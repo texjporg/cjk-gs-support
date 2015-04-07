@@ -390,7 +390,6 @@ Name: STHeitiSC-Medium
 Type: TTF
 Class: GB
 Filename: STHeiti Medium.ttc(1)
-Filename: STHeiti Medium.ttc(1)
 Filename: STHeitiSC-Medium.ttf
 
 Name: STHeitiTC-Light
