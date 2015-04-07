@@ -63,6 +63,23 @@ sub main {
   info_found_files();
 }
 
+sub generate_cidfmap {
+  my $outp = '';
+  for my $k (keys %fontdb) {
+    my @foundfiles;
+    for my $f (keys %{$fontdb{$k}{'files'}}) {
+      push @foundfiles, $f if $fontdb{$k}{'files'}{$f};
+    }
+    if (@foundfiles) {
+      if ($fontdb{$k}{'type'} eq 'TTF') {
+        for my $f (@foundfiles) {
+          $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $f);
+        }
+      }
+    }
+  }
+  #open(FOO, ">cidfmap.local") || die "Cannot open cidfmap.local: $!";
+}
 
 #
 # dump found files
@@ -145,7 +162,7 @@ sub check_for_files {
 }
 
 sub read_font_database {
-  open (FDB, "<ssscjk-font-definitions.txt") || 
+  open (FDB, "<cjk-font-definitions.txt") ||
     die "Cannot find cjk-font-definitions.txt: $?";
   chomp(my @dbl = <FDB>);
   # add a "final empty line" to easy parsing
