@@ -63,6 +63,7 @@ sub main {
   info_found_files();
 }
 
+
 #
 # dump found files
 sub info_found_files {
@@ -144,7 +145,7 @@ sub check_for_files {
 }
 
 sub read_font_database {
-  open FDB, "<cjk-font-definitions.txt" || 
+  open (FDB, "<ssscjk-font-definitions.txt") || 
     die "Cannot find cjk-font-definitions.txt: $?";
   chomp(my @dbl = <FDB>);
   # add a "final empty line" to easy parsing
