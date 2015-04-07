@@ -26,11 +26,196 @@ my $version = '$VER$';
 my $dry_run = 0;
 my $opt_help = 0;
 my $opt_quiet = 0;
+my $opt_debug = 0;
+
+my %encode_list = (
+  Japan => [ qw/
+    78-EUC-H
+    78-EUC-V
+    78-H
+    78-RKSJ-H
+    78-RKSJ-V
+    78-V
+    78ms-RKSJ-H
+    78ms-RKSJ-V
+    83pv-RKSJ-H
+    90ms-RKSJ-H
+    90ms-RKSJ-V
+    90msp-RKSJ-H
+    90msp-RKSJ-V
+    90pv-RKSJ-H
+    90pv-RKSJ-V
+    Add-H
+    Add-RKSJ-H
+    Add-RKSJ-V
+    Add-V
+    Adobe-Japan1-0
+    Adobe-Japan1-1
+    Adobe-Japan1-2
+    Adobe-Japan1-3
+    Adobe-Japan1-4
+    Adobe-Japan1-5
+    Adobe-Japan1-6
+    EUC-H
+    EUC-V
+    Ext-H
+    Ext-RKSJ-H
+    Ext-RKSJ-V
+    Ext-V
+    H
+    Hankaku
+    Hiragana
+    Identity-H
+    Identity-V
+    Katakana
+    NWP-H
+    NWP-V
+    RKSJ-H
+    RKSJ-V
+    Roman
+    UniJIS-UCS2-H
+    UniJIS-UCS2-HW-H
+    UniJIS-UCS2-HW-V
+    UniJIS-UCS2-V
+    UniJIS-UTF16-H
+    UniJIS-UTF16-V
+    UniJIS-UTF32-H
+    UniJIS-UTF32-V
+    UniJIS-UTF8-H
+    UniJIS-UTF8-V
+    UniJIS2004-UTF16-H
+    UniJIS2004-UTF16-V
+    UniJIS2004-UTF32-H
+    UniJIS2004-UTF32-V
+    UniJIS2004-UTF8-H
+    UniJIS2004-UTF8-V
+    UniJISPro-UCS2-HW-V
+    UniJISPro-UCS2-V
+    UniJISPro-UTF8-V
+    UniJISX0213-UTF32-H
+    UniJISX0213-UTF32-V
+    UniJISX02132004-UTF32-H
+    UniJISX02132004-UTF32-V
+    V
+    WP-Symbol/ ],
+  GB => [ qw/
+    Adobe-GB1-0
+    Adobe-GB1-1
+    Adobe-GB1-2
+    Adobe-GB1-3
+    Adobe-GB1-4
+    Adobe-GB1-5
+    GB-EUC-H
+    GB-EUC-V
+    GB-H
+    GB-RKSJ-H
+    GB-V
+    GBK-EUC-H
+    GBK-EUC-V
+    GBK2K-H
+    GBK2K-V
+    GBKp-EUC-H
+    GBKp-EUC-V
+    GBT-EUC-H
+    GBT-EUC-V
+    GBT-H
+    GBT-RKSJ-H
+    GBT-V
+    GBTpc-EUC-H
+    GBTpc-EUC-V
+    GBpc-EUC-H
+    GBpc-EUC-V
+    Identity-H
+    Identity-V
+    UniGB-UCS2-H
+    UniGB-UCS2-V
+    UniGB-UTF16-H
+    UniGB-UTF16-V
+    UniGB-UTF32-H
+    UniGB-UTF32-V
+    UniGB-UTF8-H
+    UniGB-UTF8-V/ ],
+  CNS => [ qw/
+    Adobe-CNS1-0
+    Adobe-CNS1-1
+    Adobe-CNS1-2
+    Adobe-CNS1-3
+    Adobe-CNS1-4
+    Adobe-CNS1-5
+    Adobe-CNS1-6
+    B5-H
+    B5-V
+    B5pc-H
+    B5pc-V
+    CNS-EUC-H
+    CNS-EUC-V
+    CNS1-H
+    CNS1-V
+    CNS2-H
+    CNS2-V
+    ETHK-B5-H
+    ETHK-B5-V
+    ETen-B5-H
+    ETen-B5-V
+    ETenms-B5-H
+    ETenms-B5-V
+    HKdla-B5-H
+    HKdla-B5-V
+    HKdlb-B5-H
+    HKdlb-B5-V
+    HKgccs-B5-H
+    HKgccs-B5-V
+    HKm314-B5-H
+    HKm314-B5-V
+    HKm471-B5-H
+    HKm471-B5-V
+    HKscs-B5-H
+    HKscs-B5-V
+    Identity-H
+    Identity-V
+    UniCNS-UCS2-H
+    UniCNS-UCS2-V
+    UniCNS-UTF16-H
+    UniCNS-UTF16-V
+    UniCNS-UTF32-H
+    UniCNS-UTF32-V
+    UniCNS-UTF8-H
+    UniCNS-UTF8-V/ ],
+  Korea => [ qw/
+    Adobe-Korea1-0
+    Adobe-Korea1-1
+    Adobe-Korea1-2
+    Identity-H
+    Identity-V
+    KSC-EUC-H
+    KSC-EUC-V
+    KSC-H
+    KSC-Johab-H
+    KSC-Johab-V
+    KSC-RKSJ-H
+    KSC-V
+    KSCms-UHC-H
+    KSCms-UHC-HW-H
+    KSCms-UHC-HW-V
+    KSCms-UHC-V
+    KSCpc-EUC-H
+    KSCpc-EUC-V
+    UniKS-UCS2-H
+    UniKS-UCS2-V
+    UniKS-UTF16-H
+    UniKS-UTF16-V
+    UniKS-UTF32-H
+    UniKS-UTF32-V
+    UniKS-UTF8-H
+    UniKS-UTF8-V/ ] );
+
+
 
 if (! GetOptions(
         "n|dry-run" => \$dry_run,
 	      "h|help" =>    \$opt_help,
         "q|quiet" =>   \$opt_quiet,
+        "d+"      =>   \$opt_debug,
         "version" =>   sub { print &version(); exit(0); }, ) ) {
   die "Try \"$0 --help\" for more information.\n";
 }
@@ -60,7 +245,70 @@ sub main {
   }
   read_font_database();
   check_for_files();
-  info_found_files();
+  # info_found_files();
+  generate_cidfmap();
+  generate_cid();
+}
+
+sub generate_cid {
+  my $fontdest = "Font";
+  my $ciddest  = "CIDFont";
+  if (-r $fontdest) {
+    if (! -d $fontdest) {
+      print_error("$fontdest is not a directory, cannot create CID snippets there!\n");
+      exit 1;
+    }
+  } else {
+    mkdir($fontdest);
+  }
+  if (-r $ciddest) {
+    if (! -d $ciddest) {
+      print_error("$ciddest is not a directory, cannot link CID fonts there!\n");
+      exit 1;
+    }
+  } else {
+    mkdir($ciddest);
+  }
+  for my $k (keys %fontdb) {
+    my @foundfiles;
+    for my $f (keys %{$fontdb{$k}{'files'}}) {
+      push @foundfiles, $f if $fontdb{$k}{'files'}{$f};
+    }
+    if (@foundfiles) {
+      if ($fontdb{$k}{'type'} eq 'CID') {
+        for my $f (@foundfiles) {
+          generate_cid_font_snippet($fontdest,
+            $k, $fontdb{$k}{'class'}, $fontdb{$k}{'files'}{$f});
+          link_cid_font($ciddest, $k, $fontdb{$k}{'files'}{$f});
+        }
+      }
+    }
+  }
+}
+
+sub generate_cid_font_snippet {
+  my ($fd, $n, $c, $f) = @_;
+  for my $enc (@{$encode_list{$c}}) {
+    open(FOO, ">$fd/$n-$enc") || die("cannot open $fd/$n-$enc for writing: $!");
+    print FOO "%%!PS-Adobe-3.0 Resource-Font
+%%%%DocumentNeededResources: $enc (CMap)
+%%%%IncludeResource: $enc (CMap)
+%%%%BeginResource: Font ($n-$enc)
+($n-$enc)
+($enc) /CMap findresource
+[($n) /CIDFont findresource]
+composefont
+pop
+%%%%EndResource
+%%%%EOF
+";
+    close(FOO);
+  }
+}
+
+sub link_cid_font {
+  my ($cd, $n, $f) = @_;
+  symlink($f, "$cd/$n");
 }
 
 sub generate_cidfmap {
@@ -73,12 +321,49 @@ sub generate_cidfmap {
     if (@foundfiles) {
       if ($fontdb{$k}{'type'} eq 'TTF') {
         for my $f (@foundfiles) {
-          $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $f);
+          $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'files'}{$f});
         }
       }
     }
   }
-  #open(FOO, ">cidfmap.local") || die "Cannot open cidfmap.local: $!";
+  if ($outp) {
+    open(FOO, ">cidfmap.local") || die "Cannot open cidfmap.local: $!";
+    print FOO $outp;
+    close(FOO);
+  }
+}
+
+sub generate_cidfmap_entry {
+  my ($n, $c, $f) = @_;
+  # extract subfont
+  my $rf = $f;
+  my $sf = 0;
+  if ($f =~ m/^(.*)\((\d*)\)$/) {
+    $rf = $1;
+    $sf = $2;
+  }
+  my $s = "/$n <<
+  /FileType /TrueType
+  /SubfontID 0
+  /CSI [($c";
+  if ($c eq "Japan") {
+    $s .= "1) 6]";
+  } elsif ($c eq "GB") {
+    $s .= "1) 5]";
+  } elsif ($c eq "CNS") {
+    $s .= "1) 5]";
+  } elsif ($c eq "Korean") {
+    print_warning("don't know how to handle class $c for $n, skipping.\n");
+    return '';
+  } else {
+    print_warning("unknown class $c for $n, skipping.\n");
+    return '';
+  }
+  $s .= "
+  /Path ($f) >> ;
+
+";
+  return $s;
 }
 
 #
@@ -134,21 +419,26 @@ sub check_for_files {
   if (@extradirs) {
     # final dummy directory
     push @extradirs, "/this/does/not/really/exists/unless/you/are/stupid";
+    # push current value of OSFONTDIR
+    push @extradirs, $ENV{'OSFONTDIR'} if $ENV{'OSFONTDIR'};
     # compose OSFONTDIR
     my $osfontdir = join ':', @extradirs;
     $ENV{'OSFONTDIR'} = $osfontdir;
   }
+  if ($ENV{'OSFONTDIR'}) {
+    print_debug("final setting of OSFONTDIR: $ENV{'OSFONTDIR'}\n");
+  }
   # shoot up kpsewhich
   #print "checking for kpsewhich @fn\n\n";
   chomp( my @foundfiles = `kpsewhich @fn`);
-  # print "Found files @foundfiles\n";
+  print_debug("Found files @foundfiles\n");
   # map basenames to filenames
   my %bntofn;
   for my $f (@foundfiles) {
     my $bn = basename($f);
     $bntofn{$bn} = $f;
   }
-  # print Data::Dumper::Dumper(\%bntofn);
+  print_ddebug(Data::Dumper::Dumper(\%bntofn));
 
   # update the %fontdb with the found files
   for my $k (keys %fontdb) {
@@ -265,6 +555,12 @@ sub print_warning {
 }
 sub print_error {
   print STDERR "$prg [ERROR]: ", @_;
+}
+sub print_debug {
+  print STDERR "$prg [DEBUG]: ", @_ if ($opt_debug >= 1);
+}
+sub print_ddebug {
+  print STDERR "$prg [DEBUG]: ", @_ if ($opt_debug >= 2);
 }
 
 
