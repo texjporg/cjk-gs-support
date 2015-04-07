@@ -52,10 +52,11 @@ main(@ARGV);
 # only sub definitions from here on
 #
 sub main {
-  my $gsres = find_gs_resource();
-  if (!$gsres) {
-    print_error("Cannot find GhostScript, terminating!\n");
-    exit(1);
+   my $gsres = find_gs_resource();
+   if (!$gsres) {
+     print_error("Cannot find GhostScript, (not really) terminating!\n");
+     # for now keep working
+     # exit(1);
   }
   read_font_database();
   check_for_files();
