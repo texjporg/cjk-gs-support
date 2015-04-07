@@ -147,8 +147,8 @@ Filename: Hiragino Sans GB W3.otf
 Filename: HiraginoSansGB-W3.otf
 
 Name: HiraginoSansGB-W6
-Type: GB
-Class: Japan
+Type: CID
+Class: GB
 Filename: Hiragino Sans GB W6.otf
 Filename: HiraginoSansGB-W6.otf
 
