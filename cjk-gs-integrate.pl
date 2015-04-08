@@ -524,8 +524,10 @@ sub check_for_files {
     my $bn = basename($f);
     $bntofn{$bn} = $f;
   }
-  print_ddebug("dumping basename to filename list:\n");
-  print_ddebug(Data::Dumper::Dumper(\%bntofn));
+  if ($opt_debug > 1) {
+    print_ddebug("dumping basename to filename list:\n");
+    print_ddebug(Data::Dumper::Dumper(\%bntofn));
+  }
 
   # update the %fontdb with the found files
   for my $k (keys %fontdb) {
@@ -553,10 +555,12 @@ sub check_for_files {
       }
     }
   }
-  print_ddebug("dumping font database:\n");
-  print_ddebug(Data::Dumper::Dumper(\%fontdb));
-  print_ddebug("dumping aliases:\n");
-  print_ddebug(Data::Dumper::Dumper(\%aliases));
+  if ($opt_debug > 1) {
+    print_ddebug("dumping font database:\n");
+    print_ddebug(Data::Dumper::Dumper(\%fontdb));
+    print_ddebug("dumping aliases:\n");
+    print_ddebug(Data::Dumper::Dumper(\%aliases));
+  }
 }
 
 sub read_font_database {
