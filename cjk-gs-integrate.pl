@@ -1386,18 +1386,18 @@ Filename: Kaiti.ttc(0)
 Filename: 楷体.ttc(0)
 Filename: STKaiti-SC-Black.ttf
 
-Name: STKaiti-TC-Regular
+Name: STKaiTi-TC-Regular
 Type: TTF
 Class: CNS
 Provides: MKai-Medium(10)
 Filename: Kaiti.ttc(5)
-Filename: STKaiti-TC-Regular.ttf
+Filename: STKaiTi-TC-Regular.ttf
 
-Name: STKaiti-TC-Bold
+Name: STKaiTi-TC-Bold
 Type: TTF
 Class: CNS
 Filename: Kaiti.ttc(2)
-Filename: STKaiti-TC-Bold.ttf
+Filename: STKaiTi-TC-Bold.ttf
 
 Name: STKaiti-Adobe-CNS1
 Type: TTF
