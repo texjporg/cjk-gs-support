@@ -1,0 +1,627 @@
+#
+# CJK FONT DEFINITIONS
+#
+# WARNING WARNING
+# this file is NOT actually used, it is here only for ease of access.
+# The master list is included in the main perl script after the __DATA__
+#
+
+# JAPAN
+
+# Morisawa
+
+Name: A-OTF-FutoGoB101Pr6N-Bold
+Type: CID
+Class: Japan
+Provides: FutoGoB101-Bold(10)
+Provides: A-OTF-FutoGoB101Pro-Bold(10)
+Filename: A-OTF-FutoGoB101Pr6N-Bold.otf
+
+Name: A-OTF-FutoGoB101Pro-Bold
+Type: CID
+Class: Japan
+Provides: FutoGoB101-Bold(20)
+Filename: A-OTF-FutoGoB101Pro-Bold.otf
+
+Name: A-OTF-FutoMinA101Pr6N-Bold
+Type: CID
+Class: Japan
+Provides: FutoMinA101-Bold(10)
+Provides: A-OTF-FutoMinA101Pro-Bold(10)
+Filename: A-OTF-FutoMinA101Pr6N-Bold.otf
+
+Name: A-OTF-FutoMinA101Pro-Bold
+Type: CID
+Class: Japan
+Provides: FutoMinA101-Bold(20)
+Filename: A-OTF-FutoMinA101Pro-Bold.otf
+
+Name: A-OTF-GothicBBBPr6N-Medium
+Type: CID
+Class: Japan
+Provides: GothicBBB-Medium(10)
+Provides: A-OTF-GothicBBBPro-Medium(10)
+Filename: A-OTF-GothicBBBPr6N-Medium.otf
+
+Name: A-OTF-GothicBBBPro-Medium
+Type: CID
+Class: Japan
+Provides: GothicBBB-Medium(20)
+Filename: A-OTF-GothicBBBPro-Medium.otf
+
+Name: A-OTF-Jun101Pro-Light
+Type: CID
+Class: Japan
+Provides: Jun101-Light(20)
+Filename: A-OTF-Jun101Pro-Light.otf
+
+Name: A-OTF-MidashiGoPr6N-MB31
+Type: CID
+Class: Japan
+Filename: A-OTF-MidashiGoPr6N-MB31.otf
+
+Name: A-OTF-MidashiGoPro-MB31
+Type: CID
+Class: Japan
+Filename: A-OTF-MidashiGoPro-MB31.otf
+
+Name: A-OTF-RyuminPr6N-Light
+Type: CID
+Class: Japan
+Provides: Ryumin-Light(10)
+Provides: A-OTF-RyuminPro-Light(10)
+Filename: A-OTF-RyuminPr6N-Light.otf
+
+Name: A-OTF-RyuminPro-Light
+Type: CID
+Class: Japan
+Provides: Ryumin-Light(20)
+Filename: A-OTF-RyuminPro-Light.otf
+
+Name: A-OTF-ShinMGoPr6N-Light
+Type: CID
+Class: Japan
+Provides: Jun101-Light(10)
+Provides: A-OTF-Jun101Pro-Light(10)
+Filename: A-OTF-ShinMGoPr6N-Light.otf
+
+
+# Hiragino
+
+Name: HiraKakuPro-W3
+Type: CID
+Class: Japan
+Provides: GothicBBB-Medium(40)
+Provides: A-OTF-GothicBBBPro-Medium(40)
+Filename: ヒラギノ角ゴ Pro W3.otf
+Filename: HiraKakuPro-W3.otf
+
+Name: HiraKakuPro-W6
+Type: CID
+Class: Japan
+Provides: FutoGoB101-Bold(40)
+Provides: A-OTF-FutoGoB101Pro-Bold(40)
+Filename: ヒラギノ角ゴ Pro W6.otf
+Filename: HiraKakuPro-W6.otf
+
+Name: HiraKakuProN-W3
+Type: CID
+Class: Japan
+Provides: GothicBBB-Medium(30)
+Provides: A-OTF-GothicBBBPro-Medium(30)
+Filename: ヒラギノ角ゴ ProN W3.otf
+Filename: HiraKakuProN-W3.otf
+
+Name: HiraKakuProN-W6
+Type: CID
+Class: Japan
+Provides: FutoGoB101-Bold(30)
+Provides: A-OTF-FutoGoB101Pro-Bold(30)
+Filename: ヒラギノ角ゴ ProN W6.otf
+Filename: HiraKakuProN-W6.otf
+
+Name: HiraKakuStd-W8
+Type: CID
+Class: Japan
+Filename: ヒラギノ角ゴ Std W8.otf
+Filename: HiraKakuStd-W8.otf
+
+Name: HiraKakuStdN-W8
+Type: CID
+Class: Japan
+Filename: ヒラギノ角ゴ StdN W8.otf
+Filename: HiraKakuStdN-W8.otf
+
+Name: HiraMaruPro-W4
+Type: CID
+Class: Japan
+Provides: Jun101-Light(40)
+Provides: A-OTF-Jun101Pro-Light(40)
+Filename: ヒラギノ丸ゴ Pro W4.otf
+Filename: HiraMaruPro-W4.otf
+
+Name: HiraMaruProN-W4
+Type: CID
+Class: Japan
+Provides: Jun101-Light(30)
+Provides: A-OTF-Jun101Pro-Light(30)
+Filename: ヒラギノ丸ゴ ProN W4.otf
+Filename: HiraMaruProN-W4.otf
+
+Name: HiraMinPro-W3
+Type: CID
+Class: Japan
+Provides: Ryumin-Light(40)
+Provides: A-OTF-RyuminPro-Light(40)
+Filename: ヒラギノ明朝 Pro W3.otf
+Filename: HiraMinPro-W3.otf
+
+Name: HiraMinPro-W6
+Type: CID
+Class: Japan
+Provides: FutoMinA101-Bold(40)
+Provides: A-OTF-FutoMinA101Pro-Bold(40)
+Filename: ヒラギノ明朝 Pro W6.otf
+Filename: HiraMinPro-W6.otf
+
+Name: HiraMinProN-W3
+Type: CID
+Class: Japan
+Provides: Ryumin-Light(30)
+Provides: A-OTF-RyuminPro-Light(30)
+Filename: ヒラギノ明朝 ProN W3.otf
+Filename: HiraMinProN-W3.otf
+
+Name: HiraMinProN-W6
+Type: CID
+Class: Japan
+Provides: FutoMinA101-Bold(30)
+Provides: A-OTF-FutoMinA101Pro-Bold(30)
+Filename: ヒラギノ明朝 ProN W6.otf
+Filename: HiraMinProN-W6.otf
+
+
+Name: HiraginoSansGB-W3
+Type: CID
+Class: GB
+Filename: Hiragino Sans GB W3.otf
+Filename: HiraginoSansGB-W3.otf
+
+Name: HiraginoSansGB-W6
+Type: CID
+Class: GB
+Filename: Hiragino Sans GB W6.otf
+Filename: HiraginoSansGB-W6.otf
+
+
+# Yu-fonts MacOS version
+
+Name: YuGo-Medium
+Type: CID
+Class: Japan
+Provides: GothicBBB-Medium(50)
+Provides: A-OTF-GothicBBBPro-Medium(50)
+Filename: Yu Gothic Medium.otf
+Filename: YuGo-Medium.otf
+
+Name: YuGo-Bold
+Type: CID
+Class: Japan
+Provides: FutoGoB101-Bold(50)
+Provides: A-OTF-FutoGoB101Pro-Bold(50)
+Provides: Jun101-Light(50)
+Provides: A-OTF-Jun101Pro-Light(50)
+Filename: Yu Gothic Bold.otf
+Filename: YuGo-Bold.otf
+
+Name: YuMin-Medium
+Type: CID
+Class: Japan
+Provides: Ryumin-Light(50)
+Provides: A-OTF-RyuminPro-Light(50)
+Filename: Yu Mincho Medium.otf
+Filename: YuMin-Medium.otf
+
+Name: YuMin-Demibold
+Type: CID
+Class: Japan
+Provides: FutoMinA101-Bold(50)
+Provides: A-OTF-FutoMinA101Pro-Bold(50)
+Filename: Yu Mincho Demibold.otf
+Filename: YuMin-Demibold.otf
+
+# Yu-fonts Windows version
+Name: YuMincho-Regular
+Type: TTF
+Class: Japan
+Provides: Ryumin-Light(60)
+Provides: A-OTF-RyuminPro-Light(60)
+Filename: yumin.ttf
+Filename: YuMincho-Regular.ttf
+
+Name: YuMincho-Light
+Type: TTF
+Class: Japan
+Filename: yuminl.ttf
+Filename: YuMincho-Light.ttf
+
+Name: YuMincho-DemiBold
+Type: TTF
+Class: Japan
+Provides: FutoMinA101-Bold(60)
+Provides: A-OTF-FutoMinA101Pro-Bold(60)
+Filename: yumindb.ttf
+Filename: YuMincho-DemiBold.ttf
+
+Name: YuGothic-Regular
+Type: TTF
+Class: Japan
+Provides: GothicBBB-Medium(60)
+Provides: A-OTF-GothicBBBPro-Medium(60)
+Filename: yugothic.ttf
+Filename: YuGothic-Regular.ttf
+
+Name: YuGothic-Light
+Type: TTF
+Class: Japan
+Filename: yugothil.ttf
+Filename: YuGothic-Light.ttf
+
+Name: YuGothic-Bold
+Type: TTF
+Class: Japan
+Provides: FutoGoB101-Bold(60)
+Provides: A-OTF-FutoGoB101Pro-Bold(60)
+Provides: Jun101-Light(60)
+Provides: A-OTF-Jun101Pro-Light(60)
+Filename: yugothib.ttf
+Filename: YuGothic-Bold.ttf
+
+# IPA fonts
+
+Name: IPAMincho
+Type: TTF
+Class: Japan
+Provides: Ryumin-Light(110)
+Provides: A-OTF-RyuminPro-Light(110)
+Filename: ipam.ttf
+Filename: IPAMincho.ttf
+
+Name: IPAGothic
+Type: TTF
+Class: Japan
+Provides: GothicBBB-Medium(110)
+Provides: A-OTF-GothicBBBPro-Medium(110)
+Provides: FutoMinA101-Bold(110)
+Provides: A-OTF-FutoMinA101Pro-Bold(110)
+Provides: FutoGoB101-Bold(110)
+Provides: A-OTF-FutoGoB101Pro-Bold(110)
+Provides: Jun101-Light(110)
+Provides: A-OTF-Jun101Pro-Light(110)
+Filename: ipag.ttf
+Filename: IPAGothic.ttf
+
+Name: IPAexMincho
+Type: TTF
+Class: Japan
+Provides: Ryumin-Light(100)
+Provides: A-OTF-RyuminPro-Light(100)
+Filename: ipaexm.ttf
+Filename: IPAexMincho.ttf
+
+Name: IPAexGothic
+Type: TTF
+Class: Japan
+Provides: GothicBBB-Medium(100)
+Provides: A-OTF-GothicBBBPro-Medium(100)
+Provides: FutoMinA101-Bold(100)
+Provides: A-OTF-FutoMinA101Pro-Bold(100)
+Provides: FutoGoB101-Bold(100)
+Provides: A-OTF-FutoGoB101Pro-Bold(100)
+Provides: Jun101-Light(100)
+Provides: A-OTF-Jun101Pro-Light(100)
+Filename: ipaexg.ttf
+Filename: IPAexGothic.ttf
+
+# Kozuka fonts
+
+Name: KozGoPr6N-Bold
+Type: CID
+Class: Japan
+Provides: FutoGoB101-Bold(70)
+Provides: A-OTF-FutoGoB101Pro-Bold(70)
+Filename: KozGoPr6N-Bold.otf
+
+Name: KozGoPr6N-Heavy
+Type: CID
+Class: Japan
+Provides: Jun101-Light(70)
+Provides: A-OTF-Jun101Pro-Light(70)
+Filename: KozGoPr6N-Heavy.otf
+
+Name: KozGoPr6N-Medium
+Type: CID
+Class: Japan
+Provides: GothicBBB-Medium(70)
+Provides: A-OTF-GothicBBBPro-Medium(70)
+Filename: KozGoPr6N-Medium.otf
+
+Name: KozGoPr6N-Regular
+Type: CID
+Class: Japan
+Filename: KozGoPr6N-Regular.otf
+
+Name: KozGoPro-Bold
+Type: CID
+Class: Japan
+Provides: FutoGoB101-Bold(90)
+Provides: A-OTF-FutoGoB101Pro-Bold(90)
+Filename: KozGoPro-Bold.otf
+
+Name: KozGoPro-Heavy
+Type: CID
+Class: Japan
+Provides: Jun101-Light(90)
+Provides: A-OTF-Jun101Pro-Light(90)
+Filename: KozGoPro-Heavy.otf
+
+Name: KozGoPro-Medium
+Type: CID
+Class: Japan
+Provides: GothicBBB-Medium(90)
+Provides: A-OTF-GothicBBBPro-Medium(90)
+Filename: KozGoPro-Medium.otf
+
+Name: KozGoPro-Regular
+Type: CID
+Class: Japan
+Filename: KozGoPro-Regular.otf
+
+Name: KozGoProVI-Bold
+Type: CID
+Class: Japan
+Provides: FutoGoB101-Bold(80)
+Provides: A-OTF-FutoGoB101Pro-Bold(80)
+Filename: KozGoProVI-Bold.otf
+
+Name: KozGoProVI-Heavy
+Type: CID
+Class: Japan
+Provides: Jun101-Light(80)
+Provides: A-OTF-Jun101Pro-Light(80)
+Filename: KozGoProVI-Heavy.otf
+
+Name: KozGoProVI-Medium
+Type: CID
+Class: Japan
+Provides: GothicBBB-Medium(80)
+Provides: A-OTF-GothicBBBPro-Medium(80)
+Filename: KozGoProVI-Medium.otf
+
+Name: KozGoProVI-Regular
+Type: CID
+Class: Japan
+Filename: KozGoProVI-Regular.otf
+
+Name: KozMinPr6N-Bold
+Type: CID
+Class: Japan
+Provides: FutoMinA101-Bold(70)
+Provides: A-OTF-FutoMinA101Pro-Bold(70)
+Filename: KozMinPr6N-Bold.otf
+
+Name: KozMinPr6N-Light
+Type: CID
+Class: Japan
+Filename: KozMinPr6N-Light.otf
+
+Name: KozMinPr6N-Regular
+Type: CID
+Class: Japan
+Provides: Ryumin-Light(70)
+Provides: A-OTF-RyuminPro-Light(70)
+Filename: KozMinPr6N-Regular.otf
+
+Name: KozMinPro-Bold
+Type: CID
+Class: Japan
+Provides: FutoMinA101-Bold(90)
+Provides: A-OTF-FutoMinA101Pro-Bold(90)
+Filename: KozMinPro-Bold.otf
+
+Name: KozMinPro-Light
+Type: CID
+Class: Japan
+Filename: KozMinPro-Light.otf
+
+Name: KozMinPro-Regular
+Type: CID
+Class: Japan
+Provides: Ryumin-Light(90)
+Provides: A-OTF-RyuminPro-Light(90)
+Filename: KozMinPro-Regular.otf
+
+Name: KozMinProVI-Bold
+Type: CID
+Class: Japan
+Provides: FutoMinA101-Bold(80)
+Provides: A-OTF-FutoMinA101Pro-Bold(80)
+Filename: KozMinProVI-Bold.otf
+
+Name: KozMinProVI-Light
+Type: CID
+Class: Japan
+Filename: KozMinProVI-Light.otf
+
+Name: KozMinProVI-Regular
+Type: CID
+Class: Japan
+Provides: Ryumin-Light(80)
+Provides: A-OTF-RyuminPro-Light(80)
+Filename: KozMinProVI-Regular.otf
+
+#
+# CHINESE FONTS
+#
+
+Name: LiHeiPro
+Type: TTF
+Class: CNS
+Filename: 儷黑 Pro.ttf
+Filename: 儷黑 Pro.ttf
+Filename: LiHeiPro.ttf
+
+Name: LiSongPro
+Type: TTF
+Class: CNS
+Filename: 儷宋 Pro.ttf
+Filename: LiSongPro.ttf
+
+Name: STXihei
+Type: TTF
+Class: GB
+Filename: 华文细黑.ttf
+Filename: 华文细黑.ttf
+Filename: STXihei.ttf
+
+Name: STHeiti
+Type: TTF
+Class: GB
+Filename: 华文黑体.ttf
+Filename: 华文黑体.ttf
+Filename: STHeiti.ttf
+
+Name: STHeitiSC-Light
+Type: TTF
+Class: GB
+Filename: STHeiti Light.ttc(1)
+Filename: STHeitiSC-Light.ttf
+
+Name: STHeitiSC-Medium
+Type: TTF
+Class: GB
+Filename: STHeiti Medium.ttc(1)
+Filename: STHeitiSC-Medium.ttf
+
+Name: STHeitiTC-Light
+Type: TTF
+Class: GB
+Filename: STHeiti Light.ttc(0)
+Filename: STHeitiTC-Light.ttf
+
+Name: STHeitiTC-Medium
+Type: TTF
+Class: GB
+Filename: STHeiti Medium.ttc(0)
+Filename: STHeiti Medium.ttc(0)
+Filename: STHeitiTC-Medium.ttf
+
+Name: STFangsong
+Type: TTF
+Class: GB
+Filename: 华文仿宋.ttf
+Filename: STFangsong.ttf
+
+Name: STSong
+Type: TTF
+Class: GB
+Filename: Songti.ttc(4)
+Filename: 宋体.ttc(3)
+Filename: 华文宋体.ttf
+Filename: STSong.ttf
+
+Name: STSongti-SC-Light
+Type: TTF
+Class: GB
+Filename: Songti.ttc(3)
+Filename: 宋体.ttc(2)
+Filename: STSongti-SC-Light.ttf
+
+Name: STSongti-SC-Regular
+Type: TTF
+Class: GB
+Filename: Songti.ttc(6)
+Filename: 宋体.ttc(4)
+Filename: STSongti-SC-Regular.ttf
+
+Name: STSongti-SC-Bold
+Type: TTF
+Class: GB
+Filename: Songti.ttc(1)
+Filename: 宋体.ttc(1)
+Filename: STSongti-SC-Bold.ttf
+
+Name: STSongti-SC-Black
+Type: TTF
+Class: GB
+Filename: Songti.ttc(0)
+Filename: 宋体.ttc(0)
+Filename: STSongti-SC-Black.ttf
+
+Name: STSongti-TC-Light
+Type: TTF
+Class: GB
+Filename: Songti.ttc(5)
+Filename: STSongti-TC-Light.ttf
+
+Name: STSongti-TC-Regular
+Type: TTF
+Class: GB
+Filename: Songti.ttc(7)
+Filename: STSongti-TC-Regular.ttf
+
+Name: STSongti-TC-Bold
+Type: TTF
+Class: GB
+Filename: Songti.ttc(2)
+Filename: STSongti-TC-Bold.ttf
+
+Name: STKaiti
+Type: TTF
+Class: GB
+Filename: Kaiti.ttc(4)
+Filename: 楷体.ttc(3)
+Filename: 华文楷体.ttf
+Filename: STKaiti.ttf
+
+Name: STKaiti-SC-Regular
+Type: TTF
+Class: GB
+Filename: Kaiti.ttc(3)
+Filename: 楷体.ttc(2)
+Filename: STKaiti-SC-Regular.ttf
+
+Name: STKaiti-SC-Bold
+Type: TTF
+Class: GB
+Filename: Kaiti.ttc(1)
+Filename: 楷体.ttc(1)
+Filename: STKaiti-SC-Bold.ttf
+
+Name: STKaiti-SC-Black
+Type: TTF
+Class: GB
+Filename: Kaiti.ttc(0)
+Filename: 楷体.ttc(0)
+Filename: STKaiti-SC-Black.ttf
+
+Name: STKaiTi-TC-Regular
+Type: TTF
+Class: GB
+Filename: Kaiti.ttc(5)
+Filename: STKaiTi-TC-Regular.ttf
+
+Name: STKaiTi-TC-Bold
+Type: TTF
+Class: GB
+Filename: Kaiti.ttc(2)
+Filename: STKaiTi-TC-Bold.ttf
+
+#
+# KOREAN FONTS
+#
+Name: AppleMyungjo
+Type: TTF
+Class: Korean
+Filename: AppleMyungjo.ttf
+
