@@ -4,6 +4,9 @@
 #
 # Copyright 2015 by Norbert Preining
 #
+# Based on research and work by Yusuke Kuroki, Bruno Voisin, Munehiro Yamamoto
+# and the TeX Q&A wiki page
+#
 # This file is licensed under GPL version 3 or any later version.
 # For copyright statements see end of file.
 #
@@ -22,11 +25,6 @@ $Data::Dumper::Indent = 1;
 
 (my $prg = basename($0)) =~ s/\.pl$//;
 my $version = '$VER$';
-
-my $dry_run = 0;
-my $opt_help = 0;
-my $opt_quiet = 0;
-my $opt_debug = 0;
 
 my %encode_list = (
   Japan => [ qw/
@@ -209,14 +207,21 @@ my %encode_list = (
     UniKS-UTF8-H
     UniKS-UTF8-V/ ] );
 
-
+my $dry_run = 0;
+my $opt_help = 0;
+my $opt_quiet = 0;
+my $opt_debug = 0;
+my $opt_fontdef;
+my $opt_output;
 
 if (! GetOptions(
-        "n|dry-run" => \$dry_run,
-	      "h|help" =>    \$opt_help,
-        "q|quiet" =>   \$opt_quiet,
-        "d+"      =>   \$opt_debug,
-        "version" =>   sub { print &version(); exit(0); }, ) ) {
+        "n|dry-run"   => \$dry_run,
+        "o|output=s"  => \$opt_output,
+	      "h|help"      => \$opt_help,
+        "q|quiet"     => \$opt_quiet,
+        "d|debug+"    => \$opt_debug,
+        "f|fontdef=s" => \$opt_fontdef,
+        "v|version"   => sub { print &version(); exit(0); }, ) ) {
   die "Try \"$0 --help\" for more information.\n";
 }
 
@@ -224,6 +229,7 @@ sub win32 { return ($^O=~/^MSWin(32|64)$/i); }
 my $nul = (win32() ? 'nul' : '/dev/null') ;
 my $sep = (win32() ? ';' : ':');
 my %fontdb;
+my %aliases;
 
 if ($opt_help) {
   Usage();
@@ -237,29 +243,76 @@ main(@ARGV);
 # only sub definitions from here on
 #
 sub main {
-   my $gsres = find_gs_resource();
-   if (!$gsres) {
-     print_error("Cannot find GhostScript, (not really) terminating!\n");
-     # for now keep working
-     # exit(1);
+  if (! $opt_output) {
+    print_info("searching for GhostScript resource\n");
+    my $gsres = find_gs_resource();
+    if (!$gsres) {
+      print_error("Cannot find GhostScript, (not really) terminating!\n");
+      exit(1);
+    } else {
+      $opt_output = $gsres;
+    }
   }
+  if (! -d $opt_output) {
+    $dry_run || mkdir($opt_output) || 
+      die ("Cannot create directory $opt_output: $!");
+  }
+  print_info("output is going to $opt_output\n");
+  print_info("reading font database ...\n");
   read_font_database();
+  print_info("checking for files ...\n");
   check_for_files();
-  # info_found_files();
-  generate_cidfmap();
+  if ($opt_debug > 1) {
+    info_found_files();
+  }
+  print_info("generating font snippets and link CID fonts ...\n");
   generate_cid();
+  print_info("generating cidfmap.local ...\n");
+  generate_cidfmap();
+  print_info("adding cidfmap.local to cidfmap file ...\n");
+  update_master_cidfmap();
+  print_info("finished\n");
+}
+
+sub update_master_cidfmap {
+  my $cidfmap_master = "$opt_output/Init/cidfmap";
+  my $cidfmap_local = "$opt_output/Init/cidfmap.local";
+  if (-r $cidfmap_master) {
+    open(FOO, "<", $cidfmap_master) ||
+      die ("Cannot open $cidfmap_master for reading: $!");
+    my $found = 0;
+    while(<FOO>) {
+      $found = 1 if
+        m/^\s*\(cidfmap\.local\)\s\s*\.runlibfile\s*$/;
+    }
+    if ($found) {
+      print_info("cidfmap.local already loaded in $cidfmap_master, no changes\n");
+    } else {
+      return if $dry_run;
+      open(FOO, ">>", $cidfmap_master) ||
+        die ("Cannot open $cidfmap_master for appending: $!");
+      print FOO "(cidfmap.local) .runlibfile\n";
+      close(FOO);
+    }
+  } else {
+    return if $dry_run;
+    open(FOO, ">", $cidfmap_master) ||
+      die ("Cannot open $cidfmap_master for writing: $!");
+    print FOO "(cidfmap.local) .runlibfile\n";
+    close(FOO);
+  }
 }
 
 sub generate_cid {
-  my $fontdest = "Font";
-  my $ciddest  = "CIDFont";
+  my $fontdest = "$opt_output/Font";
+  my $ciddest  = "$opt_output/CIDFont";
   if (-r $fontdest) {
     if (! -d $fontdest) {
       print_error("$fontdest is not a directory, cannot create CID snippets there!\n");
       exit 1;
     }
   } else {
-    mkdir($fontdest);
+    $dry_run || mkdir($fontdest);
   }
   if (-r $ciddest) {
     if (! -d $ciddest) {
@@ -267,7 +320,7 @@ sub generate_cid {
       exit 1;
     }
   } else {
-    mkdir($ciddest);
+    $dry_run || mkdir($ciddest);
   }
   for my $k (keys %fontdb) {
     my @foundfiles;
@@ -288,8 +341,10 @@ sub generate_cid {
 
 sub generate_cid_font_snippet {
   my ($fd, $n, $c, $f) = @_;
+  return if $dry_run;
   for my $enc (@{$encode_list{$c}}) {
-    open(FOO, ">$fd/$n-$enc") || die("cannot open $fd/$n-$enc for writing: $!");
+    open(FOO, ">$fd/$n-$enc") || 
+      die("cannot open $fd/$n-$enc for writing: $!");
     print FOO "%%!PS-Adobe-3.0 Resource-Font
 %%%%DocumentNeededResources: $enc (CMap)
 %%%%IncludeResource: $enc (CMap)
@@ -308,6 +363,7 @@ pop
 
 sub link_cid_font {
   my ($cd, $n, $f) = @_;
+  return if $dry_run;
   symlink($f, "$cd/$n");
 }
 
@@ -326,8 +382,40 @@ sub generate_cidfmap {
       }
     }
   }
+  #
+  # alias handling
+  # we use two levels of aliases, one is for the default names that
+  # are not actual fonts:
+  # Ryumin-Light, GothicBBB-Medium, FutoMinA101-Bold, FutoGoB101-Bold, 
+  # Jun101-Light which are the original Morisawa names.
+  #
+  # the second level of aliases is for Morisawa OTF font names:
+  # A-OTF-RyuminPro-Light, A-OTF-GothicBBBPro-Medium,
+  # A-OTF-FutoMinA101Pro-Bold, A-OTF-FutoGoB101Pro-Bold
+  # A-OTF-Jun101Pro-Light
+  #
+  # the order of fonts selected is
+  # Morisawa Pr6, Morisawa, Hiragino ProN, Hiragino, 
+  # Yu OSX, Yu Win, Kozuka ProN, Kozuka, IPAex, IPA
+  # but is defined in the Provides: Name(Priority) in the font definiton
+  #
+  $outp .= "\n\n% Aliases\n\n";
+  my @al = keys %aliases;
+  for my $al (keys %aliases) {
+    # search lowest number
+    my @ks = keys(%{$aliases{$al}});
+    my $first = (sort { $a <=> $b} @ks)[0];
+    $outp .= "/$al /$aliases{$al}{$first} ;\n";
+  }
+  #
+  return if $dry_run;
   if ($outp) {
-    open(FOO, ">cidfmap.local") || die "Cannot open cidfmap.local: $!";
+    if (! -d "$opt_output/Init") {
+      mkdir("$opt_output/Init") ||
+        die("Cannot create directory $opt_output/Init: $!");
+    }
+    open(FOO, ">$opt_output/Init/cidfmap.local") || 
+      die "Cannot open $opt_output/cidfmap.local: $!";
     print FOO $outp;
     close(FOO);
   }
@@ -413,8 +501,6 @@ sub check_for_files {
       push @extradirs, $d if (-d $d);
     }
   }
-  # TODO
-  # we need to take command line arguments into account
   #
   if (@extradirs) {
     # final dummy directory
@@ -438,29 +524,58 @@ sub check_for_files {
     my $bn = basename($f);
     $bntofn{$bn} = $f;
   }
+  print_ddebug("dumping basename to filename list:\n");
   print_ddebug(Data::Dumper::Dumper(\%bntofn));
 
   # update the %fontdb with the found files
   for my $k (keys %fontdb) {
+    $fontdb{$k}{'available'} = 0;
     for my $f (keys %{$fontdb{$k}{'files'}}) {
       # check for subfont extension 
       my $realfile = $f;
       $realfile =~ s/^(.*)\(\d*\)$/$1/;
-      $fontdb{$k}{'files'}{$f} = $bntofn{$realfile} if ($bntofn{$realfile});
+      if ($bntofn{$realfile}) {
+        # we found a representative, make it available
+        $fontdb{$k}{'files'}{$f} = $bntofn{$realfile};
+        $fontdb{$k}{'available'} = 1;
+      }
     }
   }
+  # make a second round through the fontdb to check for provides
+  for my $k (keys %fontdb) {
+    if ($fontdb{$k}{'available'}) {
+      for my $p (keys %{$fontdb{$k}{'provides'}}) {
+        # do not check alias if the real font is available
+        next if $fontdb{$p}{'available'};
+        # use the priority as key
+        # if priorities are double, this will pick one at chance
+        $aliases{$p}{$fontdb{$k}{'provides'}{$p}} = $k;
+      }
+    }
+  }
+  print_ddebug("dumping font database:\n");
+  print_ddebug(Data::Dumper::Dumper(\%fontdb));
+  print_ddebug("dumping aliases:\n");
+  print_ddebug(Data::Dumper::Dumper(\%aliases));
 }
 
 sub read_font_database {
-  open (FDB, "<cjk-font-definitions.txt") ||
-    die "Cannot find cjk-font-definitions.txt: $?";
-  chomp(my @dbl = <FDB>);
+  my @dbl;
+  if ($opt_fontdef) {
+    open (FDB, "<$opt_fontdef") ||
+      die "Cannot find $opt_fontdef: $!";
+    @dbl = <FDB>;
+    close(FDB);
+  } else {
+    @dbl = <DATA>;
+  }
+  chomp(@dbl);
   # add a "final empty line" to easy parsing
   push @dbl, "";
-  close FDB;
   my $fontname = "";
   my $fonttype = "";
   my $fontclass = "";
+  my %fontprovides = ();
   my @fontfiles;
   my $lineno = 0;
   for my $l (@dbl) {
@@ -476,14 +591,17 @@ sub read_font_database {
             # this will be set to the path name if found
             $fontdb{$fontname}{'files'}{$f} = 0;
           }
+          $fontdb{$fontname}{'provides'} = { %fontprovides };
           # reset to start
           $fontname = $fonttype = $fontclass = "";
           @fontfiles = ();
+          %fontprovides = ();
         } else {
           print_warning("incomplete entry above line $lineno for $fontname/$fonttype/$fontclass, skipping!\n");
           # reset to start
           $fontname = $fonttype = $fontclass = "";
           @fontfiles = ();
+          %fontprovides = ();
         }
       } else {
         # no term is set, so nothing to warn about
@@ -494,6 +612,7 @@ sub read_font_database {
     if ($l =~ m/^Type:\s*(.*)$/) { $fonttype = $1 ; next ; }
     if ($l =~ m/^Class:\s*(.*)$/) { $fontclass = $1 ; next ; }
     if ($l =~ m/^Filename:\s*(.*)$/) { push @fontfiles, $1 ; next ; }
+    if ($l =~ m/^Provides:\s*(.*)\((\d+)\)$/) { $fontprovides{$1} = $2; next; }
     # we are still here??
     print_error("Cannot parse this file at line $lineno, exiting. Strange line: >>>$l<<<\n");
     exit (1);
@@ -532,9 +651,91 @@ sub version {
 
 sub Usage {
   my $usage = <<"EOF";
-  $prg  Configuring GhostScript for CJK CID/TTF fonts.
 
-  more to be written
+Usage: $prg [OPTION] ...
+
+Configuring GhostScript for CJK CID/TTF fonts.
+
+Options:
+  -n, --dry-run         do not actually output anything
+  -f, --fontdef FILE    specify alternate set of font definitions, if not
+                        given, the built-in set is used
+  -o, --output DIR      specifies the base output dir, if not provided,
+                        the Resource directory of an install GhostScript
+                        is searched and used.
+  -q, --quiet           be less verbose
+  -d, --debug           output debug information, can be given multiple times
+  -v, --version         outputs only the version information
+  -h, --help            this help
+
+Operation:
+
+  This script searches a list of directories (see below) for CJK fonts,
+  and makes them available to an installed GhostScript. In the simplest
+  case with sufficient privileges, a run without arguments should effect
+  in a complete setup of GhostScript.
+
+  For each found TrueType (TTF) font it creates a cidfmap entry in
+    <Resource>/Init/cidfmap.local
+  For each CID font it creates a snippet in
+    <Resource>/Font/
+  and links the font to 
+    <Resource>/CIDFont
+  The <Resource> dir is either given by -o/--output, or otherwise searched
+  from an installed GhostScript (binary name is assumed to be 'gs').
+
+  Finally, it tries to add runlib call to
+    <Resource>/Init/cidfmap
+  to load the cidfmap.local.
+
+How and which directories are searched:
+
+  Search is done using the kpathsea library, in particular using kpsewhich
+  program. By default the following directories are searched:
+  - all TEXMF trees
+  - /Library/Fonts and /System/Library/Fonts (if available)
+  - c:/windows/fonts (on Windows)
+  - the directories in OSFONTDIR environment variable
+
+  In case you want to add some directories to the search path, adapt the
+  OSFONTDIR environment variable accordingly: Example:
+    OSFONTDIR="/usr/local/share/fonts/truetype//:/usr/local/share/fonts/opentype//" $prg
+  will result in fonts found in the above two given directories to be
+  searched in addition.
+
+Output files:
+
+  If no output option is given, the program searches for a GhostScript
+  interpreter 'gs' and determines its Resource directory. This might
+  fail, in which case one need to pass the output directory manually.
+
+  Since the program adds files and link to this directory, sufficient
+  permissions are necessary.
+
+Aliases:
+
+  The program tries to set up aliases if necessary for the set of
+  original Morisawa names
+    Ryumin-Light GothicBBB-Medium FutoMinA101-Bold
+    FutoGoB101-Bold Jun101-Light
+  and the otf Morisawa names
+    A-OTF-RyuminPro-Light A-OTF-GothicBBBPro-Medium A-OTF-FutoMinA101Pro-Bold
+    A-OTF-FutoGoB101Pro-Bold A-OTF-Jun101Pro-Light
+  The order is determined by the Provides setting in the font database,
+  and currently is 
+    Morisawa Pr6, Morisawa, Hiragino ProN, Hiragino, 
+    Yu OSX, Yu Win, Kozuka ProN, Kozuka, IPAex, IPA
+  That is, the first font found in this order will be used to provide the
+  alias if necessary.
+
+Authors, Contributors, and Copyright:
+
+  The script and its documentation was written by Norbert Preining, based
+  on research and work by Yusuke Kuroki, Bruno Voisin, Munehiro Yamamoto
+  and the TeX Q&A wiki page.
+
+  The script is licensed under GNU General Public License Version 3 or later.
+  The contained font data is not copyrightable.
 
 EOF
 ;
@@ -562,6 +763,631 @@ sub print_debug {
 sub print_ddebug {
   print STDERR "$prg [DEBUG]: ", @_ if ($opt_debug >= 2);
 }
+
+
+__DATA__
+#
+# CJK FONT DEFINITIONS
+#
+
+# JAPAN
+
+# Morisawa
+
+Name: A-OTF-FutoGoB101Pr6N-Bold
+Type: CID
+Class: Japan
+Provides: FutoGoB101-Bold(10)
+Provides: A-OTF-FutoGoB101Pro-Bold(10)
+Filename: A-OTF-FutoGoB101Pr6N-Bold.otf
+
+Name: A-OTF-FutoGoB101Pro-Bold
+Type: CID
+Class: Japan
+Provides: FutoGoB101-Bold(20)
+Filename: A-OTF-FutoGoB101Pro-Bold.otf
+
+Name: A-OTF-FutoMinA101Pr6N-Bold
+Type: CID
+Class: Japan
+Provides: FutoMinA101-Bold(10)
+Provides: A-OTF-FutoMinA101Pro-Bold(10)
+Filename: A-OTF-FutoMinA101Pr6N-Bold.otf
+
+Name: A-OTF-FutoMinA101Pro-Bold
+Type: CID
+Class: Japan
+Provides: FutoMinA101-Bold(20)
+Filename: A-OTF-FutoMinA101Pro-Bold.otf
+
+Name: A-OTF-GothicBBBPr6N-Medium
+Type: CID
+Class: Japan
+Provides: GothicBBB-Medium(10)
+Provides: A-OTF-GothicBBBPro-Medium(10)
+Filename: A-OTF-GothicBBBPr6N-Medium.otf
+
+Name: A-OTF-GothicBBBPro-Medium
+Type: CID
+Class: Japan
+Provides: GothicBBB-Medium(20)
+Filename: A-OTF-GothicBBBPro-Medium.otf
+
+Name: A-OTF-Jun101Pro-Light
+Type: CID
+Class: Japan
+Provides: Jun101-Light(20)
+Filename: A-OTF-Jun101Pro-Light.otf
+
+Name: A-OTF-MidashiGoPr6N-MB31
+Type: CID
+Class: Japan
+Filename: A-OTF-MidashiGoPr6N-MB31.otf
+
+Name: A-OTF-MidashiGoPro-MB31
+Type: CID
+Class: Japan
+Filename: A-OTF-MidashiGoPro-MB31.otf
+
+Name: A-OTF-RyuminPr6N-Light
+Type: CID
+Class: Japan
+Provides: Ryumin-Light(10)
+Provides: A-OTF-RyuminPro-Light(10)
+Filename: A-OTF-RyuminPr6N-Light.otf
+
+Name: A-OTF-RyuminPro-Light
+Type: CID
+Class: Japan
+Provides: Ryumin-Light(20)
+Filename: A-OTF-RyuminPro-Light.otf
+
+Name: A-OTF-ShinMGoPr6N-Light
+Type: CID
+Class: Japan
+Provides: Jun101-Light(10)
+Provides: A-OTF-Jun101Pro-Light(10)
+Filename: A-OTF-ShinMGoPr6N-Light.otf
+
+
+# Hiragino
+
+Name: HiraKakuPro-W3
+Type: CID
+Class: Japan
+Provides: GothicBBB-Medium(40)
+Provides: A-OTF-GothicBBBPro-Medium(40)
+Filename: ヒラギノ角ゴ Pro W3.otf
+Filename: HiraKakuPro-W3.otf
+
+Name: HiraKakuPro-W6
+Type: CID
+Class: Japan
+Provides: FutoGoB101-Bold(40)
+Provides: A-OTF-FutoGoB101Pro-Bold(40)
+Filename: ヒラギノ角ゴ Pro W6.otf
+Filename: HiraKakuPro-W6.otf
+
+Name: HiraKakuProN-W3
+Type: CID
+Class: Japan
+Provides: GothicBBB-Medium(30)
+Provides: A-OTF-GothicBBBPro-Medium(30)
+Filename: ヒラギノ角ゴ ProN W3.otf
+Filename: HiraKakuProN-W3.otf
+
+Name: HiraKakuProN-W6
+Type: CID
+Class: Japan
+Provides: FutoGoB101-Bold(30)
+Provides: A-OTF-FutoGoB101Pro-Bold(30)
+Filename: ヒラギノ角ゴ ProN W6.otf
+Filename: HiraKakuProN-W6.otf
+
+Name: HiraKakuStd-W8
+Type: CID
+Class: Japan
+Filename: ヒラギノ角ゴ Std W8.otf
+Filename: HiraKakuStd-W8.otf
+
+Name: HiraKakuStdN-W8
+Type: CID
+Class: Japan
+Filename: ヒラギノ角ゴ StdN W8.otf
+Filename: HiraKakuStdN-W8.otf
+
+Name: HiraMaruPro-W4
+Type: CID
+Class: Japan
+Provides: Jun101-Light(40)
+Provides: A-OTF-Jun101Pro-Light(40)
+Filename: ヒラギノ丸ゴ Pro W4.otf
+Filename: HiraMaruPro-W4.otf
+
+Name: HiraMaruProN-W4
+Type: CID
+Class: Japan
+Provides: Jun101-Light(30)
+Provides: A-OTF-Jun101Pro-Light(30)
+Filename: ヒラギノ丸ゴ ProN W4.otf
+Filename: HiraMaruProN-W4.otf
+
+Name: HiraMinPro-W3
+Type: CID
+Class: Japan
+Provides: Ryumin-Light(40)
+Provides: A-OTF-RyuminPro-Light(40)
+Filename: ヒラギノ明朝 Pro W3.otf
+Filename: HiraMinPro-W3.otf
+
+Name: HiraMinPro-W6
+Type: CID
+Class: Japan
+Provides: FutoMinA101-Bold(40)
+Provides: A-OTF-FutoMinA101Pro-Bold(40)
+Filename: ヒラギノ明朝 Pro W6.otf
+Filename: HiraMinPro-W6.otf
+
+Name: HiraMinProN-W3
+Type: CID
+Class: Japan
+Provides: Ryumin-Light(30)
+Provides: A-OTF-RyuminPro-Light(30)
+Filename: ヒラギノ明朝 ProN W3.otf
+Filename: HiraMinProN-W3.otf
+
+Name: HiraMinProN-W6
+Type: CID
+Class: Japan
+Provides: FutoMinA101-Bold(30)
+Provides: A-OTF-FutoMinA101Pro-Bold(30)
+Filename: ヒラギノ明朝 ProN W6.otf
+Filename: HiraMinProN-W6.otf
+
+
+Name: HiraginoSansGB-W3
+Type: CID
+Class: GB
+Filename: Hiragino Sans GB W3.otf
+Filename: HiraginoSansGB-W3.otf
+
+Name: HiraginoSansGB-W6
+Type: CID
+Class: GB
+Filename: Hiragino Sans GB W6.otf
+Filename: HiraginoSansGB-W6.otf
+
+
+# Yu-fonts MacOS version
+
+Name: YuGo-Medium
+Type: CID
+Class: Japan
+Provides: GothicBBB-Medium(50)
+Provides: A-OTF-GothicBBBPro-Medium(50)
+Filename: Yu Gothic Medium.otf
+Filename: YuGo-Medium.otf
+
+Name: YuGo-Bold
+Type: CID
+Class: Japan
+Provides: FutoGoB101-Bold(50)
+Provides: A-OTF-FutoGoB101Pro-Bold(50)
+Provides: Jun101-Light(50)
+Provides: A-OTF-Jun101Pro-Light(50)
+Filename: Yu Gothic Bold.otf
+Filename: YuGo-Bold.otf
+
+Name: YuMin-Medium
+Type: CID
+Class: Japan
+Provides: Ryumin-Light(50)
+Provides: A-OTF-RyuminPro-Light(50)
+Filename: Yu Mincho Medium.otf
+Filename: YuMin-Medium.otf
+
+Name: YuMin-Demibold
+Type: CID
+Class: Japan
+Provides: FutoMinA101-Bold(50)
+Provides: A-OTF-FutoMinA101Pro-Bold(50)
+Filename: Yu Mincho Demibold.otf
+Filename: YuMin-Demibold.otf
+
+# Yu-fonts Windows version
+Name: YuMincho-Regular
+Type: TTF
+Class: Japan
+Provides: Ryumin-Light(60)
+Provides: A-OTF-RyuminPro-Light(60)
+Filename: yumin.ttf
+Filename: YuMincho-Regular.ttf
+
+Name: YuMincho-Light
+Type: TTF
+Class: Japan
+Filename: yuminl.ttf
+Filename: YuMincho-Light.ttf
+
+Name: YuMincho-DemiBold
+Type: TTF
+Class: Japan
+Provides: FutoMinA101-Bold(60)
+Provides: A-OTF-FutoMinA101Pro-Bold(60)
+Filename: yumindb.ttf
+Filename: YuMincho-DemiBold.ttf
+
+Name: YuGothic-Regular
+Type: TTF
+Class: Japan
+Provides: GothicBBB-Medium(60)
+Provides: A-OTF-GothicBBBPro-Medium(60)
+Filename: yugothic.ttf
+Filename: YuGothic-Regular.ttf
+
+Name: YuGothic-Light
+Type: TTF
+Class: Japan
+Filename: yugothil.ttf
+Filename: YuGothic-Light.ttf
+
+Name: YuGothic-Bold
+Type: TTF
+Class: Japan
+Provides: FutoGoB101-Bold(60)
+Provides: A-OTF-FutoGoB101Pro-Bold(60)
+Provides: Jun101-Light(60)
+Provides: A-OTF-Jun101Pro-Light(60)
+Filename: yugothib.ttf
+Filename: YuGothic-Bold.ttf
+
+# IPA fonts
+
+Name: IPAMincho
+Type: TTF
+Class: Japan
+Provides: Ryumin-Light(110)
+Provides: A-OTF-RyuminPro-Light(110)
+Filename: ipam.ttf
+Filename: IPAMincho.ttf
+
+Name: IPAGothic
+Type: TTF
+Class: Japan
+Provides: GothicBBB-Medium(110)
+Provides: A-OTF-GothicBBBPro-Medium(110)
+Provides: FutoMinA101-Bold(110)
+Provides: A-OTF-FutoMinA101Pro-Bold(110)
+Provides: FutoGoB101-Bold(110)
+Provides: A-OTF-FutoGoB101Pro-Bold(110)
+Provides: Jun101-Light(110)
+Provides: A-OTF-Jun101Pro-Light(110)
+Filename: ipag.ttf
+Filename: IPAGothic.ttf
+
+Name: IPAexMincho
+Type: TTF
+Class: Japan
+Provides: Ryumin-Light(100)
+Provides: A-OTF-RyuminPro-Light(100)
+Filename: ipaexm.ttf
+Filename: IPAexMincho.ttf
+
+Name: IPAexGothic
+Type: TTF
+Class: Japan
+Provides: GothicBBB-Medium(100)
+Provides: A-OTF-GothicBBBPro-Medium(100)
+Provides: FutoMinA101-Bold(100)
+Provides: A-OTF-FutoMinA101Pro-Bold(100)
+Provides: FutoGoB101-Bold(100)
+Provides: A-OTF-FutoGoB101Pro-Bold(100)
+Provides: Jun101-Light(100)
+Provides: A-OTF-Jun101Pro-Light(100)
+Filename: ipaexg.ttf
+Filename: IPAexGothic.ttf
+
+# Kozuka fonts
+
+Name: KozGoPr6N-Bold
+Type: CID
+Class: Japan
+Provides: FutoGoB101-Bold(70)
+Provides: A-OTF-FutoGoB101Pro-Bold(70)
+Filename: KozGoPr6N-Bold.otf
+
+Name: KozGoPr6N-Heavy
+Type: CID
+Class: Japan
+Provides: Jun101-Light(70)
+Provides: A-OTF-Jun101Pro-Light(70)
+Filename: KozGoPr6N-Heavy.otf
+
+Name: KozGoPr6N-Medium
+Type: CID
+Class: Japan
+Provides: GothicBBB-Medium(70)
+Provides: A-OTF-GothicBBBPro-Medium(70)
+Filename: KozGoPr6N-Medium.otf
+
+Name: KozGoPr6N-Regular
+Type: CID
+Class: Japan
+Filename: KozGoPr6N-Regular.otf
+
+Name: KozGoPro-Bold
+Type: CID
+Class: Japan
+Provides: FutoGoB101-Bold(90)
+Provides: A-OTF-FutoGoB101Pro-Bold(90)
+Filename: KozGoPro-Bold.otf
+
+Name: KozGoPro-Heavy
+Type: CID
+Class: Japan
+Provides: Jun101-Light(90)
+Provides: A-OTF-Jun101Pro-Light(90)
+Filename: KozGoPro-Heavy.otf
+
+Name: KozGoPro-Medium
+Type: CID
+Class: Japan
+Provides: GothicBBB-Medium(90)
+Provides: A-OTF-GothicBBBPro-Medium(90)
+Filename: KozGoPro-Medium.otf
+
+Name: KozGoPro-Regular
+Type: CID
+Class: Japan
+Filename: KozGoPro-Regular.otf
+
+Name: KozGoProVI-Bold
+Type: CID
+Class: Japan
+Provides: FutoGoB101-Bold(80)
+Provides: A-OTF-FutoGoB101Pro-Bold(80)
+Filename: KozGoProVI-Bold.otf
+
+Name: KozGoProVI-Heavy
+Type: CID
+Class: Japan
+Provides: Jun101-Light(80)
+Provides: A-OTF-Jun101Pro-Light(80)
+Filename: KozGoProVI-Heavy.otf
+
+Name: KozGoProVI-Medium
+Type: CID
+Class: Japan
+Provides: GothicBBB-Medium(80)
+Provides: A-OTF-GothicBBBPro-Medium(80)
+Filename: KozGoProVI-Medium.otf
+
+Name: KozGoProVI-Regular
+Type: CID
+Class: Japan
+Filename: KozGoProVI-Regular.otf
+
+Name: KozMinPr6N-Bold
+Type: CID
+Class: Japan
+Provides: FutoMinA101-Bold(70)
+Provides: A-OTF-FutoMinA101Pro-Bold(70)
+Filename: KozMinPr6N-Bold.otf
+
+Name: KozMinPr6N-Light
+Type: CID
+Class: Japan
+Filename: KozMinPr6N-Light.otf
+
+Name: KozMinPr6N-Regular
+Type: CID
+Class: Japan
+Provides: Ryumin-Light(70)
+Provides: A-OTF-RyuminPro-Light(70)
+Filename: KozMinPr6N-Regular.otf
+
+Name: KozMinPro-Bold
+Type: CID
+Class: Japan
+Provides: FutoMinA101-Bold(90)
+Provides: A-OTF-FutoMinA101Pro-Bold(90)
+Filename: KozMinPro-Bold.otf
+
+Name: KozMinPro-Light
+Type: CID
+Class: Japan
+Filename: KozMinPro-Light.otf
+
+Name: KozMinPro-Regular
+Type: CID
+Class: Japan
+Provides: Ryumin-Light(90)
+Provides: A-OTF-RyuminPro-Light(90)
+Filename: KozMinPro-Regular.otf
+
+Name: KozMinProVI-Bold
+Type: CID
+Class: Japan
+Provides: FutoMinA101-Bold(80)
+Provides: A-OTF-FutoMinA101Pro-Bold(80)
+Filename: KozMinProVI-Bold.otf
+
+Name: KozMinProVI-Light
+Type: CID
+Class: Japan
+Filename: KozMinProVI-Light.otf
+
+Name: KozMinProVI-Regular
+Type: CID
+Class: Japan
+Provides: Ryumin-Light(80)
+Provides: A-OTF-RyuminPro-Light(80)
+Filename: KozMinProVI-Regular.otf
+
+#
+# CHINESE FONTS
+#
+
+Name: LiHeiPro
+Type: TTF
+Class: CNS
+Filename: 儷黑 Pro.ttf
+Filename: 儷黑 Pro.ttf
+Filename: LiHeiPro.ttf
+
+Name: LiSongPro
+Type: TTF
+Class: CNS
+Filename: 儷宋 Pro.ttf
+Filename: LiSongPro.ttf
+
+Name: STXihei
+Type: TTF
+Class: GB
+Filename: 华文细黑.ttf
+Filename: 华文细黑.ttf
+Filename: STXihei.ttf
+
+Name: STHeiti
+Type: TTF
+Class: GB
+Filename: 华文黑体.ttf
+Filename: 华文黑体.ttf
+Filename: STHeiti.ttf
+
+Name: STHeitiSC-Light
+Type: TTF
+Class: GB
+Filename: STHeiti Light.ttc(1)
+Filename: STHeitiSC-Light.ttf
+
+Name: STHeitiSC-Medium
+Type: TTF
+Class: GB
+Filename: STHeiti Medium.ttc(1)
+Filename: STHeitiSC-Medium.ttf
+
+Name: STHeitiTC-Light
+Type: TTF
+Class: GB
+Filename: STHeiti Light.ttc(0)
+Filename: STHeitiTC-Light.ttf
+
+Name: STHeitiTC-Medium
+Type: TTF
+Class: GB
+Filename: STHeiti Medium.ttc(0)
+Filename: STHeiti Medium.ttc(0)
+Filename: STHeitiTC-Medium.ttf
+
+Name: STFangsong
+Type: TTF
+Class: GB
+Filename: 华文仿宋.ttf
+Filename: STFangsong.ttf
+
+Name: STSong
+Type: TTF
+Class: GB
+Filename: Songti.ttc(4)
+Filename: 宋体.ttc(3)
+Filename: 华文宋体.ttf
+Filename: STSong.ttf
+
+Name: STSongti-SC-Light
+Type: TTF
+Class: GB
+Filename: Songti.ttc(3)
+Filename: 宋体.ttc(2)
+Filename: STSongti-SC-Light.ttf
+
+Name: STSongti-SC-Regular
+Type: TTF
+Class: GB
+Filename: Songti.ttc(6)
+Filename: 宋体.ttc(4)
+Filename: STSongti-SC-Regular.ttf
+
+Name: STSongti-SC-Bold
+Type: TTF
+Class: GB
+Filename: Songti.ttc(1)
+Filename: 宋体.ttc(1)
+Filename: STSongti-SC-Bold.ttf
+
+Name: STSongti-SC-Black
+Type: TTF
+Class: GB
+Filename: Songti.ttc(0)
+Filename: 宋体.ttc(0)
+Filename: STSongti-SC-Black.ttf
+
+Name: STSongti-TC-Light
+Type: TTF
+Class: GB
+Filename: Songti.ttc(5)
+Filename: STSongti-TC-Light.ttf
+
+Name: STSongti-TC-Regular
+Type: TTF
+Class: GB
+Filename: Songti.ttc(7)
+Filename: STSongti-TC-Regular.ttf
+
+Name: STSongti-TC-Bold
+Type: TTF
+Class: GB
+Filename: Songti.ttc(2)
+Filename: STSongti-TC-Bold.ttf
+
+Name: STKaiti
+Type: TTF
+Class: GB
+Filename: Kaiti.ttc(4)
+Filename: 楷体.ttc(3)
+Filename: 华文楷体.ttf
+Filename: STKaiti.ttf
+
+Name: STKaiti-SC-Regular
+Type: TTF
+Class: GB
+Filename: Kaiti.ttc(3)
+Filename: 楷体.ttc(2)
+Filename: STKaiti-SC-Regular.ttf
+
+Name: STKaiti-SC-Bold
+Type: TTF
+Class: GB
+Filename: Kaiti.ttc(1)
+Filename: 楷体.ttc(1)
+Filename: STKaiti-SC-Bold.ttf
+
+Name: STKaiti-SC-Black
+Type: TTF
+Class: GB
+Filename: Kaiti.ttc(0)
+Filename: 楷体.ttc(0)
+Filename: STKaiti-SC-Black.ttf
+
+Name: STKaiTi-TC-Regular
+Type: TTF
+Class: GB
+Filename: Kaiti.ttc(5)
+Filename: STKaiTi-TC-Regular.ttf
+
+Name: STKaiTi-TC-Bold
+Type: TTF
+Class: GB
+Filename: Kaiti.ttc(2)
+Filename: STKaiTi-TC-Bold.ttf
+
+#
+# KOREAN FONTS
+#
+Name: AppleMyungjo
+Type: TTF
+Class: Korean
+Filename: AppleMyungjo.ttf
 
 
 
