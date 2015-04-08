@@ -514,9 +514,14 @@ sub check_for_files {
   if ($ENV{'OSFONTDIR'}) {
     print_debug("final setting of OSFONTDIR: $ENV{'OSFONTDIR'}\n");
   }
+  # prepare for kpsewhich call, we need to do quoting
+  my $cmdl = 'kpsewhich ';
+  for my $f (@fn) {
+    $cmdl .= " \"$f\" ";
+  }
   # shoot up kpsewhich
-  #print "checking for kpsewhich @fn\n\n";
-  chomp( my @foundfiles = `kpsewhich @fn`);
+  print_debug("checking for $cmdl\n");
+  chomp( my @foundfiles = `$cmdl`);
   print_debug("Found files @foundfiles\n");
   # map basenames to filenames
   my %bntofn;
