@@ -467,52 +467,55 @@ Filename: KozMinProVI-Regular.otf
 Name: LiHeiPro
 Type: TTF
 Class: CNS
-Filename: 儷黑 Pro.ttf
+Provides: MHei-Medium(20)
 Filename: 儷黑 Pro.ttf
 Filename: LiHeiPro.ttf
 
 Name: LiSongPro
 Type: TTF
 Class: CNS
+Provides: MSungStd-Light(20)
 Filename: 儷宋 Pro.ttf
 Filename: LiSongPro.ttf
 
 Name: STXihei
 Type: TTF
 Class: GB
-Filename: 华文细黑.ttf
+Provides: STHeiti-Light(20)
 Filename: 华文细黑.ttf
 Filename: STXihei.ttf
 
 Name: STHeiti
 Type: TTF
 Class: GB
-Filename: 华文黑体.ttf
+Provides: STHeiti-Regular(20)
 Filename: 华文黑体.ttf
 Filename: STHeiti.ttf
 
 Name: STHeitiSC-Light
 Type: TTF
 Class: GB
+Provides: STHeiti-Light(10)
 Filename: STHeiti Light.ttc(1)
 Filename: STHeitiSC-Light.ttf
 
 Name: STHeitiSC-Medium
 Type: TTF
 Class: GB
+Provides: STHeiti-Regular(10)
 Filename: STHeiti Medium.ttc(1)
 Filename: STHeitiSC-Medium.ttf
 
 Name: STHeitiTC-Light
 Type: TTF
-Class: GB
+Class: CNS
 Filename: STHeiti Light.ttc(0)
 Filename: STHeitiTC-Light.ttf
 
 Name: STHeitiTC-Medium
 Type: TTF
-Class: GB
-Filename: STHeiti Medium.ttc(0)
+Class: CNS
+Provides: MHei-Medium(10)
 Filename: STHeiti Medium.ttc(0)
 Filename: STHeitiTC-Medium.ttf
 
@@ -525,6 +528,7 @@ Filename: STFangsong.ttf
 Name: STSong
 Type: TTF
 Class: GB
+Provides: STSongStd-Light(20)
 Filename: Songti.ttc(4)
 Filename: 宋体.ttc(3)
 Filename: 华文宋体.ttf
@@ -533,6 +537,7 @@ Filename: STSong.ttf
 Name: STSongti-SC-Light
 Type: TTF
 Class: GB
+Provides: STSongStd-Light(10)
 Filename: Songti.ttc(3)
 Filename: 宋体.ttc(2)
 Filename: STSongti-SC-Light.ttf
@@ -560,25 +565,27 @@ Filename: STSongti-SC-Black.ttf
 
 Name: STSongti-TC-Light
 Type: TTF
-Class: GB
+Class: CNS
+Provides: MSungStd-Light(10)
 Filename: Songti.ttc(5)
 Filename: STSongti-TC-Light.ttf
 
 Name: STSongti-TC-Regular
 Type: TTF
-Class: GB
+Class: CNS
 Filename: Songti.ttc(7)
 Filename: STSongti-TC-Regular.ttf
 
 Name: STSongti-TC-Bold
 Type: TTF
-Class: GB
+Class: CNS
 Filename: Songti.ttc(2)
 Filename: STSongti-TC-Bold.ttf
 
 Name: STKaiti
 Type: TTF
 Class: GB
+Provides: STKaiti-Regular(20)
 Filename: Kaiti.ttc(4)
 Filename: 楷体.ttc(3)
 Filename: 华文楷体.ttf
@@ -587,6 +594,7 @@ Filename: STKaiti.ttf
 Name: STKaiti-SC-Regular
 Type: TTF
 Class: GB
+Provides: STKaiti-Regular(10)
 Filename: Kaiti.ttc(3)
 Filename: 楷体.ttc(2)
 Filename: STKaiti-SC-Regular.ttf
@@ -605,17 +613,24 @@ Filename: Kaiti.ttc(0)
 Filename: 楷体.ttc(0)
 Filename: STKaiti-SC-Black.ttf
 
-Name: STKaiTi-TC-Regular
+Name: STKaiti-TC-Regular
 Type: TTF
-Class: GB
+Class: CNS
+Provides: MKai-Medium(10)
 Filename: Kaiti.ttc(5)
-Filename: STKaiTi-TC-Regular.ttf
+Filename: STKaiti-TC-Regular.ttf
 
-Name: STKaiTi-TC-Bold
+Name: STKaiti-TC-Bold
 Type: TTF
-Class: GB
+Class: CNS
 Filename: Kaiti.ttc(2)
-Filename: STKaiTi-TC-Bold.ttf
+Filename: STKaiti-TC-Bold.ttf
+
+Name: STKaiti-Adobe-CNS1
+Type: TTF
+Class: CNS
+Provides: MKai-Medium(20)
+Filename: STKaiti.ttf
 
 #
 # KOREAN FONTS
@@ -623,5 +638,12 @@ Filename: STKaiTi-TC-Bold.ttf
 Name: AppleMyungjo
 Type: TTF
 Class: Korean
+Provides: HYSMyeongJoStd-Medium(50)
 Filename: AppleMyungjo.ttf
+
+Name: AppleGothic
+Type: TTF
+Class: Korean
+Provides: HYGoThic-Medium(50)
+Filename: AppleGothic.ttf
 
