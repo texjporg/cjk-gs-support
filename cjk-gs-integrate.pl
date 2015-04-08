@@ -441,7 +441,7 @@ sub generate_cidfmap_entry {
   } elsif ($c eq "CNS") {
     $s .= "1) 5]";
   } elsif ($c eq "Korean") {
-    print_warning("don't know how to handle class $c for $n, skipping.\n");
+    $s .= "1) 2]";
     return '';
   } else {
     print_warning("unknown class $c for $n, skipping.\n");
@@ -1386,17 +1386,24 @@ Filename: Kaiti.ttc(0)
 Filename: 楷体.ttc(0)
 Filename: STKaiti-SC-Black.ttf
 
-Name: STKaiTi-TC-Regular
+Name: STKaiti-TC-Regular
 Type: TTF
 Class: CNS
+Provides: MKai-Medium(10)
 Filename: Kaiti.ttc(5)
-Filename: STKaiTi-TC-Regular.ttf
+Filename: STKaiti-TC-Regular.ttf
 
-Name: STKaiTi-TC-Bold
+Name: STKaiti-TC-Bold
 Type: TTF
 Class: CNS
 Filename: Kaiti.ttc(2)
-Filename: STKaiTi-TC-Bold.ttf
+Filename: STKaiti-TC-Bold.ttf
+
+Name: STKaiti-Adobe-CNS1
+Type: TTF
+Class: CNS
+Provides: MKai-Medium(20)
+Filename: STKaiti.ttf
 
 #
 # KOREAN FONTS
