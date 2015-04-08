@@ -19,10 +19,6 @@ use Getopt::Long qw(:config no_autoabbrev ignore_case_always);
 use File::Basename;
 use strict;
 
-# for debugging
-use Data::Dumper;
-$Data::Dumper::Indent = 1;
-
 (my $prg = basename($0)) =~ s/\.pl$//;
 my $version = '$VER$';
 
@@ -236,6 +232,10 @@ if ($opt_help) {
   exit 0;
 }
 
+if ($opt_debug) {
+  require Data::Dumper;
+  $Data::Dumper::Indent = 1;
+}
 
 main(@ARGV);
 
