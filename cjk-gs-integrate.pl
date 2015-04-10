@@ -377,7 +377,12 @@ sub generate_cidfmap {
     if (@foundfiles) {
       if ($fontdb{$k}{'type'} eq 'TTF') {
         for my $f (@foundfiles) {
-          $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'files'}{$f});
+          # extract subfont if necessary
+          my $sf = 0;
+          if ($f =~ m/^(.*)\((\d*)\)$/) {
+            $sf = $2;
+          }
+          $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'files'}{$f}, $sf);
         }
       }
     }
@@ -422,17 +427,11 @@ sub generate_cidfmap {
 }
 
 sub generate_cidfmap_entry {
-  my ($n, $c, $f) = @_;
+  my ($n, $c, $f, $sf) = @_;
   # extract subfont
-  my $rf = $f;
-  my $sf = 0;
-  if ($f =~ m/^(.*)\((\d*)\)$/) {
-    $rf = $1;
-    $sf = $2;
-  }
   my $s = "/$n <<
   /FileType /TrueType
-  /SubfontID 0
+  /SubfontID $sf
   /CSI [($c";
   if ($c eq "Japan") {
     $s .= "1) 6]";
@@ -442,7 +441,6 @@ sub generate_cidfmap_entry {
     $s .= "1) 5]";
   } elsif ($c eq "Korean") {
     $s .= "1) 2]";
-    return '';
   } else {
     print_warning("unknown class $c for $n, skipping.\n");
     return '';
@@ -1420,6 +1418,92 @@ Class: Korean
 Provides: HYGoThic-Medium(50)
 Filename: AppleGothic.ttf
 
+Name: NanumMyeongjo
+Type: TTF
+Class: Korean
+Provides: HYSMyeongJoStd-Medium(30)
+Filename: NanumMyeongjo.ttc(0)
+
+Name: NanumMyeongjoBold
+Type: TTF
+Class: Korean
+Filename: NanumMyeongjo.ttc(1)
+
+Name: NanumMyeongjoExtraBold
+Type: TTF
+Class: Korean
+Filename: NanumMyeongjo.ttc(2)
+
+Name: NanumGothic
+Type: TTF
+Class: Korean
+Provides: HYGoThic-Medium(30)
+Filename: NanumGothic.ttc(0)
+
+Name: NanumGothicBold
+Type: TTF
+Class: Korean
+Filename: NanumGothic.ttc(1)
+
+Name: NanumGothicExtraBold
+Type: TTF
+Class: Korean
+Filename: NanumGothic.ttc(2)
+
+Name: NanumBrush
+Type: TTF
+Class: Korean
+Filename: NanumScript.ttc(0)
+
+Name: NanumPen
+Type: TTF
+Class: Korean
+Filename: NanumScript.ttc(1)
+
+Name: AppleSDGothicNeo-Thin
+Type: OTF
+Class: Korean
+Filename: AppleSDGothicNeo-Thin.otf
+
+Name: AppleSDGothicNeo-UltraLight
+Type: OTF
+Class: Korean
+Filename: AppleSDGothicNeo-UltraLight.otf
+
+Name: AppleSDGothicNeo-Light
+Type: OTF
+Class: Korean
+Filename: AppleSDGothicNeo-Light.otf
+
+Name: AppleSDGothicNeo-Regular
+Type: OTF
+Class: Korean
+Filename: AppleSDGothicNeo-Regular.otf
+
+Name: AppleSDGothicNeo-Medium
+Type: OTF
+Class: Korean
+Filename: AppleSDGothicNeo-Medium.otf
+
+Name: AppleSDGothicNeo-SemiBold
+Type: OTF
+Class: Korean
+Filename: AppleSDGothicNeo-SemiBold.otf
+
+Name: AppleSDGothicNeo-Bold
+Type: OTF
+Class: Korean
+Filename: AppleSDGothicNeo-Bold.otf
+
+Name: AppleSDGothicNeo-ExtraBold
+Type: OTF
+Class: Korean
+Filename: AppleSDGothicNeo-ExtraBold.otf
+
+Name: AppleSDGothicNeo-Heavy
+Type: OTF
+Class: Korean
+Filename: AppleSDGothicNeo-Heavy.otf
 
 
 ### Local Variables:
