@@ -431,6 +431,7 @@ sub generate_cidfmap_entry {
   # extract subfont
   my $s = "/$n <<
   /FileType /TrueType
+  /Path ($f)
   /SubfontID $sf
   /CSI [($c";
   if ($c eq "Japan") {
@@ -439,16 +440,13 @@ sub generate_cidfmap_entry {
     $s .= "1) 5]";
   } elsif ($c eq "CNS") {
     $s .= "1) 5]";
-  } elsif ($c eq "Korean") {
+  } elsif ($c eq "Korea") {
     $s .= "1) 2]";
   } else {
     print_warning("unknown class $c for $n, skipping.\n");
     return '';
   }
-  $s .= "
-  /Path ($f) >> ;
-
-";
+  $s .= " >> ;\n";
   return $s;
 }
 
@@ -1408,101 +1406,101 @@ Filename: STKaiti.ttf
 #
 Name: AppleMyungjo
 Type: TTF
-Class: Korean
+Class: Korea
 Provides: HYSMyeongJoStd-Medium(50)
 Filename: AppleMyungjo.ttf
 
 Name: AppleGothic
 Type: TTF
-Class: Korean
+Class: Korea
 Provides: HYGoThic-Medium(50)
 Filename: AppleGothic.ttf
 
 Name: NanumMyeongjo
 Type: TTF
-Class: Korean
+Class: Korea
 Provides: HYSMyeongJoStd-Medium(30)
 Filename: NanumMyeongjo.ttc(0)
 
 Name: NanumMyeongjoBold
 Type: TTF
-Class: Korean
+Class: Korea
 Filename: NanumMyeongjo.ttc(1)
 
 Name: NanumMyeongjoExtraBold
 Type: TTF
-Class: Korean
+Class: Korea
 Filename: NanumMyeongjo.ttc(2)
 
 Name: NanumGothic
 Type: TTF
-Class: Korean
+Class: Korea
 Provides: HYGoThic-Medium(30)
 Filename: NanumGothic.ttc(0)
 
 Name: NanumGothicBold
 Type: TTF
-Class: Korean
+Class: Korea
 Filename: NanumGothic.ttc(1)
 
 Name: NanumGothicExtraBold
 Type: TTF
-Class: Korean
+Class: Korea
 Filename: NanumGothic.ttc(2)
 
 Name: NanumBrush
 Type: TTF
-Class: Korean
+Class: Korea
 Filename: NanumScript.ttc(0)
 
 Name: NanumPen
 Type: TTF
-Class: Korean
+Class: Korea
 Filename: NanumScript.ttc(1)
 
 Name: AppleSDGothicNeo-Thin
 Type: OTF
-Class: Korean
+Class: Korea
 Filename: AppleSDGothicNeo-Thin.otf
 
 Name: AppleSDGothicNeo-UltraLight
 Type: OTF
-Class: Korean
+Class: Korea
 Filename: AppleSDGothicNeo-UltraLight.otf
 
 Name: AppleSDGothicNeo-Light
 Type: OTF
-Class: Korean
+Class: Korea
 Filename: AppleSDGothicNeo-Light.otf
 
 Name: AppleSDGothicNeo-Regular
 Type: OTF
-Class: Korean
+Class: Korea
 Filename: AppleSDGothicNeo-Regular.otf
 
 Name: AppleSDGothicNeo-Medium
 Type: OTF
-Class: Korean
+Class: Korea
 Filename: AppleSDGothicNeo-Medium.otf
 
 Name: AppleSDGothicNeo-SemiBold
 Type: OTF
-Class: Korean
+Class: Korea
 Filename: AppleSDGothicNeo-SemiBold.otf
 
 Name: AppleSDGothicNeo-Bold
 Type: OTF
-Class: Korean
+Class: Korea
 Filename: AppleSDGothicNeo-Bold.otf
 
 Name: AppleSDGothicNeo-ExtraBold
 Type: OTF
-Class: Korean
+Class: Korea
 Filename: AppleSDGothicNeo-ExtraBold.otf
 
 Name: AppleSDGothicNeo-Heavy
 Type: OTF
-Class: Korean
+Class: Korea
 Filename: AppleSDGothicNeo-Heavy.otf
 
 
