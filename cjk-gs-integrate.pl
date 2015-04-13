@@ -1408,6 +1408,7 @@ Name: AppleMyungjo
 Type: TTF
 Class: Korea
 Provides: HYSMyeongJoStd-Medium(50)
+Provides: HYSMyeongJo-Medium(50)
 Filename: AppleMyungjo.ttf
 
 Name: AppleGothic
@@ -1420,6 +1421,7 @@ Name: NanumMyeongjo
 Type: TTF
 Class: Korea
 Provides: HYSMyeongJoStd-Medium(30)
+Provides: HYSMyeongJo-Medium(30)
 Filename: NanumMyeongjo.ttc(0)
 
 Name: NanumMyeongjoBold
