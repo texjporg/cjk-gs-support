@@ -121,7 +121,8 @@ Korean:
 
 Chinese:
 
-    MHei-Medium MKai-Medium MSungStd-Light STHeiti-Light STHeiti-Regular STKaiti-Regular STSongStd-Light
+    MHei-Medium MKai-Medium MSungStd-Light 
+    STHeiti-Light STHeiti-Regular STKaiti-Regular STSongStd-Light
 
 In addition, we also includes provide entries for the OTF Morisawa names:
 
