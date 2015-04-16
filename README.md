@@ -7,11 +7,11 @@ on the system.
 Usage
 -----
 
-cjk-gs-integrate [OPTION] ...
+`````
+[perl] cjk-gs-integrate[.pl] [OPTIONS]
+`````
 
-Configuring GhostScript for CJK CID/TTF fonts.
-
-Options:
+#### Options ####
 
 `````
   -n, --dry-run         do not actually output anything
@@ -31,7 +31,7 @@ Options:
 
 `````
 
-Command like options:
+#### Command like options ####
 
 `````
   --list-aliases        lists the aliases and their options, with the selected
@@ -50,18 +50,28 @@ case with sufficient privileges, a run without arguments should effect
 in a complete setup of GhostScript.
 
 For each found TrueType (TTF) font it creates a cidfmap entry in
+
     <Resource>/Init/cidfmap.local
+
 and links the font to
+
     <Resource>/Font/
+
 For each OTF font it creates a snippet in
+
     <Resource>/Font/
+
 and links the font to 
+
     <Resource>/CIDFont
-The <Resource> dir is either given by -o/--output, or otherwise searched
+
+The `<Resource>` dir is either given by `-o`/`--output`, or otherwise searched
 from an installed GhostScript (binary name is assumed to be 'gs').
 
 Finally, it tries to add runlib call to
+
     <Resource>/Init/cidfmap
+
 to load the cidfmap.local.
 
 How and which directories are searched:
@@ -70,15 +80,19 @@ How and which directories are searched:
   Search is done using the kpathsea library, in particular using kpsewhich
   program. By default the following directories are searched:
   - all TEXMF trees
-  - /Library/Fonts and /System/Library/Fonts (if available)
-  - c:/windows/fonts (on Windows)
-  - the directories in OSFONTDIR environment variable
+  - `/Library/Fonts` and `/System/Library/Fonts` (if available)
+  - `c:/windows/fonts` (on Windows)
+  - the directories in `OSFONTDIR` environment variable
 
-  In case you want to add some directories to the search path, adapt the
-  OSFONTDIR environment variable accordingly: Example:
+In case you want to add some directories to the search path, adapt the
+OSFONTDIR environment variable accordingly: Example:
+
+`````
     OSFONTDIR="/usr/local/share/fonts/truetype//:/usr/local/share/fonts/opentype//" cjk-gs-integrate
-  will result in fonts found in the above two given directories to be
-  searched in addition.
+`````
+
+will result in fonts found in the above two given directories to be
+searched in addition.
 
 Output files:
 -------------
@@ -98,22 +112,28 @@ At the moment entries for the basic font names for CJK fonts
 are added:
 
 Japanese:
+
     Ryumin-Light GothicBBB-Medium FutoMinA101-Bold FutoGoB101-Bold Jun101-Light
 
 Korean:
+
     HYGoThic-Medium HYSMyeongJo-Medium HYSMyeongJoStd-Medium
 
 Chinese:
+
     MHei-Medium MKai-Medium MSungStd-Light STHeiti-Light STHeiti-Regular STKaiti-Regular STSongStd-Light
 
 In addition, we also includes provide entries for the OTF Morisawa names:
+
     A-OTF-RyuminPro-Light A-OTF-GothicBBBPro-Medium A-OTF-FutoMinA101Pro-Bold
     A-OTF-FutoGoB101Pro-Bold A-OTF-Jun101Pro-Light
 
 The order is determined by the Provides setting in the font database,
 and for the Japanese fonts it is currently:
+
     Morisawa Pr6, Morisawa, Hiragino ProN, Hiragino, 
     Yu OSX, Yu Win, Kozuka ProN, Kozuka, IPAex, IPA
+
 That is, the first font found in this order will be used to provide the
 alias if necessary.
 
