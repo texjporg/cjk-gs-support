@@ -137,6 +137,13 @@ and for the Japanese fonts it is currently:
 That is, the first font found in this order will be used to provide the
 alias if necessary.
 
+#### Overriding aliases ####
+
+Using the command line option `--alias LL=RR` one can add arbitrary aliases,
+or override ones selected by the program. For this to work the following
+requirements of `LL` and `RR` must be fulfilled:
+  * `LL` is not provided by a real font
+  * `RR` is available either as real font, or as alias (indirect alias)
 
 
 Authors, Contributors, and Copyright:

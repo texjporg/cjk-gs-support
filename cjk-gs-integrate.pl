@@ -818,19 +818,39 @@ Output files:
 
 Aliases:
 
-  The program tries to set up aliases if necessary for the set of
-  original Morisawa names
-    Ryumin-Light GothicBBB-Medium FutoMinA101-Bold
-    FutoGoB101-Bold Jun101-Light
-  and the otf Morisawa names
+  Aliases are managed via the Provides values in the font database.
+  At the moment entries for the basic font names for CJK fonts
+  are added:
+
+  Japanese:
+    Ryumin-Light GothicBBB-Medium FutoMinA101-Bold FutoGoB101-Bold Jun101-Light
+
+  Korean:
+    HYGoThic-Medium HYSMyeongJo-Medium HYSMyeongJoStd-Medium
+
+  Chinese:
+    MHei-Medium MKai-Medium MSungStd-Light STHeiti-Light STHeiti-Regular
+    STKaiti-Regular STSongStd-Light
+
+  In addition, we also includes provide entries for the OTF Morisawa names:
     A-OTF-RyuminPro-Light A-OTF-GothicBBBPro-Medium A-OTF-FutoMinA101Pro-Bold
     A-OTF-FutoGoB101Pro-Bold A-OTF-Jun101Pro-Light
+
   The order is determined by the Provides setting in the font database,
-  and currently is 
+  and for the Japanese fonts it is currently:
     Morisawa Pr6, Morisawa, Hiragino ProN, Hiragino, 
     Yu OSX, Yu Win, Kozuka ProN, Kozuka, IPAex, IPA
+
   That is, the first font found in this order will be used to provide the
   alias if necessary.
+
+Overriding aliases
+
+  Using the command line option `--alias LL=RR` one can add arbitrary aliases,
+  or override ones selected by the program. For this to work the following
+  requirements of `LL` and `RR` must be fulfilled:
+  * `LL` is not provided by a real font
+  * `RR` is available either as real font, or as alias (indirect alias)
 
 Authors, Contributors, and Copyright:
 
