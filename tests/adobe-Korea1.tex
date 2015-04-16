@@ -1,4 +1,4 @@
-\documentclass[\dviware]{jsarticle}
+\documentclass[dvips]{jsarticle}
 \usepackage[deluxe, expert, multi]{otf}
 \usepackage{pgffor}
 \usepackage{color}
@@ -13,14 +13,17 @@ Adobe-Korea1 Glyphs
 \end{center}
 \newcount \code
 \noindent
+Supplement 0\\
 \foreach \x in {0,...,9332}{%
 \colorbox{UClightpink}{\CIDK{\code}}\
 \global\advance\code by 1
 }%
+\\ Supplement 1\\
 \foreach \x in {0,...,8821}{%
 \colorbox{UClightyellowgreen}{\CIDK{\code}}\
 \global\advance\code by 1
 }%
+\\ Supplement 2
 \foreach \x in {0,...,196}{%
 \colorbox{UClightskyblue}{\CIDK{\code}}\
 \global\advance\code by 1

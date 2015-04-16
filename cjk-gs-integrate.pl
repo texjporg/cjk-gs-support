@@ -13,6 +13,10 @@
 # For development see
 #  https://github.com/norbusan/cjk-gs-support
 #
+# TODO
+# - Morisawa fonts don't work, as he PS name is differernt then the filename
+#   needs fixing/script
+#
 
 $^W = 1;
 use Getopt::Long qw(:config no_autoabbrev ignore_case_always);
@@ -207,16 +211,24 @@ my $dry_run = 0;
 my $opt_help = 0;
 my $opt_quiet = 0;
 my $opt_debug = 0;
+my $opt_listaliases = 0;
+my $opt_listfonts = 0;
+my $opt_info = 0;
 my $opt_fontdef;
 my $opt_output;
+my @opt_aliases;
 
 if (! GetOptions(
         "n|dry-run"   => \$dry_run,
+        "info"        => \$opt_info,
+        "list-aliases" => \$opt_listaliases,
+        "list-fonts"  => \$opt_listfonts,
         "o|output=s"  => \$opt_output,
 	      "h|help"      => \$opt_help,
         "q|quiet"     => \$opt_quiet,
         "d|debug+"    => \$opt_debug,
         "f|fontdef=s" => \$opt_fontdef,
+        "a|alias=s"   => \@opt_aliases,
         "v|version"   => sub { print &version(); exit(0); }, ) ) {
   die "Try \"$0 --help\" for more information.\n";
 }
@@ -226,6 +238,7 @@ my $nul = (win32() ? 'nul' : '/dev/null') ;
 my $sep = (win32() ? ';' : ':');
 my %fontdb;
 my %aliases;
+my %user_aliases;
 
 if ($opt_help) {
   Usage();
@@ -243,11 +256,39 @@ main(@ARGV);
 # only sub definitions from here on
 #
 sub main {
+  print_info("reading font database ...\n");
+  read_font_database();
+  print_info("checking for files ...\n");
+  check_for_files();
+  if ($opt_info) {
+    $opt_listfonts = 1;
+    $opt_listaliases = 1;
+  }
+  if ($opt_listfonts) {
+    info_found_fonts();
+  }
+  if ($opt_listaliases) {
+    print "List of aliases and their options (in decreasing priority):\n";
+    for my $al (keys %aliases) {
+      my @ks = sort { $a <=> $b} keys(%{$aliases{$al}});
+      print "$al:\n";
+      for my $p (@ks) {
+        my $t = $aliases{$al}{$p};
+        my $fn = $fontdb{$t}{'target'};
+        if ($fontdb{$t}{'type'} eq 'TTF' && $fontdb{$t}{'subfont'} > 0) {
+          $fn .= "($fontdb{$t}{'subfont'})";
+        }
+        print "\t$aliases{$al}{$p} ($fn)\n";
+      }
+    }
+  }
+  exit(0) if ($opt_listfonts || $opt_listaliases);
+
   if (! $opt_output) {
     print_info("searching for GhostScript resource\n");
     my $gsres = find_gs_resource();
     if (!$gsres) {
-      print_error("Cannot find GhostScript, (not really) terminating!\n");
+      print_error("Cannot find GhostScript, terminating!\n");
       exit(1);
     } else {
       $opt_output = $gsres;
@@ -258,13 +299,6 @@ sub main {
       die ("Cannot create directory $opt_output: $!");
   }
   print_info("output is going to $opt_output\n");
-  print_info("reading font database ...\n");
-  read_font_database();
-  print_info("checking for files ...\n");
-  check_for_files();
-  if ($opt_debug > 1) {
-    info_found_files();
-  }
   print_info("generating font snippets and link CID fonts ...\n");
   do_otf_fonts();
   print_info("generating font snippets, links, and cidfmap.local for TTF fonts ...\n");
@@ -323,14 +357,14 @@ sub do_otf_fonts {
   }
   for my $k (keys %fontdb) {
     if ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'CID') {
-      generate_cid_font_snippet($fontdest,
+      generate_font_snippet($fontdest,
         $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
-      link_font($ciddest, $k, $fontdb{$k}{'target'});
+      link_font($fontdb{$k}{'target'}, $ciddest, $k);
     }
   }
 }
 
-sub generate_cid_font_snippet {
+sub generate_font_snippet {
   my ($fd, $n, $c, $f) = @_;
   return if $dry_run;
   for my $enc (@{$encode_list{$c}}) {
@@ -353,8 +387,11 @@ pop
 }
 
 sub link_font {
-  my ($cd, $n, $f) = @_;
+  my ($f, $cd, $n) = @_;
   return if $dry_run;
+  if (!$n) {
+    $n = basename($f);
+  }
   symlink($f, "$cd/$n");
 }
 
@@ -363,10 +400,10 @@ sub do_ttf_fonts {
   my $outp = '';
   for my $k (keys %fontdb) {
     if ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'TTF') {
-      generate_cid_font_snippet($fontdest,
+      generate_font_snippet($fontdest,
         $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
       $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'}, $fontdb{$k}{'subfont'});
-      # link_font($fontdest, $k, $fontdb{$k}{'target'});
+      link_font($fontdb{$k}{'target'}, $fontdest);
     }
   }
   #
@@ -387,12 +424,32 @@ sub do_ttf_fonts {
   # but is defined in the Provides(Priority): Name in the font definiton
   #
   $outp .= "\n\n% Aliases\n\n";
-  my @al = keys %aliases;
+  #
   for my $al (keys %aliases) {
-    # search lowest number
-    my @ks = keys(%{$aliases{$al}});
-    my $first = (sort { $a <=> $b} @ks)[0];
-    $outp .= "/$al /$aliases{$al}{$first} ;\n";
+    my $target;
+    my $class;
+    if ($user_aliases{$al}) {
+      $target = $user_aliases{$al};
+      # determine class
+      if ($fontdb{$target}{'available'}) {
+        $class = $fontdb{$target}{'class'};
+      } else {
+        # must be an aliases, we checked this when initializing %user_aliases
+        # reset the $al value
+        # and since $class is still undefined we will use the next code below
+        $al = $target;
+      }
+    }
+    if (!$class) {
+      # search lowest number
+      my @ks = keys(%{$aliases{$al}});
+      my $first = (sort { $a <=> $b} @ks)[0];
+      $target = $aliases{$al}{$first};
+      $class  = $fontdb{$target}{'class'};
+    }
+    # we also need to create font snippets in Font for the aliases!
+    generate_font_snippet($fontdest, $al, $class, $target);
+    $outp .= "/$al /$target ;\n";
   }
   #
   return if $dry_run;
@@ -412,10 +469,13 @@ sub do_ttf_fonts {
 
 sub generate_cidfmap_entry {
   my ($n, $c, $f, $sf) = @_;
+  # we link the ttf fonts, so we use only the base name
+  # otherwise the ps2pdf breaks due to -dSAFER
+  my $bn = basename($f);
   # extract subfont
   my $s = "/$n <<
   /FileType /TrueType
-  /Path ($f)
+  /Path ($bn)
   /SubfontID $sf
   /CSI [($c";
   if ($c eq "Japan") {
@@ -436,16 +496,19 @@ sub generate_cidfmap_entry {
 
 #
 # dump found files
-sub info_found_files {
+sub info_found_fonts {
+  print "List of found fonts:\n\n";
   for my $k (keys %fontdb) {
     my @foundfiles;
     if ($fontdb{$k}{'available'}) {
       print "Font:  $k\n";
       print "Type:  $fontdb{$k}{'type'}\n";
       print "Class: $fontdb{$k}{'class'}\n";
-      for my $f (keys %{$fontdb{$k}{'files'}}) {
-        print "Path($fontdb{$k}{'files'}{$f}{'priority'}):  $fontdb{$k}{'files'}{$f}{'target'}\n";
+      my $fn = $fontdb{$k}{'target'};
+      if ($fontdb{$k}{'type'} eq 'TTF' && $fontdb{$k}{'subfont'} > 0) {
+        $fn .= "($fontdb{$k}{'subfont'})";
       }
+      print "File:  $fn\n";
       print "\n";
     }
   }
@@ -497,9 +560,9 @@ sub check_for_files {
     $cmdl .= " \"$f\" ";
   }
   # shoot up kpsewhich
-  print_debug("checking for $cmdl\n");
+  print_ddebug("checking for $cmdl\n");
   chomp( my @foundfiles = `$cmdl`);
-  print_debug("Found files @foundfiles\n");
+  print_ddebug("Found files @foundfiles\n");
   # map basenames to filenames
   my %bntofn;
   for my $f (@foundfiles) {
@@ -548,6 +611,7 @@ sub check_for_files {
     delete $fontdb{$k}{'files'};
   }
   # third round through the fontdb to check for provides
+  # accumulate all provided fonts in @provides
   for my $k (keys %fontdb) {
     if ($fontdb{$k}{'available'}) {
       for my $p (keys %{$fontdb{$k}{'provides'}}) {
@@ -559,11 +623,33 @@ sub check_for_files {
       }
     }
   }
-  if ($opt_debug > 1) {
-    print_ddebug("dumping font database:\n");
-    print_ddebug(Data::Dumper::Dumper(\%fontdb));
-    print_ddebug("dumping aliases:\n");
-    print_ddebug(Data::Dumper::Dumper(\%aliases));
+  # check for user supplied aliases
+  for my $a (@opt_aliases) {
+    if ($a =~ m/^(.*)=(.*)$/) {
+      my $ll = $1;
+      my $rr = $2;
+      # check for consistency of user provided aliases:
+      # - ll must not be available
+      # - rr needs to be available as font or alias
+      # check whether $rr is available, either as real font or as alias
+      if ($fontdb{$ll}{'available'}) {
+        print_error("left side of alias spec is provided by a real font: $a\n");
+        print_error("stopping here\n");
+        exit(1);
+      }
+      if (!($fontdb{$rr}{'available'} || $aliases{$rr})) {
+        print_error("right side of alias spec is not available as real font or alias: $a\n");
+        print_error("stopping here\n");
+        exit(1);
+      }
+      $user_aliases{$ll} = $rr;
+    }
+  }
+  if ($opt_debug > 0) {
+    print_debug("dumping font database:\n");
+    print_debug(Data::Dumper::Dumper(\%fontdb));
+    print_debug("dumping aliases:\n");
+    print_debug(Data::Dumper::Dumper(\%aliases));
   }
 }
 
@@ -671,10 +757,20 @@ Options:
   -o, --output DIR      specifies the base output dir, if not provided,
                         the Resource directory of an install GhostScript
                         is searched and used.
+  -a, --alias LL=RR     defines an alias, or overrides a given alias
+                        illegal if LL is provided by a real font, or
+                        RR is neither available as real font or alias
+                        can be given multiple times
   -q, --quiet           be less verbose
   -d, --debug           output debug information, can be given multiple times
   -v, --version         outputs only the version information
   -h, --help            this help
+
+Command like options:
+  --list-aliases        lists the aliases and their options, with the selected
+                        option on top
+  --list-fonts          lists the fonts found on the system
+  --info                combines the above two information
 
 Operation:
 
