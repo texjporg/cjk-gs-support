@@ -1362,7 +1362,10 @@ Filename(10): LiHeiPro.ttf
 Name: LiSongPro
 Type: TTF
 Class: CNS
+Provides(20): MSung-Medium
+Provides(20): MSungStd-Medium
 Provides(20): MSungStd-Light
+Provides(20): MSung-Light
 Filename(20): 儷宋 Pro.ttf
 Filename(10): LiSongPro.ttf
 
@@ -1417,6 +1420,7 @@ Name: STSong
 Type: TTF
 Class: GB
 Provides(20): STSongStd-Light
+Provides(20): STSong-Light
 Filename(10): Songti.ttc(4)
 Filename(20): 宋体.ttc(3)
 Filename(30): 华文宋体.ttf
@@ -1426,6 +1430,7 @@ Name: STSongti-SC-Light
 Type: TTF
 Class: GB
 Provides(10): STSongStd-Light
+Provides(10): STSong-Light
 Filename(10): Songti.ttc(3)
 Filename(20): 宋体.ttc(2)
 Filename(30): STSongti-SC-Light.ttf
@@ -1455,12 +1460,15 @@ Name: STSongti-TC-Light
 Type: TTF
 Class: CNS
 Provides(10): MSungStd-Light
+Provides(10): MSung-Light
 Filename(10): Songti.ttc(5)
 Filename(20): STSongti-TC-Light.ttf
 
 Name: STSongti-TC-Regular
 Type: TTF
 Class: CNS
+Provides(10): MSung-Medium
+Provides(10): MSungStd-Medium
 Filename(10): Songti.ttc(7)
 Filename(20): STSongti-TC-Regular.ttf
 
