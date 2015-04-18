@@ -1356,6 +1356,7 @@ Name: LiHeiPro
 Type: TTF
 Class: CNS
 Provides(20): MHei-Medium
+Provides(20): MHei-Medium-
 Filename(20): 儷黑 Pro.ttf
 Filename(10): LiHeiPro.ttf
 
@@ -1407,12 +1408,16 @@ Name: STHeitiTC-Medium
 Type: TTF
 Class: CNS
 Provides(10): MHei-Medium
+Provides(10): MHei-Medium-
 Filename(10): STHeiti Medium.ttc(0)
 Filename(20): STHeitiTC-Medium.ttf
 
 Name: STFangsong
 Type: TTF
 Class: GB
+Provides(20): STFangsong-Light
+Provides(20): STFangsong-Light-
+Provides(20): STFangsong-Regular
 Filename(20): 华文仿宋.ttf
 Filename(10): STFangsong.ttf
 
