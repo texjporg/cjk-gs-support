@@ -1533,6 +1533,68 @@ Class: CNS
 Provides(20): MKai-Medium
 Filename: STKaiti.ttf
 
+# Adobe fonts
+
+# simplified chinese
+
+Name: AdobeSongStd-Light
+Type: CID
+Class: GB
+Provides(50): STSongStd-Light
+Provides(10): STSong-Light
+Filename(10): AdobeSongStd-Light.otf
+
+Name: AdobeHeitiStd-Regular
+Type: CID
+Class: GB
+Provides(50): STHeiti-Regular
+Filename(20): AdobeHeitiStd-Regular.otf
+
+Name: AdobeKaitiStd-Regular
+Type: CID
+Class: GB
+Provides(50): STKaiti-Regular
+Filename(20): AdobeKaitiStd-Regular.otf
+
+Name: AdobeFangsongStd-Regular
+Type: CID
+Class: GB
+Provides(50): STFangsong-Light
+Provides(50): STFangsong-Light-
+Provides(50): STFangsong-Regular
+Filename(20): AdobeFangsongStd-Regular.otf
+
+# traditional chinese
+
+Name: AdobeMingStd-Light
+Type: CID
+Class: CNS
+Provides(30): MSungStd-Light
+Provides(30): MSung-Light
+Filename(20): AdobeMingStd-Light.otf
+
+Name: AdobeFanHeitiStd-Bold
+Type: CID
+Class: CNS
+Provides(30): MHei-Medium
+Provides(30): MHei-Medium-
+Filename(20): AdobeFanHeitiStd-Bold.otf
+
+# korean
+
+Name: AdobeMyungjoStd-Medium
+Type: CID
+Class: Korea
+Provides(70): HYSMyeongJoStd-Medium
+Provides(70): HYSMyeongJo-Medium
+Filename: AdobeMyungjoStd-Medium.otf
+
+Name: AdobeGothicStd-Bold
+Type: TTF
+Class: Korea
+Provides(70): HYGoThic-Medium
+Filename: AdobeGothicStd-Bold.otf
+
 #
 # KOREAN FONTS
 #
