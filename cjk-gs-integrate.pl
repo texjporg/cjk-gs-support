@@ -690,6 +690,7 @@ sub read_font_database {
   my $fontclass = "";
   my %fontprovides = ();
   my %fontfiles;
+  my $psname = "";
   my $lineno = 0;
   for my $l (@dbl) {
     $lineno++;
@@ -703,13 +704,13 @@ sub read_font_database {
           $fontdb{$fontname}{'files'} = { %fontfiles };
           $fontdb{$fontname}{'provides'} = { %fontprovides };
           # reset to start
-          $fontname = $fonttype = $fontclass = "";
+          $fontname = $fonttype = $fontclass = $psname = "";
           %fontfiles = ();
           %fontprovides = ();
         } else {
           print_warning("incomplete entry above line $lineno for $fontname/$fonttype/$fontclass, skipping!\n");
           # reset to start
-          $fontname = $fonttype = $fontclass = "";
+          $fontname = $fonttype = $fontclass = $psname = "";
           %fontfiles = ();
           %fontprovides = ();
         }
@@ -719,6 +720,7 @@ sub read_font_database {
       next;
     }
     if ($l =~ m/^Name:\s*(.*)$/) { $fontname = $1; next; }
+    if ($l =~ m/^PSName:\s*(.*)$/) { $psname = $1; next; }
     if ($l =~ m/^Type:\s*(.*)$/) { $fonttype = $1 ; next ; }
     if ($l =~ m/^Class:\s*(.*)$/) { $fontclass = $1 ; next ; }
     if ($l =~ m/^Filename(\((\d+)\))?:\s*(.*)$/) { 
@@ -920,6 +922,7 @@ __DATA__
 # Morisawa
 
 Name: A-OTF-FutoGoB101Pr6N-Bold
+PSName: FutoGoB101Pr6N-Bold
 Type: CID
 Class: Japan
 Provides(10): FutoGoB101-Bold
@@ -927,12 +930,14 @@ Provides(10): A-OTF-FutoGoB101Pro-Bold
 Filename: A-OTF-FutoGoB101Pr6N-Bold.otf
 
 Name: A-OTF-FutoGoB101Pro-Bold
+PSName: FutoGoB101Pro-Bold
 Type: CID
 Class: Japan
 Provides(20): FutoGoB101-Bold
 Filename: A-OTF-FutoGoB101Pro-Bold.otf
 
 Name: A-OTF-FutoMinA101Pr6N-Bold
+PSName: FutoMinA101Pr6N-Bold
 Type: CID
 Class: Japan
 Provides(10): FutoMinA101-Bold
@@ -940,12 +945,14 @@ Provides(10): A-OTF-FutoMinA101Pro-Bold
 Filename: A-OTF-FutoMinA101Pr6N-Bold.otf
 
 Name: A-OTF-FutoMinA101Pro-Bold
+PSName: FutoMinA101Pro-Bold
 Type: CID
 Class: Japan
 Provides(20): FutoMinA101-Bold
 Filename: A-OTF-FutoMinA101Pro-Bold.otf
 
 Name: A-OTF-GothicBBBPr6N-Medium
+PSName: GothicBBBPr6N-Medium
 Type: CID
 Class: Japan
 Provides(10): GothicBBB-Medium
@@ -953,28 +960,33 @@ Provides(10): A-OTF-GothicBBBPro-Medium
 Filename: A-OTF-GothicBBBPr6N-Medium.otf
 
 Name: A-OTF-GothicBBBPro-Medium
+PSName: GothicBBBPro-Medium
 Type: CID
 Class: Japan
 Provides(20): GothicBBB-Medium
 Filename: A-OTF-GothicBBBPro-Medium.otf
 
 Name: A-OTF-Jun101Pro-Light
+PSName: Jun101Pro-Light
 Type: CID
 Class: Japan
 Provides(20): Jun101-Light
 Filename: A-OTF-Jun101Pro-Light.otf
 
 Name: A-OTF-MidashiGoPr6N-MB31
+PSName: MidashiGoPr6N-MB31
 Type: CID
 Class: Japan
 Filename: A-OTF-MidashiGoPr6N-MB31.otf
 
 Name: A-OTF-MidashiGoPro-MB31
+PSName: MidashiGoPro-MB31
 Type: CID
 Class: Japan
 Filename: A-OTF-MidashiGoPro-MB31.otf
 
 Name: A-OTF-RyuminPr6N-Light
+PSName: RyuminPr6N-Light
 Type: CID
 Class: Japan
 Provides(10): Ryumin-Light
@@ -982,12 +994,14 @@ Provides(10): A-OTF-RyuminPro-Light
 Filename: A-OTF-RyuminPr6N-Light.otf
 
 Name: A-OTF-RyuminPro-Light
+PSName: RyuminPro-Light
 Type: CID
 Class: Japan
 Provides(20): Ryumin-Light
 Filename: A-OTF-RyuminPro-Light.otf
 
 Name: A-OTF-ShinMGoPr6N-Light
+PSName: ShinMGoPr6N-Light
 Type: CID
 Class: Japan
 Provides(10): Jun101-Light
