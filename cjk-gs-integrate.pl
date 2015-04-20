@@ -13,9 +13,6 @@
 # For development see
 #  https://github.com/norbusan/cjk-gs-support
 #
-# TODO
-# - Morisawa fonts don't work, as he PS name is differernt then the filename
-#   needs fixing/script
 #
 
 $^W = 1;
@@ -376,9 +373,10 @@ sub do_otf_fonts {
   }
   for my $k (keys %fontdb) {
     if ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'CID') {
+      my $fname = ($fontdb{$k}{'psname'} ? $fontdb{$k}{'psname'} : $k);
       generate_font_snippet($fontdest,
-        $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
-      link_font($fontdb{$k}{'target'}, $ciddest, $k);
+        $fname, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
+      link_font($fontdb{$k}{'target'}, $ciddest, $fname);
     }
   }
 }
@@ -465,9 +463,9 @@ sub do_ttf_fonts {
   # Jun101-Light which are the original Morisawa names.
   #
   # the second level of aliases is for Morisawa OTF font names:
-  # A-OTF-RyuminPro-Light, A-OTF-GothicBBBPro-Medium,
-  # A-OTF-FutoMinA101Pro-Bold, A-OTF-FutoGoB101Pro-Bold
-  # A-OTF-Jun101Pro-Light
+  # RyuminPro-Light, GothicBBBPro-Medium,
+  # FutoMinA101Pro-Bold, FutoGoB101Pro-Bold
+  # Jun101Pro-Light
   #
   # the order of fonts selected is
   # Morisawa Pr6, Morisawa, Hiragino ProN, Hiragino, 
@@ -737,6 +735,7 @@ sub read_font_database {
           $fontdb{$fontname}{'class'} = $fontclass;
           $fontdb{$fontname}{'files'} = { %fontfiles };
           $fontdb{$fontname}{'provides'} = { %fontprovides };
+          $fontdb{$fontname}{'psname'} = $psname ;
           # reset to start
           $fontname = $fonttype = $fontclass = $psname = "";
           %fontfiles = ();
@@ -960,7 +959,7 @@ PSName: FutoGoB101Pr6N-Bold
 Type: CID
 Class: Japan
 Provides(10): FutoGoB101-Bold
-Provides(10): A-OTF-FutoGoB101Pro-Bold
+Provides(10): FutoGoB101Pro-Bold
 Filename: A-OTF-FutoGoB101Pr6N-Bold.otf
 
 Name: A-OTF-FutoGoB101Pro-Bold
@@ -975,7 +974,7 @@ PSName: FutoMinA101Pr6N-Bold
 Type: CID
 Class: Japan
 Provides(10): FutoMinA101-Bold
-Provides(10): A-OTF-FutoMinA101Pro-Bold
+Provides(10): FutoMinA101Pro-Bold
 Filename: A-OTF-FutoMinA101Pr6N-Bold.otf
 
 Name: A-OTF-FutoMinA101Pro-Bold
@@ -990,7 +989,7 @@ PSName: GothicBBBPr6N-Medium
 Type: CID
 Class: Japan
 Provides(10): GothicBBB-Medium
-Provides(10): A-OTF-GothicBBBPro-Medium
+Provides(10): GothicBBBPro-Medium
 Filename: A-OTF-GothicBBBPr6N-Medium.otf
 
 Name: A-OTF-GothicBBBPro-Medium
@@ -1024,7 +1023,7 @@ PSName: RyuminPr6N-Light
 Type: CID
 Class: Japan
 Provides(10): Ryumin-Light
-Provides(10): A-OTF-RyuminPro-Light
+Provides(10): RyuminPro-Light
 Filename: A-OTF-RyuminPr6N-Light.otf
 
 Name: A-OTF-RyuminPro-Light
@@ -1039,7 +1038,7 @@ PSName: ShinMGoPr6N-Light
 Type: CID
 Class: Japan
 Provides(10): Jun101-Light
-Provides(10): A-OTF-Jun101Pro-Light
+Provides(10): Jun101Pro-Light
 Filename: A-OTF-ShinMGoPr6N-Light.otf
 
 
@@ -1049,7 +1048,7 @@ Name: HiraKakuPro-W3
 Type: CID
 Class: Japan
 Provides(40): GothicBBB-Medium
-Provides(40): A-OTF-GothicBBBPro-Medium
+Provides(40): GothicBBBPro-Medium
 Filename(20): ヒラギノ角ゴ Pro W3.otf
 Filename(10): HiraKakuPro-W3.otf
 
@@ -1057,7 +1056,7 @@ Name: HiraKakuPro-W6
 Type: CID
 Class: Japan
 Provides(40): FutoGoB101-Bold
-Provides(40): A-OTF-FutoGoB101Pro-Bold
+Provides(40): FutoGoB101Pro-Bold
 Filename(20): ヒラギノ角ゴ Pro W6.otf
 Filename(10): HiraKakuPro-W6.otf
 
@@ -1065,7 +1064,7 @@ Name: HiraKakuProN-W3
 Type: CID
 Class: Japan
 Provides(30): GothicBBB-Medium
-Provides(30): A-OTF-GothicBBBPro-Medium
+Provides(30): GothicBBBPro-Medium
 Filename(20): ヒラギノ角ゴ ProN W3.otf
 Filename(10): HiraKakuProN-W3.otf
 
@@ -1073,7 +1072,7 @@ Name: HiraKakuProN-W6
 Type: CID
 Class: Japan
 Provides(30): FutoGoB101-Bold
-Provides(30): A-OTF-FutoGoB101Pro-Bold
+Provides(30): FutoGoB101Pro-Bold
 Filename(20): ヒラギノ角ゴ ProN W6.otf
 Filename(10): HiraKakuProN-W6.otf
 
@@ -1093,7 +1092,7 @@ Name: HiraMaruPro-W4
 Type: CID
 Class: Japan
 Provides(40): Jun101-Light
-Provides(40): A-OTF-Jun101Pro-Light
+Provides(40): Jun101Pro-Light
 Filename(20): ヒラギノ丸ゴ Pro W4.otf
 Filename(10): HiraMaruPro-W4.otf
 
@@ -1101,7 +1100,7 @@ Name: HiraMaruProN-W4
 Type: CID
 Class: Japan
 Provides(30): Jun101-Light
-Provides(30): A-OTF-Jun101Pro-Light
+Provides(30): Jun101Pro-Light
 Filename(20): ヒラギノ丸ゴ ProN W4.otf
 Filename(10): HiraMaruProN-W4.otf
 
@@ -1109,7 +1108,7 @@ Name: HiraMinPro-W3
 Type: CID
 Class: Japan
 Provides(40): Ryumin-Light
-Provides(40): A-OTF-RyuminPro-Light
+Provides(40): RyuminPro-Light
 Filename(20): ヒラギノ明朝 Pro W3.otf
 Filename(10): HiraMinPro-W3.otf
 
@@ -1117,7 +1116,7 @@ Name: HiraMinPro-W6
 Type: CID
 Class: Japan
 Provides(40): FutoMinA101-Bold
-Provides(40): A-OTF-FutoMinA101Pro-Bold
+Provides(40): FutoMinA101Pro-Bold
 Filename(20): ヒラギノ明朝 Pro W6.otf
 Filename(10): HiraMinPro-W6.otf
 
@@ -1125,7 +1124,7 @@ Name: HiraMinProN-W3
 Type: CID
 Class: Japan
 Provides(30): Ryumin-Light
-Provides(30): A-OTF-RyuminPro-Light
+Provides(30): RyuminPro-Light
 Filename(20): ヒラギノ明朝 ProN W3.otf
 Filename(10): HiraMinProN-W3.otf
 
@@ -1133,7 +1132,7 @@ Name: HiraMinProN-W6
 Type: CID
 Class: Japan
 Provides(30): FutoMinA101-Bold
-Provides(30): A-OTF-FutoMinA101Pro-Bold
+Provides(30): FutoMinA101Pro-Bold
 Filename(20): ヒラギノ明朝 ProN W6.otf
 Filename(10): HiraMinProN-W6.otf
 
@@ -1157,7 +1156,7 @@ Name: YuGo-Medium
 Type: CID
 Class: Japan
 Provides(50): GothicBBB-Medium
-Provides(50): A-OTF-GothicBBBPro-Medium
+Provides(50): GothicBBBPro-Medium
 Filename(20): Yu Gothic Medium.otf
 Filename(10): YuGo-Medium.otf
 
@@ -1165,9 +1164,9 @@ Name: YuGo-Bold
 Type: CID
 Class: Japan
 Provides(50): FutoGoB101-Bold
-Provides(50): A-OTF-FutoGoB101Pro-Bold
+Provides(50): FutoGoB101Pro-Bold
 Provides(50): Jun101-Light
-Provides(50): A-OTF-Jun101Pro-Light
+Provides(50): Jun101Pro-Light
 Filename(20): Yu Gothic Bold.otf
 Filename(10): YuGo-Bold.otf
 
@@ -1175,7 +1174,7 @@ Name: YuMin-Medium
 Type: CID
 Class: Japan
 Provides(50): Ryumin-Light
-Provides(50): A-OTF-RyuminPro-Light
+Provides(50): RyuminPro-Light
 Filename(20): Yu Mincho Medium.otf
 Filename(10): YuMin-Medium.otf
 
@@ -1183,7 +1182,7 @@ Name: YuMin-Demibold
 Type: CID
 Class: Japan
 Provides(50): FutoMinA101-Bold
-Provides(50): A-OTF-FutoMinA101Pro-Bold
+Provides(50): FutoMinA101Pro-Bold
 Filename(20): Yu Mincho Demibold.otf
 Filename(10): YuMin-Demibold.otf
 
@@ -1193,7 +1192,7 @@ Name: YuMincho-Regular
 Type: TTF
 Class: Japan
 Provides(60): Ryumin-Light
-Provides(60): A-OTF-RyuminPro-Light
+Provides(60): RyuminPro-Light
 Filename(20): yumin.ttf
 Filename(10): YuMincho-Regular.ttf
 
@@ -1207,7 +1206,7 @@ Name: YuMincho-DemiBold
 Type: TTF
 Class: Japan
 Provides(60): FutoMinA101-Bold
-Provides(60): A-OTF-FutoMinA101Pro-Bold
+Provides(60): FutoMinA101Pro-Bold
 Filename(20): yumindb.ttf
 Filename(10): YuMincho-DemiBold.ttf
 
@@ -1215,7 +1214,7 @@ Name: YuGothic-Regular
 Type: TTF
 Class: Japan
 Provides(60): GothicBBB-Medium
-Provides(60): A-OTF-GothicBBBPro-Medium
+Provides(60): GothicBBBPro-Medium
 Filename(20): yugothic.ttf
 Filename(10): YuGothic-Regular.ttf
 
@@ -1229,9 +1228,9 @@ Name: YuGothic-Bold
 Type: TTF
 Class: Japan
 Provides(60): FutoGoB101-Bold
-Provides(60): A-OTF-FutoGoB101Pro-Bold
+Provides(60): FutoGoB101Pro-Bold
 Provides(60): Jun101-Light
-Provides(60): A-OTF-Jun101Pro-Light
+Provides(60): Jun101Pro-Light
 Filename(20): yugothib.ttf
 Filename(10): YuGothic-Bold.ttf
 
@@ -1241,7 +1240,7 @@ Name: IPAMincho
 Type: TTF
 Class: Japan
 Provides(110): Ryumin-Light
-Provides(110): A-OTF-RyuminPro-Light
+Provides(110): RyuminPro-Light
 Filename(20): ipam.ttf
 Filename(10): IPAMincho.ttf
 
@@ -1249,13 +1248,13 @@ Name: IPAGothic
 Type: TTF
 Class: Japan
 Provides(110): GothicBBB-Medium
-Provides(110): A-OTF-GothicBBBPro-Medium
+Provides(110): GothicBBBPro-Medium
 Provides(110): FutoMinA101-Bold
-Provides(110): A-OTF-FutoMinA101Pro-Bold
+Provides(110): FutoMinA101Pro-Bold
 Provides(110): FutoGoB101-Bold
-Provides(110): A-OTF-FutoGoB101Pro-Bold
+Provides(110): FutoGoB101Pro-Bold
 Provides(110): Jun101-Light
-Provides(110): A-OTF-Jun101Pro-Light
+Provides(110): Jun101Pro-Light
 Filename(20): ipag.ttf
 Filename(10): IPAGothic.ttf
 
@@ -1263,7 +1262,7 @@ Name: IPAexMincho
 Type: TTF
 Class: Japan
 Provides(100): Ryumin-Light
-Provides(100): A-OTF-RyuminPro-Light
+Provides(100): RyuminPro-Light
 Filename(20): ipaexm.ttf
 Filename(10): IPAexMincho.ttf
 
@@ -1271,13 +1270,13 @@ Name: IPAexGothic
 Type: TTF
 Class: Japan
 Provides(100): GothicBBB-Medium
-Provides(100): A-OTF-GothicBBBPro-Medium
+Provides(100): GothicBBBPro-Medium
 Provides(100): FutoMinA101-Bold
-Provides(100): A-OTF-FutoMinA101Pro-Bold
+Provides(100): FutoMinA101Pro-Bold
 Provides(100): FutoGoB101-Bold
-Provides(100): A-OTF-FutoGoB101Pro-Bold
+Provides(100): FutoGoB101Pro-Bold
 Provides(100): Jun101-Light
-Provides(100): A-OTF-Jun101Pro-Light
+Provides(100): Jun101Pro-Light
 Filename(20): ipaexg.ttf
 Filename(10): IPAexGothic.ttf
 
@@ -1287,21 +1286,21 @@ Name: KozGoPr6N-Bold
 Type: CID
 Class: Japan
 Provides(70): FutoGoB101-Bold
-Provides(70): A-OTF-FutoGoB101Pro-Bold
+Provides(70): FutoGoB101Pro-Bold
 Filename: KozGoPr6N-Bold.otf
 
 Name: KozGoPr6N-Heavy
 Type: CID
 Class: Japan
 Provides(70): Jun101-Light
-Provides(70): A-OTF-Jun101Pro-Light
+Provides(70): Jun101Pro-Light
 Filename: KozGoPr6N-Heavy.otf
 
 Name: KozGoPr6N-Medium
 Type: CID
 Class: Japan
 Provides(70): GothicBBB-Medium
-Provides(70): A-OTF-GothicBBBPro-Medium
+Provides(70): GothicBBBPro-Medium
 Filename: KozGoPr6N-Medium.otf
 
 Name: KozGoPr6N-Regular
@@ -1313,21 +1312,21 @@ Name: KozGoPro-Bold
 Type: CID
 Class: Japan
 Provides(90): FutoGoB101-Bold
-Provides(90): A-OTF-FutoGoB101Pro-Bold
+Provides(90): FutoGoB101Pro-Bold
 Filename: KozGoPro-Bold.otf
 
 Name: KozGoPro-Heavy
 Type: CID
 Class: Japan
 Provides(90): Jun101-Light
-Provides(90): A-OTF-Jun101Pro-Light
+Provides(90): Jun101Pro-Light
 Filename: KozGoPro-Heavy.otf
 
 Name: KozGoPro-Medium
 Type: CID
 Class: Japan
 Provides(90): GothicBBB-Medium
-Provides(90): A-OTF-GothicBBBPro-Medium
+Provides(90): GothicBBBPro-Medium
 Filename: KozGoPro-Medium.otf
 
 Name: KozGoPro-Regular
@@ -1339,21 +1338,21 @@ Name: KozGoProVI-Bold
 Type: CID
 Class: Japan
 Provides(80): FutoGoB101-Bold
-Provides(80): A-OTF-FutoGoB101Pro-Bold
+Provides(80): FutoGoB101Pro-Bold
 Filename: KozGoProVI-Bold.otf
 
 Name: KozGoProVI-Heavy
 Type: CID
 Class: Japan
 Provides(80): Jun101-Light
-Provides(80): A-OTF-Jun101Pro-Light
+Provides(80): Jun101Pro-Light
 Filename: KozGoProVI-Heavy.otf
 
 Name: KozGoProVI-Medium
 Type: CID
 Class: Japan
 Provides(80): GothicBBB-Medium
-Provides(80): A-OTF-GothicBBBPro-Medium
+Provides(80): GothicBBBPro-Medium
 Filename: KozGoProVI-Medium.otf
 
 Name: KozGoProVI-Regular
@@ -1365,7 +1364,7 @@ Name: KozMinPr6N-Bold
 Type: CID
 Class: Japan
 Provides(70): FutoMinA101-Bold
-Provides(70): A-OTF-FutoMinA101Pro-Bold
+Provides(70): FutoMinA101Pro-Bold
 Filename: KozMinPr6N-Bold.otf
 
 Name: KozMinPr6N-Light
@@ -1377,14 +1376,14 @@ Name: KozMinPr6N-Regular
 Type: CID
 Class: Japan
 Provides(70): Ryumin-Light
-Provides(70): A-OTF-RyuminPro-Light
+Provides(70): RyuminPro-Light
 Filename: KozMinPr6N-Regular.otf
 
 Name: KozMinPro-Bold
 Type: CID
 Class: Japan
 Provides(90): FutoMinA101-Bold
-Provides(90): A-OTF-FutoMinA101Pro-Bold
+Provides(90): FutoMinA101Pro-Bold
 Filename: KozMinPro-Bold.otf
 
 Name: KozMinPro-Light
@@ -1396,14 +1395,14 @@ Name: KozMinPro-Regular
 Type: CID
 Class: Japan
 Provides(90): Ryumin-Light
-Provides(90): A-OTF-RyuminPro-Light
+Provides(90): RyuminPro-Light
 Filename: KozMinPro-Regular.otf
 
 Name: KozMinProVI-Bold
 Type: CID
 Class: Japan
 Provides(80): FutoMinA101-Bold
-Provides(80): A-OTF-FutoMinA101Pro-Bold
+Provides(80): FutoMinA101Pro-Bold
 Filename: KozMinProVI-Bold.otf
 
 Name: KozMinProVI-Light
@@ -1415,7 +1414,7 @@ Name: KozMinProVI-Regular
 Type: CID
 Class: Japan
 Provides(80): Ryumin-Light
-Provides(80): A-OTF-RyuminPro-Light
+Provides(80): RyuminPro-Light
 Filename: KozMinProVI-Regular.otf
 
 #
