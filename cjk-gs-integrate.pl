@@ -411,18 +411,50 @@ sub link_font {
   if (!$n) {
     $n = basename($f);
   }
-  symlink($f, "$cd/$n");
+  my $target = "$cd/$n";
+  if (-r $target) {
+    if (-l $target) {
+      if (readlink($target) eq $f) {
+        # do nothing, it is the same link
+      } else {
+        print_error("link $target already existing, but different target then $target, exiting!\n");
+        exit(1);
+      }
+    } else {
+      print_error("$target already existing, but not a link, exiting!\n");
+      exit(1);
+    }
+  } else {
+    symlink($f, $target) || die("Cannot link font $f to $target: $!");
+  }
 }
 
 sub do_ttf_fonts {
   my $fontdest = "$opt_output/Font";
+  my $cidfsubst = "$opt_output/CIDFSubst";
   my $outp = '';
+  if (-r $fontdest) {
+    if (! -d $fontdest) {
+      print_error("$fontdest is not a directory, cannot create CID snippets there!\n");
+      exit 1;
+    }
+  } else {
+    $dry_run || mkdir($fontdest);
+  }
+  if (-r $cidfsubst) {
+    if (! -d $cidfsubst) {
+      print_error("$cidfsubst is not a directory, cannot link CID fonts there!\n");
+      exit 1;
+    }
+  } else {
+    $dry_run || mkdir($cidfsubst);
+  }
   for my $k (keys %fontdb) {
     if ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'TTF') {
       generate_font_snippet($fontdest,
         $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
       $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'}, $fontdb{$k}{'subfont'});
-      link_font($fontdb{$k}{'target'}, $fontdest);
+      link_font($fontdb{$k}{'target'}, $cidfsubst);
     }
   }
   #
@@ -492,9 +524,9 @@ sub generate_cidfmap_entry {
   # otherwise the ps2pdf breaks due to -dSAFER
   my $bn = basename($f);
   # extract subfont
-  my $s = "/$n <<
-  /FileType /TrueType
-  /Path ($bn)
+  my $s = "/$n << /FileType /TrueType 
+  /Path pssystemparams /GenericResourceDir get 
+  (CIDFSubst/$bn) concatstrings
   /SubfontID $sf
   /CSI [($c";
   if ($c eq "Japan") {
