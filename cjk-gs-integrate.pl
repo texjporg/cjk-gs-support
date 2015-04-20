@@ -282,7 +282,7 @@ sub main {
         if ($fontdb{$t}{'type'} eq 'TTF' && $fontdb{$t}{'subfont'} > 0) {
           $fn .= "($fontdb{$t}{'subfont'})";
         }
-        $foo .= "\t$aliases{$al}{$p} ($fn)\n";
+        $foo .= "\t($p) $aliases{$al}{$p} ($fn)\n";
       }
       if ($cl eq 'Japan') {
         push @jal, $foo;
