@@ -270,7 +270,7 @@ sub main {
   if ($opt_listaliases) {
     print "List of aliases and their options (in decreasing priority):\n";
     my (@jal, @kal, @tal, @sal);
-    for my $al (keys %aliases) {
+    for my $al (sort keys %aliases) {
       my $cl;
       my @ks = sort { $a <=> $b} keys(%{$aliases{$al}});
       my $foo = "$al:\n";
@@ -1598,7 +1598,6 @@ Filename(20): AdobeFanHeitiStd-Bold.otf
 Name: AdobeMyungjoStd-Medium
 Type: CID
 Class: Korea
-Provides(20): HYSMyeongJoStd-Medium
 Provides(20): HYSMyeongJo-Medium
 Filename: AdobeMyungjoStd-Medium.otf
 
@@ -1614,7 +1613,6 @@ Filename: AdobeGothicStd-Bold.otf
 Name: AppleMyungjo
 Type: TTF
 Class: Korea
-Provides(50): HYSMyeongJoStd-Medium
 Provides(50): HYSMyeongJo-Medium
 Filename: AppleMyungjo.ttf
 
@@ -1627,7 +1625,6 @@ Filename: AppleGothic.ttf
 Name: NanumMyeongjo
 Type: TTF
 Class: Korea
-Provides(30): HYSMyeongJoStd-Medium
 Provides(30): HYSMyeongJo-Medium
 Filename: NanumMyeongjo.ttc(0)
 
