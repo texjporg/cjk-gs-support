@@ -1386,6 +1386,7 @@ Type: TTF
 Class: CNS
 Provides(50): MSung-Medium
 Provides(50): MSung-Light
+Provides(50): MSung-Light-
 Filename(20): 儷宋 Pro.ttf
 Filename(10): LiSongPro.ttf
 
@@ -1400,6 +1401,7 @@ Name: STHeiti
 Type: TTF
 Class: GB
 Provides(50): STHeiti-Regular
+Provides(50): STHeiti-Regular-
 Filename(20): 华文黑体.ttf
 Filename(10): STHeiti.ttf
 
@@ -1414,6 +1416,7 @@ Name: STHeitiSC-Medium
 Type: TTF
 Class: GB
 Provides(40): STHeiti-Regular
+Provides(40): STHeiti-Regular-
 Filename(10): STHeiti Medium.ttc(1)
 Filename(20): STHeitiSC-Medium.ttf
 
@@ -1444,6 +1447,7 @@ Name: STSong
 Type: TTF
 Class: GB
 Provides(50): STSong-Light
+Provides(50): STSong-Light-
 Filename(10): Songti.ttc(4)
 Filename(20): 宋体.ttc(3)
 Filename(30): 华文宋体.ttf
@@ -1453,6 +1457,7 @@ Name: STSongti-SC-Light
 Type: TTF
 Class: GB
 Provides(40): STSong-Light
+Provides(40): STSong-Light-
 Filename(10): Songti.ttc(3)
 Filename(20): 宋体.ttc(2)
 Filename(30): STSongti-SC-Light.ttf
@@ -1482,6 +1487,7 @@ Name: STSongti-TC-Light
 Type: TTF
 Class: CNS
 Provides(40): MSung-Light
+Provides(40): MSung-Light-
 Filename(10): Songti.ttc(5)
 Filename(20): STSongti-TC-Light.ttf
 
@@ -1502,6 +1508,7 @@ Name: STKaiti
 Type: TTF
 Class: GB
 Provides(50): STKaiti-Regular
+Provides(50): STKaiti-Regular-
 Filename(10): Kaiti.ttc(4)
 Filename(20): 楷体.ttc(3)
 Filename(30): 华文楷体.ttf
@@ -1511,6 +1518,7 @@ Name: STKaiti-SC-Regular
 Type: TTF
 Class: GB
 Provides(40): STKaiti-Regular
+Provides(40): STKaiti-Regular-
 Filename(10): Kaiti.ttc(3)
 Filename(20): 楷体.ttc(2)
 Filename(30): STKaiti-SC-Regular.ttf
@@ -1533,6 +1541,7 @@ Name: STKaiTi-TC-Regular
 Type: TTF
 Class: CNS
 Provides(40): MKai-Medium
+Provides(40): MKai-Medium-
 Filename(10): Kaiti.ttc(5)
 Filename(20): STKaiTi-TC-Regular.ttf
 
@@ -1546,6 +1555,7 @@ Name: STKaiti-Adobe-CNS1
 Type: TTF
 Class: CNS
 Provides(50): MKai-Medium
+Provides(50): MKai-Medium-
 Filename: STKaiti.ttf
 
 # Adobe fonts
@@ -1556,18 +1566,21 @@ Name: AdobeSongStd-Light
 Type: CID
 Class: GB
 Provides(30): STSong-Light
+Provides(30): STSong-Light-
 Filename(10): AdobeSongStd-Light.otf
 
 Name: AdobeHeitiStd-Regular
 Type: CID
 Class: GB
 Provides(30): STHeiti-Regular
+Provides(30): STHeiti-Regular-
 Filename(20): AdobeHeitiStd-Regular.otf
 
 Name: AdobeKaitiStd-Regular
 Type: CID
 Class: GB
 Provides(30): STKaiti-Regular
+Provides(30): STKaiti-Regular-
 Filename(20): AdobeKaitiStd-Regular.otf
 
 Name: AdobeFangsongStd-Regular
@@ -1584,6 +1597,7 @@ Name: AdobeMingStd-Light
 Type: CID
 Class: CNS
 Provides(30): MSung-Light
+Provides(30): MSung-Light-
 Filename(20): AdobeMingStd-Light.otf
 
 Name: AdobeFanHeitiStd-Bold
@@ -1599,12 +1613,14 @@ Name: AdobeMyungjoStd-Medium
 Type: CID
 Class: Korea
 Provides(20): HYSMyeongJo-Medium
+Provides(20): HYSMyeongJo-Medium-
 Filename: AdobeMyungjoStd-Medium.otf
 
 Name: AdobeGothicStd-Bold
-Type: TTF
+Type: CID
 Class: Korea
 Provides(20): HYGoThic-Medium
+Provides(20): HYGoThic-Medium-
 Filename: AdobeGothicStd-Bold.otf
 
 #
@@ -1614,18 +1630,21 @@ Name: AppleMyungjo
 Type: TTF
 Class: Korea
 Provides(50): HYSMyeongJo-Medium
+Provides(50): HYSMyeongJo-Medium-
 Filename: AppleMyungjo.ttf
 
 Name: AppleGothic
 Type: TTF
 Class: Korea
 Provides(50): HYGoThic-Medium
+Provides(50): HYGoThic-Medium-
 Filename: AppleGothic.ttf
 
 Name: NanumMyeongjo
 Type: TTF
 Class: Korea
 Provides(30): HYSMyeongJo-Medium
+Provides(30): HYSMyeongJo-Medium-
 Filename: NanumMyeongjo.ttc(0)
 
 Name: NanumMyeongjoBold
@@ -1642,6 +1661,7 @@ Name: NanumGothic
 Type: TTF
 Class: Korea
 Provides(30): HYGoThic-Medium
+Provides(30): HYGoThic-Medium-
 Filename: NanumGothic.ttc(0)
 
 Name: NanumGothicBold
