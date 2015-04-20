@@ -1188,6 +1188,7 @@ Filename(20): Yu Mincho Demibold.otf
 Filename(10): YuMin-Demibold.otf
 
 # Yu-fonts Windows version
+
 Name: YuMincho-Regular
 Type: TTF
 Class: Japan
@@ -1654,6 +1655,9 @@ Filename: AdobeGothicStd-Bold.otf
 #
 # KOREAN FONTS
 #
+
+# apple fonts
+
 Name: AppleMyungjo
 Type: TTF
 Class: Korea
@@ -1754,6 +1758,15 @@ Name: AppleSDGothicNeo-Heavy
 Type: OTF
 Class: Korea
 Filename: AppleSDGothicNeo-Heavy.otf
+
+# Microsoft Office for Mac fonts
+
+Name: Gulim
+Type: TTF
+Class: Korea
+Provides(30): HYRGoThic-Medium
+Filename(30): Gulim.ttf
+Filename(50): gulim.ttc
 
 
 ### Local Variables:
