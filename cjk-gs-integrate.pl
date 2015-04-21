@@ -373,10 +373,9 @@ sub do_otf_fonts {
   }
   for my $k (keys %fontdb) {
     if ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'CID') {
-      my $fname = ($fontdb{$k}{'psname'} ? $fontdb{$k}{'psname'} : $k);
       generate_font_snippet($fontdest,
-        $fname, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
-      link_font($fontdb{$k}{'target'}, $ciddest, $fname);
+        $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
+      link_font($fontdb{$k}{'target'}, $ciddest, $k);
     }
   }
 }
@@ -731,11 +730,11 @@ sub read_font_database {
     if ($l =~ m/^\s*$/) {
       if ($fontname || $fonttype || $fontclass || keys(%fontfiles)) {
         if ($fontname && $fonttype && $fontclass && keys(%fontfiles)) {
-          $fontdb{$fontname}{'type'} = $fonttype;
-          $fontdb{$fontname}{'class'} = $fontclass;
-          $fontdb{$fontname}{'files'} = { %fontfiles };
-          $fontdb{$fontname}{'provides'} = { %fontprovides };
-          $fontdb{$fontname}{'psname'} = $psname ;
+          my $realfontname = ($psname ? $psname : $fontname);
+          $fontdb{$realfontname}{'type'} = $fonttype;
+          $fontdb{$realfontname}{'class'} = $fontclass;
+          $fontdb{$realfontname}{'files'} = { %fontfiles };
+          $fontdb{$realfontname}{'provides'} = { %fontprovides };
           # reset to start
           $fontname = $fonttype = $fontclass = $psname = "";
           %fontfiles = ();
