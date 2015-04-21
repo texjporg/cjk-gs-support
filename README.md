@@ -24,6 +24,7 @@ Usage
                         illegal if LL is provided by a real font, or
                         RR is neither available as real font or alias
                         can be given multiple times
+  --machine-readable    output of --list-aliases is machine readable
   -q, --quiet           be less verbose
   -d, --debug           output debug information, can be given multiple times
   -v, --version         outputs only the version information
@@ -34,6 +35,7 @@ Usage
 #### Command like options ####
 
 `````
+  --only-aliases        do only regenerate the cidfmap.alias file 
   --list-aliases        lists the aliases and their options, with the selected
                         option on top
   --list-fonts          lists the fonts found on the system
@@ -55,7 +57,7 @@ For each found TrueType (TTF) font it creates a cidfmap entry in
 
 and links the font to
 
-    <Resource>/Font/
+    <Resource>/CIDFSubst/
 
 For each OTF font it creates a snippet in
 
@@ -68,11 +70,15 @@ and links the font to
 The `<Resource>` dir is either given by `-o`/`--output`, or otherwise searched
 from an installed GhostScript (binary name is assumed to be 'gs').
 
-Finally, it tries to add runlib call to
+Aliases are added to 
+
+    <Resource>/Init/cidfmap.aliases
+
+Finally, it tries to add runlib calls to
 
     <Resource>/Init/cidfmap
 
-to load the cidfmap.local.
+to load the cidfmap.local and cidfmap.aliases
 
 How and which directories are searched:
 ---------------------------------------
@@ -80,7 +86,8 @@ How and which directories are searched:
   Search is done using the kpathsea library, in particular using kpsewhich
   program. By default the following directories are searched:
   - all TEXMF trees
-  - `/Library/Fonts` and `/System/Library/Fonts` (if available)
+  - `/Library/Fonts`, `/System/Library/Fonts`, `/Network/Library/Fonts`, and
+    `~/Library/Fonts` (all if available)
   - `c:/windows/fonts` (on Windows)
   - the directories in `OSFONTDIR` environment variable
 
@@ -126,8 +133,8 @@ Chinese:
 
 In addition, we also includes provide entries for the OTF Morisawa names:
 
-    A-OTF-RyuminPro-Light A-OTF-GothicBBBPro-Medium A-OTF-FutoMinA101Pro-Bold
-    A-OTF-FutoGoB101Pro-Bold A-OTF-Jun101Pro-Light
+    RyuminPro-Light GothicBBBPro-Medium FutoMinA101Pro-Bold
+    FutoGoB101Pro-Bold Jun101Pro-Light
 
 The order is determined by the Provides setting in the font database,
 and for the Japanese fonts it is currently:
