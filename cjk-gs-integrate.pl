@@ -471,9 +471,11 @@ sub do_ttf_fonts {
   # Yu OSX, Yu Win, Kozuka ProN, Kozuka, IPAex, IPA
   # but is defined in the Provides(Priority): Name in the font definiton
   #
-  $outp .= "\n\n% Aliases\n\n";
+  $outp .= "\n\n% Aliases\n";
   #
-  for my $al (keys %aliases) {
+  my (@jal, @kal, @tal, @sal);
+  #
+  for my $al (sort keys %aliases) {
     my $target;
     my $class;
     if ($user_aliases{$al}) {
@@ -497,8 +499,23 @@ sub do_ttf_fonts {
     }
     # we also need to create font snippets in Font for the aliases!
     generate_font_snippet($fontdest, $al, $class, $target);
-    $outp .= "/$al /$target ;\n";
+    # TODO order the aliases also after classes
+    if ($class eq 'Japan') {
+      push @jal, "/$al /$target ;";
+    } elsif ($class eq 'Korea') {
+      push @kal, "/$al /$target ;";
+    } elsif ($class eq 'GB') {
+      push @sal, "/$al /$target ;";
+    } elsif ($class eq 'CNS') {
+      push @tal, "/$al /$target ;";
+    } else {
+      print STDERR "unknown class $class for $al\n";
+    }
   }
+  $outp .= "\n% Japanese fonts\n" . join("\n", @jal) . "\n" if @jal;
+  $outp .= "\n% Korean fonts\n" . join("\n", @kal) . "\n" if @kal;
+  $outp .= "\n% Traditional Chinese fonts\n" . join("\n", @tal) . "\n" if @tal;
+  $outp .= "\n% Simplified Chinese fonts\n" . join("\n", @sal) . "\n" if @sal;
   #
   return if $dry_run;
   if ($outp) {
