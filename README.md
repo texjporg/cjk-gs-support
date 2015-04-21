@@ -24,6 +24,8 @@ Usage
                         illegal if LL is provided by a real font, or
                         RR is neither available as real font or alias
                         can be given multiple times
+  --filelist FILE       read list of available font files from FILE
+                        instead of searching with kpathsea
   --machine-readable    output of --list-aliases is machine readable
   -q, --quiet           be less verbose
   -d, --debug           output debug information, can be given multiple times

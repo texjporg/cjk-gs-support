@@ -216,6 +216,7 @@ my $opt_output;
 my @opt_aliases;
 my $opt_only_aliases = 0;
 my $opt_machine = 0;
+my $opt_filelist;
 
 if (! GetOptions(
         "n|dry-run"   => \$dry_run,
@@ -224,6 +225,7 @@ if (! GetOptions(
         "list-fonts"  => \$opt_listfonts,
         "only-aliases" => \$opt_only_aliases,
         "machine-readable" => \$opt_machine,
+        "filelist=s"  => \$opt_filelist,
         "o|output=s"  => \$opt_output,
 	      "h|help"      => \$opt_help,
         "q|quiet"     => \$opt_quiet,
@@ -429,20 +431,20 @@ sub link_font {
     $n = basename($f);
   }
   my $target = "$cd/$n";
-  if (-r $target) {
-    if (-l $target) {
-      if (readlink($target) eq $f) {
-        # do nothing, it is the same link
-      } else {
-        print_error("link $target already existing, but different target then $target, exiting!\n");
-        exit(1);
-      }
+  if (-l $target) {
+    if (readlink($target) eq $f) {
+      # do nothing, it is the same link
     } else {
-      print_error("$target already existing, but not a link, exiting!\n");
+      print_error("link $target already existing, but different target then $target, exiting!\n");
       exit(1);
     }
   } else {
-    symlink($f, $target) || die("Cannot link font $f to $target: $!");
+    if (-e $target) {
+      print_error("$target already existing, but not a link, exiting!\n");
+      exit(1);
+    } else {
+      symlink($f, $target) || die("Cannot link font $f to $target: $!");
+    }
   }
 }
 
@@ -617,56 +619,65 @@ sub info_found_fonts {
   }
 }
 
+
 #
 # checks all file names listed in %fontdb
 # and sets
 sub check_for_files {
-  # first collect all files:
-  my @fn;
-  for my $k (keys %fontdb) {
-    for my $f (keys %{$fontdb{$k}{'files'}}) {
-      # check for subfont extension 
-      if ($f =~ m/^(.*)\(\d*\)$/) {
-        push @fn, $1;
-      } else {
-        push @fn, $f;
+  my @foundfiles;
+  if ($opt_filelist) {
+    open(FOO, "<", $opt_filelist) || die "Cannot open $opt_filelist: $!";
+    @foundfiles = <FOO>;
+    close(FOO) || warn "Cannot close $opt_filelist: $!";
+  } else {
+    # first collect all files:
+    my @fn;
+    for my $k (keys %fontdb) {
+      for my $f (keys %{$fontdb{$k}{'files'}}) {
+        # check for subfont extension 
+        if ($f =~ m/^(.*)\(\d*\)$/) {
+          push @fn, $1;
+        } else {
+          push @fn, $f;
+        }
       }
     }
-  }
-  #
-  # collect extra directories for search
-  my @extradirs;
-  if (win32()) {
-    push @extradirs, "c:/windows/fonts//";
-  } else {
-    # other dirs to check, for normal unix?
-    for my $d (qw!/Library/Fonts /System/Library/Fonts /Network/Library/Fonts!) {
-      push @extradirs, $d if (-d $d);
+    #
+    # collect extra directories for search
+    my @extradirs;
+    if (win32()) {
+      push @extradirs, "c:/windows/fonts//";
+    } else {
+      # other dirs to check, for normal unix?
+      for my $d (qw!/Library/Fonts /System/Library/Fonts /Network/Library/Fonts!) {
+        push @extradirs, $d if (-d $d);
+      }
+      my $home = $ENV{'HOME'};
+      push @extradirs, "$home/Library/Fonts" if (-d "$home/Library/Fonts");
     }
-    my $home = $ENV{'HOME'};
-    push @extradirs, "$home/Library/Fonts" if (-d "$home/Library/Fonts");
+    #
+    if (@extradirs) {
+      # final dummy directory
+      push @extradirs, "/this/does/not/really/exists/unless/you/are/stupid";
+      # push current value of OSFONTDIR
+      push @extradirs, $ENV{'OSFONTDIR'} if $ENV{'OSFONTDIR'};
+      # compose OSFONTDIR
+      my $osfontdir = join ':', @extradirs;
+      $ENV{'OSFONTDIR'} = $osfontdir;
+    }
+    if ($ENV{'OSFONTDIR'}) {
+      print_debug("final setting of OSFONTDIR: $ENV{'OSFONTDIR'}\n");
+    }
+    # prepare for kpsewhich call, we need to do quoting
+    my $cmdl = 'kpsewhich ';
+    for my $f (@fn) {
+      $cmdl .= " \"$f\" ";
+    }
+    # shoot up kpsewhich
+    print_ddebug("checking for $cmdl\n");
+    @foundfiles = `$cmdl`;
   }
-  #
-  if (@extradirs) {
-    # final dummy directory
-    push @extradirs, "/this/does/not/really/exists/unless/you/are/stupid";
-    # push current value of OSFONTDIR
-    push @extradirs, $ENV{'OSFONTDIR'} if $ENV{'OSFONTDIR'};
-    # compose OSFONTDIR
-    my $osfontdir = join ':', @extradirs;
-    $ENV{'OSFONTDIR'} = $osfontdir;
-  }
-  if ($ENV{'OSFONTDIR'}) {
-    print_debug("final setting of OSFONTDIR: $ENV{'OSFONTDIR'}\n");
-  }
-  # prepare for kpsewhich call, we need to do quoting
-  my $cmdl = 'kpsewhich ';
-  for my $f (@fn) {
-    $cmdl .= " \"$f\" ";
-  }
-  # shoot up kpsewhich
-  print_ddebug("checking for $cmdl\n");
-  chomp( my @foundfiles = `$cmdl`);
+  chomp(@foundfiles);
   print_ddebug("Found files @foundfiles\n");
   # map basenames to filenames
   my %bntofn;
@@ -869,6 +880,8 @@ Options:
                         illegal if LL is provided by a real font, or
                         RR is neither available as real font or alias
                         can be given multiple times
+  --filelist FILE       read list of available font files from FILE
+                        instead of searching with kpathsea
   --machine-readable    output of --list-aliases is machine readable
   -q, --quiet           be less verbose
   -d, --debug           output debug information, can be given multiple times
@@ -1776,47 +1789,47 @@ Class: Korea
 Filename: NanumScript.ttc(1)
 
 Name: AppleSDGothicNeo-Thin
-Type: OTF
+Type: CID
 Class: Korea
 Filename: AppleSDGothicNeo-Thin.otf
 
 Name: AppleSDGothicNeo-UltraLight
-Type: OTF
+Type: CID
 Class: Korea
 Filename: AppleSDGothicNeo-UltraLight.otf
 
 Name: AppleSDGothicNeo-Light
-Type: OTF
+Type: CID
 Class: Korea
 Filename: AppleSDGothicNeo-Light.otf
 
 Name: AppleSDGothicNeo-Regular
-Type: OTF
+Type: CID
 Class: Korea
 Filename: AppleSDGothicNeo-Regular.otf
 
 Name: AppleSDGothicNeo-Medium
-Type: OTF
+Type: CID
 Class: Korea
 Filename: AppleSDGothicNeo-Medium.otf
 
 Name: AppleSDGothicNeo-SemiBold
-Type: OTF
+Type: CID
 Class: Korea
 Filename: AppleSDGothicNeo-SemiBold.otf
 
 Name: AppleSDGothicNeo-Bold
-Type: OTF
+Type: CID
 Class: Korea
 Filename: AppleSDGothicNeo-Bold.otf
 
 Name: AppleSDGothicNeo-ExtraBold
-Type: OTF
+Type: CID
 Class: Korea
 Filename: AppleSDGothicNeo-ExtraBold.otf
 
 Name: AppleSDGothicNeo-Heavy
-Type: OTF
+Type: CID
 Class: Korea
 Filename: AppleSDGothicNeo-Heavy.otf
 
