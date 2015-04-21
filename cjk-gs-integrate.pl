@@ -1124,7 +1124,10 @@ Type: CID
 Class: Japan
 Provides(40): GothicBBB-Medium
 Provides(40): GothicBBBPro-Medium
+# the following two are *not* the same
+# one is in decomposed form (for Mac), one is in composed form (for the rest)
 Filename(20): ヒラギノ角ゴ Pro W3.otf
+Filename(19): ヒラギノ角ゴ Pro W3.otf
 Filename(10): HiraKakuPro-W3.otf
 
 Name: HiraKakuPro-W6
@@ -1133,6 +1136,7 @@ Class: Japan
 Provides(40): FutoGoB101-Bold
 Provides(40): FutoGoB101Pro-Bold
 Filename(20): ヒラギノ角ゴ Pro W6.otf
+Filename(19): ヒラギノ角ゴ Pro W6.otf
 Filename(10): HiraKakuPro-W6.otf
 
 Name: HiraKakuProN-W3
@@ -1141,6 +1145,7 @@ Class: Japan
 Provides(30): GothicBBB-Medium
 Provides(30): GothicBBBPro-Medium
 Filename(20): ヒラギノ角ゴ ProN W3.otf
+Filename(19): ヒラギノ角ゴ ProN W3.otf
 Filename(10): HiraKakuProN-W3.otf
 
 Name: HiraKakuProN-W6
@@ -1149,18 +1154,21 @@ Class: Japan
 Provides(30): FutoGoB101-Bold
 Provides(30): FutoGoB101Pro-Bold
 Filename(20): ヒラギノ角ゴ ProN W6.otf
+Filename(19): ヒラギノ角ゴ ProN W6.otf
 Filename(10): HiraKakuProN-W6.otf
 
 Name: HiraKakuStd-W8
 Type: CID
 Class: Japan
 Filename(20): ヒラギノ角ゴ Std W8.otf
+Filename(19): ヒラギノ角ゴ Std W8.otf
 Filename(10): HiraKakuStd-W8.otf
 
 Name: HiraKakuStdN-W8
 Type: CID
 Class: Japan
 Filename(20): ヒラギノ角ゴ StdN W8.otf
+Filename(19): ヒラギノ角ゴ StdN W8.otf
 Filename(10): HiraKakuStdN-W8.otf
 
 Name: HiraMaruPro-W4
@@ -1169,6 +1177,7 @@ Class: Japan
 Provides(40): Jun101-Light
 Provides(40): Jun101Pro-Light
 Filename(20): ヒラギノ丸ゴ Pro W4.otf
+Filename(19): ヒラギノ丸ゴ Pro W4.otf
 Filename(10): HiraMaruPro-W4.otf
 
 Name: HiraMaruProN-W4
@@ -1177,6 +1186,7 @@ Class: Japan
 Provides(30): Jun101-Light
 Provides(30): Jun101Pro-Light
 Filename(20): ヒラギノ丸ゴ ProN W4.otf
+Filename(19): ヒラギノ丸ゴ ProN W4.otf
 Filename(10): HiraMaruProN-W4.otf
 
 Name: HiraMinPro-W3
@@ -1185,6 +1195,7 @@ Class: Japan
 Provides(40): Ryumin-Light
 Provides(40): RyuminPro-Light
 Filename(20): ヒラギノ明朝 Pro W3.otf
+Filename(19): ヒラギノ明朝 Pro W3.otf
 Filename(10): HiraMinPro-W3.otf
 
 Name: HiraMinPro-W6
@@ -1193,6 +1204,7 @@ Class: Japan
 Provides(40): FutoMinA101-Bold
 Provides(40): FutoMinA101Pro-Bold
 Filename(20): ヒラギノ明朝 Pro W6.otf
+Filename(19): ヒラギノ明朝 Pro W6.otf
 Filename(10): HiraMinPro-W6.otf
 
 Name: HiraMinProN-W3
@@ -1201,6 +1213,7 @@ Class: Japan
 Provides(30): Ryumin-Light
 Provides(30): RyuminPro-Light
 Filename(20): ヒラギノ明朝 ProN W3.otf
+Filename(19): ヒラギノ明朝 ProN W3.otf
 Filename(10): HiraMinProN-W3.otf
 
 Name: HiraMinProN-W6
@@ -1209,6 +1222,7 @@ Class: Japan
 Provides(30): FutoMinA101-Bold
 Provides(30): FutoMinA101Pro-Bold
 Filename(20): ヒラギノ明朝 ProN W6.otf
+Filename(19): ヒラギノ明朝 ProN W6.otf
 Filename(10): HiraMinProN-W6.otf
 
 
