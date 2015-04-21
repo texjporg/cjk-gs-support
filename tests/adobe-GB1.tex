@@ -4,7 +4,7 @@
 
 \begin{document}
 \begin{center}
-Adobe-CNS1 Glyphs\\
+Adobe-GB1 Glyphs\\
  \begin{tabular}{ll} \hline
   Supplement & Color \\ \hline
   0 & \colorsample{0} \\
@@ -12,8 +12,7 @@ Adobe-CNS1 Glyphs\\
   2 & \colorsample{2} \\
   3 & \colorsample{3} \\
   4 & \colorsample{4} \\
-  5 & \colorsample{5} \\
-  6 & \colorsample{6} \\ \hline
+  5 & \colorsample{5} \\ \hline
  \end{tabular}
 \end{center}
 
@@ -21,18 +20,17 @@ Adobe-CNS1 Glyphs\\
 \newcount\supplement\global\supplement=0
 
 \noindent
-\foreach \row in {0,...,957}{%
+\foreach \row in {0,...,1514}{%
 \hbox to 7ex{\hfill\number\code}\quad
 \foreach \col in {0,...,19}{%
 \ifcase\supplement%
-\ifnum\code>14098 \global\advance\supplement by 1\fi\or
-\ifnum\code>17407 \global\advance\supplement by 1\fi\or
-\ifnum\code>17600 \global\advance\supplement by 1\fi\or
-\ifnum\code>18845 \global\advance\supplement by 1\fi\or
-\ifnum\code>18964 \global\advance\supplement by 1\fi\or
-\ifnum\code>19087 \global\advance\supplement by 1\fi\fi
-\ifnum\code < 19156
- \colorbox{\colorname{\supplement}}{\CIDT{\code}}\
+\ifnum\code>7716  \global\advance\supplement by 1\fi\or
+\ifnum\code>9896  \global\advance\supplement by 1\fi\or
+\ifnum\code>22126 \global\advance\supplement by 1\fi\or
+\ifnum\code>22352 \global\advance\supplement by 1\fi\or
+\ifnum\code>29063 \global\advance\supplement by 1\fi\fi
+\ifnum\code < 30284
+ \colorbox{\colorname{\supplement}}{\CIDC{\code}}\
 \fi
 \global\advance\code by 1
 }\\

@@ -1,21 +1,12 @@
 
-TESTGB = adobe-GB1_0-2 adobe-GB1_3-5
-TESTK  = adobe-Korea1
-TESTCNS = adobe-CNS1
 
-TESTALL = $(TESTGB) $(TESTCNS) $(TESTK)
+all = gb cns korea japan
 
-TESTPDF = $(patsubst %, %.pdf, $(TESTALL))
+$(all) all:
+	bash test-runner.sh $@
 
-all: $(TESTPDF)
-	echo $(TESTPDF)
+clean:
+	rm -f *.log *.dvi *.aux
 
-%.dvi: %.tex
-	platex $<
-
-%.ps: %.dvi
-	dvips $<
-
-%.pdf: %.ps
-	ps2pdf $<
-
+realclean: clean
+	rm -f *.pdf *.ps

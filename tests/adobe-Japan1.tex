@@ -4,7 +4,7 @@
 
 \begin{document}
 \begin{center}
-Adobe-CNS1 Glyphs\\
+Adobe-Japan1 Glyphs\\
  \begin{tabular}{ll} \hline
   Supplement & Color \\ \hline
   0 & \colorsample{0} \\
@@ -21,18 +21,18 @@ Adobe-CNS1 Glyphs\\
 \newcount\supplement\global\supplement=0
 
 \noindent
-\foreach \row in {0,...,957}{%
+\foreach \row in {0,...,1152}{%
 \hbox to 7ex{\hfill\number\code}\quad
 \foreach \col in {0,...,19}{%
 \ifcase\supplement%
-\ifnum\code>14098 \global\advance\supplement by 1\fi\or
-\ifnum\code>17407 \global\advance\supplement by 1\fi\or
-\ifnum\code>17600 \global\advance\supplement by 1\fi\or
-\ifnum\code>18845 \global\advance\supplement by 1\fi\or
-\ifnum\code>18964 \global\advance\supplement by 1\fi\or
-\ifnum\code>19087 \global\advance\supplement by 1\fi\fi
-\ifnum\code < 19156
- \colorbox{\colorname{\supplement}}{\CIDT{\code}}\
+\ifnum\code>8283  \global\advance\supplement by 1\fi\or
+\ifnum\code>8358  \global\advance\supplement by 1\fi\or
+\ifnum\code>8719  \global\advance\supplement by 1\fi\or
+\ifnum\code>9353  \global\advance\supplement by 1\fi\or
+\ifnum\code>15443 \global\advance\supplement by 1\fi\or
+\ifnum\code>20316 \global\advance\supplement by 1\fi\fi
+\ifnum\code < 23058
+ \colorbox{\colorname{\supplement}}{\CID{\code}}\
 \fi
 \global\advance\code by 1
 }\\

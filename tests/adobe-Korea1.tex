@@ -1,31 +1,32 @@
-\documentclass[dvips]{jsarticle}
-\usepackage[deluxe, expert, multi]{otf}
-\usepackage{pgffor}
-\usepackage{color}
-\setlength{\fboxsep}{0pt}
-%\setlength{\fboxrule}{0.2pt}
-\definecolor{UClightpink}{cmyk}{0,.25,.15,0}
-\definecolor{UClightyellowgreen}{cmyk}{.25,0,.80,0}
-\definecolor{UClightskyblue}{cmyk}{.30,0,0,0}
+\ifx\dviware\undefined \def\dviware{dvipdfmx}\fi
+\documentclass[\dviware]{jsarticle}
+\usepackage{cidtable}
+
 \begin{document}
 \begin{center}
-Adobe-Korea1 Glyphs
+Adobe-Korea1 Glyphs\\
+ \begin{tabular}{ll} \hline
+  Supplement & Color \\ \hline
+  0 & \colorsample{0} \\
+  1 & \colorsample{1} \\
+  2 & \colorsample{2} \\ \hline
+ \end{tabular}
 \end{center}
-\newcount \code
+
+\newcount\code\global\code=0
+\newcount\supplement\global\supplement=0
+
 \noindent
-Supplement 0\\
-\foreach \x in {0,...,9332}{%
-\colorbox{UClightpink}{\CIDK{\code}}\
+\foreach \row in {0,...,917}{%
+\hbox to 7ex{\hfill\number\code}\quad
+\foreach \col in {0,...,19}{%
+\ifcase\supplement%
+\ifnum\code>9332 \global\advance\supplement by 1\fi\or
+\ifnum\code>18154 \global\advance\supplement by 1\fi\fi
+\ifnum\code < 18352
+ \colorbox{\colorname{\supplement}}{\CIDK{\code}}\
+\fi
 \global\advance\code by 1
-}%
-\\ Supplement 1\\
-\foreach \x in {0,...,8821}{%
-\colorbox{UClightyellowgreen}{\CIDK{\code}}\
-\global\advance\code by 1
-}%
-\\ Supplement 2
-\foreach \x in {0,...,196}{%
-\colorbox{UClightskyblue}{\CIDK{\code}}\
-\global\advance\code by 1
-}%
+}\\
+}
 \end{document}

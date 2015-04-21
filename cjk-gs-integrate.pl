@@ -214,12 +214,16 @@ my $opt_info = 0;
 my $opt_fontdef;
 my $opt_output;
 my @opt_aliases;
+my $opt_only_aliases = 0;
+my $opt_machine = 0;
 
 if (! GetOptions(
         "n|dry-run"   => \$dry_run,
         "info"        => \$opt_info,
         "list-aliases" => \$opt_listaliases,
         "list-fonts"  => \$opt_listfonts,
+        "only-aliases" => \$opt_only_aliases,
+        "machine-readable" => \$opt_machine,
         "o|output=s"  => \$opt_output,
 	      "h|help"      => \$opt_help,
         "q|quiet"     => \$opt_quiet,
@@ -265,12 +269,13 @@ sub main {
     info_found_fonts();
   }
   if ($opt_listaliases) {
-    print "List of aliases and their options (in decreasing priority):\n";
+    print "List of aliases and their options (in decreasing priority):\n" unless $opt_machine;
     my (@jal, @kal, @tal, @sal);
     for my $al (sort keys %aliases) {
       my $cl;
       my @ks = sort { $a <=> $b} keys(%{$aliases{$al}});
-      my $foo = "$al:\n";
+      my $foo = '';
+      $foo = "$al:\n" unless $opt_machine;
       for my $p (@ks) {
         my $t = $aliases{$al}{$p};
         my $fn = $fontdb{$t}{'target'};
@@ -279,7 +284,11 @@ sub main {
         if ($fontdb{$t}{'type'} eq 'TTF' && $fontdb{$t}{'subfont'} > 0) {
           $fn .= "($fontdb{$t}{'subfont'})";
         }
-        $foo .= "\t($p) $aliases{$al}{$p} ($fn)\n";
+        if ($opt_machine) {
+          $foo .= "$al:$p:$aliases{$al}{$p}:$fn\n";
+        } else {
+          $foo .= "\t($p) $aliases{$al}{$p} ($fn)\n";
+        }
       }
       if ($cl eq 'Japan') {
         push @jal, $foo;
@@ -293,10 +302,17 @@ sub main {
         print STDERR "unknown class $cl for $al\n";
       }
     }
-    print "Aliases for Japanese fonts:\n", @jal, "\n" if @jal;
-    print "Aliases for Korean fonts:\n", @kal, "\n" if @kal;
-    print "Aliases for Traditional Chinese fonts:\n", @tal, "\n" if @tal;
-    print "Aliases for Simplified Chinese fonts:\n", @sal, "\n" if @sal;
+    if ($opt_machine) {
+      print @jal if @jal;
+      print @kal if @kal;
+      print @tal if @tal;
+      print @sal if @sal;
+    } else {
+      print "Aliases for Japanese fonts:\n", @jal, "\n" if @jal;
+      print "Aliases for Korean fonts:\n", @kal, "\n" if @kal;
+      print "Aliases for Traditional Chinese fonts:\n", @tal, "\n" if @tal;
+      print "Aliases for Simplified Chinese fonts:\n", @sal, "\n" if @sal;
+    }
   }
   exit(0) if ($opt_listfonts || $opt_listaliases);
 
@@ -315,38 +331,42 @@ sub main {
       die ("Cannot create directory $opt_output: $!");
   }
   print_info("output is going to $opt_output\n");
-  print_info("generating font snippets and link CID fonts ...\n");
-  do_otf_fonts();
-  print_info("generating font snippets, links, and cidfmap.local for TTF fonts ...\n");
-  do_ttf_fonts();
+  if (!$opt_only_aliases) {
+    print_info("generating font snippets and link CID fonts ...\n");
+    do_otf_fonts();
+    print_info("generating font snippets, links, and cidfmap.local for TTF fonts ...\n");
+    do_ttf_fonts();
+  }
+  print_info("generating font aliases ...\n");
+  do_aliases();
   print_info("finished\n");
 }
 
 sub update_master_cidfmap {
+  my $add = shift;
   my $cidfmap_master = "$opt_output/Init/cidfmap";
-  my $cidfmap_local = "$opt_output/Init/cidfmap.local";
   if (-r $cidfmap_master) {
     open(FOO, "<", $cidfmap_master) ||
       die ("Cannot open $cidfmap_master for reading: $!");
     my $found = 0;
     while(<FOO>) {
       $found = 1 if
-        m/^\s*\(cidfmap\.local\)\s\s*\.runlibfile\s*$/;
+        m/^\s*\(\Q$add\E\)\s\s*\.runlibfile\s*$/;
     }
     if ($found) {
-      print_info("cidfmap.local already loaded in $cidfmap_master, no changes\n");
+      print_info("$add already loaded in $cidfmap_master, no changes\n");
     } else {
       return if $dry_run;
       open(FOO, ">>", $cidfmap_master) ||
         die ("Cannot open $cidfmap_master for appending: $!");
-      print FOO "(cidfmap.local) .runlibfile\n";
+      print FOO "($add) .runlibfile\n";
       close(FOO);
     }
   } else {
     return if $dry_run;
     open(FOO, ">", $cidfmap_master) ||
       die ("Cannot open $cidfmap_master for writing: $!");
-    print FOO "(cidfmap.local) .runlibfile\n";
+    print FOO "($add) .runlibfile\n";
     close(FOO);
   }
 }
@@ -454,6 +474,25 @@ sub do_ttf_fonts {
       link_font($fontdb{$k}{'target'}, $cidfsubst);
     }
   }
+  return if $dry_run;
+  if ($outp) {
+    if (! -d "$opt_output/Init") {
+      mkdir("$opt_output/Init") ||
+        die("Cannot create directory $opt_output/Init: $!");
+    }
+    open(FOO, ">$opt_output/Init/cidfmap.local") || 
+      die "Cannot open $opt_output/cidfmap.local: $!";
+    print FOO $outp;
+    close(FOO);
+  }
+  print_info("adding cidfmap.local to cidfmap file ...\n");
+  update_master_cidfmap('cidfmap.local');
+}
+
+sub do_aliases {
+  my $fontdest = "$opt_output/Font";
+  my $cidfsubst = "$opt_output/CIDFSubst";
+  my $outp = '';
   #
   # alias handling
   # we use two levels of aliases, one is for the default names that
@@ -499,7 +538,6 @@ sub do_ttf_fonts {
     }
     # we also need to create font snippets in Font for the aliases!
     generate_font_snippet($fontdest, $al, $class, $target);
-    # TODO order the aliases also after classes
     if ($class eq 'Japan') {
       push @jal, "/$al /$target ;";
     } elsif ($class eq 'Korea') {
@@ -523,13 +561,13 @@ sub do_ttf_fonts {
       mkdir("$opt_output/Init") ||
         die("Cannot create directory $opt_output/Init: $!");
     }
-    open(FOO, ">$opt_output/Init/cidfmap.local") || 
-      die "Cannot open $opt_output/cidfmap.local: $!";
+    open(FOO, ">$opt_output/Init/cidfmap.aliases") || 
+      die "Cannot open $opt_output/cidfmap.aliases: $!";
     print FOO $outp;
     close(FOO);
   }
-  print_info("adding cidfmap.local to cidfmap file ...\n");
-  update_master_cidfmap();
+  print_info("adding cidfmap.aliases to cidfmap file ...\n");
+  update_master_cidfmap('cidfmap.aliases');
 }
 
 sub generate_cidfmap_entry {
@@ -831,12 +869,14 @@ Options:
                         illegal if LL is provided by a real font, or
                         RR is neither available as real font or alias
                         can be given multiple times
+  --machine-readable    output of --list-aliases is machine readable
   -q, --quiet           be less verbose
   -d, --debug           output debug information, can be given multiple times
   -v, --version         outputs only the version information
   -h, --help            this help
 
 Command like options:
+  --only-aliases        do only regenerate the cidfmap.alias file instead of all
   --list-aliases        lists the aliases and their options, with the selected
                         option on top
   --list-fonts          lists the fonts found on the system
@@ -851,6 +891,8 @@ Operation:
 
   For each found TrueType (TTF) font it creates a cidfmap entry in
     <Resource>/Init/cidfmap.local
+  and links the font to
+    <Resource>/CIDFSubst
   For each CID font it creates a snippet in
     <Resource>/Font/
   and links the font to 
@@ -858,16 +900,20 @@ Operation:
   The <Resource> dir is either given by -o/--output, or otherwise searched
   from an installed GhostScript (binary name is assumed to be 'gs').
 
-  Finally, it tries to add runlib call to
+  Aliases are added to 
+    <Resource>/Init/cidfmap.aliases
+
+  Finally, it tries to add runlib calls to
     <Resource>/Init/cidfmap
-  to load the cidfmap.local.
+  to load the cidfmap.local and cidfmap.aliases.
 
 How and which directories are searched:
 
   Search is done using the kpathsea library, in particular using kpsewhich
   program. By default the following directories are searched:
   - all TEXMF trees
-  - /Library/Fonts and /System/Library/Fonts (if available)
+  - /Library/Fonts, /System/Library/Fonts, /Network/Library/Fonts, and
+    ~/Library/Fonts (all if available)
   - c:/windows/fonts (on Windows)
   - the directories in OSFONTDIR environment variable
 
@@ -905,8 +951,8 @@ Aliases:
     MSung-Light MHei-Medium MKai-Medium
 
   In addition, we also includes provide entries for the OTF Morisawa names:
-    A-OTF-RyuminPro-Light A-OTF-GothicBBBPro-Medium A-OTF-FutoMinA101Pro-Bold
-    A-OTF-FutoGoB101Pro-Bold A-OTF-Jun101Pro-Light
+    RyuminPro-Light GothicBBBPro-Medium FutoMinA101Pro-Bold
+    FutoGoB101Pro-Bold Jun101Pro-Light
 
   The order is determined by the Provides setting in the font database,
   and for the Japanese fonts it is currently:
