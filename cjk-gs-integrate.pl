@@ -217,6 +217,7 @@ my @opt_aliases;
 my $opt_only_aliases = 0;
 my $opt_machine = 0;
 my $opt_filelist;
+my $opt_force = 0;
 
 if (! GetOptions(
         "n|dry-run"   => \$dry_run,
@@ -225,6 +226,7 @@ if (! GetOptions(
         "list-fonts"  => \$opt_listfonts,
         "only-aliases" => \$opt_only_aliases,
         "machine-readable" => \$opt_machine,
+        "force"       => \$opt_force,
         "filelist=s"  => \$opt_filelist,
         "o|output=s"  => \$opt_output,
 	      "h|help"      => \$opt_help,
@@ -431,6 +433,10 @@ sub link_font {
     $n = basename($f);
   }
   my $target = "$cd/$n";
+  if ($opt_force && -e $target) {
+    print_info("Removing $target prior to recreation due to --force\n");
+    unlink($target) || die "Cannot unlink $target prior to recreation under --force: $!";
+  }
   if (-l $target) {
     if (readlink($target) eq $f) {
       # do nothing, it is the same link
@@ -883,6 +889,7 @@ Options:
   --filelist FILE       read list of available font files from FILE
                         instead of searching with kpathsea
   --machine-readable    output of --list-aliases is machine readable
+  --force               do not bail out if linked fonts already exist
   -q, --quiet           be less verbose
   -d, --debug           output debug information, can be given multiple times
   -v, --version         outputs only the version information
