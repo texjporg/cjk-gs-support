@@ -455,11 +455,17 @@ sub link_font {
     unlink($target) || die "Cannot unlink $target prior to recreation under --force: $!";
   }
   if (-l $target) {
-    if (readlink($target) eq $f) {
-      # do nothing, it is the same link
+    my $linkt = readlink($target);
+    if ($linkt && -r $linkt) {
+      if ($linkt eq $f) {
+        # do nothing, it is the same link
+      } else {
+        print_error("link $target already existing, but different target then $target, exiting!\n");
+        exit(1);
+      }
     } else {
-      print_error("link $target already existing, but different target then $target, exiting!\n");
-      exit(1);
+      print_warning("removing dangling symlink $target to $linkt\n");
+      unlink($target);
     }
   } else {
     if (-e $target) {
