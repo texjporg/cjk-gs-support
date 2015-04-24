@@ -1877,7 +1877,11 @@ Type: CID
 Class: Korea
 Filename: AppleSDGothicNeo-Heavy.otf
 
-# Microsoft Office for Mac fonts
+#
+# Microsoft Mac Office fonts
+#
+
+# Korea
 
 Name: Gulim
 Type: TTF
@@ -1885,6 +1889,103 @@ Class: Korea
 Provides(30): HYRGoThic-Medium
 Filename(30): Gulim.ttf
 Filename(50): gulim.ttc
+
+Name: Dotum
+Type: TTF
+Class: Korea
+Provides(30): HYGoThic-Medium
+Filename(50): Dotum.ttf
+
+Name: Batang
+Type: TTF
+Class: Korea
+Provides(30): HYSMyeongJo-Medium
+Filename(50): Batang.ttf
+
+# simplified chinese
+
+Name: SimHei
+Type: TTF
+Class: GB
+Provides(30): STHeiti-Regular
+Provides(60): STKaiti-Regular
+Filename(50): SimHei.ttf
+
+Name: SimSun
+Type: TTF
+Class: GB
+Provides(30): STSong-Light
+Provides(60): STFangsong-Light
+Filename(50): SimSun.ttf
+
+# traditional chinese
+
+Name: MingLiU
+Type: TTF
+Class: CNS
+Provides(60): MHei-Medium
+Provides(60): MKai-Medium
+Provides(60): MSung-Medium
+Provides(60): MSung-Light
+Filename(50): MingLiU.ttf
+
+Name: PMingLiU
+Type: TTF
+Class: CNS
+Filename(50): PMingLiU.ttf
+
+# japanese
+
+Name: MS-Gothic
+Type: TTF
+Class: Japan
+Provides(80): GothicBBB-Medium
+Provides(80): GothicBBBPro-Medium
+Filename(50): MS Gothic.ttf
+Filename(30): MS-Gothic.ttf
+
+Name: MS-Mincho
+Type: TTF
+Class: Japan
+Provides(80): Ryumin-Light
+Provides(80): RyuminPro-Light
+Filename(50): MS Mincho.ttf
+Filename(30): MS-Mincho.ttf
+
+Name: MS-PGothic
+Type: TTF
+Class: Japan
+Filename(50): MS PGothic.ttf
+Filename(30): MS-PGothic.ttf
+
+Name: MS-PMincho
+Type: TTF
+Class: Japan
+Filename(50): MS PMincho.ttf
+Filename(30): MS-PMincho.ttf
+
+Name: Meiryo
+Type: TTF
+Class: Japan
+Filename(50): Meiryo.ttf
+
+Name: Meiryo-Bold
+Type: TTF
+Class: Japan
+Filename(50): Meiryo Bold.ttf
+Filename(30): Meiryo-Bold.ttf
+
+Name: Meiryo-BoldItalic
+Type: TTF
+Class: Japan
+Filename(50): Meiryo Bold Italic.ttf
+Filename(30): Meiryo-BoldItalic.ttf
+
+Name: Meiryo-Italic
+Type: TTF
+Class: Japan
+Filename(50): Meiryo Italic.ttf
+Filename(30): Meiryo-Italic.ttf
 
 
 ### Local Variables:
