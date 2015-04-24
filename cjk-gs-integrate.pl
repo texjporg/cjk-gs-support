@@ -13,6 +13,11 @@
 # For development see
 #  https://github.com/norbusan/cjk-gs-support
 #
+# TODO:
+# - how to deal with MacTeX pre-shipped configuration files?
+# - provide a way to link found fonts into TEXMFLOCAL
+# - interoperability with updmap-config-kanji
+# - input from CK about font priorities
 #
 
 $^W = 1;
@@ -22,6 +27,11 @@ use strict;
 
 (my $prg = basename($0)) =~ s/\.pl$//;
 my $version = '$VER$';
+
+if (win32()) {
+  print_error("Sorry, currently not supported on Windows!\n");
+  exit(1);
+}
 
 my %encode_list = (
   Japan => [ qw/
