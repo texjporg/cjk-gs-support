@@ -209,6 +209,7 @@ my $opt_help = 0;
 my $opt_quiet = 0;
 my $opt_debug = 0;
 my $opt_listaliases = 0;
+my $opt_listallaliases = 0;
 my $opt_listfonts = 0;
 my $opt_info = 0;
 my $opt_fontdef;
@@ -223,6 +224,7 @@ if (! GetOptions(
         "n|dry-run"   => \$dry_run,
         "info"        => \$opt_info,
         "list-aliases" => \$opt_listaliases,
+        "list-all-aliases" => \$opt_listallaliases,
         "list-fonts"  => \$opt_listfonts,
         "only-aliases" => \$opt_only_aliases,
         "machine-readable" => \$opt_machine,
@@ -263,8 +265,13 @@ main(@ARGV);
 sub main {
   print_info("reading font database ...\n");
   read_font_database();
-  print_info("checking for files ...\n");
-  check_for_files();
+  if (!$opt_listallaliases) {
+    print_info("checking for files ...\n");
+    check_for_files();
+  } else {
+    make_all_available();
+  }
+  compute_aliases();
   if ($opt_info) {
     $opt_listfonts = 1;
     $opt_listaliases = 1;
@@ -272,8 +279,8 @@ sub main {
   if ($opt_listfonts) {
     info_found_fonts();
   }
-  if ($opt_listaliases) {
-    print "List of aliases and their options (in decreasing priority):\n" unless $opt_machine;
+  if ($opt_listaliases || $opt_listallaliases) {
+    print "List of ", ($opt_listaliases ? "all" : "available"), " aliases and their options (in decreasing priority):\n" unless $opt_machine;
     my (@jal, @kal, @tal, @sal);
     for my $al (sort keys %aliases) {
       my $cl;
@@ -282,10 +289,10 @@ sub main {
       $foo = "$al:\n" unless $opt_machine;
       for my $p (@ks) {
         my $t = $aliases{$al}{$p};
-        my $fn = $fontdb{$t}{'target'};
+        my $fn = ($opt_listallaliases ? "-" : $fontdb{$t}{'target'} );
         # should always be the same ;-)
         $cl = $fontdb{$t}{'class'};
-        if ($fontdb{$t}{'type'} eq 'TTF' && $fontdb{$t}{'subfont'} > 0) {
+        if (!$opt_listallaliases && $fontdb{$t}{'type'} eq 'TTF' && $fontdb{$t}{'subfont'} > 0) {
           $fn .= "($fontdb{$t}{'subfont'})";
         }
         if ($opt_machine) {
@@ -318,7 +325,7 @@ sub main {
       print "Aliases for Simplified Chinese fonts:\n", @sal, "\n" if @sal;
     }
   }
-  exit(0) if ($opt_listfonts || $opt_listaliases);
+  exit(0) if ($opt_listfonts || $opt_listaliases || $opt_listallaliases);
 
   if (! $opt_output) {
     print_info("searching for GhostScript resource\n");
@@ -627,6 +634,15 @@ sub info_found_fonts {
 
 
 #
+# make all fonts available for listing all aliases
+sub make_all_available {
+  for my $k (keys %fontdb) {
+    $fontdb{$k}{'available'} = 1;
+    delete $fontdb{$k}{'files'};
+  }
+}
+
+#
 # checks all file names listed in %fontdb
 # and sets
 sub check_for_files {
@@ -732,7 +748,14 @@ sub check_for_files {
     # not needed anymore
     delete $fontdb{$k}{'files'};
   }
-  # third round through the fontdb to check for provides
+  if ($opt_debug > 0) {
+    print_debug("dumping font database:\n");
+    print_debug(Data::Dumper::Dumper(\%fontdb));
+  }
+}
+
+sub compute_aliases {
+  # go through fontdb to check for provides
   # accumulate all provided fonts in @provides
   for my $k (keys %fontdb) {
     if ($fontdb{$k}{'available'}) {
@@ -768,8 +791,6 @@ sub check_for_files {
     }
   }
   if ($opt_debug > 0) {
-    print_debug("dumping font database:\n");
-    print_debug(Data::Dumper::Dumper(\%fontdb));
     print_debug("dumping aliases:\n");
     print_debug(Data::Dumper::Dumper(\%aliases));
   }
@@ -897,8 +918,10 @@ Options:
 
 Command like options:
   --only-aliases        do only regenerate the cidfmap.alias file instead of all
-  --list-aliases        lists the aliases and their options, with the selected
-                        option on top
+  --list-aliases        lists the available aliases and their options, with the 
+                        selected option on top
+  --list-all-aliases    list all possible aliases without searching for actually
+                        present files
   --list-fonts          lists the fonts found on the system
   --info                combines the above two information
 
