@@ -764,7 +764,13 @@ sub compute_aliases {
         next if $fontdb{$p}{'available'};
         # use the priority as key
         # if priorities are double, this will pick one at chance
-        $aliases{$p}{$fontdb{$k}{'provides'}{$p}} = $k;
+        if ($aliases{$p}{$fontdb{$k}{'provides'}{$p}}) {
+          print_warning("duplicate provide levels:\n");
+          print_warning("  current $p $fontdb{$k}{'provides'}{$p} $aliases{$p}{$fontdb{$k}{'provides'}{$p}}\n");
+          print_warning("  ignored $p $fontdb{$k}{'provides'}{$p} $k\n");
+        } else {
+          $aliases{$p}{$fontdb{$k}{'provides'}{$p}} = $k;
+        }
       }
     }
   }
@@ -1886,20 +1892,20 @@ Filename: AppleSDGothicNeo-Heavy.otf
 Name: Gulim
 Type: TTF
 Class: Korea
-Provides(30): HYRGoThic-Medium
+Provides(70): HYRGoThic-Medium
 Filename(30): Gulim.ttf
 Filename(50): gulim.ttc
 
 Name: Dotum
 Type: TTF
 Class: Korea
-Provides(30): HYGoThic-Medium
+Provides(40): HYGoThic-Medium
 Filename(50): Dotum.ttf
 
 Name: Batang
 Type: TTF
 Class: Korea
-Provides(30): HYSMyeongJo-Medium
+Provides(40): HYSMyeongJo-Medium
 Filename(50): Batang.ttf
 
 # simplified chinese
@@ -1907,14 +1913,14 @@ Filename(50): Batang.ttf
 Name: SimHei
 Type: TTF
 Class: GB
-Provides(30): STHeiti-Regular
+Provides(60): STHeiti-Regular
 Provides(60): STKaiti-Regular
 Filename(50): SimHei.ttf
 
 Name: SimSun
 Type: TTF
 Class: GB
-Provides(30): STSong-Light
+Provides(60): STSong-Light
 Provides(60): STFangsong-Light
 Filename(50): SimSun.ttf
 
@@ -1939,16 +1945,16 @@ Filename(50): PMingLiU.ttf
 Name: MS-Gothic
 Type: TTF
 Class: Japan
-Provides(80): GothicBBB-Medium
-Provides(80): GothicBBBPro-Medium
+Provides(95): GothicBBB-Medium
+Provides(95): GothicBBBPro-Medium
 Filename(50): MS Gothic.ttf
 Filename(30): MS-Gothic.ttf
 
 Name: MS-Mincho
 Type: TTF
 Class: Japan
-Provides(80): Ryumin-Light
-Provides(80): RyuminPro-Light
+Provides(95): Ryumin-Light
+Provides(95): RyuminPro-Light
 Filename(50): MS Mincho.ttf
 Filename(30): MS-Mincho.ttf
 
