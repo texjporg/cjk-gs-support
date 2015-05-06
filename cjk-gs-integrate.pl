@@ -1826,6 +1826,7 @@ Name: AdobeHeitiStd-Regular
 Type: CID
 Class: GB
 Provides(30): STHeiti-Regular
+Provides(30): STHeiti-Light
 Filename(20): AdobeHeitiStd-Regular.otf
 
 Name: AdobeKaitiStd-Regular
@@ -1847,12 +1848,14 @@ Name: AdobeMingStd-Light
 Type: CID
 Class: CNS
 Provides(30): MSung-Light
+# Provides(30): MSung-Medium
 Filename(20): AdobeMingStd-Light.otf
 
 Name: AdobeFanHeitiStd-Bold
 Type: CID
 Class: CNS
 Provides(30): MHei-Medium
+Provides(30): MKai-Medium
 Filename(20): AdobeFanHeitiStd-Bold.otf
 
 # korean
@@ -2010,6 +2013,7 @@ Type: TTF
 Class: GB
 Provides(60): STHeiti-Regular
 Provides(60): STKaiti-Regular
+Provides(60): STHeiti-Light
 Filename(50): SimHei.ttf
 
 Name: SimSun
@@ -2017,6 +2021,7 @@ Type: TTF
 Class: GB
 Provides(60): STSong-Light
 # Provides(60): STFangsong-Light
+Provides(60): STFangsong-Regular
 Filename(50): SimSun.ttf
 
 # traditional chinese
@@ -2044,6 +2049,12 @@ Provides(95): GothicBBB-Medium
 Provides(95): GothicBBBPro-Medium
 Provides(95): MidashiGo-MB31
 Provides(95): MidashiGoPro-MB31
+Provides(95): FutoGoB101-Bold
+Provides(95): FutoGoB101Pro-Bold
+Provides(95): MidashiGo-MB31
+Provides(95): MidashiGoPro-MB31
+Provides(95): Jun101-Light
+Provides(95): Jun101Pro-Light
 Filename(50): MS Gothic.ttf
 Filename(30): MS-Gothic.ttf
 
@@ -2052,6 +2063,8 @@ Type: TTF
 Class: Japan
 Provides(95): Ryumin-Light
 Provides(95): RyuminPro-Light
+Provides(95): FutoMinA101-Bold
+Provides(95): FutoMinA101Pro-Bold
 Filename(50): MS Mincho.ttf
 Filename(30): MS-Mincho.ttf
 
