@@ -237,7 +237,7 @@ if (! GetOptions(
         "list-aliases" => \$opt_listaliases,
         "list-all-aliases" => \$opt_listallaliases,
         "list-fonts"  => \$opt_listfonts,
-        "texmflocal-link" => $opt_texmflink,
+        "link-texmflocal" => \$opt_texmflink,
         "only-aliases" => \$opt_only_aliases,
         "machine-readable" => \$opt_machine,
         "force"       => \$opt_force,
@@ -268,6 +268,8 @@ if ($opt_debug) {
   require Data::Dumper;
   $Data::Dumper::Indent = 1;
 }
+
+chomp (my $TEXMFLOCAL = `kpsewhich -var-value=TEXMFLOCAL`);
 
 main(@ARGV);
 
@@ -394,31 +396,34 @@ sub update_master_cidfmap {
   }
 }
 
+sub make_dir {
+  my ($d, $w) = @_;
+  if (-r $d) {
+    if (! -d $d) {
+      print_error("$d is not a directory, $w\n");
+      exit 1;
+    }
+  } else {
+    $dry_run || mkdir($d);
+  }
+}
 
 sub do_otf_fonts {
   my $fontdest = "$opt_output/Font";
   my $ciddest  = "$opt_output/CIDFont";
-  if (-r $fontdest) {
-    if (! -d $fontdest) {
-      print_error("$fontdest is not a directory, cannot create CID snippets there!\n");
-      exit 1;
-    }
-  } else {
-    $dry_run || mkdir($fontdest);
-  }
-  if (-r $ciddest) {
-    if (! -d $ciddest) {
-      print_error("$ciddest is not a directory, cannot link CID fonts there!\n");
-      exit 1;
-    }
-  } else {
-    $dry_run || mkdir($ciddest);
-  }
+  make_dir($fontdest, "cannot create CID snippets there!");
+  make_dir($ciddest,  "cannot link CID fonts there!");
+  print "opt_texfmlink = $opt_texmflink\n";
+  make_dir("$TEXMFLOCAL/fonts/opentype/cjk-gs-integrate",
+           "cannot link fonts to it!")
+    if $opt_texmflink;
   for my $k (keys %fontdb) {
     if ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'CID') {
       generate_font_snippet($fontdest,
         $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
       link_font($fontdb{$k}{'target'}, $ciddest, $k);
+      link_font($fontdb{$k}{'target'}, "$TEXMFLOCAL/fonts/opentype/cjk-gs-integrate")
+        if $opt_texmflink;
     }
   }
 }
@@ -452,6 +457,7 @@ sub link_font {
     $n = basename($f);
   }
   my $target = "$cd/$n";
+  printf STDERR "link try to $target\n";
   if ($opt_force && -e $target) {
     print_info("Removing $target prior to recreation due to --force\n");
     unlink($target) || die "Cannot unlink $target prior to recreation under --force: $!";
@@ -483,28 +489,19 @@ sub do_ttf_fonts {
   my $fontdest = "$opt_output/Font";
   my $cidfsubst = "$opt_output/CIDFSubst";
   my $outp = '';
-  if (-r $fontdest) {
-    if (! -d $fontdest) {
-      print_error("$fontdest is not a directory, cannot create CID snippets there!\n");
-      exit 1;
-    }
-  } else {
-    $dry_run || mkdir($fontdest);
-  }
-  if (-r $cidfsubst) {
-    if (! -d $cidfsubst) {
-      print_error("$cidfsubst is not a directory, cannot link CID fonts there!\n");
-      exit 1;
-    }
-  } else {
-    $dry_run || mkdir($cidfsubst);
-  }
+  make_dir($fontdest, "cannot create CID snippets there!");
+  make_dir($cidfsubst,  "cannot link TTF fonts there!");
+  make_dir("$TEXMFLOCAL/fonts/truetype/cjk-gs-integrate",
+           "cannot link fonts to it!")
+    if $opt_texmflink;
   for my $k (keys %fontdb) {
     if ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'TTF') {
       generate_font_snippet($fontdest,
         $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
       $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'}, $fontdb{$k}{'subfont'});
       link_font($fontdb{$k}{'target'}, $cidfsubst);
+      link_font($fontdb{$k}{'target'}, "$TEXMFLOCAL/fonts/truetype/cjk-gs-integrate")
+        if $opt_texmflink;
     }
   }
   return if $dry_run;
@@ -689,7 +686,7 @@ sub check_for_files {
       push @extradirs, "c:/windows/fonts//";
     } else {
       # other dirs to check, for normal unix?
-      for my $d (qw!/Library/Fonts /System/Library/Fonts /Network/Library/Fonts!) {
+      for my $d (qw!/Library/Fonts /System/Library/Fonts /Library/Fonts/Microsoft/ /Network/Library/Fonts!) {
         push @extradirs, $d if (-d $d);
       }
       my $home = $ENV{'HOME'};
@@ -979,8 +976,8 @@ How and which directories are searched:
   Search is done using the kpathsea library, in particular using kpsewhich
   program. By default the following directories are searched:
   - all TEXMF trees
-  - /Library/Fonts, /System/Library/Fonts, /Network/Library/Fonts, and
-    ~/Library/Fonts (all if available)
+  - /Library/Fonts, /Library/Fonts/Microsoft, /System/Library/Fonts, 
+    /Network/Library/Fonts, and ~/Library/Fonts (all if available)
   - c:/windows/fonts (on Windows)
   - the directories in OSFONTDIR environment variable
 
