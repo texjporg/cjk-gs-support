@@ -15,7 +15,6 @@
 #
 # TODO:
 # - how to deal with MacTeX pre-shipped configuration files?
-# - provide a way to link found fonts into TEXMFLOCAL
 # - interoperability with updmap-config-kanji
 # - input from CK about font priorities
 #
@@ -230,6 +229,7 @@ my $opt_machine = 0;
 my $opt_filelist;
 my $opt_force = 0;
 my $opt_texmflink = 0;
+my $opt_markdown = 0;
 
 if (! GetOptions(
         "n|dry-run"   => \$dry_run,
@@ -242,6 +242,7 @@ if (! GetOptions(
         "machine-readable" => \$opt_machine,
         "force"       => \$opt_force,
         "filelist=s"  => \$opt_filelist,
+        "markdown"    => \$opt_markdown,
         "o|output=s"  => \$opt_output,
 	      "h|help"      => \$opt_help,
         "q|quiet"     => \$opt_quiet,
@@ -911,142 +912,211 @@ sub version {
 }
 
 sub Usage {
-  my $usage = <<"EOF";
+  my $headline = "Configuring GhostScript for CJK CID/TTF fonts";
+  my $usage = "[perl] $prg\[.pl\] [OPTIONS]";
+  my $options = "
+-n, --dry-run         do not actually output anything
+-f, --fontdef FILE    specify alternate set of font definitions, if not
+                      given, the built-in set is used
+-o, --output DIR      specifies the base output dir, if not provided,
+                      the Resource directory of an install GhostScript
+                      is searched and used.
+-a, --alias LL=RR     defines an alias, or overrides a given alias
+                      illegal if LL is provided by a real font, or
+                      RR is neither available as real font or alias
+                      can be given multiple times
+--filelist FILE       read list of available font files from FILE
+                      instead of searching with kpathsea
+--link-texmflocal     link fonts into
+                         TEXMFLOCAL/fonts/opentype/cjk-gs-integrate
+                      and
+                         TEXMFLOCAL/fonts/truetype/cjk-gs-integrate
+--machine-readable    output of --list-aliases is machine readable
+--force               do not bail out if linked fonts already exist
+-q, --quiet           be less verbose
+-d, --debug           output debug information, can be given multiple times
+-v, --version         outputs only the version information
+-h, --help            this help
+";
 
-Usage: $prg [OPTION] ...
+  my $commandoptions = "
+--only-aliases        do only regenerate the cidfmap.alias file instead of all
+--list-aliases        lists the available aliases and their options, with the
+                      selected option on top
+--list-all-aliases    list all possible aliases without searching for actually
+                      present files
+--list-fonts          lists the fonts found on the system
+--info                combines the above two information
+";
 
-Configuring GhostScript for CJK CID/TTF fonts.
+  my $shortdesc = "
+This script searches a list of directories for CJK fonts, and makes
+them available to an installed GhostScript. In the simplest case with
+sufficient privileges, a run without arguments should effect in a
+complete setup of GhostScript.
+";
 
-Options:
-  -n, --dry-run         do not actually output anything
-  -f, --fontdef FILE    specify alternate set of font definitions, if not
-                        given, the built-in set is used
-  -o, --output DIR      specifies the base output dir, if not provided,
-                        the Resource directory of an install GhostScript
-                        is searched and used.
-  -a, --alias LL=RR     defines an alias, or overrides a given alias
-                        illegal if LL is provided by a real font, or
-                        RR is neither available as real font or alias
-                        can be given multiple times
-  --filelist FILE       read list of available font files from FILE
-                        instead of searching with kpathsea
-  --machine-readable    output of --list-aliases is machine readable
-  --force               do not bail out if linked fonts already exist
-  -q, --quiet           be less verbose
-  -d, --debug           output debug information, can be given multiple times
-  -v, --version         outputs only the version information
-  -h, --help            this help
+my $operation = "
+For each found TrueType (TTF) font it creates a cidfmap entry in
 
-Command like options:
-  --only-aliases        do only regenerate the cidfmap.alias file instead of all
-  --list-aliases        lists the available aliases and their options, with the 
-                        selected option on top
-  --list-all-aliases    list all possible aliases without searching for actually
-                        present files
-  --list-fonts          lists the fonts found on the system
-  --info                combines the above two information
-
-Operation:
-
-  This script searches a list of directories (see below) for CJK fonts,
-  and makes them available to an installed GhostScript. In the simplest
-  case with sufficient privileges, a run without arguments should effect
-  in a complete setup of GhostScript.
-
-  For each found TrueType (TTF) font it creates a cidfmap entry in
     <Resource>/Init/cidfmap.local
-  and links the font to
-    <Resource>/CIDFSubst
-  For each CID font it creates a snippet in
-    <Resource>/Font/
-  and links the font to 
-    <Resource>/CIDFont
-  The <Resource> dir is either given by -o/--output, or otherwise searched
-  from an installed GhostScript (binary name is assumed to be 'gs').
 
-  Aliases are added to 
+and links the font to
+
+    <Resource>/CIDFSubst/
+
+For each CID font it creates a snippet in
+
+    <Resource>/Font/
+
+and links the font to
+
+    <Resource>/CIDFont/
+
+The `<Resource>` dir is either given by `-o`/`--output`, or otherwise searched
+from an installed GhostScript (binary name is assumed to be 'gs').
+
+Aliases are added to 
+
     <Resource>/Init/cidfmap.aliases
 
-  Finally, it tries to add runlib calls to
+Finally, it tries to add runlib calls to
+
     <Resource>/Init/cidfmap
-  to load the cidfmap.local and cidfmap.aliases.
 
-How and which directories are searched:
+to load the cidfmap.local and cidfmap.aliases.
+";
 
-  Search is done using the kpathsea library, in particular using kpsewhich
-  program. By default the following directories are searched:
+  my $dirsearch = '
+Search is done using the kpathsea library, in particular using kpsewhich
+program. By default the following directories are searched:
   - all TEXMF trees
-  - /Library/Fonts, /Library/Fonts/Microsoft, /System/Library/Fonts, 
-    /Network/Library/Fonts, and ~/Library/Fonts (all if available)
-  - c:/windows/fonts (on Windows)
-  - the directories in OSFONTDIR environment variable
+  - `/Library/Fonts`, `/Library/Fonts/Microsoft`, `/System/Library/Fonts`, 
+    `/Network/Library/Fonts`, and `~/Library/Fonts` (all if available)
+  - `c:/windows/fonts` (on Windows)
+  - the directories in `OSFONTDIR` environment variable
 
-  In case you want to add some directories to the search path, adapt the
-  OSFONTDIR environment variable accordingly: Example:
+In case you want to add some directories to the search path, adapt the
+`OSFONTDIR` environment variable accordingly: Example:
+
+`````
     OSFONTDIR="/usr/local/share/fonts/truetype//:/usr/local/share/fonts/opentype//" $prg
-  will result in fonts found in the above two given directories to be
-  searched in addition.
+`````
 
-Output files:
+will result in fonts found in the above two given directories to be
+searched in addition.
+';
 
-  If no output option is given, the program searches for a GhostScript
-  interpreter 'gs' and determines its Resource directory. This might
-  fail, in which case one need to pass the output directory manually.
+  my $outputfile = "
+If no output option is given, the program searches for a GhostScript
+interpreter 'gs' and determines its Resource directory. This might
+fail, in which case one need to pass the output directory manually.
 
-  Since the program adds files and link to this directory, sufficient
-  permissions are necessary.
+Since the program adds files and link to this directory, sufficient
+permissions are necessary.
+";
 
-Aliases:
+  my $aliases = "
+Aliases are managed via the Provides values in the font database.
+At the moment entries for the basic font names for CJK fonts
+are added:
 
-  Aliases are managed via the Provides values in the font database.
-  At the moment entries for the basic font names for CJK fonts
-  are added:
+Japanese:
 
-  Japanese:
     Ryumin-Light GothicBBB-Medium FutoMinA101-Bold FutoGoB101-Bold Jun101-Light
 
-  Korean:
+Korean:
+
     HYGoThic-Medium HYSMyeongJo-Medium
 
-  Simplified Chinese:
+Simplified Chinese:
+
     STSong-Light STHeiti-Regular STHeiti-Light STKaiti-Regular
 
-  Traditional Chinese:
+Traditional Chinese:
+
     MSung-Light MHei-Medium MKai-Medium
 
-  In addition, we also includes provide entries for the OTF Morisawa names:
+In addition, we also includes provide entries for the OTF Morisawa names:
     RyuminPro-Light GothicBBBPro-Medium FutoMinA101Pro-Bold
     FutoGoB101Pro-Bold Jun101Pro-Light
 
-  The order is determined by the Provides setting in the font database,
-  and for the Japanese fonts it is currently:
+The order is determined by the Provides setting in the font database,
+and for the Japanese fonts it is currently:
     Morisawa Pr6, Morisawa, Hiragino ProN, Hiragino, 
     Yu OSX, Yu Win, Kozuka ProN, Kozuka, IPAex, IPA
 
-  That is, the first font found in this order will be used to provide the
-  alias if necessary.
+That is, the first font found in this order will be used to provide the
+alias if necessary.
 
-Overriding aliases
+#### Overriding aliases ####
 
-  Using the command line option `--alias LL=RR` one can add arbitrary aliases,
-  or override ones selected by the program. For this to work the following
-  requirements of `LL` and `RR` must be fulfilled:
+Using the command line option `--alias LL=RR` one can add arbitrary aliases,
+or override ones selected by the program. For this to work the following
+requirements of `LL` and `RR` must be fulfilled:
   * `LL` is not provided by a real font
   * `RR` is available either as real font, or as alias (indirect alias)
+";
 
-Authors, Contributors, and Copyright:
+  my $authors = "
+The script and its documentation was written by Norbert Preining, based
+on research and work by Yusuke Kuroki, Bruno Voisin, Munehiro Yamamoto
+and the TeX Q&A wiki page.
 
-  The script and its documentation was written by Norbert Preining, based
-  on research and work by Yusuke Kuroki, Bruno Voisin, Munehiro Yamamoto
-  and the TeX Q&A wiki page.
+The script is licensed under GNU General Public License Version 3 or later.
+The contained font data is not copyrightable.
+";
 
-  The script is licensed under GNU General Public License Version 3 or later.
-  The contained font data is not copyrightable.
 
-EOF
-;
-  print $usage;
+  if ($opt_markdown) {
+    print "$headline\n";
+    print ("=" x length($headline));
+    print "\n$shortdesc\nUsage\n-----\n\n`````\n$usage\n`````\n\n";
+    print "#### Options ####\n\n`````";
+    print_for_out($options, "  ");
+    print "`````\n\n#### Command like options ####\n\n`````";
+    print_for_out($commandoptions, "  ");
+    print "`````\n\nOperation\n---------\n$operation\n";
+    print "How and which directories are searched\n";
+    print "--------------------------------------\n$dirsearch\n";
+    print "Output files\n";
+    print "------------\n$outputfile\n";
+    print "Aliases\n";
+    print "-------\n$aliases\n";
+    print "Authors, Contributors, and Copyright\n";
+    print "------------------------------------\n$authors\n";
+  } else {
+    print "\nUsage: $usage\n\n$headline\n$shortdesc";
+    print "\nOptions:\n";
+    print_for_out($options, "  ");
+    print "\nCommand like options:\n";
+    print_for_out($commandoptions, "  ");
+    print "\nOperation:\n";
+    print_for_out($operation, "  ");
+    print "\nHow and which directories are searched:\n";
+    print_for_out($dirsearch, "  ");
+    print "\nOutput files:\n";
+    print_for_out($outputfile, "  ");
+    print "\nAliases:\n";
+    print_for_out($aliases, "  ");
+    print "\nAuthors, Contributors, and Copyright:\n";
+    print_for_out($authors, "  ");
+    print "\n";
+  }
   exit 0;
+}
+
+sub print_for_out {
+  my ($what, $indent) = @_;
+  for (split /\n/, $what) { 
+    next if m/`````/;
+    s/\s*####\s*//g;
+    if ($_ eq '') {
+      print "\n";
+    } else {
+      print "$indent$_\n";
+    }
+  }
 }
 
 # info/warning can be suppressed

@@ -1,8 +1,10 @@
-CID and TTF font setup tools for ghostscript
-============================================
+Configuring GhostScript for CJK CID/TTF fonts
+=============================================
 
-This script configures GhostScript for CJK CID/TTF fonts found
-on the system.
+This script searches a list of directories for CJK fonts, and makes
+them available to an installed GhostScript. In the simplest case with
+sufficient privileges, a run without arguments should effect in a
+complete setup of GhostScript.
 
 Usage
 -----
@@ -26,32 +28,32 @@ Usage
                         can be given multiple times
   --filelist FILE       read list of available font files from FILE
                         instead of searching with kpathsea
+  --link-texmflocal     link fonts into
+                           TEXMFLOCAL/fonts/opentype/cjk-gs-integrate
+                        and
+                           TEXMFLOCAL/fonts/truetype/cjk-gs-integrate
   --machine-readable    output of --list-aliases is machine readable
+  --force               do not bail out if linked fonts already exist
   -q, --quiet           be less verbose
   -d, --debug           output debug information, can be given multiple times
   -v, --version         outputs only the version information
   -h, --help            this help
-
 `````
 
 #### Command like options ####
 
 `````
-  --only-aliases        do only regenerate the cidfmap.alias file 
-  --list-aliases        lists the aliases and their options, with the selected
-                        option on top
+  --only-aliases        do only regenerate the cidfmap.alias file instead of all
+  --list-aliases        lists the available aliases and their options, with the
+                        selected option on top
+  --list-all-aliases    list all possible aliases without searching for actually
+                        present files
   --list-fonts          lists the fonts found on the system
   --info                combines the above two information
 `````
 
-
-Operation:
-----------
-
-This script searches a list of directories (see below) for CJK fonts,
-and makes them available to an installed GhostScript. In the simplest
-case with sufficient privileges, a run without arguments should effect
-in a complete setup of GhostScript.
+Operation
+---------
 
 For each found TrueType (TTF) font it creates a cidfmap entry in
 
@@ -61,13 +63,13 @@ and links the font to
 
     <Resource>/CIDFSubst/
 
-For each OTF font it creates a snippet in
+For each CID font it creates a snippet in
 
     <Resource>/Font/
 
-and links the font to 
+and links the font to
 
-    <Resource>/CIDFont
+    <Resource>/CIDFont/
 
 The `<Resource>` dir is either given by `-o`/`--output`, or otherwise searched
 from an installed GhostScript (binary name is assumed to be 'gs').
@@ -80,41 +82,41 @@ Finally, it tries to add runlib calls to
 
     <Resource>/Init/cidfmap
 
-to load the cidfmap.local and cidfmap.aliases
+to load the cidfmap.local and cidfmap.aliases.
 
-How and which directories are searched:
----------------------------------------
+How and which directories are searched
+--------------------------------------
 
-  Search is done using the kpathsea library, in particular using kpsewhich
-  program. By default the following directories are searched:
+Search is done using the kpathsea library, in particular using kpsewhich
+program. By default the following directories are searched:
   - all TEXMF trees
-  - `/Library/Fonts`, `/System/Library/Fonts`, `/Network/Library/Fonts`, and
-    `~/Library/Fonts` (all if available)
+  - `/Library/Fonts`, `/Library/Fonts/Microsoft`, `/System/Library/Fonts`, 
+    `/Network/Library/Fonts`, and `~/Library/Fonts` (all if available)
   - `c:/windows/fonts` (on Windows)
   - the directories in `OSFONTDIR` environment variable
 
 In case you want to add some directories to the search path, adapt the
-OSFONTDIR environment variable accordingly: Example:
+`OSFONTDIR` environment variable accordingly: Example:
 
 `````
-    OSFONTDIR="/usr/local/share/fonts/truetype//:/usr/local/share/fonts/opentype//" cjk-gs-integrate
+    OSFONTDIR="/usr/local/share/fonts/truetype//:/usr/local/share/fonts/opentype//" $prg
 `````
 
 will result in fonts found in the above two given directories to be
 searched in addition.
 
-Output files:
--------------
+Output files
+------------
 
-  If no output option is given, the program searches for a GhostScript
-  interpreter 'gs' and determines its Resource directory. This might
-  fail, in which case one need to pass the output directory manually.
+If no output option is given, the program searches for a GhostScript
+interpreter 'gs' and determines its Resource directory. This might
+fail, in which case one need to pass the output directory manually.
 
-  Since the program adds files and link to this directory, sufficient
-  permissions are necessary.
+Since the program adds files and link to this directory, sufficient
+permissions are necessary.
 
-Aliases:
---------
+Aliases
+-------
 
 Aliases are managed via the Provides values in the font database.
 At the moment entries for the basic font names for CJK fonts
@@ -126,21 +128,22 @@ Japanese:
 
 Korean:
 
-    HYGoThic-Medium HYSMyeongJo-Medium HYSMyeongJoStd-Medium
+    HYGoThic-Medium HYSMyeongJo-Medium
 
-Chinese:
+Simplified Chinese:
 
-    MHei-Medium MKai-Medium MSungStd-Light 
-    STHeiti-Light STHeiti-Regular STKaiti-Regular STSongStd-Light
+    STSong-Light STHeiti-Regular STHeiti-Light STKaiti-Regular
+
+Traditional Chinese:
+
+    MSung-Light MHei-Medium MKai-Medium
 
 In addition, we also includes provide entries for the OTF Morisawa names:
-
     RyuminPro-Light GothicBBBPro-Medium FutoMinA101Pro-Bold
     FutoGoB101Pro-Bold Jun101Pro-Light
 
 The order is determined by the Provides setting in the font database,
 and for the Japanese fonts it is currently:
-
     Morisawa Pr6, Morisawa, Hiragino ProN, Hiragino, 
     Yu OSX, Yu Win, Kozuka ProN, Kozuka, IPAex, IPA
 
@@ -155,9 +158,8 @@ requirements of `LL` and `RR` must be fulfilled:
   * `LL` is not provided by a real font
   * `RR` is available either as real font, or as alias (indirect alias)
 
-
-Authors, Contributors, and Copyright:
--------------------------------------
+Authors, Contributors, and Copyright
+------------------------------------
 
 The script and its documentation was written by Norbert Preining, based
 on research and work by Yusuke Kuroki, Bruno Voisin, Munehiro Yamamoto
@@ -165,38 +167,4 @@ and the TeX Q&A wiki page.
 
 The script is licensed under GNU General Public License Version 3 or later.
 The contained font data is not copyrightable.
-
-
-Questions and open problems
-----------------------------
-
-* why does the auto-construction not work (Use.html 8.3)
-	/CIDFont-CMap findfont
-* why does explicite cid font substitution in cidfmap not work (Use.html 8.4)
-	/CIDFont (/path/to/foo.otf) ;
-  I would have expected that this defines a CID resource named CIDFont
-  in the same way as Resource/CIDFont.
-  But it does not work with the combination
-* ghostscript does not allow to change the CIDFont search path
-	I faintly remember having seen some PS code that does that
-	for the Resource directory
-
-
-#### multiple invocations ####
-
-This script can be run several times, in case new fonts are installed
-into TEXMFLOCAL or font dirs.
-
-If run a second time it does also:
-- check all files in Resource/CIDFont that are links into TEXMF trees
-  whether they got dangling (and remove them in this case)
-  (don't do this for links to outside the TEXMF trees)
-- check the Resource/Font files for the comment header of the script
-  remove/sync with newly found fonts
-- regenerate the cidfmap.local
-
-
-#### interoperation with kanji-config-updmap ####
-
-(open - not clear if this is an aim at all)
 
