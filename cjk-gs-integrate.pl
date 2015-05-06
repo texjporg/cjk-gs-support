@@ -1468,6 +1468,27 @@ Type: CID
 Class: Japan
 Filename: KozGoPr6N-Regular.otf
 
+Name: KozGoPr6N-ExtraLight
+Type: CID
+Class: Japan
+Filename: KozGoPr6N-ExtraLight.otf
+
+Name: KozGoPr6N-Light
+Type: CID
+Class: Japan
+Filename: KozGoPr6N-Light.otf
+
+Name: KozGoPro-ExtraLight
+Type: CID
+Class: Japan
+Filename: KozGoPro-ExtraLight.otf
+
+Name: KozGoPro-Light
+Type: CID
+Class: Japan
+Filename: KozGoPro-Light.otf
+
+
 Name: KozGoPro-Bold
 Type: CID
 Class: Japan
@@ -1580,6 +1601,37 @@ Class: Japan
 Provides(80): Ryumin-Light
 Provides(80): RyuminPro-Light
 Filename: KozMinProVI-Regular.otf
+
+Name: KozMinPr6N-ExtraLight
+Type: CID
+Class: Japan
+Filename: KozMinPr6N-ExtraLight.otf
+
+Name: KozMinPr6N-Medium
+Type: CID
+Class: Japan
+Filename: KozMinPr6N-Medium.otf
+
+Name: KozMinPr6N-Heavy
+Type: CID
+Class: Japan
+Filename: KozMinPr6N-Heavy.otf
+
+Name: KozMinPro-ExtraLight
+Type: CID
+Class: Japan
+Filename: KozMinPro-ExtraLight.otf
+
+Name: KozMinPro-Medium
+Type: CID
+Class: Japan
+Filename: KozMinPro-Medium.otf
+
+Name: KozMinPro-Heavy
+Type: CID
+Class: Japan
+Filename: KozMinPro-Heavy.otf
+
 
 #
 # CHINESE FONTS
