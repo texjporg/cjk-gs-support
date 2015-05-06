@@ -1755,7 +1755,10 @@ Name: STKaiti-Adobe-CNS1
 Type: TTF
 Class: CNS
 Provides(50): MKai-Medium
-Filename: STKaiti.ttf
+Filename(10): Kaiti.ttc(4)
+Filename(20): 楷体.ttc(3)
+Filename(30): 华文楷体.ttf
+Filename(40): STKaiti.ttf
 
 # Adobe fonts
 
