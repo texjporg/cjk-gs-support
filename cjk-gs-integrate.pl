@@ -1935,6 +1935,7 @@ Name: Gulim
 Type: TTF
 Class: Korea
 Provides(70): HYRGoThic-Medium
+Provides(70): HYGoThic-Medium
 Filename(30): Gulim.ttf
 Filename(50): gulim.ttc
 
