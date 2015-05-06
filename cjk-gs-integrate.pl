@@ -229,6 +229,7 @@ my $opt_only_aliases = 0;
 my $opt_machine = 0;
 my $opt_filelist;
 my $opt_force = 0;
+my $opt_texmflink = 0;
 
 if (! GetOptions(
         "n|dry-run"   => \$dry_run,
@@ -236,6 +237,7 @@ if (! GetOptions(
         "list-aliases" => \$opt_listaliases,
         "list-all-aliases" => \$opt_listallaliases,
         "list-fonts"  => \$opt_listfonts,
+        "texmflocal-link" => $opt_texmflink,
         "only-aliases" => \$opt_only_aliases,
         "machine-readable" => \$opt_machine,
         "force"       => \$opt_force,
@@ -1137,12 +1139,15 @@ Name: A-OTF-MidashiGoPr6N-MB31
 PSName: MidashiGoPr6N-MB31
 Type: CID
 Class: Japan
+Provides(10): MidashiGo-MB31
+Provides(10): MidashiGoPro-MB31
 Filename: A-OTF-MidashiGoPr6N-MB31.otf
 
 Name: A-OTF-MidashiGoPro-MB31
 PSName: MidashiGoPro-MB31
 Type: CID
 Class: Japan
+Provides(20): MidashiGo-MB31
 Filename: A-OTF-MidashiGoPro-MB31.otf
 
 Name: A-OTF-RyuminPr6N-Light
@@ -1212,6 +1217,8 @@ Filename(10): HiraKakuProN-W6.otf
 Name: HiraKakuStd-W8
 Type: CID
 Class: Japan
+Provides(40): MidashiGo-MB31
+Provides(40): MidashiGoPro-MB31
 Filename(20): ヒラギノ角ゴ Std W8.otf
 Filename(19): ヒラギノ角ゴ Std W8.otf
 Filename(10): HiraKakuStd-W8.otf
@@ -1219,6 +1226,8 @@ Filename(10): HiraKakuStd-W8.otf
 Name: HiraKakuStdN-W8
 Type: CID
 Class: Japan
+Provides(30): MidashiGo-MB31
+Provides(30): MidashiGoPro-MB31
 Filename(20): ヒラギノ角ゴ StdN W8.otf
 Filename(19): ヒラギノ角ゴ StdN W8.otf
 Filename(10): HiraKakuStdN-W8.otf
@@ -1308,6 +1317,8 @@ Provides(50): FutoGoB101-Bold
 Provides(50): FutoGoB101Pro-Bold
 Provides(50): Jun101-Light
 Provides(50): Jun101Pro-Light
+Provides(50): MidashiGo-MB31
+Provides(50): MidashiGoPro-MB31
 Filename(20): Yu Gothic Bold.otf
 Filename(10): YuGo-Bold.otf
 
@@ -1372,6 +1383,8 @@ Provides(60): FutoGoB101-Bold
 Provides(60): FutoGoB101Pro-Bold
 Provides(60): Jun101-Light
 Provides(60): Jun101Pro-Light
+Provides(60): MidashiGo-MB31
+Provides(60): MidashiGoPro-MB31
 Filename(20): yugothib.ttf
 Filename(10): YuGothic-Bold.ttf
 
@@ -1382,6 +1395,8 @@ Type: TTF
 Class: Japan
 Provides(110): Ryumin-Light
 Provides(110): RyuminPro-Light
+Provides(110): FutoMinA101-Bold
+Provides(110): FutoMinA101Pro-Bold
 Filename(20): ipam.ttf
 Filename(10): IPAMincho.ttf
 
@@ -1390,12 +1405,12 @@ Type: TTF
 Class: Japan
 Provides(110): GothicBBB-Medium
 Provides(110): GothicBBBPro-Medium
-Provides(110): FutoMinA101-Bold
-Provides(110): FutoMinA101Pro-Bold
 Provides(110): FutoGoB101-Bold
 Provides(110): FutoGoB101Pro-Bold
 Provides(110): Jun101-Light
 Provides(110): Jun101Pro-Light
+Provides(110): MidashiGo-MB31
+Provides(110): MidashiGoPro-MB31
 Filename(20): ipag.ttf
 Filename(10): IPAGothic.ttf
 
@@ -1404,6 +1419,8 @@ Type: TTF
 Class: Japan
 Provides(100): Ryumin-Light
 Provides(100): RyuminPro-Light
+Provides(100): FutoMinA101-Bold
+Provides(100): FutoMinA101Pro-Bold
 Filename(20): ipaexm.ttf
 Filename(10): IPAexMincho.ttf
 
@@ -1412,12 +1429,12 @@ Type: TTF
 Class: Japan
 Provides(100): GothicBBB-Medium
 Provides(100): GothicBBBPro-Medium
-Provides(100): FutoMinA101-Bold
-Provides(100): FutoMinA101Pro-Bold
 Provides(100): FutoGoB101-Bold
 Provides(100): FutoGoB101Pro-Bold
 Provides(100): Jun101-Light
 Provides(100): Jun101Pro-Light
+Provides(100): MidashiGo-MB31
+Provides(100): MidashiGoPro-MB31
 Filename(20): ipaexg.ttf
 Filename(10): IPAexGothic.ttf
 
@@ -1435,6 +1452,8 @@ Type: CID
 Class: Japan
 Provides(70): Jun101-Light
 Provides(70): Jun101Pro-Light
+Provides(70): MidashiGo-MB31
+Provides(70): MidashiGoPro-MB31
 Filename: KozGoPr6N-Heavy.otf
 
 Name: KozGoPr6N-Medium
@@ -1461,6 +1480,8 @@ Type: CID
 Class: Japan
 Provides(90): Jun101-Light
 Provides(90): Jun101Pro-Light
+Provides(90): MidashiGo-MB31
+Provides(90): MidashiGoPro-MB31
 Filename: KozGoPro-Heavy.otf
 
 Name: KozGoPro-Medium
@@ -1487,6 +1508,8 @@ Type: CID
 Class: Japan
 Provides(80): Jun101-Light
 Provides(80): Jun101Pro-Light
+Provides(80): MidashiGo-MB31
+Provides(80): MidashiGoPro-MB31
 Filename: KozGoProVI-Heavy.otf
 
 Name: KozGoProVI-Medium
@@ -1963,6 +1986,8 @@ Type: TTF
 Class: Japan
 Provides(95): GothicBBB-Medium
 Provides(95): GothicBBBPro-Medium
+Provides(95): MidashiGo-MB31
+Provides(95): MidashiGoPro-MB31
 Filename(50): MS Gothic.ttf
 Filename(30): MS-Gothic.ttf
 
