@@ -458,7 +458,6 @@ sub link_font {
     $n = basename($f);
   }
   my $target = "$cd/$n";
-  printf STDERR "link try to $target\n";
   if ($opt_force && -e $target) {
     print_info("Removing $target prior to recreation due to --force\n");
     unlink($target) || die "Cannot unlink $target prior to recreation under --force: $!";
