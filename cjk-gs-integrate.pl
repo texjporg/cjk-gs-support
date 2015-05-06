@@ -1647,7 +1647,7 @@ Filename(10): LiHeiPro.ttf
 Name: LiSongPro
 Type: TTF
 Class: CNS
-Provides(50): MSung-Medium
+# Provides(50): MSung-Medium
 Provides(50): MSung-Light
 Filename(20): 儷宋 Pro.ttf
 Filename(10): LiSongPro.ttf
@@ -1696,7 +1696,7 @@ Filename(20): STHeitiTC-Medium.ttf
 Name: STFangsong
 Type: TTF
 Class: GB
-Provides(40): STFangsong-Light
+# Provides(40): STFangsong-Light
 Provides(40): STFangsong-Regular
 Filename(20): 华文仿宋.ttf
 Filename(10): STFangsong.ttf
@@ -1749,7 +1749,7 @@ Filename(20): STSongti-TC-Light.ttf
 Name: STSongti-TC-Regular
 Type: TTF
 Class: CNS
-Provides(40): MSung-Medium
+# Provides(40): MSung-Medium
 Filename(10): Songti.ttc(7)
 Filename(20): STSongti-TC-Regular.ttf
 
@@ -1837,7 +1837,7 @@ Filename(20): AdobeKaitiStd-Regular.otf
 Name: AdobeFangsongStd-Regular
 Type: CID
 Class: GB
-Provides(30): STFangsong-Light
+# Provides(30): STFangsong-Light
 Provides(30): STFangsong-Regular
 Filename(20): AdobeFangsongStd-Regular.otf
 
@@ -2016,7 +2016,7 @@ Name: SimSun
 Type: TTF
 Class: GB
 Provides(60): STSong-Light
-Provides(60): STFangsong-Light
+# Provides(60): STFangsong-Light
 Filename(50): SimSun.ttf
 
 # traditional chinese
@@ -2026,7 +2026,7 @@ Type: TTF
 Class: CNS
 Provides(60): MHei-Medium
 Provides(60): MKai-Medium
-Provides(60): MSung-Medium
+# Provides(60): MSung-Medium
 Provides(60): MSung-Light
 Filename(50): MingLiU.ttf
 
