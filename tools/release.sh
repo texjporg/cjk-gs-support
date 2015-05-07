@@ -36,6 +36,8 @@ for i in cjk-gs-integrate.pl ; do
   perl -pi.bak -e "s/\\\$VER\\\$/$VER/g" $i
   rm -f ${i}.bak
 done
+# rename README.md to README for CTAN
+mv README.md README
 cd ..
 diff -urN $PROJECT-$VER-orig $PROJECT-$VER
 tar zcf $DIR/$PROJECT-$VER.tar.gz $PROJECT-$VER
