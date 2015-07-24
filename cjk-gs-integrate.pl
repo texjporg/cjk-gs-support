@@ -1252,6 +1252,9 @@ Provides(40): GothicBBBPro-Medium
 Filename(20): ヒラギノ角ゴ Pro W3.otf
 Filename(19): ヒラギノ角ゴ Pro W3.otf
 Filename(10): HiraKakuPro-W3.otf
+Filename(30): ヒラギノ角ゴシック W3.ttc(2)
+Filename(29): ヒラギノ角ゴシック W3.ttc(2)
+Filename(28): HiraginoSans-W3.ttc(2)
 
 Name: HiraKakuPro-W6
 Type: CID
@@ -1261,6 +1264,9 @@ Provides(40): FutoGoB101Pro-Bold
 Filename(20): ヒラギノ角ゴ Pro W6.otf
 Filename(19): ヒラギノ角ゴ Pro W6.otf
 Filename(10): HiraKakuPro-W6.otf
+Filename(30): ヒラギノ角ゴシック W6.ttc(2)
+Filename(29): ヒラギノ角ゴシック W6.ttc(2)
+Filename(28): HiraginoSans-W6.ttc(2)
 
 Name: HiraKakuProN-W3
 Type: CID
@@ -1270,6 +1276,9 @@ Provides(30): GothicBBBPro-Medium
 Filename(20): ヒラギノ角ゴ ProN W3.otf
 Filename(19): ヒラギノ角ゴ ProN W3.otf
 Filename(10): HiraKakuProN-W3.otf
+Filename(30): ヒラギノ角ゴシック W3.ttc(1)
+Filename(29): ヒラギノ角ゴシック W3.ttc(1)
+Filename(28): HiraginoSans-W3.ttc(1)
 
 Name: HiraKakuProN-W6
 Type: CID
@@ -1279,6 +1288,9 @@ Provides(30): FutoGoB101Pro-Bold
 Filename(20): ヒラギノ角ゴ ProN W6.otf
 Filename(19): ヒラギノ角ゴ ProN W6.otf
 Filename(10): HiraKakuProN-W6.otf
+Filename(30): ヒラギノ角ゴシック W6.ttc(1)
+Filename(29): ヒラギノ角ゴシック W6.ttc(1)
+Filename(28): HiraginoSans-W6.ttc(1)
 
 Name: HiraKakuStd-W8
 Type: CID
@@ -1288,6 +1300,9 @@ Provides(40): MidashiGoPro-MB31
 Filename(20): ヒラギノ角ゴ Std W8.otf
 Filename(19): ヒラギノ角ゴ Std W8.otf
 Filename(10): HiraKakuStd-W8.otf
+Filename(30): ヒラギノ角ゴシック W8.ttc(1)
+Filename(29): ヒラギノ角ゴシック W8.ttc(1)
+Filename(28): HiraginoSans-W8.ttc(1)
 
 Name: HiraKakuStdN-W8
 Type: CID
@@ -1297,6 +1312,81 @@ Provides(30): MidashiGoPro-MB31
 Filename(20): ヒラギノ角ゴ StdN W8.otf
 Filename(19): ヒラギノ角ゴ StdN W8.otf
 Filename(10): HiraKakuStdN-W8.otf
+Filename(30): ヒラギノ角ゴシック W8.ttc(2)
+Filename(29): ヒラギノ角ゴシック W8.ttc(2)
+Filename(28): HiraginoSans-W8.ttc(2)
+
+Name: HiraginoSans-W0
+Type: CID
+Class: Japan
+Provides(30): HiraginoSans-W0
+Filename(30): ヒラギノ角ゴシック W0.otf
+Filename(29): ヒラギノ角ゴシック W0.otf
+Filename(28): HiraginoSans-W0.otf
+
+Name: HiraginoSans-W1
+Type: CID
+Class: Japan
+Provides(30): HiraginoSans-W1
+Filename(30): ヒラギノ角ゴシック W1.ttc(0)
+Filename(29): ヒラギノ角ゴシック W1.ttc(0)
+Filename(28): HiraginoSans-W1.ttc(0)
+
+Name: HiraginoSans-W3
+Type: CID
+Class: Japan
+Provides(30): HiraginoSans-W3
+Filename(30): ヒラギノ角ゴシック W3.ttc(0)
+Filename(29): ヒラギノ角ゴシック W3.ttc(0)
+Filename(28): HiraginoSans-W3.ttc(0)
+
+Name: HiraginoSans-W4
+Type: CID
+Class: Japan
+Provides(30): HiraginoSans-W4
+Filename(30): ヒラギノ角ゴシック W4.otf
+Filename(29): ヒラギノ角ゴシック W4.otf
+Filename(28): HiraginoSans-W4.otf
+
+Name: HiraginoSans-W5
+Type: CID
+Class: Japan
+Provides(30): HiraginoSans-W5
+Filename(30): ヒラギノ角ゴシック W5.otf
+Filename(29): ヒラギノ角ゴシック W5.otf
+Filename(28): HiraginoSans-W5.otf
+
+Name: HiraginoSans-W6
+Type: CID
+Class: Japan
+Provides(30): HiraginoSans-W6
+Filename(30): ヒラギノ角ゴシック W6.ttc(0)
+Filename(29): ヒラギノ角ゴシック W6.ttc(0)
+Filename(28): HiraginoSans-W6.ttc(0)
+
+Name: HiraginoSans-W7
+Type: CID
+Class: Japan
+Provides(30): HiraginoSans-W7
+Filename(30): ヒラギノ角ゴシック W7.otf
+Filename(29): ヒラギノ角ゴシック W7.otf
+Filename(28): HiraginoSans-W7.otf
+
+Name: HiraginoSans-W8
+Type: CID
+Class: Japan
+Provides(30): HiraginoSans-W8
+Filename(30): ヒラギノ角ゴシック W8.ttc(0)
+Filename(29): ヒラギノ角ゴシック W8.ttc(0)
+Filename(28): HiraginoSans-W8.ttc(0)
+
+Name: HiraginoSans-W9
+Type: CID
+Class: Japan
+Provides(30): HiraginoSans-W9
+Filename(30): ヒラギノ角ゴシック W9.otf
+Filename(29): ヒラギノ角ゴシック W9.otf
+Filename(28): HiraginoSans-W9.otf
 
 Name: HiraMaruPro-W4
 Type: CID
@@ -1306,6 +1396,9 @@ Provides(40): Jun101Pro-Light
 Filename(20): ヒラギノ丸ゴ Pro W4.otf
 Filename(19): ヒラギノ丸ゴ Pro W4.otf
 Filename(10): HiraMaruPro-W4.otf
+Filename(30): ヒラギノ丸ゴ ProN W4.ttc(0)
+Filename(29): ヒラギノ丸ゴ ProN W4.ttc(0)
+Filename(28): HiraginoSansR-W4.ttc(0)
 
 Name: HiraMaruProN-W4
 Type: CID
@@ -1315,6 +1408,9 @@ Provides(30): Jun101Pro-Light
 Filename(20): ヒラギノ丸ゴ ProN W4.otf
 Filename(19): ヒラギノ丸ゴ ProN W4.otf
 Filename(10): HiraMaruProN-W4.otf
+Filename(30): ヒラギノ丸ゴ ProN W4.ttc(1)
+Filename(29): ヒラギノ丸ゴ ProN W4.ttc(1)
+Filename(28): HiraginoSansR-W4.ttc(1)
 
 Name: HiraMinPro-W3
 Type: CID
@@ -1324,6 +1420,9 @@ Provides(40): RyuminPro-Light
 Filename(20): ヒラギノ明朝 Pro W3.otf
 Filename(19): ヒラギノ明朝 Pro W3.otf
 Filename(10): HiraMinPro-W3.otf
+Filename(30): ヒラギノ明朝 ProN W3.ttc(1)
+Filename(29): ヒラギノ明朝 ProN W3.ttc(1)
+Filename(28): HiraginoSerif-W3.ttc(1)
 
 Name: HiraMinPro-W6
 Type: CID
@@ -1333,6 +1432,9 @@ Provides(40): FutoMinA101Pro-Bold
 Filename(20): ヒラギノ明朝 Pro W6.otf
 Filename(19): ヒラギノ明朝 Pro W6.otf
 Filename(10): HiraMinPro-W6.otf
+Filename(30): ヒラギノ明朝 ProN W6.ttc(1)
+Filename(29): ヒラギノ明朝 ProN W6.ttc(1)
+Filename(28): HiraginoSerif-W6.ttc(1)
 
 Name: HiraMinProN-W3
 Type: CID
@@ -1342,6 +1444,10 @@ Provides(30): RyuminPro-Light
 Filename(20): ヒラギノ明朝 ProN W3.otf
 Filename(19): ヒラギノ明朝 ProN W3.otf
 Filename(10): HiraMinProN-W3.otf
+Filename(30): ヒラギノ明朝 ProN W3.ttc(0)
+Filename(29): ヒラギノ明朝 ProN W3.ttc(0)
+Filename(28): HiraginoSerif-W3.ttc(0)
+
 
 Name: HiraMinProN-W6
 Type: CID
@@ -1351,6 +1457,9 @@ Provides(30): FutoMinA101Pro-Bold
 Filename(20): ヒラギノ明朝 ProN W6.otf
 Filename(19): ヒラギノ明朝 ProN W6.otf
 Filename(10): HiraMinProN-W6.otf
+Filename(30): ヒラギノ明朝 ProN W6.ttc(0)
+Filename(29): ヒラギノ明朝 ProN W6.ttc(0)
+Filename(28): HiraginoSerif-W6.ttc(0)
 
 
 Name: HiraginoSansGB-W3
@@ -1395,6 +1504,7 @@ Provides(50): Ryumin-Light
 Provides(50): RyuminPro-Light
 Filename(20): Yu Mincho Medium.otf
 Filename(10): YuMin-Medium.otf
+Filename(30): YuMincho.ttc(0)
 
 Name: YuMin-Demibold
 Type: CID
@@ -1403,6 +1513,17 @@ Provides(50): FutoMinA101-Bold
 Provides(50): FutoMinA101Pro-Bold
 Filename(20): Yu Mincho Demibold.otf
 Filename(10): YuMin-Demibold.otf
+Filename(30): YuMincho.ttc(1)
+
+Name: YuMin_36pKn-Medium
+Type: CID
+Class: Japan
+Filename(30): YuMincho.ttc(2)
+
+Name: YuMin_36pKn-Demibold
+Type: CID
+Class: Japan
+Filename(30): YuMincho.ttc(3)
 
 # Yu-fonts Windows version
 
@@ -1698,6 +1819,39 @@ Type: CID
 Class: Japan
 Filename: KozMinPro-Heavy.otf
 
+#
+# other OSX 11 fonts
+
+# TODO TODO should they provide Maru Gothic ???
+Name: TsukuARdGothic-Regular
+Type: CID
+Class: Japan
+Filename: TsukushiAMaruGothic.ttc(0)
+
+Name: TsukuARdGothic-Bold
+Type: CID
+Class: Japan
+Filename: TsukushiAMaruGothic.ttc(1)
+
+Name: TsukuBRdGothic-Regular
+Type: CID
+Class: Japan
+Filename: TsukushiBMaruGothic.ttc(0)
+
+Name: TsukuBRdGothic-Bold
+Type: CID
+Class: Japan
+Filename: TsukushiBMaruGothic.ttc(1)
+
+Name: Klee-Medium
+Type: CID
+Class: Japan
+Filename: Klee.ttc(1)
+
+Name: Klee-Demibold
+Type: CID
+Class: Japan
+Filename: Klee.ttc(0)
 
 #
 # CHINESE FONTS
