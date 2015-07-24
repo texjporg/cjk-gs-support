@@ -34,6 +34,8 @@ if (win32()) {
 
 my %encode_list = (
   Japan => [ qw/
+    2004-H
+    2004-V
     78-EUC-H
     78-EUC-V
     78-H
