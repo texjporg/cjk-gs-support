@@ -1254,9 +1254,9 @@ Provides(40): GothicBBBPro-Medium
 Filename(20): ヒラギノ角ゴ Pro W3.otf
 Filename(19): ヒラギノ角ゴ Pro W3.otf
 Filename(10): HiraKakuPro-W3.otf
-Filename(30): ヒラギノ角ゴシック W3.ttc(2)
-Filename(29): ヒラギノ角ゴシック W3.ttc(2)
-Filename(28): HiraginoSans-W3.ttc(2)
+Filename(30): ヒラギノ角ゴシック W3.ttc(3)
+Filename(29): ヒラギノ角ゴシック W3.ttc(3)
+Filename(28): HiraginoSans-W3.ttc(3)
 
 Name: HiraKakuPro-W6
 Type: CID
@@ -1266,9 +1266,9 @@ Provides(40): FutoGoB101Pro-Bold
 Filename(20): ヒラギノ角ゴ Pro W6.otf
 Filename(19): ヒラギノ角ゴ Pro W6.otf
 Filename(10): HiraKakuPro-W6.otf
-Filename(30): ヒラギノ角ゴシック W6.ttc(2)
-Filename(29): ヒラギノ角ゴシック W6.ttc(2)
-Filename(28): HiraginoSans-W6.ttc(2)
+Filename(30): ヒラギノ角ゴシック W6.ttc(3)
+Filename(29): ヒラギノ角ゴシック W6.ttc(3)
+Filename(28): HiraginoSans-W6.ttc(3)
 
 Name: HiraKakuProN-W3
 Type: CID
@@ -1278,9 +1278,9 @@ Provides(30): GothicBBBPro-Medium
 Filename(20): ヒラギノ角ゴ ProN W3.otf
 Filename(19): ヒラギノ角ゴ ProN W3.otf
 Filename(10): HiraKakuProN-W3.otf
-Filename(30): ヒラギノ角ゴシック W3.ttc(1)
-Filename(29): ヒラギノ角ゴシック W3.ttc(1)
-Filename(28): HiraginoSans-W3.ttc(1)
+Filename(30): ヒラギノ角ゴシック W3.ttc(2)
+Filename(29): ヒラギノ角ゴシック W3.ttc(2)
+Filename(28): HiraginoSans-W3.ttc(2)
 
 Name: HiraKakuProN-W6
 Type: CID
@@ -1290,9 +1290,9 @@ Provides(30): FutoGoB101Pro-Bold
 Filename(20): ヒラギノ角ゴ ProN W6.otf
 Filename(19): ヒラギノ角ゴ ProN W6.otf
 Filename(10): HiraKakuProN-W6.otf
-Filename(30): ヒラギノ角ゴシック W6.ttc(1)
-Filename(29): ヒラギノ角ゴシック W6.ttc(1)
-Filename(28): HiraginoSans-W6.ttc(1)
+Filename(30): ヒラギノ角ゴシック W6.ttc(2)
+Filename(29): ヒラギノ角ゴシック W6.ttc(2)
+Filename(28): HiraginoSans-W6.ttc(2)
 
 Name: HiraKakuStd-W8
 Type: CID
@@ -1302,9 +1302,9 @@ Provides(40): MidashiGoPro-MB31
 Filename(20): ヒラギノ角ゴ Std W8.otf
 Filename(19): ヒラギノ角ゴ Std W8.otf
 Filename(10): HiraKakuStd-W8.otf
-Filename(30): ヒラギノ角ゴシック W8.ttc(1)
-Filename(29): ヒラギノ角ゴシック W8.ttc(1)
-Filename(28): HiraginoSans-W8.ttc(1)
+Filename(30): ヒラギノ角ゴシック W8.ttc(2)
+Filename(29): ヒラギノ角ゴシック W8.ttc(2)
+Filename(28): HiraginoSans-W8.ttc(2)
 
 Name: HiraKakuStdN-W8
 Type: CID
@@ -1314,17 +1314,17 @@ Provides(30): MidashiGoPro-MB31
 Filename(20): ヒラギノ角ゴ StdN W8.otf
 Filename(19): ヒラギノ角ゴ StdN W8.otf
 Filename(10): HiraKakuStdN-W8.otf
-Filename(30): ヒラギノ角ゴシック W8.ttc(2)
-Filename(29): ヒラギノ角ゴシック W8.ttc(2)
-Filename(28): HiraginoSans-W8.ttc(2)
+Filename(30): ヒラギノ角ゴシック W8.ttc(3)
+Filename(29): ヒラギノ角ゴシック W8.ttc(3)
+Filename(28): HiraginoSans-W8.ttc(3)
 
 Name: HiraginoSans-W0
 Type: CID
 Class: Japan
 Provides(30): HiraginoSans-W0
-Filename(30): ヒラギノ角ゴシック W0.otf
-Filename(29): ヒラギノ角ゴシック W0.otf
-Filename(28): HiraginoSans-W0.otf
+Filename(30): ヒラギノ角ゴシック W0.ttc(0)
+Filename(29): ヒラギノ角ゴシック W0.ttc(0)
+Filename(28): HiraginoSans-W0.ttc(0)
 
 Name: HiraginoSans-W1
 Type: CID
@@ -1346,17 +1346,17 @@ Name: HiraginoSans-W4
 Type: CID
 Class: Japan
 Provides(30): HiraginoSans-W4
-Filename(30): ヒラギノ角ゴシック W4.otf
-Filename(29): ヒラギノ角ゴシック W4.otf
-Filename(28): HiraginoSans-W4.otf
+Filename(30): ヒラギノ角ゴシック W4.ttc(0)
+Filename(29): ヒラギノ角ゴシック W4.ttc(0)
+Filename(28): HiraginoSans-W4.ttc(0)
 
 Name: HiraginoSans-W5
 Type: CID
 Class: Japan
 Provides(30): HiraginoSans-W5
-Filename(30): ヒラギノ角ゴシック W5.otf
-Filename(29): ヒラギノ角ゴシック W5.otf
-Filename(28): HiraginoSans-W5.otf
+Filename(30): ヒラギノ角ゴシック W5.ttc(0)
+Filename(29): ヒラギノ角ゴシック W5.ttc(0)
+Filename(28): HiraginoSans-W5.ttc(0)
 
 Name: HiraginoSans-W6
 Type: CID
@@ -1370,9 +1370,9 @@ Name: HiraginoSans-W7
 Type: CID
 Class: Japan
 Provides(30): HiraginoSans-W7
-Filename(30): ヒラギノ角ゴシック W7.otf
-Filename(29): ヒラギノ角ゴシック W7.otf
-Filename(28): HiraginoSans-W7.otf
+Filename(30): ヒラギノ角ゴシック W7.ttc(0)
+Filename(29): ヒラギノ角ゴシック W7.ttc(0)
+Filename(28): HiraginoSans-W7.ttc(0)
 
 Name: HiraginoSans-W8
 Type: CID
@@ -1386,9 +1386,9 @@ Name: HiraginoSans-W9
 Type: CID
 Class: Japan
 Provides(30): HiraginoSans-W9
-Filename(30): ヒラギノ角ゴシック W9.otf
-Filename(29): ヒラギノ角ゴシック W9.otf
-Filename(28): HiraginoSans-W9.otf
+Filename(30): ヒラギノ角ゴシック W9.ttc(0)
+Filename(29): ヒラギノ角ゴシック W9.ttc(0)
+Filename(28): HiraginoSans-W9.ttc(0)
 
 Name: HiraMaruPro-W4
 Type: CID
@@ -1469,12 +1469,14 @@ Type: CID
 Class: GB
 Filename(20): Hiragino Sans GB W3.otf
 Filename(10): HiraginoSansGB-W3.otf
+Filename(30): Hiragino Sans GB W3.ttc(0)
 
 Name: HiraginoSansGB-W6
 Type: CID
 Class: GB
 Filename(20): Hiragino Sans GB W6.otf
 Filename(10): HiraginoSansGB-W6.otf
+Filename(30): Hiragino Sans GB W6.ttc(0)
 
 
 # Yu-fonts MacOS version
