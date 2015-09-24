@@ -232,6 +232,7 @@ my $opt_filelist;
 my $opt_force = 0;
 my $opt_texmflink = 0;
 my $opt_markdown = 0;
+my $opt_texmfout;
 
 if (! GetOptions(
         "n|dry-run"   => \$dry_run,
@@ -246,7 +247,8 @@ if (! GetOptions(
         "filelist=s"  => \$opt_filelist,
         "markdown"    => \$opt_markdown,
         "o|output=s"  => \$opt_output,
-	      "h|help"      => \$opt_help,
+        "texmfout=s"  => \$opt_texmfout,
+        "h|help"      => \$opt_help,
         "q|quiet"     => \$opt_quiet,
         "d|debug+"    => \$opt_debug,
         "f|fontdef=s" => \$opt_fontdef,
@@ -272,7 +274,7 @@ if ($opt_debug) {
   $Data::Dumper::Indent = 1;
 }
 
-chomp (my $TEXMFLOCAL = `kpsewhich -var-value=TEXMFLOCAL`);
+chomp (my $TEXMFLOCAL = ($opt_texmfout ? $opt_texmfout : `kpsewhich -var-value=TEXMFLOCAL`));
 
 main(@ARGV);
 
@@ -417,7 +419,6 @@ sub do_otf_fonts {
   my $ciddest  = "$opt_output/CIDFont";
   make_dir($fontdest, "cannot create CID snippets there!");
   make_dir($ciddest,  "cannot link CID fonts there!");
-  print "opt_texfmlink = $opt_texmflink\n";
   make_dir("$TEXMFLOCAL/fonts/opentype/cjk-gs-integrate",
            "cannot link fonts to it!")
     if $opt_texmflink;
@@ -501,7 +502,7 @@ sub do_ttf_fonts {
     if ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'TTF') {
       generate_font_snippet($fontdest,
         $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
-      $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'}, $fontdb{$k}{'subfont'});
+      $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'ttfname'}, $fontdb{$k}{'subfont'});
       link_font($fontdb{$k}{'target'}, $cidfsubst, $fontdb{$k}{'ttfname'});
       link_font($fontdb{$k}{'target'}, "$TEXMFLOCAL/fonts/truetype/cjk-gs-integrate", $fontdb{$k}{'ttfname'})
         if $opt_texmflink;
@@ -605,13 +606,12 @@ sub do_aliases {
 
 sub generate_cidfmap_entry {
   my ($n, $c, $f, $sf) = @_;
-  # we link the ttf fonts, so we use only the base name
-  # otherwise the ps2pdf breaks due to -dSAFER
-  my $bn = basename($f);
+  # $f is already the link target name 'ttfname'
+  # as determined by minimal priority number
   # extract subfont
   my $s = "/$n << /FileType /TrueType 
   /Path pssystemparams /GenericResourceDir get 
-  (CIDFSubst/$bn) concatstrings
+  (CIDFSubst/$f) concatstrings
   /SubfontID $sf
   /CSI [($c";
   if ($c eq "Japan") {
