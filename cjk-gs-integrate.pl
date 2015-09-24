@@ -282,6 +282,7 @@ main(@ARGV);
 sub main {
   print_info("reading font database ...\n");
   read_font_database();
+  determine_ttf_link_target(); # see comments there
   if (!$opt_listallaliases) {
     print_info("checking for files ...\n");
     check_for_files();
@@ -501,8 +502,8 @@ sub do_ttf_fonts {
       generate_font_snippet($fontdest,
         $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
       $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'}, $fontdb{$k}{'subfont'});
-      link_font($fontdb{$k}{'target'}, $cidfsubst);
-      link_font($fontdb{$k}{'target'}, "$TEXMFLOCAL/fonts/truetype/cjk-gs-integrate")
+      link_font($fontdb{$k}{'target'}, $cidfsubst, $fontdb{$k}{'ttfname'});
+      link_font($fontdb{$k}{'target'}, "$TEXMFLOCAL/fonts/truetype/cjk-gs-integrate", $fontdb{$k}{'ttfname'})
         if $opt_texmflink;
     }
   }
@@ -644,6 +645,9 @@ sub info_found_fonts {
         $fn .= "($fontdb{$k}{'subfont'})";
       }
       print "File:  $fn\n";
+      if ($fontdb{$k}{'type'} eq 'TTF') {
+        print "Link:  $fontdb{$k}{'ttfname'}\n";
+      }
       print "\n";
     }
   }
@@ -723,6 +727,10 @@ sub check_for_files {
   for my $f (@foundfiles) {
     my $bn = basename($f);
     $bntofn{$bn} = $f;
+  }
+  if ($opt_debug > 0) {
+    print_debug("dumping font database before file check:\n");
+    print_debug(Data::Dumper::Dumper(\%fontdb));
   }
   if ($opt_debug > 1) {
     print_ddebug("dumping basename to filename list:\n");
@@ -821,6 +829,31 @@ sub compute_aliases {
   }
 }
 
+# While the OTF link target is determined by the filename itself
+# for TTF we can have ttc with several fonts.
+# The following routine determines the link target by selecting
+# the file name of the ttf candidates with the lowest priority
+# as the link target name for TTF
+sub determine_ttf_link_target {
+  for my $k (keys %fontdb) {
+    my $ttfname;
+    my $mp = 10000000;
+    for my $f (keys %{$fontdb{$k}{'files'}}) {
+      if ($fontdb{$k}{'files'}{$f}{'type'} eq 'TTF') {
+        my $p = $fontdb{$k}{'files'}{$f}{'priority'};
+        if ($p < $mp) {
+          $ttfname = $f;
+          $ttfname =~ s/^(.*)\(\d*\)$/$1/;
+          $mp = $p;
+        }
+      }
+    }
+    if ($ttfname) {
+      $fontdb{$k}{'ttfname'} = $ttfname;
+    }
+  }
+}
+
 sub read_font_database {
   my @dbl;
   if ($opt_fontdef) {
@@ -851,6 +884,9 @@ sub read_font_database {
           $fontdb{$realfontname}{'class'} = $fontclass;
           $fontdb{$realfontname}{'files'} = { %fontfiles };
           $fontdb{$realfontname}{'provides'} = { %fontprovides };
+          if ($opt_debug > 1) {
+            print_ddebug("Dumping fontfiles for $realfontname: " . Data::Dumper::Dumper(\%fontfiles));
+          }
           # reset to start
           $fontname = $fontclass = $psname = "";
           %fontfiles = ();
@@ -873,9 +909,12 @@ sub read_font_database {
     if ($l =~ m/^Filename(\((\d+)\))?:\s*(.*)$/) { 
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
+      print_ddebug("filename: $fn\n");
       if ($fn =~ m/\.ot[fc]$/i) {
+        print_ddebug("type: cid\n");
         $fontfiles{$fn}{'type'} = 'CID';
       } elsif ($fn =~ m/\.tt[fc](\(\d+\))?$/i) {
+        print_ddebug("type: ttf\n");
         $fontfiles{$fn}{'type'} = 'TTF';
       } else{
         print_warning("cannot determine font type of $fn at line $lineno, skipping!\n");
