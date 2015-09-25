@@ -1361,6 +1361,13 @@ Filename(30): ヒラギノ角ゴシック W1.ttc(0)
 Filename(29): ヒラギノ角ゴシック W1.ttc(0)
 Filename(28): HiraginoSans-W1.ttc(0)
 
+Name: HiraginoSans-W2
+Class: Japan
+Provides(30): HiraginoSans-W2
+Filename(30): ヒラギノ角ゴシック W2.ttc(0)
+Filename(29): ヒラギノ角ゴシック W2.ttc(0)
+Filename(28): HiraginoSans-W2.ttc(0)
+
 Name: HiraginoSans-W3
 Class: Japan
 Provides(30): HiraginoSans-W3
