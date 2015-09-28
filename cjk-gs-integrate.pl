@@ -22,6 +22,7 @@
 $^W = 1;
 use Getopt::Long qw(:config no_autoabbrev ignore_case_always);
 use File::Basename;
+use File::Path qw(make_path);
 use strict;
 
 (my $prg = basename($0)) =~ s/\.pl$//;
@@ -230,9 +231,8 @@ my $opt_only_aliases = 0;
 my $opt_machine = 0;
 my $opt_filelist;
 my $opt_force = 0;
-my $opt_texmflink = 0;
+my $opt_texmflink;
 my $opt_markdown = 0;
-my $opt_texmfout;
 
 if (! GetOptions(
         "n|dry-run"   => \$dry_run,
@@ -240,14 +240,13 @@ if (! GetOptions(
         "list-aliases" => \$opt_listaliases,
         "list-all-aliases" => \$opt_listallaliases,
         "list-fonts"  => \$opt_listfonts,
-        "link-texmflocal" => \$opt_texmflink,
+        "link-texmf:s" => \$opt_texmflink,
         "only-aliases" => \$opt_only_aliases,
         "machine-readable" => \$opt_machine,
         "force"       => \$opt_force,
         "filelist=s"  => \$opt_filelist,
         "markdown"    => \$opt_markdown,
         "o|output=s"  => \$opt_output,
-        "texmfout=s"  => \$opt_texmfout,
         "h|help"      => \$opt_help,
         "q|quiet"     => \$opt_quiet,
         "d|debug+"    => \$opt_debug,
@@ -274,7 +273,20 @@ if ($opt_debug) {
   $Data::Dumper::Indent = 1;
 }
 
-chomp (my $TEXMFLOCAL = ($opt_texmfout ? $opt_texmfout : `kpsewhich -var-value=TEXMFLOCAL`));
+if (defined($opt_texmflink)) {
+  my $foo;
+  if ($opt_texmflink eq '') {
+    # option was passed but didn't receive a value
+    #  -> use TEXMFLOCAL
+    chomp( $foo = `kpsewhich -var-value=TEXMFLOCAL`);
+  } else {
+    # option was passed with an argument
+    #  -> use it
+    $foo = $opt_texmflink;
+  }
+  $opt_texmflink = $foo;
+}
+
 
 main(@ARGV);
 
@@ -410,7 +422,7 @@ sub make_dir {
       exit 1;
     }
   } else {
-    $dry_run || mkdir($d);
+    $dry_run || make_path($d);
   }
 }
 
@@ -419,7 +431,7 @@ sub do_otf_fonts {
   my $ciddest  = "$opt_output/CIDFont";
   make_dir($fontdest, "cannot create CID snippets there!");
   make_dir($ciddest,  "cannot link CID fonts there!");
-  make_dir("$TEXMFLOCAL/fonts/opentype/cjk-gs-integrate",
+  make_dir("$opt_texmflink/fonts/opentype/cjk-gs-integrate",
            "cannot link fonts to it!")
     if $opt_texmflink;
   for my $k (keys %fontdb) {
@@ -427,7 +439,7 @@ sub do_otf_fonts {
       generate_font_snippet($fontdest,
         $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
       link_font($fontdb{$k}{'target'}, $ciddest, $k);
-      link_font($fontdb{$k}{'target'}, "$TEXMFLOCAL/fonts/opentype/cjk-gs-integrate")
+      link_font($fontdb{$k}{'target'}, "$opt_texmflink/fonts/opentype/cjk-gs-integrate")
         if $opt_texmflink;
     }
   }
@@ -495,7 +507,7 @@ sub do_ttf_fonts {
   my $outp = '';
   make_dir($fontdest, "cannot create CID snippets there!");
   make_dir($cidfsubst,  "cannot link TTF fonts there!");
-  make_dir("$TEXMFLOCAL/fonts/truetype/cjk-gs-integrate",
+  make_dir("$opt_texmflink/fonts/truetype/cjk-gs-integrate",
            "cannot link fonts to it!")
     if $opt_texmflink;
   for my $k (keys %fontdb) {
@@ -504,7 +516,7 @@ sub do_ttf_fonts {
         $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
       $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'ttfname'}, $fontdb{$k}{'subfont'});
       link_font($fontdb{$k}{'target'}, $cidfsubst, $fontdb{$k}{'ttfname'});
-      link_font($fontdb{$k}{'target'}, "$TEXMFLOCAL/fonts/truetype/cjk-gs-integrate", $fontdb{$k}{'ttfname'})
+      link_font($fontdb{$k}{'target'}, "$opt_texmflink/fonts/truetype/cjk-gs-integrate", $fontdb{$k}{'ttfname'})
         if $opt_texmflink;
     }
   }
@@ -975,10 +987,11 @@ sub Usage {
                       can be given multiple times
 --filelist FILE       read list of available font files from FILE
                       instead of searching with kpathsea
---link-texmflocal     link fonts into
-                         TEXMFLOCAL/fonts/opentype/cjk-gs-integrate
+--link-texmf [DIR]    link fonts into
+                         DIR/fonts/opentype/cjk-gs-integrate
                       and
-                         TEXMFLOCAL/fonts/truetype/cjk-gs-integrate
+                         DIR/fonts/truetype/cjk-gs-integrate
+                      where DIR defaults to TEXMFLOCAL
 --machine-readable    output of --list-aliases is machine readable
 --force               do not bail out if linked fonts already exist
 -q, --quiet           be less verbose
