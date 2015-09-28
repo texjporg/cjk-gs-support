@@ -223,6 +223,7 @@ my $opt_debug = 0;
 my $opt_listaliases = 0;
 my $opt_listallaliases = 0;
 my $opt_listfonts = 0;
+my $opt_remove = 0;
 my $opt_info = 0;
 my $opt_fontdef;
 my $opt_output;
@@ -241,6 +242,7 @@ if (! GetOptions(
         "list-all-aliases" => \$opt_listallaliases,
         "list-fonts"  => \$opt_listfonts,
         "link-texmf:s" => \$opt_texmflink,
+        "remove"       => \$opt_remove,
         "only-aliases" => \$opt_only_aliases,
         "machine-readable" => \$opt_machine,
         "force"       => \$opt_force,
@@ -375,12 +377,12 @@ sub main {
   }
   print_info("output is going to $opt_output\n");
   if (!$opt_only_aliases) {
-    print_info("generating font snippets and link CID fonts ...\n");
+    print_info(($opt_remove ? "removing" : "generating") . " font snippets and link CID fonts ...\n");
     do_otf_fonts();
-    print_info("generating font snippets, links, and cidfmap.local for TTF fonts ...\n");
+    print_info(($opt_remove ? "removing" : "generating") . " font snippets, links, and cidfmap.local for TTF fonts ...\n");
     do_ttf_fonts();
   }
-  print_info("generating font aliases ...\n");
+  print_info(($opt_remove ? "removing" : "generating") . " font aliases ...\n");
   do_aliases();
   print_info("finished\n");
 }
@@ -388,18 +390,35 @@ sub main {
 sub update_master_cidfmap {
   my $add = shift;
   my $cidfmap_master = "$opt_output/Init/cidfmap";
+  print_info(sprintf("%s $add %s cidfmap file ...\n", 
+    ($opt_remove ? "removing" : "adding"), ($opt_remove ? "from" : "to")));
   if (-r $cidfmap_master) {
     open(FOO, "<", $cidfmap_master) ||
       die ("Cannot open $cidfmap_master for reading: $!");
     my $found = 0;
+    my $newmaster = "";
+    # in add mode: just search for the entry and set $found
+    # in remove mode: collect all lines that do not match
     while(<FOO>) {
-      $found = 1 if
-        m/^\s*\(\Q$add\E\)\s\s*\.runlibfile\s*$/;
+      if (m/^\s*\(\Q$add\E\)\s\s*\.runlibfile\s*$/) {
+        $found = 1;
+      } else {
+        $newmaster .= $_;
+      }
     }
+    close(FOO);
     if ($found) {
-      print_info("$add already loaded in $cidfmap_master, no changes\n");
+      if ($opt_remove) {
+        open(FOO, ">", $cidfmap_master) ||
+          die ("Cannot clean up $cidfmap_master: $!");
+        print FOO $newmaster;
+        close FOO;
+      } else {
+        print_info("$add already loaded in $cidfmap_master, no changes\n");
+      }
     } else {
       return if $dry_run;
+      return if $opt_remove;
       open(FOO, ">>", $cidfmap_master) ||
         die ("Cannot open $cidfmap_master for appending: $!");
       print FOO "($add) .runlibfile\n";
@@ -407,6 +426,7 @@ sub update_master_cidfmap {
     }
   } else {
     return if $dry_run;
+    return if $opt_remove;
     open(FOO, ">", $cidfmap_master) ||
       die ("Cannot open $cidfmap_master for writing: $!");
     print FOO "($add) .runlibfile\n";
@@ -449,6 +469,10 @@ sub generate_font_snippet {
   my ($fd, $n, $c, $f) = @_;
   return if $dry_run;
   for my $enc (@{$encode_list{$c}}) {
+    if ($opt_remove) {
+      unlink "$fd/$n-$enc" if (-f "$fd/$n-$enc");
+      next;
+    }
     open(FOO, ">$fd/$n-$enc") || 
       die("cannot open $fd/$n-$enc for writing: $!");
     print FOO "%%!PS-Adobe-3.0 Resource-Font
@@ -477,11 +501,13 @@ sub link_font {
   if ($opt_force && -e $target) {
     print_info("Removing $target prior to recreation due to --force\n");
     unlink($target) || die "Cannot unlink $target prior to recreation under --force: $!";
+    return if $opt_remove;
   }
   if (-l $target) {
     my $linkt = readlink($target);
     if ($linkt && -r $linkt) {
       if ($linkt eq $f) {
+        unlink($target) if $opt_remove;
         # do nothing, it is the same link
       } else {
         print_error("link $target already existing, but different target then $target, exiting!\n");
@@ -496,7 +522,11 @@ sub link_font {
       print_error("$target already existing, but not a link, exiting!\n");
       exit(1);
     } else {
-      symlink($f, $target) || die("Cannot link font $f to $target: $!");
+      if ($opt_remove) {
+        unlink($target);
+      } else {
+        symlink($f, $target) || die("Cannot link font $f to $target: $!");
+      }
     }
   }
 }
@@ -531,7 +561,6 @@ sub do_ttf_fonts {
     print FOO $outp;
     close(FOO);
   }
-  print_info("adding cidfmap.local to cidfmap file ...\n");
   update_master_cidfmap('cidfmap.local');
 }
 
@@ -602,7 +631,7 @@ sub do_aliases {
   $outp .= "\n% Simplified Chinese fonts\n" . join("\n", @sal) . "\n" if @sal;
   #
   return if $dry_run;
-  if ($outp) {
+  if ($outp && !$opt_remove) {
     if (! -d "$opt_output/Init") {
       mkdir("$opt_output/Init") ||
         die("Cannot create directory $opt_output/Init: $!");
@@ -612,12 +641,12 @@ sub do_aliases {
     print FOO $outp;
     close(FOO);
   }
-  print_info("adding cidfmap.aliases to cidfmap file ...\n");
   update_master_cidfmap('cidfmap.aliases');
 }
 
 sub generate_cidfmap_entry {
   my ($n, $c, $f, $sf) = @_;
+  return "" if $opt_remove;
   # $f is already the link target name 'ttfname'
   # as determined by minimal priority number
   # extract subfont
@@ -976,6 +1005,7 @@ sub Usage {
   my $usage = "[perl] $prg\[.pl\] [OPTIONS]";
   my $options = "
 -n, --dry-run         do not actually output anything
+--remove              try to remove instead of create
 -f, --fontdef FILE    specify alternate set of font definitions, if not
                       given, the built-in set is used
 -o, --output DIR      specifies the base output dir, if not provided,
