@@ -17,6 +17,7 @@ Usage
 
 `````
   -n, --dry-run         do not actually output anything
+  --remove              try to remove instead of create
   -f, --fontdef FILE    specify alternate set of font definitions, if not
                         given, the built-in set is used
   -o, --output DIR      specifies the base output dir, if not provided,
@@ -28,10 +29,11 @@ Usage
                         can be given multiple times
   --filelist FILE       read list of available font files from FILE
                         instead of searching with kpathsea
-  --link-texmflocal     link fonts into
-                           TEXMFLOCAL/fonts/opentype/cjk-gs-integrate
+  --link-texmf [DIR]    link fonts into
+                           DIR/fonts/opentype/cjk-gs-integrate
                         and
-                           TEXMFLOCAL/fonts/truetype/cjk-gs-integrate
+                           DIR/fonts/truetype/cjk-gs-integrate
+                        where DIR defaults to TEXMFLOCAL
   --machine-readable    output of --list-aliases is machine readable
   --force               do not bail out if linked fonts already exist
   -q, --quiet           be less verbose
