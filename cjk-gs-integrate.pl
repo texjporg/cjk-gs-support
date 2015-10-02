@@ -1009,11 +1009,11 @@ sub Usage {
 -f, --fontdef FILE    specify alternate set of font definitions, if not
                       given, the built-in set is used
 -o, --output DIR      specifies the base output dir, if not provided,
-                      the Resource directory of an install GhostScript
+                      the Resource directory of an installed GhostScript
                       is searched and used.
--a, --alias LL=RR     defines an alias, or overrides a given alias
+-a, --alias LL=RR     defines an alias, or overrides a given alias;
                       illegal if LL is provided by a real font, or
-                      RR is neither available as real font or alias
+                      RR is neither available as real font or alias;
                       can be given multiple times
 --filelist FILE       read list of available font files from FILE
                       instead of searching with kpathsea
@@ -1128,7 +1128,7 @@ Traditional Chinese:
 
     MSung-Light MHei-Medium MKai-Medium
 
-In addition, we also includes provide entries for the OTF Morisawa names:
+In addition, we also include provide entries for the OTF Morisawa names:
     RyuminPro-Light GothicBBBPro-Medium FutoMinA101Pro-Bold
     FutoGoB101Pro-Bold Jun101Pro-Light
 
