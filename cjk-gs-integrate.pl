@@ -994,9 +994,9 @@ sub find_gs_resource {
     for (@ret) {
       if (m!Resource/Font!) {
         $foundres = $_;
-        $foundres =~ s/^\s*//;
-        $foundres =~ s/\s*:\s*$//;
-        $foundres =~ s!/Font!!;
+        # extract the first substring of non-space chars
+        # up to Resource/Font and drop the /Font part
+        $foundres =~ s!^.*\s(\S*Resource)/Font.*$!$1!;
         last;
       }
     }
