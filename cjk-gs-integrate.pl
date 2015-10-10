@@ -689,6 +689,18 @@ sub info_found_fonts {
       if ($fontdb{$k}{'type'} eq 'TTF') {
         print "Link:  $fontdb{$k}{'ttfname'}\n";
       }
+      my @ks = sort { $fontdb{$k}{'files'}{$a}{'priority'}
+                      <=>
+                      $fontdb{$k}{'files'}{$b}{'priority'} }
+                    keys %{$fontdb{$k}{'files'}};
+      # remove the top element which is the winner and shown above
+      shift @ks;
+      if (@ks) {
+        print "Other candidates in decreasing order:\n";
+        for my $f (@ks) {
+          print "       ", $fontdb{$k}{'files'}{$f}{'target'}, "\n";
+        }
+      }
       print "\n";
     }
   }
@@ -814,7 +826,7 @@ sub check_for_files {
       $fontdb{$k}{'subfont'} = $sf if ($fontdb{$k}{'type'} eq 'TTF');
     }
     # not needed anymore
-    delete $fontdb{$k}{'files'};
+    # delete $fontdb{$k}{'files'};
   }
   if ($opt_debug > 0) {
     print_debug("dumping font database:\n");
