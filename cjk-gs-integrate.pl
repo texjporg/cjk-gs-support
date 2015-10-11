@@ -491,6 +491,35 @@ pop
   }
 }
 
+#
+# link_font operation
+# $opt_force is *not* treated first to warn only 
+# at really critical cases
+# case 1:
+#   exists, is link, link targets agree
+#     $opt_force is ignored
+#     remove or remove+add according to $opt_remove
+# case 2:
+#   exists, is link, dangling symlink
+#     $opt_force is ignored
+#     remove or remove+add according to $opt_remove
+# case 3:
+#   exists, is link, link target different
+#     if $opt_force
+#       warn, remove or remove+add according to $opt_remove
+#     else
+#       error message
+# case 4:
+#   exists, not a link
+#     if $opt_force
+#       warn, remove or remove+add according to $opt_remove
+#     else
+#       error message
+# case 5:
+#   not exists
+#     $opt_force is ignored
+#     do nothing or add according to $opt_remove
+#     
 sub link_font {
   my ($f, $cd, $n) = @_;
   return if $dry_run;
@@ -498,36 +527,47 @@ sub link_font {
     $n = basename($f);
   }
   my $target = "$cd/$n";
-  if ($opt_force && -e $target) {
-    print_info("Removing $target prior to recreation due to --force\n");
-    unlink($target) || die "Cannot unlink $target prior to recreation under --force: $!";
-    return if $opt_remove;
-  }
+  my $do_unlink = 0;
   if (-l $target) {
     my $linkt = readlink($target);
-    if ($linkt && -r $linkt) {
+    if ($linkt) {
       if ($linkt eq $f) {
-        unlink($target) if $opt_remove;
-        # do nothing, it is the same link
+        # case 1: exists, link, targets agree
+        $do_unlink = 1;
+      } elsif (-r $linkt) {
+        # case 3: exists, link, targets different
+        if ($opt_force) {
+          print_info("Removing link $target due to --force!\n");
+          $do_unlink = 1;
+        } else {
+          print_error("Link $target already existing, but different target then $target, exiting!\n");
+          exit(1);
+        }
       } else {
-        print_error("link $target already existing, but different target then $target, exiting!\n");
-        exit(1);
+        # case 2: dangling symlink
+        print_warning("Removing dangling symlink $target to $linkt\n");
+        $do_unlink = 1;
       }
     } else {
-      print_warning("removing dangling symlink $target to $linkt\n");
-      unlink($target);
-    }
-  } else {
-    if (-e $target) {
-      print_error("$target already existing, but not a link, exiting!\n");
+      print_error("This should not happen, we have a link but cannot read the target?\n");
       exit(1);
-    } else {
-      if ($opt_remove) {
-        unlink($target);
-      } else {
-        symlink($f, $target) || die("Cannot link font $f to $target: $!");
-      }
     }
+  } elsif (-r $target) {
+    # case 4: exists, but not link
+    if ($opt_force) {
+      print_info("Removing $target due to --force!\n");
+      $do_unlink = 1;
+    } else {
+      print_error("$target already existing, exiting!\n");
+      exit(1);
+    }
+  } # otherwise it is not existing!
+
+  # if we are still here and $do_unlink is set, remove it
+  unlink($target) if $do_unlink;
+  # recreate link if we are not in the remove case
+  if (! $opt_remove) {
+    symlink($f, $target) || die("Cannot link font $f to $target: $!");
   }
 }
 
