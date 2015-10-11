@@ -985,7 +985,7 @@ sub read_font_database {
 sub find_gs_resource {
   # we assume that gs is in the path
   # on Windows we probably have to try something else
-  my @ret = `gs --help 2>$nul`;
+  chomp( my @ret = `gs --help 2>$nul` );
   my $foundres = '';
   if ($?) {
     print_error("Cannot find gs ...\n");
