@@ -216,6 +216,12 @@ my %encode_list = (
     UniKS-UTF8-H
     UniKS-UTF8-V/ ] );
 
+#
+# location where links to fonts in texmf are created, relative to TEXMF
+my $otf_pathpart = "fonts/opentype/cjk-gs-integrate";
+my $ttf_pathpart = "fonts/truetype/cjk-gs-integrate";
+
+
 my $dry_run = 0;
 my $opt_help = 0;
 my $opt_quiet = 0;
@@ -232,6 +238,7 @@ my $opt_only_aliases = 0;
 my $opt_machine = 0;
 my $opt_filelist;
 my $opt_force = 0;
+my $opt_bruteforce = 0;
 my $opt_texmflink;
 my $opt_markdown = 0;
 
@@ -246,6 +253,7 @@ if (! GetOptions(
         "only-aliases" => \$opt_only_aliases,
         "machine-readable" => \$opt_machine,
         "force"       => \$opt_force,
+        "bruteforce"  => \$opt_bruteforce,
         "filelist=s"  => \$opt_filelist,
         "markdown"    => \$opt_markdown,
         "o|output=s"  => \$opt_output,
@@ -275,6 +283,8 @@ if ($opt_debug) {
   $Data::Dumper::Indent = 1;
 }
 
+$opt_force = 1 if ($opt_bruteforce);
+
 if (defined($opt_texmflink)) {
   my $foo;
   if ($opt_texmflink eq '') {
@@ -287,6 +297,16 @@ if (defined($opt_texmflink)) {
     $foo = $opt_texmflink;
   }
   $opt_texmflink = $foo;
+
+  # clean up location $opt_texmflink from links
+  if (!$dry_run) {
+    if (-d "$opt_texmflink/$otf_pathpart") {
+      cleanup_links("$opt_texmflink/$otf_pathpart");
+    }
+    if (-d "$opt_texmflink/$ttf_pathpart") {
+      cleanup_links("$opt_texmflink/$ttf_pathpart");
+    }
+  }
 }
 
 
@@ -387,6 +407,29 @@ sub main {
   print_info("finished\n");
 }
 
+#
+# removes all links from argument dir (which is existing already)
+# if normal files are found, break out unless --bruteforce is given
+sub cleanup_links {
+  my $dir = shift;
+  for my $f (<$dir/*>) {
+    if (-l $f) {
+      unlink($f) || die("Cannot cleanup link $f: $!");
+    } elsif (-d $f) {
+      next;
+    } else {
+      if ($opt_bruteforce) {
+        print_info("brute-force removing $f ... you called for it!\n");
+        unlink($f) || die("Cannot cleanup link $f: $!");
+      } else {
+        print_error("non-link\n\t$f\nfound -- that is not good, there should be only links!\n");
+        print_error("If you are really really sure to remove all non-links, too, use --bruteforce\n");
+        exit (1);
+      }
+    }
+  }
+}
+
 sub update_master_cidfmap {
   my $add = shift;
   my $cidfmap_master = "$opt_output/Init/cidfmap";
@@ -451,7 +494,7 @@ sub do_otf_fonts {
   my $ciddest  = "$opt_output/CIDFont";
   make_dir($fontdest, "cannot create CID snippets there!");
   make_dir($ciddest,  "cannot link CID fonts there!");
-  make_dir("$opt_texmflink/fonts/opentype/cjk-gs-integrate",
+  make_dir("$opt_texmflink/$otf_pathpart",
            "cannot link fonts to it!")
     if $opt_texmflink;
   for my $k (keys %fontdb) {
@@ -459,7 +502,7 @@ sub do_otf_fonts {
       generate_font_snippet($fontdest,
         $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
       link_font($fontdb{$k}{'target'}, $ciddest, $k);
-      link_font($fontdb{$k}{'target'}, "$opt_texmflink/fonts/opentype/cjk-gs-integrate", "$k.otf")
+      link_font($fontdb{$k}{'target'}, "$opt_texmflink/$otf_pathpart", "$k.otf")
         if $opt_texmflink;
     }
   }
@@ -577,7 +620,7 @@ sub do_ttf_fonts {
   my $outp = '';
   make_dir($fontdest, "cannot create CID snippets there!");
   make_dir($cidfsubst,  "cannot link TTF fonts there!");
-  make_dir("$opt_texmflink/fonts/truetype/cjk-gs-integrate",
+  make_dir("$opt_texmflink/$ttf_pathpart",
            "cannot link fonts to it!")
     if $opt_texmflink;
   for my $k (keys %fontdb) {
@@ -586,7 +629,7 @@ sub do_ttf_fonts {
         $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
       $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'ttfname'}, $fontdb{$k}{'subfont'});
       link_font($fontdb{$k}{'target'}, $cidfsubst, $fontdb{$k}{'ttfname'});
-      link_font($fontdb{$k}{'target'}, "$opt_texmflink/fonts/truetype/cjk-gs-integrate", $fontdb{$k}{'ttfname'})
+      link_font($fontdb{$k}{'target'}, "$opt_texmflink/$ttf_pathpart", $fontdb{$k}{'ttfname'})
         if $opt_texmflink;
     }
   }
@@ -1070,9 +1113,9 @@ sub Usage {
 --filelist FILE       read list of available font files from FILE
                       instead of searching with kpathsea
 --link-texmf [DIR]    link fonts into
-                         DIR/fonts/opentype/cjk-gs-integrate
+                         DIR/$otf_pathpart
                       and
-                         DIR/fonts/truetype/cjk-gs-integrate
+                         DIR/$ttf_pathpart
                       where DIR defaults to TEXMFLOCAL
 --machine-readable    output of --list-aliases is machine readable
 --force               do not bail out if linked fonts already exist
