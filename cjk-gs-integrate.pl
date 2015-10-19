@@ -459,7 +459,7 @@ sub do_otf_fonts {
       generate_font_snippet($fontdest,
         $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
       link_font($fontdb{$k}{'target'}, $ciddest, $k);
-      link_font($fontdb{$k}{'target'}, "$opt_texmflink/fonts/opentype/cjk-gs-integrate")
+      link_font($fontdb{$k}{'target'}, "$opt_texmflink/fonts/opentype/cjk-gs-integrate", "$k.otf")
         if $opt_texmflink;
     }
   }
