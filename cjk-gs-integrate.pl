@@ -23,6 +23,7 @@ $^W = 1;
 use Getopt::Long qw(:config no_autoabbrev ignore_case_always);
 use File::Basename;
 use File::Path qw(make_path);
+use Cwd 'abs_path';
 use strict;
 
 (my $prg = basename($0)) =~ s/\.pl$//;
@@ -868,8 +869,13 @@ sub check_for_files {
   # map basenames to filenames
   my %bntofn;
   for my $f (@foundfiles) {
+    my $realf = abs_path($f);
+    if (!$realf) {
+      print_warning("dead link or strange file found: $f - ignored!\n");
+      next;
+    }
     my $bn = basename($f);
-    $bntofn{$bn} = $f;
+    $bntofn{$bn} = $realf;
   }
   if ($opt_debug > 0) {
     print_debug("dumping font database before file check:\n");
