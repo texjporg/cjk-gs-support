@@ -239,7 +239,6 @@ my $opt_only_aliases = 0;
 my $opt_machine = 0;
 my $opt_filelist;
 my $opt_force = 0;
-my $opt_bruteforce = 0;
 my $opt_texmflink;
 my $opt_markdown = 0;
 
@@ -254,7 +253,6 @@ if (! GetOptions(
         "only-aliases" => \$opt_only_aliases,
         "machine-readable" => \$opt_machine,
         "force"       => \$opt_force,
-        "bruteforce"  => \$opt_bruteforce,
         "filelist=s"  => \$opt_filelist,
         "markdown"    => \$opt_markdown,
         "o|output=s"  => \$opt_output,
@@ -283,34 +281,6 @@ if ($opt_debug) {
   require Data::Dumper;
   $Data::Dumper::Indent = 1;
 }
-
-$opt_force = 1 if ($opt_bruteforce);
-
-if (defined($opt_texmflink)) {
-  my $foo;
-  if ($opt_texmflink eq '') {
-    # option was passed but didn't receive a value
-    #  -> use TEXMFLOCAL
-    chomp( $foo = `kpsewhich -var-value=TEXMFLOCAL`);
-  } else {
-    # option was passed with an argument
-    #  -> use it
-    $foo = $opt_texmflink;
-  }
-  $opt_texmflink = $foo;
-
-  # clean up location $opt_texmflink from links
-  if (!$dry_run) {
-    if (-d "$opt_texmflink/$otf_pathpart") {
-      cleanup_links("$opt_texmflink/$otf_pathpart");
-    }
-    if (-d "$opt_texmflink/$ttf_pathpart") {
-      cleanup_links("$opt_texmflink/$ttf_pathpart");
-    }
-    system("mktexlsr", $opt_texmflink);
-  }
-}
-
 
 main(@ARGV);
 
@@ -407,29 +377,6 @@ sub main {
   print_info(($opt_remove ? "removing" : "generating") . " font aliases ...\n");
   do_aliases();
   print_info("finished\n");
-}
-
-#
-# removes all links from argument dir (which is existing already)
-# if normal files are found, break out unless --bruteforce is given
-sub cleanup_links {
-  my $dir = shift;
-  for my $f (<$dir/*>) {
-    if (-l $f) {
-      unlink($f) || die("Cannot cleanup link $f: $!");
-    } elsif (-d $f) {
-      next;
-    } else {
-      if ($opt_bruteforce) {
-        print_info("brute-force removing $f ... you called for it!\n");
-        unlink($f) || die("Cannot cleanup link $f: $!");
-      } else {
-        print_error("non-link\n\t$f\nfound -- that is not good, there should be only links!\n");
-        print_error("If you are really really sure to remove all non-links, too, use --bruteforce\n");
-        exit (1);
-      }
-    }
-  }
 }
 
 sub update_master_cidfmap {
