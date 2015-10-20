@@ -841,18 +841,18 @@ sub check_for_files {
       # we want that files in OSFONTDIR are found first, before 
       # links that we have created in TEXMFLOCAL
       # Thus, instead of setting OSFONTDIR which is at the *END* of
-      # the kpsewhich variables OPENTYPEFONTS and TTFFONTS, we put
+      # the kpsewhich variables OPENTYPEFONTS and TTFONTS, we put
       # all these fonts at the front of them
       # push current value of OSFONTDIR
       push @extradirs, $ENV{'OSFONTDIR'} if $ENV{'OSFONTDIR'};
-      # update OPENTYPEFONTS and TTFFONTS
+      # update OPENTYPEFONTS and TTFONTS
       if (@extradirs) {
         my $newotf = join(':', @extradirs) . ':';
         my $newttf = $newotf;
         $newotf .= $ENV{'OPENTYPEFONTS'} if ($ENV{'OPENTYPEFONTS'});
-        $newttf .= $ENV{'TTFFONTS'} if ($ENV{'TTFFONTS'});
+        $newttf .= $ENV{'TTFONTS'} if ($ENV{'TTFONTS'});
         $ENV{'OPENTYPEFONTS'} = $newotf;
-        $ENV{'TTFFONTS'} = $newttf;
+        $ENV{'TTFONTS'} = $newttf;
       }
     }
     # prepare for kpsewhich call, we need to do quoting
