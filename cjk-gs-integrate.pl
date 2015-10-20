@@ -306,6 +306,7 @@ if (defined($opt_texmflink)) {
     if (-d "$opt_texmflink/$ttf_pathpart") {
       cleanup_links("$opt_texmflink/$ttf_pathpart");
     }
+    system("mktexlsr", $opt_texmflink);
   }
 }
 
@@ -836,16 +837,22 @@ sub check_for_files {
     }
     #
     if (@extradirs) {
-      # final dummy directory
-      push @extradirs, "/this/does/not/really/exists/unless/you/are/stupid";
+      # we want that files in OSFONTDIR are found first, before 
+      # links that we have created in TEXMFLOCAL
+      # Thus, instead of setting OSFONTDIR which is at the *END* of
+      # the kpsewhich variables OPENTYPEFONTS and TTFFONTS, we put
+      # all these fonts at the front of them
       # push current value of OSFONTDIR
       push @extradirs, $ENV{'OSFONTDIR'} if $ENV{'OSFONTDIR'};
-      # compose OSFONTDIR
-      my $osfontdir = join ':', @extradirs;
-      $ENV{'OSFONTDIR'} = $osfontdir;
-    }
-    if ($ENV{'OSFONTDIR'}) {
-      print_debug("final setting of OSFONTDIR: $ENV{'OSFONTDIR'}\n");
+      # update OPENTYPEFONTS and TTFFONTS
+      if (@extradirs) {
+        my $newotf = join(':', @extradirs) . ':';
+        my $newttf = $newotf;
+        $newotf .= $ENV{'OPENTYPEFONTS'} if ($ENV{'OPENTYPEFONTS'});
+        $newttf .= $ENV{'TTFFONTS'} if ($ENV{'TTFFONTS'});
+        $ENV{'OPENTYPEFONTS'} = $newotf;
+        $ENV{'TTFFONTS'} = $newttf;
+      }
     }
     # prepare for kpsewhich call, we need to do quoting
     my $cmdl = 'kpsewhich ';
