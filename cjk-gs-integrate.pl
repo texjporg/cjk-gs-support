@@ -282,6 +282,20 @@ if ($opt_debug) {
   $Data::Dumper::Indent = 1;
 }
 
+if (defined($opt_texmflink)) {
+  my $foo;
+  if ($opt_texmflink eq '') {
+    # option was passed but didn't receive a value
+    #  -> use TEXMFLOCAL
+    chomp( $foo = `kpsewhich -var-value=TEXMFLOCAL`);
+  } else {
+    # option was passed with an argument
+    #  -> use it
+    $foo = $opt_texmflink;
+  }
+  $opt_texmflink = $foo;
+}
+
 main(@ARGV);
 
 #
