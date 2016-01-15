@@ -37,7 +37,8 @@ for i in cjk-gs-integrate.pl ; do
   rm -f ${i}.bak
 done
 # rename README.md to README for CTAN
-mv README.md README
+# not necessary anymore, README.md is acceptable
+#mv README.md README
 cd ..
 diff -urN $PROJECT-$VER-orig $PROJECT-$VER
 tar zcf $DIR/$PROJECT-$VER.tar.gz $PROJECT-$VER
