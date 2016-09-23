@@ -792,7 +792,7 @@ sub check_for_files {
     } else {
       # other dirs to check, for normal unix?
       for my $d (qw!/Library/Fonts /System/Library/Fonts /System/Library/Assets /Network/Library/Fonts /usr/share/fonts!) {
-        push @extradirs, "$d//" if (-d $d); # recirsive search
+        push @extradirs, "$d//" if (-d $d); # recursive search
       }
       my $home = $ENV{'HOME'};
       push @extradirs, "$home/Library/Fonts//" if (-d "$home/Library/Fonts");
