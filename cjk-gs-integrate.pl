@@ -1775,11 +1775,17 @@ Provides(60): GothicBBB-Medium
 Provides(60): GothicBBBPro-Medium
 Filename(20): yugothic.ttf
 Filename(10): YuGothic-Regular.ttf
+Filename(30): YuGothR.ttc(0)
+
+Name: YuGothic-Medium
+Class: Japan
+Filename(30): YuGothM.ttc(0)
 
 Name: YuGothic-Light
 Class: Japan
 Filename(20): yugothil.ttf
 Filename(10): YuGothic-Light.ttf
+Filename(30): YuGothL.ttc(0)
 
 Name: YuGothic-Bold
 Class: Japan
@@ -1791,6 +1797,7 @@ Provides(60): MidashiGo-MB31
 Provides(60): MidashiGoPro-MB31
 Filename(20): yugothib.ttf
 Filename(10): YuGothic-Bold.ttf
+Filename(30): YuGothB.ttc(0)
 
 # IPA fonts
 
