@@ -1310,18 +1310,18 @@ __DATA__
 
 # Morisawa
 
-Name: A-OTF-FutoGoB101Pr6N-Bold
-PSName: FutoGoB101Pr6N-Bold
+Name: A-OTF-RyuminPr6N-Light
+PSName: RyuminPr6N-Light
 Class: Japan
-Provides(10): FutoGoB101-Bold
-Provides(10): FutoGoB101Pro-Bold
-Filename: A-OTF-FutoGoB101Pr6N-Bold.otf
+Provides(10): Ryumin-Light
+Provides(10): RyuminPro-Light
+Filename: A-OTF-RyuminPr6N-Light.otf
 
-Name: A-OTF-FutoGoB101Pro-Bold
-PSName: FutoGoB101Pro-Bold
+Name: A-OTF-RyuminPro-Light
+PSName: RyuminPro-Light
 Class: Japan
-Provides(20): FutoGoB101-Bold
-Filename: A-OTF-FutoGoB101Pro-Bold.otf
+Provides(20): Ryumin-Light
+Filename: A-OTF-RyuminPro-Light.otf
 
 Name: A-OTF-FutoMinA101Pr6N-Bold
 PSName: FutoMinA101Pr6N-Bold
@@ -1349,11 +1349,18 @@ Class: Japan
 Provides(20): GothicBBB-Medium
 Filename: A-OTF-GothicBBBPro-Medium.otf
 
-Name: A-OTF-Jun101Pro-Light
-PSName: Jun101Pro-Light
+Name: A-OTF-FutoGoB101Pr6N-Bold
+PSName: FutoGoB101Pr6N-Bold
 Class: Japan
-Provides(20): Jun101-Light
-Filename: A-OTF-Jun101Pro-Light.otf
+Provides(10): FutoGoB101-Bold
+Provides(10): FutoGoB101Pro-Bold
+Filename: A-OTF-FutoGoB101Pr6N-Bold.otf
+
+Name: A-OTF-FutoGoB101Pro-Bold
+PSName: FutoGoB101Pro-Bold
+Class: Japan
+Provides(20): FutoGoB101-Bold
+Filename: A-OTF-FutoGoB101Pro-Bold.otf
 
 Name: A-OTF-MidashiGoPr6N-MB31
 PSName: MidashiGoPr6N-MB31
@@ -1368,26 +1375,114 @@ Class: Japan
 Provides(20): MidashiGo-MB31
 Filename: A-OTF-MidashiGoPro-MB31.otf
 
-Name: A-OTF-RyuminPr6N-Light
-PSName: RyuminPr6N-Light
-Class: Japan
-Provides(10): Ryumin-Light
-Provides(10): RyuminPro-Light
-Filename: A-OTF-RyuminPr6N-Light.otf
-
-Name: A-OTF-RyuminPro-Light
-PSName: RyuminPro-Light
-Class: Japan
-Provides(20): Ryumin-Light
-Filename: A-OTF-RyuminPro-Light.otf
-
-Name: A-OTF-ShinMGoPr6N-Light
-PSName: ShinMGoPr6N-Light
+Name: A-OTF-Jun101Pr6N-Light
+PSName: Jun101Pr6N-Light
 Class: Japan
 Provides(10): Jun101-Light
 Provides(10): Jun101Pro-Light
-Filename: A-OTF-ShinMGoPr6N-Light.otf
+Filename: A-OTF-Jun101Pr6N-Light.otf
 
+Name: A-OTF-Jun101Pro-Light
+PSName: Jun101Pro-Light
+Class: Japan
+Provides(20): Jun101-Light
+Filename: A-OTF-Jun101Pro-Light.otf
+
+# Morisawa others (for moriprop);
+# A-OTF-Jun101Pro-Light.otf and A-OTF-RyuminPro-Light.otf already added
+
+Name: A-OTF-Jun201Pro-Regular
+PSName: Jun201Pro-Regular
+Class: Japan
+Provides(20): Jun201Pro-Regular
+Filename: A-OTF-Jun201Pro-Regular.otf
+
+Name: A-OTF-Jun34Pro-Medium
+PSName: Jun34Pro-Medium
+Class: Japan
+Provides(20): Jun34Pro-Medium
+Filename: A-OTF-Jun34Pro-Medium.otf
+
+Name: A-OTF-Jun501Pro-Bold
+PSName: Jun501Pro-Bold
+Class: Japan
+Provides(20): Jun501Pro-Bold
+Filename: A-OTF-Jun501Pro-Bold.otf
+
+Name: A-OTF-RyuminPro-Regular
+PSName: RyuminPro-Regular
+Class: Japan
+Provides(20): Ryumin-Regular
+Filename: A-OTF-RyuminPro-Regular.otf
+
+Name: A-OTF-RyuminPro-Medium
+PSName: RyuminPro-Medium
+Class: Japan
+Provides(20): Ryumin-Medium
+Filename: A-OTF-RyuminPro-Medium.otf
+
+Name: A-OTF-RyuminPro-Bold
+PSName: RyuminPro-Bold
+Class: Japan
+Provides(20): RyuminPro-Bold
+Filename: A-OTF-RyuminPro-Bold.otf
+
+Name: A-OTF-RyuminPro-Heavy
+PSName: RyuminPro-Heavy
+Class: Japan
+Provides(20): Ryumin-Heavy
+Filename: A-OTF-RyuminPro-Heavy.otf
+
+Name: A-OTF-RyuminPro-Ultra
+PSName: RyuminPro-Ultra
+Class: Japan
+Provides(20): Ryumin-Ultra
+Filename: A-OTF-RyuminPro-Ultra.otf
+
+Name: A-OTF-ShinGoPro-Light
+PSName: ShinGoPro-Light
+Class: Japan
+Provides(20): ShinGo-Light
+Filename: A-OTF-ShinGoPro-Light.otf
+
+Name: A-OTF-ShinGoPro-Regular
+PSName: ShinGoPro-Regular
+Class: Japan
+Provides(20): ShinGo-Regular
+Filename: A-OTF-ShinGoPro-Regular.otf
+
+Name: A-OTF-ShinGoPro-Medium
+PSName: ShinGoPro-Medium
+Class: Japan
+Provides(20): ShinGo-Medium
+Filename: A-OTF-ShinGoPro-Medium.otf
+
+Name: A-OTF-ShinGoPro-Bold
+PSName: ShinGoPro-Bold
+Class: Japan
+Provides(20): ShinGoPro-Bold
+Filename: A-OTF-ShinGoPro-Bold.otf
+
+Name: A-OTF-ShinGoPro-Heavy
+PSName: ShinGoPro-Heavy
+Class: Japan
+Provides(20): ShinGo-Heavy
+Filename: A-OTF-ShinGoPro-Heavy.otf
+
+Name: A-OTF-ShinGoPro-Ultra
+PSName: ShinGoPro-Ultra
+Class: Japan
+Provides(20): ShinGo-Ultra
+Filename: A-OTF-ShinGoPro-Ultra.otf
+
+# ----- Does this font really exist, and really needed? -- HY (2016/09/24)
+#Name: A-OTF-ShinMGoPr6N-Light
+#PSName: ShinMGoPr6N-Light
+#Class: Japan
+#Provides(10): Jun101-Light
+#Provides(10): Jun101Pro-Light
+#Filename: A-OTF-ShinMGoPr6N-Light.otf
+# -----
 
 # Hiragino
 
