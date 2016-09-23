@@ -1845,6 +1845,18 @@ Provides(100): MidashiGoPro-MB31
 Filename(20): ipaexg.ttf
 Filename(10): IPAexGothic.ttf
 
+# IPA proportional fonts
+
+Name: IPAPMincho
+Class: Japan
+Filename(20): ipamp.ttf
+Filename(10): IPAPMincho.ttf
+
+Name: IPAPGothic
+Class: Japan
+Filename(20): ipagp.ttf
+Filename(10): IPAPGothic.ttf
+
 # Kozuka fonts
 
 Name: KozGoPr6N-Bold
