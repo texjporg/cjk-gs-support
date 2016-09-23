@@ -1891,15 +1891,6 @@ Name: KozGoPr6N-Light
 Class: Japan
 Filename: KozGoPr6N-Light.otf
 
-Name: KozGoPro-ExtraLight
-Class: Japan
-Filename: KozGoPro-ExtraLight.otf
-
-Name: KozGoPro-Light
-Class: Japan
-Filename: KozGoPro-Light.otf
-
-
 Name: KozGoPro-Bold
 Class: Japan
 Provides(90): FutoGoB101-Bold
@@ -1923,6 +1914,14 @@ Filename: KozGoPro-Medium.otf
 Name: KozGoPro-Regular
 Class: Japan
 Filename: KozGoPro-Regular.otf
+
+Name: KozGoPro-ExtraLight
+Class: Japan
+Filename: KozGoPro-ExtraLight.otf
+
+Name: KozGoPro-Light
+Class: Japan
+Filename: KozGoPro-Light.otf
 
 Name: KozGoProVI-Bold
 Class: Japan
@@ -1954,9 +1953,13 @@ Provides(70): FutoMinA101-Bold
 Provides(70): FutoMinA101Pro-Bold
 Filename: KozMinPr6N-Bold.otf
 
-Name: KozMinPr6N-Light
+Name: KozMinPr6N-Heavy
 Class: Japan
-Filename: KozMinPr6N-Light.otf
+Filename: KozMinPr6N-Heavy.otf
+
+Name: KozMinPr6N-Medium
+Class: Japan
+Filename: KozMinPr6N-Medium.otf
 
 Name: KozMinPr6N-Regular
 Class: Japan
@@ -1964,15 +1967,27 @@ Provides(70): Ryumin-Light
 Provides(70): RyuminPro-Light
 Filename: KozMinPr6N-Regular.otf
 
+Name: KozMinPr6N-ExtraLight
+Class: Japan
+Filename: KozMinPr6N-ExtraLight.otf
+
+Name: KozMinPr6N-Light
+Class: Japan
+Filename: KozMinPr6N-Light.otf
+
 Name: KozMinPro-Bold
 Class: Japan
 Provides(90): FutoMinA101-Bold
 Provides(90): FutoMinA101Pro-Bold
 Filename: KozMinPro-Bold.otf
 
-Name: KozMinPro-Light
+Name: KozMinPro-Heavy
 Class: Japan
-Filename: KozMinPro-Light.otf
+Filename: KozMinPro-Heavy.otf
+
+Name: KozMinPro-Medium
+Class: Japan
+Filename: KozMinPro-Medium.otf
 
 Name: KozMinPro-Regular
 Class: Japan
@@ -1980,15 +1995,19 @@ Provides(90): Ryumin-Light
 Provides(90): RyuminPro-Light
 Filename: KozMinPro-Regular.otf
 
+Name: KozMinPro-ExtraLight
+Class: Japan
+Filename: KozMinPro-ExtraLight.otf
+
+Name: KozMinPro-Light
+Class: Japan
+Filename: KozMinPro-Light.otf
+
 Name: KozMinProVI-Bold
 Class: Japan
 Provides(80): FutoMinA101-Bold
 Provides(80): FutoMinA101Pro-Bold
 Filename: KozMinProVI-Bold.otf
-
-Name: KozMinProVI-Light
-Class: Japan
-Filename: KozMinProVI-Light.otf
 
 Name: KozMinProVI-Regular
 Class: Japan
@@ -1996,34 +2015,14 @@ Provides(80): Ryumin-Light
 Provides(80): RyuminPro-Light
 Filename: KozMinProVI-Regular.otf
 
-Name: KozMinPr6N-ExtraLight
+Name: KozMinProVI-Light
 Class: Japan
-Filename: KozMinPr6N-ExtraLight.otf
-
-Name: KozMinPr6N-Medium
-Class: Japan
-Filename: KozMinPr6N-Medium.otf
-
-Name: KozMinPr6N-Heavy
-Class: Japan
-Filename: KozMinPr6N-Heavy.otf
-
-Name: KozMinPro-ExtraLight
-Class: Japan
-Filename: KozMinPro-ExtraLight.otf
-
-Name: KozMinPro-Medium
-Class: Japan
-Filename: KozMinPro-Medium.otf
-
-Name: KozMinPro-Heavy
-Class: Japan
-Filename: KozMinPro-Heavy.otf
+Filename: KozMinProVI-Light.otf
 
 #
 # other OSX 11 fonts
 
-# TODO TODO should they provide Maru Gothic ???
+# TODO should they provide Maru Gothic ???
 Name: TsukuARdGothic-Regular
 Class: Japan
 Filename: TsukushiAMaruGothic.ttc(0)
