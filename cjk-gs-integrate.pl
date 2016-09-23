@@ -1679,7 +1679,6 @@ Filename(30): ヒラギノ明朝 ProN W3.ttc(0)
 Filename(29): ヒラギノ明朝 ProN W3.ttc(0)
 Filename(28): HiraginoSerif-W3.ttc(0)
 
-
 Name: HiraMinProN-W6
 Class: Japan
 Provides(30): FutoMinA101-Bold
@@ -1691,19 +1690,19 @@ Filename(30): ヒラギノ明朝 ProN W6.ttc(0)
 Filename(29): ヒラギノ明朝 ProN W6.ttc(0)
 Filename(28): HiraginoSerif-W6.ttc(0)
 
-
 Name: HiraginoSansGB-W3
 Class: GB
 Filename(20): Hiragino Sans GB W3.otf
 Filename(10): HiraginoSansGB-W3.otf
 Filename(30): Hiragino Sans GB W3.ttc(0)
+Filename(28): HiraginoSansGB-W3.ttc(0)
 
 Name: HiraginoSansGB-W6
 Class: GB
 Filename(20): Hiragino Sans GB W6.otf
 Filename(10): HiraginoSansGB-W6.otf
 Filename(30): Hiragino Sans GB W6.ttc(0)
-
+Filename(28): HiraginoSansGB-W6.ttc(0)
 
 # Yu-fonts MacOS version
 
