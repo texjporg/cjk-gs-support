@@ -2079,25 +2079,29 @@ Filename(10): STHeiti.ttf
 Name: STHeitiSC-Light
 Class: GB
 Provides(10): STHeiti-Light
-Filename(10): STHeiti Light.ttc(1)
-Filename(20): STHeitiSC-Light.ttf
+Filename(10): STHeiti-Light.ttc(1)
+Filename(20): STHeiti Light.ttc(1)
+Filename(30): STHeitiSC-Light.ttf
 
 Name: STHeitiSC-Medium
 Class: GB
 Provides(40): STHeiti-Regular
-Filename(10): STHeiti Medium.ttc(1)
-Filename(20): STHeitiSC-Medium.ttf
+Filename(10): STHeiti-Medium.ttc(1)
+Filename(20): STHeiti Medium.ttc(1)
+Filename(30): STHeitiSC-Medium.ttf
 
 Name: STHeitiTC-Light
 Class: CNS
-Filename(10): STHeiti Light.ttc(0)
-Filename(20): STHeitiTC-Light.ttf
+Filename(10): STHeiti-Light.ttc(0)
+Filename(20): STHeiti Light.ttc(0)
+Filename(30): STHeitiTC-Light.ttf
 
 Name: STHeitiTC-Medium
 Class: CNS
 Provides(40): MHei-Medium
-Filename(10): STHeiti Medium.ttc(0)
-Filename(20): STHeitiTC-Medium.ttf
+Filename(10): STHeiti-Medium.ttc(0)
+Filename(20): STHeiti Medium.ttc(0)
+Filename(30): STHeitiTC-Medium.ttf
 
 Name: STFangsong
 Class: GB
