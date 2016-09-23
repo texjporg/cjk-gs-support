@@ -791,11 +791,11 @@ sub check_for_files {
       push @extradirs, "c:/windows/fonts//";
     } else {
       # other dirs to check, for normal unix?
-      for my $d (qw!/Library/Fonts /System/Library/Fonts /Library/Fonts/Microsoft/ /Network/Library/Fonts!) {
-        push @extradirs, $d if (-d $d);
+      for my $d (qw!/Library/Fonts /System/Library/Fonts /System/Library/Assets /Network/Library/Fonts /usr/share/fonts!) {
+        push @extradirs, "$d//" if (-d $d); # recirsive search
       }
       my $home = $ENV{'HOME'};
-      push @extradirs, "$home/Library/Fonts" if (-d "$home/Library/Fonts");
+      push @extradirs, "$home/Library/Fonts//" if (-d "$home/Library/Fonts");
     }
     #
     if (@extradirs) {
