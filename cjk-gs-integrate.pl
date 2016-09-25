@@ -2110,13 +2110,14 @@ Provides(40): STFangsong-Regular
 Filename(20): 华文仿宋.ttf
 Filename(10): STFangsong.ttf
 
+# ----- Wrong symlink Songti.ttc -> 华文宋体.ttf is created! -- HY (2016/09/25)
 Name: STSong
 Class: GB
 Provides(50): STSong-Light
 Filename(10): Songti.ttc(4)
 Filename(20): 宋体.ttc(3)
-Filename(30): 华文宋体.ttf
-Filename(40): STSong.ttf
+Filename(30): STSong.ttf
+Filename(40): 华文宋体.ttf
 
 Name: STSongti-SC-Light
 Class: GB
@@ -2160,13 +2161,14 @@ Class: CNS
 Filename(10): Songti.ttc(2)
 Filename(20): STSongti-TC-Bold.ttf
 
+# ----- Wrong symlink Kaiti.ttc -> 华文楷体.ttf is created! -- HY (2016/09/25)
 Name: STKaiti
 Class: GB
 Provides(50): STKaiti-Regular
 Filename(10): Kaiti.ttc(4)
 Filename(20): 楷体.ttc(3)
-Filename(30): 华文楷体.ttf
-Filename(40): STKaiti.ttf
+Filename(30): STKaiti.ttf
+Filename(40): 华文楷体.ttf
 
 Name: STKaiti-SC-Regular
 Class: GB
@@ -2198,13 +2200,15 @@ Class: CNS
 Filename(10): Kaiti.ttc(2)
 Filename(20): STKaiTi-TC-Bold.ttf
 
-Name: STKaiti-Adobe-CNS1
-Class: CNS
-Provides(50): MKai-Medium
-Filename(10): Kaiti.ttc(4)
-Filename(20): 楷体.ttc(3)
-Filename(30): 华文楷体.ttf
-Filename(40): STKaiti.ttf
+# ----- Is this entry really needed? -- HY (2016/09/25)
+#Name: STKaiti-Adobe-CNS1
+#Class: CNS
+#Provides(50): MKai-Medium
+#Filename(10): Kaiti.ttc(4)
+#Filename(20): 楷体.ttc(3)
+#Filename(30): STKaiti.ttf
+#Filename(40): 华文楷体.ttf
+#
 
 # Adobe fonts
 
