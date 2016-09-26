@@ -2081,27 +2081,27 @@ Class: GB
 Provides(10): STHeiti-Light
 Filename(10): STHeiti-Light.ttc(1)
 Filename(20): STHeiti Light.ttc(1)
-Filename(30): STHeitiSC-Light.ttf
+#Filename(30): STHeitiSC-Light.ttf
 
 Name: STHeitiSC-Medium
 Class: GB
 Provides(40): STHeiti-Regular
 Filename(10): STHeiti-Medium.ttc(1)
 Filename(20): STHeiti Medium.ttc(1)
-Filename(30): STHeitiSC-Medium.ttf
+#Filename(30): STHeitiSC-Medium.ttf
 
 Name: STHeitiTC-Light
 Class: CNS
 Filename(10): STHeiti-Light.ttc(0)
 Filename(20): STHeiti Light.ttc(0)
-Filename(30): STHeitiTC-Light.ttf
+#Filename(30): STHeitiTC-Light.ttf
 
 Name: STHeitiTC-Medium
 Class: CNS
 Provides(40): MHei-Medium
 Filename(10): STHeiti-Medium.ttc(0)
 Filename(20): STHeiti Medium.ttc(0)
-Filename(30): STHeitiTC-Medium.ttf
+#Filename(30): STHeitiTC-Medium.ttf
 
 Name: STFangsong
 Class: GB
@@ -2110,12 +2110,18 @@ Provides(40): STFangsong-Regular
 Filename(20): 华文仿宋.ttf
 Filename(10): STFangsong.ttf
 
-# ----- Wrong symlink Songti.ttc -> 华文宋体.ttf is created! -- HY (2016/09/25)
+# ----- Prevent wrong symlink Songti.ttc -> 华文宋体.ttf -- HY (2016/09/26)
+# TTC entry for Mountain Lion (10.8) or later
 Name: STSong
 Class: GB
 Provides(50): STSong-Light
 Filename(10): Songti.ttc(4)
 Filename(20): 宋体.ttc(3)
+
+# TTF entry for Lion (10.7) or earlier
+Name: STSong
+Class: GB
+Provides(50): STSong-Light
 Filename(30): STSong.ttf
 Filename(40): 华文宋体.ttf
 
@@ -2124,49 +2130,55 @@ Class: GB
 Provides(40): STSong-Light
 Filename(10): Songti.ttc(3)
 Filename(20): 宋体.ttc(2)
-Filename(30): STSongti-SC-Light.ttf
+#Filename(30): STSongti-SC-Light.ttf
 
 Name: STSongti-SC-Regular
 Class: GB
 Filename(10): Songti.ttc(6)
 Filename(20): 宋体.ttc(4)
-Filename(30): STSongti-SC-Regular.ttf
+#Filename(30): STSongti-SC-Regular.ttf
 
 Name: STSongti-SC-Bold
 Class: GB
 Filename(10): Songti.ttc(1)
 Filename(20): 宋体.ttc(1)
-Filename(30): STSongti-SC-Bold.ttf
+#Filename(30): STSongti-SC-Bold.ttf
 
 Name: STSongti-SC-Black
 Class: GB
 Filename(10): Songti.ttc(0)
 Filename(20): 宋体.ttc(0)
-Filename(30): STSongti-SC-Black.ttf
+#Filename(30): STSongti-SC-Black.ttf
 
 Name: STSongti-TC-Light
 Class: CNS
 Provides(40): MSung-Light
 Filename(10): Songti.ttc(5)
-Filename(20): STSongti-TC-Light.ttf
+#Filename(20): STSongti-TC-Light.ttf
 
 Name: STSongti-TC-Regular
 Class: CNS
 Provides(40): MSung-Medium
 Filename(10): Songti.ttc(7)
-Filename(20): STSongti-TC-Regular.ttf
+#Filename(20): STSongti-TC-Regular.ttf
 
 Name: STSongti-TC-Bold
 Class: CNS
 Filename(10): Songti.ttc(2)
-Filename(20): STSongti-TC-Bold.ttf
+#Filename(20): STSongti-TC-Bold.ttf
 
-# ----- Wrong symlink Kaiti.ttc -> 华文楷体.ttf is created! -- HY (2016/09/25)
+# ----- Prevent wrong symlink Kaiti.ttc -> 华文楷体.ttf -- HY (2016/09/26)
+# TTC entry for Mountain Lion (10.8) or later
 Name: STKaiti
 Class: GB
 Provides(50): STKaiti-Regular
 Filename(10): Kaiti.ttc(4)
 Filename(20): 楷体.ttc(3)
+
+# TTF entry for Lion (10.7) or earlier
+Name: STKaiti
+Class: GB
+Provides(50): STKaiti-Regular
 Filename(30): STKaiti.ttf
 Filename(40): 华文楷体.ttf
 
@@ -2175,30 +2187,30 @@ Class: GB
 Provides(40): STKaiti-Regular
 Filename(10): Kaiti.ttc(3)
 Filename(20): 楷体.ttc(2)
-Filename(30): STKaiti-SC-Regular.ttf
+#Filename(30): STKaiti-SC-Regular.ttf
 
 Name: STKaiti-SC-Bold
 Class: GB
 Filename(10): Kaiti.ttc(1)
 Filename(20): 楷体.ttc(1)
-Filename(30): STKaiti-SC-Bold.ttf
+#Filename(30): STKaiti-SC-Bold.ttf
 
 Name: STKaiti-SC-Black
 Class: GB
 Filename(10): Kaiti.ttc(0)
 Filename(20): 楷体.ttc(0)
-Filename(30): STKaiti-SC-Black.ttf
+#Filename(30): STKaiti-SC-Black.ttf
 
 Name: STKaiTi-TC-Regular
 Class: CNS
 Provides(40): MKai-Medium
 Filename(10): Kaiti.ttc(5)
-Filename(20): STKaiTi-TC-Regular.ttf
+#Filename(20): STKaiTi-TC-Regular.ttf
 
 Name: STKaiTi-TC-Bold
 Class: CNS
 Filename(10): Kaiti.ttc(2)
-Filename(20): STKaiTi-TC-Bold.ttf
+#Filename(20): STKaiTi-TC-Bold.ttf
 
 # ----- Is this entry really needed? -- HY (2016/09/25)
 #Name: STKaiti-Adobe-CNS1
@@ -2208,7 +2220,7 @@ Filename(20): STKaiTi-TC-Bold.ttf
 #Filename(20): 楷体.ttc(3)
 #Filename(30): STKaiti.ttf
 #Filename(40): 华文楷体.ttf
-#
+# -----
 
 # Adobe fonts
 
