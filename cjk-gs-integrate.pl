@@ -799,21 +799,27 @@ sub check_for_files {
     }
     #
     if (@extradirs) {
-      # we want that files in OSFONTDIR are found first, before 
+      # TODO: we want that files in OSFONTDIR are found first, before
       # links that we have created in TEXMFLOCAL
       # Thus, instead of setting OSFONTDIR which is at the *END* of
-      # the kpsewhich variables OPENTYPEFONTS and TTFONTS, we put
-      # all these fonts at the front of them
+      # the kpsewhich variables OPENTYPEFONTS and TTFONTS, we'd like to
+      # put all these fonts at the front of them
+      # however, when we explicitly update OPENTYPEFONTS and TTFONTS,
+      # kpathsea cannot distinguish uppercase and lowercase letters
+      # so for now, we do NOT set OPENTYPEFONTS and TTFONTS -- HY (2016/09/27)
       # push current value of OSFONTDIR
       push @extradirs, $ENV{'OSFONTDIR'} if $ENV{'OSFONTDIR'};
-      # update OPENTYPEFONTS and TTFONTS
       if (@extradirs) {
-        my $newotf = join(':', @extradirs) . ':';
-        my $newttf = $newotf;
-        $newotf .= $ENV{'OPENTYPEFONTS'} if ($ENV{'OPENTYPEFONTS'});
-        $newttf .= $ENV{'TTFONTS'} if ($ENV{'TTFONTS'});
-        $ENV{'OPENTYPEFONTS'} = $newotf;
-        $ENV{'TTFONTS'} = $newttf;
+      # comment out -- HY (2016/09/27)
+#        my $newotf = join(':', @extradirs) . ':';
+#        my $newttf = $newotf;
+#        $newotf .= $ENV{'OPENTYPEFONTS'} if ($ENV{'OPENTYPEFONTS'});
+#        $newttf .= $ENV{'TTFONTS'} if ($ENV{'TTFONTS'});
+#        $ENV{'OPENTYPEFONTS'} = $newotf;
+#        $ENV{'TTFONTS'} = $newttf;
+      # new code for uppercase/lowercase workarond -- HY (2016/09/27)
+        my $extrafontdir = join(':', @extradirs) . ':';
+        $ENV{'OSFONTDIR'} = $extrafontdir;
       }
     }
     # prepare for kpsewhich call, we need to do quoting
