@@ -791,11 +791,11 @@ sub check_for_files {
       push @extradirs, "c:/windows/fonts//";
     } else {
       # other dirs to check, for normal unix?
-      for my $d (qw!/Library/Fonts /System/Library/Fonts /Library/Fonts/Microsoft/ /Network/Library/Fonts!) {
-        push @extradirs, $d if (-d $d);
+      for my $d (qw!/Library/Fonts /System/Library/Fonts /System/Library/Assets /Network/Library/Fonts /usr/share/fonts!) {
+        push @extradirs, "$d//" if (-d $d); # recursive search
       }
       my $home = $ENV{'HOME'};
-      push @extradirs, "$home/Library/Fonts" if (-d "$home/Library/Fonts");
+      push @extradirs, "$home/Library/Fonts//" if (-d "$home/Library/Fonts");
     }
     #
     if (@extradirs) {
@@ -1310,18 +1310,18 @@ __DATA__
 
 # Morisawa
 
-Name: A-OTF-FutoGoB101Pr6N-Bold
-PSName: FutoGoB101Pr6N-Bold
+Name: A-OTF-RyuminPr6N-Light
+PSName: RyuminPr6N-Light
 Class: Japan
-Provides(10): FutoGoB101-Bold
-Provides(10): FutoGoB101Pro-Bold
-Filename: A-OTF-FutoGoB101Pr6N-Bold.otf
+Provides(10): Ryumin-Light
+Provides(10): RyuminPro-Light
+Filename: A-OTF-RyuminPr6N-Light.otf
 
-Name: A-OTF-FutoGoB101Pro-Bold
-PSName: FutoGoB101Pro-Bold
+Name: A-OTF-RyuminPro-Light
+PSName: RyuminPro-Light
 Class: Japan
-Provides(20): FutoGoB101-Bold
-Filename: A-OTF-FutoGoB101Pro-Bold.otf
+Provides(20): Ryumin-Light
+Filename: A-OTF-RyuminPro-Light.otf
 
 Name: A-OTF-FutoMinA101Pr6N-Bold
 PSName: FutoMinA101Pr6N-Bold
@@ -1349,11 +1349,18 @@ Class: Japan
 Provides(20): GothicBBB-Medium
 Filename: A-OTF-GothicBBBPro-Medium.otf
 
-Name: A-OTF-Jun101Pro-Light
-PSName: Jun101Pro-Light
+Name: A-OTF-FutoGoB101Pr6N-Bold
+PSName: FutoGoB101Pr6N-Bold
 Class: Japan
-Provides(20): Jun101-Light
-Filename: A-OTF-Jun101Pro-Light.otf
+Provides(10): FutoGoB101-Bold
+Provides(10): FutoGoB101Pro-Bold
+Filename: A-OTF-FutoGoB101Pr6N-Bold.otf
+
+Name: A-OTF-FutoGoB101Pro-Bold
+PSName: FutoGoB101Pro-Bold
+Class: Japan
+Provides(20): FutoGoB101-Bold
+Filename: A-OTF-FutoGoB101Pro-Bold.otf
 
 Name: A-OTF-MidashiGoPr6N-MB31
 PSName: MidashiGoPr6N-MB31
@@ -1368,26 +1375,114 @@ Class: Japan
 Provides(20): MidashiGo-MB31
 Filename: A-OTF-MidashiGoPro-MB31.otf
 
-Name: A-OTF-RyuminPr6N-Light
-PSName: RyuminPr6N-Light
-Class: Japan
-Provides(10): Ryumin-Light
-Provides(10): RyuminPro-Light
-Filename: A-OTF-RyuminPr6N-Light.otf
-
-Name: A-OTF-RyuminPro-Light
-PSName: RyuminPro-Light
-Class: Japan
-Provides(20): Ryumin-Light
-Filename: A-OTF-RyuminPro-Light.otf
-
-Name: A-OTF-ShinMGoPr6N-Light
-PSName: ShinMGoPr6N-Light
+Name: A-OTF-Jun101Pr6N-Light
+PSName: Jun101Pr6N-Light
 Class: Japan
 Provides(10): Jun101-Light
 Provides(10): Jun101Pro-Light
-Filename: A-OTF-ShinMGoPr6N-Light.otf
+Filename: A-OTF-Jun101Pr6N-Light.otf
 
+Name: A-OTF-Jun101Pro-Light
+PSName: Jun101Pro-Light
+Class: Japan
+Provides(20): Jun101-Light
+Filename: A-OTF-Jun101Pro-Light.otf
+
+# Morisawa others (for moriprop);
+# A-OTF-Jun101Pro-Light.otf and A-OTF-RyuminPro-Light.otf already added
+
+Name: A-OTF-Jun201Pro-Regular
+PSName: Jun201Pro-Regular
+Class: Japan
+Provides(20): Jun201Pro-Regular
+Filename: A-OTF-Jun201Pro-Regular.otf
+
+Name: A-OTF-Jun34Pro-Medium
+PSName: Jun34Pro-Medium
+Class: Japan
+Provides(20): Jun34Pro-Medium
+Filename: A-OTF-Jun34Pro-Medium.otf
+
+Name: A-OTF-Jun501Pro-Bold
+PSName: Jun501Pro-Bold
+Class: Japan
+Provides(20): Jun501Pro-Bold
+Filename: A-OTF-Jun501Pro-Bold.otf
+
+Name: A-OTF-RyuminPro-Regular
+PSName: RyuminPro-Regular
+Class: Japan
+Provides(20): Ryumin-Regular
+Filename: A-OTF-RyuminPro-Regular.otf
+
+Name: A-OTF-RyuminPro-Medium
+PSName: RyuminPro-Medium
+Class: Japan
+Provides(20): Ryumin-Medium
+Filename: A-OTF-RyuminPro-Medium.otf
+
+Name: A-OTF-RyuminPro-Bold
+PSName: RyuminPro-Bold
+Class: Japan
+Provides(20): RyuminPro-Bold
+Filename: A-OTF-RyuminPro-Bold.otf
+
+Name: A-OTF-RyuminPro-Heavy
+PSName: RyuminPro-Heavy
+Class: Japan
+Provides(20): Ryumin-Heavy
+Filename: A-OTF-RyuminPro-Heavy.otf
+
+Name: A-OTF-RyuminPro-Ultra
+PSName: RyuminPro-Ultra
+Class: Japan
+Provides(20): Ryumin-Ultra
+Filename: A-OTF-RyuminPro-Ultra.otf
+
+Name: A-OTF-ShinGoPro-Light
+PSName: ShinGoPro-Light
+Class: Japan
+Provides(20): ShinGo-Light
+Filename: A-OTF-ShinGoPro-Light.otf
+
+Name: A-OTF-ShinGoPro-Regular
+PSName: ShinGoPro-Regular
+Class: Japan
+Provides(20): ShinGo-Regular
+Filename: A-OTF-ShinGoPro-Regular.otf
+
+Name: A-OTF-ShinGoPro-Medium
+PSName: ShinGoPro-Medium
+Class: Japan
+Provides(20): ShinGo-Medium
+Filename: A-OTF-ShinGoPro-Medium.otf
+
+Name: A-OTF-ShinGoPro-Bold
+PSName: ShinGoPro-Bold
+Class: Japan
+Provides(20): ShinGoPro-Bold
+Filename: A-OTF-ShinGoPro-Bold.otf
+
+Name: A-OTF-ShinGoPro-Heavy
+PSName: ShinGoPro-Heavy
+Class: Japan
+Provides(20): ShinGo-Heavy
+Filename: A-OTF-ShinGoPro-Heavy.otf
+
+Name: A-OTF-ShinGoPro-Ultra
+PSName: ShinGoPro-Ultra
+Class: Japan
+Provides(20): ShinGo-Ultra
+Filename: A-OTF-ShinGoPro-Ultra.otf
+
+# ----- Does this font really exist, and really needed? -- HY (2016/09/24)
+#Name: A-OTF-ShinMGoPr6N-Light
+#PSName: ShinMGoPr6N-Light
+#Class: Japan
+#Provides(10): Jun101-Light
+#Provides(10): Jun101Pro-Light
+#Filename: A-OTF-ShinMGoPr6N-Light.otf
+# -----
 
 # Hiragino
 
@@ -1584,7 +1679,6 @@ Filename(30): ヒラギノ明朝 ProN W3.ttc(0)
 Filename(29): ヒラギノ明朝 ProN W3.ttc(0)
 Filename(28): HiraginoSerif-W3.ttc(0)
 
-
 Name: HiraMinProN-W6
 Class: Japan
 Provides(30): FutoMinA101-Bold
@@ -1596,19 +1690,19 @@ Filename(30): ヒラギノ明朝 ProN W6.ttc(0)
 Filename(29): ヒラギノ明朝 ProN W6.ttc(0)
 Filename(28): HiraginoSerif-W6.ttc(0)
 
-
 Name: HiraginoSansGB-W3
 Class: GB
 Filename(20): Hiragino Sans GB W3.otf
 Filename(10): HiraginoSansGB-W3.otf
 Filename(30): Hiragino Sans GB W3.ttc(0)
+Filename(28): HiraginoSansGB-W3.ttc(0)
 
 Name: HiraginoSansGB-W6
 Class: GB
 Filename(20): Hiragino Sans GB W6.otf
 Filename(10): HiraginoSansGB-W6.otf
 Filename(30): Hiragino Sans GB W6.ttc(0)
-
+Filename(28): HiraginoSansGB-W6.ttc(0)
 
 # Yu-fonts MacOS version
 
@@ -1681,11 +1775,17 @@ Provides(60): GothicBBB-Medium
 Provides(60): GothicBBBPro-Medium
 Filename(20): yugothic.ttf
 Filename(10): YuGothic-Regular.ttf
+Filename(30): YuGothR.ttc(0)
+
+Name: YuGothic-Medium
+Class: Japan
+Filename(30): YuGothM.ttc(0)
 
 Name: YuGothic-Light
 Class: Japan
 Filename(20): yugothil.ttf
 Filename(10): YuGothic-Light.ttf
+Filename(30): YuGothL.ttc(0)
 
 Name: YuGothic-Bold
 Class: Japan
@@ -1697,6 +1797,7 @@ Provides(60): MidashiGo-MB31
 Provides(60): MidashiGoPro-MB31
 Filename(20): yugothib.ttf
 Filename(10): YuGothic-Bold.ttf
+Filename(30): YuGothB.ttc(0)
 
 # IPA fonts
 
@@ -1744,6 +1845,18 @@ Provides(100): MidashiGoPro-MB31
 Filename(20): ipaexg.ttf
 Filename(10): IPAexGothic.ttf
 
+# IPA proportional fonts
+
+Name: IPAPMincho
+Class: Japan
+Filename(20): ipamp.ttf
+Filename(10): IPAPMincho.ttf
+
+Name: IPAPGothic
+Class: Japan
+Filename(20): ipagp.ttf
+Filename(10): IPAPGothic.ttf
+
 # Kozuka fonts
 
 Name: KozGoPr6N-Bold
@@ -1778,15 +1891,6 @@ Name: KozGoPr6N-Light
 Class: Japan
 Filename: KozGoPr6N-Light.otf
 
-Name: KozGoPro-ExtraLight
-Class: Japan
-Filename: KozGoPro-ExtraLight.otf
-
-Name: KozGoPro-Light
-Class: Japan
-Filename: KozGoPro-Light.otf
-
-
 Name: KozGoPro-Bold
 Class: Japan
 Provides(90): FutoGoB101-Bold
@@ -1810,6 +1914,14 @@ Filename: KozGoPro-Medium.otf
 Name: KozGoPro-Regular
 Class: Japan
 Filename: KozGoPro-Regular.otf
+
+Name: KozGoPro-ExtraLight
+Class: Japan
+Filename: KozGoPro-ExtraLight.otf
+
+Name: KozGoPro-Light
+Class: Japan
+Filename: KozGoPro-Light.otf
 
 Name: KozGoProVI-Bold
 Class: Japan
@@ -1841,9 +1953,13 @@ Provides(70): FutoMinA101-Bold
 Provides(70): FutoMinA101Pro-Bold
 Filename: KozMinPr6N-Bold.otf
 
-Name: KozMinPr6N-Light
+Name: KozMinPr6N-Heavy
 Class: Japan
-Filename: KozMinPr6N-Light.otf
+Filename: KozMinPr6N-Heavy.otf
+
+Name: KozMinPr6N-Medium
+Class: Japan
+Filename: KozMinPr6N-Medium.otf
 
 Name: KozMinPr6N-Regular
 Class: Japan
@@ -1851,15 +1967,27 @@ Provides(70): Ryumin-Light
 Provides(70): RyuminPro-Light
 Filename: KozMinPr6N-Regular.otf
 
+Name: KozMinPr6N-ExtraLight
+Class: Japan
+Filename: KozMinPr6N-ExtraLight.otf
+
+Name: KozMinPr6N-Light
+Class: Japan
+Filename: KozMinPr6N-Light.otf
+
 Name: KozMinPro-Bold
 Class: Japan
 Provides(90): FutoMinA101-Bold
 Provides(90): FutoMinA101Pro-Bold
 Filename: KozMinPro-Bold.otf
 
-Name: KozMinPro-Light
+Name: KozMinPro-Heavy
 Class: Japan
-Filename: KozMinPro-Light.otf
+Filename: KozMinPro-Heavy.otf
+
+Name: KozMinPro-Medium
+Class: Japan
+Filename: KozMinPro-Medium.otf
 
 Name: KozMinPro-Regular
 Class: Japan
@@ -1867,15 +1995,19 @@ Provides(90): Ryumin-Light
 Provides(90): RyuminPro-Light
 Filename: KozMinPro-Regular.otf
 
+Name: KozMinPro-ExtraLight
+Class: Japan
+Filename: KozMinPro-ExtraLight.otf
+
+Name: KozMinPro-Light
+Class: Japan
+Filename: KozMinPro-Light.otf
+
 Name: KozMinProVI-Bold
 Class: Japan
 Provides(80): FutoMinA101-Bold
 Provides(80): FutoMinA101Pro-Bold
 Filename: KozMinProVI-Bold.otf
-
-Name: KozMinProVI-Light
-Class: Japan
-Filename: KozMinProVI-Light.otf
 
 Name: KozMinProVI-Regular
 Class: Japan
@@ -1883,34 +2015,14 @@ Provides(80): Ryumin-Light
 Provides(80): RyuminPro-Light
 Filename: KozMinProVI-Regular.otf
 
-Name: KozMinPr6N-ExtraLight
+Name: KozMinProVI-Light
 Class: Japan
-Filename: KozMinPr6N-ExtraLight.otf
-
-Name: KozMinPr6N-Medium
-Class: Japan
-Filename: KozMinPr6N-Medium.otf
-
-Name: KozMinPr6N-Heavy
-Class: Japan
-Filename: KozMinPr6N-Heavy.otf
-
-Name: KozMinPro-ExtraLight
-Class: Japan
-Filename: KozMinPro-ExtraLight.otf
-
-Name: KozMinPro-Medium
-Class: Japan
-Filename: KozMinPro-Medium.otf
-
-Name: KozMinPro-Heavy
-Class: Japan
-Filename: KozMinPro-Heavy.otf
+Filename: KozMinProVI-Light.otf
 
 #
 # other OSX 11 fonts
 
-# TODO TODO should they provide Maru Gothic ???
+# TODO should they provide Maru Gothic ???
 Name: TsukuARdGothic-Regular
 Class: Japan
 Filename: TsukushiAMaruGothic.ttc(0)
@@ -1967,25 +2079,29 @@ Filename(10): STHeiti.ttf
 Name: STHeitiSC-Light
 Class: GB
 Provides(10): STHeiti-Light
-Filename(10): STHeiti Light.ttc(1)
-Filename(20): STHeitiSC-Light.ttf
+Filename(10): STHeiti-Light.ttc(1)
+Filename(20): STHeiti Light.ttc(1)
+#Filename(30): STHeitiSC-Light.ttf
 
 Name: STHeitiSC-Medium
 Class: GB
 Provides(40): STHeiti-Regular
-Filename(10): STHeiti Medium.ttc(1)
-Filename(20): STHeitiSC-Medium.ttf
+Filename(10): STHeiti-Medium.ttc(1)
+Filename(20): STHeiti Medium.ttc(1)
+#Filename(30): STHeitiSC-Medium.ttf
 
 Name: STHeitiTC-Light
 Class: CNS
-Filename(10): STHeiti Light.ttc(0)
-Filename(20): STHeitiTC-Light.ttf
+Filename(10): STHeiti-Light.ttc(0)
+Filename(20): STHeiti Light.ttc(0)
+#Filename(30): STHeitiTC-Light.ttf
 
 Name: STHeitiTC-Medium
 Class: CNS
 Provides(40): MHei-Medium
-Filename(10): STHeiti Medium.ttc(0)
-Filename(20): STHeitiTC-Medium.ttf
+Filename(10): STHeiti-Medium.ttc(0)
+Filename(20): STHeiti Medium.ttc(0)
+#Filename(30): STHeitiTC-Medium.ttf
 
 Name: STFangsong
 Class: GB
@@ -1994,101 +2110,117 @@ Provides(40): STFangsong-Regular
 Filename(20): 华文仿宋.ttf
 Filename(10): STFangsong.ttf
 
+# ----- Prevent wrong symlink Songti.ttc -> 华文宋体.ttf -- HY (2016/09/26)
+# TTC entry for Mountain Lion (10.8) or later
 Name: STSong
 Class: GB
 Provides(50): STSong-Light
 Filename(10): Songti.ttc(4)
 Filename(20): 宋体.ttc(3)
-Filename(30): 华文宋体.ttf
-Filename(40): STSong.ttf
+
+# TTF entry for Lion (10.7) or earlier
+Name: STSong
+Class: GB
+Provides(50): STSong-Light
+Filename(30): STSong.ttf
+Filename(40): 华文宋体.ttf
 
 Name: STSongti-SC-Light
 Class: GB
 Provides(40): STSong-Light
 Filename(10): Songti.ttc(3)
 Filename(20): 宋体.ttc(2)
-Filename(30): STSongti-SC-Light.ttf
+#Filename(30): STSongti-SC-Light.ttf
 
 Name: STSongti-SC-Regular
 Class: GB
 Filename(10): Songti.ttc(6)
 Filename(20): 宋体.ttc(4)
-Filename(30): STSongti-SC-Regular.ttf
+#Filename(30): STSongti-SC-Regular.ttf
 
 Name: STSongti-SC-Bold
 Class: GB
 Filename(10): Songti.ttc(1)
 Filename(20): 宋体.ttc(1)
-Filename(30): STSongti-SC-Bold.ttf
+#Filename(30): STSongti-SC-Bold.ttf
 
 Name: STSongti-SC-Black
 Class: GB
 Filename(10): Songti.ttc(0)
 Filename(20): 宋体.ttc(0)
-Filename(30): STSongti-SC-Black.ttf
+#Filename(30): STSongti-SC-Black.ttf
 
 Name: STSongti-TC-Light
 Class: CNS
 Provides(40): MSung-Light
 Filename(10): Songti.ttc(5)
-Filename(20): STSongti-TC-Light.ttf
+#Filename(20): STSongti-TC-Light.ttf
 
 Name: STSongti-TC-Regular
 Class: CNS
 Provides(40): MSung-Medium
 Filename(10): Songti.ttc(7)
-Filename(20): STSongti-TC-Regular.ttf
+#Filename(20): STSongti-TC-Regular.ttf
 
 Name: STSongti-TC-Bold
 Class: CNS
 Filename(10): Songti.ttc(2)
-Filename(20): STSongti-TC-Bold.ttf
+#Filename(20): STSongti-TC-Bold.ttf
 
+# ----- Prevent wrong symlink Kaiti.ttc -> 华文楷体.ttf -- HY (2016/09/26)
+# TTC entry for Mountain Lion (10.8) or later
 Name: STKaiti
 Class: GB
 Provides(50): STKaiti-Regular
 Filename(10): Kaiti.ttc(4)
 Filename(20): 楷体.ttc(3)
-Filename(30): 华文楷体.ttf
-Filename(40): STKaiti.ttf
+
+# TTF entry for Lion (10.7) or earlier
+Name: STKaiti
+Class: GB
+Provides(50): STKaiti-Regular
+Filename(30): STKaiti.ttf
+Filename(40): 华文楷体.ttf
 
 Name: STKaiti-SC-Regular
 Class: GB
 Provides(40): STKaiti-Regular
 Filename(10): Kaiti.ttc(3)
 Filename(20): 楷体.ttc(2)
-Filename(30): STKaiti-SC-Regular.ttf
+#Filename(30): STKaiti-SC-Regular.ttf
 
 Name: STKaiti-SC-Bold
 Class: GB
 Filename(10): Kaiti.ttc(1)
 Filename(20): 楷体.ttc(1)
-Filename(30): STKaiti-SC-Bold.ttf
+#Filename(30): STKaiti-SC-Bold.ttf
 
 Name: STKaiti-SC-Black
 Class: GB
 Filename(10): Kaiti.ttc(0)
 Filename(20): 楷体.ttc(0)
-Filename(30): STKaiti-SC-Black.ttf
+#Filename(30): STKaiti-SC-Black.ttf
 
 Name: STKaiTi-TC-Regular
 Class: CNS
 Provides(40): MKai-Medium
 Filename(10): Kaiti.ttc(5)
-Filename(20): STKaiTi-TC-Regular.ttf
+#Filename(20): STKaiTi-TC-Regular.ttf
 
 Name: STKaiTi-TC-Bold
 Class: CNS
 Filename(10): Kaiti.ttc(2)
-Filename(20): STKaiTi-TC-Bold.ttf
+#Filename(20): STKaiTi-TC-Bold.ttf
 
-Name: STKaiti-Adobe-CNS1
-Class: CNS
-Provides(50): MKai-Medium
-Filename(10): Kaiti.ttc(4)
-Filename(20): 楷体.ttc(3)
-Filename(30): 华文楷体.ttf
-Filename(40): STKaiti.ttf
+# ----- Is this entry really needed? -- HY (2016/09/25)
+#Name: STKaiti-Adobe-CNS1
+#Class: CNS
+#Provides(50): MKai-Medium
+#Filename(10): Kaiti.ttc(4)
+#Filename(20): 楷体.ttc(3)
+#Filename(30): STKaiti.ttf
+#Filename(40): 华文楷体.ttf
+# -----
 
 # Adobe fonts
 
