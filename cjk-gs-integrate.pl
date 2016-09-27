@@ -804,21 +804,21 @@ sub check_for_files {
       # Thus, instead of setting OSFONTDIR which is at the *END* of
       # the kpsewhich variables OPENTYPEFONTS and TTFONTS, we'd like to
       # put all these fonts at the front of them
-      # however, when we explicitly update OPENTYPEFONTS and TTFONTS,
-      # kpathsea cannot distinguish uppercase and lowercase letters
-      # so for now, we do NOT set OPENTYPEFONTS and TTFONTS -- HY (2016/09/27)
+      # However, when we explicitly update OPENTYPEFONTS and TTFONTS,
+      # kpathsea does not distinguish uppercase and lowercase letters
+      # So for now, we do NOT set OPENTYPEFONTS and TTFONTS -- HY (2016/09/27)
       # push current value of OSFONTDIR
       push @extradirs, $ENV{'OSFONTDIR'} if $ENV{'OSFONTDIR'};
       if (@extradirs) {
       # comment out -- HY (2016/09/27)
-#        my $newotf = join(':', @extradirs) . ':';
+#        my $newotf = join($sep, @extradirs) . $sep;
 #        my $newttf = $newotf;
 #        $newotf .= $ENV{'OPENTYPEFONTS'} if ($ENV{'OPENTYPEFONTS'});
 #        $newttf .= $ENV{'TTFONTS'} if ($ENV{'TTFONTS'});
 #        $ENV{'OPENTYPEFONTS'} = $newotf;
 #        $ENV{'TTFONTS'} = $newttf;
-      # new code for uppercase/lowercase workarond -- HY (2016/09/27)
-        my $extrafontdir = join(':', @extradirs) . ':';
+      # new code for uppercase/lowercase workaround -- HY (2016/09/27)
+        my $extrafontdir = join($sep, @extradirs) . $sep;
         $ENV{'OSFONTDIR'} = $extrafontdir;
       }
     }
