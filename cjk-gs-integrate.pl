@@ -1375,11 +1375,14 @@ Class: Japan
 Provides(20): MidashiGo-MB31
 Filename: A-OTF-MidashiGoPro-MB31.otf
 
+# A-OTF-Jun101Pr6N-Light has been replaced by A-OTF-ShinMGoPr6N-Light
+# in otf-(up-)morisawa-pr6n.map since jfontmaps 20140301.0
+# now unnecessary, but reserved for backward compatibility
 Name: A-OTF-Jun101Pr6N-Light
 PSName: Jun101Pr6N-Light
 Class: Japan
-Provides(10): Jun101-Light
-Provides(10): Jun101Pro-Light
+Provides(11): Jun101-Light
+Provides(11): Jun101Pro-Light
 Filename: A-OTF-Jun101Pr6N-Light.otf
 
 Name: A-OTF-Jun101Pro-Light
@@ -1387,6 +1390,13 @@ PSName: Jun101Pro-Light
 Class: Japan
 Provides(20): Jun101-Light
 Filename: A-OTF-Jun101Pro-Light.otf
+
+Name: A-OTF-ShinMGoPr6N-Light
+PSName: ShinMGoPr6N-Light
+Class: Japan
+Provides(10): Jun101-Light
+Provides(10): Jun101Pro-Light
+Filename: A-OTF-ShinMGoPr6N-Light.otf
 
 # Morisawa others (for moriprop);
 # A-OTF-Jun101Pro-Light.otf and A-OTF-RyuminPro-Light.otf already added
@@ -1474,15 +1484,6 @@ PSName: ShinGoPro-Ultra
 Class: Japan
 Provides(20): ShinGo-Ultra
 Filename: A-OTF-ShinGoPro-Ultra.otf
-
-# ----- Does this font really exist, and really needed? -- HY (2016/09/24)
-#Name: A-OTF-ShinMGoPr6N-Light
-#PSName: ShinMGoPr6N-Light
-#Class: Japan
-#Provides(10): Jun101-Light
-#Provides(10): Jun101Pro-Light
-#Filename: A-OTF-ShinMGoPr6N-Light.otf
-# -----
 
 # Hiragino
 
