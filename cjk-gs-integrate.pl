@@ -2176,16 +2176,29 @@ Filename(10): Songti.ttc(2)
 
 # ----- Prevent wrong symlink Kaiti.ttc -> 华文楷体.ttf -- HY (2016/09/26)
 # TTC entry for Mountain Lion (10.8) or later
+# GB
 Name: STKaiti
 Class: GB
 Provides(50): STKaiti-Regular
 Filename(10): Kaiti.ttc(4)
 Filename(20): 楷体.ttc(3)
-
+# CNS
+Name: STKaiti-Adobe-CNS1
+Class: CNS
+Provides(50): MKai-Medium
+Filename(10): Kaiti.ttc(4)
+Filename(20): 楷体.ttc(3)
 # TTF entry for Lion (10.7) or earlier
+# GB
 Name: STKaiti
 Class: GB
 Provides(50): STKaiti-Regular
+Filename(30): STKaiti.ttf
+Filename(40): 华文楷体.ttf
+# CNS
+Name: STKaiti-Adobe-CNS1
+Class: CNS
+Provides(50): MKai-Medium
 Filename(30): STKaiti.ttf
 Filename(40): 华文楷体.ttf
 
@@ -2218,16 +2231,6 @@ Name: STKaiTi-TC-Bold
 Class: CNS
 Filename(10): Kaiti.ttc(2)
 #Filename(20): STKaiTi-TC-Bold.ttf
-
-# ----- Is this entry really needed? -- HY (2016/09/25)
-#Name: STKaiti-Adobe-CNS1
-#Class: CNS
-#Provides(50): MKai-Medium
-#Filename(10): Kaiti.ttc(4)
-#Filename(20): 楷体.ttc(3)
-#Filename(30): STKaiti.ttf
-#Filename(40): 华文楷体.ttf
-# -----
 
 # Adobe fonts
 
@@ -2285,6 +2288,35 @@ Filename: AdobeGothicStd-Bold.otf
 #
 # KOREAN FONTS
 #
+
+# baekmuk package (free)
+# This is a special case, because "batang.ttf" in baekmuk and
+# "Batang.ttf" in Microsoft Mac Office font share the same filename;
+# symlink name should be "Baekmuk-Batang.ttf"
+# similar for "Gulim.ttf" -- HY (2016/09/29)
+
+Name: Baekmuk-Batang
+Class: Korea
+Provides(110): HYSMyeongJo-Medium
+Filename(20): batang.ttf
+Filename(10): Baekmuk-Batang.ttf
+
+Name: Baekmuk-Dotum
+Class: Korea
+Provides(110): HYGoThic-Medium
+Filename(20): dotum.ttf
+Filename(10): Baekmuk-Dotum.ttf
+
+Name: Baekmuk-Gulim
+Class: Korea
+Provides(110): HYRGoThic-Medium
+Filename(20): gulim.ttf
+Filename(10): Baekmuk-Gulim.ttf
+
+Name: Baekmuk-Headline
+Class: Korea
+Filename(20): hline.ttf
+Filename(10): Baekmuk-Headline.ttf
 
 # apple fonts
 
@@ -2376,22 +2408,23 @@ Filename: AppleSDGothicNeo-Heavy.otf
 
 # Korea
 
+Name: Batang
+Class: Korea
+Provides(40): HYSMyeongJo-Medium
+Filename(50): Batang.ttf
+
+# TODO: Does this font really exist? -- HY (2016/09/29)
+Name: Dotum
+Class: Korea
+Provides(40): HYGoThic-Medium
+Filename(50): Dotum.ttf
+
 Name: Gulim
 Class: Korea
 Provides(70): HYRGoThic-Medium
 Provides(70): HYGoThic-Medium
 Filename(30): Gulim.ttf
 Filename(50): gulim.ttc
-
-Name: Dotum
-Class: Korea
-Provides(40): HYGoThic-Medium
-Filename(50): Dotum.ttf
-
-Name: Batang
-Class: Korea
-Provides(40): HYSMyeongJo-Medium
-Filename(50): Batang.ttf
 
 # simplified chinese
 
