@@ -799,21 +799,27 @@ sub check_for_files {
     }
     #
     if (@extradirs) {
-      # we want that files in OSFONTDIR are found first, before 
+      # TODO: we want that files in OSFONTDIR are found first, before
       # links that we have created in TEXMFLOCAL
       # Thus, instead of setting OSFONTDIR which is at the *END* of
-      # the kpsewhich variables OPENTYPEFONTS and TTFONTS, we put
-      # all these fonts at the front of them
+      # the kpsewhich variables OPENTYPEFONTS and TTFONTS, we'd like to
+      # put all these fonts at the front of them
+      # However, when we explicitly update OPENTYPEFONTS and TTFONTS,
+      # kpathsea does not distinguish uppercase and lowercase letters
+      # So for now, we do NOT set OPENTYPEFONTS and TTFONTS -- HY (2016/09/27)
       # push current value of OSFONTDIR
       push @extradirs, $ENV{'OSFONTDIR'} if $ENV{'OSFONTDIR'};
-      # update OPENTYPEFONTS and TTFONTS
       if (@extradirs) {
-        my $newotf = join(':', @extradirs) . ':';
-        my $newttf = $newotf;
-        $newotf .= $ENV{'OPENTYPEFONTS'} if ($ENV{'OPENTYPEFONTS'});
-        $newttf .= $ENV{'TTFONTS'} if ($ENV{'TTFONTS'});
-        $ENV{'OPENTYPEFONTS'} = $newotf;
-        $ENV{'TTFONTS'} = $newttf;
+      # comment out -- HY (2016/09/27)
+#        my $newotf = join($sep, @extradirs) . $sep;
+#        my $newttf = $newotf;
+#        $newotf .= $ENV{'OPENTYPEFONTS'} if ($ENV{'OPENTYPEFONTS'});
+#        $newttf .= $ENV{'TTFONTS'} if ($ENV{'TTFONTS'});
+#        $ENV{'OPENTYPEFONTS'} = $newotf;
+#        $ENV{'TTFONTS'} = $newttf;
+      # new code for uppercase/lowercase workaround -- HY (2016/09/27)
+        my $extrafontdir = join($sep, @extradirs) . $sep;
+        $ENV{'OSFONTDIR'} = $extrafontdir;
       }
     }
     # prepare for kpsewhich call, we need to do quoting
@@ -1375,11 +1381,14 @@ Class: Japan
 Provides(20): MidashiGo-MB31
 Filename: A-OTF-MidashiGoPro-MB31.otf
 
+# A-OTF-Jun101Pr6N-Light has been replaced by A-OTF-ShinMGoPr6N-Light
+# in otf-(up-)morisawa-pr6n.map since jfontmaps 20140301.0
+# now unnecessary, but reserved for backward compatibility
 Name: A-OTF-Jun101Pr6N-Light
 PSName: Jun101Pr6N-Light
 Class: Japan
-Provides(10): Jun101-Light
-Provides(10): Jun101Pro-Light
+Provides(11): Jun101-Light
+Provides(11): Jun101Pro-Light
 Filename: A-OTF-Jun101Pr6N-Light.otf
 
 Name: A-OTF-Jun101Pro-Light
@@ -1387,6 +1396,13 @@ PSName: Jun101Pro-Light
 Class: Japan
 Provides(20): Jun101-Light
 Filename: A-OTF-Jun101Pro-Light.otf
+
+Name: A-OTF-ShinMGoPr6N-Light
+PSName: ShinMGoPr6N-Light
+Class: Japan
+Provides(10): Jun101-Light
+Provides(10): Jun101Pro-Light
+Filename: A-OTF-ShinMGoPr6N-Light.otf
 
 # Morisawa others (for moriprop);
 # A-OTF-Jun101Pro-Light.otf and A-OTF-RyuminPro-Light.otf already added
@@ -1474,15 +1490,6 @@ PSName: ShinGoPro-Ultra
 Class: Japan
 Provides(20): ShinGo-Ultra
 Filename: A-OTF-ShinGoPro-Ultra.otf
-
-# ----- Does this font really exist, and really needed? -- HY (2016/09/24)
-#Name: A-OTF-ShinMGoPr6N-Light
-#PSName: ShinMGoPr6N-Light
-#Class: Japan
-#Provides(10): Jun101-Light
-#Provides(10): Jun101Pro-Light
-#Filename: A-OTF-ShinMGoPr6N-Light.otf
-# -----
 
 # Hiragino
 
@@ -1755,26 +1762,26 @@ Class: Japan
 Provides(60): Ryumin-Light
 Provides(60): RyuminPro-Light
 Filename(20): yumin.ttf
-Filename(10): YuMincho-Regular.ttf
+#Filename(10): YuMincho-Regular.ttf
 
 Name: YuMincho-Light
 Class: Japan
 Filename(20): yuminl.ttf
-Filename(10): YuMincho-Light.ttf
+#Filename(10): YuMincho-Light.ttf
 
 Name: YuMincho-DemiBold
 Class: Japan
 Provides(60): FutoMinA101-Bold
 Provides(60): FutoMinA101Pro-Bold
 Filename(20): yumindb.ttf
-Filename(10): YuMincho-DemiBold.ttf
+#Filename(10): YuMincho-DemiBold.ttf
 
 Name: YuGothic-Regular
 Class: Japan
 Provides(60): GothicBBB-Medium
 Provides(60): GothicBBBPro-Medium
 Filename(20): yugothic.ttf
-Filename(10): YuGothic-Regular.ttf
+#Filename(10): YuGothic-Regular.ttf
 Filename(30): YuGothR.ttc(0)
 
 Name: YuGothic-Medium
@@ -1784,7 +1791,7 @@ Filename(30): YuGothM.ttc(0)
 Name: YuGothic-Light
 Class: Japan
 Filename(20): yugothil.ttf
-Filename(10): YuGothic-Light.ttf
+#Filename(10): YuGothic-Light.ttf
 Filename(30): YuGothL.ttc(0)
 
 Name: YuGothic-Bold
@@ -1796,7 +1803,7 @@ Provides(60): Jun101Pro-Light
 Provides(60): MidashiGo-MB31
 Provides(60): MidashiGoPro-MB31
 Filename(20): yugothib.ttf
-Filename(10): YuGothic-Bold.ttf
+#Filename(10): YuGothic-Bold.ttf
 Filename(30): YuGothB.ttc(0)
 
 # IPA fonts
@@ -1808,7 +1815,7 @@ Provides(110): RyuminPro-Light
 Provides(110): FutoMinA101-Bold
 Provides(110): FutoMinA101Pro-Bold
 Filename(20): ipam.ttf
-Filename(10): IPAMincho.ttf
+#Filename(10): IPAMincho.ttf
 
 Name: IPAGothic
 Class: Japan
@@ -1821,7 +1828,7 @@ Provides(110): Jun101Pro-Light
 Provides(110): MidashiGo-MB31
 Provides(110): MidashiGoPro-MB31
 Filename(20): ipag.ttf
-Filename(10): IPAGothic.ttf
+#Filename(10): IPAGothic.ttf
 
 Name: IPAexMincho
 Class: Japan
@@ -1830,7 +1837,7 @@ Provides(100): RyuminPro-Light
 Provides(100): FutoMinA101-Bold
 Provides(100): FutoMinA101Pro-Bold
 Filename(20): ipaexm.ttf
-Filename(10): IPAexMincho.ttf
+#Filename(10): IPAexMincho.ttf
 
 Name: IPAexGothic
 Class: Japan
@@ -1843,19 +1850,19 @@ Provides(100): Jun101Pro-Light
 Provides(100): MidashiGo-MB31
 Provides(100): MidashiGoPro-MB31
 Filename(20): ipaexg.ttf
-Filename(10): IPAexGothic.ttf
+#Filename(10): IPAexGothic.ttf
 
 # IPA proportional fonts
 
 Name: IPAPMincho
 Class: Japan
 Filename(20): ipamp.ttf
-Filename(10): IPAPMincho.ttf
+#Filename(10): IPAPMincho.ttf
 
 Name: IPAPGothic
 Class: Japan
 Filename(20): ipagp.ttf
-Filename(10): IPAPGothic.ttf
+#Filename(10): IPAPGothic.ttf
 
 # Kozuka fonts
 
