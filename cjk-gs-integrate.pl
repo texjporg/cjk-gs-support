@@ -1059,6 +1059,9 @@ sub find_gs_resource {
       # /path/to/share/ghostscript/$(gs --version)/Resource
       chomp( $foundres = `which gs` );
       $foundres =~ s/\/bin\/gs/\/share\/ghostscript\/@gsver\/Resource/;
+      if ( ! -d $foundres ) {
+        $foundres = '';
+      }
       if (!$foundres) {
         print_error("Found gs but no resource???\n");
       }
