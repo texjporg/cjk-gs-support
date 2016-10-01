@@ -1054,10 +1054,10 @@ sub find_gs_resource {
     if ($?) {
       print_error("Cannot get gs version ...\n");
     } else {
-      print_debug("Finding gs resource by assuming relative path ...\n");
       # trial 1: assume the relative path
       # when /path/to/bin/gs is found, then there should be
       # /path/to/share/ghostscript/$(gs --version)/Resource
+      print_debug("Finding gs resource by assuming relative path ...\n");
       chomp( $foundres = `which gs` );
       $foundres =~ s!/bin/gs!/share/ghostscript/$gsver/Resource!;
       if ( ! -d $foundres ) {
@@ -1068,13 +1068,13 @@ sub find_gs_resource {
       }
     }
     if (!$foundres) {
+      chomp( my @ret = `gs --help 2>$nul` );
       if ($?) {
         print_error("Cannot run gs --help ...\n");
       } else {
-        print_debug("Finding gs resource by parsing help message ...\n");
         # trial 2: parse gs help message
+        print_debug("Finding gs resource by parsing help message ...\n");
         $foundres = '';
-        chomp( my @ret = `gs --help 2>$nul` );
         # try to find resource line
         for (@ret) {
           if (m!Resource/Font!) {
