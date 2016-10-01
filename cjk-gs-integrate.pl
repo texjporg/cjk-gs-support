@@ -1046,25 +1046,22 @@ sub read_font_database {
 }
 
 sub find_gs_resource {
-  # we assume that gs is in the path
-  # on Windows we probably have to try something else
-  chomp( my @ret = `gs --help 2>$nul` );
   my $foundres = '';
-  if ($?) {
-    print_error("Cannot find gs ...\n");
-  } else {
-    # try to find resource line
-    for (@ret) {
-      if (m!Resource/Font!) {
-        $foundres = $_;
-        # extract the first substring of non-space chars
-        # up to Resource/Font and drop the /Font part
-        $foundres =~ s!^.*\s(\S*Resource)/Font.*$!$1!;
-        last;
+  if (!win32()) {
+    # we assume that gs is in the path
+    # on Windows we probably have to try something else
+    chomp( my @gsver = `gs --version 2>$nul` );
+    if ($?) {
+      print_error("Cannot find gs ...\n");
+    } else {
+      # assume the relative path
+      # when /path/to/bin/gs is found, then there should be
+      # /path/to/share/ghostscript/$(gs --version)/Resource
+      chomp( $foundres = `which gs` );
+      $foundres =~ s/\/bin\/gs/\/share\/ghostscript\/@gsver\/Resource/;
+      if (!$foundres) {
+        print_error("Found gs but no resource???\n");
       }
-    }
-    if (!$foundres) {
-      print_error("Found gs but no resource???\n");
     }
   }
   return $foundres;
