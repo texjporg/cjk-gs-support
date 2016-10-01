@@ -1050,7 +1050,7 @@ sub find_gs_resource {
   if (!win32()) {
     # we assume that gs is in the path
     # on Windows we probably have to try something else
-    chomp( my @gsver = `gs --version 2>$nul` );
+    chomp( my $gsver = `gs --version 2>$nul` );
     if ($?) {
       print_error("Cannot find gs ...\n");
     } else {
@@ -1058,7 +1058,7 @@ sub find_gs_resource {
       # when /path/to/bin/gs is found, then there should be
       # /path/to/share/ghostscript/$(gs --version)/Resource
       chomp( $foundres = `which gs` );
-      $foundres =~ s/\/bin\/gs/\/share\/ghostscript\/@gsver\/Resource/;
+      $foundres =~ s!/bin/gs!/share/ghostscript/$gsver/Resource!;
       if ( ! -d $foundres ) {
         $foundres = '';
       }
