@@ -130,7 +130,7 @@ Japanese:
 
 Korean:
 
-    HYGoThic-Medium HYSMyeongJo-Medium
+    HYSMyeongJo-Medium HYGoThic-Medium HYRGoThic-Medium
 
 Simplified Chinese:
 
@@ -147,10 +147,20 @@ In addition, we also include provide entries for the OTF Morisawa names:
 The order is determined by the Provides setting in the font database,
 and for the Japanese fonts it is currently:
     Morisawa Pr6, Morisawa, Hiragino ProN, Hiragino, 
-    Yu OSX, Yu Win, Kozuka ProN, Kozuka, IPAex, IPA
+    Yu OSX, Yu Win, Kozuka ProN, Kozuka ProVI, Kozuka,
+    MS, IPAex, IPA
 
 That is, the first font found in this order will be used to provide the
 alias if necessary.
+
+For the Korean fonts:
+    (Hanyang,) Solaris-hanyang, Adobe, MS, Apple, Unfonts, Baekmuk
+
+For the Simplified Chinese:
+    [Not yet]
+
+For the Traditional Chinese:
+    [Not yet]
 
 #### Overriding aliases ####
 
@@ -164,8 +174,8 @@ Authors, Contributors, and Copyright
 ------------------------------------
 
 The script and its documentation was written by Norbert Preining, based
-on research and work by Yusuke Kuroki, Bruno Voisin, Munehiro Yamamoto
-and the TeX Q&A wiki page.
+on research and work by Yusuke Kuroki, Bruno Voisin, Hironobu Yamashita,
+Munehiro Yamamoto and the TeX Q&A wiki page.
 
 The script is licensed under GNU General Public License Version 3 or later.
 The contained font data is not copyrightable.

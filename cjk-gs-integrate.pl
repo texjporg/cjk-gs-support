@@ -1260,8 +1260,8 @@ requirements of `LL` and `RR` must be fulfilled:
 
   my $authors = "
 The script and its documentation was written by Norbert Preining, based
-on research and work by Yusuke Kuroki, Bruno Voisin, Munehiro Yamamoto
-and the TeX Q&A wiki page.
+on research and work by Yusuke Kuroki, Bruno Voisin, Hironobu Yamashita,
+Munehiro Yamamoto and the TeX Q&A wiki page.
 
 The script is licensed under GNU General Public License Version 3 or later.
 The contained font data is not copyrightable.
