@@ -1052,18 +1052,42 @@ sub find_gs_resource {
     # on Windows we probably have to try something else
     chomp( my $gsver = `gs --version 2>$nul` );
     if ($?) {
-      print_error("Cannot find gs ...\n");
+      print_error("Cannot get gs version ...\n");
     } else {
-      # assume the relative path
+      # trial 1: assume the relative path
       # when /path/to/bin/gs is found, then there should be
       # /path/to/share/ghostscript/$(gs --version)/Resource
+      print_debug("Finding gs resource by assuming relative path ...\n");
       chomp( $foundres = `which gs` );
       $foundres =~ s!/bin/gs!/share/ghostscript/$gsver/Resource!;
       if ( ! -d $foundres ) {
         $foundres = '';
       }
       if (!$foundres) {
-        print_error("Found gs but no resource???\n");
+        print_debug("Found gs but no resource, try another routine ...\n");
+      }
+    }
+    if (!$foundres) {
+      chomp( my @ret = `gs --help 2>$nul` );
+      if ($?) {
+        print_error("Cannot run gs --help ...\n");
+      } else {
+        # trial 2: parse gs help message
+        print_debug("Finding gs resource by parsing help message ...\n");
+        $foundres = '';
+        # try to find resource line
+        for (@ret) {
+          if (m!Resource/Font!) {
+            $foundres = $_;
+            # extract the first substring of non-space chars
+            # up to Resource/Font and drop the /Font part
+            $foundres =~ s!^.*\s(\S*Resource)/Font.*$!$1!;
+            last;
+          }
+        }
+        if (!$foundres) {
+          print_error("Found gs but no resource???\n");
+        }
       }
     }
   }
@@ -1193,7 +1217,7 @@ Japanese:
 
 Korean:
 
-    HYGoThic-Medium HYSMyeongJo-Medium
+    HYSMyeongJo-Medium HYGoThic-Medium HYRGoThic-Medium
 
 Simplified Chinese:
 
@@ -1210,10 +1234,20 @@ In addition, we also include provide entries for the OTF Morisawa names:
 The order is determined by the Provides setting in the font database,
 and for the Japanese fonts it is currently:
     Morisawa Pr6, Morisawa, Hiragino ProN, Hiragino, 
-    Yu OSX, Yu Win, Kozuka ProN, Kozuka, IPAex, IPA
+    Yu OSX, Yu Win, Kozuka ProN, Kozuka ProVI, Kozuka,
+    MS, IPAex, IPA
 
 That is, the first font found in this order will be used to provide the
 alias if necessary.
+
+For the Korean fonts:
+    (Hanyang,) Solaris-hanyang, Adobe, MS, Apple, Unfonts, Baekmuk
+
+For the Simplified Chinese:
+    [Not yet]
+
+For the Traditional Chinese:
+    [Not yet]
 
 #### Overriding aliases ####
 
@@ -1312,7 +1346,9 @@ __DATA__
 # CJK FONT DEFINITIONS
 #
 
-# JAPAN
+#
+# JAPANESE FONTS
+#
 
 # Morisawa
 
@@ -1491,7 +1527,7 @@ Class: Japan
 Provides(20): ShinGo-Ultra
 Filename: A-OTF-ShinGoPro-Ultra.otf
 
-# Hiragino
+# Hiragino (OS X)
 
 Name: HiraKakuPro-W3
 Class: Japan
@@ -1697,20 +1733,6 @@ Filename(30): ヒラギノ明朝 ProN W6.ttc(0)
 Filename(29): ヒラギノ明朝 ProN W6.ttc(0)
 Filename(28): HiraginoSerif-W6.ttc(0)
 
-Name: HiraginoSansGB-W3
-Class: GB
-Filename(20): Hiragino Sans GB W3.otf
-Filename(10): HiraginoSansGB-W3.otf
-Filename(30): Hiragino Sans GB W3.ttc(0)
-Filename(28): HiraginoSansGB-W3.ttc(0)
-
-Name: HiraginoSansGB-W6
-Class: GB
-Filename(20): Hiragino Sans GB W6.otf
-Filename(10): HiraginoSansGB-W6.otf
-Filename(30): Hiragino Sans GB W6.ttc(0)
-Filename(28): HiraginoSansGB-W6.ttc(0)
-
 # Yu-fonts MacOS version
 
 Name: YuGo-Medium
@@ -1806,7 +1828,7 @@ Filename(20): yugothib.ttf
 #Filename(10): YuGothic-Bold.ttf
 Filename(30): YuGothB.ttc(0)
 
-# IPA fonts
+# IPA (free)
 
 Name: IPAMincho
 Class: Japan
@@ -1852,7 +1874,7 @@ Provides(100): MidashiGoPro-MB31
 Filename(20): ipaexg.ttf
 #Filename(10): IPAexGothic.ttf
 
-# IPA proportional fonts
+# IPA proportional (free)
 
 Name: IPAPMincho
 Class: Japan
@@ -1864,7 +1886,7 @@ Class: Japan
 Filename(20): ipagp.ttf
 #Filename(10): IPAPGothic.ttf
 
-# Kozuka fonts
+# Kozuka (Adobe)
 
 Name: KozGoPr6N-Bold
 Class: Japan
@@ -2026,8 +2048,7 @@ Name: KozMinProVI-Light
 Class: Japan
 Filename: KozMinProVI-Light.otf
 
-#
-# other OSX 11 fonts
+# other OS X 11 fonts
 
 # TODO should they provide Maru Gothic ???
 Name: TsukuARdGothic-Regular
@@ -2058,6 +2079,24 @@ Filename: Klee.ttc(0)
 # CHINESE FONTS
 #
 
+# Hiragino chinese (OS X)
+
+Name: HiraginoSansGB-W3
+Class: GB
+Filename(20): Hiragino Sans GB W3.otf
+Filename(10): HiraginoSansGB-W3.otf
+Filename(30): Hiragino Sans GB W3.ttc(0)
+Filename(28): HiraginoSansGB-W3.ttc(0)
+
+Name: HiraginoSansGB-W6
+Class: GB
+Filename(20): Hiragino Sans GB W6.otf
+Filename(10): HiraginoSansGB-W6.otf
+Filename(30): Hiragino Sans GB W6.ttc(0)
+Filename(28): HiraginoSansGB-W6.ttc(0)
+
+# DynaComware (OS X)
+
 Name: LiHeiPro
 Class: CNS
 Provides(50): MHei-Medium
@@ -2070,6 +2109,8 @@ Provides(50): MSung-Medium
 Provides(50): MSung-Light
 Filename(20): 儷宋 Pro.ttf
 Filename(10): LiSongPro.ttf
+
+# Changzhou SinoType (OS X)
 
 Name: STXihei
 Class: GB
@@ -2188,6 +2229,7 @@ Class: CNS
 Provides(50): MKai-Medium
 Filename(10): Kaiti.ttc(4)
 Filename(20): 楷体.ttc(3)
+
 # TTF entry for Lion (10.7) or earlier
 # GB
 Name: STKaiti
@@ -2232,7 +2274,7 @@ Class: CNS
 Filename(10): Kaiti.ttc(2)
 #Filename(20): STKaiTi-TC-Bold.ttf
 
-# Adobe fonts
+# Adobe chinese fonts
 
 # simplified chinese
 
@@ -2272,24 +2314,40 @@ Provides(30): MHei-Medium
 Provides(30): MKai-Medium
 Filename(20): AdobeFanHeitiStd-Bold.otf
 
-# korean
-
-Name: AdobeMyungjoStd-Medium
-Class: Korea
-Provides(20): HYSMyeongJo-Medium
-Filename: AdobeMyungjoStd-Medium.otf
-
-Name: AdobeGothicStd-Bold
-Class: Korea
-Provides(20): HYGoThic-Medium
-Provides(50): HYRGoThic-Medium
-Filename: AdobeGothicStd-Bold.otf
-
 #
 # KOREAN FONTS
 #
 
-# baekmuk package (free)
+# Solaris-hanyang (Solaris 10, 11)
+
+Name: Myeongjo
+Class: Korea
+Provides(20): HYSMyeongJo-Medium
+Filename: h2mjsm.ttf
+
+Name: Gothic
+Class: Korea
+Provides(20): HYGoThic-Medium
+Filename: h2gtrm.ttf
+
+Name: RoundedGothic
+Class: Korea
+Provides(20): HYRGoThic-Medium
+Filename: h2drrm.ttf
+
+Name: Haeseo
+Class: Korea
+Filename: h2hsrm.ttf
+
+Name: SunDotum
+Class: Korea
+Filename: sundotump.ttf
+
+Name: SunDotumChe
+Class: Korea
+Filename: sundotumf.ttf
+
+# Baekmuk (free)
 # This is a special case, because "batang.ttf" in baekmuk and
 # "Batang.ttf" in Microsoft Mac Office font share the same filename;
 # symlink name should be "Baekmuk-Batang.ttf"
@@ -2297,19 +2355,19 @@ Filename: AdobeGothicStd-Bold.otf
 
 Name: Baekmuk-Batang
 Class: Korea
-Provides(110): HYSMyeongJo-Medium
+Provides(70): HYSMyeongJo-Medium
 Filename(20): batang.ttf
 Filename(10): Baekmuk-Batang.ttf
 
 Name: Baekmuk-Dotum
 Class: Korea
-Provides(110): HYGoThic-Medium
+Provides(70): HYGoThic-Medium
 Filename(20): dotum.ttf
 Filename(10): Baekmuk-Dotum.ttf
 
 Name: Baekmuk-Gulim
 Class: Korea
-Provides(110): HYRGoThic-Medium
+Provides(70): HYRGoThic-Medium
 Filename(20): gulim.ttf
 Filename(10): Baekmuk-Gulim.ttf
 
@@ -2318,22 +2376,178 @@ Class: Korea
 Filename(20): hline.ttf
 Filename(10): Baekmuk-Headline.ttf
 
-# apple fonts
+# Unfonts-core (free)
 
-Name: AppleMyungjo
+Name: UnBatang
 Class: Korea
-Provides(50): HYSMyeongJo-Medium
-Filename: AppleMyungjo.ttf
+Provides(60): HYSMyeongJo-Medium
+Filename: UnBatang.ttf
 
-Name: AppleGothic
+Name: UnBatang-Bold
 Class: Korea
-Provides(50): HYGoThic-Medium
-Provides(80): HYRGoThic-Medium
-Filename: AppleGothic.ttf
+Filename: UnBatangBold.ttf
+
+Name: UnDotum
+Class: Korea
+Provides(60): HYGoThic-Medium
+Filename: UnDotum.ttf
+
+Name: UnDotum-Bold
+Class: Korea
+Filename: UnDotumBold.ttf
+
+Name: UnDinaru
+Class: Korea
+Provides(60): HYRGoThic-Medium
+Filename: UnDinaru.ttf
+
+Name: UnDinaru-Bold
+Class: Korea
+Filename: UnDinaruBold.ttf
+
+Name: UnDinaru-Light
+Class: Korea
+Filename: UnDinaruLight.ttf
+
+Name: UnGraphic
+Class: Korea
+Filename: UnGraphic.ttf
+
+Name: UnGraphic-Bold
+Class: Korea
+Filename: UnGraphicBold.ttf
+
+Name: UnGungseo
+Class: Korea
+Filename: UnGungseo.ttf
+
+Name: UnPilgi
+Class: Korea
+Filename: UnPilgi.ttf
+
+Name: UnPilgi-Bold
+Class: Korea
+Filename: UnPilgiBold.ttf
+
+# Unfonts-extra (free)
+
+Name: UnBom
+Class: Korea
+Filename: UnBom.ttf
+
+Name: UnPen
+Class: Korea
+Filename: UnPen.ttf
+
+Name: UnPenheulim
+Class: Korea
+Filename: UnPenheulim.ttf
+
+Name: UnPilgia
+Class: Korea
+Filename: UnPilgia.ttf
+
+Name: UnShinmun
+Class: Korea
+Filename: UnShinmun.ttf
+
+Name: UnVada
+Class: Korea
+Filename: UnVada.ttf
+
+Name: UnYetgul
+Class: Korea
+Filename: UnYetgul.ttf
+
+Name: UnTaza
+Class: Korea
+Filename: UnTaza.ttf
+
+# UnJamo... family has proportional metrics
+Name: UnJamoBatang
+Class: Korea
+Filename: UnJamoBatang.ttf
+
+Name: UnJamoDotum
+Class: Korea
+Filename: UnJamoDotum.ttf
+
+Name: UnJamoNovel
+Class: Korea
+Filename: UnJamoNovel.ttf
+
+Name: UnJamoSora
+Class: Korea
+Filename: UnJamoSora.ttf
+
+# Nanum (free)
+# note that all fonts have narrow metrics
 
 Name: NanumMyeongjo
 Class: Korea
-Provides(30): HYSMyeongJo-Medium
+Filename: NanumMyeongjo.ttf
+
+Name: NanumMyeongjoBold
+Class: Korea
+Filename: NanumMyeongjoBold.ttf
+
+Name: NanumGothic
+Class: Korea
+Filename: NanumGothic.ttf
+
+Name: NanumGothicBold
+Class: Korea
+Filename: NanumGothicBold.ttf
+
+Name: NanumBarunGothic
+Class: Korea
+Filename: NanumBarunGothic.ttf
+
+Name: NanumBarunGothicBold
+Class: Korea
+Filename: NanumBarunGothicBold.ttf
+
+Name: NanumMyeongjoExtraBold
+Class: Korea
+Filename: NanumMyeongjoExtraBold.ttf
+
+Name: NanumGothicExtraBold
+Class: Korea
+Filename: NanumGothicExtraBold.ttf
+
+Name: NanumGothicLight
+Class: Korea
+Filename: NanumGothicLight.ttf
+
+Name: NanumBarunGothicLight
+Class: Korea
+Filename: NanumBarunGothicLight.ttf
+
+Name: NanumBarunGothicUltraLight
+Class: Korea
+Filename: NanumBarunGothicUltraLight.ttf
+
+Name: NanumBarunpen
+Class: Korea
+Filename: NanumBarunpenR.ttf
+
+Name: NanumBarunpen-Bold
+Class: Korea
+Filename: NanumBarunpenB.ttf
+
+Name: NanumBrush
+Class: Korea
+Filename: NanumBrush.ttf
+
+Name: NanumPen
+Class: Korea
+Filename: NanumPen.ttf
+
+# Nanum OS X (free, but converted to ttc format)
+# note that all fonts have narrow metrics
+
+Name: NanumMyeongjo
+Class: Korea
 Filename: NanumMyeongjo.ttc(0)
 
 Name: NanumMyeongjoBold
@@ -2346,8 +2560,6 @@ Filename: NanumMyeongjo.ttc(2)
 
 Name: NanumGothic
 Class: Korea
-Provides(30): HYGoThic-Medium
-Provides(60): HYRGoThic-Medium
 Filename: NanumGothic.ttc(0)
 
 Name: NanumGothicBold
@@ -2365,6 +2577,19 @@ Filename: NanumScript.ttc(0)
 Name: NanumPen
 Class: Korea
 Filename: NanumScript.ttc(1)
+
+# Apple
+
+Name: AppleMyungjo
+Class: Korea
+Provides(50): HYSMyeongJo-Medium
+Filename: AppleMyungjo.ttf
+
+Name: AppleGothic
+Class: Korea
+Provides(50): HYGoThic-Medium
+Provides(100): HYRGoThic-Medium
+Filename: AppleGothic.ttf
 
 Name: AppleSDGothicNeo-Thin
 Class: Korea
@@ -2402,11 +2627,24 @@ Name: AppleSDGothicNeo-Heavy
 Class: Korea
 Filename: AppleSDGothicNeo-Heavy.otf
 
+# Adobe korean fonts
+
+Name: AdobeMyungjoStd-Medium
+Class: Korea
+Provides(30): HYSMyeongJo-Medium
+Filename: AdobeMyungjoStd-Medium.otf
+
+Name: AdobeGothicStd-Bold
+Class: Korea
+Provides(30): HYGoThic-Medium
+Provides(80): HYRGoThic-Medium
+Filename: AdobeGothicStd-Bold.otf
+
 #
 # Microsoft Mac Office fonts
 #
 
-# Korea
+# korea
 
 Name: Batang
 Class: Korea
@@ -2421,8 +2659,8 @@ Filename(50): Dotum.ttf
 
 Name: Gulim
 Class: Korea
-Provides(70): HYRGoThic-Medium
-Provides(70): HYGoThic-Medium
+Provides(40): HYRGoThic-Medium
+Provides(90): HYGoThic-Medium
 Filename(30): Gulim.ttf
 Filename(50): gulim.ttc
 
