@@ -2321,24 +2321,30 @@ Filename(20): AdobeFanHeitiStd-Bold.otf
 # Solaris-hanyang (Solaris 10, 11)
 
 Name: Myeongjo
+Class: Korea
 Provides(20): HYSMyeongJo-Medium
 Filename: h2mjsm.ttf
 
 Name: Gothic
+Class: Korea
 Provides(20): HYGoThic-Medium
 Filename: h2gtrm.ttf
 
 Name: RoundedGothic
+Class: Korea
 Provides(20): HYRGoThic-Medium
 Filename: h2drrm.ttf
 
 Name: Haeseo
+Class: Korea
 Filename: h2hsrm.ttf
 
 Name: SunDotum
+Class: Korea
 Filename: sundotump.ttf
 
 Name: SunDotumChe
+Class: Korea
 Filename: sundotumf.ttf
 
 # Baekmuk (free)
