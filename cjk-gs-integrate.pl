@@ -1536,7 +1536,7 @@ Filename: A-OTF-ShinGoPro-Ultra.otf
 #   ヒラギノ角ゴシック {W0,...W9}.ttc
 #   ヒラギノ丸ゴ ProN W4.ttc
 #   ヒラギノ明朝 ProN {W3,W6}.ttc
-# are bundled with OS X 10.11.0 El Capitan or later versions.
+# are bundled with OS X 10.11 El Capitan or later versions.
 
 Name: HiraKakuPro-W3
 Class: Japan
@@ -1747,16 +1747,16 @@ Filename(28): HiraginoSerif-W6.ttc(0)
 # Note about Mac OS X:
 #   Yu Gothic Medium.otf
 #   Yu Gothic Bold.otf
-# are bundled with OS X 10.9.0 Mavericks or later versions.
-#   YuMin-Medium.otf
+# are bundled with OS X 10.9 Mavericks or later versions.
+#   Yu Mincho Medium.otf
 #   Yu Mincho Demibold.otf
-# are bundled with OS X 10.9.0 Mavericks -- 10.10.5 Yosemite.
+# are bundled with OS X 10.9 Mavericks -- 10.10.5 Yosemite.
 #   YuMincho.ttc
 #     index 0: YuMin-Medium
 #     index 1: YuMin-Demibold
 #     index 2: YuMin_36pKn-Medium
 #     index 3: YuMin_36pKn-Demibold
-# is bundled with OS X 10.11.0 -- 10.11.6 El Capitan.
+# is bundled with OS X 10.11 -- 10.11.6 El Capitan.
 #   YuMincho.ttc
 #     index 0: YuMin-Medium
 #     index 1: YuMin-Demibold
@@ -1801,7 +1801,7 @@ Filename(10): YuMin-Demibold.otf
 Filename(30): YuMincho.ttc(1)
 
 # Following four entries are for macOS 10.12 Sierra
-# The index for OS X 10.11 El Capitan is different!
+# The index for OS X 10.11.x El Capitan is different!
 
 Name: YuMin-Extrabold
 Class: Japan
@@ -2095,13 +2095,13 @@ Filename: KozMinProVI-Light.otf
 # Note about Mac OS X:
 #   Klee.ttc
 #   Tsukushi{A,B}MaruGothic.ttc
-# are bundled with OS X 10.11.0 El Capitan or later versions.
+# are bundled with OS X 10.11 El Capitan or later versions.
 #   Kyokasho.ttc
 #   ToppanBunkyuMincho-Regular.otf
 #   ToppanBunkyuGothic.ttc
 #   ToppanBunkyuMidashiMincho-ExtraBold.otf
 #   ToppanBunkyuMidashiGothic-ExtraBold.otf
-# are bundled with macOS 10.12.0 Sierra or later versions.
+# are bundled with macOS 10.12 Sierra or later versions.
 
 Name: TsukuARdGothic-Regular
 Class: Japan
