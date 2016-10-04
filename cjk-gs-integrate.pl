@@ -2183,6 +2183,16 @@ Filename(10): HiraginoSansGB-W6.otf
 Filename(30): Hiragino Sans GB W6.ttc(0)
 Filename(28): HiraginoSansGB-W6.ttc(0)
 
+Name: HiraginoSansCNS-W3
+Class: CNS
+Filename(30): Hiragino Sans CNS.ttc(0)
+Filename(28): HiraginoSansCNS.ttc(0)
+
+Name: HiraginoSansCNS-W6
+Class: CNS
+Filename(30): Hiragino Sans CNS.ttc(1)
+Filename(28): HiraginoSansCNS.ttc(1)
+
 # DynaComware (OS X)
 
 Name: LiHeiPro
@@ -2361,6 +2371,130 @@ Name: STKaiTi-TC-Bold
 Class: CNS
 Filename(10): Kaiti.ttc(2)
 #Filename(20): STKaiTi-TC-Bold.ttf
+
+Name: STBaoliSC-Regular
+Class: GB
+Filename: Baoli.ttc(0)
+
+Name: STBaoliTC-Regular
+Class: CNS
+Filename: Baoli.ttc(1)
+
+Name: STLibianSC-Regular
+Class: GB
+Filename: Libian.ttc(0)
+
+Name: STLibianTC-Regular
+Class: CNS
+Filename: Libian.ttc(1)
+
+Name: STXingkaiSC-Bold
+Class: GB
+Filename: Xingkai.ttc(0)
+
+Name: STXingkaiTC-Bold
+Class: CNS
+Filename: Xingkai.ttc(1)
+
+Name: STXingkaiSC-Light
+Class: GB
+Filename: Xingkai.ttc(2)
+
+Name: STXingkaiTC-Light
+Class: CNS
+Filename: Xingkai.ttc(3)
+
+Name: STYuanti-SC-Regular
+Class: GB
+Filename: Yuanti.ttc(0)
+
+Name: STYuanti-TC-Regular
+Class: CNS
+Filename: Yuanti.ttc(1)
+
+Name: STYuanti-SC-Bold
+Class: GB
+Filename: Yuanti.ttc(2)
+
+Name: STYuanti-TC-Bold
+Class: CNS
+Filename: Yuanti.ttc(3)
+
+Name: STYuanti-SC-Light
+Class: GB
+Filename: Yuanti.ttc(4)
+
+Name: STYuanti-TC-Light
+Class: CNS
+Filename: Yuanti.ttc(5)
+
+# Arphic Font Design Team (OS X)
+
+Name: Weibei-SC-Bold
+Class: GB
+Filename: WeibeiSC-Bold.otf
+
+Name: Weibei-TC-Bold
+Class: CNS
+Filename: WeibeiTC-Bold.otf
+
+# Monotype Imaging (OS X)
+
+Name: YuppySC-Regular
+Class: GB
+Filename: YuppySC-Regular.otf
+
+Name: YuppyTC-Regular
+Class: CNS
+Filename: YuppyTC-Regular.otf
+
+# Monotype Hong Kong (OS X)
+
+Name: MLingWaiMedium-SC
+Class: GB
+Filename: LingWaiSC-Medium.otf
+
+Name: MLingWaiMedium-TC
+Class: CNS
+Filename: LingWaiTC-Medium.otf
+
+# DynaComware Taiwan (OS X)
+
+Name: DFWaWaSC-W5
+Class: GB
+Filename: WawaSC-Regular.otf
+
+Name: HannotateSC-W5
+Class: GB
+Filename: Hannotate.ttc(0)
+
+Name: HannotateTC-W5
+Class: CNS
+Filename: Hannotate.ttc(1)
+
+Name: HannotateSC-W7
+Class: GB
+Filename: Hannotate.ttc(2)
+
+Name: HannotateTC-W7
+Class: CNS
+Filename: Hannotate.ttc(3)
+
+Name: HanziPenSC-W3
+Class: GB
+Filename: Hanzipen.ttc(0)
+
+Name: HanziPenTC-W3
+Class: CNS
+Filename: Hanzipen.ttc(1)
+
+Name: HanziPenSC-W5
+Class: GB
+Filename: Hanzipen.ttc(2)
+
+Name: HanziPenTC-W5
+Class: CNS
+Filename: Hanzipen.ttc(3)
 
 # Adobe chinese fonts
 
