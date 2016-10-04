@@ -627,9 +627,7 @@ sub do_aliases {
   # Jun101Pro-Light
   #
   # the order of fonts selected is
-  # Morisawa Pr6, Morisawa, Hiragino ProN, Hiragino, 
-  # Yu OSX, Yu Win, Kozuka ProN, Kozuka, IPAex, IPA
-  # but is defined in the Provides(Priority): Name in the font definiton
+  # defined in the Provides(Priority): Name in the font definiton
   #
   $outp .= "\n\n% Aliases\n";
   #
@@ -1233,8 +1231,8 @@ In addition, we also include provide entries for the OTF Morisawa names:
 
 The order is determined by the Provides setting in the font database,
 and for the Japanese fonts it is currently:
-    Morisawa Pr6, Morisawa, Hiragino ProN, Hiragino, 
-    Yu OSX, Yu Win, Kozuka ProN, Kozuka ProVI, Kozuka,
+    Morisawa Pr6N, Morisawa, Hiragino ProN, Hiragino,
+    Yu OSX, Yu Win, Kozuka Pr6N, Kozuka ProVI, Kozuka,
     MS, IPAex, IPA
 
 That is, the first font found in this order will be used to provide the
@@ -1529,6 +1527,17 @@ Filename: A-OTF-ShinGoPro-Ultra.otf
 
 # Hiragino (OS X)
 
+# Note about Mac OS X:
+#   ヒラギノ角ゴ {Pro,ProN} {W3,W6}.otf
+#   ヒラギノ角ゴ {Std,StdN} W8.otf
+#   ヒラギノ丸ゴ {Pro,ProN} W4.otf
+#   ヒラギノ明朝 {Pro,ProN} {W3,W6}.otf
+# are bundled with OS X 10.10.5 Yosemite or earlier versions.
+#   ヒラギノ角ゴシック {W0,...W9}.ttc
+#   ヒラギノ丸ゴ ProN W4.ttc
+#   ヒラギノ明朝 ProN {W3,W6}.ttc
+# are bundled with OS X 10.11.0 El Capitan or later versions.
+
 Name: HiraKakuPro-W3
 Class: Japan
 Provides(40): GothicBBB-Medium
@@ -1735,6 +1744,28 @@ Filename(28): HiraginoSerif-W6.ttc(0)
 
 # Yu-fonts MacOS version
 
+# Note about Mac OS X:
+#   Yu Gothic Medium.otf
+#   Yu Gothic Bold.otf
+# are bundled with OS X 10.9.0 Mavericks or later versions.
+#   YuMin-Medium.otf
+#   Yu Mincho Demibold.otf
+# are bundled with OS X 10.9.0 Mavericks -- 10.10.5 Yosemite.
+#   YuMincho.ttc
+#     index 0: YuMin-Medium
+#     index 1: YuMin-Demibold
+#     index 2: YuMin_36pKn-Medium
+#     index 3: YuMin_36pKn-Demibold
+# is bundled with OS X 10.11.0 -- 10.11.6 El Capitan.
+#   YuMincho.ttc
+#     index 0: YuMin-Medium
+#     index 1: YuMin-Demibold
+#     index 2: YuMin-Extrabold
+#     index 3: YuMin_36pKn-Medium
+#     index 4: YuMin_36pKn-Demibold
+#     index 5: YuMin_36pKn-Extrabold
+# is bundled with macOS 10.12.0 Sierra or later versions.
+
 Name: YuGo-Medium
 Class: Japan
 Provides(50): GothicBBB-Medium
@@ -1769,13 +1800,24 @@ Filename(20): Yu Mincho Demibold.otf
 Filename(10): YuMin-Demibold.otf
 Filename(30): YuMincho.ttc(1)
 
-Name: YuMin_36pKn-Medium
+# Following four entries are for macOS 10.12 Sierra
+# The index for OS X 10.11 El Capitan is different!
+
+Name: YuMin-Extrabold
 Class: Japan
 Filename(30): YuMincho.ttc(2)
 
-Name: YuMin_36pKn-Demibold
+Name: YuMin_36pKn-Medium
 Class: Japan
 Filename(30): YuMincho.ttc(3)
+
+Name: YuMin_36pKn-Demibold
+Class: Japan
+Filename(30): YuMincho.ttc(4)
+
+Name: YuMin_36pKn-Extrabold
+Class: Japan
+Filename(30): YuMincho.ttc(5)
 
 # Yu-fonts Windows version
 
@@ -2048,9 +2090,19 @@ Name: KozMinProVI-Light
 Class: Japan
 Filename: KozMinProVI-Light.otf
 
-# other OS X 11 fonts
+# other Mac OS X fonts
 
-# TODO should they provide Maru Gothic ???
+# Note about Mac OS X:
+#   Klee.ttc
+#   Tsukushi{A,B}MaruGothic.ttc
+# are bundled with OS X 10.11.0 El Capitan or later versions.
+#   Kyokasho.ttc
+#   ToppanBunkyuMincho-Regular.otf
+#   ToppanBunkyuGothic.ttc
+#   ToppanBunkyuMidashiMincho-ExtraBold.otf
+#   ToppanBunkyuMidashiGothic-ExtraBold.otf
+# are bundled with macOS 10.12.0 Sierra or later versions.
+
 Name: TsukuARdGothic-Regular
 Class: Japan
 Filename: TsukushiAMaruGothic.ttc(0)
@@ -2074,6 +2126,42 @@ Filename: Klee.ttc(1)
 Name: Klee-Demibold
 Class: Japan
 Filename: Klee.ttc(0)
+
+Name: YuKyo_Yoko-Medium
+Class: Japan
+Filename: Kyokasho.ttc(0)
+
+Name: YuKyo_Yoko-Bold
+Class: Japan
+Filename: Kyokasho.ttc(1)
+
+Name: YuKyo-Medium
+Class: Japan
+Filename: Kyokasho.ttc(2)
+
+Name: YuKyo-Bold
+Class: Japan
+Filename: Kyokasho.ttc(3)
+
+Name: ToppanBunkyuMinchoPr6N-Regular
+Class: Japan
+Filename: ToppanBunkyuMincho-Regular.otf
+
+Name: ToppanBunkyuGothicPr6N-DB
+Class: Japan
+Filename: ToppanBunkyuGothic.ttc(0)
+
+Name: ToppanBunkyuGothicPr6N-Regular
+Class: Japan
+Filename: ToppanBunkyuGothic.ttc(1)
+
+Name: ToppanBunkyuMidashiMinchoStdN-ExtraBold
+Class: Japan
+Filename: ToppanBunkyuMidashiMincho-ExtraBold.otf
+
+Name: ToppanBunkyuMidashiGothicStdN-ExtraBold
+Class: Japan
+Filename: ToppanBunkyuMidashiGothic-ExtraBold.otf
 
 #
 # CHINESE FONTS
