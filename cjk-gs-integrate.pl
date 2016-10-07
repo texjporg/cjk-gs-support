@@ -627,9 +627,7 @@ sub do_aliases {
   # Jun101Pro-Light
   #
   # the order of fonts selected is
-  # Morisawa Pr6, Morisawa, Hiragino ProN, Hiragino, 
-  # Yu OSX, Yu Win, Kozuka ProN, Kozuka, IPAex, IPA
-  # but is defined in the Provides(Priority): Name in the font definiton
+  # defined in the Provides(Priority): Name in the font definiton
   #
   $outp .= "\n\n% Aliases\n";
   #
@@ -1233,8 +1231,8 @@ In addition, we also include provide entries for the OTF Morisawa names:
 
 The order is determined by the Provides setting in the font database,
 and for the Japanese fonts it is currently:
-    Morisawa Pr6, Morisawa, Hiragino ProN, Hiragino, 
-    Yu OSX, Yu Win, Kozuka ProN, Kozuka ProVI, Kozuka,
+    Morisawa Pr6N, Morisawa, Hiragino ProN, Hiragino,
+    Yu OSX, Yu Win, Kozuka Pr6N, Kozuka ProVI, Kozuka,
     MS, IPAex, IPA
 
 That is, the first font found in this order will be used to provide the
@@ -1529,6 +1527,17 @@ Filename: A-OTF-ShinGoPro-Ultra.otf
 
 # Hiragino (OS X)
 
+# Note about Mac OS X:
+#   ヒラギノ角ゴ {Pro,ProN} {W3,W6}.otf
+#   ヒラギノ角ゴ {Std,StdN} W8.otf
+#   ヒラギノ丸ゴ {Pro,ProN} W4.otf
+#   ヒラギノ明朝 {Pro,ProN} {W3,W6}.otf
+# are bundled with OS X 10.10.5 Yosemite or earlier versions.
+#   ヒラギノ角ゴシック {W0,...W9}.ttc
+#   ヒラギノ丸ゴ ProN W4.ttc
+#   ヒラギノ明朝 ProN {W3,W6}.ttc
+# are bundled with OS X 10.11 El Capitan or later versions.
+
 Name: HiraKakuPro-W3
 Class: Japan
 Provides(40): GothicBBB-Medium
@@ -1735,6 +1744,28 @@ Filename(28): HiraginoSerif-W6.ttc(0)
 
 # Yu-fonts MacOS version
 
+# Note about Mac OS X:
+#   Yu Gothic Medium.otf
+#   Yu Gothic Bold.otf
+# are bundled with OS X 10.9 Mavericks or later versions.
+#   Yu Mincho Medium.otf
+#   Yu Mincho Demibold.otf
+# are bundled with OS X 10.9 Mavericks -- 10.10.5 Yosemite.
+#   YuMincho.ttc
+#     index 0: YuMin-Medium
+#     index 1: YuMin-Demibold
+#     index 2: YuMin_36pKn-Medium
+#     index 3: YuMin_36pKn-Demibold
+# is bundled with OS X 10.11 -- 10.11.6 El Capitan.
+#   YuMincho.ttc
+#     index 0: YuMin-Medium
+#     index 1: YuMin-Demibold
+#     index 2: YuMin-Extrabold
+#     index 3: YuMin_36pKn-Medium
+#     index 4: YuMin_36pKn-Demibold
+#     index 5: YuMin_36pKn-Extrabold
+# is bundled with macOS 10.12.0 Sierra or later versions.
+
 Name: YuGo-Medium
 Class: Japan
 Provides(50): GothicBBB-Medium
@@ -1769,13 +1800,24 @@ Filename(20): Yu Mincho Demibold.otf
 Filename(10): YuMin-Demibold.otf
 Filename(30): YuMincho.ttc(1)
 
-Name: YuMin_36pKn-Medium
+# Following four entries are for macOS 10.12 Sierra
+# The index for OS X 10.11.x El Capitan is different!
+
+Name: YuMin-Extrabold
 Class: Japan
 Filename(30): YuMincho.ttc(2)
 
-Name: YuMin_36pKn-Demibold
+Name: YuMin_36pKn-Medium
 Class: Japan
 Filename(30): YuMincho.ttc(3)
+
+Name: YuMin_36pKn-Demibold
+Class: Japan
+Filename(30): YuMincho.ttc(4)
+
+Name: YuMin_36pKn-Extrabold
+Class: Japan
+Filename(30): YuMincho.ttc(5)
 
 # Yu-fonts Windows version
 
@@ -2048,9 +2090,19 @@ Name: KozMinProVI-Light
 Class: Japan
 Filename: KozMinProVI-Light.otf
 
-# other OS X 11 fonts
+# other Mac OS X fonts
 
-# TODO should they provide Maru Gothic ???
+# Note about Mac OS X:
+#   Klee.ttc
+#   Tsukushi{A,B}MaruGothic.ttc
+# are bundled with OS X 10.11 El Capitan or later versions.
+#   Kyokasho.ttc
+#   ToppanBunkyuMincho-Regular.otf
+#   ToppanBunkyuGothic.ttc
+#   ToppanBunkyuMidashiMincho-ExtraBold.otf
+#   ToppanBunkyuMidashiGothic-ExtraBold.otf
+# are bundled with macOS 10.12 Sierra or later versions.
+
 Name: TsukuARdGothic-Regular
 Class: Japan
 Filename: TsukushiAMaruGothic.ttc(0)
@@ -2075,6 +2127,42 @@ Name: Klee-Demibold
 Class: Japan
 Filename: Klee.ttc(0)
 
+Name: YuKyo_Yoko-Medium
+Class: Japan
+Filename: Kyokasho.ttc(0)
+
+Name: YuKyo_Yoko-Bold
+Class: Japan
+Filename: Kyokasho.ttc(1)
+
+Name: YuKyo-Medium
+Class: Japan
+Filename: Kyokasho.ttc(2)
+
+Name: YuKyo-Bold
+Class: Japan
+Filename: Kyokasho.ttc(3)
+
+Name: ToppanBunkyuMinchoPr6N-Regular
+Class: Japan
+Filename: ToppanBunkyuMincho-Regular.otf
+
+Name: ToppanBunkyuGothicPr6N-DB
+Class: Japan
+Filename: ToppanBunkyuGothic.ttc(0)
+
+Name: ToppanBunkyuGothicPr6N-Regular
+Class: Japan
+Filename: ToppanBunkyuGothic.ttc(1)
+
+Name: ToppanBunkyuMidashiMinchoStdN-ExtraBold
+Class: Japan
+Filename: ToppanBunkyuMidashiMincho-ExtraBold.otf
+
+Name: ToppanBunkyuMidashiGothicStdN-ExtraBold
+Class: Japan
+Filename: ToppanBunkyuMidashiGothic-ExtraBold.otf
+
 #
 # CHINESE FONTS
 #
@@ -2094,6 +2182,16 @@ Filename(20): Hiragino Sans GB W6.otf
 Filename(10): HiraginoSansGB-W6.otf
 Filename(30): Hiragino Sans GB W6.ttc(0)
 Filename(28): HiraginoSansGB-W6.ttc(0)
+
+Name: HiraginoSansCNS-W3
+Class: CNS
+Filename(30): Hiragino Sans CNS.ttc(0)
+Filename(28): HiraginoSansCNS.ttc(0)
+
+Name: HiraginoSansCNS-W6
+Class: CNS
+Filename(30): Hiragino Sans CNS.ttc(1)
+Filename(28): HiraginoSansCNS.ttc(1)
 
 # DynaComware (OS X)
 
@@ -2273,6 +2371,130 @@ Name: STKaiTi-TC-Bold
 Class: CNS
 Filename(10): Kaiti.ttc(2)
 #Filename(20): STKaiTi-TC-Bold.ttf
+
+Name: STBaoliSC-Regular
+Class: GB
+Filename: Baoli.ttc(0)
+
+Name: STBaoliTC-Regular
+Class: CNS
+Filename: Baoli.ttc(1)
+
+Name: STLibianSC-Regular
+Class: GB
+Filename: Libian.ttc(0)
+
+Name: STLibianTC-Regular
+Class: CNS
+Filename: Libian.ttc(1)
+
+Name: STXingkaiSC-Bold
+Class: GB
+Filename: Xingkai.ttc(0)
+
+Name: STXingkaiTC-Bold
+Class: CNS
+Filename: Xingkai.ttc(1)
+
+Name: STXingkaiSC-Light
+Class: GB
+Filename: Xingkai.ttc(2)
+
+Name: STXingkaiTC-Light
+Class: CNS
+Filename: Xingkai.ttc(3)
+
+Name: STYuanti-SC-Regular
+Class: GB
+Filename: Yuanti.ttc(0)
+
+Name: STYuanti-TC-Regular
+Class: CNS
+Filename: Yuanti.ttc(1)
+
+Name: STYuanti-SC-Bold
+Class: GB
+Filename: Yuanti.ttc(2)
+
+Name: STYuanti-TC-Bold
+Class: CNS
+Filename: Yuanti.ttc(3)
+
+Name: STYuanti-SC-Light
+Class: GB
+Filename: Yuanti.ttc(4)
+
+Name: STYuanti-TC-Light
+Class: CNS
+Filename: Yuanti.ttc(5)
+
+# Arphic Font Design Team (OS X)
+
+Name: Weibei-SC-Bold
+Class: GB
+Filename: WeibeiSC-Bold.otf
+
+Name: Weibei-TC-Bold
+Class: CNS
+Filename: WeibeiTC-Bold.otf
+
+# Monotype Imaging (OS X)
+
+Name: YuppySC-Regular
+Class: GB
+Filename: YuppySC-Regular.otf
+
+Name: YuppyTC-Regular
+Class: CNS
+Filename: YuppyTC-Regular.otf
+
+# Monotype Hong Kong (OS X)
+
+Name: MLingWaiMedium-SC
+Class: GB
+Filename: LingWaiSC-Medium.otf
+
+Name: MLingWaiMedium-TC
+Class: CNS
+Filename: LingWaiTC-Medium.otf
+
+# DynaComware Taiwan (OS X)
+
+Name: DFWaWaSC-W5
+Class: GB
+Filename: WawaSC-Regular.otf
+
+Name: HannotateSC-W5
+Class: GB
+Filename: Hannotate.ttc(0)
+
+Name: HannotateTC-W5
+Class: CNS
+Filename: Hannotate.ttc(1)
+
+Name: HannotateSC-W7
+Class: GB
+Filename: Hannotate.ttc(2)
+
+Name: HannotateTC-W7
+Class: CNS
+Filename: Hannotate.ttc(3)
+
+Name: HanziPenSC-W3
+Class: GB
+Filename: Hanzipen.ttc(0)
+
+Name: HanziPenTC-W3
+Class: CNS
+Filename: Hanzipen.ttc(1)
+
+Name: HanziPenSC-W5
+Class: GB
+Filename: Hanzipen.ttc(2)
+
+Name: HanziPenTC-W5
+Class: CNS
+Filename: Hanzipen.ttc(3)
 
 # Adobe chinese fonts
 
