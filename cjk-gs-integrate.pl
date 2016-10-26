@@ -2313,19 +2313,27 @@ Class: CNS
 Filename(10): Songti.ttc(2)
 #Filename(20): STSongti-TC-Bold.ttf
 
+# Note about Mac OS X:
+#   Kaiti.ttc
+# contained 6 fonts before OS X 10.11.6 El Capitan.
+# After macOS 10.12 Sierra, it contains 7 fonts and
+# the order of ttc index has completely changed.
+
 # ----- Prevent wrong symlink Kaiti.ttc -> 华文楷体.ttf -- HY (2016/09/26)
 # TTC entry for Mountain Lion (10.8) or later
 # GB
 Name: STKaiti
 Class: GB
 Provides(50): STKaiti-Regular
-Filename(10): Kaiti.ttc(4)
+Filename(10): Kaiti.ttc(1) # for Sierra (10.12) or later
+#Filename(10): Kaiti.ttc(4) # for El Capitan (10.11.6) or earlier
 Filename(20): 楷体.ttc(3)
 # CNS
 Name: STKaiti-Adobe-CNS1
 Class: CNS
 Provides(50): MKai-Medium
-Filename(10): Kaiti.ttc(4)
+Filename(10): Kaiti.ttc(1) # for Sierra (10.12) or later
+#Filename(10): Kaiti.ttc(4) # for El Capitan (10.11.6) or earlier
 Filename(20): 楷体.ttc(3)
 
 # TTF entry for Lion (10.7) or earlier
@@ -2342,6 +2350,7 @@ Provides(50): MKai-Medium
 Filename(30): STKaiti.ttf
 Filename(40): 华文楷体.ttf
 
+# for El Capitan (10.11.6) or earlier
 Name: STKaiti-SC-Regular
 Class: GB
 Provides(40): STKaiti-Regular
@@ -2349,28 +2358,64 @@ Filename(10): Kaiti.ttc(3)
 Filename(20): 楷体.ttc(2)
 #Filename(30): STKaiti-SC-Regular.ttf
 
+# for Sierra (10.12) or later
+Name: STKaitiSC-Regular
+Class: GB
+Provides(39): STKaiti-Regular
+Filename(10): Kaiti.ttc(0)
+
+# for El Capitan (10.11.6) or earlier
 Name: STKaiti-SC-Bold
 Class: GB
 Filename(10): Kaiti.ttc(1)
 Filename(20): 楷体.ttc(1)
 #Filename(30): STKaiti-SC-Bold.ttf
 
+# for Sierra (10.12) or later
+Name: STKaitiSC-Bold
+Class: GB
+Filename(10): Kaiti.ttc(3)
+
+# for El Capitan (10.11.6) or earlier
 Name: STKaiti-SC-Black
 Class: GB
 Filename(10): Kaiti.ttc(0)
 Filename(20): 楷体.ttc(0)
 #Filename(30): STKaiti-SC-Black.ttf
 
+# for Sierra (10.12) or later
+Name: STKaitiSC-Black
+Class: GB
+Filename(10): Kaiti.ttc(5)
+
+# for El Capitan (10.11.6) or earlier
 Name: STKaiTi-TC-Regular
 Class: CNS
 Provides(40): MKai-Medium
 Filename(10): Kaiti.ttc(5)
 #Filename(20): STKaiTi-TC-Regular.ttf
 
+# for Sierra (10.12) or later
+Name: STKaitiTC-Regular
+Class: CNS
+Provides(39): MKai-Medium
+Filename(10): Kaiti.ttc(2)
+
+# for El Capitan (10.11.6) or earlier
 Name: STKaiTi-TC-Bold
 Class: CNS
 Filename(10): Kaiti.ttc(2)
 #Filename(20): STKaiTi-TC-Bold.ttf
+
+# for Sierra (10.12) or later
+Name: STKaitiTC-Bold
+Class: CNS
+Filename(10): Kaiti.ttc(4)
+
+# for Sierra (10.12) or later (New!)
+Name: STKaitiTC-Black
+Class: CNS
+Filename(10): Kaiti.ttc(6)
 
 Name: STBaoliSC-Regular
 Class: GB
@@ -2427,6 +2472,38 @@ Filename: Yuanti.ttc(4)
 Name: STYuanti-TC-Light
 Class: CNS
 Filename: Yuanti.ttc(5)
+
+# Beijing Founder Electronics (OS X)
+
+# Lantinghei SC Demibold
+Name: FZLTZHK--GBK1-0
+Class: GB
+Filename: Lantinghei.ttc(0)
+
+# Lantinghei SC Extralight
+Name: FZLTXHK--GBK1-0
+Class: GB
+Filename: Lantinghei.ttc(1)
+
+# Lantinghei SC Heavy
+Name: FZLTTHK--GBK1-0
+Class: GB
+Filename: Lantinghei.ttc(2)
+
+# Lantinghei TC Demibold
+Name: FZLTZHB--B51-0
+Class: CNS
+Filename: Lantinghei.ttc(3)
+
+# Lantinghei TC Extralight
+Name: FZLTXHB--B51-0
+Class: CNS
+Filename: Lantinghei.ttc(4)
+
+# Lantinghei TC Heavy
+Name: FZLTTHB--B51-0
+Class: CNS
+Filename: Lantinghei.ttc(5)
 
 # Arphic Font Design Team (OS X)
 
