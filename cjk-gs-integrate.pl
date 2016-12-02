@@ -465,7 +465,7 @@ sub do_otf_fonts {
       generate_font_snippet($fontdest,
         $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
       link_font($fontdb{$k}{'target'}, $ciddest, $k);
-      link_font($fontdb{$k}{'target'}, "$opt_texmflink/$otf_pathpart", "$k.otf")
+      link_font($fontdb{$k}{'target'}, "$opt_texmflink/$otf_pathpart", "$fontdb{$k}{'origname'}.otf")
         if $opt_texmflink;
     }
   }
@@ -995,6 +995,7 @@ sub read_font_database {
       if ($fontname || $fontclass || keys(%fontfiles)) {
         if ($fontname && $fontclass && keys(%fontfiles)) {
           my $realfontname = ($psname ? $psname : $fontname);
+          $fontdb{$realfontname}{'origname'} = $fontname;
           $fontdb{$realfontname}{'class'} = $fontclass;
           $fontdb{$realfontname}{'files'} = { %fontfiles };
           $fontdb{$realfontname}{'provides'} = { %fontprovides };
