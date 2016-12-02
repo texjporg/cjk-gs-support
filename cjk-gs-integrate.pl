@@ -2143,7 +2143,8 @@ Name: YuKyo-Bold
 Class: Japan
 Filename: Kyokasho.ttc(3)
 
-Name: ToppanBunkyuMinchoPr6N-Regular
+Name: ToppanBunkyuMincho-Regular
+PSName: ToppanBunkyuMinchoPr6N-Regular
 Class: Japan
 Filename: ToppanBunkyuMincho-Regular.otf
 
@@ -2155,11 +2156,13 @@ Name: ToppanBunkyuGothicPr6N-Regular
 Class: Japan
 Filename: ToppanBunkyuGothic.ttc(1)
 
-Name: ToppanBunkyuMidashiMinchoStdN-ExtraBold
+Name: ToppanBunkyuMidashiMincho-ExtraBold
+PSName: ToppanBunkyuMidashiMinchoStdN-ExtraBold
 Class: Japan
 Filename: ToppanBunkyuMidashiMincho-ExtraBold.otf
 
-Name: ToppanBunkyuMidashiGothicStdN-ExtraBold
+Name: ToppanBunkyuMidashiGothic-ExtraBold
+PSName: ToppanBunkyuMidashiGothicStdN-ExtraBold
 Class: Japan
 Filename: ToppanBunkyuMidashiGothic-ExtraBold.otf
 
@@ -2325,15 +2328,19 @@ Filename(10): Songti.ttc(2)
 Name: STKaiti
 Class: GB
 Provides(50): STKaiti-Regular
-Filename(10): Kaiti.ttc(1) # for Sierra (10.12) or later
-#Filename(10): Kaiti.ttc(4) # for El Capitan (10.11.6) or earlier
+## for Sierra (10.12) or later
+Filename(10): Kaiti.ttc(1)
+## for El Capitan (10.11.6) or earlier
+#Filename(10): Kaiti.ttc(4)
 Filename(20): 楷体.ttc(3)
 # CNS
 Name: STKaiti-Adobe-CNS1
 Class: CNS
 Provides(50): MKai-Medium
-Filename(10): Kaiti.ttc(1) # for Sierra (10.12) or later
-#Filename(10): Kaiti.ttc(4) # for El Capitan (10.11.6) or earlier
+## for Sierra (10.12) or later
+Filename(10): Kaiti.ttc(1)
+## for El Capitan (10.11.6) or earlier
+#Filename(10): Kaiti.ttc(4)
 Filename(20): 楷体.ttc(3)
 
 # TTF entry for Lion (10.7) or earlier
