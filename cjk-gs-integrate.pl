@@ -2621,6 +2621,28 @@ Provides(30): MHei-Medium
 Provides(30): MKai-Medium
 Filename(20): AdobeFanHeitiStd-Bold.otf
 
+# Arphic (free)
+
+Name: BousungEG-Light-GB
+Class: GB
+Provides(100): STSong-Light
+Filename: gbsn00lp.ttf
+
+Name: GBZenKai-Medium
+Class: GB
+Provides(100): STKaiti-Regular
+Filename: gkai00mp.ttf
+
+Name: ShanHeiSun-Light
+Class: CNS
+Provides(100): MSung-Light
+Filename: bsmi00lp.ttf
+
+Name: ZenKai-Medium
+Class: CNS
+Provides(100): MKai-Medium
+Filename: bkai00mp.ttf
+
 #
 # KOREAN FONTS
 #
