@@ -2648,22 +2648,22 @@ Filename: bkai00mp.ttf
 
 Name: UMingCN
 Class: GB
-Provides(100): MSung-Light
+Provides(110): MSung-Light
 Filename: uming.ttc(0)
 
 Name: UMingTW
 Class: CNS
-Provides(100): STSong-Light
+Provides(110): STSong-Light
 Filename: uming.ttc(2)
 
 Name: UKaiCN
 Class: GB
-Provides(100): MKai-Medium
+Provides(110): MKai-Medium
 Filename: ukai.ttc(0)
 
 Name: UKaiTW
 Class: CNS
-Provides(100): STKaiti-Regular
+Provides(110): STKaiti-Regular
 Filename: ukai.ttc(2)
 
 # CJK-Unifonts old ttf edition (free)
@@ -2671,23 +2671,23 @@ Filename: ukai.ttc(2)
 # CNS
 Name: ShanHeiSun-Uni
 Class: CNS
-Provides(110): MSung-Light
+Provides(111): MSung-Light
 Filename: uming.ttf
 # GB
 Name: ShanHeiSun-Uni-Adobe-GB1
 Class: GB
-Provides(110): STSong-Light
+Provides(111): STSong-Light
 Filename: uming.ttf
 
 # CNS
 Name: ZenKai-Uni
 Class: CNS
-Provides(110): MKai-Medium
+Provides(111): MKai-Medium
 Filename: ukai.ttf
 # GB
 Name: ZenKai-Uni-Adobe-GB1
 Class: GB
-Provides(110): STKaiti-Regular
+Provides(111): STKaiti-Regular
 Filename: ukai.ttf
 
 #
