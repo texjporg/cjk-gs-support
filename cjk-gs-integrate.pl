@@ -3,6 +3,7 @@
 # cjk-gs-integrate - setup ghostscript for CID/TTF CJK fonts
 #
 # Copyright 2015-2016 by Norbert Preining
+# Copyright 2016-     by Japanese TeX Development Community
 #
 # Based on research and work by Yusuke Kuroki, Bruno Voisin, Munehiro Yamamoto
 # and the TeX Q&A wiki page
@@ -11,7 +12,7 @@
 # For copyright statements see end of file.
 #
 # For development see
-#  https://github.com/norbusan/cjk-gs-support
+#  https://github.com/texjporg/cjk-gs-support
 #
 # TODO:
 # - how to deal with MacTeX pre-shipped configuration files?
