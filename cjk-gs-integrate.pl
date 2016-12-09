@@ -591,9 +591,9 @@ sub do_ttf_fonts {
     if ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'TTF') {
       generate_font_snippet($fontdest,
         $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
-      $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'ttfname'}, $fontdb{$k}{'subfont'});
-      link_font($fontdb{$k}{'target'}, $cidfsubst, $fontdb{$k}{'ttfname'});
-      link_font($fontdb{$k}{'target'}, "$opt_texmflink/$ttf_pathpart", $fontdb{$k}{'ttfname'})
+      $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'ttname'}, $fontdb{$k}{'subfont'});
+      link_font($fontdb{$k}{'target'}, $cidfsubst, $fontdb{$k}{'ttname'});
+      link_font($fontdb{$k}{'target'}, "$opt_texmflink/$ttf_pathpart", $fontdb{$k}{'ttname'})
         if $opt_texmflink;
     }
   }
@@ -692,7 +692,7 @@ sub do_aliases {
 sub generate_cidfmap_entry {
   my ($n, $c, $f, $sf) = @_;
   return "" if $opt_remove;
-  # $f is already the link target name 'ttfname'
+  # $f is already the link target name 'ttname'
   # as determined by minimal priority number
   # extract subfont
   my $s = "/$n << /FileType /TrueType 
@@ -732,7 +732,7 @@ sub info_found_fonts {
       }
       print "File:  $fn\n";
       if ($fontdb{$k}{'type'} eq 'TTF') {
-        print "Link:  $fontdb{$k}{'ttfname'}\n";
+        print "Link:  $fontdb{$k}{'ttname'}\n";
       }
       my @ks = sort { $fontdb{$k}{'files'}{$a}{'priority'}
                       <=>
@@ -951,20 +951,20 @@ sub compute_aliases {
 # as the link target name for TTF
 sub determine_ttf_link_target {
   for my $k (keys %fontdb) {
-    my $ttfname;
+    my $ttname;
     my $mp = 10000000;
     for my $f (keys %{$fontdb{$k}{'files'}}) {
       if ($fontdb{$k}{'files'}{$f}{'type'} eq 'TTF') {
         my $p = $fontdb{$k}{'files'}{$f}{'priority'};
         if ($p < $mp) {
-          $ttfname = $f;
-          $ttfname =~ s/^(.*)\(\d*\)$/$1/;
+          $ttname = $f;
+          $ttname =~ s/^(.*)\(\d*\)$/$1/;
           $mp = $p;
         }
       }
     }
-    if ($ttfname) {
-      $fontdb{$k}{'ttfname'} = $ttfname;
+    if ($ttname) {
+      $fontdb{$k}{'ttname'} = $ttname;
     }
   }
 }
@@ -1022,7 +1022,7 @@ sub read_font_database {
     if ($l =~ m/^Name:\s*(.*)$/) { $fontname = $1; next; }
     if ($l =~ m/^PSName:\s*(.*)$/) { $psname = $1; next; }
     if ($l =~ m/^Class:\s*(.*)$/) { $fontclass = $1 ; next ; }
-    if ($l =~ m/^Filename(\((\d+)\))?:\s*(.*)$/) { 
+    if ($l =~ m/^Filename(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
       print_ddebug("filename: $fn\n");
