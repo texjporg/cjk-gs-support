@@ -1059,7 +1059,7 @@ sub find_gs_resource {
       # /path/to/share/ghostscript/$(gs --version)/Resource
       print_debug("Finding gs resource by assuming relative path ...\n");
       chomp( $foundres = `which gs` );
-      $foundres =~ s!/bin/gs!/share/ghostscript/$gsver/Resource!;
+      $foundres =~ s!/bin/gs$!/share/ghostscript/$gsver/Resource!;
       if ( ! -d $foundres ) {
         $foundres = '';
       }
@@ -1530,14 +1530,14 @@ Filename: A-OTF-ShinGoPro-Ultra.otf
 # Hiragino (OS X)
 
 # Note about Mac OS X:
-#   ヒラギノ角ゴ {Pro,ProN} {W3,W6}.otf
-#   ヒラギノ角ゴ {Std,StdN} W8.otf
-#   ヒラギノ丸ゴ {Pro,ProN} W4.otf
-#   ヒラギノ明朝 {Pro,ProN} {W3,W6}.otf
+#   ヒラギノ角ゴ {Pro,ProN} {W3,W6}.otf
+#   ヒラギノ角ゴ {Std,StdN} W8.otf
+#   ヒラギノ丸ゴ {Pro,ProN} W4.otf
+#   ヒラギノ明朝 {Pro,ProN} {W3,W6}.otf
 # are bundled with OS X 10.10.5 Yosemite or earlier versions.
-#   ヒラギノ角ゴシック {W0,...W9}.ttc
-#   ヒラギノ丸ゴ ProN W4.ttc
-#   ヒラギノ明朝 ProN {W3,W6}.ttc
+#   ヒラギノ角ゴシック {W0,...W9}.ttc
+#   ヒラギノ丸ゴ ProN W4.ttc
+#   ヒラギノ明朝 ProN {W3,W6}.ttc
 # are bundled with OS X 10.11 El Capitan or later versions.
 
 Name: HiraKakuPro-W3
@@ -1547,10 +1547,10 @@ Provides(40): GothicBBBPro-Medium
 # the following two are *not* the same
 # one is in decomposed form (for Mac), one is in composed form (for the rest)
 Filename(20): ヒラギノ角ゴ Pro W3.otf
-Filename(19): ヒラギノ角ゴ Pro W3.otf
+Filename(19): ヒラギノ角ゴ Pro W3.otf
 Filename(10): HiraKakuPro-W3.otf
 Filename(30): ヒラギノ角ゴシック W3.ttc(3)
-Filename(29): ヒラギノ角ゴシック W3.ttc(3)
+Filename(29): ヒラギノ角ゴシック W3.ttc(3)
 Filename(28): HiraginoSans-W3.ttc(3)
 
 Name: HiraKakuPro-W6
@@ -1558,10 +1558,10 @@ Class: Japan
 Provides(40): FutoGoB101-Bold
 Provides(40): FutoGoB101Pro-Bold
 Filename(20): ヒラギノ角ゴ Pro W6.otf
-Filename(19): ヒラギノ角ゴ Pro W6.otf
+Filename(19): ヒラギノ角ゴ Pro W6.otf
 Filename(10): HiraKakuPro-W6.otf
 Filename(30): ヒラギノ角ゴシック W6.ttc(3)
-Filename(29): ヒラギノ角ゴシック W6.ttc(3)
+Filename(29): ヒラギノ角ゴシック W6.ttc(3)
 Filename(28): HiraginoSans-W6.ttc(3)
 
 Name: HiraKakuProN-W3
@@ -1569,10 +1569,10 @@ Class: Japan
 Provides(30): GothicBBB-Medium
 Provides(30): GothicBBBPro-Medium
 Filename(20): ヒラギノ角ゴ ProN W3.otf
-Filename(19): ヒラギノ角ゴ ProN W3.otf
+Filename(19): ヒラギノ角ゴ ProN W3.otf
 Filename(10): HiraKakuProN-W3.otf
 Filename(30): ヒラギノ角ゴシック W3.ttc(2)
-Filename(29): ヒラギノ角ゴシック W3.ttc(2)
+Filename(29): ヒラギノ角ゴシック W3.ttc(2)
 Filename(28): HiraginoSans-W3.ttc(2)
 
 Name: HiraKakuProN-W6
@@ -1580,10 +1580,10 @@ Class: Japan
 Provides(30): FutoGoB101-Bold
 Provides(30): FutoGoB101Pro-Bold
 Filename(20): ヒラギノ角ゴ ProN W6.otf
-Filename(19): ヒラギノ角ゴ ProN W6.otf
+Filename(19): ヒラギノ角ゴ ProN W6.otf
 Filename(10): HiraKakuProN-W6.otf
 Filename(30): ヒラギノ角ゴシック W6.ttc(2)
-Filename(29): ヒラギノ角ゴシック W6.ttc(2)
+Filename(29): ヒラギノ角ゴシック W6.ttc(2)
 Filename(28): HiraginoSans-W6.ttc(2)
 
 Name: HiraKakuStd-W8
@@ -1591,10 +1591,10 @@ Class: Japan
 Provides(40): MidashiGo-MB31
 Provides(40): MidashiGoPro-MB31
 Filename(20): ヒラギノ角ゴ Std W8.otf
-Filename(19): ヒラギノ角ゴ Std W8.otf
+Filename(19): ヒラギノ角ゴ Std W8.otf
 Filename(10): HiraKakuStd-W8.otf
 Filename(30): ヒラギノ角ゴシック W8.ttc(2)
-Filename(29): ヒラギノ角ゴシック W8.ttc(2)
+Filename(29): ヒラギノ角ゴシック W8.ttc(2)
 Filename(28): HiraginoSans-W8.ttc(2)
 
 Name: HiraKakuStdN-W8
@@ -1602,80 +1602,80 @@ Class: Japan
 Provides(30): MidashiGo-MB31
 Provides(30): MidashiGoPro-MB31
 Filename(20): ヒラギノ角ゴ StdN W8.otf
-Filename(19): ヒラギノ角ゴ StdN W8.otf
+Filename(19): ヒラギノ角ゴ StdN W8.otf
 Filename(10): HiraKakuStdN-W8.otf
 Filename(30): ヒラギノ角ゴシック W8.ttc(3)
-Filename(29): ヒラギノ角ゴシック W8.ttc(3)
+Filename(29): ヒラギノ角ゴシック W8.ttc(3)
 Filename(28): HiraginoSans-W8.ttc(3)
 
 Name: HiraginoSans-W0
 Class: Japan
 Provides(30): HiraginoSans-W0
 Filename(30): ヒラギノ角ゴシック W0.ttc(0)
-Filename(29): ヒラギノ角ゴシック W0.ttc(0)
+Filename(29): ヒラギノ角ゴシック W0.ttc(0)
 Filename(28): HiraginoSans-W0.ttc(0)
 
 Name: HiraginoSans-W1
 Class: Japan
 Provides(30): HiraginoSans-W1
 Filename(30): ヒラギノ角ゴシック W1.ttc(0)
-Filename(29): ヒラギノ角ゴシック W1.ttc(0)
+Filename(29): ヒラギノ角ゴシック W1.ttc(0)
 Filename(28): HiraginoSans-W1.ttc(0)
 
 Name: HiraginoSans-W2
 Class: Japan
 Provides(30): HiraginoSans-W2
 Filename(30): ヒラギノ角ゴシック W2.ttc(0)
-Filename(29): ヒラギノ角ゴシック W2.ttc(0)
+Filename(29): ヒラギノ角ゴシック W2.ttc(0)
 Filename(28): HiraginoSans-W2.ttc(0)
 
 Name: HiraginoSans-W3
 Class: Japan
 Provides(30): HiraginoSans-W3
 Filename(30): ヒラギノ角ゴシック W3.ttc(0)
-Filename(29): ヒラギノ角ゴシック W3.ttc(0)
+Filename(29): ヒラギノ角ゴシック W3.ttc(0)
 Filename(28): HiraginoSans-W3.ttc(0)
 
 Name: HiraginoSans-W4
 Class: Japan
 Provides(30): HiraginoSans-W4
 Filename(30): ヒラギノ角ゴシック W4.ttc(0)
-Filename(29): ヒラギノ角ゴシック W4.ttc(0)
+Filename(29): ヒラギノ角ゴシック W4.ttc(0)
 Filename(28): HiraginoSans-W4.ttc(0)
 
 Name: HiraginoSans-W5
 Class: Japan
 Provides(30): HiraginoSans-W5
 Filename(30): ヒラギノ角ゴシック W5.ttc(0)
-Filename(29): ヒラギノ角ゴシック W5.ttc(0)
+Filename(29): ヒラギノ角ゴシック W5.ttc(0)
 Filename(28): HiraginoSans-W5.ttc(0)
 
 Name: HiraginoSans-W6
 Class: Japan
 Provides(30): HiraginoSans-W6
 Filename(30): ヒラギノ角ゴシック W6.ttc(0)
-Filename(29): ヒラギノ角ゴシック W6.ttc(0)
+Filename(29): ヒラギノ角ゴシック W6.ttc(0)
 Filename(28): HiraginoSans-W6.ttc(0)
 
 Name: HiraginoSans-W7
 Class: Japan
 Provides(30): HiraginoSans-W7
 Filename(30): ヒラギノ角ゴシック W7.ttc(0)
-Filename(29): ヒラギノ角ゴシック W7.ttc(0)
+Filename(29): ヒラギノ角ゴシック W7.ttc(0)
 Filename(28): HiraginoSans-W7.ttc(0)
 
 Name: HiraginoSans-W8
 Class: Japan
 Provides(30): HiraginoSans-W8
 Filename(30): ヒラギノ角ゴシック W8.ttc(0)
-Filename(29): ヒラギノ角ゴシック W8.ttc(0)
+Filename(29): ヒラギノ角ゴシック W8.ttc(0)
 Filename(28): HiraginoSans-W8.ttc(0)
 
 Name: HiraginoSans-W9
 Class: Japan
 Provides(30): HiraginoSans-W9
 Filename(30): ヒラギノ角ゴシック W9.ttc(0)
-Filename(29): ヒラギノ角ゴシック W9.ttc(0)
+Filename(29): ヒラギノ角ゴシック W9.ttc(0)
 Filename(28): HiraginoSans-W9.ttc(0)
 
 Name: HiraMaruPro-W4
@@ -1683,10 +1683,10 @@ Class: Japan
 Provides(40): Jun101-Light
 Provides(40): Jun101Pro-Light
 Filename(20): ヒラギノ丸ゴ Pro W4.otf
-Filename(19): ヒラギノ丸ゴ Pro W4.otf
+Filename(19): ヒラギノ丸ゴ Pro W4.otf
 Filename(10): HiraMaruPro-W4.otf
 Filename(30): ヒラギノ丸ゴ ProN W4.ttc(0)
-Filename(29): ヒラギノ丸ゴ ProN W4.ttc(0)
+Filename(29): ヒラギノ丸ゴ ProN W4.ttc(0)
 Filename(28): HiraginoSansR-W4.ttc(0)
 
 Name: HiraMaruProN-W4
@@ -1694,10 +1694,10 @@ Class: Japan
 Provides(30): Jun101-Light
 Provides(30): Jun101Pro-Light
 Filename(20): ヒラギノ丸ゴ ProN W4.otf
-Filename(19): ヒラギノ丸ゴ ProN W4.otf
+Filename(19): ヒラギノ丸ゴ ProN W4.otf
 Filename(10): HiraMaruProN-W4.otf
 Filename(30): ヒラギノ丸ゴ ProN W4.ttc(1)
-Filename(29): ヒラギノ丸ゴ ProN W4.ttc(1)
+Filename(29): ヒラギノ丸ゴ ProN W4.ttc(1)
 Filename(28): HiraginoSansR-W4.ttc(1)
 
 Name: HiraMinPro-W3
@@ -1705,10 +1705,10 @@ Class: Japan
 Provides(40): Ryumin-Light
 Provides(40): RyuminPro-Light
 Filename(20): ヒラギノ明朝 Pro W3.otf
-Filename(19): ヒラギノ明朝 Pro W3.otf
+Filename(19): ヒラギノ明朝 Pro W3.otf
 Filename(10): HiraMinPro-W3.otf
 Filename(30): ヒラギノ明朝 ProN W3.ttc(1)
-Filename(29): ヒラギノ明朝 ProN W3.ttc(1)
+Filename(29): ヒラギノ明朝 ProN W3.ttc(1)
 Filename(28): HiraginoSerif-W3.ttc(1)
 
 Name: HiraMinPro-W6
@@ -1716,10 +1716,10 @@ Class: Japan
 Provides(40): FutoMinA101-Bold
 Provides(40): FutoMinA101Pro-Bold
 Filename(20): ヒラギノ明朝 Pro W6.otf
-Filename(19): ヒラギノ明朝 Pro W6.otf
+Filename(19): ヒラギノ明朝 Pro W6.otf
 Filename(10): HiraMinPro-W6.otf
 Filename(30): ヒラギノ明朝 ProN W6.ttc(1)
-Filename(29): ヒラギノ明朝 ProN W6.ttc(1)
+Filename(29): ヒラギノ明朝 ProN W6.ttc(1)
 Filename(28): HiraginoSerif-W6.ttc(1)
 
 Name: HiraMinProN-W3
@@ -1727,10 +1727,10 @@ Class: Japan
 Provides(30): Ryumin-Light
 Provides(30): RyuminPro-Light
 Filename(20): ヒラギノ明朝 ProN W3.otf
-Filename(19): ヒラギノ明朝 ProN W3.otf
+Filename(19): ヒラギノ明朝 ProN W3.otf
 Filename(10): HiraMinProN-W3.otf
 Filename(30): ヒラギノ明朝 ProN W3.ttc(0)
-Filename(29): ヒラギノ明朝 ProN W3.ttc(0)
+Filename(29): ヒラギノ明朝 ProN W3.ttc(0)
 Filename(28): HiraginoSerif-W3.ttc(0)
 
 Name: HiraMinProN-W6
@@ -1738,10 +1738,10 @@ Class: Japan
 Provides(30): FutoMinA101-Bold
 Provides(30): FutoMinA101Pro-Bold
 Filename(20): ヒラギノ明朝 ProN W6.otf
-Filename(19): ヒラギノ明朝 ProN W6.otf
+Filename(19): ヒラギノ明朝 ProN W6.otf
 Filename(10): HiraMinProN-W6.otf
 Filename(30): ヒラギノ明朝 ProN W6.ttc(0)
-Filename(29): ヒラギノ明朝 ProN W6.ttc(0)
+Filename(29): ヒラギノ明朝 ProN W6.ttc(0)
 Filename(28): HiraginoSerif-W6.ttc(0)
 
 # Yu-fonts MacOS version
