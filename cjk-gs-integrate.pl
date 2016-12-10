@@ -1059,7 +1059,7 @@ sub find_gs_resource {
       # /path/to/share/ghostscript/$(gs --version)/Resource
       print_debug("Finding gs resource by assuming relative path ...\n");
       chomp( $foundres = `which gs` );
-      $foundres =~ s!/bin/gs!/share/ghostscript/$gsver/Resource!;
+      $foundres =~ s!/bin/gs$!/share/ghostscript/$gsver/Resource!;
       if ( ! -d $foundres ) {
         $foundres = '';
       }
