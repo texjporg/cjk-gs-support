@@ -333,7 +333,7 @@ sub main {
         my $fn = ($opt_listallaliases ? "-" : $fontdb{$t}{'target'} );
         # should always be the same ;-)
         $cl = $fontdb{$t}{'class'};
-        if (!$opt_listallaliases && $fontdb{$t}{'type'} eq 'TTC' && $fontdb{$t}{'subfont'} > 0) {
+        if (!$opt_listallaliases && ($fontdb{$t}{'type'} eq 'TTC' or $fontdb{$t}{'type'} eq 'OTC') && $fontdb{$t}{'subfont'} > 0) {
           $fn .= "($fontdb{$t}{'subfont'})";
         }
         if ($opt_machine) {
@@ -930,7 +930,13 @@ sub compute_aliases {
           print_warning("  current $p $fontdb{$k}{'provides'}{$p} $aliases{$p}{$fontdb{$k}{'provides'}{$p}}\n");
           print_warning("  ignored $p $fontdb{$k}{'provides'}{$p} $k\n");
         } else {
-          $aliases{$p}{$fontdb{$k}{'provides'}{$p}} = $k;
+          # if OTC font is caught, then skip it as Ghostscript doesn't support it (2016/12/12)
+          if ($fontdb{$k}{'type'} eq 'OTC') {
+            print_warning("Currently Ghostscript does not support OTC font,\n");
+            print_warning("not adding $fontdb{$k}{'otcname'} to aliases\n");
+          } else {
+            $aliases{$p}{$fontdb{$k}{'provides'}{$p}} = $k;
+          }
         }
       }
     }
