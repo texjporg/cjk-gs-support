@@ -933,7 +933,7 @@ sub compute_aliases {
           # if OTC font is caught, then skip it as Ghostscript doesn't support it (2016/12/12)
           if ($fontdb{$k}{'type'} eq 'OTC') {
             print_warning("Currently Ghostscript does not support OTC font,\n");
-            print_warning("not adding $fontdb{$k}{'otcname'} to aliases\n");
+            print_warning("not adding $fontdb{$k}{'otcname'} to alias candidates\n");
           } else {
             $aliases{$p}{$fontdb{$k}{'provides'}{$p}} = $k;
           }
@@ -1104,17 +1104,23 @@ sub read_font_database {
       $fontfiles{$fn}{'type'} = 'TTC';
       next;
     }
-    # only for backward compatibility (TODO: separate otf/otc, ttf/ttc)
+    # only for backward compatibility; guess type from the file extension
     if ($l =~ m/^Filename(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
       print_ddebug("filename: $fn\n");
-      if ($fn =~ m/\.ot[fc](\(\d+\))?$/i) {
+      if ($fn =~ m/\.otf$/i) {
         print_ddebug("type: otf\n");
         $fontfiles{$fn}{'type'} = 'OTF';
-      } elsif ($fn =~ m/\.tt[fc](\(\d+\))?$/i) {
+      } elsif ($fn =~ m/\.otc(\(\d+\))?$/i) {
+        print_ddebug("type: otc\n");
+        $fontfiles{$fn}{'type'} = 'OTC';
+      } elsif ($fn =~ m/\.ttf$/i) {
         print_ddebug("type: ttf\n");
         $fontfiles{$fn}{'type'} = 'TTF';
+      } elsif ($fn =~ m/\.ttc(\(\d+\))?$/i) {
+        print_ddebug("type: ttc\n");
+        $fontfiles{$fn}{'type'} = 'TTC';
       } else {
         print_warning("cannot determine font type of $fn at line $lineno, skipping!\n");
         delete $fontfiles{$fn};
