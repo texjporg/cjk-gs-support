@@ -588,14 +588,14 @@ sub do_nonotf_fonts {
            "cannot link fonts to it!")
     if $opt_texmflink;
   for my $k (keys %fontdb) {
-    if ($fontdb{$k}{'available'} && ($fontdb{$k}{'type'} eq 'TTF')) {
+    if ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'TTF') {
       generate_font_snippet($fontdest,
         $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
       $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'ttfname'}, $fontdb{$k}{'subfont'});
       link_font($fontdb{$k}{'target'}, $cidfsubst, $fontdb{$k}{'ttfname'});
       link_font($fontdb{$k}{'target'}, "$opt_texmflink/$ttf_pathpart", $fontdb{$k}{'ttfname'})
         if $opt_texmflink;
-    } elsif ($fontdb{$k}{'available'} && ($fontdb{$k}{'type'} eq 'TTC')) {
+    } elsif ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'TTC') {
       generate_font_snippet($fontdest,
         $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
       $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'ttcname'}, $fontdb{$k}{'subfont'});
@@ -707,7 +707,7 @@ sub do_aliases {
 sub generate_cidfmap_entry {
   my ($n, $c, $f, $sf) = @_;
   return "" if $opt_remove;
-  # $f is already the link target name 'ttname'
+  # $f is already the link target name 'ttfname' (or 'ttcname' or 'otcname')
   # as determined by minimal priority number
   # extract subfont
   my $s = "/$n << /FileType /TrueType 
@@ -742,12 +742,16 @@ sub info_found_fonts {
       print "Type:  $fontdb{$k}{'type'}\n";
       print "Class: $fontdb{$k}{'class'}\n";
       my $fn = $fontdb{$k}{'target'};
-      if ($fontdb{$k}{'type'} eq 'TTC' && $fontdb{$k}{'subfont'} > 0) {
+      if (($fontdb{$k}{'type'} eq 'TTC' or $fontdb{$k}{'type'} eq 'OTC') && $fontdb{$k}{'subfont'} > 0) {
         $fn .= "($fontdb{$k}{'subfont'})";
       }
       print "File:  $fn\n";
-      if ($fontdb{$k}{'type'} eq 'TTF' or $fontdb{$k}{'type'} eq 'TTC') {
-        print "Link:  $fontdb{$k}{'ttname'}\n";
+      if ($fontdb{$k}{'type'} eq 'TTF') {
+        print "Link:  $fontdb{$k}{'ttfname'}\n";
+      } elsif ($fontdb{$k}{'type'} eq 'TTC') {
+        print "Link:  $fontdb{$k}{'ttcname'}\n";
+      } elsif ($fontdb{$k}{'type'} eq 'OTC') {
+        print "Link:  $fontdb{$k}{'otcname'}\n";
       }
       my @ks = sort { $fontdb{$k}{'files'}{$a}{'priority'}
                       <=>
@@ -900,7 +904,7 @@ sub check_for_files {
       if ($mf =~ m/^(.*)\((\d*)\)$/) { $sf = $2; }
       $fontdb{$k}{'target'} = $fontdb{$k}{'files'}{$mf}{'target'};
       $fontdb{$k}{'type'} = $fontdb{$k}{'files'}{$mf}{'type'};
-      $fontdb{$k}{'subfont'} = $sf if ($fontdb{$k}{'type'} eq 'TTF' or $fontdb{$k}{'type'} eq 'TTC');
+      $fontdb{$k}{'subfont'} = $sf if ($fontdb{$k}{'type'} eq 'TTF' or $fontdb{$k}{'type'} eq 'TTC' or $fontdb{$k}{'type'} eq 'OTC');
     }
     # not needed anymore
     # delete $fontdb{$k}{'files'};
