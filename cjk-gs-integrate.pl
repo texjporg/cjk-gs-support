@@ -999,7 +999,7 @@ sub determine_nonotf_link_name {
         }
       } elsif ($fontdb{$k}{'files'}{$f}{'type'} eq 'OTC') {
         my $p = $fontdb{$k}{'files'}{$f}{'priority'};
-        if ($p < $mpttc) {
+        if ($p < $mpotc) {
           $otcname = $f;
           $otcname =~ s/^(.*)\(\d*\)$/$1/;
           $mpotc = $p;
