@@ -333,7 +333,7 @@ sub main {
         my $fn = ($opt_listallaliases ? "-" : $fontdb{$t}{'target'} );
         # should always be the same ;-)
         $cl = $fontdb{$t}{'class'};
-        if (!$opt_listallaliases && ($fontdb{$t}{'type'} eq 'TTC' or $fontdb{$t}{'type'} eq 'OTC') && $fontdb{$t}{'subfont'} > 0) {
+        if (!$opt_listallaliases && ($fontdb{$t}{'type'} eq 'TTC' or $fontdb{$t}{'type'} eq 'OTC')) {
           $fn .= "($fontdb{$t}{'subfont'})";
         }
         if ($opt_machine) {
@@ -742,7 +742,7 @@ sub info_found_fonts {
       print "Type:  $fontdb{$k}{'type'}\n";
       print "Class: $fontdb{$k}{'class'}\n";
       my $fn = $fontdb{$k}{'target'};
-      if (($fontdb{$k}{'type'} eq 'TTC' or $fontdb{$k}{'type'} eq 'OTC') && $fontdb{$k}{'subfont'} > 0) {
+      if ($fontdb{$k}{'type'} eq 'TTC' or $fontdb{$k}{'type'} eq 'OTC') {
         $fn .= "($fontdb{$k}{'subfont'})";
       }
       print "File:  $fn\n";
