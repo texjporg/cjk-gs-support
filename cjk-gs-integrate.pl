@@ -2279,13 +2279,13 @@ OTCname(28): HiraginoSansGB-W6.ttc(0)
 
 Name: HiraginoSansCNS-W3
 Class: CNS
-Filename(30): Hiragino Sans CNS.ttc(0)
-Filename(28): HiraginoSansCNS.ttc(0)
+OTCname(30): Hiragino Sans CNS.ttc(0)
+OTCname(28): HiraginoSansCNS.ttc(0)
 
 Name: HiraginoSansCNS-W6
 Class: CNS
-Filename(30): Hiragino Sans CNS.ttc(1)
-Filename(28): HiraginoSansCNS.ttc(1)
+OTCname(30): Hiragino Sans CNS.ttc(1)
+OTCname(28): HiraginoSansCNS.ttc(1)
 
 # DynaComware (OS X)
 
@@ -2517,91 +2517,91 @@ TTCname(10): Kaiti.ttc(6)
 
 Name: STBaoliSC-Regular
 Class: GB
-Filename: Baoli.ttc(0)
+TTCname: Baoli.ttc(0)
 
 Name: STBaoliTC-Regular
 Class: CNS
-Filename: Baoli.ttc(1)
+TTCname: Baoli.ttc(1)
 
 Name: STLibianSC-Regular
 Class: GB
-Filename: Libian.ttc(0)
+TTCname: Libian.ttc(0)
 
 Name: STLibianTC-Regular
 Class: CNS
-Filename: Libian.ttc(1)
+TTCname: Libian.ttc(1)
 
 Name: STXingkaiSC-Bold
 Class: GB
-Filename: Xingkai.ttc(0)
+TTCname: Xingkai.ttc(0)
 
 Name: STXingkaiTC-Bold
 Class: CNS
-Filename: Xingkai.ttc(1)
+TTCname: Xingkai.ttc(1)
 
 Name: STXingkaiSC-Light
 Class: GB
-Filename: Xingkai.ttc(2)
+TTCname: Xingkai.ttc(2)
 
 Name: STXingkaiTC-Light
 Class: CNS
-Filename: Xingkai.ttc(3)
+TTCname: Xingkai.ttc(3)
 
 Name: STYuanti-SC-Regular
 Class: GB
-Filename: Yuanti.ttc(0)
+TTCname: Yuanti.ttc(0)
 
 Name: STYuanti-TC-Regular
 Class: CNS
-Filename: Yuanti.ttc(1)
+TTCname: Yuanti.ttc(1)
 
 Name: STYuanti-SC-Bold
 Class: GB
-Filename: Yuanti.ttc(2)
+TTCname: Yuanti.ttc(2)
 
 Name: STYuanti-TC-Bold
 Class: CNS
-Filename: Yuanti.ttc(3)
+TTCname: Yuanti.ttc(3)
 
 Name: STYuanti-SC-Light
 Class: GB
-Filename: Yuanti.ttc(4)
+TTCname: Yuanti.ttc(4)
 
 Name: STYuanti-TC-Light
 Class: CNS
-Filename: Yuanti.ttc(5)
+TTCname: Yuanti.ttc(5)
 
 # Beijing Founder Electronics (OS X)
 
 # Lantinghei SC Demibold
 Name: FZLTZHK--GBK1-0
 Class: GB
-Filename: Lantinghei.ttc(0)
+TTCname: Lantinghei.ttc(0)
 
 # Lantinghei SC Extralight
 Name: FZLTXHK--GBK1-0
 Class: GB
-Filename: Lantinghei.ttc(1)
+TTCname: Lantinghei.ttc(1)
 
 # Lantinghei SC Heavy
 Name: FZLTTHK--GBK1-0
 Class: GB
-Filename: Lantinghei.ttc(2)
+TTCname: Lantinghei.ttc(2)
 
 # Lantinghei TC Demibold
 Name: FZLTZHB--B51-0
 Class: CNS
-Filename: Lantinghei.ttc(3)
+TTCname: Lantinghei.ttc(3)
 
 # Lantinghei TC Extralight
 Name: FZLTXHB--B51-0
 Class: CNS
-Filename: Lantinghei.ttc(4)
+TTCname: Lantinghei.ttc(4)
 
 # Lantinghei TC Heavy
 Name: FZLTTHB--B51-0
 Class: CNS
-Filename: Lantinghei.ttc(5)
+TTCname: Lantinghei.ttc(5)
 
 # Arphic Font Design Team (OS X)
 
@@ -2641,35 +2641,35 @@ OTFname: WawaSC-Regular.otf
 
 Name: HannotateSC-W5
 Class: GB
-Filename: Hannotate.ttc(0)
+OTCname: Hannotate.ttc(0)
 
 Name: HannotateTC-W5
 Class: CNS
-Filename: Hannotate.ttc(1)
+OTCname: Hannotate.ttc(1)
 
 Name: HannotateSC-W7
 Class: GB
-Filename: Hannotate.ttc(2)
+OTCname: Hannotate.ttc(2)
 
 Name: HannotateTC-W7
 Class: CNS
-Filename: Hannotate.ttc(3)
+OTCname: Hannotate.ttc(3)
 
 Name: HanziPenSC-W3
 Class: GB
-Filename: Hanzipen.ttc(0)
+OTCname: Hanzipen.ttc(0)
 
 Name: HanziPenTC-W3
 Class: CNS
-Filename: Hanzipen.ttc(1)
+OTCname: Hanzipen.ttc(1)
 
 Name: HanziPenSC-W5
 Class: GB
-Filename: Hanzipen.ttc(2)
+OTCname: Hanzipen.ttc(2)
 
 Name: HanziPenTC-W5
 Class: CNS
-Filename: Hanzipen.ttc(3)
+OTCname: Hanzipen.ttc(3)
 
 # Adobe chinese fonts
 
