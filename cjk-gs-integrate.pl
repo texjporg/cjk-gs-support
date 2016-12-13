@@ -1311,10 +1311,11 @@ Korean:
 Simplified Chinese:
 
     STSong-Light STHeiti-Regular STHeiti-Light STKaiti-Regular
+    STFangsong-Light STFangsong-Regular
 
 Traditional Chinese:
 
-    MSung-Light MHei-Medium MKai-Medium
+    MSung-Light MSung-Medium MHei-Medium MKai-Medium
 
 In addition, we also include provide entries for the OTF Morisawa names:
     RyuminPro-Light GothicBBBPro-Medium FutoMinA101Pro-Bold
@@ -1324,7 +1325,7 @@ The order is determined by the Provides setting in the font database,
 and for the Japanese fonts it is currently:
     Morisawa Pr6N, Morisawa, Hiragino ProN, Hiragino,
     Yu OSX, Yu Win, Kozuka Pr6N, Kozuka ProVI, Kozuka,
-    MS, IPAex, IPA
+    MS, Moga-Mobo-ex, Moga-Mobo, IPAex, IPA
 
 That is, the first font found in this order will be used to provide the
 alias if necessary.
@@ -1965,45 +1966,45 @@ TTCname(30): YuGothB.ttc(0)
 
 Name: IPAMincho
 Class: Japan
-Provides(110): Ryumin-Light
-Provides(110): RyuminPro-Light
-Provides(110): FutoMinA101-Bold
-Provides(110): FutoMinA101Pro-Bold
+Provides(130): Ryumin-Light
+Provides(130): RyuminPro-Light
+Provides(130): FutoMinA101-Bold
+Provides(130): FutoMinA101Pro-Bold
 TTFname(20): ipam.ttf
 #TTFname(10): IPAMincho.ttf
 
 Name: IPAGothic
 Class: Japan
-Provides(110): GothicBBB-Medium
-Provides(110): GothicBBBPro-Medium
-Provides(110): FutoGoB101-Bold
-Provides(110): FutoGoB101Pro-Bold
-Provides(110): Jun101-Light
-Provides(110): Jun101Pro-Light
-Provides(110): MidashiGo-MB31
-Provides(110): MidashiGoPro-MB31
+Provides(130): GothicBBB-Medium
+Provides(130): GothicBBBPro-Medium
+Provides(130): FutoGoB101-Bold
+Provides(130): FutoGoB101Pro-Bold
+Provides(130): Jun101-Light
+Provides(130): Jun101Pro-Light
+Provides(130): MidashiGo-MB31
+Provides(130): MidashiGoPro-MB31
 TTFname(20): ipag.ttf
 #TTFname(10): IPAGothic.ttf
 
 Name: IPAexMincho
 Class: Japan
-Provides(100): Ryumin-Light
-Provides(100): RyuminPro-Light
-Provides(100): FutoMinA101-Bold
-Provides(100): FutoMinA101Pro-Bold
+Provides(120): Ryumin-Light
+Provides(120): RyuminPro-Light
+Provides(120): FutoMinA101-Bold
+Provides(120): FutoMinA101Pro-Bold
 TTFname(20): ipaexm.ttf
 #TTFname(10): IPAexMincho.ttf
 
 Name: IPAexGothic
 Class: Japan
-Provides(100): GothicBBB-Medium
-Provides(100): GothicBBBPro-Medium
-Provides(100): FutoGoB101-Bold
-Provides(100): FutoGoB101Pro-Bold
-Provides(100): Jun101-Light
-Provides(100): Jun101Pro-Light
-Provides(100): MidashiGo-MB31
-Provides(100): MidashiGoPro-MB31
+Provides(120): GothicBBB-Medium
+Provides(120): GothicBBBPro-Medium
+Provides(120): FutoGoB101-Bold
+Provides(120): FutoGoB101Pro-Bold
+Provides(120): Jun101-Light
+Provides(120): Jun101Pro-Light
+Provides(120): MidashiGo-MB31
+Provides(120): MidashiGoPro-MB31
 TTFname(20): ipaexg.ttf
 #TTFname(10): IPAexGothic.ttf
 
@@ -2018,6 +2019,176 @@ Name: IPAPGothic
 Class: Japan
 TTFname(20): ipagp.ttf
 #TTFname(10): IPAPGothic.ttf
+
+# Moga-Mobo from Y.Oz Vox (free)
+
+Name: MogaMincho-Regular
+Class: Japan
+Provides(110): Ryumin-Light
+Provides(110): RyuminPro-Light
+TTCname: mogam.ttc(0)
+
+Name: MogaExMincho-Regular
+Class: Japan
+Provides(100): Ryumin-Light
+Provides(100): RyuminPro-Light
+TTCname: mogam.ttc(1)
+
+Name: MogaExMincho-Italic
+Class: Japan
+TTCname: mogam.ttc(2)
+
+Name: Moga90Mincho-Regular
+Class: Japan
+TTCname: mogam.ttc(3)
+
+Name: MogaEx90Mincho-Regular
+Class: Japan
+TTCname: mogam.ttc(4)
+
+Name: MogaEx90Mincho-Italic
+Class: Japan
+TTCname: mogam.ttc(5)
+
+Name: MogaMincho-Bold
+Class: Japan
+Provides(110): FutoMinA101-Bold
+Provides(110): FutoMinA101Pro-Bold
+TTCname: mogamb.ttc(0)
+
+Name: MogaExMincho-Bold
+Class: Japan
+Provides(100): FutoMinA101-Bold
+Provides(100): FutoMinA101Pro-Bold
+TTCname: mogamb.ttc(1)
+
+Name: Moga90Mincho-Bold
+Class: Japan
+TTCname: mogamb.ttc(2)
+
+Name: MogaEx90Mincho-Bold
+Class: Japan
+TTCname: mogamb.ttc(3)
+
+Name: MogaHMincho-Regular
+Class: Japan
+TTCname: mogahm.ttc(0)
+
+Name: MogaExHMincho-Regular
+Class: Japan
+TTCname: mogahm.ttc(1)
+
+Name: MogaExHMincho-Italic
+Class: Japan
+TTCname: mogahm.ttc(2)
+
+Name: Moga90HMincho-Regular
+Class: Japan
+TTCname: mogahm.ttc(3)
+
+Name: MogaEx90HMincho-Regular
+Class: Japan
+TTCname: mogahm.ttc(4)
+
+Name: MogaEx90HMincho-Italic
+Class: Japan
+TTCname: mogahm.ttc(5)
+
+Name: MogaHMincho-Bold
+Class: Japan
+TTCname: mogahmb.ttc(0)
+
+Name: MogaExHMincho-Bold
+Class: Japan
+TTCname: mogahmb.ttc(1)
+
+Name: Moga90HMincho-Bold
+Class: Japan
+TTCname: mogahmb.ttc(2)
+
+Name: MogaEx90HMincho-Bold
+Class: Japan
+TTCname: mogahmb.ttc(3)
+
+Name: MogaGothic-Regular
+Class: Japan
+Provides(110): GothicBBB-Medium
+Provides(110): GothicBBBPro-Medium
+TTCname: mogag.ttc(0)
+
+Name: MogaExGothic-Regular
+Class: Japan
+Provides(100): GothicBBB-Medium
+Provides(100): GothicBBBPro-Medium
+TTCname: mogag.ttc(1)
+
+Name: Moga90Gothic-Regular
+Class: Japan
+TTCname: mogag.ttc(2)
+
+Name: MogaEx90Gothic-Regular
+Class: Japan
+TTCname: mogag.ttc(3)
+
+Name: MogaGothic-Bold
+Class: Japan
+Provides(110): FutoGoB101-Bold
+Provides(110): FutoGoB101Pro-Bold
+Provides(110): MidashiGo-MB31
+Provides(110): MidashiGoPro-MB31
+TTCname: mogagb.ttc(0)
+
+Name: MogaExGothic-Bold
+Class: Japan
+Provides(100): FutoGoB101-Bold
+Provides(100): FutoGoB101Pro-Bold
+Provides(100): MidashiGo-MB31
+Provides(100): MidashiGoPro-MB31
+TTCname: mogagb.ttc(1)
+
+Name: Moga90Gothic-Bold
+Class: Japan
+TTCname: mogagb.ttc(2)
+
+Name: MogaEx90Gothic-Bold
+Class: Japan
+TTCname: mogagb.ttc(3)
+
+Name: MoboGothic-Regular
+Class: Japan
+Provides(110): Jun101-Light
+Provides(110): Jun101Pro-Light
+TTCname: mobog.ttc(0)
+
+Name: MoboExGothic-Regular
+Class: Japan
+Provides(100): Jun101-Light
+Provides(100): Jun101Pro-Light
+TTCname: mobog.ttc(1)
+
+Name: Mobo90Gothic-Regular
+Class: Japan
+TTCname: mobog.ttc(2)
+
+Name: MoboEx90Gothic-Regular
+Class: Japan
+TTCname: mobog.ttc(3)
+
+Name: MoboGothic-Bold
+Class: Japan
+TTCname: mobogb.ttc(0)
+
+Name: MoboExGothic-Bold
+Class: Japan
+TTCname: mobogb.ttc(1)
+
+Name: Mobo90Gothic-Bold
+Class: Japan
+TTCname: mobogb.ttc(2)
+
+Name: MoboEx90Gothic-Bold
+Class: Japan
+TTCname: mobogb.ttc(3)
 
 # Kozuka (Adobe)
 
