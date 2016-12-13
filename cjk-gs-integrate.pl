@@ -2605,11 +2605,13 @@ TTCname: Lantinghei.ttc(5)
 
 # Arphic Font Design Team (OS X)
 
-Name: Weibei-SC-Bold
+Name: WeibeiSC-Bold
+PSName: Weibei-SC-Bold
 Class: GB
 OTFname: WeibeiSC-Bold.otf
 
-Name: Weibei-TC-Bold
+Name: WeibeiTC-Bold
+PSName: Weibei-TC-Bold
 Class: CNS
 OTFname: WeibeiTC-Bold.otf
 
@@ -2625,17 +2627,20 @@ OTFname: YuppyTC-Regular.otf
 
 # Monotype Hong Kong (OS X)
 
-Name: MLingWaiMedium-SC
+Name: LingWaiSC-Medium
+PSName: MLingWaiMedium-SC
 Class: GB
 OTFname: LingWaiSC-Medium.otf
 
-Name: MLingWaiMedium-TC
+Name: LingWaiTC-Medium
+PSName: MLingWaiMedium-TC
 Class: CNS
 OTFname: LingWaiTC-Medium.otf
 
 # DynaComware Taiwan (OS X)
 
-Name: DFWaWaSC-W5
+Name: WawaSC-Regular
+PSName: DFWaWaSC-W5
 Class: GB
 OTFname: WawaSC-Regular.otf
 
