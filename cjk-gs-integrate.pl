@@ -604,10 +604,11 @@ sub do_nonotf_fonts {
         if $opt_texmflink;
     } elsif ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'OTC') {
     # currently ghostscript does not have OTC support; not creating gs resource
-#      generate_font_snippet($fontdest,
-#        $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
-#      $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'otcname'}, $fontdb{$k}{'subfont'});
-#      link_font($fontdb{$k}{'target'}, $cidfsubst, $fontdb{$k}{'otcname'});
+    print_ddebug("gs does not support OTC, not creating gs resource for $k\n");
+    # generate_font_snippet($fontdest,
+    #  $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
+    # $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'otcname'}, $fontdb{$k}{'subfont'});
+    # link_font($fontdb{$k}{'target'}, $cidfsubst, $fontdb{$k}{'otcname'});
       link_font($fontdb{$k}{'target'}, "$opt_texmflink/$otf_pathpart", $fontdb{$k}{'otcname'})
         if $opt_texmflink;
     }
@@ -822,20 +823,23 @@ sub check_for_files {
       # Thus, instead of setting OSFONTDIR which is at the *END* of
       # the kpsewhich variables OPENTYPEFONTS and TTFONTS, we'd like to
       # put all these fonts at the front of them
-      # However, when we explicitly update OPENTYPEFONTS and TTFONTS,
-      # kpathsea does not distinguish uppercase and lowercase letters
-      # So for now, we do NOT set OPENTYPEFONTS and TTFONTS -- HY (2016/09/27)
-      # push current value of OSFONTDIR
+      #
+      # There are problems with case-insensitive file systems like HFS
+      # on MacOS, as we might catch different names (batang/Batang)
+      # and identify them wrongly.
+      # https://github.com/texjporg/cjk-gs-support/issues/9
+      # For now until we have dealt with that, do not set the
+      # two variables (HY 2016/09/27) and think about a different approach.
       push @extradirs, $ENV{'OSFONTDIR'} if $ENV{'OSFONTDIR'};
       if (@extradirs) {
-      # comment out -- HY (2016/09/27)
-#        my $newotf = join($sep, @extradirs) . $sep;
-#        my $newttf = $newotf;
-#        $newotf .= $ENV{'OPENTYPEFONTS'} if ($ENV{'OPENTYPEFONTS'});
-#        $newttf .= $ENV{'TTFONTS'} if ($ENV{'TTFONTS'});
-#        $ENV{'OPENTYPEFONTS'} = $newotf;
-#        $ENV{'TTFONTS'} = $newttf;
-      # new code for uppercase/lowercase workaround -- HY (2016/09/27)
+        # comment out -- HY (2016/09/27)
+        # my $newotf = join($sep, @extradirs) . $sep;
+        # my $newttf = $newotf;
+        # $newotf .= $ENV{'OPENTYPEFONTS'} if ($ENV{'OPENTYPEFONTS'});
+        # $newttf .= $ENV{'TTFONTS'} if ($ENV{'TTFONTS'});
+        # $ENV{'OPENTYPEFONTS'} = $newotf;
+        # $ENV{'TTFONTS'} = $newttf;
+        # new code for uppercase/lowercase workaround -- HY (2016/09/27)
         my $extrafontdir = join($sep, @extradirs) . $sep;
         $ENV{'OSFONTDIR'} = $extrafontdir;
       }
