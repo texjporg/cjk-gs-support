@@ -135,10 +135,11 @@ Korean:
 Simplified Chinese:
 
     STSong-Light STHeiti-Regular STHeiti-Light STKaiti-Regular
+    STFangsong-Light STFangsong-Regular
 
 Traditional Chinese:
 
-    MSung-Light MHei-Medium MKai-Medium
+    MSung-Light MSung-Medium MHei-Medium MKai-Medium
 
 In addition, we also include provide entries for the OTF Morisawa names:
     RyuminPro-Light GothicBBBPro-Medium FutoMinA101Pro-Bold
@@ -146,9 +147,9 @@ In addition, we also include provide entries for the OTF Morisawa names:
 
 The order is determined by the Provides setting in the font database,
 and for the Japanese fonts it is currently:
-    Morisawa Pr6, Morisawa, Hiragino ProN, Hiragino, 
-    Yu OSX, Yu Win, Kozuka ProN, Kozuka ProVI, Kozuka,
-    MS, IPAex, IPA
+    Morisawa Pr6N, Morisawa, Hiragino ProN, Hiragino,
+    Yu OSX, Yu Win, Kozuka Pr6N, Kozuka ProVI, Kozuka,
+    MS, Moga-Mobo-ex, Moga-Mobo, IPAex, IPA
 
 That is, the first font found in this order will be used to provide the
 alias if necessary.
