@@ -753,6 +753,60 @@ sub generate_cidfmap_entry {
   return $s;
 }
 
+sub maybe_symlink {
+  my ($realname, $targetname) = @_;
+  if (win32()) {
+#    open(FOO, ">$targetname") || 
+#      die("cannot open $targetname for writing: $!");
+#    print FOO "$realname";
+#    close(FOO);
+    open(FOO, ">>$winbatch") || 
+      die("cannot open $winbatch for writing: $!");
+    $realname =~ s!/!\\!g;
+    $targetname =~ s!/!\\!g;
+    print FOO "mklink $targetname $realname\n";
+    close(FOO);
+  } else {
+    symlink ($realname, $targetname);
+  }
+}
+
+# initialize batch file (windows only)
+sub init_winbatch {
+  open(FOO, ">$winbatch") || 
+    die("cannot open $winbatch for writing: $!");
+  print FOO "\@echo off\n";
+  close(FOO);
+}
+
+# complete batch file (windows only)
+sub complete_winbatch {
+  open(FOO, ">>$winbatch") || 
+    die("cannot open $winbatch for writing: $!");
+  print FOO "\@echo symlink generated\n";
+  print FOO "\@pause 1\n";
+  close(FOO);
+}
+
+# initialize psnames-for-otfps
+sub init_akotfps_datafile {
+  make_dir("$opt_texmflink/$akotfps_pathpart",
+         "cannot create $akotfps_datafilename in it!")
+  if $opt_texmflink;
+  open(FOO, ">$opt_texmflink/$akotfps_pathpart/$akotfps_datafilename") || 
+    die("cannot open $opt_texmflink/$akotfps_pathpart/$akotfps_datafilename for writing: $!");
+  print FOO "% psnames-for-otf
+%
+% PostSctipt names for OpenType fonts
+%
+% This file is used by a program ps2otfps
+% in order to add needed information to a ps file
+% created by the dvips
+%
+";
+  close(FOO);
+}
+
 #
 # dump found files
 sub info_found_fonts {
@@ -1440,60 +1494,6 @@ sub print_for_out {
       print "$indent$_\n";
     }
   }
-}
-
-sub maybe_symlink {
-  my ($realname, $targetname) = @_;
-  if (win32()) {
-#    open(FOO, ">$targetname") || 
-#      die("cannot open $targetname for writing: $!");
-#    print FOO "$realname";
-#    close(FOO);
-    open(FOO, ">>$winbatch") || 
-      die("cannot open $winbatch for writing: $!");
-    $realname =~ s!/!\\!g;
-    $targetname =~ s!/!\\!g;
-    print FOO "mklink $targetname $realname\n";
-    close(FOO);
-  } else {
-    symlink ($realname, $targetname);
-  }
-}
-
-# initialize batch file (windows only)
-sub init_winbatch {
-  open(FOO, ">$winbatch") || 
-    die("cannot open $winbatch for writing: $!");
-  print FOO "\@echo off\n";
-  close(FOO);
-}
-
-# complete batch file (windows only)
-sub complete_winbatch {
-  open(FOO, ">>$winbatch") || 
-    die("cannot open $winbatch for writing: $!");
-  print FOO "\@echo symlink generated\n";
-  print FOO "\@pause 1\n";
-  close(FOO);
-}
-
-# initialize psnames-for-otfps
-sub init_akotfps_datafile {
-  make_dir("$opt_texmflink/$akotfps_pathpart",
-         "cannot create $akotfps_datafilename in it!")
-  if $opt_texmflink;
-  open(FOO, ">$opt_texmflink/$akotfps_pathpart/$akotfps_datafilename") || 
-    die("cannot open $opt_texmflink/$akotfps_pathpart/$akotfps_datafilename for writing: $!");
-  print FOO "% psnames-for-otf
-%
-% PostSctipt names for OpenType fonts
-%
-% This file is used by a program ps2otfps
-% in order to add needed information to a ps file
-% created by the dvips
-%
-";
-  close(FOO);
 }
 
 # info/warning can be suppressed
