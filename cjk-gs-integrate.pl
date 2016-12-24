@@ -246,6 +246,7 @@ my $opt_machine = 0;
 my $opt_filelist;
 my $opt_force = 0;
 my $opt_texmflink;
+my $opt_akotfps;
 my $opt_markdown = 0;
 
 if (! GetOptions(
@@ -255,6 +256,7 @@ if (! GetOptions(
         "list-all-aliases" => \$opt_listallaliases,
         "list-fonts"  => \$opt_listfonts,
         "link-texmf:s" => \$opt_texmflink,
+        "otfps"        => \$opt_akotfps,
         "remove"       => \$opt_remove,
         "only-aliases" => \$opt_only_aliases,
         "machine-readable" => \$opt_machine,
@@ -390,7 +392,7 @@ sub main {
   print_info("output is going to $opt_output\n");
   if (!$opt_only_aliases) {
     init_winbatch() if (win32());
-    init_akotfps_datafile();
+    init_akotfps_datafile() if ($opt_akotfps);
     print_info(($opt_remove ? "removing" : "generating") . " font snippets and link CID fonts ...\n");
     do_otf_fonts();
     print_info(($opt_remove ? "removing" : "generating") . " font snippets, links, and cidfmap.local for TTF fonts ...\n");
@@ -471,9 +473,12 @@ sub do_otf_fonts {
     if $opt_texmflink;
   for my $k (keys %fontdb) {
     if ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'OTF') {
-      add_akotfps_data($k);
-      generate_font_snippet($fontdest,
-        $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
+      if ($opt_akotfps) {
+        add_akotfps_data($k);
+      } else {
+        generate_font_snippet($fontdest,
+          $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
+      }
       link_font($fontdb{$k}{'target'}, $ciddest, $k);
       link_font($fontdb{$k}{'target'}, "$opt_texmflink/$otf_pathpart", "$fontdb{$k}{'origname'}.otf")
         if $opt_texmflink;
@@ -510,10 +515,12 @@ pop
 sub add_akotfps_data {
   my ($fn) = @_;
   return if $dry_run;
-  open(FOO, ">>$opt_texmflink/$akotfps_pathpart/$akotfps_datafilename") || 
-    die("cannot open $opt_texmflink/$akotfps_pathpart/$akotfps_datafilename for writing: $!");
-  print FOO "$fn\n";
-  close(FOO);
+  if (! $opt_remove) {
+    open(FOO, ">>$opt_texmflink/$akotfps_pathpart/$akotfps_datafilename") || 
+      die("cannot open $opt_texmflink/$akotfps_pathpart/$akotfps_datafilename for writing: $!");
+    print FOO "$fn\n";
+    close(FOO);
+  }
 }
 
 #
@@ -607,17 +614,23 @@ sub do_nonotf_fonts {
     if $opt_texmflink;
   for my $k (keys %fontdb) {
     if ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'TTF') {
-      add_akotfps_data($k);
-      generate_font_snippet($fontdest,
-        $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
+      if ($opt_akotfps) {
+        add_akotfps_data($k);
+      } else {
+        generate_font_snippet($fontdest,
+          $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
+      }
       $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'ttfname'}, $fontdb{$k}{'subfont'});
       link_font($fontdb{$k}{'target'}, $cidfsubst, $fontdb{$k}{'ttfname'});
       link_font($fontdb{$k}{'target'}, "$opt_texmflink/$ttf_pathpart", $fontdb{$k}{'ttfname'})
         if $opt_texmflink;
     } elsif ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'TTC') {
-      add_akotfps_data($k);
-      generate_font_snippet($fontdest,
-        $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
+      if ($opt_akotfps) {
+        add_akotfps_data($k);
+      } else {
+        generate_font_snippet($fontdest,
+          $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
+      }
       $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'ttcname'}, $fontdb{$k}{'subfont'});
       link_font($fontdb{$k}{'target'}, $cidfsubst, $fontdb{$k}{'ttcname'});
       link_font($fontdb{$k}{'target'}, "$opt_texmflink/$ttf_pathpart", $fontdb{$k}{'ttcname'})
@@ -625,9 +638,12 @@ sub do_nonotf_fonts {
     } elsif ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'OTC') {
     # currently ghostscript does not have OTC support; not creating gs resource
     print_ddebug("gs does not support OTC, not creating gs resource for $k\n");
-    # add_akotfps_data($k);
-    # generate_font_snippet($fontdest,
-    #   $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
+    # if ($opt_akotfps) {
+    #   add_akotfps_data($k);
+    # } else {
+    #   generate_font_snippet($fontdest,
+    #     $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
+    # }
     # $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'otcname'}, $fontdb{$k}{'subfont'});
     # link_font($fontdb{$k}{'target'}, $cidfsubst, $fontdb{$k}{'otcname'});
       link_font($fontdb{$k}{'target'}, "$opt_texmflink/$otf_pathpart", $fontdb{$k}{'otcname'})
@@ -756,10 +772,10 @@ sub generate_cidfmap_entry {
 sub maybe_symlink {
   my ($realname, $targetname) = @_;
   if (win32()) {
-#    open(FOO, ">$targetname") || 
-#      die("cannot open $targetname for writing: $!");
-#    print FOO "$realname";
-#    close(FOO);
+    # open(FOO, ">$targetname") || 
+    #   die("cannot open $targetname for writing: $!");
+    # print FOO "$realname";
+    # close(FOO);
     open(FOO, ">>$winbatch") || 
       die("cannot open $winbatch for writing: $!");
     $realname =~ s!/!\\!g;
@@ -1297,6 +1313,8 @@ sub Usage {
                       and
                          DIR/$ttf_pathpart
                       where DIR defaults to TEXMFLOCAL
+--otfps               generate configuration file (psnames-for-otf) for ps2otfps
+                      developed by Akira Kakuto, instead of generating snippets
 --machine-readable    output of --list-aliases is machine readable
 --force               do not bail out if linked fonts already exist
 -q, --quiet           be less verbose
