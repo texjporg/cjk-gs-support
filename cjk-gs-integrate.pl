@@ -2891,6 +2891,38 @@ Provides(30): MHei-Medium
 Provides(30): MKai-Medium
 OTFname(20): AdobeFanHeitiStd-Bold.otf
 
+# Fandol (free)
+
+Name: FandolSong-Regular
+Class: GB
+Provides(70): STSong-Light
+OTFname(10): FandolSong-Regular.otf
+
+Name: FandolSong-Bold
+Class: GB
+OTFname(10): FandolSong-Bold.otf
+
+Name: FandolKai-Regular
+Class: GB
+Provides(70): STKaiti-Regular
+OTFname(10): FandolKai-Regular.otf
+
+Name: FandolHei-Regular
+Class: GB
+Provides(70): STHeiti-Regular
+Provides(70): STHeiti-Light
+OTFname(10): FandolHei-Regular.otf
+
+Name: FandolHei-Bold
+Class: GB
+OTFname(10): FandolHei-Bold.otf
+
+Name: FandolFang-Regular
+Class: GB
+Provides(70): STFangsong-Light
+Provides(70): STFangsong-Regular
+OTFname(10): AdobeFanHeitiStd-Bold.otf
+
 # Arphic (free)
 
 Name: BousungEG-Light-GB
@@ -3284,6 +3316,10 @@ Class: Korea
 Provides(30): HYGoThic-Medium
 Provides(80): HYRGoThic-Medium
 OTFname: AdobeGothicStd-Bold.otf
+
+Name: AdobeGothicStd-Light
+Class: Korea
+OTFname: AdobeGothicStd-Light.otf
 
 #
 # Microsoft Mac Office fonts
