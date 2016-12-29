@@ -2921,7 +2921,7 @@ Name: FandolFang-Regular
 Class: GB
 Provides(70): STFangsong-Light
 Provides(70): STFangsong-Regular
-OTFname(10): AdobeFanHeitiStd-Bold.otf
+OTFname(10): FandolFang-Regular.otf
 
 # Arphic (free)
 
