@@ -32,6 +32,7 @@ my $version = '$VER$';
 
 # if windows, create batch file for links
 my $winbatch = '';
+my $winbatch_content = '';
 if (win32()) {
   print_warning("Sorry, we have only partial support for Windows!\n");
   $winbatch = "makefontlinks.bat";
@@ -228,6 +229,7 @@ my $ttf_pathpart = "fonts/truetype/cjk-gs-integrate";
 # support for ps2otfps by Akira Kakuto
 my $akotfps_pathpart = "dvips/ps2otfps";
 my $akotfps_datafilename = "psnames-for-otf";
+my $akotfps_datacontent = '';
 
 my $dry_run = 0;
 my $opt_help = 0;
@@ -256,7 +258,7 @@ if (! GetOptions(
         "list-all-aliases" => \$opt_listallaliases,
         "list-fonts"  => \$opt_listfonts,
         "link-texmf:s" => \$opt_texmflink,
-        "otfps"        => \$opt_akotfps,
+        "otfps:s"      => \$opt_akotfps,
         "remove"       => \$opt_remove,
         "only-aliases" => \$opt_only_aliases,
         "machine-readable" => \$opt_machine,
@@ -302,6 +304,20 @@ if (defined($opt_texmflink)) {
     $foo = $opt_texmflink;
   }
   $opt_texmflink = $foo;
+}
+
+if (defined($opt_akotfps)) {
+  my $foo;
+  if ($opt_akotfps eq '') {
+    if (defined($opt_texmflink)) {
+      $foo = $opt_texmflink;
+    } else {
+      chomp( $foo = `kpsewhich -var-value=TEXMFLOCAL`);
+    }
+  } else {
+    $foo = $opt_akotfps;
+  }
+  $opt_akotfps = $foo;
 }
 
 main(@ARGV);
@@ -398,6 +414,7 @@ sub main {
     print_info(($opt_remove ? "removing" : "generating") . " font snippets, links, and cidfmap.local for TTF fonts ...\n");
     do_nonotf_fonts();
     complete_winbatch() if (win32());
+    complete_akotfps_datafile() if ($opt_akotfps);
   }
   print_info(($opt_remove ? "removing" : "generating") . " font aliases ...\n");
   do_aliases();
@@ -516,10 +533,7 @@ sub add_akotfps_data {
   my ($fn) = @_;
   return if $dry_run;
   if (! $opt_remove) {
-    open(FOO, ">>$opt_texmflink/$akotfps_pathpart/$akotfps_datafilename") || 
-      die("cannot open $opt_texmflink/$akotfps_pathpart/$akotfps_datafilename for writing: $!");
-    print FOO "$fn\n";
-    close(FOO);
+    $akotfps_datacontent = "$akotfps_datacontent$fn\n";
   }
 }
 
@@ -776,12 +790,9 @@ sub maybe_symlink {
     #   die("cannot open $targetname for writing: $!");
     # print FOO "$realname";
     # close(FOO);
-    open(FOO, ">>$winbatch") || 
-      die("cannot open $winbatch for writing: $!");
     $realname =~ s!/!\\!g;
     $targetname =~ s!/!\\!g;
-    print FOO "mklink $targetname $realname\n";
-    close(FOO);
+    $winbatch_content = "$winbatch_content mklink $targetname $realname\n";
   } else {
     symlink ($realname, $targetname);
   }
@@ -789,6 +800,7 @@ sub maybe_symlink {
 
 # initialize batch file (windows only)
 sub init_winbatch {
+  return if $dry_run;
   open(FOO, ">$winbatch") || 
     die("cannot open $winbatch for writing: $!");
   print FOO "\@echo off\n";
@@ -797,8 +809,10 @@ sub init_winbatch {
 
 # complete batch file (windows only)
 sub complete_winbatch {
+  return if $dry_run;
   open(FOO, ">>$winbatch") || 
     die("cannot open $winbatch for writing: $!");
+  print FOO "$winbatch_content";
   print FOO "\@echo symlink generated\n";
   print FOO "\@pause 1\n";
   close(FOO);
@@ -806,11 +820,12 @@ sub complete_winbatch {
 
 # initialize psnames-for-otfps
 sub init_akotfps_datafile {
-  make_dir("$opt_texmflink/$akotfps_pathpart",
+  return if $dry_run;
+  make_dir("$opt_akotfps/$akotfps_pathpart",
          "cannot create $akotfps_datafilename in it!")
-  if $opt_texmflink;
-  open(FOO, ">$opt_texmflink/$akotfps_pathpart/$akotfps_datafilename") || 
-    die("cannot open $opt_texmflink/$akotfps_pathpart/$akotfps_datafilename for writing: $!");
+  if $opt_akotfps;
+  open(FOO, ">$opt_akotfps/$akotfps_pathpart/$akotfps_datafilename") || 
+    die("cannot open $opt_akotfps/$akotfps_pathpart/$akotfps_datafilename for writing: $!");
   print FOO "% psnames-for-otf
 %
 % PostSctipt names for OpenType fonts
@@ -820,6 +835,15 @@ sub init_akotfps_datafile {
 % created by the dvips
 %
 ";
+  close(FOO);
+}
+
+# write to psnames-for-otfps
+sub complete_akotfps_datafile {
+  return if $dry_run;
+  open(FOO, ">>$opt_akotfps/$akotfps_pathpart/$akotfps_datafilename") || 
+    die("cannot open $opt_akotfps/$akotfps_pathpart/$akotfps_datafilename for writing: $!");
+  print FOO "$akotfps_datacontent";
   close(FOO);
 }
 
@@ -1313,8 +1337,10 @@ sub Usage {
                       and
                          DIR/$ttf_pathpart
                       where DIR defaults to TEXMFLOCAL
---otfps               generate configuration file (psnames-for-otf) for ps2otfps
-                      developed by Akira Kakuto, instead of generating snippets
+--otfps [DIR]         generate configuration file (psnames-for-otf) into
+                         DIR/$akotfps_pathpart
+                      which is used by ps2otfps (developed by Akira Kakuto),
+                      instead of generating snippets
 --machine-readable    output of --list-aliases is machine readable
 --force               do not bail out if linked fonts already exist
 -q, --quiet           be less verbose
