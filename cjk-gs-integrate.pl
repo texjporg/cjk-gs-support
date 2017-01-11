@@ -533,7 +533,7 @@ sub add_akotfps_data {
   my ($fn) = @_;
   return if $dry_run;
   if (! $opt_remove) {
-    $akotfps_datacontent = "$akotfps_datacontent$fn\n";
+    $akotfps_datacontent .= "$fn\n";
   }
 }
 
@@ -792,7 +792,7 @@ sub maybe_symlink {
     # close(FOO);
     $realname =~ s!/!\\!g;
     $targetname =~ s!/!\\!g;
-    $winbatch_content = "$winbatch_content mklink $targetname $realname\n";
+    $winbatch_content .= "mklink $targetname $realname\n";
   } else {
     symlink ($realname, $targetname);
   }
