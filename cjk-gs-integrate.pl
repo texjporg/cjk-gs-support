@@ -406,18 +406,20 @@ sub main {
       die ("Cannot create directory $opt_output: $!");
   }
   print_info("output is going to $opt_output\n");
+
+  init_akotfps_datafile() if ($opt_akotfps);
   if (!$opt_only_aliases) {
     init_winbatch() if (win32());
-    init_akotfps_datafile() if ($opt_akotfps);
     print_info(($opt_remove ? "removing" : "generating") . " font snippets and link CID fonts ...\n");
     do_otf_fonts();
     print_info(($opt_remove ? "removing" : "generating") . " font snippets, links, and cidfmap.local for TTF fonts ...\n");
     do_nonotf_fonts();
     complete_winbatch() if (win32());
-    complete_akotfps_datafile() if ($opt_akotfps);
   }
   print_info(($opt_remove ? "removing" : "generating") . " font aliases ...\n");
   do_aliases();
+  complete_akotfps_datafile() if ($opt_akotfps);
+
   print_info("finished\n");
 }
 
@@ -723,8 +725,13 @@ sub do_aliases {
       $target = $aliases{$al}{$first};
       $class  = $fontdb{$target}{'class'};
     }
-    # we also need to create font snippets in Font for the aliases!
-    generate_font_snippet($fontdest, $al, $class, $target);
+    # we also need to create font snippets in Font (or add configuration)
+    # for the aliases!
+    if ($opt_akotfps) {
+      add_akotfps_data($al);
+    } else {
+      generate_font_snippet($fontdest, $al, $class, $target);
+    }
     if ($class eq 'Japan') {
       push @jal, "/$al /$target ;";
     } elsif ($class eq 'Korea') {
