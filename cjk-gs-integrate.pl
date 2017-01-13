@@ -619,7 +619,7 @@ sub link_font {
   } # otherwise it is not existing!
 
   # if we are still here and $do_unlink is set, remove it
-  unlink($target) if $do_unlink;
+  maybe_unlink($target) if $do_unlink;
   # recreate link if we are not in the remove case
   if (! $opt_remove) {
     maybe_symlink($f, $target) || die("Cannot link font $f to $target: $!");
@@ -797,6 +797,11 @@ sub generate_cidfmap_entry {
   return $s;
 }
 
+# symlink function does not work on windows, so leave it to
+# batch file. if target already exists, do not try to override it.
+# otherwise
+# "mklink error: Cannot create a file when that file already exists"
+# is thrown many times
 sub maybe_symlink {
   my ($realname, $targetname) = @_;
   if (win32()) {
@@ -806,9 +811,22 @@ sub maybe_symlink {
     # close(FOO);
     $realname =~ s!/!\\!g;
     $targetname =~ s!/!\\!g;
-    $winbatch_content .= "mklink $targetname $realname\n";
+    $winbatch_content .= "if not exist \"$targetname\" mklink \"$targetname\" \"$realname\"\n";
   } else {
     symlink ($realname, $targetname);
+  }
+}
+
+# unlink function actually works also on windows, however,
+# leave it to batch file for consistency. otherwise
+# option $opt_force may not work as expected
+sub maybe_unlink {
+  my ($targetname) = @_;
+  if (win32()) {
+    $targetname =~ s!/!\\!g;
+    $winbatch_content .= "if exist \"$targetname\" del \"$targetname\"\n";
+  } else {
+    unlink ($targetname);
   }
 }
 
@@ -823,7 +841,7 @@ sub write_winbatch {
   $winbatch_content = Encode::encode('cp932', $winbatch_content);
   print FOO "\@echo off\n",
             "$winbatch_content",
-            "\@echo symlink generated\n",
+            "\@echo symlink ", ($opt_remove ? "removed\n" : "generated\n"),
             "\@pause 1\n";
   close(FOO);
 }
