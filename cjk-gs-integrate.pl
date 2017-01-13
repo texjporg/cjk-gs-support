@@ -406,20 +406,16 @@ sub main {
       die ("Cannot create directory $opt_output: $!");
   }
   print_info("output is going to $opt_output\n");
-
-  init_akotfps_datafile() if ($opt_akotfps);
   if (!$opt_only_aliases) {
-    init_winbatch() if (win32());
     print_info(($opt_remove ? "removing" : "generating") . " font snippets and link CID fonts ...\n");
     do_otf_fonts();
     print_info(($opt_remove ? "removing" : "generating") . " font snippets, links, and cidfmap.local for TTF fonts ...\n");
     do_nonotf_fonts();
-    complete_winbatch() if (win32());
+    write_winbatch() if (win32());
   }
   print_info(($opt_remove ? "removing" : "generating") . " font aliases ...\n");
   do_aliases();
-  complete_akotfps_datafile() if ($opt_akotfps);
-
+  write_akotfps_datafile() if ($opt_akotfps);
   print_info("finished\n");
 }
 
@@ -805,32 +801,23 @@ sub maybe_symlink {
   }
 }
 
-# initialize batch file (windows only)
-sub init_winbatch {
+# write batch file (windows only)
+sub write_winbatch {
   return if $dry_run;
   open(FOO, ">$winbatch") || 
     die("cannot open $winbatch for writing: $!");
-  print FOO "\@echo off\n";
+  print FOO "\@echo off\n",
+            "$winbatch_content",
+            "\@echo symlink generated\n",
+            "\@pause 1\n";
   close(FOO);
 }
 
-# complete batch file (windows only)
-sub complete_winbatch {
-  return if $dry_run;
-  open(FOO, ">>$winbatch") || 
-    die("cannot open $winbatch for writing: $!");
-  print FOO "$winbatch_content";
-  print FOO "\@echo symlink generated\n";
-  print FOO "\@pause 1\n";
-  close(FOO);
-}
-
-# initialize psnames-for-otfps
-sub init_akotfps_datafile {
+# write to psnames-for-otfps
+sub write_akotfps_datafile {
   return if $dry_run;
   make_dir("$opt_akotfps/$akotfps_pathpart",
-         "cannot create $akotfps_datafilename in it!")
-  if $opt_akotfps;
+         "cannot create $akotfps_datafilename in it!");
   open(FOO, ">$opt_akotfps/$akotfps_pathpart/$akotfps_datafilename") || 
     die("cannot open $opt_akotfps/$akotfps_pathpart/$akotfps_datafilename for writing: $!");
   print FOO "% psnames-for-otf
@@ -841,16 +828,7 @@ sub init_akotfps_datafile {
 % in order to add needed information to a ps file
 % created by the dvips
 %
-";
-  close(FOO);
-}
-
-# write to psnames-for-otfps
-sub complete_akotfps_datafile {
-  return if $dry_run;
-  open(FOO, ">>$opt_akotfps/$akotfps_pathpart/$akotfps_datafilename") || 
-    die("cannot open $opt_akotfps/$akotfps_pathpart/$akotfps_datafilename for writing: $!");
-  print FOO "$akotfps_datacontent";
+$akotfps_datacontent";
   close(FOO);
 }
 
