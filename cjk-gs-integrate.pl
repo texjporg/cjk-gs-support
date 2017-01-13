@@ -34,6 +34,17 @@ my $version = '$VER$';
 my $winbatch = '';
 my $winbatch_content = '';
 if (win32()) {
+  # conversion between internal (utf-8) and console (cp932):
+  # multibyte characters should be encoded in cp932 at least during
+  #   * kpathsea file search
+  #   * abs_path existence test
+  #   * input/output on console
+  #   * batch file output
+  # routines. make sure all of these should be restricted to win32 mode!
+  # TODO: what to do with $opt_fontdef, @opt_aliases and $opt_filelist ?
+  use utf8;
+  use Encode;
+  # symlink function does not work, so create batch file instead
   print_warning("Sorry, we have only partial support for Windows!\n");
   $winbatch = "makefontlinks.bat";
 }
@@ -806,6 +817,10 @@ sub write_winbatch {
   return if $dry_run;
   open(FOO, ">$winbatch") || 
     die("cannot open $winbatch for writing: $!");
+  # $winbatch_content may contain multibyte characters, and they
+  # should be encoded in cp932 in batch file
+  $winbatch_content = Encode::decode('utf-8', $winbatch_content);
+  $winbatch_content = Encode::encode('cp932', $winbatch_content);
   print FOO "\@echo off\n",
             "$winbatch_content",
             "\@echo symlink generated\n",
@@ -950,9 +965,17 @@ sub check_for_files {
       $cmdl .= " \"$f\" ";
     }
     # shoot up kpsewhich
+    # this call (derived from the database) contains multibyte characters,
+    # and they should be encoded in cp932 for win32 console
+    if (win32()) {
+      $cmdl = Encode::decode('utf-8', $cmdl);
+      $cmdl = Encode::encode('cp932', $cmdl);
+    }
     print_ddebug("checking for $cmdl\n");
     @foundfiles = `$cmdl`;
   }
+  # at this point, on windows, @foundfiles is encoded in cp932
+  # which is suitable for the next few lines
   chomp(@foundfiles);
   print_ddebug("Found files @foundfiles\n");
   # map basenames to filenames
@@ -962,6 +985,13 @@ sub check_for_files {
     if (!$realf) {
       print_warning("dead link or strange file found: $f - ignored!\n");
       next;
+    }
+    # decode now on windows! (cp932 -> internal utf-8)
+    if (win32()) {
+      $f = Encode::decode('cp932', $f);
+      $f = Encode::encode('utf-8', $f);
+      $realf = Encode::decode('cp932', $realf);
+      $realf = Encode::encode('utf-8', $realf);
     }
     my $bn = basename($f);
     $bntofn{$bn} = $realf;
@@ -1179,7 +1209,13 @@ sub read_font_database {
     if ($l =~ m/^OTFname(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
-      print_ddebug("filename: $fn\n");
+      # cp932 for win32 console
+      my $encoded_fn;
+      if (win32()) {
+        $encoded_fn = Encode::decode('utf-8', $fn);
+        $encoded_fn = Encode::encode('cp932', $encoded_fn);
+      }
+      print_ddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
       print_ddebug("type: otf\n");
       $fontfiles{$fn}{'type'} = 'OTF';
       next;
@@ -1187,7 +1223,13 @@ sub read_font_database {
     if ($l =~ m/^OTCname(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
-      print_ddebug("filename: $fn\n");
+      # cp932 for win32 console
+      my $encoded_fn;
+      if (win32()) {
+        $encoded_fn = Encode::decode('utf-8', $fn);
+        $encoded_fn = Encode::encode('cp932', $encoded_fn);
+      }
+      print_ddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
       print_ddebug("type: otc\n");
       $fontfiles{$fn}{'type'} = 'OTC';
       next;
@@ -1195,7 +1237,13 @@ sub read_font_database {
     if ($l =~ m/^TTFname(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
-      print_ddebug("filename: $fn\n");
+      # cp932 for win32 console
+      my $encoded_fn;
+      if (win32()) {
+        $encoded_fn = Encode::decode('utf-8', $fn);
+        $encoded_fn = Encode::encode('cp932', $encoded_fn);
+      }
+      print_ddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
       print_ddebug("type: ttf\n");
       $fontfiles{$fn}{'type'} = 'TTF';
       next;
@@ -1203,7 +1251,13 @@ sub read_font_database {
     if ($l =~ m/^TTCname(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
-      print_ddebug("filename: $fn\n");
+      # cp932 for win32 console
+      my $encoded_fn;
+      if (win32()) {
+        $encoded_fn = Encode::decode('utf-8', $fn);
+        $encoded_fn = Encode::encode('cp932', $encoded_fn);
+      }
+      print_ddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
       print_ddebug("type: ttc\n");
       $fontfiles{$fn}{'type'} = 'TTC';
       next;
@@ -1212,7 +1266,13 @@ sub read_font_database {
     if ($l =~ m/^Filename(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
-      print_ddebug("filename: $fn\n");
+      # cp932 for win32 console
+      my $encoded_fn;
+      if (win32()) {
+        $encoded_fn = Encode::decode('utf-8', $fn);
+        $encoded_fn = Encode::encode('cp932', $encoded_fn);
+      }
+      print_ddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
       if ($fn =~ m/\.otf$/i) {
         print_ddebug("type: otf\n");
         $fontfiles{$fn}{'type'} = 'OTF';
