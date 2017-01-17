@@ -1917,31 +1917,46 @@ OTCname(30): YuMincho.ttc(5)
 
 # Yu-fonts Windows version
 
+# Note about Windows:
+#   yugothi{b,c,l}.ttf
+#   yumin.ttf, yumin{db,l}.ttf
+# are bundled with Windows 8.1.
+#   YuGoth{B,L,M,R}.ttc
+#   yumin.ttf, yumin{db,l}.ttf
+# are bundled with Windows 10.
+#   YUGOTH{B,L,M,R}.TTC
+#   YUMIN.TTF, YUMIN{DB,L}.TTF
+# are bundled with Yu Font Pack for MSOffice 2010/2013.
+#   YuGothic.ttf
+#   YuGothic-Bold.ttf
+# are bundled with VS2013 or later versions.
+# Also, symlink names should be consistent with ptex-fontmaps!
+
 Name: YuMincho-Regular
 Class: Japan
 Provides(60): Ryumin-Light
 Provides(60): RyuminPro-Light
 TTFname(20): yumin.ttf
-#TTFname(10): YuMincho-Regular.ttf
+#TTFname(21): YuMincho-Regular.ttf
 
 Name: YuMincho-Light
 Class: Japan
 TTFname(20): yuminl.ttf
-#TTFname(10): YuMincho-Light.ttf
+#TTFname(21): YuMincho-Light.ttf
 
 Name: YuMincho-DemiBold
 Class: Japan
 Provides(60): FutoMinA101-Bold
 Provides(60): FutoMinA101Pro-Bold
 TTFname(20): yumindb.ttf
-#TTFname(10): YuMincho-DemiBold.ttf
+#TTFname(21): YuMincho-DemiBold.ttf
 
 Name: YuGothic-Regular
 Class: Japan
 Provides(60): GothicBBB-Medium
 Provides(60): GothicBBBPro-Medium
 TTFname(20): yugothic.ttf
-#TTFname(10): YuGothic-Regular.ttf
+#TTFname(21): YuGothic-Regular.ttf
 TTCname(30): YuGothR.ttc(0)
 
 Name: YuGothic-Medium
@@ -1951,7 +1966,7 @@ TTCname(30): YuGothM.ttc(0)
 Name: YuGothic-Light
 Class: Japan
 TTFname(20): yugothil.ttf
-#TTFname(10): YuGothic-Light.ttf
+#TTFname(21): YuGothic-Light.ttf
 TTCname(30): YuGothL.ttc(0)
 
 Name: YuGothic-Bold
@@ -1963,7 +1978,7 @@ Provides(60): Jun101Pro-Light
 Provides(60): MidashiGo-MB31
 Provides(60): MidashiGoPro-MB31
 TTFname(20): yugothib.ttf
-#TTFname(10): YuGothic-Bold.ttf
+TTFname(21): YuGothic-Bold.ttf
 TTCname(30): YuGothB.ttc(0)
 
 # IPA (free)
@@ -1975,7 +1990,7 @@ Provides(130): RyuminPro-Light
 Provides(130): FutoMinA101-Bold
 Provides(130): FutoMinA101Pro-Bold
 TTFname(20): ipam.ttf
-#TTFname(10): IPAMincho.ttf
+#TTFname(21): IPAMincho.ttf
 
 Name: IPAGothic
 Class: Japan
@@ -1988,7 +2003,7 @@ Provides(130): Jun101Pro-Light
 Provides(130): MidashiGo-MB31
 Provides(130): MidashiGoPro-MB31
 TTFname(20): ipag.ttf
-#TTFname(10): IPAGothic.ttf
+#TTFname(21): IPAGothic.ttf
 
 Name: IPAexMincho
 Class: Japan
@@ -1997,7 +2012,7 @@ Provides(120): RyuminPro-Light
 Provides(120): FutoMinA101-Bold
 Provides(120): FutoMinA101Pro-Bold
 TTFname(20): ipaexm.ttf
-#TTFname(10): IPAexMincho.ttf
+#TTFname(21): IPAexMincho.ttf
 
 Name: IPAexGothic
 Class: Japan
@@ -2010,19 +2025,19 @@ Provides(120): Jun101Pro-Light
 Provides(120): MidashiGo-MB31
 Provides(120): MidashiGoPro-MB31
 TTFname(20): ipaexg.ttf
-#TTFname(10): IPAexGothic.ttf
+#TTFname(21): IPAexGothic.ttf
 
 # IPA proportional (free)
 
 Name: IPAPMincho
 Class: Japan
 TTFname(20): ipamp.ttf
-#TTFname(10): IPAPMincho.ttf
+#TTFname(21): IPAPMincho.ttf
 
 Name: IPAPGothic
 Class: Japan
 TTFname(20): ipagp.ttf
-#TTFname(10): IPAPGothic.ttf
+#TTFname(21): IPAPGothic.ttf
 
 # Moga-Mobo from Y.Oz Vox (free)
 
@@ -2193,6 +2208,92 @@ TTCname: mobogb.ttc(2)
 Name: MoboEx90Gothic-Bold
 Class: Japan
 TTCname: mobogb.ttc(3)
+
+# Ume-font (free)
+# note: in the current release (2016-09-03 umefont_660.7z),
+# ume-tms.ttf and ume-pms.ttf ("studybook" family) share the same PSName
+# as ume-tmo.ttf and ume-pmo.ttf; we don't add these database
+# intentionally -- HY (2017/01/17)
+
+Name: Ume-Mincho
+Class: Japan
+TTFname(10): ume-tmo3.ttf
+#TTFname(11): ume-tms3.ttf
+
+Name: Ume-Gothic
+Class: Japan
+TTFname(10): ume-tgo4.ttf
+
+Name: Ume-Gothic-O5
+Class: Japan
+TTFname(10): ume-tgo5.ttf
+
+Name: Ume-Gothic-C4
+Class: Japan
+TTFname(10): ume-tgc4.ttf
+
+Name: Ume-Gothic-C5
+Class: Japan
+TTFname(10): ume-tgc5.ttf
+
+Name: Ume-Gothic-S4
+Class: Japan
+TTFname(10): ume-tgs4.ttf
+
+Name: Ume-Gothic-S5
+Class: Japan
+TTFname(10): ume-tgs5.ttf
+
+Name: Ume-P-Mincho
+Class: Japan
+TTFname(10): ume-pmo3.ttf
+#TTFname(11): ume-pms3.ttf
+
+Name: Ume-P-Gothic
+Class: Japan
+TTFname(10): ume-pgo4.ttf
+
+Name: Ume-P-Gothic-O5
+Class: Japan
+TTFname(10): ume-pgo5.ttf
+
+Name: Ume-P-Gothic-C4
+Class: Japan
+TTFname(10): ume-pgc4.ttf
+
+Name: Ume-P-Gothic-C5
+Class: Japan
+TTFname(10): ume-pgc5.ttf
+
+Name: Ume-P-Gothic-S4
+Class: Japan
+TTFname(10): ume-pgs4.ttf
+
+Name: Ume-P-Gothic-S5
+Class: Japan
+TTFname(10): ume-pgs5.ttf
+
+Name: Ume-UI-Gothic
+Class: Japan
+TTFname(10): ume-ugo4.ttf
+
+Name: Ume-UI-Gothic-O5
+Class: Japan
+TTFname(10): ume-ugo5.ttf
+
+Name: Ume-Hy-Gothic
+Class: Japan
+TTFname(10): ume-hgo4.ttf
+
+# Sazanami (free)
+
+Name: Sazanami-Mincho-Regular
+Class: Japan
+TTFname: sazanami-mincho.ttf
+
+Name: Sazanami-Gothic-Regular
+Class: Japan
+TTFname: sazanami-gothic.ttf
 
 # Kozuka (Adobe)
 
@@ -2525,18 +2626,13 @@ Provides(40): STFangsong-Regular
 TTFname(20): 华文仿宋.ttf
 TTFname(10): STFangsong.ttf
 
-# ----- Prevent wrong symlink Songti.ttc -> 华文宋体.ttf -- HY (2016/09/26)
 # TTC entry for Mountain Lion (10.8) or later
+# TTF entry for Lion (10.7) or earlier
 Name: STSong
 Class: GB
 Provides(50): STSong-Light
 TTCname(10): Songti.ttc(4)
 TTCname(20): 宋体.ttc(3)
-
-# TTF entry for Lion (10.7) or earlier
-Name: STSong
-Class: GB
-Provides(50): STSong-Light
 TTFname(30): STSong.ttf
 TTFname(40): 华文宋体.ttf
 
@@ -2588,38 +2684,29 @@ TTCname(10): Songti.ttc(2)
 # After macOS 10.12 Sierra, it contains 7 fonts and
 # the order of ttc index has completely changed.
 
-# ----- Prevent wrong symlink Kaiti.ttc -> 华文楷体.ttf -- HY (2016/09/26)
-# TTC entry for Mountain Lion (10.8) or later
-# GB
-Name: STKaiti
-Class: GB
-Provides(50): STKaiti-Regular
-## for Sierra (10.12) or later
-TTCname(10): Kaiti.ttc(1)
-## for El Capitan (10.11.6) or earlier
-#TTCname(10): Kaiti.ttc(4)
-TTCname(20): 楷体.ttc(3)
-# CNS
-Name: STKaiti-Adobe-CNS1
-Class: CNS
-Provides(50): MKai-Medium
-## for Sierra (10.12) or later
-TTCname(10): Kaiti.ttc(1)
-## for El Capitan (10.11.6) or earlier
-#TTCname(10): Kaiti.ttc(4)
-TTCname(20): 楷体.ttc(3)
-
 # TTF entry for Lion (10.7) or earlier
-# GB
+# TTC entry for Mountain Lion (10.8) or later
 Name: STKaiti
 Class: GB
 Provides(50): STKaiti-Regular
+## for Sierra (10.12) or later
+TTCname(10): Kaiti.ttc(1)
+## for El Capitan (10.11.6) or earlier
+#TTCname(10): Kaiti.ttc(4)
+TTCname(20): 楷体.ttc(3)
 TTFname(30): STKaiti.ttf
 TTFname(40): 华文楷体.ttf
-# CNS
+
+# TTF entry for Lion (10.7) or earlier
+# TTC entry for Mountain Lion (10.8) or later
 Name: STKaiti-Adobe-CNS1
 Class: CNS
 Provides(50): MKai-Medium
+## for Sierra (10.12) or later
+TTCname(10): Kaiti.ttc(1)
+## for El Capitan (10.11.6) or earlier
+#TTCname(10): Kaiti.ttc(4)
+TTCname(20): 楷体.ttc(3)
 TTFname(30): STKaiti.ttf
 TTFname(40): 华文楷体.ttf
 
@@ -3157,103 +3244,95 @@ Name: UnJamoSora
 Class: Korea
 TTFname: UnJamoSora.ttf
 
-# Nanum (free)
+# Nanum (free - TTF files) and Nanum OS X (free - TTC files)
 # note that all fonts have narrow metrics
 
 Name: NanumMyeongjo
 Class: Korea
-TTFname: NanumMyeongjo.ttf
+TTFname(10): NanumMyeongjo.ttf
+TTCname(20): NanumMyeongjo.ttc(0)
 
 Name: NanumMyeongjoBold
 Class: Korea
-TTFname: NanumMyeongjoBold.ttf
-
-Name: NanumGothic
-Class: Korea
-TTFname: NanumGothic.ttf
-
-Name: NanumGothicBold
-Class: Korea
-TTFname: NanumGothicBold.ttf
-
-Name: NanumBarunGothic
-Class: Korea
-TTFname: NanumBarunGothic.ttf
-
-Name: NanumBarunGothicBold
-Class: Korea
-TTFname: NanumBarunGothicBold.ttf
+TTFname(10): NanumMyeongjoBold.ttf
+TTCname(20): NanumMyeongjo.ttc(1)
 
 Name: NanumMyeongjoExtraBold
 Class: Korea
-TTFname: NanumMyeongjoExtraBold.ttf
+TTFname(10): NanumMyeongjoExtraBold.ttf
+TTCname(20): NanumMyeongjo.ttc(2)
+
+Name: NanumGothic
+Class: Korea
+TTFname(10): NanumGothic.ttf
+TTCname(20): NanumGothic.ttc(0)
+
+Name: NanumGothicBold
+Class: Korea
+TTFname(10): NanumGothicBold.ttf
+TTCname(20): NanumGothic.ttc(1)
 
 Name: NanumGothicExtraBold
 Class: Korea
-TTFname: NanumGothicExtraBold.ttf
+TTFname(10): NanumGothicExtraBold.ttf
+TTCname(20): NanumGothic.ttc(2)
 
 Name: NanumGothicLight
 Class: Korea
-TTFname: NanumGothicLight.ttf
+TTFname(10): NanumGothicLight.ttf
+
+Name: NanumBarunGothic
+Class: Korea
+TTFname(10): NanumBarunGothic.ttf
+
+Name: NanumBarunGothicBold
+Class: Korea
+TTFname(10): NanumBarunGothicBold.ttf
 
 Name: NanumBarunGothicLight
 Class: Korea
-TTFname: NanumBarunGothicLight.ttf
+TTFname(10): NanumBarunGothicLight.ttf
 
 Name: NanumBarunGothicUltraLight
 Class: Korea
-TTFname: NanumBarunGothicUltraLight.ttf
+TTFname(10): NanumBarunGothicUltraLight.ttf
 
 Name: NanumBarunpen
 Class: Korea
-TTFname: NanumBarunpenR.ttf
+TTFname(10): NanumBarunpenR.ttf
 
 Name: NanumBarunpen-Bold
 Class: Korea
-TTFname: NanumBarunpenB.ttf
+TTFname(10): NanumBarunpenB.ttf
 
 Name: NanumBrush
 Class: Korea
-TTFname: NanumBrush.ttf
+TTFname(10): NanumBrush.ttf
+TTCname(20): NanumScript.ttc(0)
 
 Name: NanumPen
 Class: Korea
-TTFname: NanumPen.ttf
+TTFname(10): NanumPen.ttf
+TTCname(20): NanumScript.ttc(1)
 
-# Nanum OS X (free, but converted to ttc format)
+# Hancom HCR (free)
 # note that all fonts have narrow metrics
 
-Name: NanumMyeongjo
+Name: HCRBatang
 Class: Korea
-TTCname: NanumMyeongjo.ttc(0)
+TTFname: HANBatang.ttf
 
-Name: NanumMyeongjoBold
+Name: HCRBatang-Bold
 Class: Korea
-TTCname: NanumMyeongjo.ttc(1)
+TTFname: HANBatangB.ttf
 
-Name: NanumMyeongjoExtraBold
+Name: HCRDotum
 Class: Korea
-TTCname: NanumMyeongjo.ttc(2)
+TTFname: HANDotum.ttf
 
-Name: NanumGothic
+Name: HCRDotum-Bold
 Class: Korea
-TTCname: NanumGothic.ttc(0)
-
-Name: NanumGothicBold
-Class: Korea
-TTCname: NanumGothic.ttc(1)
-
-Name: NanumGothicExtraBold
-Class: Korea
-TTCname: NanumGothic.ttc(2)
-
-Name: NanumBrush
-Class: Korea
-TTCname: NanumScript.ttc(0)
-
-Name: NanumPen
-Class: Korea
-TTCname: NanumScript.ttc(1)
+TTFname: HANDotumB.ttf
 
 # Apple
 
