@@ -1328,14 +1328,14 @@ In addition, we also include provide entries for the OTF Morisawa names:
 The order is determined by the Provides setting in the font database,
 and for the Japanese fonts it is currently:
     Morisawa Pr6N, Morisawa, Hiragino ProN, Hiragino,
-    Yu OSX, Yu Win, Kozuka Pr6N, Kozuka ProVI, Kozuka,
-    MS, Moga-Mobo-ex, Moga-Mobo, IPAex, IPA
+    Kozuka Pr6N, Kozuka ProVI, Kozuka, Yu OSX, Yu Win,
+    MS, Moga-Mobo-ex, Moga-Mobo, IPAex, IPA, Ume
 
 That is, the first font found in this order will be used to provide the
 alias if necessary.
 
 For the Korean fonts:
-    (Hanyang,) Solaris-hanyang, Adobe, MS, Apple, Unfonts, Baekmuk
+    (Hanyang,) Adobe, Solaris-hanyang, MS, Unfonts, Baekmuk
 
 For the Simplified Chinese:
     [Not yet]
@@ -1864,34 +1864,34 @@ OTCname(28): HiraginoSerif-W6.ttc(0)
 
 Name: YuGo-Medium
 Class: Japan
-Provides(50): GothicBBB-Medium
-Provides(50): GothicBBBPro-Medium
+Provides(80): GothicBBB-Medium
+Provides(80): GothicBBBPro-Medium
 OTFname(20): Yu Gothic Medium.otf
 OTFname(10): YuGo-Medium.otf
 
 Name: YuGo-Bold
 Class: Japan
-Provides(50): FutoGoB101-Bold
-Provides(50): FutoGoB101Pro-Bold
-Provides(50): Jun101-Light
-Provides(50): Jun101Pro-Light
-Provides(50): MidashiGo-MB31
-Provides(50): MidashiGoPro-MB31
+Provides(80): FutoGoB101-Bold
+Provides(80): FutoGoB101Pro-Bold
+Provides(80): Jun101-Light
+Provides(80): Jun101Pro-Light
+Provides(80): MidashiGo-MB31
+Provides(80): MidashiGoPro-MB31
 OTFname(20): Yu Gothic Bold.otf
 OTFname(10): YuGo-Bold.otf
 
 Name: YuMin-Medium
 Class: Japan
-Provides(50): Ryumin-Light
-Provides(50): RyuminPro-Light
+Provides(80): Ryumin-Light
+Provides(80): RyuminPro-Light
 OTFname(20): Yu Mincho Medium.otf
 OTFname(10): YuMin-Medium.otf
 OTCname(30): YuMincho.ttc(0)
 
 Name: YuMin-Demibold
 Class: Japan
-Provides(50): FutoMinA101-Bold
-Provides(50): FutoMinA101Pro-Bold
+Provides(80): FutoMinA101-Bold
+Provides(80): FutoMinA101Pro-Bold
 OTFname(20): Yu Mincho Demibold.otf
 OTFname(10): YuMin-Demibold.otf
 OTCname(30): YuMincho.ttc(1)
@@ -1934,8 +1934,8 @@ OTCname(30): YuMincho.ttc(5)
 
 Name: YuMincho-Regular
 Class: Japan
-Provides(60): Ryumin-Light
-Provides(60): RyuminPro-Light
+Provides(90): Ryumin-Light
+Provides(90): RyuminPro-Light
 TTFname(20): yumin.ttf
 #TTFname(21): YuMincho-Regular.ttf
 
@@ -1946,15 +1946,15 @@ TTFname(20): yuminl.ttf
 
 Name: YuMincho-DemiBold
 Class: Japan
-Provides(60): FutoMinA101-Bold
-Provides(60): FutoMinA101Pro-Bold
+Provides(90): FutoMinA101-Bold
+Provides(90): FutoMinA101Pro-Bold
 TTFname(20): yumindb.ttf
 #TTFname(21): YuMincho-DemiBold.ttf
 
 Name: YuGothic-Regular
 Class: Japan
-Provides(60): GothicBBB-Medium
-Provides(60): GothicBBBPro-Medium
+Provides(90): GothicBBB-Medium
+Provides(90): GothicBBBPro-Medium
 TTFname(20): yugothic.ttf
 #TTFname(21): YuGothic-Regular.ttf
 TTCname(30): YuGothR.ttc(0)
@@ -1971,12 +1971,12 @@ TTCname(30): YuGothL.ttc(0)
 
 Name: YuGothic-Bold
 Class: Japan
-Provides(60): FutoGoB101-Bold
-Provides(60): FutoGoB101Pro-Bold
-Provides(60): Jun101-Light
-Provides(60): Jun101Pro-Light
-Provides(60): MidashiGo-MB31
-Provides(60): MidashiGoPro-MB31
+Provides(90): FutoGoB101-Bold
+Provides(90): FutoGoB101Pro-Bold
+Provides(90): Jun101-Light
+Provides(90): Jun101Pro-Light
+Provides(90): MidashiGo-MB31
+Provides(90): MidashiGoPro-MB31
 TTFname(20): yugothib.ttf
 TTFname(21): YuGothic-Bold.ttf
 TTCname(30): YuGothB.ttc(0)
@@ -2311,22 +2311,22 @@ TTFname: sazanami-gothic.ttf
 
 Name: KozGoPr6N-Bold
 Class: Japan
-Provides(70): FutoGoB101-Bold
-Provides(70): FutoGoB101Pro-Bold
+Provides(50): FutoGoB101-Bold
+Provides(50): FutoGoB101Pro-Bold
 OTFname: KozGoPr6N-Bold.otf
 
 Name: KozGoPr6N-Heavy
 Class: Japan
-Provides(70): Jun101-Light
-Provides(70): Jun101Pro-Light
-Provides(70): MidashiGo-MB31
-Provides(70): MidashiGoPro-MB31
+Provides(50): Jun101-Light
+Provides(50): Jun101Pro-Light
+Provides(50): MidashiGo-MB31
+Provides(50): MidashiGoPro-MB31
 OTFname: KozGoPr6N-Heavy.otf
 
 Name: KozGoPr6N-Medium
 Class: Japan
-Provides(70): GothicBBB-Medium
-Provides(70): GothicBBBPro-Medium
+Provides(50): GothicBBB-Medium
+Provides(50): GothicBBBPro-Medium
 OTFname: KozGoPr6N-Medium.otf
 
 Name: KozGoPr6N-Regular
@@ -2343,22 +2343,22 @@ OTFname: KozGoPr6N-Light.otf
 
 Name: KozGoPro-Bold
 Class: Japan
-Provides(90): FutoGoB101-Bold
-Provides(90): FutoGoB101Pro-Bold
+Provides(70): FutoGoB101-Bold
+Provides(70): FutoGoB101Pro-Bold
 OTFname: KozGoPro-Bold.otf
 
 Name: KozGoPro-Heavy
 Class: Japan
-Provides(90): Jun101-Light
-Provides(90): Jun101Pro-Light
-Provides(90): MidashiGo-MB31
-Provides(90): MidashiGoPro-MB31
+Provides(70): Jun101-Light
+Provides(70): Jun101Pro-Light
+Provides(70): MidashiGo-MB31
+Provides(70): MidashiGoPro-MB31
 OTFname: KozGoPro-Heavy.otf
 
 Name: KozGoPro-Medium
 Class: Japan
-Provides(90): GothicBBB-Medium
-Provides(90): GothicBBBPro-Medium
+Provides(70): GothicBBB-Medium
+Provides(70): GothicBBBPro-Medium
 OTFname: KozGoPro-Medium.otf
 
 Name: KozGoPro-Regular
@@ -2375,22 +2375,22 @@ OTFname: KozGoPro-Light.otf
 
 Name: KozGoProVI-Bold
 Class: Japan
-Provides(80): FutoGoB101-Bold
-Provides(80): FutoGoB101Pro-Bold
+Provides(60): FutoGoB101-Bold
+Provides(60): FutoGoB101Pro-Bold
 OTFname: KozGoProVI-Bold.otf
 
 Name: KozGoProVI-Heavy
 Class: Japan
-Provides(80): Jun101-Light
-Provides(80): Jun101Pro-Light
-Provides(80): MidashiGo-MB31
-Provides(80): MidashiGoPro-MB31
+Provides(60): Jun101-Light
+Provides(60): Jun101Pro-Light
+Provides(60): MidashiGo-MB31
+Provides(60): MidashiGoPro-MB31
 OTFname: KozGoProVI-Heavy.otf
 
 Name: KozGoProVI-Medium
 Class: Japan
-Provides(80): GothicBBB-Medium
-Provides(80): GothicBBBPro-Medium
+Provides(60): GothicBBB-Medium
+Provides(60): GothicBBBPro-Medium
 OTFname: KozGoProVI-Medium.otf
 
 Name: KozGoProVI-Regular
@@ -2399,8 +2399,8 @@ OTFname: KozGoProVI-Regular.otf
 
 Name: KozMinPr6N-Bold
 Class: Japan
-Provides(70): FutoMinA101-Bold
-Provides(70): FutoMinA101Pro-Bold
+Provides(50): FutoMinA101-Bold
+Provides(50): FutoMinA101Pro-Bold
 OTFname: KozMinPr6N-Bold.otf
 
 Name: KozMinPr6N-Heavy
@@ -2413,8 +2413,8 @@ OTFname: KozMinPr6N-Medium.otf
 
 Name: KozMinPr6N-Regular
 Class: Japan
-Provides(70): Ryumin-Light
-Provides(70): RyuminPro-Light
+Provides(50): Ryumin-Light
+Provides(50): RyuminPro-Light
 OTFname: KozMinPr6N-Regular.otf
 
 Name: KozMinPr6N-ExtraLight
@@ -2427,8 +2427,8 @@ OTFname: KozMinPr6N-Light.otf
 
 Name: KozMinPro-Bold
 Class: Japan
-Provides(90): FutoMinA101-Bold
-Provides(90): FutoMinA101Pro-Bold
+Provides(70): FutoMinA101-Bold
+Provides(70): FutoMinA101Pro-Bold
 OTFname: KozMinPro-Bold.otf
 
 Name: KozMinPro-Heavy
@@ -2441,8 +2441,8 @@ OTFname: KozMinPro-Medium.otf
 
 Name: KozMinPro-Regular
 Class: Japan
-Provides(90): Ryumin-Light
-Provides(90): RyuminPro-Light
+Provides(70): Ryumin-Light
+Provides(70): RyuminPro-Light
 OTFname: KozMinPro-Regular.otf
 
 Name: KozMinPro-ExtraLight
@@ -2455,14 +2455,14 @@ OTFname: KozMinPro-Light.otf
 
 Name: KozMinProVI-Bold
 Class: Japan
-Provides(80): FutoMinA101-Bold
-Provides(80): FutoMinA101Pro-Bold
+Provides(60): FutoMinA101-Bold
+Provides(60): FutoMinA101Pro-Bold
 OTFname: KozMinProVI-Bold.otf
 
 Name: KozMinProVI-Regular
 Class: Japan
-Provides(80): Ryumin-Light
-Provides(80): RyuminPro-Light
+Provides(60): Ryumin-Light
+Provides(60): RyuminPro-Light
 OTFname: KozMinProVI-Regular.otf
 
 Name: KozMinProVI-Light
@@ -3100,17 +3100,17 @@ TTFname: ukai.ttf
 
 Name: Myeongjo
 Class: Korea
-Provides(20): HYSMyeongJo-Medium
+Provides(40): HYSMyeongJo-Medium
 TTFname: h2mjsm.ttf
 
 Name: Gothic
 Class: Korea
-Provides(20): HYGoThic-Medium
+Provides(40): HYGoThic-Medium
 TTFname: h2gtrm.ttf
 
 Name: RoundedGothic
 Class: Korea
-Provides(20): HYRGoThic-Medium
+Provides(40): HYRGoThic-Medium
 TTFname: h2drrm.ttf
 
 Name: Haeseo
@@ -3422,18 +3422,12 @@ OTFname: AdobeGothicStd-Light.otf
 
 Name: Batang
 Class: Korea
-Provides(40): HYSMyeongJo-Medium
+Provides(50): HYSMyeongJo-Medium
 TTFname(50): Batang.ttf
-
-# TODO: Does this font really exist? -- HY (2016/09/29)
-Name: Dotum
-Class: Korea
-Provides(40): HYGoThic-Medium
-TTFname(50): Dotum.ttf
 
 Name: Gulim
 Class: Korea
-Provides(40): HYRGoThic-Medium
+Provides(50): HYRGoThic-Medium
 Provides(90): HYGoThic-Medium
 TTFname(30): Gulim.ttf
 TTCname(50): gulim.ttc
