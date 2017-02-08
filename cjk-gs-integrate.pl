@@ -2217,11 +2217,23 @@ TTCname: mobogb.ttc(3)
 
 Name: Ume-Mincho
 Class: Japan
+Provides(140): Ryumin-Light
+Provides(140): RyuminPro-Light
+Provides(140): FutoMinA101-Bold
+Provides(140): FutoMinA101Pro-Bold
 TTFname(10): ume-tmo3.ttf
 #TTFname(11): ume-tms3.ttf
 
 Name: Ume-Gothic
 Class: Japan
+Provides(140): GothicBBB-Medium
+Provides(140): GothicBBBPro-Medium
+Provides(140): FutoGoB101-Bold
+Provides(140): FutoGoB101Pro-Bold
+Provides(140): Jun101-Light
+Provides(140): Jun101Pro-Light
+Provides(140): MidashiGo-MB31
+Provides(140): MidashiGoPro-MB31
 TTFname(10): ume-tgo4.ttf
 
 Name: Ume-Gothic-O5
@@ -2541,6 +2553,7 @@ OTFname: ToppanBunkyuMidashiGothic-ExtraBold.otf
 
 Name: HiraginoSansGB-W3
 Class: GB
+Provides(100): STHeiti-Light
 OTFname(20): Hiragino Sans GB W3.otf
 OTFname(10): HiraginoSansGB-W3.otf
 OTCname(30): Hiragino Sans GB W3.ttc(0)
@@ -2548,6 +2561,7 @@ OTCname(28): HiraginoSansGB-W3.ttc(0)
 
 Name: HiraginoSansGB-W6
 Class: GB
+Provides(100): STHeiti-Regular
 OTFname(20): Hiragino Sans GB W6.otf
 OTFname(10): HiraginoSansGB-W6.otf
 OTCname(30): Hiragino Sans GB W6.ttc(0)
@@ -2567,14 +2581,14 @@ OTCname(28): HiraginoSansCNS.ttc(1)
 
 Name: LiHeiPro
 Class: CNS
-Provides(50): MHei-Medium
+#Provides(??): MHei-Medium # fails
 TTFname(20): 儷黑 Pro.ttf
 TTFname(10): LiHeiPro.ttf
 
 Name: LiSongPro
 Class: CNS
-Provides(50): MSung-Medium
-Provides(50): MSung-Light
+#Provides(??): MSung-Medium # fails
+#Provides(??): MSung-Light # fails
 TTFname(20): 儷宋 Pro.ttf
 TTFname(10): LiSongPro.ttf
 
@@ -2582,26 +2596,26 @@ TTFname(10): LiSongPro.ttf
 
 Name: STXihei
 Class: GB
-Provides(20): STHeiti-Light
+#Provides(??): STHeiti-Light # fails
 TTFname(20): 华文细黑.ttf
 TTFname(10): STXihei.ttf
 
 Name: STHeiti
 Class: GB
-Provides(50): STHeiti-Regular
+#Provides(??): STHeiti-Regular # fails
 TTFname(20): 华文黑体.ttf
 TTFname(10): STHeiti.ttf
 
 Name: STHeitiSC-Light
 Class: GB
-Provides(10): STHeiti-Light
+#Provides(??): STHeiti-Light # fails
 TTCname(10): STHeiti-Light.ttc(1)
 TTCname(20): STHeiti Light.ttc(1)
 #TTFname(30): STHeitiSC-Light.ttf
 
 Name: STHeitiSC-Medium
 Class: GB
-Provides(40): STHeiti-Regular
+#Provides(??): STHeiti-Regular # fails
 TTCname(10): STHeiti-Medium.ttc(1)
 TTCname(20): STHeiti Medium.ttc(1)
 #TTFname(30): STHeitiSC-Medium.ttf
@@ -2614,15 +2628,15 @@ TTCname(20): STHeiti Light.ttc(0)
 
 Name: STHeitiTC-Medium
 Class: CNS
-Provides(40): MHei-Medium
+#Provides(??): MHei-Medium # fails
 TTCname(10): STHeiti-Medium.ttc(0)
 TTCname(20): STHeiti Medium.ttc(0)
 #TTFname(30): STHeitiTC-Medium.ttf
 
 Name: STFangsong
 Class: GB
-Provides(40): STFangsong-Light
-Provides(40): STFangsong-Regular
+#Provides(??): STFangsong-Light # fails
+#Provides(??): STFangsong-Regular # fails
 TTFname(20): 华文仿宋.ttf
 TTFname(10): STFangsong.ttf
 
@@ -2630,7 +2644,7 @@ TTFname(10): STFangsong.ttf
 # TTF entry for Lion (10.7) or earlier
 Name: STSong
 Class: GB
-Provides(50): STSong-Light
+#Provides(??): STSong-Light # fails
 TTCname(10): Songti.ttc(4)
 TTCname(20): 宋体.ttc(3)
 TTFname(30): STSong.ttf
@@ -2638,7 +2652,7 @@ TTFname(40): 华文宋体.ttf
 
 Name: STSongti-SC-Light
 Class: GB
-Provides(40): STSong-Light
+#Provides(??): STSong-Light # fails
 TTCname(10): Songti.ttc(3)
 TTCname(20): 宋体.ttc(2)
 #TTFname(30): STSongti-SC-Light.ttf
@@ -2663,13 +2677,13 @@ TTCname(20): 宋体.ttc(0)
 
 Name: STSongti-TC-Light
 Class: CNS
-Provides(40): MSung-Light
+#Provides(??): MSung-Light # fails
 TTCname(10): Songti.ttc(5)
 #TTFname(20): STSongti-TC-Light.ttf
 
 Name: STSongti-TC-Regular
 Class: CNS
-Provides(40): MSung-Medium
+#Provides(??): MSung-Medium # fails
 TTCname(10): Songti.ttc(7)
 #TTFname(20): STSongti-TC-Regular.ttf
 
@@ -2688,7 +2702,7 @@ TTCname(10): Songti.ttc(2)
 # TTC entry for Mountain Lion (10.8) or later
 Name: STKaiti
 Class: GB
-Provides(50): STKaiti-Regular
+#Provides(??): STKaiti-Regular # fails
 ## for Sierra (10.12) or later
 TTCname(10): Kaiti.ttc(1)
 ## for El Capitan (10.11.6) or earlier
@@ -2701,7 +2715,7 @@ TTFname(40): 华文楷体.ttf
 # TTC entry for Mountain Lion (10.8) or later
 Name: STKaiti-Adobe-CNS1
 Class: CNS
-Provides(50): MKai-Medium
+#Provides(??): MKai-Medium # fails
 ## for Sierra (10.12) or later
 TTCname(10): Kaiti.ttc(1)
 ## for El Capitan (10.11.6) or earlier
@@ -2713,7 +2727,7 @@ TTFname(40): 华文楷体.ttf
 # for El Capitan (10.11.6) or earlier
 Name: STKaiti-SC-Regular
 Class: GB
-Provides(40): STKaiti-Regular
+#Provides(??): STKaiti-Regular # fails
 TTCname(10): Kaiti.ttc(3)
 TTCname(20): 楷体.ttc(2)
 #TTFname(30): STKaiti-SC-Regular.ttf
@@ -2721,7 +2735,7 @@ TTCname(20): 楷体.ttc(2)
 # for Sierra (10.12) or later
 Name: STKaitiSC-Regular
 Class: GB
-Provides(39): STKaiti-Regular
+#Provides(??): STKaiti-Regular # fails
 TTCname(10): Kaiti.ttc(0)
 
 # for El Capitan (10.11.6) or earlier
@@ -2751,14 +2765,14 @@ TTCname(10): Kaiti.ttc(5)
 # for El Capitan (10.11.6) or earlier
 Name: STKaiTi-TC-Regular
 Class: CNS
-Provides(40): MKai-Medium
+#Provides(??): MKai-Medium # fails
 TTCname(10): Kaiti.ttc(5)
 #TTFname(20): STKaiTi-TC-Regular.ttf
 
 # for Sierra (10.12) or later
 Name: STKaitiTC-Regular
 Class: CNS
-Provides(39): MKai-Medium
+#Provides(??): MKai-Medium # fails
 TTCname(10): Kaiti.ttc(2)
 
 # for El Capitan (10.11.6) or earlier
@@ -3036,22 +3050,22 @@ TTFname: bkai00mp.ttf
 
 Name: UMingCN
 Class: GB
-Provides(110): MSung-Light
+Provides(110): STSong-Light
 TTCname: uming.ttc(0)
 
 Name: UMingTW
 Class: CNS
-Provides(110): STSong-Light
+Provides(110): MSung-Light
 TTCname: uming.ttc(2)
 
 Name: UKaiCN
 Class: GB
-Provides(110): MKai-Medium
+Provides(110): STKaiti-Regular
 TTCname: ukai.ttc(0)
 
 Name: UKaiTW
 Class: CNS
-Provides(110): STKaiti-Regular
+Provides(110): MKai-Medium
 TTCname: ukai.ttc(2)
 
 # CJK-Unifonts old ttf edition (free)
@@ -3338,13 +3352,13 @@ TTFname: HANDotumB.ttf
 
 Name: AppleMyungjo
 Class: Korea
-Provides(50): HYSMyeongJo-Medium
+#Provides(??): HYSMyeongJo-Medium # fails
 TTFname: AppleMyungjo.ttf
 
 Name: AppleGothic
 Class: Korea
-Provides(50): HYGoThic-Medium
-Provides(100): HYRGoThic-Medium
+#Provides(??): HYGoThic-Medium # fails
+#Provides(??): HYRGoThic-Medium # fails
 TTFname: AppleGothic.ttf
 
 Name: AppleSDGothicNeo-Thin
