@@ -1338,10 +1338,10 @@ For the Korean fonts:
     (Hanyang,) Adobe, Solaris-hanyang, MS, Unfonts, Baekmuk
 
 For the Simplified Chinese:
-    [Not yet]
+    Adobe, Fandol, Hiragino, MS, CJKUnifonts, Arphic, CJKUnifonts-ttf
 
 For the Traditional Chinese:
-    [Not yet]
+    Adobe, MS, CJKUnifonts, Arphic, CJKUnifonts-ttf
 
 #### Overriding aliases ####
 
@@ -2553,7 +2553,7 @@ OTFname: ToppanBunkyuMidashiGothic-ExtraBold.otf
 
 Name: HiraginoSansGB-W3
 Class: GB
-Provides(100): STHeiti-Light
+Provides(50): STHeiti-Light
 OTFname(20): Hiragino Sans GB W3.otf
 OTFname(10): HiraginoSansGB-W3.otf
 OTCname(30): Hiragino Sans GB W3.ttc(0)
@@ -2561,7 +2561,7 @@ OTCname(28): HiraginoSansGB-W3.ttc(0)
 
 Name: HiraginoSansGB-W6
 Class: GB
-Provides(100): STHeiti-Regular
+Provides(50): STHeiti-Regular
 OTFname(20): Hiragino Sans GB W6.otf
 OTFname(10): HiraginoSansGB-W6.otf
 OTCname(30): Hiragino Sans GB W6.ttc(0)
@@ -2996,7 +2996,7 @@ OTFname(20): AdobeFanHeitiStd-Bold.otf
 
 Name: FandolSong-Regular
 Class: GB
-Provides(70): STSong-Light
+Provides(40): STSong-Light
 OTFname(10): FandolSong-Regular.otf
 
 Name: FandolSong-Bold
@@ -3005,13 +3005,13 @@ OTFname(10): FandolSong-Bold.otf
 
 Name: FandolKai-Regular
 Class: GB
-Provides(70): STKaiti-Regular
+Provides(40): STKaiti-Regular
 OTFname(10): FandolKai-Regular.otf
 
 Name: FandolHei-Regular
 Class: GB
-Provides(70): STHeiti-Regular
-Provides(70): STHeiti-Light
+Provides(40): STHeiti-Regular
+Provides(40): STHeiti-Light
 OTFname(10): FandolHei-Regular.otf
 
 Name: FandolHei-Bold
@@ -3020,52 +3020,64 @@ OTFname(10): FandolHei-Bold.otf
 
 Name: FandolFang-Regular
 Class: GB
-Provides(70): STFangsong-Light
-Provides(70): STFangsong-Regular
+Provides(40): STFangsong-Light
+Provides(40): STFangsong-Regular
 OTFname(10): FandolFang-Regular.otf
 
 # Arphic (free)
 
 Name: BousungEG-Light-GB
 Class: GB
-Provides(100): STSong-Light
+Provides(80): STSong-Light
+Provides(80): STFangsong-Light
+Provides(80): STFangsong-Regular
 TTFname: gbsn00lp.ttf
 
 Name: GBZenKai-Medium
 Class: GB
-Provides(100): STKaiti-Regular
+Provides(80): STKaiti-Regular
+Provides(80): STHeiti-Regular
+Provides(80): STHeiti-Light
 TTFname: gkai00mp.ttf
 
 Name: ShanHeiSun-Light
 Class: CNS
-Provides(100): MSung-Light
+Provides(80): MSung-Light
+Provides(80): MSung-Medium
 TTFname: bsmi00lp.ttf
 
 Name: ZenKai-Medium
 Class: CNS
-Provides(100): MKai-Medium
+Provides(80): MKai-Medium
+Provides(80): MHei-Medium
 TTFname: bkai00mp.ttf
 
 # CJK-Unifonts new ttc edition (free)
 
 Name: UMingCN
 Class: GB
-Provides(110): STSong-Light
+Provides(70): STSong-Light
+Provides(70): STFangsong-Light
+Provides(70): STFangsong-Regular
 TTCname: uming.ttc(0)
 
 Name: UMingTW
 Class: CNS
-Provides(110): MSung-Light
+Provides(70): MSung-Light
+Provides(70): MSung-Medium
 TTCname: uming.ttc(2)
 
 Name: UKaiCN
 Class: GB
-Provides(110): STKaiti-Regular
+Provides(70): STKaiti-Regular
+Provides(70): STHeiti-Regular
+Provides(70): STHeiti-Light
 TTCname: ukai.ttc(0)
 
 Name: UKaiTW
 Class: CNS
-Provides(110): MKai-Medium
+Provides(70): MKai-Medium
+Provides(70): MHei-Medium
 TTCname: ukai.ttc(2)
 
 # CJK-Unifonts old ttf edition (free)
@@ -3073,23 +3085,29 @@ TTCname: ukai.ttc(2)
 # CNS
 Name: ShanHeiSun-Uni
 Class: CNS
-Provides(111): MSung-Light
+Provides(90): MSung-Light
+Provides(90): MSung-Medium
 TTFname: uming.ttf
 # GB
 Name: ShanHeiSun-Uni-Adobe-GB1
 Class: GB
-Provides(111): STSong-Light
+Provides(90): STSong-Light
+Provides(90): STFangsong-Light
+Provides(90): STFangsong-Regular
 TTFname: uming.ttf
 
 # CNS
 Name: ZenKai-Uni
 Class: CNS
-Provides(111): MKai-Medium
+Provides(90): MKai-Medium
+Provides(90): MHei-Medium
 TTFname: ukai.ttf
 # GB
 Name: ZenKai-Uni-Adobe-GB1
 Class: GB
-Provides(111): STKaiti-Regular
+Provides(90): STKaiti-Regular
+Provides(90): STHeiti-Regular
+Provides(90): STHeiti-Light
 TTFname: ukai.ttf
 
 #
