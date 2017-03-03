@@ -1540,19 +1540,19 @@ OTFname: A-OTF-ShinMGoPr6N-Light.otf
 Name: A-OTF-Jun201Pro-Regular
 PSName: Jun201Pro-Regular
 Class: Japan
-Provides(20): Jun201Pro-Regular
+Provides(20): Jun201-Regular
 OTFname: A-OTF-Jun201Pro-Regular.otf
 
 Name: A-OTF-Jun34Pro-Medium
 PSName: Jun34Pro-Medium
 Class: Japan
-Provides(20): Jun34Pro-Medium
+Provides(20): Jun34-Medium
 OTFname: A-OTF-Jun34Pro-Medium.otf
 
 Name: A-OTF-Jun501Pro-Bold
 PSName: Jun501Pro-Bold
 Class: Japan
-Provides(20): Jun501Pro-Bold
+Provides(20): Jun501-Bold
 OTFname: A-OTF-Jun501Pro-Bold.otf
 
 Name: A-OTF-RyuminPro-Regular
@@ -1570,7 +1570,7 @@ OTFname: A-OTF-RyuminPro-Medium.otf
 Name: A-OTF-RyuminPro-Bold
 PSName: RyuminPro-Bold
 Class: Japan
-Provides(20): RyuminPro-Bold
+Provides(20): Ryumin-Bold
 OTFname: A-OTF-RyuminPro-Bold.otf
 
 Name: A-OTF-RyuminPro-Heavy
@@ -1606,7 +1606,7 @@ OTFname: A-OTF-ShinGoPro-Medium.otf
 Name: A-OTF-ShinGoPro-Bold
 PSName: ShinGoPro-Bold
 Class: Japan
-Provides(20): ShinGoPro-Bold
+Provides(20): ShinGo-Bold
 OTFname: A-OTF-ShinGoPro-Bold.otf
 
 Name: A-OTF-ShinGoPro-Heavy
