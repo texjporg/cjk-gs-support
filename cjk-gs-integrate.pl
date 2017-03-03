@@ -1451,12 +1451,15 @@ PSName: RyuminPr6N-Light
 Class: Japan
 Provides(10): Ryumin-Light
 Provides(10): RyuminPro-Light
+Provides(10): HiraMinProN-W3
+Provides(10): HiraMinPro-W3
 OTFname: A-OTF-RyuminPr6N-Light.otf
 
 Name: A-OTF-RyuminPro-Light
 PSName: RyuminPro-Light
 Class: Japan
 Provides(20): Ryumin-Light
+Provides(20): HiraMinPro-W3
 OTFname: A-OTF-RyuminPro-Light.otf
 
 Name: A-OTF-FutoMinA101Pr6N-Bold
@@ -1464,12 +1467,15 @@ PSName: FutoMinA101Pr6N-Bold
 Class: Japan
 Provides(10): FutoMinA101-Bold
 Provides(10): FutoMinA101Pro-Bold
+Provides(10): HiraMinProN-W6
+Provides(10): HiraMinPro-W6
 OTFname: A-OTF-FutoMinA101Pr6N-Bold.otf
 
 Name: A-OTF-FutoMinA101Pro-Bold
 PSName: FutoMinA101Pro-Bold
 Class: Japan
 Provides(20): FutoMinA101-Bold
+Provides(20): HiraMinPro-W6
 OTFname: A-OTF-FutoMinA101Pro-Bold.otf
 
 Name: A-OTF-GothicBBBPr6N-Medium
@@ -1477,12 +1483,15 @@ PSName: GothicBBBPr6N-Medium
 Class: Japan
 Provides(10): GothicBBB-Medium
 Provides(10): GothicBBBPro-Medium
+Provides(10): HiraKakuProN-W3
+Provides(10): HiraKakuPro-W3
 OTFname: A-OTF-GothicBBBPr6N-Medium.otf
 
 Name: A-OTF-GothicBBBPro-Medium
 PSName: GothicBBBPro-Medium
 Class: Japan
 Provides(20): GothicBBB-Medium
+Provides(20): HiraKakuPro-W3
 OTFname: A-OTF-GothicBBBPro-Medium.otf
 
 Name: A-OTF-FutoGoB101Pr6N-Bold
@@ -1490,12 +1499,15 @@ PSName: FutoGoB101Pr6N-Bold
 Class: Japan
 Provides(10): FutoGoB101-Bold
 Provides(10): FutoGoB101Pro-Bold
+Provides(10): HiraKakuProN-W6
+Provides(10): HiraKakuPro-W6
 OTFname: A-OTF-FutoGoB101Pr6N-Bold.otf
 
 Name: A-OTF-FutoGoB101Pro-Bold
 PSName: FutoGoB101Pro-Bold
 Class: Japan
 Provides(20): FutoGoB101-Bold
+Provides(20): HiraKakuPro-W6
 OTFname: A-OTF-FutoGoB101Pro-Bold.otf
 
 Name: A-OTF-MidashiGoPr6N-MB31
@@ -1503,12 +1515,15 @@ PSName: MidashiGoPr6N-MB31
 Class: Japan
 Provides(10): MidashiGo-MB31
 Provides(10): MidashiGoPro-MB31
+Provides(10): HiraKakuStdN-W8
+Provides(10): HiraKakuStd-W8
 OTFname: A-OTF-MidashiGoPr6N-MB31.otf
 
 Name: A-OTF-MidashiGoPro-MB31
 PSName: MidashiGoPro-MB31
 Class: Japan
 Provides(20): MidashiGo-MB31
+Provides(20): HiraKakuStd-W8
 OTFname: A-OTF-MidashiGoPro-MB31.otf
 
 # A-OTF-Jun101Pr6N-Light has been replaced by A-OTF-ShinMGoPr6N-Light
@@ -1519,12 +1534,15 @@ PSName: Jun101Pr6N-Light
 Class: Japan
 Provides(11): Jun101-Light
 Provides(11): Jun101Pro-Light
+Provides(11): HiraMaruProN-W4
+Provides(11): HiraMaruPro-W4
 OTFname: A-OTF-Jun101Pr6N-Light.otf
 
 Name: A-OTF-Jun101Pro-Light
 PSName: Jun101Pro-Light
 Class: Japan
 Provides(20): Jun101-Light
+Provides(20): HiraMaruPro-W4
 OTFname: A-OTF-Jun101Pro-Light.otf
 
 Name: A-OTF-ShinMGoPr6N-Light
@@ -1532,6 +1550,8 @@ PSName: ShinMGoPr6N-Light
 Class: Japan
 Provides(10): Jun101-Light
 Provides(10): Jun101Pro-Light
+Provides(10): HiraMaruProN-W4
+Provides(10): HiraMaruPro-W4
 OTFname: A-OTF-ShinMGoPr6N-Light.otf
 
 # Morisawa others (for moriprop);
@@ -1936,6 +1956,8 @@ Name: YuMincho-Regular
 Class: Japan
 Provides(90): Ryumin-Light
 Provides(90): RyuminPro-Light
+Provides(90): HiraMinProN-W3
+Provides(90): HiraMinPro-W3
 TTFname(20): yumin.ttf
 #TTFname(21): YuMincho-Regular.ttf
 
@@ -1948,6 +1970,8 @@ Name: YuMincho-DemiBold
 Class: Japan
 Provides(90): FutoMinA101-Bold
 Provides(90): FutoMinA101Pro-Bold
+Provides(90): HiraMinProN-W6
+Provides(90): HiraMinPro-W6
 TTFname(20): yumindb.ttf
 #TTFname(21): YuMincho-DemiBold.ttf
 
@@ -1955,6 +1979,8 @@ Name: YuGothic-Regular
 Class: Japan
 Provides(90): GothicBBB-Medium
 Provides(90): GothicBBBPro-Medium
+Provides(90): HiraKakuProN-W3
+Provides(90): HiraKakuPro-W3
 TTFname(20): yugothic.ttf
 #TTFname(21): YuGothic-Regular.ttf
 TTCname(30): YuGothR.ttc(0)
@@ -1973,10 +1999,16 @@ Name: YuGothic-Bold
 Class: Japan
 Provides(90): FutoGoB101-Bold
 Provides(90): FutoGoB101Pro-Bold
+Provides(90): HiraKakuProN-W6
+Provides(90): HiraKakuPro-W6
 Provides(90): Jun101-Light
 Provides(90): Jun101Pro-Light
+Provides(90): HiraMaruProN-W4
+Provides(90): HiraMaruPro-W4
 Provides(90): MidashiGo-MB31
 Provides(90): MidashiGoPro-MB31
+Provides(90): HiraKakuStdN-W8
+Provides(90): HiraKakuStd-W8
 TTFname(20): yugothib.ttf
 TTFname(21): YuGothic-Bold.ttf
 TTCname(30): YuGothB.ttc(0)
@@ -1987,8 +2019,12 @@ Name: IPAMincho
 Class: Japan
 Provides(130): Ryumin-Light
 Provides(130): RyuminPro-Light
+Provides(130): HiraMinProN-W3
+Provides(130): HiraMinPro-W3
 Provides(130): FutoMinA101-Bold
 Provides(130): FutoMinA101Pro-Bold
+Provides(130): HiraMinProN-W6
+Provides(130): HiraMinPro-W6
 TTFname(20): ipam.ttf
 #TTFname(21): IPAMincho.ttf
 
@@ -1996,12 +2032,20 @@ Name: IPAGothic
 Class: Japan
 Provides(130): GothicBBB-Medium
 Provides(130): GothicBBBPro-Medium
+Provides(130): HiraKakuProN-W3
+Provides(130): HiraKakuPro-W3
 Provides(130): FutoGoB101-Bold
 Provides(130): FutoGoB101Pro-Bold
+Provides(130): HiraKakuProN-W6
+Provides(130): HiraKakuPro-W6
 Provides(130): Jun101-Light
 Provides(130): Jun101Pro-Light
+Provides(130): HiraMaruProN-W4
+Provides(130): HiraMaruPro-W4
 Provides(130): MidashiGo-MB31
 Provides(130): MidashiGoPro-MB31
+Provides(130): HiraKakuStdN-W8
+Provides(130): HiraKakuStd-W8
 TTFname(20): ipag.ttf
 #TTFname(21): IPAGothic.ttf
 
@@ -2009,8 +2053,12 @@ Name: IPAexMincho
 Class: Japan
 Provides(120): Ryumin-Light
 Provides(120): RyuminPro-Light
+Provides(120): HiraMinProN-W3
+Provides(120): HiraMinPro-W3
 Provides(120): FutoMinA101-Bold
 Provides(120): FutoMinA101Pro-Bold
+Provides(120): HiraMinProN-W6
+Provides(120): HiraMinPro-W6
 TTFname(20): ipaexm.ttf
 #TTFname(21): IPAexMincho.ttf
 
@@ -2018,12 +2066,20 @@ Name: IPAexGothic
 Class: Japan
 Provides(120): GothicBBB-Medium
 Provides(120): GothicBBBPro-Medium
+Provides(120): HiraKakuProN-W3
+Provides(120): HiraKakuPro-W3
 Provides(120): FutoGoB101-Bold
 Provides(120): FutoGoB101Pro-Bold
+Provides(120): HiraKakuProN-W6
+Provides(120): HiraKakuPro-W6
 Provides(120): Jun101-Light
 Provides(120): Jun101Pro-Light
+Provides(120): HiraMaruProN-W4
+Provides(120): HiraMaruPro-W4
 Provides(120): MidashiGo-MB31
 Provides(120): MidashiGoPro-MB31
+Provides(120): HiraKakuStdN-W8
+Provides(120): HiraKakuStd-W8
 TTFname(20): ipaexg.ttf
 #TTFname(21): IPAexGothic.ttf
 
@@ -2045,12 +2101,16 @@ Name: MogaMincho-Regular
 Class: Japan
 Provides(110): Ryumin-Light
 Provides(110): RyuminPro-Light
+Provides(110): HiraMinProN-W3
+Provides(110): HiraMinPro-W3
 TTCname: mogam.ttc(0)
 
 Name: MogaExMincho-Regular
 Class: Japan
 Provides(100): Ryumin-Light
 Provides(100): RyuminPro-Light
+Provides(100): HiraMinProN-W3
+Provides(100): HiraMinPro-W3
 TTCname: mogam.ttc(1)
 
 Name: MogaExMincho-Italic
@@ -2073,12 +2133,16 @@ Name: MogaMincho-Bold
 Class: Japan
 Provides(110): FutoMinA101-Bold
 Provides(110): FutoMinA101Pro-Bold
+Provides(110): HiraMinProN-W6
+Provides(110): HiraMinPro-W6
 TTCname: mogamb.ttc(0)
 
 Name: MogaExMincho-Bold
 Class: Japan
 Provides(100): FutoMinA101-Bold
 Provides(100): FutoMinA101Pro-Bold
+Provides(100): HiraMinProN-W6
+Provides(100): HiraMinPro-W6
 TTCname: mogamb.ttc(1)
 
 Name: Moga90Mincho-Bold
@@ -2133,12 +2197,16 @@ Name: MogaGothic-Regular
 Class: Japan
 Provides(110): GothicBBB-Medium
 Provides(110): GothicBBBPro-Medium
+Provides(110): HiraKakuProN-W3
+Provides(110): HiraKakuPro-W3
 TTCname: mogag.ttc(0)
 
 Name: MogaExGothic-Regular
 Class: Japan
 Provides(100): GothicBBB-Medium
 Provides(100): GothicBBBPro-Medium
+Provides(100): HiraKakuProN-W3
+Provides(100): HiraKakuPro-W3
 TTCname: mogag.ttc(1)
 
 Name: Moga90Gothic-Regular
@@ -2153,16 +2221,24 @@ Name: MogaGothic-Bold
 Class: Japan
 Provides(110): FutoGoB101-Bold
 Provides(110): FutoGoB101Pro-Bold
+Provides(110): HiraKakuProN-W6
+Provides(110): HiraKakuPro-W6
 Provides(110): MidashiGo-MB31
 Provides(110): MidashiGoPro-MB31
+Provides(110): HiraKakuStdN-W8
+Provides(110): HiraKakuStd-W8
 TTCname: mogagb.ttc(0)
 
 Name: MogaExGothic-Bold
 Class: Japan
 Provides(100): FutoGoB101-Bold
 Provides(100): FutoGoB101Pro-Bold
+Provides(100): HiraKakuProN-W6
+Provides(100): HiraKakuPro-W6
 Provides(100): MidashiGo-MB31
 Provides(100): MidashiGoPro-MB31
+Provides(100): HiraKakuStdN-W8
+Provides(100): HiraKakuStd-W8
 TTCname: mogagb.ttc(1)
 
 Name: Moga90Gothic-Bold
@@ -2177,12 +2253,16 @@ Name: MoboGothic-Regular
 Class: Japan
 Provides(110): Jun101-Light
 Provides(110): Jun101Pro-Light
+Provides(110): HiraMaruProN-W4
+Provides(110): HiraMaruPro-W4
 TTCname: mobog.ttc(0)
 
 Name: MoboExGothic-Regular
 Class: Japan
 Provides(100): Jun101-Light
 Provides(100): Jun101Pro-Light
+Provides(100): HiraMaruProN-W4
+Provides(100): HiraMaruPro-W4
 TTCname: mobog.ttc(1)
 
 Name: Mobo90Gothic-Regular
@@ -2219,8 +2299,12 @@ Name: Ume-Mincho
 Class: Japan
 Provides(140): Ryumin-Light
 Provides(140): RyuminPro-Light
+Provides(140): HiraMinProN-W3
+Provides(140): HiraMinPro-W3
 Provides(140): FutoMinA101-Bold
 Provides(140): FutoMinA101Pro-Bold
+Provides(140): HiraMinProN-W6
+Provides(140): HiraMinPro-W6
 TTFname(10): ume-tmo3.ttf
 #TTFname(11): ume-tms3.ttf
 
@@ -2228,12 +2312,20 @@ Name: Ume-Gothic
 Class: Japan
 Provides(140): GothicBBB-Medium
 Provides(140): GothicBBBPro-Medium
+Provides(140): HiraKakuProN-W3
+Provides(140): HiraKakuPro-W3
 Provides(140): FutoGoB101-Bold
 Provides(140): FutoGoB101Pro-Bold
+Provides(140): HiraKakuProN-W6
+Provides(140): HiraKakuPro-W6
 Provides(140): Jun101-Light
 Provides(140): Jun101Pro-Light
+Provides(140): HiraMaruProN-W4
+Provides(140): HiraMaruPro-W4
 Provides(140): MidashiGo-MB31
 Provides(140): MidashiGoPro-MB31
+Provides(140): HiraKakuStdN-W8
+Provides(140): HiraKakuStd-W8
 TTFname(10): ume-tgo4.ttf
 
 Name: Ume-Gothic-O5
@@ -2313,20 +2405,28 @@ Name: KozGoPr6N-Bold
 Class: Japan
 Provides(50): FutoGoB101-Bold
 Provides(50): FutoGoB101Pro-Bold
+Provides(50): HiraKakuProN-W6
+Provides(50): HiraKakuPro-W6
 OTFname: KozGoPr6N-Bold.otf
 
 Name: KozGoPr6N-Heavy
 Class: Japan
 Provides(50): Jun101-Light
 Provides(50): Jun101Pro-Light
+Provides(50): HiraMaruProN-W4
+Provides(50): HiraMaruPro-W4
 Provides(50): MidashiGo-MB31
 Provides(50): MidashiGoPro-MB31
+Provides(50): HiraKakuStdN-W8
+Provides(50): HiraKakuStd-W8
 OTFname: KozGoPr6N-Heavy.otf
 
 Name: KozGoPr6N-Medium
 Class: Japan
 Provides(50): GothicBBB-Medium
 Provides(50): GothicBBBPro-Medium
+Provides(50): HiraKakuProN-W3
+Provides(50): HiraKakuPro-W3
 OTFname: KozGoPr6N-Medium.otf
 
 Name: KozGoPr6N-Regular
@@ -2345,20 +2445,28 @@ Name: KozGoPro-Bold
 Class: Japan
 Provides(70): FutoGoB101-Bold
 Provides(70): FutoGoB101Pro-Bold
+Provides(70): HiraKakuProN-W6
+Provides(70): HiraKakuPro-W6
 OTFname: KozGoPro-Bold.otf
 
 Name: KozGoPro-Heavy
 Class: Japan
 Provides(70): Jun101-Light
 Provides(70): Jun101Pro-Light
+Provides(70): HiraMaruProN-W4
+Provides(70): HiraMaruPro-W4
 Provides(70): MidashiGo-MB31
 Provides(70): MidashiGoPro-MB31
+Provides(70): HiraKakuStdN-W8
+Provides(70): HiraKakuStd-W8
 OTFname: KozGoPro-Heavy.otf
 
 Name: KozGoPro-Medium
 Class: Japan
 Provides(70): GothicBBB-Medium
 Provides(70): GothicBBBPro-Medium
+Provides(70): HiraKakuProN-W3
+Provides(70): HiraKakuPro-W3
 OTFname: KozGoPro-Medium.otf
 
 Name: KozGoPro-Regular
@@ -2377,20 +2485,28 @@ Name: KozGoProVI-Bold
 Class: Japan
 Provides(60): FutoGoB101-Bold
 Provides(60): FutoGoB101Pro-Bold
+Provides(60): HiraKakuProN-W6
+Provides(60): HiraKakuPro-W6
 OTFname: KozGoProVI-Bold.otf
 
 Name: KozGoProVI-Heavy
 Class: Japan
 Provides(60): Jun101-Light
 Provides(60): Jun101Pro-Light
+Provides(60): HiraMaruProN-W4
+Provides(60): HiraMaruPro-W4
 Provides(60): MidashiGo-MB31
 Provides(60): MidashiGoPro-MB31
+Provides(60): HiraKakuStdN-W8
+Provides(60): HiraKakuStd-W8
 OTFname: KozGoProVI-Heavy.otf
 
 Name: KozGoProVI-Medium
 Class: Japan
 Provides(60): GothicBBB-Medium
 Provides(60): GothicBBBPro-Medium
+Provides(60): HiraKakuProN-W3
+Provides(60): HiraKakuPro-W3
 OTFname: KozGoProVI-Medium.otf
 
 Name: KozGoProVI-Regular
@@ -2401,6 +2517,8 @@ Name: KozMinPr6N-Bold
 Class: Japan
 Provides(50): FutoMinA101-Bold
 Provides(50): FutoMinA101Pro-Bold
+Provides(50): HiraMinProN-W6
+Provides(50): HiraMinPro-W6
 OTFname: KozMinPr6N-Bold.otf
 
 Name: KozMinPr6N-Heavy
@@ -2415,6 +2533,8 @@ Name: KozMinPr6N-Regular
 Class: Japan
 Provides(50): Ryumin-Light
 Provides(50): RyuminPro-Light
+Provides(50): HiraMinProN-W3
+Provides(50): HiraMinPro-W3
 OTFname: KozMinPr6N-Regular.otf
 
 Name: KozMinPr6N-ExtraLight
@@ -2429,6 +2549,8 @@ Name: KozMinPro-Bold
 Class: Japan
 Provides(70): FutoMinA101-Bold
 Provides(70): FutoMinA101Pro-Bold
+Provides(70): HiraMinProN-W6
+Provides(70): HiraMinPro-W6
 OTFname: KozMinPro-Bold.otf
 
 Name: KozMinPro-Heavy
@@ -2443,6 +2565,8 @@ Name: KozMinPro-Regular
 Class: Japan
 Provides(70): Ryumin-Light
 Provides(70): RyuminPro-Light
+Provides(70): HiraMinProN-W3
+Provides(70): HiraMinPro-W3
 OTFname: KozMinPro-Regular.otf
 
 Name: KozMinPro-ExtraLight
@@ -2457,12 +2581,16 @@ Name: KozMinProVI-Bold
 Class: Japan
 Provides(60): FutoMinA101-Bold
 Provides(60): FutoMinA101Pro-Bold
+Provides(60): HiraMinProN-W6
+Provides(60): HiraMinPro-W6
 OTFname: KozMinProVI-Bold.otf
 
 Name: KozMinProVI-Regular
 Class: Japan
 Provides(60): Ryumin-Light
 Provides(60): RyuminPro-Light
+Provides(60): HiraMinProN-W3
+Provides(60): HiraMinPro-W3
 OTFname: KozMinProVI-Regular.otf
 
 Name: KozMinProVI-Light
@@ -3486,14 +3614,20 @@ Name: MS-Gothic
 Class: Japan
 Provides(95): GothicBBB-Medium
 Provides(95): GothicBBBPro-Medium
-Provides(95): MidashiGo-MB31
-Provides(95): MidashiGoPro-MB31
+Provides(95): HiraKakuProN-W3
+Provides(95): HiraKakuPro-W3
 Provides(95): FutoGoB101-Bold
 Provides(95): FutoGoB101Pro-Bold
+Provides(95): HiraKakuProN-W6
+Provides(95): HiraKakuPro-W6
 Provides(95): MidashiGo-MB31
 Provides(95): MidashiGoPro-MB31
+Provides(95): HiraKakuStdN-W8
+Provides(95): HiraKakuStd-W8
 Provides(95): Jun101-Light
 Provides(95): Jun101Pro-Light
+Provides(95): HiraMaruProN-W4
+Provides(95): HiraMaruPro-W4
 TTFname(50): MS Gothic.ttf
 TTFname(30): MS-Gothic.ttf
 
@@ -3501,8 +3635,12 @@ Name: MS-Mincho
 Class: Japan
 Provides(95): Ryumin-Light
 Provides(95): RyuminPro-Light
+Provides(95): HiraMinProN-W3
+Provides(95): HiraMinPro-W3
 Provides(95): FutoMinA101-Bold
 Provides(95): FutoMinA101Pro-Bold
+Provides(95): HiraMinProN-W6
+Provides(95): HiraMinPro-W6
 TTFname(50): MS Mincho.ttf
 TTFname(30): MS-Mincho.ttf
 
