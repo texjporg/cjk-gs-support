@@ -333,7 +333,7 @@ sub main {
         my $fn = ($opt_listallaliases ? "-" : $fontdb{$t}{'target'} );
         # should always be the same ;-)
         $cl = $fontdb{$t}{'class'};
-        if (!$opt_listallaliases && ($fontdb{$t}{'type'} eq 'TTC' or $fontdb{$t}{'type'} eq 'OTC')) {
+        if (!$opt_listallaliases && ($fontdb{$t}{'type'} eq 'TTC' || $fontdb{$t}{'type'} eq 'OTC')) {
           $fn .= "($fontdb{$t}{'subfont'})";
         }
         if ($opt_machine) {
@@ -744,7 +744,7 @@ sub info_found_fonts {
       print "Type:  $fontdb{$k}{'type'}\n";
       print "Class: $fontdb{$k}{'class'}\n";
       my $fn = $fontdb{$k}{'target'};
-      if ($fontdb{$k}{'type'} eq 'TTC' or $fontdb{$k}{'type'} eq 'OTC') {
+      if ($fontdb{$k}{'type'} eq 'TTC' || $fontdb{$k}{'type'} eq 'OTC') {
         $fn .= "($fontdb{$k}{'subfont'})";
       }
       print "File:  $fn\n";
@@ -909,7 +909,7 @@ sub check_for_files {
       if ($mf =~ m/^(.*)\((\d*)\)$/) { $sf = $2; }
       $fontdb{$k}{'target'} = $fontdb{$k}{'files'}{$mf}{'target'};
       $fontdb{$k}{'type'} = $fontdb{$k}{'files'}{$mf}{'type'};
-      $fontdb{$k}{'subfont'} = $sf if ($fontdb{$k}{'type'} eq 'TTF' or $fontdb{$k}{'type'} eq 'TTC' or $fontdb{$k}{'type'} eq 'OTC');
+      $fontdb{$k}{'subfont'} = $sf if ($fontdb{$k}{'type'} eq 'TTF' || $fontdb{$k}{'type'} eq 'TTC' || $fontdb{$k}{'type'} eq 'OTC');
     }
     # not needed anymore
     # delete $fontdb{$k}{'files'};
@@ -926,7 +926,7 @@ sub compute_aliases {
   for my $k (keys %fontdb) {
     if ($fontdb{$k}{'available'}) {
       for my $p (keys %{$fontdb{$k}{'provides'}}) {
-        # do not check alias if the real font is available
+        # do not check alias if the real font is available in OTF/TTF/TTC format
         if ($fontdb{$p}{'available'}) {
           next if ($fontdb{$p}{'type'} ne 'OTC');
         }
