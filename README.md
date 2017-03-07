@@ -148,20 +148,20 @@ In addition, we also include provide entries for the OTF Morisawa names:
 The order is determined by the Provides setting in the font database,
 and for the Japanese fonts it is currently:
     Morisawa Pr6N, Morisawa, Hiragino ProN, Hiragino,
-    Yu OSX, Yu Win, Kozuka Pr6N, Kozuka ProVI, Kozuka,
-    MS, Moga-Mobo-ex, Moga-Mobo, IPAex, IPA
+    Kozuka Pr6N, Kozuka ProVI, Kozuka, Yu OSX, Yu Win,
+    MS, Moga-Mobo-ex, Moga-Mobo, IPAex, IPA, Ume
 
 That is, the first font found in this order will be used to provide the
 alias if necessary.
 
 For the Korean fonts:
-    (Hanyang,) Solaris-hanyang, Adobe, MS, Apple, Unfonts, Baekmuk
+    (Hanyang,) Adobe, Solaris-hanyang, MS, Unfonts, Baekmuk
 
 For the Simplified Chinese:
-    [Not yet]
+    Adobe, Fandol, Hiragino, MS, CJKUnifonts, Arphic, CJKUnifonts-ttf
 
 For the Traditional Chinese:
-    [Not yet]
+    Adobe, MS, CJKUnifonts, Arphic, CJKUnifonts-ttf
 
 #### Overriding aliases ####
 

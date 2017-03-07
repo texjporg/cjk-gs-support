@@ -49,8 +49,10 @@ echo "  git push && git tag $VER && git push origin $VER"
 echo
 echo Informations for submitting CTAN: 
 echo "  CONTRIBUTION: $PROJECT"
+echo "  VERSION:      $VER"
+echo "  AUTHOR:       Japanese TeX Development Community"
 echo "  SUMMARY:      Tools to integrate CJK fonts into Ghostscript"
-echo "  DIRECTORY:    fonts/$PROJECT"
+echo "  DIRECTORY:    fonts/utilities/$PROJECT"
 echo "  LICENSE:      free/GPLv3"
 echo "  FILE:         $DIR/$PROJECT-$VER.tar.gz"
 
