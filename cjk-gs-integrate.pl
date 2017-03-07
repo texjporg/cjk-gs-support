@@ -666,6 +666,7 @@ sub do_aliases {
       }
     }
     if (!$class) {
+      print_warning("Alias candidate for $al is empty!\n") if (!%{$aliases{$al}});
       # search lowest number
       my @ks = keys(%{$aliases{$al}});
       my $first = (sort { $a <=> $b} @ks)[0];
@@ -926,7 +927,9 @@ sub compute_aliases {
     if ($fontdb{$k}{'available'}) {
       for my $p (keys %{$fontdb{$k}{'provides'}}) {
         # do not check alias if the real font is available
-        next if $fontdb{$p}{'available'};
+        if ($fontdb{$p}{'available'}) {
+          next if ($fontdb{$p}{'type'} ne 'OTC');
+        }
         # use the priority as key
         # if priorities are double, this will pick one at chance
         if ($aliases{$p}{$fontdb{$k}{'provides'}{$p}}) {
@@ -1724,70 +1727,60 @@ OTCname(28): HiraginoSans-W8.ttc(3)
 
 Name: HiraginoSans-W0
 Class: Japan
-Provides(30): HiraginoSans-W0
 OTCname(30): ヒラギノ角ゴシック W0.ttc(0)
 OTCname(29): ヒラギノ角ゴシック W0.ttc(0)
 OTCname(28): HiraginoSans-W0.ttc(0)
 
 Name: HiraginoSans-W1
 Class: Japan
-Provides(30): HiraginoSans-W1
 OTCname(30): ヒラギノ角ゴシック W1.ttc(0)
 OTCname(29): ヒラギノ角ゴシック W1.ttc(0)
 OTCname(28): HiraginoSans-W1.ttc(0)
 
 Name: HiraginoSans-W2
 Class: Japan
-Provides(30): HiraginoSans-W2
 OTCname(30): ヒラギノ角ゴシック W2.ttc(0)
 OTCname(29): ヒラギノ角ゴシック W2.ttc(0)
 OTCname(28): HiraginoSans-W2.ttc(0)
 
 Name: HiraginoSans-W3
 Class: Japan
-Provides(30): HiraginoSans-W3
 OTCname(30): ヒラギノ角ゴシック W3.ttc(0)
 OTCname(29): ヒラギノ角ゴシック W3.ttc(0)
 OTCname(28): HiraginoSans-W3.ttc(0)
 
 Name: HiraginoSans-W4
 Class: Japan
-Provides(30): HiraginoSans-W4
 OTCname(30): ヒラギノ角ゴシック W4.ttc(0)
 OTCname(29): ヒラギノ角ゴシック W4.ttc(0)
 OTCname(28): HiraginoSans-W4.ttc(0)
 
 Name: HiraginoSans-W5
 Class: Japan
-Provides(30): HiraginoSans-W5
 OTCname(30): ヒラギノ角ゴシック W5.ttc(0)
 OTCname(29): ヒラギノ角ゴシック W5.ttc(0)
 OTCname(28): HiraginoSans-W5.ttc(0)
 
 Name: HiraginoSans-W6
 Class: Japan
-Provides(30): HiraginoSans-W6
 OTCname(30): ヒラギノ角ゴシック W6.ttc(0)
 OTCname(29): ヒラギノ角ゴシック W6.ttc(0)
 OTCname(28): HiraginoSans-W6.ttc(0)
 
 Name: HiraginoSans-W7
 Class: Japan
-Provides(30): HiraginoSans-W7
 OTCname(30): ヒラギノ角ゴシック W7.ttc(0)
 OTCname(29): ヒラギノ角ゴシック W7.ttc(0)
 OTCname(28): HiraginoSans-W7.ttc(0)
 
 Name: HiraginoSans-W8
 Class: Japan
-Provides(30): HiraginoSans-W8
 OTCname(30): ヒラギノ角ゴシック W8.ttc(0)
 OTCname(29): ヒラギノ角ゴシック W8.ttc(0)
 OTCname(28): HiraginoSans-W8.ttc(0)
 
 Name: HiraginoSans-W9
 Class: Japan
-Provides(30): HiraginoSans-W9
 OTCname(30): ヒラギノ角ゴシック W9.ttc(0)
 OTCname(29): ヒラギノ角ゴシック W9.ttc(0)
 OTCname(28): HiraginoSans-W9.ttc(0)
