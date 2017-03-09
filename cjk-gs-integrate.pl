@@ -3744,7 +3744,7 @@ Class: Korea
 OTFname: AdobeGothicStd-Light.otf
 
 #
-# Microsoft Mac Office fonts
+# Microsoft Windows, Windows/Mac Office fonts
 #
 
 # korea
@@ -3753,13 +3753,47 @@ Name: Batang
 Class: Korea
 Provides(50): HYSMyeongJo-Medium
 TTFname(50): Batang.ttf
+TTCname(20): batang.ttc(0)
+
+Name: BatangChe
+Class: Korea
+TTCname(20): batang.ttc(1)
+
+Name: Dotum
+Class: Korea
+Provides(50): HYGoThic-Medium
+TTCname(20): gulim.ttc(2)
+
+Name: DotumChe
+Class: Korea
+TTCname(20): gulim.ttc(3)
 
 Name: Gulim
 Class: Korea
 Provides(50): HYRGoThic-Medium
 Provides(90): HYGoThic-Medium
 TTFname(30): Gulim.ttf
-TTCname(50): gulim.ttc
+TTCname(20): gulim.ttc(0)
+
+Name: GulimChe
+Class: Korea
+TTCname(20): gulim.ttc(1)
+
+Name: Gungsuh
+Class: Korea
+TTCname(20): batang.ttc(2)
+
+Name: GungsuhChe
+Class: Korea
+TTCname(20): batang.ttc(3)
+
+Name: MalgunGothicRegular
+Class: Korea
+TTFname: malgun.ttf
+
+Name: MalgunGothicBold
+Class: Korea
+TTFname: malgunbd.ttf
 
 # simplified chinese
 
@@ -3769,6 +3803,7 @@ Provides(60): STHeiti-Regular
 Provides(60): STKaiti-Regular
 Provides(60): STHeiti-Light
 TTFname(50): SimHei.ttf
+TTFname(20): simhei.ttf
 
 Name: SimSun
 Class: GB
@@ -3776,6 +3811,27 @@ Provides(60): STSong-Light
 Provides(60): STFangsong-Light
 Provides(60): STFangsong-Regular
 TTFname(50): SimSun.ttf
+TTCname(20): simsun.ttc(0)
+
+Name: NSimSun
+Class: GB
+TTCname(20): simsun.ttc(1)
+
+Name: KaiTi
+Class: GB
+TTFname(20): simkai.ttf
+
+Name: FangSong
+Class: GB
+TTFname(20): simfang.ttf
+
+Name: MicrosoftYaHei
+Class: GB
+TTFname: msyh.ttf
+
+Name: MicrosoftYaHeiBold
+Class: GB
+TTFname: msyhbd.ttf
 
 # traditional chinese
 
@@ -3786,10 +3842,24 @@ Provides(60): MKai-Medium
 Provides(60): MSung-Medium
 Provides(60): MSung-Light
 TTFname(50): MingLiU.ttf
+TTCname(20): mingliu.ttc(0)
 
 Name: PMingLiU
 Class: CNS
 TTFname(50): PMingLiU.ttf
+TTCname(20): mingliu.ttc(1)
+
+Name: DFKaiShu-SB-Estd-BF
+Class: CNS
+TTFname: kaiu.ttf
+
+Name: MicrosoftJhengHeiRegular
+Class: CNS
+TTFname: msjh.ttf
+
+Name: MicrosoftJhengHeiBold
+Class: CNS
+TTFname: msjhbd.ttf
 
 # japanese
 
@@ -3813,6 +3883,7 @@ Provides(95): HiraMaruProN-W4
 Provides(95): HiraMaruPro-W4
 TTFname(50): MS Gothic.ttf
 TTFname(30): MS-Gothic.ttf
+TTCname(20): msgothic.ttc(0)
 
 Name: MS-Mincho
 Class: Japan
@@ -3826,36 +3897,46 @@ Provides(95): HiraMinProN-W6
 Provides(95): HiraMinPro-W6
 TTFname(50): MS Mincho.ttf
 TTFname(30): MS-Mincho.ttf
+TTCname(20): msmincho.ttc(0)
 
 Name: MS-PGothic
 Class: Japan
 TTFname(50): MS PGothic.ttf
 TTFname(30): MS-PGothic.ttf
+TTCname(20): msgothic.ttc(1)
 
 Name: MS-PMincho
 Class: Japan
 TTFname(50): MS PMincho.ttf
 TTFname(30): MS-PMincho.ttf
+TTCname(20): msmincho.ttc(1)
+
+Name: MS-UIGothic
+Class: Japan
+TTCname(20): msgothic.ttc(2)
 
 Name: Meiryo
 Class: Japan
 TTFname(50): Meiryo.ttf
+TTCname(20): meiryo.ttc(0)
 
 Name: Meiryo-Bold
 Class: Japan
 TTFname(50): Meiryo Bold.ttf
 TTFname(30): Meiryo-Bold.ttf
+TTCname(20): meiryob.ttc(0)
 
 Name: Meiryo-BoldItalic
 Class: Japan
 TTFname(50): Meiryo Bold Italic.ttf
 TTFname(30): Meiryo-BoldItalic.ttf
+TTCname(20): meiryob.ttc(1)
 
 Name: Meiryo-Italic
 Class: Japan
 TTFname(50): Meiryo Italic.ttf
 TTFname(30): Meiryo-Italic.ttf
-
+TTCname(20): meiryo.ttc(1)
 
 ### Local Variables:
 ### perl-indent-level: 2
