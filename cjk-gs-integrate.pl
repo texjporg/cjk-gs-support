@@ -287,6 +287,7 @@ if (! GetOptions(
 }
 
 sub win32 { return ($^O=~/^MSWin(32|64)$/i); }
+sub macosx { return ($^O=~/^darwin$/i); }
 my $nul = (win32() ? 'nul' : '/dev/null') ;
 my $sep = (win32() ? ';' : ':');
 my %fontdb;
@@ -946,6 +947,13 @@ sub check_for_files {
       # other dirs to check, for normal unix?
       for my $d (qw!/Library/Fonts /System/Library/Fonts /System/Library/Assets /Network/Library/Fonts /usr/share/fonts!) {
         push @extradirs, "$d//" if (-d $d); # recursive search
+      }
+      # macosx specific; the path contains white space, so hack required
+      for my $d (qw!/Applications/Microsoft__Word.app /Applications/Microsoft__Excel.app /Applications/Microsoft__PowerPoint.app!) {
+        my $sd = $d;
+        $sd =~ s/_/ /;
+        push @extradirs, "$sd/Contents/Resources/Fonts/" if (-d "$sd/Contents/Resources/Fonts");
+        push @extradirs, "$sd/Contents/Resources/DFonts/" if (-d "$sd/Contents/Resources/DFonts");
       }
       my $home = $ENV{'HOME'};
       push @extradirs, "$home/Library/Fonts//" if (-d "$home/Library/Fonts");
