@@ -951,7 +951,7 @@ sub check_for_files {
       # macosx specific; the path contains white space, so hack required
       for my $d (qw!/Applications/Microsoft__Word.app /Applications/Microsoft__Excel.app /Applications/Microsoft__PowerPoint.app!) {
         my $sd = $d;
-        $sd =~ s/_/ /;
+        $sd =~ s/__/ /;
         push @extradirs, "$sd/Contents/Resources/Fonts/" if (-d "$sd/Contents/Resources/Fonts");
         push @extradirs, "$sd/Contents/Resources/DFonts/" if (-d "$sd/Contents/Resources/DFonts");
       }
