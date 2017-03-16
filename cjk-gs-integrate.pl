@@ -2133,6 +2133,9 @@ OTCname(30): YuMincho.ttc(5)
 #   YuGothic.ttf
 #   YuGothic-Bold.ttf
 # are bundled with VS2013 or later versions.
+#   YuGoth{B,L,M,R}.ttf
+#   yumin.ttf, yumin{db,l}.ttf
+# are bundled with Office for Mac 2016.
 # Also, symlink names should be consistent with ptex-fontmaps!
 
 Name: YuMincho-Regular
@@ -2142,12 +2145,12 @@ Provides(90): RyuminPro-Light
 Provides(90): HiraMinProN-W3
 Provides(90): HiraMinPro-W3
 TTFname(20): yumin.ttf
-#TTFname(21): YuMincho-Regular.ttf
+#TTFname(50): YuMincho-Regular.ttf
 
 Name: YuMincho-Light
 Class: Japan
 TTFname(20): yuminl.ttf
-#TTFname(21): YuMincho-Light.ttf
+#TTFname(50): YuMincho-Light.ttf
 
 Name: YuMincho-DemiBold
 Class: Japan
@@ -2156,7 +2159,7 @@ Provides(90): FutoMinA101Pro-Bold
 Provides(90): HiraMinProN-W6
 Provides(90): HiraMinPro-W6
 TTFname(20): yumindb.ttf
-#TTFname(21): YuMincho-DemiBold.ttf
+#TTFname(50): YuMincho-DemiBold.ttf
 
 Name: YuGothic-Regular
 Class: Japan
@@ -2165,18 +2168,21 @@ Provides(90): GothicBBBPro-Medium
 Provides(90): HiraKakuProN-W3
 Provides(90): HiraKakuPro-W3
 TTFname(20): yugothic.ttf
-#TTFname(21): YuGothic-Regular.ttf
 TTCname(30): YuGothR.ttc(0)
+TTFname(40): YuGothR.ttf
+#TTFname(50): YuGothic-Regular.ttf
 
 Name: YuGothic-Medium
 Class: Japan
 TTCname(30): YuGothM.ttc(0)
+TTFname(40): YuGothM.ttf
 
 Name: YuGothic-Light
 Class: Japan
 TTFname(20): yugothil.ttf
-#TTFname(21): YuGothic-Light.ttf
 TTCname(30): YuGothL.ttc(0)
+TTFname(40): YuGothL.ttf
+#TTFname(50): YuGothic-Light.ttf
 
 Name: YuGothic-Bold
 Class: Japan
@@ -2193,8 +2199,9 @@ Provides(90): MidashiGoPro-MB31
 Provides(90): HiraKakuStdN-W8
 Provides(90): HiraKakuStd-W8
 TTFname(20): yugothib.ttf
-TTFname(21): YuGothic-Bold.ttf
 TTCname(30): YuGothB.ttc(0)
+TTFname(40): YuGothB.ttf
+TTFname(50): YuGothic-Bold.ttf
 
 # IPA (free)
 
@@ -3772,7 +3779,7 @@ Name: Gulim
 Class: Korea
 Provides(50): HYRGoThic-Medium
 Provides(90): HYGoThic-Medium
-TTFname(30): Gulim.ttf
+TTFname(50): Gulim.ttf
 TTCname(20): gulim.ttc(0)
 
 Name: GulimChe
@@ -3819,17 +3826,19 @@ TTCname(20): simsun.ttc(1)
 
 Name: KaiTi
 Class: GB
+TTFname(40): Kaiti.ttf
 TTFname(20): simkai.ttf
 
 Name: FangSong
 Class: GB
+TTFname(40): Fangsong.ttf
 TTFname(20): simfang.ttf
 
 Name: MicrosoftYaHei
 Class: GB
 TTFname: msyh.ttf
 
-Name: MicrosoftYaHeiBold
+Name: MicrosoftYaHei-Bold
 Class: GB
 TTFname: msyhbd.ttf
 
@@ -3923,20 +3932,150 @@ TTCname(20): meiryo.ttc(0)
 Name: Meiryo-Bold
 Class: Japan
 TTFname(50): Meiryo Bold.ttf
+TTFname(40): MeiryoBold.ttf
 TTFname(30): Meiryo-Bold.ttf
 TTCname(20): meiryob.ttc(0)
 
 Name: Meiryo-BoldItalic
 Class: Japan
 TTFname(50): Meiryo Bold Italic.ttf
+TTFname(40): MeiryoBoldItalic.ttf
 TTFname(30): Meiryo-BoldItalic.ttf
 TTCname(20): meiryob.ttc(1)
 
 Name: Meiryo-Italic
 Class: Japan
 TTFname(50): Meiryo Italic.ttf
+TTFname(40): MeiryoItalic.ttf
 TTFname(30): Meiryo-Italic.ttf
 TTCname(20): meiryo.ttc(1)
+
+Name: HGGothicE
+Class: Japan
+TTCname(50): HGRGE.ttc(0)
+TTCname(20): HGRGE.TTC(0)
+
+Name: HGPGothicE
+Class: Japan
+TTCname(50): HGRGE.ttc(1)
+TTCname(20): HGRGE.TTC(1)
+
+Name: HGSGothicE
+Class: Japan
+TTCname(50): HGRGE.ttc(2)
+TTCname(20): HGRGE.TTC(2)
+
+Name: HGGothicM
+Class: Japan
+TTCname(20): HGRGM.TTC(0)
+
+Name: HGPGothicM
+Class: Japan
+TTCname(20): HGRGM.TTC(1)
+
+Name: HGSGothicM
+Class: Japan
+TTCname(20): HGRGM.TTC(2)
+
+Name: HGMinchoE
+Class: Japan
+TTCname(50): HGRME.ttc(0)
+TTCname(20): HGRME.TTC(0)
+
+Name: HGPMinchoE
+Class: Japan
+TTCname(50): HGRME.ttc(1)
+TTCname(20): HGRME.TTC(2)
+
+Name: HGSMinchoE
+Class: Japan
+TTCname(50): HGRME.ttc(2)
+TTCname(20): HGRME.TTC(2)
+
+Name: HGMinchoB
+Class: Japan
+TTCname(20): HGRMB.TTC(0)
+
+Name: HGPMinchoB
+Class: Japan
+TTCname(20): HGRMB.TTC(1)
+
+Name: HGPMinchoB
+Class: Japan
+TTCname(20): HGRMB.TTC(2)
+
+Name: HGSoeiKakugothicUB
+Class: Japan
+TTCname(50): HGRSGU.ttc(0)
+TTCname(20): HGRSGU.TTC(0)
+
+Name: HGPSoeiKakugothicUB
+Class: Japan
+TTCname(50): HGRSGU.ttc(1)
+TTCname(20): HGRSGU.TTC(1)
+
+Name: HGSSoeiKakugothicUB
+Class: Japan
+TTCname(50): HGRSGU.ttc(2)
+TTCname(20): HGRSGU.TTC(2)
+
+Name: HGSoeiKakupoptai
+Class: Japan
+TTCname(20): HGRPP1.TTC(0)
+
+Name: HGPSoeiKakupoptai
+Class: Japan
+TTCname(20): HGRPP1.TTC(1)
+
+Name: HGSSoeiKakupoptai
+Class: Japan
+TTCname(20): HGRPP1.TTC(2)
+
+Name: HGSoeiPresenceEB
+Class: Japan
+TTCname(20): HGRPRE.TTC(0)
+
+Name: HGPSoeiPresenceEB
+Class: Japan
+TTCname(20): HGRPRE.TTC(1)
+
+Name: HGSSoeiPresenceEB
+Class: Japan
+TTCname(20): HGRPRE.TTC(2)
+
+Name: HGKyokashotai
+Class: Japan
+TTCname(20): HGRKK.TTC(0)
+
+Name: HGPKyokashotai
+Class: Japan
+TTCname(20): HGRKK.TTC(1)
+
+Name: HGSKyokashotai
+Class: Japan
+TTCname(20): HGRKK.TTC(2)
+
+Name: HGGyoshotai
+Class: Japan
+TTCname(20): HGRGY.TTC(0)
+
+Name: HGPGyoshotai
+Class: Japan
+TTCname(20): HGRGY.TTC(1)
+
+Name: HGSGyoshotai
+Class: Japan
+TTCname(20): HGRGY.TTC(2)
+
+Name: HGMaruGothicMPRO
+Class: Japan
+TTFname(40): HGRSMP.ttf
+TTFname(20): HGRSMP.TTF
+
+Name: HGSeikaishotaiPRO
+Class: Japan
+TTFname(20): HGRSKP.TTF
+
 
 ### Local Variables:
 ### perl-indent-level: 2
