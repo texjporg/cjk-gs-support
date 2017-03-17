@@ -3810,6 +3810,10 @@ Name: MalgunGothicBold
 Class: Korea
 TTFname: malgunbd.ttf
 
+Name: MalgunGothic-Semilight
+Class: Korea
+TTFname: malgunsl.ttf
+
 # simplified chinese
 
 Name: SimHei
@@ -3844,11 +3848,50 @@ TTFname(20): simfang.ttf
 
 Name: MicrosoftYaHei
 Class: GB
-TTFname: msyh.ttf
+TTFname(20): msyh.ttf
+TTCname(30): msyh.ttc(0)
 
 Name: MicrosoftYaHei-Bold
 Class: GB
-TTFname: msyhbd.ttf
+TTFname(20): msyhbd.ttf
+TTCname(30): msyhbd.ttc(0)
+
+Name: MicrosoftYaHeiLight
+Class: GB
+TTFname(20): msyhl.ttf
+TTCname(30): msyhl.ttc(0)
+
+Name: DengXian-Regular
+Class: GB
+TTFname: Deng.ttf
+
+Name: DengXian-Bold
+Class: GB
+TTFname: Dengb.ttf
+
+Name: DengXian-Light
+Class: GB
+TTFname: Dengl.ttf
+
+Name: STZhongsong
+Class: GB
+TTFname: STZHONGS.ttf
+
+Name: STXinwei
+Class: GB
+TTFname: STXINWEI.ttf
+
+Name: STXingkai
+Class: GB
+TTFname: STXINGKA.ttf
+
+Name: STLiti
+Class: GB
+TTFname: STLITI.ttf
+
+Name: STHupo
+Class: GB
+TTFname: STHUPO.ttf
 
 # traditional chinese
 
@@ -3872,11 +3915,19 @@ TTFname: kaiu.ttf
 
 Name: MicrosoftJhengHeiRegular
 Class: CNS
-TTFname: msjh.ttf
+TTFname(40): MSJH.ttf
+TTFname(20): msjh.ttf
+TTCname(30): msjh.ttc(0)
 
 Name: MicrosoftJhengHeiBold
 Class: CNS
-TTFname: msjhbd.ttf
+TTFname(40): MSJHBD.ttf
+TTFname(20): msjhbd.ttf
+TTCname(30): msjhbd.ttc(0)
+
+Name: MicrosoftJhengHeiLight
+Class: CNS
+TTCname(30): msjhl.ttc(0)
 
 # japanese
 
