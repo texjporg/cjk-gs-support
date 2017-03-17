@@ -791,6 +791,13 @@ sub generate_cidfmap_entry {
 sub maybe_symlink {
   my ($realname, $targetname) = @_;
   if (win32()) {
+    # TODO NP
+    # why don't do we
+    # if (! -r $targetname) {
+    #   $ret = `mklink "$targetname" "$realname"`;
+    # }
+    # here instead of generating a batch file?
+    #
     # open(FOO, ">$targetname") || 
     #   die("cannot open $targetname for writing: $!");
     # print FOO "$realname";
