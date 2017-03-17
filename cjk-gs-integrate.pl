@@ -3278,6 +3278,28 @@ Name: HanziPenTC-W5
 Class: CNS
 OTCname: Hanzipen.ttc(3)
 
+# Shanghai Ikarus Ltd./URW Software & Type GmbH
+
+Name: SIL-Hei-Med-Jian
+Class: GB
+TTFname: Hei.ttf
+
+Name: SIL-Kai-Reg-Jian
+Class: GB
+TTFname: Kai.ttf
+
+# Apple
+
+Name: LiSungLight
+Class: CNS
+TTFname(20): Apple LiSung Light.ttf
+TTFname(10): LiSungLight.ttf
+
+Name: LiGothicMed
+Class: CNS
+TTFname(20): Apple LiGothic Medium.ttf
+TTFname(10): LiGothicMed.ttf
+
 # Adobe chinese fonts
 
 # simplified chinese
@@ -3741,6 +3763,18 @@ Name: AppleSDGothicNeo-Heavy
 Class: Korea
 OTFname: AppleSDGothicNeo-Heavy.otf
 
+Name: JCsmPC
+Class: Korea
+TTFname: PCmyoungjo.ttf
+
+Name: JCfg
+Class: Korea
+TTFname: Pilgiche.ttf
+
+Name: JCkg
+Class: Korea
+TTFname: Gungseouche.ttf
+
 # Adobe korean fonts
 
 Name: AdobeMyungjoStd-Medium
@@ -3911,7 +3945,8 @@ TTCname(20): mingliu.ttc(1)
 
 Name: DFKaiShu-SB-Estd-BF
 Class: CNS
-TTFname: kaiu.ttf
+TTFname(50): BiauKai.ttf
+TTFname(20): kaiu.ttf
 
 Name: MicrosoftJhengHeiRegular
 Class: CNS
