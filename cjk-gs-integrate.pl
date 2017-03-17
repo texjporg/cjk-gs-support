@@ -2597,6 +2597,16 @@ Name: Sazanami-Gothic-Regular
 Class: Japan
 TTFname: sazanami-gothic.ttf
 
+# Osaka (Apple)
+
+Name: Osaka
+Class: Japan
+TTFname: Osaka.ttf
+
+Name: Osaka-Mono
+Class: Japan
+TTFname: OsakaMono.ttf
+
 # Kozuka (Adobe)
 
 Name: KozGoPr6N-Bold
@@ -2917,6 +2927,54 @@ Class: CNS
 #Provides(??): MSung-Light # fails
 TTFname(20): 儷宋 Pro.ttf
 TTFname(10): LiSongPro.ttf
+
+Name: PingFangTC-Regular
+Class: CNS
+OTCname: PingFang.ttc(1)
+
+Name: PingFangSC-Regular
+Class: GB
+OTCname: PingFang.ttc(2)
+
+Name: PingFangTC-Medium
+Class: CNS
+OTCname: PingFang.ttc(4)
+
+Name: PingFangSC-Medium
+Class: GB
+OTCname: PingFang.ttc(5)
+
+Name: PingFangTC-Semibold
+Class: CNS
+OTCname: PingFang.ttc(7)
+
+Name: PingFangSC-Semibold
+Class: GB
+OTCname: PingFang.ttc(8)
+
+Name: PingFangTC-Light
+Class: CNS
+OTCname: PingFang.ttc(10)
+
+Name: PingFangSC-Light
+Class: GB
+OTCname: PingFang.ttc(11)
+
+Name: PingFangTC-Thin
+Class: CNS
+OTCname: PingFang.ttc(13)
+
+Name: PingFangSC-Thin
+Class: GB
+OTCname: PingFang.ttc(14)
+
+Name: PingFangTC-Ultralight
+Class: CNS
+OTCname: PingFang.ttc(16)
+
+Name: PingFangSC-Ultralight
+Class: GB
+OTCname: PingFang.ttc(17)
 
 # Changzhou SinoType (OS X)
 
@@ -3245,6 +3303,11 @@ Name: WawaSC-Regular
 PSName: DFWaWaSC-W5
 Class: GB
 OTFname: WawaSC-Regular.otf
+
+Name: WawaTC-Regular
+PSName: DFWaWaTC-W5
+Class: CNS
+OTFname: WawaTC-Regular.otf
 
 Name: HannotateSC-W5
 Class: GB
@@ -3727,41 +3790,50 @@ Class: Korea
 #Provides(??): HYRGoThic-Medium # fails
 TTFname: AppleGothic.ttf
 
-Name: AppleSDGothicNeo-Thin
-Class: Korea
-OTFname: AppleSDGothicNeo-Thin.otf
-
-Name: AppleSDGothicNeo-UltraLight
-Class: Korea
-OTFname: AppleSDGothicNeo-UltraLight.otf
-
-Name: AppleSDGothicNeo-Light
-Class: Korea
-OTFname: AppleSDGothicNeo-Light.otf
-
 Name: AppleSDGothicNeo-Regular
 Class: Korea
-OTFname: AppleSDGothicNeo-Regular.otf
+OTFname(10): AppleSDGothicNeo-Regular.otf
+OTCname(20): AppleSDGothicNeo.ttc(0)
 
 Name: AppleSDGothicNeo-Medium
 Class: Korea
-OTFname: AppleSDGothicNeo-Medium.otf
+OTFname(10): AppleSDGothicNeo-Medium.otf
+OTCname(20): AppleSDGothicNeo.ttc(2)
 
 Name: AppleSDGothicNeo-SemiBold
 Class: Korea
-OTFname: AppleSDGothicNeo-SemiBold.otf
+OTFname(10): AppleSDGothicNeo-SemiBold.otf
+OTCname(20): AppleSDGothicNeo.ttc(4)
 
 Name: AppleSDGothicNeo-Bold
 Class: Korea
-OTFname: AppleSDGothicNeo-Bold.otf
+OTFname(10): AppleSDGothicNeo-Bold.otf
+OTCname(20): AppleSDGothicNeo.ttc(6)
+
+Name: AppleSDGothicNeo-Light
+Class: Korea
+OTFname(10): AppleSDGothicNeo-Light.otf
+OTCname(20): AppleSDGothicNeo.ttc(8)
+
+Name: AppleSDGothicNeo-Thin
+Class: Korea
+OTFname(10): AppleSDGothicNeo-Thin.otf
+OTCname(20): AppleSDGothicNeo.ttc(10)
+
+Name: AppleSDGothicNeo-UltraLight
+Class: Korea
+OTFname(10): AppleSDGothicNeo-UltraLight.otf
+OTCname(20): AppleSDGothicNeo.ttc(12)
 
 Name: AppleSDGothicNeo-ExtraBold
 Class: Korea
-OTFname: AppleSDGothicNeo-ExtraBold.otf
+OTFname(10): AppleSDGothicNeo-ExtraBold.otf
+OTCname(20): AppleSDGothicNeo.ttc(14)
 
 Name: AppleSDGothicNeo-Heavy
 Class: Korea
-OTFname: AppleSDGothicNeo-Heavy.otf
+OTFname(10): AppleSDGothicNeo-Heavy.otf
+OTCname(20): AppleSDGothicNeo.ttc(16)
 
 Name: JCsmPC
 Class: Korea
@@ -3774,6 +3846,10 @@ TTFname: Pilgiche.ttf
 Name: JCkg
 Class: Korea
 TTFname: Gungseouche.ttf
+
+Name: JCHEadA
+Class: Korea
+TTFname: HeadlineA.ttf
 
 # Adobe korean fonts
 
