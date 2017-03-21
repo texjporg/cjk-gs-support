@@ -843,7 +843,7 @@ sub maybe_symlink {
       # }
       # -- however, both tlgs (TeX Live) and standalone gswin32/64 (built
       #    by Akira Kakuto) can search in c:/windows/fonts by default.
-      #    Thus, creating hard link for such files is waste of memory
+      #    Thus, copying such files is waste of memory
     }
   } else {
     symlink ($realname, $targetname);
