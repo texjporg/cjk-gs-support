@@ -30,7 +30,7 @@ use strict;
 (my $prg = basename($0)) =~ s/\.pl$//;
 my $version = '$VER$';
 
-# if windows, create batch file for links
+# if windows, we might create batch file for links
 my $winbatch = '';
 my $winbatch_content = '';
 if (win32()) {
@@ -44,7 +44,7 @@ if (win32()) {
   # TODO: what to do with $opt_fontdef, @opt_aliases and $opt_filelist ?
   use utf8;
   use Encode;
-  # symlink function does not work, so create batch file instead
+  # some perl functions (symlink, -l test) does not work
   print_warning("Sorry, we have only partial support for Windows!\n");
   $winbatch = "makefontlinks.bat";
 }
@@ -260,6 +260,7 @@ my $opt_filelist;
 my $opt_force = 0;
 my $opt_texmflink;
 my $opt_akotfps;
+my $opt_winbatch = 0;
 my $opt_markdown = 0;
 
 if (! GetOptions(
@@ -270,6 +271,7 @@ if (! GetOptions(
         "list-fonts"  => \$opt_listfonts,
         "link-texmf:s" => \$opt_texmflink,
         "otfps:s"      => \$opt_akotfps,
+        "winbatch"     => \$opt_winbatch,
         "remove"       => \$opt_remove,
         "only-aliases" => \$opt_only_aliases,
         "machine-readable" => \$opt_machine,
@@ -341,6 +343,14 @@ sub main {
   print_info("reading font database ...\n");
   read_font_database();
   determine_nonotf_link_name(); # see comments there
+  if ($opt_winbatch) {
+    if (win32()) {
+      $opt_winbatch = 1;
+    } else {
+      print_warning("ignoring --winbatch option due to non-Windows\n");
+      $opt_winbatch = 0;
+    }
+  }
   if (!$opt_listallaliases) {
     print_info("checking for files ...\n");
     check_for_files();
@@ -423,7 +433,7 @@ sub main {
     do_otf_fonts();
     print_info(($opt_remove ? "removing" : "generating") . " font snippets, links, and cidfmap.local for TTF fonts ...\n");
     do_nonotf_fonts();
-    write_winbatch() if (win32());
+    write_winbatch() if ($opt_winbatch);
   }
   print_info(($opt_remove ? "removing" : "generating") . " font aliases ...\n");
   do_aliases();
@@ -783,9 +793,9 @@ sub generate_cidfmap_entry {
   return $s;
 }
 
-# symlink function does not work on windows, so leave it to
-# batch file. if target already exists, do not try to override it.
-# otherwise
+# perl symlink function does not work on windows, so leave it to
+# cmd.exe mklink function (or write to batch file).
+# if target already exists, do not try to override it. otherwise
 # "mklink error: Cannot create a file when that file already exists"
 # is thrown many times
 sub maybe_symlink {
@@ -798,13 +808,43 @@ sub maybe_symlink {
     # }
     # here instead of generating a batch file?
     #
-    # open(FOO, ">$targetname") || 
-    #   die("cannot open $targetname for writing: $!");
-    # print FOO "$realname";
-    # close(FOO);
+    # hardlink vs. symlink
+    #   * hardlink is easy to read (reading symlink sometimes fails)
+    #   * hardlink creation does not require administrator privilege,
+    #     but is likely to fail for c:/windows/fonts/* files due to
+    #     "Access denied"
+    #   * symlink can point to a file on a different/remote volume
+    # for these reasons, we try to create hard link by default.
+    # if --winbatch option is given, we prepare batch file for symlink creation,
     $realname =~ s!/!\\!g;
     $targetname =~ s!/!\\!g;
-    $winbatch_content .= "if not exist \"$targetname\" mklink \"$targetname\" \"$realname\"\n";
+    if ($opt_winbatch) {
+      # re-encoding of $winbatch_content is done by write_winbatch()
+      $winbatch_content .= "if not exist \"$targetname\" mklink /h \"$targetname\" \"$realname\"\n";
+    } else {
+      # should be encoded in cp932 for win32 console
+      $realname = Encode::decode('utf-8', $realname);
+      $realname = Encode::encode('cp932', $realname);
+      $targetname = Encode::decode('utf-8', $targetname);
+      $targetname = Encode::encode('cp932', $targetname);
+      my $cmdl = "cmd.exe /c if not exist \"$targetname\" mklink /h \"$targetname\" \"$realname\"";
+      my @ret = `$cmdl`;
+      # sometimes hard link creation may fail due to "Access denied"
+      # (especially when $realname is located in c:/windows/fonts).
+      # TODO: what should we do to ensure resources, which might be
+      #       different from $realname? -- HY (2017/03/21)
+      # -- one possibility:
+      # if (@ret) {
+      #   @ret ="done";
+      # } else {
+      #   print_info("Hard link creation for $realname failed. I will copy this file instead.\n");
+      #   $cmdl = "cmd.exe /c if not exist \"$targetname\" copy \"$realname\" \"$targetname\"";
+      #   @ret = `$cmdl`;
+      # }
+      # -- however, both tlgs (TeX Live) and standalone gswin32/64 (built
+      #    by Akira Kakuto) can search in c:/windows/fonts by default.
+      #    Thus, creating hard link for such files is waste of memory
+    }
   } else {
     symlink ($realname, $targetname);
   }
@@ -817,7 +857,16 @@ sub maybe_unlink {
   my ($targetname) = @_;
   if (win32()) {
     $targetname =~ s!/!\\!g;
-    $winbatch_content .= "if exist \"$targetname\" del \"$targetname\"\n";
+    if ($opt_winbatch) {
+      # re-encoding of $winbatch_content is done by write_winbatch()
+      $winbatch_content .= "if exist \"$targetname\" del \"$targetname\"\n";
+    } else {
+      # should be encoded in cp932 for win32 console
+      $targetname = Encode::decode('utf-8', $targetname);
+      $targetname = Encode::encode('cp932', $targetname);
+      my $cmdl = "cmd.exe /c if exist \"$targetname\" del \"$targetname\"";
+      my @ret = `$cmdl`;
+    }
   } else {
     unlink ($targetname);
   }
@@ -1406,6 +1455,8 @@ sub Usage {
                          DIR/$akotfps_pathpart
                       which is used by ps2otfps (developed by Akira Kakuto),
                       instead of generating snippets
+--winbatch            generate batch file for symlink generation, instead of
+                      generating hardlink right away (windows only)
 --machine-readable    output of --list-aliases is machine readable
 --force               do not bail out if linked fonts already exist
 -q, --quiet           be less verbose
