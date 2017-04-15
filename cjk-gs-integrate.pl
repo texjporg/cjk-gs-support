@@ -3971,7 +3971,6 @@ TTFname: malgunsl.ttf
 Name: SimHei
 Class: GB
 Provides(60): STHeiti-Regular
-Provides(60): STKaiti-Regular
 Provides(60): STHeiti-Light
 TTFname(50): SimHei.ttf
 TTFname(20): simhei.ttf
@@ -3979,8 +3978,6 @@ TTFname(20): simhei.ttf
 Name: SimSun
 Class: GB
 Provides(60): STSong-Light
-Provides(60): STFangsong-Light
-Provides(60): STFangsong-Regular
 TTFname(50): SimSun.ttf
 TTCname(20): simsun.ttc(0)
 
@@ -3990,11 +3987,14 @@ TTCname(20): simsun.ttc(1)
 
 Name: KaiTi
 Class: GB
+Provides(60): STKaiti-Regular
 TTFname(40): Kaiti.ttf
 TTFname(20): simkai.ttf
 
 Name: FangSong
 Class: GB
+Provides(60): STFangsong-Light
+Provides(60): STFangsong-Regular
 TTFname(40): Fangsong.ttf
 TTFname(20): simfang.ttf
 
@@ -4049,8 +4049,6 @@ TTFname: STHUPO.ttf
 
 Name: MingLiU
 Class: CNS
-Provides(60): MHei-Medium
-Provides(60): MKai-Medium
 Provides(60): MSung-Medium
 Provides(60): MSung-Light
 TTFname(50): MingLiU.ttf
@@ -4063,11 +4061,13 @@ TTCname(20): mingliu.ttc(1)
 
 Name: DFKaiShu-SB-Estd-BF
 Class: CNS
+Provides(60): MKai-Medium
 TTFname(50): BiauKai.ttf
 TTFname(20): kaiu.ttf
 
 Name: MicrosoftJhengHeiRegular
 Class: CNS
+Provides(60): MHei-Medium
 TTFname(40): MSJH.ttf
 TTFname(20): msjh.ttf
 TTCname(30): msjh.ttc(0)
@@ -4081,6 +4081,15 @@ TTCname(30): msjhbd.ttc(0)
 Name: MicrosoftJhengHeiLight
 Class: CNS
 TTCname(30): msjhl.ttc(0)
+
+Name: MicrosoftMHei
+Class: CNS
+Provides(65): MHei-Medium
+TTFname(10): MSMHei.ttf
+
+Name: MicrosoftMHei-Bold
+Class: CNS
+TTFname(10): MSMHei-Bold.ttf
 
 # japanese
 
