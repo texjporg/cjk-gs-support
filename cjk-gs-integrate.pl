@@ -1374,11 +1374,10 @@ sub find_gs_resource {
     chomp( my $foo = `kpsewhich -var-value=SELFAUTOPARENT`);
     if ( -d "$foo/tlpkg/tlgs" ) {
       # should be texlive with tlgs
-      if ( -d "$foo/tlpkg/tlgs/Resource" ) {
-        $foundres = "$foo/tlpkg/tlgs/Resource";
-      } else {
-        # TODO: for TL2016, tlgs binary has built-in Resource,
-        # so no Resource directory is available!
+      $foundres = "$foo/tlpkg/tlgs/Resource";
+      # TODO: for TL2016, tlgs binary has built-in Resource,
+      # so the following test should fail!
+      if ( ! -d $foundres ) {
         print_error("No Resource directory available for tlgs,\n");
         print_error("we cannot support such gs, sorry.\n");
         $foundres = '';
