@@ -1943,6 +1943,9 @@ OTCname(30): YuMincho.ttc(5)
 #   YuGothic.ttf
 #   YuGothic-Bold.ttf
 # are bundled with VS2013 or later versions.
+#   YuGoth{B,L,M,R}.ttf
+#   yumin.ttf, yumin{db,l}.ttf
+# are bundled with Office for Mac 2016.
 # Also, symlink names should be consistent with ptex-fontmaps!
 
 Name: YuMincho-Regular
@@ -1952,12 +1955,12 @@ Provides(90): RyuminPro-Light
 Provides(90): HiraMinProN-W3
 Provides(90): HiraMinPro-W3
 TTFname(20): yumin.ttf
-#TTFname(21): YuMincho-Regular.ttf
+#TTFname(50): YuMincho-Regular.ttf
 
 Name: YuMincho-Light
 Class: Japan
 TTFname(20): yuminl.ttf
-#TTFname(21): YuMincho-Light.ttf
+#TTFname(50): YuMincho-Light.ttf
 
 Name: YuMincho-DemiBold
 Class: Japan
@@ -1966,7 +1969,7 @@ Provides(90): FutoMinA101Pro-Bold
 Provides(90): HiraMinProN-W6
 Provides(90): HiraMinPro-W6
 TTFname(20): yumindb.ttf
-#TTFname(21): YuMincho-DemiBold.ttf
+#TTFname(50): YuMincho-DemiBold.ttf
 
 Name: YuGothic-Regular
 Class: Japan
@@ -1975,18 +1978,21 @@ Provides(90): GothicBBBPro-Medium
 Provides(90): HiraKakuProN-W3
 Provides(90): HiraKakuPro-W3
 TTFname(20): yugothic.ttf
-#TTFname(21): YuGothic-Regular.ttf
 TTCname(30): YuGothR.ttc(0)
+TTFname(40): YuGothR.ttf
+#TTFname(50): YuGothic-Regular.ttf
 
 Name: YuGothic-Medium
 Class: Japan
 TTCname(30): YuGothM.ttc(0)
+TTFname(40): YuGothM.ttf
 
 Name: YuGothic-Light
 Class: Japan
 TTFname(20): yugothil.ttf
-#TTFname(21): YuGothic-Light.ttf
 TTCname(30): YuGothL.ttc(0)
+TTFname(40): YuGothL.ttf
+#TTFname(50): YuGothic-Light.ttf
 
 Name: YuGothic-Bold
 Class: Japan
@@ -2003,8 +2009,9 @@ Provides(90): MidashiGoPro-MB31
 Provides(90): HiraKakuStdN-W8
 Provides(90): HiraKakuStd-W8
 TTFname(20): yugothib.ttf
-TTFname(21): YuGothic-Bold.ttf
 TTCname(30): YuGothB.ttc(0)
+TTFname(40): YuGothB.ttf
+TTFname(50): YuGothic-Bold.ttf
 
 # IPA (free)
 
@@ -2392,6 +2399,16 @@ Name: Sazanami-Gothic-Regular
 Class: Japan
 TTFname: sazanami-gothic.ttf
 
+# Osaka (Apple)
+
+Name: Osaka
+Class: Japan
+TTFname: Osaka.ttf
+
+Name: Osaka-Mono
+Class: Japan
+TTFname: OsakaMono.ttf
+
 # Kozuka (Adobe)
 
 Name: KozGoPr6N-Bold
@@ -2712,6 +2729,54 @@ Class: CNS
 #Provides(??): MSung-Light # fails
 TTFname(20): 儷宋 Pro.ttf
 TTFname(10): LiSongPro.ttf
+
+Name: PingFangTC-Regular
+Class: CNS
+OTCname: PingFang.ttc(1)
+
+Name: PingFangSC-Regular
+Class: GB
+OTCname: PingFang.ttc(2)
+
+Name: PingFangTC-Medium
+Class: CNS
+OTCname: PingFang.ttc(4)
+
+Name: PingFangSC-Medium
+Class: GB
+OTCname: PingFang.ttc(5)
+
+Name: PingFangTC-Semibold
+Class: CNS
+OTCname: PingFang.ttc(7)
+
+Name: PingFangSC-Semibold
+Class: GB
+OTCname: PingFang.ttc(8)
+
+Name: PingFangTC-Light
+Class: CNS
+OTCname: PingFang.ttc(10)
+
+Name: PingFangSC-Light
+Class: GB
+OTCname: PingFang.ttc(11)
+
+Name: PingFangTC-Thin
+Class: CNS
+OTCname: PingFang.ttc(13)
+
+Name: PingFangSC-Thin
+Class: GB
+OTCname: PingFang.ttc(14)
+
+Name: PingFangTC-Ultralight
+Class: CNS
+OTCname: PingFang.ttc(16)
+
+Name: PingFangSC-Ultralight
+Class: GB
+OTCname: PingFang.ttc(17)
 
 # Changzhou SinoType (OS X)
 
@@ -3041,6 +3106,11 @@ PSName: DFWaWaSC-W5
 Class: GB
 OTFname: WawaSC-Regular.otf
 
+Name: WawaTC-Regular
+PSName: DFWaWaTC-W5
+Class: CNS
+OTFname: WawaTC-Regular.otf
+
 Name: HannotateSC-W5
 Class: GB
 OTCname: Hannotate.ttc(0)
@@ -3072,6 +3142,28 @@ OTCname: Hanzipen.ttc(2)
 Name: HanziPenTC-W5
 Class: CNS
 OTCname: Hanzipen.ttc(3)
+
+# Shanghai Ikarus Ltd./URW Software & Type GmbH
+
+Name: SIL-Hei-Med-Jian
+Class: GB
+TTFname: Hei.ttf
+
+Name: SIL-Kai-Reg-Jian
+Class: GB
+TTFname: Kai.ttf
+
+# Apple
+
+Name: LiSungLight
+Class: CNS
+TTFname(20): Apple LiSung Light.ttf
+TTFname(10): LiSungLight.ttf
+
+Name: LiGothicMed
+Class: CNS
+TTFname(20): Apple LiGothic Medium.ttf
+TTFname(10): LiGothicMed.ttf
 
 # Adobe chinese fonts
 
@@ -3500,41 +3592,66 @@ Class: Korea
 #Provides(??): HYRGoThic-Medium # fails
 TTFname: AppleGothic.ttf
 
-Name: AppleSDGothicNeo-Thin
-Class: Korea
-OTFname: AppleSDGothicNeo-Thin.otf
-
-Name: AppleSDGothicNeo-UltraLight
-Class: Korea
-OTFname: AppleSDGothicNeo-UltraLight.otf
-
-Name: AppleSDGothicNeo-Light
-Class: Korea
-OTFname: AppleSDGothicNeo-Light.otf
-
 Name: AppleSDGothicNeo-Regular
 Class: Korea
-OTFname: AppleSDGothicNeo-Regular.otf
+OTFname(10): AppleSDGothicNeo-Regular.otf
+OTCname(20): AppleSDGothicNeo.ttc(0)
 
 Name: AppleSDGothicNeo-Medium
 Class: Korea
-OTFname: AppleSDGothicNeo-Medium.otf
+OTFname(10): AppleSDGothicNeo-Medium.otf
+OTCname(20): AppleSDGothicNeo.ttc(2)
 
 Name: AppleSDGothicNeo-SemiBold
 Class: Korea
-OTFname: AppleSDGothicNeo-SemiBold.otf
+OTFname(10): AppleSDGothicNeo-SemiBold.otf
+OTCname(20): AppleSDGothicNeo.ttc(4)
 
 Name: AppleSDGothicNeo-Bold
 Class: Korea
-OTFname: AppleSDGothicNeo-Bold.otf
+OTFname(10): AppleSDGothicNeo-Bold.otf
+OTCname(20): AppleSDGothicNeo.ttc(6)
+
+Name: AppleSDGothicNeo-Light
+Class: Korea
+OTFname(10): AppleSDGothicNeo-Light.otf
+OTCname(20): AppleSDGothicNeo.ttc(8)
+
+Name: AppleSDGothicNeo-Thin
+Class: Korea
+OTFname(10): AppleSDGothicNeo-Thin.otf
+OTCname(20): AppleSDGothicNeo.ttc(10)
+
+Name: AppleSDGothicNeo-UltraLight
+Class: Korea
+OTFname(10): AppleSDGothicNeo-UltraLight.otf
+OTCname(20): AppleSDGothicNeo.ttc(12)
 
 Name: AppleSDGothicNeo-ExtraBold
 Class: Korea
-OTFname: AppleSDGothicNeo-ExtraBold.otf
+OTFname(10): AppleSDGothicNeo-ExtraBold.otf
+OTCname(20): AppleSDGothicNeo.ttc(14)
 
 Name: AppleSDGothicNeo-Heavy
 Class: Korea
-OTFname: AppleSDGothicNeo-Heavy.otf
+OTFname(10): AppleSDGothicNeo-Heavy.otf
+OTCname(20): AppleSDGothicNeo.ttc(16)
+
+Name: JCsmPC
+Class: Korea
+TTFname: PCmyoungjo.ttf
+
+Name: JCfg
+Class: Korea
+TTFname: Pilgiche.ttf
+
+Name: JCkg
+Class: Korea
+TTFname: Gungseouche.ttf
+
+Name: JCHEadA
+Class: Korea
+TTFname: HeadlineA.ttf
 
 # Adobe korean fonts
 
@@ -3554,7 +3671,7 @@ Class: Korea
 OTFname: AdobeGothicStd-Light.otf
 
 #
-# Microsoft Mac Office fonts
+# Microsoft Windows, Windows/Mac Office fonts
 #
 
 # korea
@@ -3563,43 +3680,176 @@ Name: Batang
 Class: Korea
 Provides(50): HYSMyeongJo-Medium
 TTFname(50): Batang.ttf
+TTCname(20): batang.ttc(0)
+
+Name: BatangChe
+Class: Korea
+TTCname(20): batang.ttc(1)
+
+Name: Dotum
+Class: Korea
+Provides(50): HYGoThic-Medium
+TTCname(20): gulim.ttc(2)
+
+Name: DotumChe
+Class: Korea
+TTCname(20): gulim.ttc(3)
 
 Name: Gulim
 Class: Korea
 Provides(50): HYRGoThic-Medium
 Provides(90): HYGoThic-Medium
-TTFname(30): Gulim.ttf
-TTCname(50): gulim.ttc
+TTFname(50): Gulim.ttf
+TTCname(20): gulim.ttc(0)
+
+Name: GulimChe
+Class: Korea
+TTCname(20): gulim.ttc(1)
+
+Name: Gungsuh
+Class: Korea
+TTCname(20): batang.ttc(2)
+
+Name: GungsuhChe
+Class: Korea
+TTCname(20): batang.ttc(3)
+
+Name: MalgunGothicRegular
+Class: Korea
+TTFname: malgun.ttf
+
+Name: MalgunGothicBold
+Class: Korea
+TTFname: malgunbd.ttf
+
+Name: MalgunGothic-Semilight
+Class: Korea
+TTFname: malgunsl.ttf
 
 # simplified chinese
 
 Name: SimHei
 Class: GB
 Provides(60): STHeiti-Regular
-Provides(60): STKaiti-Regular
 Provides(60): STHeiti-Light
 TTFname(50): SimHei.ttf
+TTFname(20): simhei.ttf
 
 Name: SimSun
 Class: GB
 Provides(60): STSong-Light
+TTFname(50): SimSun.ttf
+TTCname(20): simsun.ttc(0)
+
+Name: NSimSun
+Class: GB
+TTCname(20): simsun.ttc(1)
+
+Name: KaiTi
+Class: GB
+Provides(60): STKaiti-Regular
+TTFname(40): Kaiti.ttf
+TTFname(20): simkai.ttf
+
+Name: FangSong
+Class: GB
 Provides(60): STFangsong-Light
 Provides(60): STFangsong-Regular
-TTFname(50): SimSun.ttf
+TTFname(40): Fangsong.ttf
+TTFname(20): simfang.ttf
+
+Name: MicrosoftYaHei
+Class: GB
+TTFname(20): msyh.ttf
+TTCname(30): msyh.ttc(0)
+
+Name: MicrosoftYaHei-Bold
+Class: GB
+TTFname(20): msyhbd.ttf
+TTCname(30): msyhbd.ttc(0)
+
+Name: MicrosoftYaHeiLight
+Class: GB
+TTFname(20): msyhl.ttf
+TTCname(30): msyhl.ttc(0)
+
+Name: DengXian-Regular
+Class: GB
+TTFname: Deng.ttf
+
+Name: DengXian-Bold
+Class: GB
+TTFname: Dengb.ttf
+
+Name: DengXian-Light
+Class: GB
+TTFname: Dengl.ttf
+
+Name: STZhongsong
+Class: GB
+TTFname: STZHONGS.ttf
+
+Name: STXinwei
+Class: GB
+TTFname: STXINWEI.ttf
+
+Name: STXingkai
+Class: GB
+TTFname: STXINGKA.ttf
+
+Name: STLiti
+Class: GB
+TTFname: STLITI.ttf
+
+Name: STHupo
+Class: GB
+TTFname: STHUPO.ttf
 
 # traditional chinese
 
 Name: MingLiU
 Class: CNS
-Provides(60): MHei-Medium
-Provides(60): MKai-Medium
 Provides(60): MSung-Medium
 Provides(60): MSung-Light
 TTFname(50): MingLiU.ttf
+TTCname(20): mingliu.ttc(0)
 
 Name: PMingLiU
 Class: CNS
 TTFname(50): PMingLiU.ttf
+TTCname(20): mingliu.ttc(1)
+
+Name: DFKaiShu-SB-Estd-BF
+Class: CNS
+Provides(60): MKai-Medium
+TTFname(50): BiauKai.ttf
+TTFname(20): kaiu.ttf
+
+Name: MicrosoftJhengHeiRegular
+Class: CNS
+Provides(60): MHei-Medium
+TTFname(40): MSJH.ttf
+TTFname(20): msjh.ttf
+TTCname(30): msjh.ttc(0)
+
+Name: MicrosoftJhengHeiBold
+Class: CNS
+TTFname(40): MSJHBD.ttf
+TTFname(20): msjhbd.ttf
+TTCname(30): msjhbd.ttc(0)
+
+Name: MicrosoftJhengHeiLight
+Class: CNS
+TTCname(30): msjhl.ttc(0)
+
+Name: MicrosoftMHei
+Class: CNS
+Provides(65): MHei-Medium
+TTFname(10): MSMHei.ttf
+
+Name: MicrosoftMHei-Bold
+Class: CNS
+TTFname(10): MSMHei-Bold.ttf
 
 # japanese
 
@@ -3623,6 +3873,7 @@ Provides(95): HiraMaruProN-W4
 Provides(95): HiraMaruPro-W4
 TTFname(50): MS Gothic.ttf
 TTFname(30): MS-Gothic.ttf
+TTCname(20): msgothic.ttc(0)
 
 Name: MS-Mincho
 Class: Japan
@@ -3636,35 +3887,175 @@ Provides(95): HiraMinProN-W6
 Provides(95): HiraMinPro-W6
 TTFname(50): MS Mincho.ttf
 TTFname(30): MS-Mincho.ttf
+TTCname(20): msmincho.ttc(0)
 
 Name: MS-PGothic
 Class: Japan
 TTFname(50): MS PGothic.ttf
 TTFname(30): MS-PGothic.ttf
+TTCname(20): msgothic.ttc(1)
 
 Name: MS-PMincho
 Class: Japan
 TTFname(50): MS PMincho.ttf
 TTFname(30): MS-PMincho.ttf
+TTCname(20): msmincho.ttc(1)
+
+Name: MS-UIGothic
+Class: Japan
+TTCname(20): msgothic.ttc(2)
 
 Name: Meiryo
 Class: Japan
 TTFname(50): Meiryo.ttf
+TTCname(20): meiryo.ttc(0)
 
 Name: Meiryo-Bold
 Class: Japan
 TTFname(50): Meiryo Bold.ttf
+TTFname(40): MeiryoBold.ttf
 TTFname(30): Meiryo-Bold.ttf
+TTCname(20): meiryob.ttc(0)
 
 Name: Meiryo-BoldItalic
 Class: Japan
 TTFname(50): Meiryo Bold Italic.ttf
+TTFname(40): MeiryoBoldItalic.ttf
 TTFname(30): Meiryo-BoldItalic.ttf
+TTCname(20): meiryob.ttc(1)
 
 Name: Meiryo-Italic
 Class: Japan
 TTFname(50): Meiryo Italic.ttf
+TTFname(40): MeiryoItalic.ttf
 TTFname(30): Meiryo-Italic.ttf
+TTCname(20): meiryo.ttc(1)
+
+Name: HGGothicE
+Class: Japan
+TTCname(50): HGRGE.ttc(0)
+TTCname(20): HGRGE.TTC(0)
+
+Name: HGPGothicE
+Class: Japan
+TTCname(50): HGRGE.ttc(1)
+TTCname(20): HGRGE.TTC(1)
+
+Name: HGSGothicE
+Class: Japan
+TTCname(50): HGRGE.ttc(2)
+TTCname(20): HGRGE.TTC(2)
+
+Name: HGGothicM
+Class: Japan
+TTCname(20): HGRGM.TTC(0)
+
+Name: HGPGothicM
+Class: Japan
+TTCname(20): HGRGM.TTC(1)
+
+Name: HGSGothicM
+Class: Japan
+TTCname(20): HGRGM.TTC(2)
+
+Name: HGMinchoE
+Class: Japan
+TTCname(50): HGRME.ttc(0)
+TTCname(20): HGRME.TTC(0)
+
+Name: HGPMinchoE
+Class: Japan
+TTCname(50): HGRME.ttc(1)
+TTCname(20): HGRME.TTC(2)
+
+Name: HGSMinchoE
+Class: Japan
+TTCname(50): HGRME.ttc(2)
+TTCname(20): HGRME.TTC(2)
+
+Name: HGMinchoB
+Class: Japan
+TTCname(20): HGRMB.TTC(0)
+
+Name: HGPMinchoB
+Class: Japan
+TTCname(20): HGRMB.TTC(1)
+
+Name: HGPMinchoB
+Class: Japan
+TTCname(20): HGRMB.TTC(2)
+
+Name: HGSoeiKakugothicUB
+Class: Japan
+TTCname(50): HGRSGU.ttc(0)
+TTCname(20): HGRSGU.TTC(0)
+
+Name: HGPSoeiKakugothicUB
+Class: Japan
+TTCname(50): HGRSGU.ttc(1)
+TTCname(20): HGRSGU.TTC(1)
+
+Name: HGSSoeiKakugothicUB
+Class: Japan
+TTCname(50): HGRSGU.ttc(2)
+TTCname(20): HGRSGU.TTC(2)
+
+Name: HGSoeiKakupoptai
+Class: Japan
+TTCname(20): HGRPP1.TTC(0)
+
+Name: HGPSoeiKakupoptai
+Class: Japan
+TTCname(20): HGRPP1.TTC(1)
+
+Name: HGSSoeiKakupoptai
+Class: Japan
+TTCname(20): HGRPP1.TTC(2)
+
+Name: HGSoeiPresenceEB
+Class: Japan
+TTCname(20): HGRPRE.TTC(0)
+
+Name: HGPSoeiPresenceEB
+Class: Japan
+TTCname(20): HGRPRE.TTC(1)
+
+Name: HGSSoeiPresenceEB
+Class: Japan
+TTCname(20): HGRPRE.TTC(2)
+
+Name: HGKyokashotai
+Class: Japan
+TTCname(20): HGRKK.TTC(0)
+
+Name: HGPKyokashotai
+Class: Japan
+TTCname(20): HGRKK.TTC(1)
+
+Name: HGSKyokashotai
+Class: Japan
+TTCname(20): HGRKK.TTC(2)
+
+Name: HGGyoshotai
+Class: Japan
+TTCname(20): HGRGY.TTC(0)
+
+Name: HGPGyoshotai
+Class: Japan
+TTCname(20): HGRGY.TTC(1)
+
+Name: HGSGyoshotai
+Class: Japan
+TTCname(20): HGRGY.TTC(2)
+
+Name: HGMaruGothicMPRO
+Class: Japan
+TTFname(40): HGRSMP.ttf
+TTFname(20): HGRSMP.TTF
+
+Name: HGSeikaishotaiPRO
+Class: Japan
+TTFname(20): HGRSKP.TTF
 
 
 ### Local Variables:
