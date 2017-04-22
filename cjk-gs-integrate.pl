@@ -1370,12 +1370,27 @@ sub read_font_database {
 sub find_gs_resource {
   my $foundres = '';
   if (win32()) {
-    # TODO: currently we assume native gs, and gswin32c is in the path
-    # paths other than c:/gs/gs$gsver/Resource are not considered
-    chomp( my $gsver = `gswin32c --version 2>$nul` );
-    $foundres = "c:/gs/gs$gsver/Resource";
-    if ( ! -d $foundres ) {
-      $foundres = '';
+    # determine tlgs or native gs
+    chomp( my $foo = `kpsewhich -var-value=SELFAUTOPARENT`);
+    if ( -d "$foo/tlpkg/tlgs" ) {
+      # should be texlive with tlgs
+      if ( -d "$foo/tlpkg/tlgs/Resource" ) {
+        $foundres = "$foo/tlpkg/tlgs/Resource";
+      } else {
+        # TODO: for TL2016, tlgs binary has built-in Resource,
+        # so no Resource directory is available!
+        print_error("No Resource directory available for tlgs,\n");
+        print_error("we cannot support such gs, sorry.\n");
+        $foundres = '';
+      }
+    } else {
+      # TODO: we assume gswin32c is in the path
+      # paths other than c:/gs/gs$gsver/Resource are not considered
+      chomp( my $gsver = `gswin32c --version 2>$nul` );
+      $foundres = "c:/gs/gs$gsver/Resource";
+      if ( ! -d $foundres ) {
+        $foundres = '';
+      }
     }
   } else {
     # we assume that gs is in the path
