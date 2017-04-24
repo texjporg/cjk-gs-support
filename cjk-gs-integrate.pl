@@ -823,10 +823,8 @@ sub maybe_symlink {
       $winbatch_content .= "if not exist \"$targetname\" mklink /h \"$targetname\" \"$realname\"\n";
     } else {
       # should be encoded in cp932 for win32 console
-      $realname = Encode::decode('utf-8', $realname);
-      $realname = Encode::encode('cp932', $realname);
-      $targetname = Encode::decode('utf-8', $targetname);
-      $targetname = Encode::encode('cp932', $targetname);
+      $realname = encode_utftocp($realname);
+      $targetname = encode_utftocp($targetname);
       my $cmdl = "cmd.exe /c if not exist \"$targetname\" mklink /h \"$targetname\" \"$realname\"";
       my @ret = `$cmdl`;
       # sometimes hard link creation may fail due to "Access denied"
@@ -862,8 +860,7 @@ sub maybe_unlink {
       $winbatch_content .= "if exist \"$targetname\" del \"$targetname\"\n";
     } else {
       # should be encoded in cp932 for win32 console
-      $targetname = Encode::decode('utf-8', $targetname);
-      $targetname = Encode::encode('cp932', $targetname);
+      $targetname = encode_utftocp($targetname);
       my $cmdl = "cmd.exe /c if exist \"$targetname\" del \"$targetname\"";
       my @ret = `$cmdl`;
     }
@@ -879,8 +876,7 @@ sub write_winbatch {
     die("cannot open $winbatch for writing: $!");
   # $winbatch_content may contain multibyte characters, and they
   # should be encoded in cp932 in batch file
-  $winbatch_content = Encode::decode('utf-8', $winbatch_content);
-  $winbatch_content = Encode::encode('cp932', $winbatch_content);
+  $winbatch_content = encode_utftocp($winbatch_content);
   print FOO "\@echo off\n",
             "$winbatch_content",
             "\@echo symlink ", ($opt_remove ? "removed\n" : "generated\n"),
@@ -1035,8 +1031,7 @@ sub check_for_files {
     # this call (derived from the database) contains multibyte characters,
     # and they should be encoded in cp932 for win32 console
     if (win32()) {
-      $cmdl = Encode::decode('utf-8', $cmdl);
-      $cmdl = Encode::encode('cp932', $cmdl);
+      $cmdl = encode_utftocp($cmdl);
     }
     print_ddebug("checking for $cmdl\n");
     @foundfiles = `$cmdl`;
@@ -1055,10 +1050,8 @@ sub check_for_files {
     }
     # decode now on windows! (cp932 -> internal utf-8)
     if (win32()) {
-      $f = Encode::decode('cp932', $f);
-      $f = Encode::encode('utf-8', $f);
-      $realf = Encode::decode('cp932', $realf);
-      $realf = Encode::encode('utf-8', $realf);
+      $f = encode_cptoutf($f);
+      $realf = encode_cptoutf($realf);
     }
     my $bn = basename($f);
     $bntofn{$bn} = $realf;
@@ -1281,8 +1274,7 @@ sub read_font_database {
       # cp932 for win32 console
       my $encoded_fn;
       if (win32()) {
-        $encoded_fn = Encode::decode('utf-8', $fn);
-        $encoded_fn = Encode::encode('cp932', $encoded_fn);
+        $encoded_fn = encode_utftocp($fn);
       }
       print_ddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
       print_ddebug("type: otf\n");
@@ -1295,8 +1287,7 @@ sub read_font_database {
       # cp932 for win32 console
       my $encoded_fn;
       if (win32()) {
-        $encoded_fn = Encode::decode('utf-8', $fn);
-        $encoded_fn = Encode::encode('cp932', $encoded_fn);
+        $encoded_fn = encode_utftocp($fn);
       }
       print_ddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
       print_ddebug("type: otc\n");
@@ -1309,8 +1300,7 @@ sub read_font_database {
       # cp932 for win32 console
       my $encoded_fn;
       if (win32()) {
-        $encoded_fn = Encode::decode('utf-8', $fn);
-        $encoded_fn = Encode::encode('cp932', $encoded_fn);
+        $encoded_fn = encode_utftocp($fn);
       }
       print_ddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
       print_ddebug("type: ttf\n");
@@ -1323,8 +1313,7 @@ sub read_font_database {
       # cp932 for win32 console
       my $encoded_fn;
       if (win32()) {
-        $encoded_fn = Encode::decode('utf-8', $fn);
-        $encoded_fn = Encode::encode('cp932', $encoded_fn);
+        $encoded_fn = encode_utftocp($fn);
       }
       print_ddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
       print_ddebug("type: ttc\n");
@@ -1338,8 +1327,7 @@ sub read_font_database {
       # cp932 for win32 console
       my $encoded_fn;
       if (win32()) {
-        $encoded_fn = Encode::decode('utf-8', $fn);
-        $encoded_fn = Encode::encode('cp932', $encoded_fn);
+        $encoded_fn = encode_utftocp($fn);
       }
       print_ddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
       if ($fn =~ m/\.otf$/i) {
@@ -1436,6 +1424,20 @@ sub find_gs_resource {
     }
   }
   return $foundres;
+}
+
+sub encode_utftocp {
+  my ($foo) = @_;
+  $foo = Encode::decode('utf-8', $foo);
+  $foo = Encode::encode('cp932', $foo);
+  return $foo;
+}
+
+sub encode_cptoutf {
+  my ($foo) = @_;
+  $foo = Encode::decode('cp932', $foo);
+  $foo = Encode::encode('utf-8', $foo);
+  return $foo;
 }
 
 sub version {
