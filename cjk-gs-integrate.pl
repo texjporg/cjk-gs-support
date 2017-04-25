@@ -820,7 +820,7 @@ sub maybe_symlink {
     $targetname =~ s!/!\\!g;
     if ($opt_winbatch) {
       # re-encoding of $winbatch_content is done by write_winbatch()
-      $winbatch_content .= "if not exist \"$targetname\" mklink /h \"$targetname\" \"$realname\"\n";
+      $winbatch_content .= "if not exist \"$targetname\" mklink \"$targetname\" \"$realname\"\n";
     } else {
       # should be encoded in cp932 for win32 console
       $realname = encode_utftocp($realname);
@@ -1363,8 +1363,9 @@ sub find_gs_resource {
     if ( -d "$foo/tlpkg/tlgs" ) {
       # should be texlive with tlgs
       $foundres = "$foo/tlpkg/tlgs/Resource";
-      # TODO: for TL2016, tlgs binary has built-in Resource,
-      # so the following test should fail!
+      # for TL2016, tlgs binary has built-in Resource,
+      # so we cannot set up CJK fonts correctly.
+      # the following test forces to exit in such case
       if ( ! -d $foundres ) {
         print_error("No Resource directory available for tlgs,\n");
         print_error("we cannot support such gs, sorry.\n");
@@ -1381,7 +1382,6 @@ sub find_gs_resource {
     }
   } else {
     # we assume that gs is in the path
-    # on Windows we probably have to try something else
     chomp( my $gsver = `gs --version 2>$nul` );
     if ($?) {
       print_error("Cannot get gs version ...\n");
