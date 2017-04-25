@@ -237,6 +237,12 @@ my %encode_list = (
 my $otf_pathpart = "fonts/opentype/cjk-gs-integrate";
 my $ttf_pathpart = "fonts/truetype/cjk-gs-integrate";
 
+# location where cidfmap, cidfmap.local and cidfmap.aliases are placed
+# when found gs is tlgs (win32), then files will be placed in lib/ instead of Resource/Init/
+my $cidfmap_pathpart = "Init/cidfmap";
+my $cidfmap_local_pathpart = "Init/cidfmap.local";
+my $cidfmap_aliases_pathpart = "Init/cidfmap.aliases";
+
 # support for ps2otfps by Akira Kakuto
 my $akotfps_pathpart = "dvips/ps2otfps";
 my $akotfps_datafilename = "psnames-for-otf";
@@ -439,11 +445,15 @@ sub main {
   do_aliases();
   write_akotfps_datafile() if ($opt_akotfps);
   print_info("finished\n");
+  if ($opt_winbatch) {
+    print_info("I created $winbatch, to help you create symlinks.\n");
+    print_info("to complete, run it as administrator privilege.\n");
+  }
 }
 
 sub update_master_cidfmap {
   my $add = shift;
-  my $cidfmap_master = "$opt_output/Init/cidfmap";
+  my $cidfmap_master = "$opt_output/$cidfmap_pathpart";
   print_info(sprintf("%s $add %s cidfmap file ...\n", 
     ($opt_remove ? "removing" : "adding"), ($opt_remove ? "from" : "to")));
   if (-r $cidfmap_master) {
@@ -678,8 +688,8 @@ sub do_nonotf_fonts {
       mkdir("$opt_output/Init") ||
         die("Cannot create directory $opt_output/Init: $!");
     }
-    open(FOO, ">$opt_output/Init/cidfmap.local") || 
-      die "Cannot open $opt_output/cidfmap.local: $!";
+    open(FOO, ">$opt_output/$cidfmap_local_pathpart") || 
+      die "Cannot open $opt_output/$cidfmap_local_pathpart: $!";
     print FOO $outp;
     close(FOO);
   }
@@ -758,8 +768,8 @@ sub do_aliases {
       mkdir("$opt_output/Init") ||
         die("Cannot create directory $opt_output/Init: $!");
     }
-    open(FOO, ">$opt_output/Init/cidfmap.aliases") || 
-      die "Cannot open $opt_output/cidfmap.aliases: $!";
+    open(FOO, ">$opt_output/$cidfmap_aliases_pathpart") || 
+      die "Cannot open $opt_output/$cidfmap_aliases_pathpart: $!";
     print FOO $outp;
     close(FOO);
   }
@@ -1371,6 +1381,10 @@ sub find_gs_resource {
         print_error("we cannot support such gs, sorry.\n");
         $foundres = '';
       }
+      # change output location
+      $cidfmap_pathpart = "../lib/cidfmap";
+      $cidfmap_local_pathpart = "../lib/cidfmap.local";
+      $cidfmap_aliases_pathpart = "../lib/cidfmap.aliases";
     } else {
       # TODO: we assume gswin32c is in the path
       # paths other than c:/gs/gs$gsver/Resource are not considered
@@ -1502,6 +1516,7 @@ my $operation = "
 For each found TrueType (TTF) font it creates a cidfmap entry in
 
     <Resource>/Init/cidfmap.local
+      -- if you are using tlgs win32, tlpkg/tlgs/lib/cidfmap.local instead
 
 and links the font to
 
@@ -1521,10 +1536,12 @@ from an installed GhostScript (binary name is assumed to be 'gs').
 Aliases are added to 
 
     <Resource>/Init/cidfmap.aliases
+      -- if you are using tlgs win32, tlpkg/tlgs/lib/cidfmap.aliases instead
 
 Finally, it tries to add runlib calls to
 
     <Resource>/Init/cidfmap
+      -- if you are using tlgs win32, tlpkg/tlgs/lib/cidfmap
 
 to load the cidfmap.local and cidfmap.aliases.
 ";
