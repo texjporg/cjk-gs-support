@@ -267,6 +267,7 @@ my $opt_force = 0;
 my $opt_texmflink;
 my $opt_akotfps;
 my $opt_winbatch = 0;
+my $opt_hardlink = 0;
 my $opt_markdown = 0;
 
 if (! GetOptions(
@@ -278,6 +279,7 @@ if (! GetOptions(
         "link-texmf:s" => \$opt_texmflink,
         "otfps:s"      => \$opt_akotfps,
         "winbatch"     => \$opt_winbatch,
+        "hardlink"     => \$opt_hardlink,
         "remove"       => \$opt_remove,
         "only-aliases" => \$opt_only_aliases,
         "machine-readable" => \$opt_machine,
@@ -352,9 +354,18 @@ sub main {
   if ($opt_winbatch) {
     if (win32()) {
       $opt_winbatch = 1;
+      unlink $winbatch if (-e $winbatch);
     } else {
       print_warning("ignoring --winbatch option due to non-Windows\n");
       $opt_winbatch = 0;
+    }
+  }
+  if ($opt_hardlink) {
+    if (win32()) {
+      $opt_hardlink = 1;
+    } else {
+      print_warning("ignoring --hardlink option due to non-Windows\n");
+      $opt_hardlink = 0;
     }
   }
   if (!$opt_listallaliases) {
@@ -445,9 +456,9 @@ sub main {
   do_aliases();
   write_akotfps_datafile() if ($opt_akotfps);
   print_info("finished\n");
-  if ($opt_winbatch) {
-    print_info("I created $winbatch, to help you create symlinks.\n");
-    print_info("to complete, run it as administrator privilege.\n");
+  if ($opt_winbatch && -e $winbatch) {
+    print_info("*** Batch file $winbatch created ***\n");
+    print_info("*** to complete, run it as administrator privilege.***\n");
   }
 }
 
@@ -811,31 +822,33 @@ sub generate_cidfmap_entry {
 sub maybe_symlink {
   my ($realname, $targetname) = @_;
   if (win32()) {
-    # TODO NP
-    # why don't do we
-    # if (! -r $targetname) {
-    #   $ret = `mklink "$targetname" "$realname"`;
-    # }
-    # here instead of generating a batch file?
-    #
-    # hardlink vs. symlink
-    #   * hardlink is easy to read (reading symlink sometimes fails)
-    #   * hardlink creation does not require administrator privilege,
-    #     but is likely to fail for c:/windows/fonts/* files due to
-    #     "Access denied"
-    #   * symlink can point to a file on a different/remote volume
-    # for these reasons, we try to create hard link by default.
-    # if --winbatch option is given, we prepare batch file for symlink creation,
+    # hardlink vs. symlink -- HY 2017/04/26
+    #   * readablitiy: hardlink is easier, but it seems that current gs can read
+    #                  symlink properly, so it doesn't matter
+    #   * permission:  hardlink creation does not require administrator privilege,
+    #                  but is likely to fail for c:/windows/fonts/* system files
+    #                  due to "Access denied"
+    #                  symlink creation requires administrator privilege, but
+    #                  it can link to all files in c:/windows/fonts/
+    #   * versatility: symlink can point to a file on a different/remote volume
+    # for these reasons, we try to create symlink by default.
+    # if --hardlink option is given, we create hardlink instead.
+    # also, if --winbatch option is given, we prepare batch file for link generation,
+    # instead of creating links right away.
     $realname =~ s!/!\\!g;
     $targetname =~ s!/!\\!g;
     if ($opt_winbatch) {
       # re-encoding of $winbatch_content is done by write_winbatch()
-      $winbatch_content .= "if not exist \"$targetname\" mklink \"$targetname\" \"$realname\"\n";
+      $winbatch_content .= "if not exist \"$targetname\" mklink ";
+      $winbatch_content .= "/h " if ($opt_hardlink);
+      $winbatch_content .= "\"$targetname\" \"$realname\"\n";
     } else {
       # should be encoded in cp932 for win32 console
       $realname = encode_utftocp($realname);
       $targetname = encode_utftocp($targetname);
-      my $cmdl = "cmd.exe /c if not exist \"$targetname\" mklink /h \"$targetname\" \"$realname\"";
+      my $cmdl = "cmd.exe /c if not exist \"$targetname\" mklink ";
+      $cmdl .= "/h " if ($opt_hardlink);
+      $cmdl .= "\"$targetname\" \"$realname\"";
       my @ret = `$cmdl`;
       # sometimes hard link creation may fail due to "Access denied"
       # (especially when $realname is located in c:/windows/fonts).
@@ -1485,14 +1498,18 @@ sub Usage {
                          DIR/$akotfps_pathpart
                       which is used by ps2otfps (developed by Akira Kakuto),
                       instead of generating snippets
---winbatch            generate batch file for symlink generation, instead of
-                      generating hardlink right away (windows only)
 --machine-readable    output of --list-aliases is machine readable
 --force               do not bail out if linked fonts already exist
 -q, --quiet           be less verbose
 -d, --debug           output debug information, can be given multiple times
 -v, --version         outputs only the version information
 -h, --help            this help
+";
+
+  my $winonlyoptions = "
+--hardlink            create hardlinks instead of symlinks
+--winbatch            generate batch file for link generation, instead of
+                      generating links right away
 ";
 
   my $commandoptions = "
@@ -1644,6 +1661,8 @@ The contained font data is not copyrightable.
     print "\n$shortdesc\nUsage\n-----\n\n`````\n$usage\n`````\n\n";
     print "#### Options ####\n\n`````";
     print_for_out($options, "  ");
+    print "`````\n\n#### Windows only options ####\n\n`````";
+    print_for_out($winonlyoptions, "  ");
     print "`````\n\n#### Command like options ####\n\n`````";
     print_for_out($commandoptions, "  ");
     print "`````\n\nOperation\n---------\n$operation\n";
@@ -1659,6 +1678,10 @@ The contained font data is not copyrightable.
     print "\nUsage: $usage\n\n$headline\n$shortdesc";
     print "\nOptions:\n";
     print_for_out($options, "  ");
+    if (win32()) {
+      print "\nWindows only options:\n";
+      print_for_out($winonlyoptions, "  ");
+    }
     print "\nCommand like options:\n";
     print_for_out($commandoptions, "  ");
     print "\nOperation:\n";
