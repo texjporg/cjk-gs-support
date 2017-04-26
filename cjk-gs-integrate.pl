@@ -1508,7 +1508,7 @@ sub Usage {
 
   my $winonlyoptions = "
 --hardlink            create hardlinks instead of symlinks
---winbatch            generate batch file for link generation, instead of
+--winbatch            prepare a batch file for link generation, instead of
                       generating links right away
 ";
 
