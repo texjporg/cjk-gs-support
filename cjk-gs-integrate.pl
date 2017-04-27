@@ -3619,6 +3619,77 @@ Provides(90): STHeiti-Regular
 Provides(90): STHeiti-Light
 TTFname: ukai.ttf
 
+# WenQuanYi (free)
+
+# GB
+Name: WenQuanYiMicroHei
+Class: GB
+TTCname(10): wqy-microhei.ttc(0)
+# CNS
+Name: WenQuanYiMicroHei-Adobe-CNS1
+Class: CNS
+TTCname(10): wqy-microhei.ttc(0)
+
+# GB
+Name: WenQuanYiMicroHeiMono
+Class: GB
+TTCname(10): wqy-microhei.ttc(1)
+# CNS
+Name: WenQuanYiMicroHeiMono-Adobe-CNS1
+Class: CNS
+TTCname(10): wqy-microhei.ttc(1)
+
+# GB
+Name: WenQuanYiZenHei
+Class: GB
+TTCname(10): wqy-zenhei.ttc(0)
+TTFname(20): wqy-zenhei.ttf
+# CNS
+Name: WenQuanYiZenHei-Adobe-CNS1
+Class: CNS
+TTCname(10): wqy-zenhei.ttc(0)
+TTFname(20): wqy-zenhei.ttf
+
+# GB
+Name: WenQuanYiZenHeiMono
+Class: GB
+TTCname(10): wqy-zenhei.ttc(1)
+# CNS:
+Name: WenQuanYiZenHeiMono-Adobe-CNS1
+Class: CNS
+TTCname(10): wqy-zenhei.ttc(1)
+
+# GB
+Name: WenQuanYiZenHeiSharp
+Class: GB
+TTCname(10): wqy-zenhei.ttc(2)
+# CNS
+Name: WenQuanYiZenHeiSharp-Adobe-CNS1
+Class: CNS
+TTCname(10): wqy-zenhei.ttc(2)
+
+# cwTeX (free)
+
+Name: cwTeXMing
+Class: CNS
+TTFname: cwming.ttf
+
+Name: cwTeXHeiBold
+Class: CNS
+TTFname: cwheib.ttf
+
+Name: cwTeXKai
+Class: CNS
+TTFname: cwkai.ttf
+
+Name: cwTeXYen
+Class: CNS
+TTFname: cwyen.ttf
+
+Name: cwTeXFangSong
+Class: CNS
+TTFname: cwfs.ttf
+
 #
 # KOREAN FONTS
 #
@@ -3855,6 +3926,34 @@ Name: NanumPen
 Class: Korea
 TTFname(10): NanumPen.ttf
 TTCname(20): NanumScript.ttc(1)
+
+# Design font by Ho-Seok Ee, aka. "ALee's font" (free)
+
+Name: Bandal
+Class: Korea
+TTFname: Bandal.ttf
+
+Name: Bangwool
+Class: Korea
+TTFname: Bangwool.ttf
+
+Name: Eunjin
+Class: Korea
+TTFname: Eunjin.ttf
+
+Name: EunjinNakseo
+Class: Korea
+TTFname: EunjinNakseo.ttf
+
+Name: Guseul
+Class: Korea
+TTFname: Guseul.ttf
+
+# Woowa Brothers (free)
+
+Name: BMHANNA
+Class: Korea
+TTFname: BM-HANNA.ttf
 
 # Hancom HCR (free)
 # note that all fonts have narrow metrics
