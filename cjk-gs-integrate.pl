@@ -482,22 +482,31 @@ sub update_master_cidfmap {
       }
     }
     close(FOO);
-    if ($found) {
-      if ($opt_remove) {
+    # if the master cidfmap has a new line at end of file,
+    # then $newmaster should end with "\n".
+    # otherwise we add a new line, since there is a possibility of %EOF comment
+    # without trailing new line (e.g. TL before r44039)
+    $newmaster =~ s/\n$//g;
+    $newmaster =~ s/$/\n/g;
+    if ($opt_remove) {
+      if ($found) {
+        return if $dry_run;
         open(FOO, ">", $cidfmap_master) ||
           die ("Cannot clean up $cidfmap_master: $!");
         print FOO $newmaster;
         close FOO;
-      } else {
-        print_info("$add already loaded in $cidfmap_master, no changes\n");
       }
     } else {
-      return if $dry_run;
-      return if $opt_remove;
-      open(FOO, ">>", $cidfmap_master) ||
-        die ("Cannot open $cidfmap_master for appending: $!");
-      print FOO "($add) .runlibfile\n";
-      close(FOO);
+      if ($found) {
+        print_info("$add already loaded in $cidfmap_master, no changes\n");
+      } else {
+        return if $dry_run;
+        open(FOO, ">", $cidfmap_master) ||
+          die ("Cannot clean up $cidfmap_master: $!");
+        print FOO $newmaster;
+        print FOO "($add) .runlibfile\n";
+        close(FOO);
+      }
     }
   } else {
     return if $dry_run;
