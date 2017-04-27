@@ -502,7 +502,7 @@ sub update_master_cidfmap {
       } else {
         return if $dry_run;
         open(FOO, ">", $cidfmap_master) ||
-          die ("Cannot clean up $cidfmap_master: $!");
+          die ("Cannot open $cidfmap_master for appending: $!");
         print FOO $newmaster;
         print FOO "($add) .runlibfile\n";
         close(FOO);
