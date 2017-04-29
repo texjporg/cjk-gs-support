@@ -354,7 +354,7 @@ sub main {
   if ($opt_winbatch) {
     if (win32()) {
       $opt_winbatch = 1;
-      unlink $winbatch if (-e $winbatch);
+      unlink $winbatch if (-f $winbatch);
     } else {
       print_warning("ignoring --winbatch option due to non-Windows\n");
       $opt_winbatch = 0;
@@ -456,7 +456,7 @@ sub main {
   do_aliases();
   write_akotfps_datafile() if ($opt_akotfps);
   print_info("finished\n");
-  if ($opt_winbatch && -e $winbatch) {
+  if ($opt_winbatch && -f $winbatch) {
     print_info("*** Batch file $winbatch created ***\n");
     print_info("*** to complete, run it as administrator privilege.***\n");
   }
@@ -1088,6 +1088,8 @@ sub check_for_files {
     my $bn = basename($f);
     $bntofn{$bn} = $realf;
   }
+
+  # show the %fontdb before file check
   if ($opt_debug > 0) {
     print_debug("dumping font database before file check:\n");
     print_debug(Data::Dumper::Dumper(\%fontdb));
