@@ -429,6 +429,13 @@ sub main {
     }
   }
   exit(0) if ($opt_listfonts || $opt_listaliases || $opt_listallaliases);
+  # if $opt_machine is still alive after the above exit(0), it's useless
+  if ($opt_machine) {
+    print_error("Option --machine-readable should be used with at least one of the followings:\n");
+    print_error("  --list-aliases, --list-all-aliases, --list-fonts, --info\n");
+    print_error("terminating.\n");
+    exit(1);
+  }
 
   if (! $opt_output) {
     print_info("searching for GhostScript resource\n");
@@ -1509,7 +1516,6 @@ sub Usage {
                          DIR/$akotfps_pathpart
                       which is used by ps2otfps (developed by Akira Kakuto),
                       instead of generating snippets
---machine-readable    output of --list-aliases is machine readable
 --force               do not bail out if linked fonts already exist
 -q, --quiet           be less verbose
 -d, --debug           output debug information, can be given multiple times
@@ -1531,6 +1537,7 @@ sub Usage {
                       present files
 --list-fonts          lists the fonts found on the system
 --info                combines the above two information
+--machine-readable    output of --list-aliases is machine readable
 ";
 
   my $shortdesc = "
