@@ -248,51 +248,51 @@ my $akotfps_pathpart = "dvips/ps2otfps";
 my $akotfps_datafilename = "psnames-for-otf";
 my $akotfps_datacontent = '';
 
-my $dry_run = 0;
-my $opt_help = 0;
-my $opt_quiet = 0;
-my $opt_debug = 0;
+my $opt_output;
+my $opt_fontdef;
+my @opt_aliases;
+my $opt_filelist;
+my $opt_texmflink;
+my $opt_akotfps;
+my $opt_force = 0;
+my $opt_remove = 0;
+my $opt_hardlink = 0;
+my $opt_winbatch = 0;
+my $opt_only_aliases = 0;
 my $opt_listaliases = 0;
 my $opt_listallaliases = 0;
 my $opt_listfonts = 0;
-my $opt_remove = 0;
 my $opt_info = 0;
-my $opt_fontdef;
-my $opt_output;
-my @opt_aliases;
-my $opt_only_aliases = 0;
 my $opt_machine = 0;
-my $opt_filelist;
-my $opt_force = 0;
-my $opt_texmflink;
-my $opt_akotfps;
-my $opt_winbatch = 0;
-my $opt_hardlink = 0;
+my $dry_run = 0;
+my $opt_quiet = 0;
+my $opt_debug = 0;
+my $opt_help = 0;
 my $opt_markdown = 0;
 
 if (! GetOptions(
-        "n|dry-run"   => \$dry_run,
-        "info"        => \$opt_info,
+        "o|output=s"  => \$opt_output,
+        "f|fontdef=s" => \$opt_fontdef,
+        "a|alias=s"   => \@opt_aliases,
+        "filelist=s"  => \$opt_filelist,
+        "link-texmf:s" => \$opt_texmflink,
+        "otfps:s"      => \$opt_akotfps,
+        "force"       => \$opt_force,
+        "remove"       => \$opt_remove,
+        "hardlink"     => \$opt_hardlink,
+        "winbatch"     => \$opt_winbatch,
+        "only-aliases" => \$opt_only_aliases,
         "list-aliases" => \$opt_listaliases,
         "list-all-aliases" => \$opt_listallaliases,
         "list-fonts"  => \$opt_listfonts,
-        "link-texmf:s" => \$opt_texmflink,
-        "otfps:s"      => \$opt_akotfps,
-        "winbatch"     => \$opt_winbatch,
-        "hardlink"     => \$opt_hardlink,
-        "remove"       => \$opt_remove,
-        "only-aliases" => \$opt_only_aliases,
+        "info"        => \$opt_info,
         "machine-readable" => \$opt_machine,
-        "force"       => \$opt_force,
-        "filelist=s"  => \$opt_filelist,
-        "markdown"    => \$opt_markdown,
-        "o|output=s"  => \$opt_output,
-        "h|help"      => \$opt_help,
+        "n|dry-run"   => \$dry_run,
         "q|quiet"     => \$opt_quiet,
         "d|debug+"    => \$opt_debug,
-        "f|fontdef=s" => \$opt_fontdef,
-        "a|alias=s"   => \@opt_aliases,
         "v|version"   => sub { print &version(); exit(0); }, ) ) {
+        "h|help"      => \$opt_help,
+        "markdown"    => \$opt_markdown,
   die "Try \"$0 --help\" for more information.\n";
 }
 
@@ -1494,13 +1494,11 @@ sub Usage {
   my $headline = "Configuring GhostScript for CJK CID/TTF fonts";
   my $usage = "[perl] $prg\[.pl\] [OPTIONS]";
   my $options = "
--n, --dry-run         do not actually output anything
---remove              try to remove instead of create
--f, --fontdef FILE    specify alternate set of font definitions, if not
-                      given, the built-in set is used
 -o, --output DIR      specifies the base output dir, if not provided,
                       the Resource directory of an installed GhostScript
                       is searched and used.
+-f, --fontdef FILE    specify alternate set of font definitions, if not
+                      given, the built-in set is used
 -a, --alias LL=RR     defines an alias, or overrides a given alias;
                       illegal if LL is provided by a real font, or
                       RR is neither available as real font or alias;
@@ -1517,6 +1515,8 @@ sub Usage {
                       which is used by ps2otfps (developed by Akira Kakuto),
                       instead of generating snippets
 --force               do not bail out if linked fonts already exist
+--remove              try to remove instead of create
+-n, --dry-run         do not actually output anything
 -q, --quiet           be less verbose
 -d, --debug           output debug information, can be given multiple times
 -v, --version         outputs only the version information
