@@ -295,9 +295,9 @@ if (! GetOptions(
         "n|dry-run"   => \$dry_run,
         "q|quiet"     => \$opt_quiet,
         "d|debug+"    => \$opt_debug,
-        "v|version"   => sub { print &version(); exit(0); }, ) ) {
         "h|help"      => \$opt_help,
         "markdown"    => \$opt_markdown,
+        "v|version"   => sub { print &version(); exit(0); }, ) ) {
   die "Try \"$0 --help\" for more information.\n";
 }
 
@@ -1590,8 +1590,12 @@ to load the cidfmap.local and cidfmap.aliases.
 Search is done using the kpathsea library, in particular using kpsewhich
 program. By default the following directories are searched:
   - all TEXMF trees
-  - `/Library/Fonts`, `/Library/Fonts/Microsoft`, `/System/Library/Fonts`, 
-    `/Network/Library/Fonts`, and `~/Library/Fonts` (all if available)
+  - `/Library/Fonts`, `/Library/Fonts/Microsoft`, `/System/Library/Fonts`,
+    `/System/Library/Assets`, `/Network/Library/Fonts`,
+    `~/Library/Fonts` and `/usr/share/fonts` (all if available)
+  - `/Applications/Microsoft Word.app/Contents/Resources/{Fonts,DFonts}`,
+    `/Applications/Microsoft Excel.app/Contents/Resources/{Fonts,DFonts}`,
+    `/Applications/Microsoft PowerPoint.app/Contents/Resources/{Fonts,DFonts}`
   - `c:/windows/fonts` (on Windows)
   - the directories in `OSFONTDIR` environment variable
 
