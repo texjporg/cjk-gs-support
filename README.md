@@ -16,13 +16,11 @@ Usage
 #### Options ####
 
 `````
-  -n, --dry-run         do not actually output anything
-  --remove              try to remove instead of create
-  -f, --fontdef FILE    specify alternate set of font definitions, if not
-                        given, the built-in set is used
   -o, --output DIR      specifies the base output dir, if not provided,
                         the Resource directory of an installed GhostScript
                         is searched and used.
+  -f, --fontdef FILE    specify alternate set of font definitions, if not
+                        given, the built-in set is used
   -a, --alias LL=RR     defines an alias, or overrides a given alias;
                         illegal if LL is provided by a real font, or
                         RR is neither available as real font or alias;
@@ -34,12 +32,25 @@ Usage
                         and
                            DIR/fonts/truetype/cjk-gs-integrate
                         where DIR defaults to TEXMFLOCAL
-  --machine-readable    output of --list-aliases is machine readable
+  --otfps [DIR]         generate configuration file (psnames-for-otf) into
+                           DIR/dvips/ps2otfps
+                        which is used by ps2otfps (developed by Akira Kakuto),
+                        instead of generating snippets
   --force               do not bail out if linked fonts already exist
+  --remove              try to remove instead of create
+  -n, --dry-run         do not actually output anything
   -q, --quiet           be less verbose
   -d, --debug           output debug information, can be given multiple times
   -v, --version         outputs only the version information
   -h, --help            this help
+`````
+
+#### Windows only options ####
+
+`````
+  --hardlink            create hardlinks instead of symlinks
+  --winbatch            prepare a batch file for link generation, instead of
+                        generating links right away
 `````
 
 #### Command like options ####
@@ -52,6 +63,7 @@ Usage
                         present files
   --list-fonts          lists the fonts found on the system
   --info                combines the above two information
+  --machine-readable    output of --list-aliases is machine readable
 `````
 
 Operation
@@ -60,6 +72,7 @@ Operation
 For each found TrueType (TTF) font it creates a cidfmap entry in
 
     <Resource>/Init/cidfmap.local
+      -- if you are using tlgs win32, tlpkg/tlgs/lib/cidfmap.local instead
 
 and links the font to
 
@@ -79,10 +92,12 @@ from an installed GhostScript (binary name is assumed to be 'gs').
 Aliases are added to 
 
     <Resource>/Init/cidfmap.aliases
+      -- if you are using tlgs win32, tlpkg/tlgs/lib/cidfmap.aliases instead
 
 Finally, it tries to add runlib calls to
 
     <Resource>/Init/cidfmap
+      -- if you are using tlgs win32, tlpkg/tlgs/lib/cidfmap
 
 to load the cidfmap.local and cidfmap.aliases.
 
@@ -92,8 +107,12 @@ How and which directories are searched
 Search is done using the kpathsea library, in particular using kpsewhich
 program. By default the following directories are searched:
   - all TEXMF trees
-  - `/Library/Fonts`, `/Library/Fonts/Microsoft`, `/System/Library/Fonts`, 
-    `/Network/Library/Fonts`, and `~/Library/Fonts` (all if available)
+  - `/Library/Fonts`, `/Library/Fonts/Microsoft`, `/System/Library/Fonts`,
+    `/System/Library/Assets`, `/Network/Library/Fonts`,
+    `~/Library/Fonts` and `/usr/share/fonts` (all if available)
+  - `/Applications/Microsoft Word.app/Contents/Resources/{Fonts,DFonts}`,
+    `/Applications/Microsoft Excel.app/Contents/Resources/{Fonts,DFonts}`,
+    `/Applications/Microsoft PowerPoint.app/Contents/Resources/{Fonts,DFonts}`
   - `c:/windows/fonts` (on Windows)
   - the directories in `OSFONTDIR` environment variable
 
