@@ -113,6 +113,7 @@ program. By default the following directories are searched:
   - `/Applications/Microsoft Word.app/Contents/Resources/{Fonts,DFonts}`,
     `/Applications/Microsoft Excel.app/Contents/Resources/{Fonts,DFonts}`,
     `/Applications/Microsoft PowerPoint.app/Contents/Resources/{Fonts,DFonts}`
+     (all if available, meant for Office for Mac 2016)
   - `c:/windows/fonts` (on Windows)
   - the directories in `OSFONTDIR` environment variable
 
