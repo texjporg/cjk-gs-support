@@ -30,9 +30,28 @@ use strict;
 (my $prg = basename($0)) =~ s/\.pl$//;
 my $version = '$VER$';
 
+# if windows, we might create batch file for links
+my $winbatch = '';
+my $winbatch_content = '';
 if (win32()) {
-  print_error("Sorry, currently not supported on Windows!\n");
-  exit(1);
+  # conversion between internal (utf-8) and console (cp932):
+  # multibyte characters should be encoded in cp932 at least during
+  #   * kpathsea file search
+  #   * abs_path existence test
+  #   * input/output on console
+  #   * batch file output
+  # routines. make sure all of these should be restricted to win32 mode!
+  # TODO: what to do with $opt_fontdef, @opt_aliases and $opt_filelist,
+  #       with regard to encodings?
+  # TODO: running with --link-texmf option for multiple times is harmful,
+  #       because kpathsea catches texmflocal links and abs_path misunderstand
+  #       it as an actual file; currently the users have to run with --remove
+  #       first, before re-running with --link-texmf.
+  use utf8;
+  use Encode;
+  # some perl functions (symlink, -l test) does not work
+  print_warning("Sorry, we have only partial support for Windows!\n");
+  $winbatch = "makefontlinks.bat";
 }
 
 my %encode_list = (
@@ -223,50 +242,67 @@ my %encode_list = (
 my $otf_pathpart = "fonts/opentype/cjk-gs-integrate";
 my $ttf_pathpart = "fonts/truetype/cjk-gs-integrate";
 
+# location where cidfmap, cidfmap.local and cidfmap.aliases are placed
+# when found gs is tlgs (win32), then files will be placed in lib/ instead of Resource/Init/
+my $cidfmap_pathpart = "Init/cidfmap";
+my $cidfmap_local_pathpart = "Init/cidfmap.local";
+my $cidfmap_aliases_pathpart = "Init/cidfmap.aliases";
 
-my $dry_run = 0;
-my $opt_help = 0;
-my $opt_quiet = 0;
-my $opt_debug = 0;
+# support for ps2otfps by Akira Kakuto
+my $akotfps_pathpart = "dvips/ps2otfps";
+my $akotfps_datafilename = "psnames-for-otf";
+my $akotfps_datacontent = '';
+
+my $opt_output;
+my $opt_fontdef;
+my @opt_aliases;
+my $opt_filelist;
+my $opt_texmflink;
+my $opt_akotfps;
+my $opt_force = 0;
+my $opt_remove = 0;
+my $opt_hardlink = 0;
+my $opt_winbatch = 0;
+my $opt_only_aliases = 0;
 my $opt_listaliases = 0;
 my $opt_listallaliases = 0;
 my $opt_listfonts = 0;
-my $opt_remove = 0;
 my $opt_info = 0;
-my $opt_fontdef;
-my $opt_output;
-my @opt_aliases;
-my $opt_only_aliases = 0;
 my $opt_machine = 0;
-my $opt_filelist;
-my $opt_force = 0;
-my $opt_texmflink;
+my $dry_run = 0;
+my $opt_quiet = 0;
+my $opt_debug = 0;
+my $opt_help = 0;
 my $opt_markdown = 0;
 
 if (! GetOptions(
-        "n|dry-run"   => \$dry_run,
-        "info"        => \$opt_info,
+        "o|output=s"  => \$opt_output,
+        "f|fontdef=s" => \$opt_fontdef,
+        "a|alias=s"   => \@opt_aliases,
+        "filelist=s"  => \$opt_filelist,
+        "link-texmf:s" => \$opt_texmflink,
+        "otfps:s"      => \$opt_akotfps,
+        "force"       => \$opt_force,
+        "remove"       => \$opt_remove,
+        "hardlink"     => \$opt_hardlink,
+        "winbatch"     => \$opt_winbatch,
+        "only-aliases" => \$opt_only_aliases,
         "list-aliases" => \$opt_listaliases,
         "list-all-aliases" => \$opt_listallaliases,
         "list-fonts"  => \$opt_listfonts,
-        "link-texmf:s" => \$opt_texmflink,
-        "remove"       => \$opt_remove,
-        "only-aliases" => \$opt_only_aliases,
+        "info"        => \$opt_info,
         "machine-readable" => \$opt_machine,
-        "force"       => \$opt_force,
-        "filelist=s"  => \$opt_filelist,
-        "markdown"    => \$opt_markdown,
-        "o|output=s"  => \$opt_output,
-        "h|help"      => \$opt_help,
+        "n|dry-run"   => \$dry_run,
         "q|quiet"     => \$opt_quiet,
         "d|debug+"    => \$opt_debug,
-        "f|fontdef=s" => \$opt_fontdef,
-        "a|alias=s"   => \@opt_aliases,
+        "h|help"      => \$opt_help,
+        "markdown"    => \$opt_markdown,
         "v|version"   => sub { print &version(); exit(0); }, ) ) {
   die "Try \"$0 --help\" for more information.\n";
 }
 
 sub win32 { return ($^O=~/^MSWin(32|64)$/i); }
+sub macosx { return ($^O=~/^darwin$/i); }
 my $nul = (win32() ? 'nul' : '/dev/null') ;
 my $sep = (win32() ? ';' : ':');
 my %fontdb;
@@ -297,6 +333,20 @@ if (defined($opt_texmflink)) {
   $opt_texmflink = $foo;
 }
 
+if (defined($opt_akotfps)) {
+  my $foo;
+  if ($opt_akotfps eq '') {
+    if (defined($opt_texmflink)) {
+      $foo = $opt_texmflink;
+    } else {
+      chomp( $foo = `kpsewhich -var-value=TEXMFLOCAL`);
+    }
+  } else {
+    $foo = $opt_akotfps;
+  }
+  $opt_akotfps = $foo;
+}
+
 main(@ARGV);
 
 #
@@ -306,6 +356,23 @@ sub main {
   print_info("reading font database ...\n");
   read_font_database();
   determine_nonotf_link_name(); # see comments there
+  if ($opt_winbatch) {
+    if (win32()) {
+      $opt_winbatch = 1;
+      unlink $winbatch if (-f $winbatch);
+    } else {
+      print_warning("ignoring --winbatch option due to non-Windows\n");
+      $opt_winbatch = 0;
+    }
+  }
+  if ($opt_hardlink) {
+    if (win32()) {
+      $opt_hardlink = 1;
+    } else {
+      print_warning("ignoring --hardlink option due to non-Windows\n");
+      $opt_hardlink = 0;
+    }
+  }
   if (!$opt_listallaliases) {
     print_info("checking for files ...\n");
     check_for_files();
@@ -367,6 +434,13 @@ sub main {
     }
   }
   exit(0) if ($opt_listfonts || $opt_listaliases || $opt_listallaliases);
+  # if $opt_machine is still alive after the above exit(0), it's useless
+  if ($opt_machine) {
+    print_error("Option --machine-readable should be used with at least one of the followings:\n");
+    print_error("  --list-aliases, --list-all-aliases, --list-fonts, --info\n");
+    print_error("terminating.\n");
+    exit(1);
+  }
 
   if (! $opt_output) {
     print_info("searching for GhostScript resource\n");
@@ -388,15 +462,21 @@ sub main {
     do_otf_fonts();
     print_info(($opt_remove ? "removing" : "generating") . " font snippets, links, and cidfmap.local for TTF fonts ...\n");
     do_nonotf_fonts();
+    write_winbatch() if ($opt_winbatch);
   }
   print_info(($opt_remove ? "removing" : "generating") . " font aliases ...\n");
   do_aliases();
+  write_akotfps_datafile() if ($opt_akotfps);
   print_info("finished\n");
+  if ($opt_winbatch && -f $winbatch) {
+    print_info("*** Batch file $winbatch created ***\n");
+    print_info("*** to complete, run it as administrator privilege.***\n");
+  }
 }
 
 sub update_master_cidfmap {
   my $add = shift;
-  my $cidfmap_master = "$opt_output/Init/cidfmap";
+  my $cidfmap_master = "$opt_output/$cidfmap_pathpart";
   print_info(sprintf("%s $add %s cidfmap file ...\n", 
     ($opt_remove ? "removing" : "adding"), ($opt_remove ? "from" : "to")));
   if (-r $cidfmap_master) {
@@ -414,22 +494,31 @@ sub update_master_cidfmap {
       }
     }
     close(FOO);
-    if ($found) {
-      if ($opt_remove) {
+    # if the master cidfmap has a new line at end of file,
+    # then $newmaster should end with "\n".
+    # otherwise we add a new line, since there is a possibility of %EOF comment
+    # without trailing new line (e.g. TL before r44039)
+    $newmaster =~ s/\n$//g;
+    $newmaster =~ s/$/\n/g;
+    if ($opt_remove) {
+      if ($found) {
+        return if $dry_run;
         open(FOO, ">", $cidfmap_master) ||
           die ("Cannot clean up $cidfmap_master: $!");
         print FOO $newmaster;
         close FOO;
-      } else {
-        print_info("$add already loaded in $cidfmap_master, no changes\n");
       }
     } else {
-      return if $dry_run;
-      return if $opt_remove;
-      open(FOO, ">>", $cidfmap_master) ||
-        die ("Cannot open $cidfmap_master for appending: $!");
-      print FOO "($add) .runlibfile\n";
-      close(FOO);
+      if ($found) {
+        print_info("$add already loaded in $cidfmap_master, no changes\n");
+      } else {
+        return if $dry_run;
+        open(FOO, ">", $cidfmap_master) ||
+          die ("Cannot open $cidfmap_master for appending: $!");
+        print FOO $newmaster;
+        print FOO "($add) .runlibfile\n";
+        close(FOO);
+      }
     }
   } else {
     return if $dry_run;
@@ -475,6 +564,10 @@ sub do_otf_fonts {
 sub generate_font_snippet {
   my ($fd, $n, $c, $f) = @_;
   return if $dry_run;
+  if ($opt_akotfps) {
+    add_akotfps_data($n);
+    return;
+  }
   for my $enc (@{$encode_list{$c}}) {
     if ($opt_remove) {
       unlink "$fd/$n-$enc" if (-f "$fd/$n-$enc");
@@ -495,6 +588,14 @@ pop
 %%%%EOF
 ";
     close(FOO);
+  }
+}
+
+sub add_akotfps_data {
+  my ($fn) = @_;
+  return if $dry_run;
+  if (! $opt_remove) {
+    $akotfps_datacontent .= "$fn\n";
   }
 }
 
@@ -571,10 +672,10 @@ sub link_font {
   } # otherwise it is not existing!
 
   # if we are still here and $do_unlink is set, remove it
-  unlink($target) if $do_unlink;
+  maybe_unlink($target) if $do_unlink;
   # recreate link if we are not in the remove case
   if (! $opt_remove) {
-    symlink($f, $target) || die("Cannot link font $f to $target: $!");
+    maybe_symlink($f, $target) || die("Cannot link font $f to $target: $!");
   }
 }
 
@@ -619,8 +720,8 @@ sub do_nonotf_fonts {
       mkdir("$opt_output/Init") ||
         die("Cannot create directory $opt_output/Init: $!");
     }
-    open(FOO, ">$opt_output/Init/cidfmap.local") || 
-      die "Cannot open $opt_output/cidfmap.local: $!";
+    open(FOO, ">$opt_output/$cidfmap_local_pathpart") || 
+      die "Cannot open $opt_output/$cidfmap_local_pathpart: $!";
     print FOO $outp;
     close(FOO);
   }
@@ -673,7 +774,8 @@ sub do_aliases {
       $target = $aliases{$al}{$first};
       $class  = $fontdb{$target}{'class'};
     }
-    # we also need to create font snippets in Font for the aliases!
+    # we also need to create font snippets in Font (or add configuration)
+    # for the aliases!
     generate_font_snippet($fontdest, $al, $class, $target);
     if ($class eq 'Japan') {
       push @jal, "/$al /$target ;";
@@ -698,8 +800,8 @@ sub do_aliases {
       mkdir("$opt_output/Init") ||
         die("Cannot create directory $opt_output/Init: $!");
     }
-    open(FOO, ">$opt_output/Init/cidfmap.aliases") || 
-      die "Cannot open $opt_output/cidfmap.aliases: $!";
+    open(FOO, ">$opt_output/$cidfmap_aliases_pathpart") || 
+      die "Cannot open $opt_output/$cidfmap_aliases_pathpart: $!";
     print FOO $outp;
     close(FOO);
   }
@@ -731,6 +833,118 @@ sub generate_cidfmap_entry {
   }
   $s .= " >> ;\n";
   return $s;
+}
+
+# perl symlink function does not work on windows, so leave it to
+# cmd.exe mklink function (or write to batch file).
+# if target already exists, do not try to override it. otherwise
+# "mklink error: Cannot create a file when that file already exists"
+# is thrown many times
+sub maybe_symlink {
+  my ($realname, $targetname) = @_;
+  if (win32()) {
+    # hardlink vs. symlink -- HY 2017/04/26
+    #   * readablitiy: hardlink is easier, but it seems that current gs can read
+    #                  symlink properly, so it doesn't matter
+    #   * permission:  hardlink creation does not require administrator privilege,
+    #                  but is likely to fail for c:/windows/fonts/* system files
+    #                  due to "Access denied"
+    #                  symlink creation requires administrator privilege, but
+    #                  it can link to all files in c:/windows/fonts/
+    #   * versatility: symlink can point to a file on a different/remote volume
+    # for these reasons, we try to create symlink by default.
+    # if --hardlink option is given, we create hardlink instead.
+    # also, if --winbatch option is given, we prepare batch file for link generation,
+    # instead of creating links right away.
+    $realname =~ s!/!\\!g;
+    $targetname =~ s!/!\\!g;
+    if ($opt_winbatch) {
+      # re-encoding of $winbatch_content is done by write_winbatch()
+      $winbatch_content .= "if not exist \"$targetname\" mklink ";
+      $winbatch_content .= "/h " if ($opt_hardlink);
+      $winbatch_content .= "\"$targetname\" \"$realname\"\n";
+    } else {
+      # should be encoded in cp932 for win32 console
+      $realname = encode_utftocp($realname);
+      $targetname = encode_utftocp($targetname);
+      my $cmdl = "cmd.exe /c if not exist \"$targetname\" mklink ";
+      $cmdl .= "/h " if ($opt_hardlink);
+      $cmdl .= "\"$targetname\" \"$realname\"";
+      my @ret = `$cmdl`;
+      # sometimes hard link creation may fail due to "Access denied"
+      # (especially when $realname is located in c:/windows/fonts).
+      # TODO: what should we do to ensure resources, which might be
+      #       different from $realname? -- HY (2017/03/21)
+      # -- one possibility:
+      # if (@ret) {
+      #   @ret ="done";
+      # } else {
+      #   print_info("Hard link creation for $realname failed. I will copy this file instead.\n");
+      #   $cmdl = "cmd.exe /c if not exist \"$targetname\" copy \"$realname\" \"$targetname\"";
+      #   @ret = `$cmdl`;
+      # }
+      # -- however, both tlgs (TeX Live) and standalone gswin32/64 (built
+      #    by Akira Kakuto) can search in c:/windows/fonts by default.
+      #    Thus, copying such files is waste of memory
+    }
+  } else {
+    symlink ($realname, $targetname);
+  }
+}
+
+# unlink function actually works also on windows, however,
+# leave it to batch file for consistency. otherwise
+# option $opt_force may not work as expected
+sub maybe_unlink {
+  my ($targetname) = @_;
+  if (win32()) {
+    $targetname =~ s!/!\\!g;
+    if ($opt_winbatch) {
+      # re-encoding of $winbatch_content is done by write_winbatch()
+      $winbatch_content .= "if exist \"$targetname\" del \"$targetname\"\n";
+    } else {
+      # should be encoded in cp932 for win32 console
+      $targetname = encode_utftocp($targetname);
+      my $cmdl = "cmd.exe /c if exist \"$targetname\" del \"$targetname\"";
+      my @ret = `$cmdl`;
+    }
+  } else {
+    unlink ($targetname);
+  }
+}
+
+# write batch file (windows only)
+sub write_winbatch {
+  return if $dry_run;
+  open(FOO, ">$winbatch") || 
+    die("cannot open $winbatch for writing: $!");
+  # $winbatch_content may contain multibyte characters, and they
+  # should be encoded in cp932 in batch file
+  $winbatch_content = encode_utftocp($winbatch_content);
+  print FOO "\@echo off\n",
+            "$winbatch_content",
+            "\@echo symlink ", ($opt_remove ? "removed\n" : "generated\n"),
+            "\@pause 1\n";
+  close(FOO);
+}
+
+# write to psnames-for-otfps
+sub write_akotfps_datafile {
+  return if $dry_run;
+  make_dir("$opt_akotfps/$akotfps_pathpart",
+         "cannot create $akotfps_datafilename in it!");
+  open(FOO, ">$opt_akotfps/$akotfps_pathpart/$akotfps_datafilename") || 
+    die("cannot open $opt_akotfps/$akotfps_pathpart/$akotfps_datafilename for writing: $!");
+  print FOO "% psnames-for-otf
+%
+% PostSctipt names for OpenType fonts
+%
+% This file is used by a program ps2otfps
+% in order to add needed information to a ps file
+% created by the dvips
+%
+$akotfps_datacontent";
+  close(FOO);
 }
 
 #
@@ -814,6 +1028,13 @@ sub check_for_files {
       for my $d (qw!/Library/Fonts /System/Library/Fonts /System/Library/Assets /Network/Library/Fonts /usr/share/fonts!) {
         push @extradirs, "$d//" if (-d $d); # recursive search
       }
+      # macosx specific; the path contains white space, so hack required
+      for my $d (qw!/Applications/Microsoft__Word.app /Applications/Microsoft__Excel.app /Applications/Microsoft__PowerPoint.app!) {
+        my $sd = $d;
+        $sd =~ s/__/ /;
+        push @extradirs, "$sd/Contents/Resources/Fonts/" if (-d "$sd/Contents/Resources/Fonts");
+        push @extradirs, "$sd/Contents/Resources/DFonts/" if (-d "$sd/Contents/Resources/DFonts");
+      }
       my $home = $ENV{'HOME'};
       push @extradirs, "$home/Library/Fonts//" if (-d "$home/Library/Fonts");
     }
@@ -851,9 +1072,16 @@ sub check_for_files {
       $cmdl .= " \"$f\" ";
     }
     # shoot up kpsewhich
+    # this call (derived from the database) contains multibyte characters,
+    # and they should be encoded in cp932 for win32 console
+    if (win32()) {
+      $cmdl = encode_utftocp($cmdl);
+    }
     print_ddebug("checking for $cmdl\n");
     @foundfiles = `$cmdl`;
   }
+  # at this point, on windows, @foundfiles is encoded in cp932
+  # which is suitable for the next few lines
   chomp(@foundfiles);
   print_ddebug("Found files @foundfiles\n");
   # map basenames to filenames
@@ -864,9 +1092,16 @@ sub check_for_files {
       print_warning("dead link or strange file found: $f - ignored!\n");
       next;
     }
+    # decode now on windows! (cp932 -> internal utf-8)
+    if (win32()) {
+      $f = encode_cptoutf($f);
+      $realf = encode_cptoutf($realf);
+    }
     my $bn = basename($f);
     $bntofn{$bn} = $realf;
   }
+
+  # show the %fontdb before file check
   if ($opt_debug > 0) {
     print_debug("dumping font database before file check:\n");
     print_debug(Data::Dumper::Dumper(\%fontdb));
@@ -1082,7 +1317,12 @@ sub read_font_database {
     if ($l =~ m/^OTFname(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
-      print_ddebug("filename: $fn\n");
+      # cp932 for win32 console
+      my $encoded_fn;
+      if (win32()) {
+        $encoded_fn = encode_utftocp($fn);
+      }
+      print_ddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
       print_ddebug("type: otf\n");
       $fontfiles{$fn}{'type'} = 'OTF';
       next;
@@ -1090,7 +1330,12 @@ sub read_font_database {
     if ($l =~ m/^OTCname(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
-      print_ddebug("filename: $fn\n");
+      # cp932 for win32 console
+      my $encoded_fn;
+      if (win32()) {
+        $encoded_fn = encode_utftocp($fn);
+      }
+      print_ddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
       print_ddebug("type: otc\n");
       $fontfiles{$fn}{'type'} = 'OTC';
       next;
@@ -1098,7 +1343,12 @@ sub read_font_database {
     if ($l =~ m/^TTFname(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
-      print_ddebug("filename: $fn\n");
+      # cp932 for win32 console
+      my $encoded_fn;
+      if (win32()) {
+        $encoded_fn = encode_utftocp($fn);
+      }
+      print_ddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
       print_ddebug("type: ttf\n");
       $fontfiles{$fn}{'type'} = 'TTF';
       next;
@@ -1106,7 +1356,12 @@ sub read_font_database {
     if ($l =~ m/^TTCname(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
-      print_ddebug("filename: $fn\n");
+      # cp932 for win32 console
+      my $encoded_fn;
+      if (win32()) {
+        $encoded_fn = encode_utftocp($fn);
+      }
+      print_ddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
       print_ddebug("type: ttc\n");
       $fontfiles{$fn}{'type'} = 'TTC';
       next;
@@ -1115,7 +1370,12 @@ sub read_font_database {
     if ($l =~ m/^Filename(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
-      print_ddebug("filename: $fn\n");
+      # cp932 for win32 console
+      my $encoded_fn;
+      if (win32()) {
+        $encoded_fn = encode_utftocp($fn);
+      }
+      print_ddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
       if ($fn =~ m/\.otf$/i) {
         print_ddebug("type: otf\n");
         $fontfiles{$fn}{'type'} = 'OTF';
@@ -1143,9 +1403,35 @@ sub read_font_database {
 
 sub find_gs_resource {
   my $foundres = '';
-  if (!win32()) {
+  if (win32()) {
+    # determine tlgs or native gs
+    chomp( my $foo = `kpsewhich -var-value=SELFAUTOPARENT`);
+    if ( -d "$foo/tlpkg/tlgs" ) {
+      # should be texlive with tlgs
+      $foundres = "$foo/tlpkg/tlgs/Resource";
+      # for TL2016, tlgs binary has built-in Resource,
+      # so we cannot set up CJK fonts correctly.
+      # the following test forces to exit in such case
+      if ( ! -d $foundres ) {
+        print_error("No Resource directory available for tlgs,\n");
+        print_error("we cannot support such gs, sorry.\n");
+        $foundres = '';
+      }
+      # change output location
+      $cidfmap_pathpart = "../lib/cidfmap";
+      $cidfmap_local_pathpart = "../lib/cidfmap.local";
+      $cidfmap_aliases_pathpart = "../lib/cidfmap.aliases";
+    } else {
+      # TODO: we assume gswin32c is in the path
+      # paths other than c:/gs/gs$gsver/Resource are not considered
+      chomp( my $gsver = `gswin32c --version 2>$nul` );
+      $foundres = "c:/gs/gs$gsver/Resource";
+      if ( ! -d $foundres ) {
+        $foundres = '';
+      }
+    }
+  } else {
     # we assume that gs is in the path
-    # on Windows we probably have to try something else
     chomp( my $gsver = `gs --version 2>$nul` );
     if ($?) {
       print_error("Cannot get gs version ...\n");
@@ -1190,6 +1476,20 @@ sub find_gs_resource {
   return $foundres;
 }
 
+sub encode_utftocp {
+  my ($foo) = @_;
+  $foo = Encode::decode('utf-8', $foo);
+  $foo = Encode::encode('cp932', $foo);
+  return $foo;
+}
+
+sub encode_cptoutf {
+  my ($foo) = @_;
+  $foo = Encode::decode('cp932', $foo);
+  $foo = Encode::encode('utf-8', $foo);
+  return $foo;
+}
+
 sub version {
   my $ret = sprintf "%s version %s\n", $prg, $version;
   return $ret;
@@ -1199,13 +1499,11 @@ sub Usage {
   my $headline = "Configuring GhostScript for CJK CID/TTF fonts";
   my $usage = "[perl] $prg\[.pl\] [OPTIONS]";
   my $options = "
--n, --dry-run         do not actually output anything
---remove              try to remove instead of create
--f, --fontdef FILE    specify alternate set of font definitions, if not
-                      given, the built-in set is used
 -o, --output DIR      specifies the base output dir, if not provided,
                       the Resource directory of an installed GhostScript
                       is searched and used.
+-f, --fontdef FILE    specify alternate set of font definitions, if not
+                      given, the built-in set is used
 -a, --alias LL=RR     defines an alias, or overrides a given alias;
                       illegal if LL is provided by a real font, or
                       RR is neither available as real font or alias;
@@ -1217,12 +1515,23 @@ sub Usage {
                       and
                          DIR/$ttf_pathpart
                       where DIR defaults to TEXMFLOCAL
---machine-readable    output of --list-aliases is machine readable
+--otfps [DIR]         generate configuration file (psnames-for-otf) into
+                         DIR/$akotfps_pathpart
+                      which is used by ps2otfps (developed by Akira Kakuto),
+                      instead of generating snippets
 --force               do not bail out if linked fonts already exist
+--remove              try to remove instead of create
+-n, --dry-run         do not actually output anything
 -q, --quiet           be less verbose
 -d, --debug           output debug information, can be given multiple times
 -v, --version         outputs only the version information
 -h, --help            this help
+";
+
+  my $winonlyoptions = "
+--hardlink            create hardlinks instead of symlinks
+--winbatch            prepare a batch file for link generation, instead of
+                      generating links right away
 ";
 
   my $commandoptions = "
@@ -1233,6 +1542,7 @@ sub Usage {
                       present files
 --list-fonts          lists the fonts found on the system
 --info                combines the above two information
+--machine-readable    output of --list-aliases is machine readable
 ";
 
   my $shortdesc = "
@@ -1246,6 +1556,7 @@ my $operation = "
 For each found TrueType (TTF) font it creates a cidfmap entry in
 
     <Resource>/Init/cidfmap.local
+      -- if you are using tlgs win32, tlpkg/tlgs/lib/cidfmap.local instead
 
 and links the font to
 
@@ -1265,10 +1576,12 @@ from an installed GhostScript (binary name is assumed to be 'gs').
 Aliases are added to 
 
     <Resource>/Init/cidfmap.aliases
+      -- if you are using tlgs win32, tlpkg/tlgs/lib/cidfmap.aliases instead
 
 Finally, it tries to add runlib calls to
 
     <Resource>/Init/cidfmap
+      -- if you are using tlgs win32, tlpkg/tlgs/lib/cidfmap
 
 to load the cidfmap.local and cidfmap.aliases.
 ";
@@ -1277,8 +1590,12 @@ to load the cidfmap.local and cidfmap.aliases.
 Search is done using the kpathsea library, in particular using kpsewhich
 program. By default the following directories are searched:
   - all TEXMF trees
-  - `/Library/Fonts`, `/Library/Fonts/Microsoft`, `/System/Library/Fonts`, 
-    `/Network/Library/Fonts`, and `~/Library/Fonts` (all if available)
+  - `/Library/Fonts`, `/Library/Fonts/Microsoft`, `/System/Library/Fonts`,
+    `/System/Library/Assets`, `/Network/Library/Fonts`,
+    `~/Library/Fonts` and `/usr/share/fonts` (all if available)
+  - `/Applications/Microsoft Word.app/Contents/Resources/{Fonts,DFonts}`,
+    `/Applications/Microsoft Excel.app/Contents/Resources/{Fonts,DFonts}`,
+    `/Applications/Microsoft PowerPoint.app/Contents/Resources/{Fonts,DFonts}`
   - `c:/windows/fonts` (on Windows)
   - the directories in `OSFONTDIR` environment variable
 
@@ -1371,6 +1688,8 @@ The contained font data is not copyrightable.
     print "\n$shortdesc\nUsage\n-----\n\n`````\n$usage\n`````\n\n";
     print "#### Options ####\n\n`````";
     print_for_out($options, "  ");
+    print "`````\n\n#### Windows only options ####\n\n`````";
+    print_for_out($winonlyoptions, "  ");
     print "`````\n\n#### Command like options ####\n\n`````";
     print_for_out($commandoptions, "  ");
     print "`````\n\nOperation\n---------\n$operation\n";
@@ -1386,6 +1705,10 @@ The contained font data is not copyrightable.
     print "\nUsage: $usage\n\n$headline\n$shortdesc";
     print "\nOptions:\n";
     print_for_out($options, "  ");
+    if (win32()) {
+      print "\nWindows only options:\n";
+      print_for_out($winonlyoptions, "  ");
+    }
     print "\nCommand like options:\n";
     print_for_out($commandoptions, "  ");
     print "\nOperation:\n";
@@ -3323,6 +3646,77 @@ Provides(90): STHeiti-Regular
 Provides(90): STHeiti-Light
 TTFname: ukai.ttf
 
+# WenQuanYi (free)
+
+# GB
+Name: WenQuanYiMicroHei
+Class: GB
+TTCname(10): wqy-microhei.ttc(0)
+# CNS
+Name: WenQuanYiMicroHei-Adobe-CNS1
+Class: CNS
+TTCname(10): wqy-microhei.ttc(0)
+
+# GB
+Name: WenQuanYiMicroHeiMono
+Class: GB
+TTCname(10): wqy-microhei.ttc(1)
+# CNS
+Name: WenQuanYiMicroHeiMono-Adobe-CNS1
+Class: CNS
+TTCname(10): wqy-microhei.ttc(1)
+
+# GB
+Name: WenQuanYiZenHei
+Class: GB
+TTCname(10): wqy-zenhei.ttc(0)
+TTFname(20): wqy-zenhei.ttf
+# CNS
+Name: WenQuanYiZenHei-Adobe-CNS1
+Class: CNS
+TTCname(10): wqy-zenhei.ttc(0)
+TTFname(20): wqy-zenhei.ttf
+
+# GB
+Name: WenQuanYiZenHeiMono
+Class: GB
+TTCname(10): wqy-zenhei.ttc(1)
+# CNS:
+Name: WenQuanYiZenHeiMono-Adobe-CNS1
+Class: CNS
+TTCname(10): wqy-zenhei.ttc(1)
+
+# GB
+Name: WenQuanYiZenHeiSharp
+Class: GB
+TTCname(10): wqy-zenhei.ttc(2)
+# CNS
+Name: WenQuanYiZenHeiSharp-Adobe-CNS1
+Class: CNS
+TTCname(10): wqy-zenhei.ttc(2)
+
+# cwTeX (free)
+
+Name: cwTeXMing
+Class: CNS
+TTFname: cwming.ttf
+
+Name: cwTeXHeiBold
+Class: CNS
+TTFname: cwheib.ttf
+
+Name: cwTeXKai
+Class: CNS
+TTFname: cwkai.ttf
+
+Name: cwTeXYen
+Class: CNS
+TTFname: cwyen.ttf
+
+Name: cwTeXFangSong
+Class: CNS
+TTFname: cwfs.ttf
+
 #
 # KOREAN FONTS
 #
@@ -3559,6 +3953,34 @@ Name: NanumPen
 Class: Korea
 TTFname(10): NanumPen.ttf
 TTCname(20): NanumScript.ttc(1)
+
+# Design font by Ho-Seok Ee, aka. "ALee's font" (free)
+
+Name: Bandal
+Class: Korea
+TTFname: Bandal.ttf
+
+Name: Bangwool
+Class: Korea
+TTFname: Bangwool.ttf
+
+Name: Eunjin
+Class: Korea
+TTFname: Eunjin.ttf
+
+Name: EunjinNakseo
+Class: Korea
+TTFname: EunjinNakseo.ttf
+
+Name: Guseul
+Class: Korea
+TTFname: Guseul.ttf
+
+# Woowa Brothers (free)
+
+Name: BMHANNA
+Class: Korea
+TTFname: BM-HANNA.ttf
 
 # Hancom HCR (free)
 # note that all fonts have narrow metrics
