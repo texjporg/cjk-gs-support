@@ -575,17 +575,17 @@ sub generate_font_snippet {
     }
     open(FOO, ">$fd/$n-$enc") || 
       die("cannot open $fd/$n-$enc for writing: $!");
-    print FOO "%%!PS-Adobe-3.0 Resource-Font
-%%%%DocumentNeededResources: $enc (CMap)
-%%%%IncludeResource: $enc (CMap)
-%%%%BeginResource: Font ($n-$enc)
+    print FOO "%!PS-Adobe-3.0 Resource-Font
+%%DocumentNeededResources: $enc (CMap)
+%%IncludeResource: $enc (CMap)
+%%BeginResource: Font ($n-$enc)
 ($n-$enc)
 ($enc) /CMap findresource
 [($n) /CIDFont findresource]
 composefont
 pop
-%%%%EndResource
-%%%%EOF
+%%EndResource
+%%EOF
 ";
     close(FOO);
   }

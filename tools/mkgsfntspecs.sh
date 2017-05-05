@@ -295,17 +295,17 @@ mkgsfontspec(){
     local fontname=$1
     local encode=$2
 	cat <<EOT
-%%!PS-Adobe-3.0 Resource-Font
-%%%%DocumentNeededResources: ${encode} (CMap)
-%%%%IncludeResource: ${encode} (CMap)
-%%%%BeginResource: Font (${fontname}-${encode})
+%!PS-Adobe-3.0 Resource-Font
+%%DocumentNeededResources: ${encode} (CMap)
+%%IncludeResource: ${encode} (CMap)
+%%BeginResource: Font (${fontname}-${encode})
 (${fontname}-${encode})
 (${encode}) /CMap findresource
 [(${fontname}) /CIDFont findresource]
 composefont
 pop
-%%%%EndResource
-%%%%EOF
+%%EndResource
+%%EOF
 EOT
 }
 
