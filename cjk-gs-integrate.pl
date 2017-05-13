@@ -2175,6 +2175,21 @@ OTCname(30): ヒラギノ明朝 ProN W6.ttc(0)
 OTCname(29): ヒラギノ明朝 ProN W6.ttc(0)
 OTCname(28): HiraginoSerif-W6.ttc(0)
 
+# Following Hiragino fonts are not bundled with OS X,
+# but used in ptex-fontmaps
+
+Name: HiraMinPro-W2
+Class: Japan
+OTFname(20): ヒラギノ明朝 Pro W2.otf
+OTFname(19): ヒラギノ明朝 Pro W2.otf
+OTFname(10): HiraMinPro-W2.otf
+
+Name: HiraMinProN-W2
+Class: Japan
+OTFname(20): ヒラギノ明朝 ProN W2.otf
+OTFname(19): ヒラギノ明朝 ProN W2.otf
+OTFname(10): HiraMinProN-W2.otf
+
 # Yu-fonts MacOS version
 
 # Note about Mac OS X:
