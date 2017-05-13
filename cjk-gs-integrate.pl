@@ -4339,10 +4339,6 @@ TTFname(50): MS PMincho.ttf
 TTFname(30): MS-PMincho.ttf
 TTCname(20): msmincho.ttc(1)
 
-Name: MS-UIGothic
-Class: Japan
-TTCname(20): msgothic.ttc(2)
-
 Name: Meiryo
 Class: Japan
 TTFname(50): Meiryo.ttf
