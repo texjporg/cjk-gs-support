@@ -248,6 +248,9 @@ my $akotfps_pathpart = "dvips/ps2otfps";
 my $akotfps_datafilename = "psnames-for-otf";
 my $akotfps_datacontent = '';
 
+# dump output for data file (for easy editing for users)
+my $dump_datafile = "$prg-data.dat";
+
 my $opt_output;
 my $opt_fontdef;
 my @opt_aliases;
@@ -258,6 +261,7 @@ my $opt_force = 0;
 my $opt_remove = 0;
 my $opt_hardlink = 0;
 my $opt_winbatch = 0;
+my $opt_dump_data = 0;
 my $opt_only_aliases = 0;
 my $opt_listaliases = 0;
 my $opt_listallaliases = 0;
@@ -271,28 +275,29 @@ my $opt_help = 0;
 my $opt_markdown = 0;
 
 if (! GetOptions(
-        "o|output=s"  => \$opt_output,
-        "f|fontdef=s" => \$opt_fontdef,
-        "a|alias=s"   => \@opt_aliases,
-        "filelist=s"  => \$opt_filelist,
-        "link-texmf:s" => \$opt_texmflink,
-        "otfps:s"      => \$opt_akotfps,
-        "force"       => \$opt_force,
-        "remove"       => \$opt_remove,
-        "hardlink"     => \$opt_hardlink,
-        "winbatch"     => \$opt_winbatch,
-        "only-aliases" => \$opt_only_aliases,
-        "list-aliases" => \$opt_listaliases,
+        "o|output=s"       => \$opt_output,
+        "f|fontdef=s"      => \$opt_fontdef,
+        "a|alias=s"        => \@opt_aliases,
+        "filelist=s"       => \$opt_filelist,
+        "link-texmf:s"     => \$opt_texmflink,
+        "otfps:s"          => \$opt_akotfps,
+        "force"            => \$opt_force,
+        "remove"           => \$opt_remove,
+        "hardlink"         => \$opt_hardlink,
+        "winbatch"         => \$opt_winbatch,
+        "dump-data"        => \$opt_dump_data,
+        "only-aliases"     => \$opt_only_aliases,
+        "list-aliases"     => \$opt_listaliases,
         "list-all-aliases" => \$opt_listallaliases,
-        "list-fonts"  => \$opt_listfonts,
-        "info"        => \$opt_info,
+        "list-fonts"       => \$opt_listfonts,
+        "info"             => \$opt_info,
         "machine-readable" => \$opt_machine,
-        "n|dry-run"   => \$dry_run,
-        "q|quiet"     => \$opt_quiet,
-        "d|debug+"    => \$opt_debug,
-        "h|help"      => \$opt_help,
-        "markdown"    => \$opt_markdown,
-        "v|version"   => sub { print &version(); exit(0); }, ) ) {
+        "n|dry-run"        => \$dry_run,
+        "q|quiet"          => \$opt_quiet,
+        "d|debug+"         => \$opt_debug,
+        "h|help"           => \$opt_help,
+        "markdown"         => \$opt_markdown,
+        "v|version"        => sub { print &version(); exit(0); }, ) ) {
   die "Try \"$0 --help\" for more information.\n";
 }
 
@@ -348,8 +353,21 @@ main(@ARGV);
 # only sub definitions from here on
 #
 sub main {
+  if ($opt_dump_data && $opt_fontdef) {
+    print_warning("-f/--fontdef option ignored due to --dump-data\n");
+    $opt_fontdef = 0;
+  }
   print_info("reading font database ...\n");
   read_font_database();
+  if ($opt_dump_data) {
+    if (-f $dump_datafile) {
+      print_info("*** Data dumped to $dump_datafile ***\n");
+      exit(0);
+    } else {
+      print_error("*** Failed to dump data to $dump_datafile ***\n");
+      exit(1);
+    }
+  }
   determine_nonotf_link_name(); # see comments there
   if ($opt_winbatch) {
     if (win32()) {
@@ -420,9 +438,14 @@ sub main {
   do_aliases();
   write_akotfps_datafile() if ($opt_akotfps);
   print_info("finished\n");
-  if ($opt_winbatch && -f $winbatch) {
-    print_info("*** Batch file $winbatch created ***\n");
-    print_info("*** to complete, run it as administrator privilege.***\n");
+  if ($opt_winbatch) {
+    if (-f $winbatch) {
+      print_info("*** Batch file $winbatch created ***\n");
+      print_info("*** to complete, run it as administrator privilege.***\n");
+    } else {
+      print_error("Failed to create $winbatch!\n");
+      exit(1);
+    }
   }
 }
 
@@ -1287,6 +1310,13 @@ sub read_font_database {
   chomp(@dbl);
   # add a "final empty line" to easy parsing
   push @dbl, "";
+
+  if ($opt_dump_data) {
+    unlink $dump_datafile if (-f $dump_datafile);
+    open(FOO, ">$dump_datafile") || 
+      die("cannot open $dump_datafile for writing: $!");
+  }
+
   my $fontname = "";
   my $fontclass = "";
   my %fontprovides = ();
@@ -1294,8 +1324,12 @@ sub read_font_database {
   my $psname = "";
   my $lineno = 0;
   for my $l (@dbl) {
-    $lineno++;
+    if ($opt_dump_data) {
+      print FOO "$l\n";
+      next;
+    }
 
+    $lineno++;
     next if ($l =~ m/^\s*#/);
     if ($l =~ m/^\s*$/) {
       if ($fontname || $fontclass || keys(%fontfiles)) {
@@ -1412,6 +1446,10 @@ sub read_font_database {
     # we are still here??
     print_error("Cannot parse this file at line $lineno, exiting. Strange line: >>>$l<<<\n");
     exit (1);
+  }
+
+  if ($opt_dump_data) {
+    close(FOO);
   }
 }
 
@@ -1549,6 +1587,8 @@ sub Usage {
 ";
 
   my $commandoptions = "
+--dump-data           dump the built-in set of font definitions; you can
+                      easily modify it, and tell me with -f (or --fontdef)
 --only-aliases        do only regenerate the cidfmap.alias file instead of all
 --list-aliases        lists the available aliases and their options, with the
                       selected option on top
