@@ -383,50 +383,7 @@ sub main {
     info_found_fonts();
   }
   if ($opt_listaliases || $opt_listallaliases) {
-    print "List of ", ($opt_listaliases ? "all" : "available"), " aliases and their options (in decreasing priority):\n" unless $opt_machine;
-    my (@jal, @kal, @tal, @sal);
-    for my $al (sort keys %aliases) {
-      my $cl;
-      my @ks = sort { $a <=> $b} keys(%{$aliases{$al}});
-      my $foo = '';
-      $foo = "$al:\n" unless $opt_machine;
-      for my $p (@ks) {
-        my $t = $aliases{$al}{$p};
-        my $fn = ($opt_listallaliases ? "-" : $fontdb{$t}{'target'} );
-        # should always be the same ;-)
-        $cl = $fontdb{$t}{'class'};
-        if (!$opt_listallaliases && ($fontdb{$t}{'type'} eq 'TTC' || $fontdb{$t}{'type'} eq 'OTC')) {
-          $fn .= "($fontdb{$t}{'subfont'})";
-        }
-        if ($opt_machine) {
-          $foo .= "$al:$p:$aliases{$al}{$p}:$fn\n";
-        } else {
-          $foo .= "\t($p) $aliases{$al}{$p} ($fn)\n";
-        }
-      }
-      if ($cl eq 'Japan') {
-        push @jal, $foo;
-      } elsif ($cl eq 'Korea') {
-        push @kal, $foo;
-      } elsif ($cl eq 'GB') {
-        push @sal, $foo;
-      } elsif ($cl eq 'CNS') {
-        push @tal, $foo;
-      } else {
-        print STDERR "unknown class $cl for $al\n";
-      }
-    }
-    if ($opt_machine) {
-      print @jal if @jal;
-      print @kal if @kal;
-      print @tal if @tal;
-      print @sal if @sal;
-    } else {
-      print "Aliases for Japanese fonts:\n", @jal, "\n" if @jal;
-      print "Aliases for Korean fonts:\n", @kal, "\n" if @kal;
-      print "Aliases for Traditional Chinese fonts:\n", @tal, "\n" if @tal;
-      print "Aliases for Simplified Chinese fonts:\n", @sal, "\n" if @sal;
-    }
+    info_list_aliases();
   }
   exit(0) if ($opt_listfonts || $opt_listaliases || $opt_listallaliases);
   # if $opt_machine is still alive after the above exit(0), it's useless
@@ -981,6 +938,54 @@ sub info_found_fonts {
   }
 }
 
+#
+# dump found files
+sub info_list_aliases {
+  print "List of ", ($opt_listaliases ? "all" : "available"), " aliases and their options (in decreasing priority):\n" unless $opt_machine;
+  my (@jal, @kal, @tal, @sal);
+  for my $al (sort keys %aliases) {
+    my $cl;
+    my @ks = sort { $a <=> $b} keys(%{$aliases{$al}});
+    my $foo = '';
+    $foo = "$al:\n" unless $opt_machine;
+    for my $p (@ks) {
+      my $t = $aliases{$al}{$p};
+      my $fn = ($opt_listallaliases ? "-" : $fontdb{$t}{'target'} );
+      # should always be the same ;-)
+      $cl = $fontdb{$t}{'class'};
+      if (!$opt_listallaliases && ($fontdb{$t}{'type'} eq 'TTC' || $fontdb{$t}{'type'} eq 'OTC')) {
+        $fn .= "($fontdb{$t}{'subfont'})";
+      }
+      if ($opt_machine) {
+        $foo .= "$al:$p:$aliases{$al}{$p}:$fn\n";
+      } else {
+        $foo .= "\t($p) $aliases{$al}{$p} ($fn)\n";
+      }
+    }
+    if ($cl eq 'Japan') {
+      push @jal, $foo;
+    } elsif ($cl eq 'Korea') {
+      push @kal, $foo;
+    } elsif ($cl eq 'GB') {
+      push @sal, $foo;
+    } elsif ($cl eq 'CNS') {
+      push @tal, $foo;
+    } else {
+      print STDERR "unknown class $cl for $al\n";
+    }
+  }
+  if ($opt_machine) {
+    print @jal if @jal;
+    print @kal if @kal;
+    print @tal if @tal;
+    print @sal if @sal;
+  } else {
+    print "Aliases for Japanese fonts:\n", @jal, "\n" if @jal;
+    print "Aliases for Korean fonts:\n", @kal, "\n" if @kal;
+    print "Aliases for Traditional Chinese fonts:\n", @tal, "\n" if @tal;
+    print "Aliases for Simplified Chinese fonts:\n", @sal, "\n" if @sal;
+  }
+}
 
 #
 # make all fonts available for listing all aliases
