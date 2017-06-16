@@ -16,8 +16,7 @@
 #
 # TODO:
 # - how to deal with MacTeX pre-shipped configuration files?
-# - interoperability with updmap-config-kanji
-# - input from CK about font priorities
+# - interoperability with kanji-config-updmap
 #
 
 $^W = 1;
@@ -43,10 +42,6 @@ if (win32()) {
   # routines. make sure all of these should be restricted to win32 mode!
   # TODO: what to do with $opt_fontdef, @opt_aliases and $opt_filelist,
   #       with regard to encodings?
-  # TODO: running with --link-texmf option for multiple times is harmful,
-  #       because kpathsea catches texmflocal links and abs_path misunderstand
-  #       it as an actual file; currently the users have to run with --remove
-  #       first, before re-running with --link-texmf.
   use utf8;
   use Encode;
   # some perl functions (symlink, -l test) does not work
