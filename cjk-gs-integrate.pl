@@ -550,7 +550,7 @@ sub do_otf_fonts {
   make_dir("$opt_texmflink/$otf_pathpart",
            "cannot link fonts to it!")
     if $opt_texmflink;
-  for my $k (keys %fontdb) {
+  for my $k (sort keys %fontdb) {
     if ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'OTF') {
       generate_font_snippet($fontdest,
         $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
@@ -688,7 +688,7 @@ sub do_nonotf_fonts {
   make_dir("$opt_texmflink/$ttf_pathpart",
            "cannot link fonts to it!")
     if $opt_texmflink;
-  for my $k (keys %fontdb) {
+  for my $k (sort keys %fontdb) {
     if ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'TTF') {
       generate_font_snippet($fontdest,
         $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
@@ -951,7 +951,7 @@ $akotfps_datacontent";
 # dump found files
 sub info_found_fonts {
   print "List of found fonts:\n\n";
-  for my $k (keys %fontdb) {
+  for my $k (sort keys %fontdb) {
     my @foundfiles;
     if ($fontdb{$k}{'available'}) {
       print "Font:  $k\n";
