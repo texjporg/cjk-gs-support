@@ -309,7 +309,7 @@ my %fontdb;
 my %aliases;
 my %user_aliases;
 
-if ($opt_help) {
+if ($opt_help || $opt_markdown) {
   Usage();
   exit 0;
 }
