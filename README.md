@@ -56,6 +56,8 @@ Usage
 #### Command like options ####
 
 `````
+  --dump-data           dump the built-in set of font definitions; you can
+                        easily modify it, and tell me with -f (or --fontdef)
   --only-aliases        do only regenerate the cidfmap.alias file instead of all
   --list-aliases        lists the available aliases and their options, with the
                         selected option on top

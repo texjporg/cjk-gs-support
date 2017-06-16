@@ -364,7 +364,7 @@ sub main {
       print_info("*** Data dumped to $dump_datafile ***\n");
       exit(0);
     } else {
-      print_error("*** Failed to dump data to $dump_datafile ***\n");
+      print_error("Failed to dump data to $dump_datafile!\n");
       exit(1);
     }
   }
