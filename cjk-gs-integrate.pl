@@ -1067,7 +1067,8 @@ sub check_for_files {
       }
     }
     # prepare for kpsewhich call, we need to do quoting
-    my $cmdl = 'kpsewhich ';
+    # we need as much candidate files as possible, so -all is needed
+    my $cmdl = 'kpsewhich -all ';
     for my $f (@fn) {
       $cmdl .= " \"$f\" ";
     }
@@ -1092,13 +1093,26 @@ sub check_for_files {
       print_warning("dead link or strange file found: $f - ignored!\n");
       next;
     }
+    if (win32()) {
+      # abs_path cannot read NTFS symlink/hardlink, and it serves as
+      # identity transformation.
+      # this might lead to dangling links for multiple runs of cjk-gs-integrate,
+      # when $opt_texmflink (in the previous run) is contained in the (current)
+      # kpsewhich search path.
+      # to avoid this, ignore targets which contain $otf_pathpart or $ttf_pathpart
+      my $temp_realfdir = "$realf";
+      $temp_realfdir =~ s!^(.*)/(.*)$!$1!;
+      next if ($temp_realfdir =~ $otf_pathpart || $temp_realfdir =~ $ttf_pathpart);
+    }
     # decode now on windows! (cp932 -> internal utf-8)
     if (win32()) {
       $f = encode_cptoutf($f);
       $realf = encode_cptoutf($realf);
     }
     my $bn = basename($f);
-    $bntofn{$bn} = $realf;
+    # kpsewhich -all might return multiple files with the same basename;
+    # choose the first one among them
+    $bntofn{$bn} = $realf if (!$bntofn{$bn});
   }
 
   # show the %fontdb before file check
