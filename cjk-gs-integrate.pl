@@ -390,6 +390,8 @@ main(@ARGV);
 # only sub definitions from here on
 #
 sub main {
+  # first, read font database to obtain %fontdb
+  # if $opt_dump_data is given, exit after dumping <DATA> to $dump_datafile
   print_info("reading font database ...\n");
   read_font_database();
   if ($opt_dump_data) {
@@ -401,7 +403,11 @@ sub main {
       exit(1);
     }
   }
+  # second, determine non-otf link name
   determine_nonotf_link_name(); # see comments there
+  # set 'available' flags by kpsewhich search
+  # if $opt_listallaliases is given, treat all files
+  # in the database as if they were actually available as OTF
   if (!$opt_listallaliases) {
     print_info("checking for files ...\n");
     check_for_files();
@@ -1031,6 +1037,7 @@ sub info_list_aliases {
 sub make_all_available {
   for my $k (keys %fontdb) {
     $fontdb{$k}{'available'} = 1;
+    $fontdb{$k}{'type'} = 'OTF';
     delete $fontdb{$k}{'files'};
   }
 }
@@ -1184,12 +1191,11 @@ sub check_for_files {
   # second round to determine the winner in case of more targets
   for my $k (keys %fontdb) {
     if ($fontdb{$k}{'available'}) {
-      my $mp = 1000000; my $mf; my $mt;
+      my $mp = 1000000; my $mf;
       for my $f (keys %{$fontdb{$k}{'files'}}) {
         if ($fontdb{$k}{'files'}{$f}{'priority'} < $mp) {
           $mp = $fontdb{$k}{'files'}{$f}{'priority'};
           $mf = $f;
-          $mt = $fontdb{$k}{'files'}{$f}{'type'};
         }
       }
       # extract subfont if necessary
