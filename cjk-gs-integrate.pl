@@ -413,7 +413,10 @@ sub main {
     }
   }
   # second, determine non-otf link name
+  # this is actually required only by info_found_fonts() and do_nonotf_fonts()
+  # operations, but it does no harm for other cases too
   determine_nonotf_link_name(); # see comments there
+
   # set 'available' flags and 'type' by kpsewhich search
   # if $opt_listallaliases is given, treat all files
   # in the database as if they were actually available as OTF
@@ -425,6 +428,8 @@ sub main {
   }
   # obtain %aliases and %user_aliases
   compute_aliases();
+
+  # informative operations
   if ($opt_listfonts) {
     info_found_fonts();
   }
@@ -440,6 +445,7 @@ sub main {
     exit(1);
   }
 
+  # do actual setup/removing operations
   if (! $opt_output) {
     print_info("searching for GhostScript resource\n");
     my $gsres = find_gs_resource();
