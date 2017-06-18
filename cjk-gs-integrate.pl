@@ -351,11 +351,6 @@ if (defined($opt_winbatch)) {
   if ($opt_winbatch ne '') {
     $winbatch = $opt_winbatch;
   }
-  $opt_winbatch = 1;
-} else {
-  $opt_winbatch = 0;
-}
-if ($opt_winbatch) {
   if (win32()) {
     $opt_winbatch = 1;
     unlink $winbatch if (-f $winbatch);
@@ -363,6 +358,8 @@ if ($opt_winbatch) {
     print_warning("ignoring --winbatch option due to non-Windows\n");
     $opt_winbatch = 0;
   }
+} else {
+  $opt_winbatch = 0;
 }
 if ($opt_hardlink) {
   if (win32()) {
@@ -378,6 +375,7 @@ if (defined($opt_dump_data)) {
     $dump_datafile = $opt_dump_data;
   }
   $opt_dump_data = 1;
+  unlink $dump_datafile if (-f $dump_datafile);
 } else {
   $opt_dump_data = 0;
 }
@@ -1330,7 +1328,6 @@ sub read_font_database {
   push @dbl, "";
 
   if ($opt_dump_data) {
-    unlink $dump_datafile if (-f $dump_datafile);
     open(FOO, ">$dump_datafile") || 
       die("cannot open $dump_datafile for writing: $!");
   }
