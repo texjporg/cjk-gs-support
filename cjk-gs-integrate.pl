@@ -384,6 +384,15 @@ if ($opt_dump_data && $opt_fontdef) {
   $opt_fontdef = 0;
 }
 
+if ($opt_info) {
+  $opt_listfonts = 1;
+  $opt_listaliases = 1;
+}
+if ($opt_listallaliases && $opt_listfonts) {
+  print_error("Options --list-all-aliases and --list-fonts cannot be used at the same time!\n");
+  exit(1);
+}
+
 main(@ARGV);
 
 #
@@ -405,7 +414,7 @@ sub main {
   }
   # second, determine non-otf link name
   determine_nonotf_link_name(); # see comments there
-  # set 'available' flags by kpsewhich search
+  # set 'available' flags and 'type' by kpsewhich search
   # if $opt_listallaliases is given, treat all files
   # in the database as if they were actually available as OTF
   if (!$opt_listallaliases) {
@@ -414,11 +423,8 @@ sub main {
   } else {
     make_all_available();
   }
+  # obtain %aliases and %user_aliases
   compute_aliases();
-  if ($opt_info) {
-    $opt_listfonts = 1;
-    $opt_listaliases = 1;
-  }
   if ($opt_listfonts) {
     info_found_fonts();
   }
@@ -1618,7 +1624,8 @@ sub Usage {
 --list-all-aliases    list all possible aliases without searching for
                       actually present files
 --list-fonts          lists the fonts found on the system
---info                combines the above two information
+--info                combines the information of --list-aliases and
+                      --list-fonts
 --machine-readable    output of --list-aliases is machine readable
 ";
 
