@@ -29,9 +29,6 @@ use strict;
 (my $prg = basename($0)) =~ s/\.pl$//;
 my $version = '$VER$';
 
-# if windows, we might create batch file for links
-my $winbatch = '';
-my $winbatch_content = '';
 if (win32()) {
   # conversion between internal (utf-8) and console (cp932):
   # multibyte characters should be encoded in cp932 at least during
@@ -46,7 +43,6 @@ if (win32()) {
   use Encode;
   # some perl functions (symlink, -l test) does not work
   print_warning("Sorry, we have only partial support for Windows!\n");
-  $winbatch = "makefontlinks.bat";
 }
 
 my %encode_list = (
@@ -248,6 +244,10 @@ my $akotfps_pathpart = "dvips/ps2otfps";
 my $akotfps_datafilename = "psnames-for-otf";
 my $akotfps_datacontent = '';
 
+# if windows, we might create batch file for links
+my $winbatch = "makefontlinks.bat";
+my $winbatch_content = '';
+
 # dump output for data file (for easy editing for users)
 my $dump_datafile = "$prg-data.dat";
 
@@ -260,8 +260,8 @@ my $opt_akotfps;
 my $opt_force = 0;
 my $opt_remove = 0;
 my $opt_hardlink = 0;
-my $opt_winbatch = 0;
-my $opt_dump_data = 0;
+my $opt_winbatch;
+my $opt_dump_data;
 my $opt_only_aliases = 0;
 my $opt_listaliases = 0;
 my $opt_listallaliases = 0;
@@ -284,8 +284,8 @@ if (! GetOptions(
         "force"            => \$opt_force,
         "remove"           => \$opt_remove,
         "hardlink"         => \$opt_hardlink,
-        "winbatch"         => \$opt_winbatch,
-        "dump-data"        => \$opt_dump_data,
+        "winbatch:s"       => \$opt_winbatch,
+        "dump-data:s"      => \$opt_dump_data,
         "only-aliases"     => \$opt_only_aliases,
         "list-aliases"     => \$opt_listaliases,
         "list-all-aliases" => \$opt_listallaliases,
@@ -347,16 +347,51 @@ if (defined($opt_akotfps)) {
   $opt_akotfps = $foo;
 }
 
+if (defined($opt_winbatch)) {
+  if ($opt_winbatch ne '') {
+    $winbatch = $opt_winbatch;
+  }
+  $opt_winbatch = 1;
+} else {
+  $opt_winbatch = 0;
+}
+if ($opt_winbatch) {
+  if (win32()) {
+    $opt_winbatch = 1;
+    unlink $winbatch if (-f $winbatch);
+  } else {
+    print_warning("ignoring --winbatch option due to non-Windows\n");
+    $opt_winbatch = 0;
+  }
+}
+if ($opt_hardlink) {
+  if (win32()) {
+    $opt_hardlink = 1;
+  } else {
+    print_warning("ignoring --hardlink option due to non-Windows\n");
+    $opt_hardlink = 0;
+  }
+}
+
+if (defined($opt_dump_data)) {
+  if ($opt_dump_data ne '') {
+    $dump_datafile = $opt_dump_data;
+  }
+  $opt_dump_data = 1;
+} else {
+  $opt_dump_data = 0;
+}
+if ($opt_dump_data && $opt_fontdef) {
+  print_warning("-f/--fontdef option ignored due to --dump-data\n");
+  $opt_fontdef = 0;
+}
+
 main(@ARGV);
 
 #
 # only sub definitions from here on
 #
 sub main {
-  if ($opt_dump_data && $opt_fontdef) {
-    print_warning("-f/--fontdef option ignored due to --dump-data\n");
-    $opt_fontdef = 0;
-  }
   print_info("reading font database ...\n");
   read_font_database();
   if ($opt_dump_data) {
@@ -369,23 +404,6 @@ sub main {
     }
   }
   determine_nonotf_link_name(); # see comments there
-  if ($opt_winbatch) {
-    if (win32()) {
-      $opt_winbatch = 1;
-      unlink $winbatch if (-f $winbatch);
-    } else {
-      print_warning("ignoring --winbatch option due to non-Windows\n");
-      $opt_winbatch = 0;
-    }
-  }
-  if ($opt_hardlink) {
-    if (win32()) {
-      $opt_hardlink = 1;
-    } else {
-      print_warning("ignoring --hardlink option due to non-Windows\n");
-      $opt_hardlink = 0;
-    }
-  }
   if (!$opt_listallaliases) {
     print_info("checking for files ...\n");
     check_for_files();
@@ -1582,18 +1600,20 @@ sub Usage {
 
   my $winonlyoptions = "
 --hardlink            create hardlinks instead of symlinks
---winbatch            prepare a batch file for link generation, instead of
+--winbatch [FILE]     prepare a batch file for link generation, instead of
                       generating links right away
+                      the batch file name defaults to $winbatch
 ";
 
   my $commandoptions = "
---dump-data           dump the built-in set of font definitions; you can
+--dump-data [FILE]    dump the built-in set of font definitions; you can
                       easily modify it, and tell me with -f (or --fontdef)
---only-aliases        do only regenerate the cidfmap.alias file instead of all
+                      the data file name defaults to $dump_datafile
+--only-aliases        regenerate only cidfmap.aliases file, instead of all
 --list-aliases        lists the available aliases and their options, with the
                       selected option on top
---list-all-aliases    list all possible aliases without searching for actually
-                      present files
+--list-all-aliases    list all possible aliases without searching for
+                      actually present files
 --list-fonts          lists the fonts found on the system
 --info                combines the above two information
 --machine-readable    output of --list-aliases is machine readable
