@@ -259,6 +259,7 @@ my $opt_texmflink;
 my $opt_akotfps;
 my $opt_force = 0;
 my $opt_remove = 0;
+my $opt_cleanup = 0;
 my $opt_hardlink = 0;
 my $opt_winbatch;
 my $opt_dump_data;
@@ -283,6 +284,7 @@ if (! GetOptions(
         "otfps:s"          => \$opt_akotfps,
         "force"            => \$opt_force,
         "remove"           => \$opt_remove,
+        "cleanup"          => \$opt_cleanup,
         "hardlink"         => \$opt_hardlink,
         "winbatch:s"       => \$opt_winbatch,
         "dump-data:s"      => \$opt_dump_data,
@@ -384,6 +386,10 @@ if ($opt_dump_data && $opt_fontdef) {
   $opt_fontdef = 0;
 }
 
+if ($opt_cleanup) {
+  $opt_remove = 1;
+}
+
 if ($opt_info) {
   $opt_listfonts = 1;
   $opt_listaliases = 1;
@@ -418,9 +424,9 @@ sub main {
   determine_nonotf_link_name(); # see comments there
 
   # set 'available' flags and 'type' by kpsewhich search
-  # if $opt_listallaliases is given, treat all files
+  # if $opt_cleanup or $opt_listallaliases is given, treat all files
   # in the database as if they were actually available as OTF
-  if (!$opt_listallaliases) {
+  if (!$opt_cleanup && !$opt_listallaliases) {
     print_info("checking for files ...\n");
     check_for_files();
   } else {
@@ -460,15 +466,26 @@ sub main {
     $dry_run || mkdir($opt_output) || 
       die ("Cannot create directory $opt_output: $!");
   }
-  print_info("output is going to $opt_output\n");
+  if ($opt_cleanup) {
+    print_info("going to clean up $opt_output\n");
+  } else {
+    print_info("output is going to $opt_output\n");
+  }
   if (!$opt_only_aliases) {
-    print_info(($opt_remove ? "removing" : "generating") . " font snippets and link CID fonts ...\n");
-    do_otf_fonts();
-    print_info(($opt_remove ? "removing" : "generating") . " font snippets, links, and cidfmap.local for TTF fonts ...\n");
-    do_nonotf_fonts();
+    if ($opt_cleanup) {
+      # all font types are handled at the same time
+      print_info("cleaning up all links, snippets and cidfmap.local ...\n");
+      do_all_fonts();
+    } else {
+      # OTF and TTF/TTC/OTC must be handled separately, depending on the found files
+      print_info(($opt_remove ? "removing" : "generating") . " links and snippets for CID fonts ...\n");
+      do_otf_fonts();
+      print_info(($opt_remove ? "removing" : "generating") . " links, snippets and cidfmap.local for non-CID fonts ...\n");
+      do_nonotf_fonts();
+    }
     write_winbatch() if ($opt_winbatch);
   }
-  print_info(($opt_remove ? "removing" : "generating") . " font aliases ...\n");
+  print_info(($opt_remove ? "removing" : "generating") . " snippets and cidfmap.aliases for font aliases ...\n");
   do_aliases();
   write_akotfps_datafile() if ($opt_akotfps);
   print_info("finished\n");
@@ -479,6 +496,56 @@ sub main {
     } else {
       print_error("Failed to create $winbatch!\n");
       exit(1);
+    }
+  }
+}
+
+sub do_all_fonts {
+  # try to clean up all possible links/snippets/cidfmap which might be
+  # generated in the previous runs
+  # previous versions of cjk-gs-integrate included following bugs:
+  #   * the database sometimes identified GB/CNS classes wrongly
+  #   * symlink names were sometimes invalid (some of which contained
+  #     white-spaces) or inconsistent with ptex-fontmaps (Name <-> PSName),
+  #     due to the absence of proper database entry
+  #   * confused symlinks between TTF/TTC/OTC (including ttf <-> ttc links)
+  # also, current version generates OTC links into $otf_pathpart instead of
+  # $ttf_pathpart, which was not true in the older versions
+  # we'd like to clean up all such files
+  my $fontdest = "$opt_output/Font";
+  my $ciddest  = "$opt_output/CIDFont";
+  my $cidfsubst = "$opt_output/CIDFSubst";
+  for my $k (sort keys %fontdb) {
+    #
+    # remove snippets: note that $class = $fontdb{$k}{'class'} is not enough
+    # due to previous bugs
+    for my $class (%encode_list) {
+      for my $enc (@{$encode_list{$class}}) {
+        maybe_unlink("$fontdest/$k-$enc") if (-f "$fontdest/$k-$enc");
+      }
+    }
+    #
+    # remove links; borrow link_font operation here for convenience
+    # since we don't need target in cleanup mode, initialize with stub "none"
+    #
+    # for OTF fonts, first remove both $k[.otf] and $fontdb{$k}{'origname'}[.otf]
+    # the links $k.otf and $fontdb{$k}{'origname'} are coming from previous bugs
+    if ($fontdb{$k}{'origname'}) { # this test skips alias-only fonts (e.g. Ryumin-Light)
+      link_font("none", $ciddest, $k);
+      link_font("none", "$opt_texmflink/$otf_pathpart", "$k.otf")
+        if $opt_texmflink;
+      link_font("none", $ciddest, $fontdb{$k}{'origname'});
+      link_font("none", "$opt_texmflink/$otf_pathpart", "$fontdb{$k}{'origname'}.otf")
+        if $opt_texmflink;
+    }
+    # for OTF/TTF/TTC/OTC fonts, loop through all file candidates
+    for my $f (keys %{$fontdb{$k}{'files'}}) {
+      # check for subfont extension
+      my $foo = $f;
+      $foo =~ s/^(.*)\(\d*\)$/$1/;
+      link_font("none", $cidfsubst, "$foo");
+      link_font("none", "$opt_texmflink/$otf_pathpart", "$foo") if $opt_texmflink;
+      link_font("none", "$opt_texmflink/$ttf_pathpart", "$foo") if $opt_texmflink;
     }
   }
 }
@@ -801,11 +868,11 @@ sub link_font {
           print_info("Removing link $target due to --force!\n");
           $do_unlink = 1;
         } else {
-          print_error("Link $target already existing, but different target then $target, exiting!\n");
+          print_error("Link $target already existing, but target different from $f, exiting!\n");
           exit(1);
         }
       } else {
-        # case 2: dangling symlink
+        # case 2: dangling symlink or link-to-link
         print_warning("Removing dangling symlink $target to $linkt\n");
         $do_unlink = 1;
       }
@@ -1050,7 +1117,7 @@ sub make_all_available {
   for my $k (keys %fontdb) {
     $fontdb{$k}{'available'} = 1;
     $fontdb{$k}{'type'} = 'OTF';
-    delete $fontdb{$k}{'files'};
+    delete $fontdb{$k}{'files'} if (!$opt_cleanup);
   }
 }
 
@@ -1606,6 +1673,9 @@ sub Usage {
                       instead of generating snippets
 --force               do not bail out if linked fonts already exist
 --remove              try to remove instead of create
+--cleanup             try to clean up all possible links/snippets and
+                      cidfmap.local/cidfmap.aliases, which might be
+                      generated in the previous runs
 -n, --dry-run         do not actually output anything
 -q, --quiet           be less verbose
 -d, --debug           output debug information, can be given multiple times
