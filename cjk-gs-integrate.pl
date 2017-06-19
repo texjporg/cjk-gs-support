@@ -483,6 +483,154 @@ sub main {
   }
 }
 
+sub do_otf_fonts {
+  my $fontdest = "$opt_output/Font";
+  my $ciddest  = "$opt_output/CIDFont";
+  make_dir($fontdest, "cannot create CID snippets there!");
+  make_dir($ciddest,  "cannot link CID fonts there!");
+  make_dir("$opt_texmflink/$otf_pathpart",
+           "cannot link fonts to it!")
+    if $opt_texmflink;
+  for my $k (sort keys %fontdb) {
+    if ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'OTF') {
+      generate_font_snippet($fontdest,
+        $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
+      link_font($fontdb{$k}{'target'}, $ciddest, $k);
+      link_font($fontdb{$k}{'target'}, "$opt_texmflink/$otf_pathpart", "$fontdb{$k}{'origname'}.otf")
+        if $opt_texmflink;
+    }
+  }
+}
+
+sub do_nonotf_fonts {
+  my $fontdest = "$opt_output/Font";
+  my $cidfsubst = "$opt_output/CIDFSubst";
+  my $outp = '';
+  make_dir($fontdest, "cannot create CID snippets there!");
+  make_dir($cidfsubst,  "cannot link TTF fonts there!");
+  make_dir("$opt_texmflink/$ttf_pathpart",
+           "cannot link fonts to it!")
+    if $opt_texmflink;
+  for my $k (sort keys %fontdb) {
+    if ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'TTF') {
+      generate_font_snippet($fontdest,
+        $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
+      $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'ttfname'}, $fontdb{$k}{'subfont'});
+      link_font($fontdb{$k}{'target'}, $cidfsubst, $fontdb{$k}{'ttfname'});
+      link_font($fontdb{$k}{'target'}, "$opt_texmflink/$ttf_pathpart", $fontdb{$k}{'ttfname'})
+        if $opt_texmflink;
+    } elsif ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'TTC') {
+      generate_font_snippet($fontdest,
+        $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
+      $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'ttcname'}, $fontdb{$k}{'subfont'});
+      link_font($fontdb{$k}{'target'}, $cidfsubst, $fontdb{$k}{'ttcname'});
+      link_font($fontdb{$k}{'target'}, "$opt_texmflink/$ttf_pathpart", $fontdb{$k}{'ttcname'})
+        if $opt_texmflink;
+    } elsif ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'OTC') {
+    # currently ghostscript does not have OTC support; not creating gs resource
+    print_ddebug("gs does not support OTC, not creating gs resource for $k\n");
+    # generate_font_snippet($fontdest,
+    #   $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
+    # $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'otcname'}, $fontdb{$k}{'subfont'});
+    # link_font($fontdb{$k}{'target'}, $cidfsubst, $fontdb{$k}{'otcname'});
+      link_font($fontdb{$k}{'target'}, "$opt_texmflink/$otf_pathpart", $fontdb{$k}{'otcname'})
+        if $opt_texmflink;
+    }
+  }
+  return if $dry_run;
+  if ($outp) {
+    if (! -d "$opt_output/Init") {
+      mkdir("$opt_output/Init") ||
+        die("Cannot create directory $opt_output/Init: $!");
+    }
+    open(FOO, ">$opt_output/$cidfmap_local_pathpart") || 
+      die "Cannot open $opt_output/$cidfmap_local_pathpart: $!";
+    print FOO $outp;
+    close(FOO);
+  }
+  update_master_cidfmap('cidfmap.local');
+}
+
+sub do_aliases {
+  my $fontdest = "$opt_output/Font";
+  my $cidfsubst = "$opt_output/CIDFSubst";
+  my $outp = '';
+  #
+  # alias handling
+  # we use two levels of aliases, one is for the default names that
+  # are not actual fonts:
+  # Ryumin-Light, GothicBBB-Medium, FutoMinA101-Bold, FutoGoB101-Bold, 
+  # Jun101-Light which are the original Morisawa names.
+  #
+  # the second level of aliases is for Morisawa OTF font names:
+  # RyuminPro-Light, GothicBBBPro-Medium,
+  # FutoMinA101Pro-Bold, FutoGoB101Pro-Bold
+  # Jun101Pro-Light
+  #
+  # the order of fonts selected is
+  # defined in the Provides(Priority): Name in the font definiton
+  #
+  $outp .= "\n\n% Aliases\n";
+  #
+  my (@jal, @kal, @tal, @sal);
+  #
+  for my $al (sort keys %aliases) {
+    my $target;
+    my $class;
+    if ($user_aliases{$al}) {
+      $target = $user_aliases{$al};
+      # determine class
+      if ($fontdb{$target}{'available'}) {
+        $class = $fontdb{$target}{'class'};
+      } else {
+        # must be an aliases, we checked this when initializing %user_aliases
+        # reset the $al value
+        # and since $class is still undefined we will use the next code below
+        $al = $target;
+      }
+    }
+    if (!$class) {
+      print_warning("Alias candidate for $al is empty!\n") if (!%{$aliases{$al}});
+      # search lowest number
+      my @ks = keys(%{$aliases{$al}});
+      my $first = (sort { $a <=> $b} @ks)[0];
+      $target = $aliases{$al}{$first};
+      $class  = $fontdb{$target}{'class'};
+    }
+    # we also need to create font snippets in Font (or add configuration)
+    # for the aliases!
+    generate_font_snippet($fontdest, $al, $class, $target);
+    if ($class eq 'Japan') {
+      push @jal, "/$al /$target ;";
+    } elsif ($class eq 'Korea') {
+      push @kal, "/$al /$target ;";
+    } elsif ($class eq 'GB') {
+      push @sal, "/$al /$target ;";
+    } elsif ($class eq 'CNS') {
+      push @tal, "/$al /$target ;";
+    } else {
+      print STDERR "unknown class $class for $al\n";
+    }
+  }
+  $outp .= "\n% Japanese fonts\n" . join("\n", @jal) . "\n" if @jal;
+  $outp .= "\n% Korean fonts\n" . join("\n", @kal) . "\n" if @kal;
+  $outp .= "\n% Traditional Chinese fonts\n" . join("\n", @tal) . "\n" if @tal;
+  $outp .= "\n% Simplified Chinese fonts\n" . join("\n", @sal) . "\n" if @sal;
+  #
+  return if $dry_run;
+  if ($outp && !$opt_remove) {
+    if (! -d "$opt_output/Init") {
+      mkdir("$opt_output/Init") ||
+        die("Cannot create directory $opt_output/Init: $!");
+    }
+    open(FOO, ">$opt_output/$cidfmap_aliases_pathpart") || 
+      die "Cannot open $opt_output/$cidfmap_aliases_pathpart: $!";
+    print FOO $outp;
+    close(FOO);
+  }
+  update_master_cidfmap('cidfmap.aliases');
+}
+
 sub update_master_cidfmap {
   my $add = shift;
   my $cidfmap_master = "$opt_output/$cidfmap_pathpart";
@@ -539,35 +687,31 @@ sub update_master_cidfmap {
   }
 }
 
-sub make_dir {
-  my ($d, $w) = @_;
-  if (-r $d) {
-    if (! -d $d) {
-      print_error("$d is not a directory, $w\n");
-      exit 1;
-    }
+sub generate_cidfmap_entry {
+  my ($n, $c, $f, $sf) = @_;
+  return "" if $opt_remove;
+  # $f is already the link target name 'ttfname' (or 'ttcname' or 'otcname')
+  # as determined by minimal priority number
+  # extract subfont
+  my $s = "/$n << /FileType /TrueType 
+  /Path pssystemparams /GenericResourceDir get 
+  (CIDFSubst/$f) concatstrings
+  /SubfontID $sf
+  /CSI [($c";
+  if ($c eq "Japan") {
+    $s .= "1) 6]";
+  } elsif ($c eq "GB") {
+    $s .= "1) 5]";
+  } elsif ($c eq "CNS") {
+    $s .= "1) 5]";
+  } elsif ($c eq "Korea") {
+    $s .= "1) 2]";
   } else {
-    $dry_run || make_path($d);
+    print_warning("unknown class $c for $n, skipping.\n");
+    return '';
   }
-}
-
-sub do_otf_fonts {
-  my $fontdest = "$opt_output/Font";
-  my $ciddest  = "$opt_output/CIDFont";
-  make_dir($fontdest, "cannot create CID snippets there!");
-  make_dir($ciddest,  "cannot link CID fonts there!");
-  make_dir("$opt_texmflink/$otf_pathpart",
-           "cannot link fonts to it!")
-    if $opt_texmflink;
-  for my $k (sort keys %fontdb) {
-    if ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'OTF') {
-      generate_font_snippet($fontdest,
-        $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
-      link_font($fontdb{$k}{'target'}, $ciddest, $k);
-      link_font($fontdb{$k}{'target'}, "$opt_texmflink/$otf_pathpart", "$fontdb{$k}{'origname'}.otf")
-        if $opt_texmflink;
-    }
-  }
+  $s .= " >> ;\n";
+  return $s;
 }
 
 sub generate_font_snippet {
@@ -688,160 +832,16 @@ sub link_font {
   }
 }
 
-sub do_nonotf_fonts {
-  my $fontdest = "$opt_output/Font";
-  my $cidfsubst = "$opt_output/CIDFSubst";
-  my $outp = '';
-  make_dir($fontdest, "cannot create CID snippets there!");
-  make_dir($cidfsubst,  "cannot link TTF fonts there!");
-  make_dir("$opt_texmflink/$ttf_pathpart",
-           "cannot link fonts to it!")
-    if $opt_texmflink;
-  for my $k (sort keys %fontdb) {
-    if ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'TTF') {
-      generate_font_snippet($fontdest,
-        $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
-      $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'ttfname'}, $fontdb{$k}{'subfont'});
-      link_font($fontdb{$k}{'target'}, $cidfsubst, $fontdb{$k}{'ttfname'});
-      link_font($fontdb{$k}{'target'}, "$opt_texmflink/$ttf_pathpart", $fontdb{$k}{'ttfname'})
-        if $opt_texmflink;
-    } elsif ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'TTC') {
-      generate_font_snippet($fontdest,
-        $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
-      $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'ttcname'}, $fontdb{$k}{'subfont'});
-      link_font($fontdb{$k}{'target'}, $cidfsubst, $fontdb{$k}{'ttcname'});
-      link_font($fontdb{$k}{'target'}, "$opt_texmflink/$ttf_pathpart", $fontdb{$k}{'ttcname'})
-        if $opt_texmflink;
-    } elsif ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'OTC') {
-    # currently ghostscript does not have OTC support; not creating gs resource
-    print_ddebug("gs does not support OTC, not creating gs resource for $k\n");
-    # generate_font_snippet($fontdest,
-    #  $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
-    # $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'otcname'}, $fontdb{$k}{'subfont'});
-    # link_font($fontdb{$k}{'target'}, $cidfsubst, $fontdb{$k}{'otcname'});
-      link_font($fontdb{$k}{'target'}, "$opt_texmflink/$otf_pathpart", $fontdb{$k}{'otcname'})
-        if $opt_texmflink;
+sub make_dir {
+  my ($d, $w) = @_;
+  if (-r $d) {
+    if (! -d $d) {
+      print_error("$d is not a directory, $w\n");
+      exit 1;
     }
-  }
-  return if $dry_run;
-  if ($outp) {
-    if (! -d "$opt_output/Init") {
-      mkdir("$opt_output/Init") ||
-        die("Cannot create directory $opt_output/Init: $!");
-    }
-    open(FOO, ">$opt_output/$cidfmap_local_pathpart") || 
-      die "Cannot open $opt_output/$cidfmap_local_pathpart: $!";
-    print FOO $outp;
-    close(FOO);
-  }
-  update_master_cidfmap('cidfmap.local');
-}
-
-sub do_aliases {
-  my $fontdest = "$opt_output/Font";
-  my $cidfsubst = "$opt_output/CIDFSubst";
-  my $outp = '';
-  #
-  # alias handling
-  # we use two levels of aliases, one is for the default names that
-  # are not actual fonts:
-  # Ryumin-Light, GothicBBB-Medium, FutoMinA101-Bold, FutoGoB101-Bold, 
-  # Jun101-Light which are the original Morisawa names.
-  #
-  # the second level of aliases is for Morisawa OTF font names:
-  # RyuminPro-Light, GothicBBBPro-Medium,
-  # FutoMinA101Pro-Bold, FutoGoB101Pro-Bold
-  # Jun101Pro-Light
-  #
-  # the order of fonts selected is
-  # defined in the Provides(Priority): Name in the font definiton
-  #
-  $outp .= "\n\n% Aliases\n";
-  #
-  my (@jal, @kal, @tal, @sal);
-  #
-  for my $al (sort keys %aliases) {
-    my $target;
-    my $class;
-    if ($user_aliases{$al}) {
-      $target = $user_aliases{$al};
-      # determine class
-      if ($fontdb{$target}{'available'}) {
-        $class = $fontdb{$target}{'class'};
-      } else {
-        # must be an aliases, we checked this when initializing %user_aliases
-        # reset the $al value
-        # and since $class is still undefined we will use the next code below
-        $al = $target;
-      }
-    }
-    if (!$class) {
-      print_warning("Alias candidate for $al is empty!\n") if (!%{$aliases{$al}});
-      # search lowest number
-      my @ks = keys(%{$aliases{$al}});
-      my $first = (sort { $a <=> $b} @ks)[0];
-      $target = $aliases{$al}{$first};
-      $class  = $fontdb{$target}{'class'};
-    }
-    # we also need to create font snippets in Font (or add configuration)
-    # for the aliases!
-    generate_font_snippet($fontdest, $al, $class, $target);
-    if ($class eq 'Japan') {
-      push @jal, "/$al /$target ;";
-    } elsif ($class eq 'Korea') {
-      push @kal, "/$al /$target ;";
-    } elsif ($class eq 'GB') {
-      push @sal, "/$al /$target ;";
-    } elsif ($class eq 'CNS') {
-      push @tal, "/$al /$target ;";
-    } else {
-      print STDERR "unknown class $class for $al\n";
-    }
-  }
-  $outp .= "\n% Japanese fonts\n" . join("\n", @jal) . "\n" if @jal;
-  $outp .= "\n% Korean fonts\n" . join("\n", @kal) . "\n" if @kal;
-  $outp .= "\n% Traditional Chinese fonts\n" . join("\n", @tal) . "\n" if @tal;
-  $outp .= "\n% Simplified Chinese fonts\n" . join("\n", @sal) . "\n" if @sal;
-  #
-  return if $dry_run;
-  if ($outp && !$opt_remove) {
-    if (! -d "$opt_output/Init") {
-      mkdir("$opt_output/Init") ||
-        die("Cannot create directory $opt_output/Init: $!");
-    }
-    open(FOO, ">$opt_output/$cidfmap_aliases_pathpart") || 
-      die "Cannot open $opt_output/$cidfmap_aliases_pathpart: $!";
-    print FOO $outp;
-    close(FOO);
-  }
-  update_master_cidfmap('cidfmap.aliases');
-}
-
-sub generate_cidfmap_entry {
-  my ($n, $c, $f, $sf) = @_;
-  return "" if $opt_remove;
-  # $f is already the link target name 'ttfname' (or 'ttcname' or 'otcname')
-  # as determined by minimal priority number
-  # extract subfont
-  my $s = "/$n << /FileType /TrueType 
-  /Path pssystemparams /GenericResourceDir get 
-  (CIDFSubst/$f) concatstrings
-  /SubfontID $sf
-  /CSI [($c";
-  if ($c eq "Japan") {
-    $s .= "1) 6]";
-  } elsif ($c eq "GB") {
-    $s .= "1) 5]";
-  } elsif ($c eq "CNS") {
-    $s .= "1) 5]";
-  } elsif ($c eq "Korea") {
-    $s .= "1) 2]";
   } else {
-    print_warning("unknown class $c for $n, skipping.\n");
-    return '';
+    $dry_run || make_path($d);
   }
-  $s .= " >> ;\n";
-  return $s;
 }
 
 # perl symlink function does not work on windows, so leave it to
@@ -996,7 +996,7 @@ sub info_found_fonts {
 }
 
 #
-# dump found files
+# dump aliases
 sub info_list_aliases {
   print "List of ", ($opt_listaliases ? "all" : "available"), " aliases and their options (in decreasing priority):\n" unless $opt_machine;
   my (@jal, @kal, @tal, @sal);
