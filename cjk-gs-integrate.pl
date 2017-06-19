@@ -521,7 +521,7 @@ sub do_all_fonts {
     # due to previous bugs
     for my $class (%encode_list) {
       for my $enc (@{$encode_list{$class}}) {
-        maybe_unlink("$fontdest/$k-$enc") if (-f "$fontdest/$k-$enc");
+        unlink "$fontdest/$k-$enc" if (-f "$fontdest/$k-$enc");
       }
     }
     #
@@ -547,6 +547,11 @@ sub do_all_fonts {
       link_font("none", "$opt_texmflink/$otf_pathpart", "$foo") if $opt_texmflink;
       link_font("none", "$opt_texmflink/$ttf_pathpart", "$foo") if $opt_texmflink;
     }
+  }
+  update_master_cidfmap('cidfmap.local');
+  # we are in cleanup mode, also remove cidfmap.local itself
+  if (-f "$opt_output/$cidfmap_local_pathpart") {
+    unlink "$opt_output/$cidfmap_local_pathpart";
   }
 }
 
@@ -696,6 +701,10 @@ sub do_aliases {
     close(FOO);
   }
   update_master_cidfmap('cidfmap.aliases');
+  # if we are in cleanup mode, also remove cidfmap.aliases itself
+  if (-f "$opt_output/$cidfmap_aliases_pathpart") {
+    unlink "$opt_output/$cidfmap_aliases_pathpart" if ($opt_cleanup);
+  }
 }
 
 sub update_master_cidfmap {
