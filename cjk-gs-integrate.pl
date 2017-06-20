@@ -866,39 +866,48 @@ sub link_font {
   my $target = "$cd/$n";
   my $do_unlink = 0;
   if (-l $target) {
-    my $linkt = readlink($target);
-    if ($linkt) {
-      if ($linkt eq $f) {
-        # case 1: exists, link, targets agree
-        $do_unlink = 1;
-      } elsif (-r $linkt) {
-        # case 3: exists, link, targets different
-        if ($opt_force) {
-          print_info("Removing link $target due to --force!\n");
-          $do_unlink = 1;
-        } else {
-          print_error("Link $target already existing, but target different from $f, exiting!\n");
-          exit(1);
-        }
-      } else {
-        # case 2: dangling symlink or link-to-link
-        print_warning("Removing dangling symlink $target to $linkt\n");
-        $do_unlink = 1;
-      }
-    } else {
-      print_error("This should not happen, we have a link but cannot read the target?\n");
-      exit(1);
-    }
-  } elsif (-r $target) {
-    # case 4: exists, but not link
-    if ($opt_force) {
-      print_info("Removing $target due to --force!\n");
+    if ($opt_cleanup) {
       $do_unlink = 1;
     } else {
-      print_error("$target already existing, exiting!\n");
-      exit(1);
+      my $linkt = readlink($target);
+      if ($linkt) {
+        if ($linkt eq $f) {
+          # case 1: exists, link, targets agree
+          $do_unlink = 1;
+        } elsif (-r $linkt) {
+          # case 3: exists, link, targets different
+          if ($opt_force) {
+            print_info("Removing link $target due to --force!\n");
+            $do_unlink = 1;
+          } else {
+            print_error("Link $target already existing, but target different from $f, exiting!\n");
+            exit(1);
+          }
+        } else {
+          # case 2: dangling symlink or link-to-link
+          print_warning("Removing dangling symlink $target to $linkt\n");
+          $do_unlink = 1;
+        }
+      } else {
+        print_error("This should not happen, we have a link but cannot read the target?\n");
+        exit(1);
+      }
     }
-  } # otherwise it is not existing!
+  } elsif (-r $target) {
+    # case 4: exists, but not link (NTFS hardlink on win32 falls into this)
+    if (-s $target) {
+      if ($opt_force) {
+        print_info("Removing $target due to --force!\n");
+        $do_unlink = 1;
+      } else {
+        print_error("$target already existing, exiting!\n");
+        exit(1);
+      }
+    } else {
+      # NTFS symlink on win32 has file size 0, we're safe to remove it
+      $do_unlink = 1;
+    }
+  } # case 5: otherwise it is not existing!
 
   # if we are still here and $do_unlink is set, remove it
   maybe_unlink($target) if $do_unlink;
