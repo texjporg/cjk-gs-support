@@ -1052,6 +1052,10 @@ sub info_found_fonts {
       print "Type:  $fontdb{$k}{'type'}\n";
       print "Class: $fontdb{$k}{'class'}\n";
       my $fn = $fontdb{$k}{'target'};
+      # cp932 for win32 console
+      if (win32()) {
+        $fn = encode_utftocp($fn);
+      }
       if ($fontdb{$k}{'type'} eq 'TTC' || $fontdb{$k}{'type'} eq 'OTC') {
         $fn .= "($fontdb{$k}{'subfont'})";
       }
@@ -1093,6 +1097,10 @@ sub info_list_aliases {
     for my $p (@ks) {
       my $t = $aliases{$al}{$p};
       my $fn = ($opt_listallaliases ? "-" : $fontdb{$t}{'target'} );
+      # cp932 for win32 console
+      if (win32()) {
+        $fn = encode_utftocp($fn);
+      }
       # should always be the same ;-)
       $cl = $fontdb{$t}{'class'};
       if (!$opt_listallaliases && ($fontdb{$t}{'type'} eq 'TTC' || $fontdb{$t}{'type'} eq 'OTC')) {
