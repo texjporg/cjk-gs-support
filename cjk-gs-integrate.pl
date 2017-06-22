@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 #
-# cjk-gs-integrate - setup ghostscript for CID/TTF CJK fonts
+# cjk-gs-integrate - setup Ghostscript for CID/TTF CJK fonts
 #
 # Copyright 2015-2017 by Norbert Preining
 # Copyright 2016-2017 by Japanese TeX Development Community
@@ -18,6 +18,7 @@
 # - how to deal with MacTeX pre-shipped configuration files?
 # - interoperability with kanji-config-updmap
 #
+# Note that symlink names should be consistent with ptex-fontmaps!
 
 $^W = 1;
 use Getopt::Long qw(:config no_autoabbrev ignore_case_always);
@@ -453,10 +454,10 @@ sub main {
 
   # do actual setup/removing operations
   if (! $opt_output) {
-    print_info("searching for GhostScript resource\n");
+    print_info("searching for Ghostscript resource\n");
     my $gsres = find_gs_resource();
     if (!$gsres) {
-      print_error("Cannot find GhostScript, terminating!\n");
+      print_error("Cannot find Ghostscript, terminating!\n");
       exit(1);
     } else {
       $opt_output = $gsres;
@@ -506,8 +507,8 @@ sub do_all_fonts {
   # previous versions of cjk-gs-integrate included following bugs:
   #   * the database sometimes identified GB/CNS classes wrongly
   #   * symlink names were sometimes invalid (some of which contained
-  #     white-spaces) or inconsistent with ptex-fontmaps (Name <-> PSName),
-  #     due to the absence of proper database entry
+  #     white-spaces, due to the absence of proper database entry) or
+  #     inconsistent with ptex-fontmaps (Name <-> PSName or redundant Filename)
   #   * confused symlinks between TTF/TTC/OTC (including ttf <-> ttc links)
   # also, current version generates OTC links into $otf_pathpart instead of
   # $ttf_pathpart, which was not true in the older versions
@@ -528,11 +529,15 @@ sub do_all_fonts {
     # remove links; borrow link_font operation here for convenience
     # since we don't need target in cleanup mode, initialize with stub "none"
     #
-    # for OTF fonts, first remove both $k[.otf] and $fontdb{$k}{'origname'}[.otf]
-    # the links $k.otf and $fontdb{$k}{'origname'} are coming from previous bugs
+    # for OTF/TTF fonts, first remove both $k[.otf,ttf] and $fontdb{$k}{'origname'}[.otf]
+    # the links $k.otf and $fontdb{$k}{'origname'} are coming from previous bugs,
+    # and the links $k.ttf are (sometimes) coming from inconsistency
     if ($fontdb{$k}{'origname'}) { # this test skips alias-only fonts (e.g. Ryumin-Light)
       link_font("none", $ciddest, $k);
+      link_font("none", $cidfsubst, "$k.ttf");
       link_font("none", "$opt_texmflink/$otf_pathpart", "$k.otf")
+        if $opt_texmflink;
+      link_font("none", "$opt_texmflink/$ttf_pathpart", "$k.ttf")
         if $opt_texmflink;
       link_font("none", $ciddest, $fontdb{$k}{'origname'});
       link_font("none", "$opt_texmflink/$otf_pathpart", "$fontdb{$k}{'origname'}.otf")
@@ -599,8 +604,8 @@ sub do_nonotf_fonts {
       link_font($fontdb{$k}{'target'}, "$opt_texmflink/$ttf_pathpart", $fontdb{$k}{'ttcname'})
         if $opt_texmflink;
     } elsif ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'OTC') {
-    # currently ghostscript does not have OTC support; not creating gs resource
-    print_ddebug("gs does not support OTC, not creating gs resource for $k\n");
+      # currently Ghostscript does not have OTC support; not creating gs resource
+      print_debug("gs does not support OTC, not creating gs resource for $k\n");
     # generate_font_snippet($fontdest,
     #   $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
     # $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'otcname'}, $fontdb{$k}{'subfont'});
@@ -1338,8 +1343,8 @@ sub compute_aliases {
         } else {
           # if OTC font is caught, then skip it as Ghostscript doesn't support it (2016/12/12)
           if ($fontdb{$k}{'type'} eq 'OTC') {
-            print_warning("Currently Ghostscript does not support OTC font,\n");
-            print_warning("not adding $fontdb{$k}{'otcname'} to alias candidates\n");
+            print_debug("Currently Ghostscript does not support OTC font,\n");
+            print_debug("not adding $fontdb{$k}{'otcname'} to alias candidates\n");
           } else {
             $aliases{$p}{$fontdb{$k}{'provides'}{$p}} = $k;
           }
@@ -1674,11 +1679,11 @@ sub version {
 }
 
 sub Usage {
-  my $headline = "Configuring GhostScript for CJK CID/TTF fonts";
+  my $headline = "Configuring Ghostscript for CJK CID/TTF fonts";
   my $usage = "[perl] $prg\[.pl\] [OPTIONS]";
   my $options = "
 -o, --output DIR      specifies the base output dir, if not provided,
-                      the Resource directory of an installed GhostScript
+                      the Resource directory of an installed Ghostscript
                       is searched and used.
 -f, --fontdef FILE    specify alternate set of font definitions, if not
                       given, the built-in set is used
@@ -1733,9 +1738,9 @@ sub Usage {
 
   my $shortdesc = "
 This script searches a list of directories for CJK fonts, and makes
-them available to an installed GhostScript. In the simplest case with
+them available to an installed Ghostscript. In the simplest case with
 sufficient privileges, a run without arguments should effect in a
-complete setup of GhostScript.
+complete setup of Ghostscript.
 ";
 
 my $operation = "
@@ -1757,7 +1762,7 @@ and links the font to
     <Resource>/CIDFont/
 
 The `<Resource>` dir is either given by `-o`/`--output`, or otherwise searched
-from an installed GhostScript (binary name is assumed to be 'gs').
+from an installed Ghostscript (binary name is assumed to be 'gs').
 
 Aliases are added to 
 
@@ -1798,7 +1803,7 @@ searched in addition.
 ';
 
   my $outputfile = "
-If no output option is given, the program searches for a GhostScript
+If no output option is given, the program searches for a Ghostscript
 interpreter 'gs' and determines its Resource directory. This might
 fail, in which case one need to pass the output directory manually.
 
@@ -2471,7 +2476,13 @@ OTCname(30): YuMincho.ttc(5)
 #   YuGoth{B,L,M,R}.ttf
 #   yumin.ttf, yumin{db,l}.ttf
 # are bundled with Office for Mac 2016.
-# Also, symlink names should be consistent with ptex-fontmaps!
+
+# In the following database, Yu Font Pack entries do not appear
+# as separate lines, but they are implied by Windows 10 entries
+# since win32 is case-insensitive.
+# Currently we don't add VS2013 YuGothic.ttf (YuGothic) and
+# YuGothic-Bold.ttf (YuGothic-Bold) on purpose, because these files
+# are smaller than Windows 8.1 yugothic.ttf and yugothib.ttf
 
 Name: YuMincho-Regular
 Class: Japan
@@ -2480,12 +2491,12 @@ Provides(90): RyuminPro-Light
 Provides(90): HiraMinProN-W3
 Provides(90): HiraMinPro-W3
 TTFname(20): yumin.ttf
-#TTFname(50): YuMincho-Regular.ttf
+#TTFname(50): YuMincho-Regular.ttf # never existed
 
 Name: YuMincho-Light
 Class: Japan
 TTFname(20): yuminl.ttf
-#TTFname(50): YuMincho-Light.ttf
+#TTFname(50): YuMincho-Light.ttf # never existed
 
 Name: YuMincho-DemiBold
 Class: Japan
@@ -2494,7 +2505,7 @@ Provides(90): FutoMinA101Pro-Bold
 Provides(90): HiraMinProN-W6
 Provides(90): HiraMinPro-W6
 TTFname(20): yumindb.ttf
-#TTFname(50): YuMincho-DemiBold.ttf
+#TTFname(50): YuMincho-DemiBold.ttf # never existed
 
 Name: YuGothic-Regular
 Class: Japan
@@ -2502,22 +2513,22 @@ Provides(90): GothicBBB-Medium
 Provides(90): GothicBBBPro-Medium
 Provides(90): HiraKakuProN-W3
 Provides(90): HiraKakuPro-W3
-TTFname(20): yugothic.ttf
-TTCname(30): YuGothR.ttc(0)
+TTFname(25): yugothic.ttf
+TTCname(20): YuGothR.ttc(0)
 TTFname(40): YuGothR.ttf
-#TTFname(50): YuGothic-Regular.ttf
+#TTFname(50): YuGothic-Regular.ttf # never existed
 
 Name: YuGothic-Medium
 Class: Japan
-TTCname(30): YuGothM.ttc(0)
+TTCname(20): YuGothM.ttc(0)
 TTFname(40): YuGothM.ttf
 
 Name: YuGothic-Light
 Class: Japan
-TTFname(20): yugothil.ttf
-TTCname(30): YuGothL.ttc(0)
+TTFname(25): yugothil.ttf
+TTCname(20): YuGothL.ttc(0)
 TTFname(40): YuGothL.ttf
-#TTFname(50): YuGothic-Light.ttf
+#TTFname(50): YuGothic-Light.ttf # never existed
 
 Name: YuGothic-Bold
 Class: Japan
@@ -2533,10 +2544,10 @@ Provides(90): MidashiGo-MB31
 Provides(90): MidashiGoPro-MB31
 Provides(90): HiraKakuStdN-W8
 Provides(90): HiraKakuStd-W8
-TTFname(20): yugothib.ttf
-TTCname(30): YuGothB.ttc(0)
+TTFname(25): yugothib.ttf
+TTCname(20): YuGothB.ttc(0)
 TTFname(40): YuGothB.ttf
-TTFname(50): YuGothic-Bold.ttf
+#TTFname(50): YuGothic-Bold.ttf
 
 # IPA (free)
 
