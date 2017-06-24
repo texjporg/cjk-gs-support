@@ -1,10 +1,10 @@
-Configuring GhostScript for CJK CID/TTF fonts
+Configuring Ghostscript for CJK CID/TTF fonts
 =============================================
 
 This script searches a list of directories for CJK fonts, and makes
-them available to an installed GhostScript. In the simplest case with
+them available to an installed Ghostscript. In the simplest case with
 sufficient privileges, a run without arguments should effect in a
-complete setup of GhostScript.
+complete setup of Ghostscript.
 
 Usage
 -----
@@ -17,7 +17,7 @@ Usage
 
 `````
   -o, --output DIR      specifies the base output dir, if not provided,
-                        the Resource directory of an installed GhostScript
+                        the Resource directory of an installed Ghostscript
                         is searched and used.
   -f, --fontdef FILE    specify alternate set of font definitions, if not
                         given, the built-in set is used
@@ -38,6 +38,9 @@ Usage
                         instead of generating snippets
   --force               do not bail out if linked fonts already exist
   --remove              try to remove instead of create
+  --cleanup             try to clean up all possible links/snippets and
+                        cidfmap.local/cidfmap.aliases, which could have been
+                        generated in the previous runs
   -n, --dry-run         do not actually output anything
   -q, --quiet           be less verbose
   -d, --debug           output debug information, can be given multiple times
@@ -49,22 +52,25 @@ Usage
 
 `````
   --hardlink            create hardlinks instead of symlinks
-  --winbatch            prepare a batch file for link generation, instead of
+  --winbatch [FILE]     prepare a batch file for link generation, instead of
                         generating links right away
+                        the batch file name defaults to makefontlinks.bat
 `````
 
 #### Command like options ####
 
 `````
-  --dump-data           dump the built-in set of font definitions; you can
+  --dump-data [FILE]    dump the built-in set of font definitions; you can
                         easily modify it, and tell me with -f (or --fontdef)
-  --only-aliases        do only regenerate the cidfmap.alias file instead of all
+                        the data file name defaults to cjk-gs-integrate-data.dat
+  --only-aliases        regenerate only cidfmap.aliases file, instead of all
   --list-aliases        lists the available aliases and their options, with the
                         selected option on top
-  --list-all-aliases    list all possible aliases without searching for actually
-                        present files
+  --list-all-aliases    list all possible aliases without searching for
+                        actually present files
   --list-fonts          lists the fonts found on the system
-  --info                combines the above two information
+  --info                combines the information of --list-aliases and
+                        --list-fonts
   --machine-readable    output of --list-aliases is machine readable
 `````
 
@@ -89,7 +95,8 @@ and links the font to
     <Resource>/CIDFont/
 
 The `<Resource>` dir is either given by `-o`/`--output`, or otherwise searched
-from an installed GhostScript (binary name is assumed to be 'gs').
+from an installed Ghostscript (binary name is assumed to be 'gs' on unix,
+'gswin32c' on win32).
 
 Aliases are added to 
 
@@ -132,7 +139,7 @@ searched in addition.
 Output files
 ------------
 
-If no output option is given, the program searches for a GhostScript
+If no output option is given, the program searches for a Ghostscript
 interpreter 'gs' and determines its Resource directory. This might
 fail, in which case one need to pass the output directory manually.
 
@@ -156,8 +163,8 @@ Korean:
 
 Simplified Chinese:
 
-    STSong-Light STHeiti-Regular STHeiti-Light STKaiti-Regular
-    STFangsong-Light STFangsong-Regular
+    STSong-Light STSong-Regular STHeiti-Regular STHeiti-Light
+    STKaiti-Regular STFangsong-Light STFangsong-Regular
 
 Traditional Chinese:
 
@@ -180,7 +187,7 @@ For the Korean fonts:
     (Hanyang,) Adobe, Solaris-hanyang, MS, Unfonts, Baekmuk
 
 For the Simplified Chinese:
-    Adobe, Fandol, Hiragino, MS, CJKUnifonts, Arphic, CJKUnifonts-ttf
+    Adobe, Fandol, Hiragino, Founder, MS, CJKUnifonts, Arphic, CJKUnifonts-ttf
 
 For the Traditional Chinese:
     Adobe, MS, CJKUnifonts, Arphic, CJKUnifonts-ttf

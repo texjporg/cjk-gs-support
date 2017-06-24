@@ -502,7 +502,7 @@ sub main {
 }
 
 sub do_all_fonts {
-  # try to clean up all possible links/snippets/cidfmap which might be
+  # try to clean up all possible links/snippets/cidfmap which could have been
   # generated in the previous runs
   # previous versions of cjk-gs-integrate included following bugs:
   #   * the database sometimes identified GB/CNS classes wrongly
@@ -1705,7 +1705,7 @@ sub Usage {
 --force               do not bail out if linked fonts already exist
 --remove              try to remove instead of create
 --cleanup             try to clean up all possible links/snippets and
-                      cidfmap.local/cidfmap.aliases, which might be
+                      cidfmap.local/cidfmap.aliases, which could have been
                       generated in the previous runs
 -n, --dry-run         do not actually output anything
 -q, --quiet           be less verbose
@@ -1762,7 +1762,8 @@ and links the font to
     <Resource>/CIDFont/
 
 The `<Resource>` dir is either given by `-o`/`--output`, or otherwise searched
-from an installed Ghostscript (binary name is assumed to be 'gs').
+from an installed Ghostscript (binary name is assumed to be 'gs' on unix,
+'gswin32c' on win32).
 
 Aliases are added to 
 
