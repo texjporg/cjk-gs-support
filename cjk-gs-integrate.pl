@@ -1605,6 +1605,7 @@ sub find_gs_resource {
     chomp( my $foo = `kpsewhich -var-value=SELFAUTOPARENT`);
     if ( -d "$foo/tlpkg/tlgs" ) {
       # should be texlive with tlgs
+      print_debug("Assuming tlgs win32 ...\n");
       $foundres = "$foo/tlpkg/tlgs/Resource";
       # for TL2016, tlgs binary has built-in Resource,
       # so we cannot set up CJK fonts correctly.
@@ -1619,19 +1620,48 @@ sub find_gs_resource {
       $cidfmap_local_pathpart = "../lib/cidfmap.local";
       $cidfmap_aliases_pathpart = "../lib/cidfmap.aliases";
     } else {
-      # TODO: we assume gswin32c is in the path
-      # paths other than c:/gs/gs$gsver/Resource are not considered
-      chomp( my $gsver = `gswin32c --version 2>$nul` );
-      $foundres = "c:/gs/gs$gsver/Resource";
-      if ( ! -d $foundres ) {
-        $foundres = '';
+      # we assume gswin32c is in the path
+      # TODO: what should we do for gswin64c?
+      chomp( $foundres = `where gswin32c 2>$nul` ); # assume 'where' is available
+      if ($?) {
+        print_error("Cannot run where gswin32c ...\n");
+      } else {
+        # trial 1: assume the relative path
+        # when C:\path\to\bin\gswin32c.exe is found, then there should be
+        # C:\path\to\Resource (note that 'where' returns backslash-ed path)
+        print_debug("Finding gs resource by assuming relative path ...\n");
+        $foundres = encode_cptoutf($foundres); # 99.99% unnecessary
+        $foundres =~ s!\\!/!g;
+        $foundres =~ s!/bin/gswin32c\.exe$!/Resource!;
+        if ( ! -d $foundres ) {
+          $foundres = '';
+        }
+        if (!$foundres) {
+          print_debug("Found gs but no resource, try another routine ...\n");
+        }
+      }
+      if (!$foundres) {
+        chomp( my $gsver = `gswin32c --version 2>$nul` );
+        if ($?) {
+          print_error("Cannot run gswin32c --version ...\n");
+        } else {
+          # trial 2: assume the fixed path, c:/gs/gs$gsver/Resource
+          print_debug("Finding gs resource by assuming fixed path ...\n");
+          $foundres = "c:/gs/gs$gsver/Resource";
+          if ( ! -d $foundres ) {
+            $foundres = '';
+          }
+          if (!$foundres) {
+            print_error("Found gs but no resource???\n");
+          }
+        }
       }
     }
   } else {
     # we assume that gs is in the path
     chomp( my $gsver = `gs --version 2>$nul` );
     if ($?) {
-      print_error("Cannot get gs version ...\n");
+      print_error("Cannot run gs --version ...\n");
     } else {
       # trial 1: assume the relative path
       # when /path/to/bin/gs is found, then there should be
