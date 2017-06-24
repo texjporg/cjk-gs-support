@@ -1092,7 +1092,7 @@ sub info_found_fonts {
 #
 # dump aliases
 sub info_list_aliases {
-  print "List of ", ($opt_listaliases ? "all" : "available"), " aliases and their options (in decreasing priority):\n" unless $opt_machine;
+  print "List of ", ($opt_listallaliases ? "all" : "available"), " aliases and their options (in decreasing priority):\n" unless $opt_machine;
   my (@jal, @kal, @tal, @sal);
   for my $al (sort keys %aliases) {
     my $cl;
@@ -1132,13 +1132,13 @@ sub info_list_aliases {
   if ($opt_machine) {
     print @jal if @jal;
     print @kal if @kal;
-    print @tal if @tal;
     print @sal if @sal;
+    print @tal if @tal;
   } else {
     print "Aliases for Japanese fonts:\n", @jal, "\n" if @jal;
     print "Aliases for Korean fonts:\n", @kal, "\n" if @kal;
-    print "Aliases for Traditional Chinese fonts:\n", @tal, "\n" if @tal;
     print "Aliases for Simplified Chinese fonts:\n", @sal, "\n" if @sal;
+    print "Aliases for Traditional Chinese fonts:\n", @tal, "\n" if @tal;
   }
 }
 
@@ -1826,8 +1826,8 @@ Korean:
 
 Simplified Chinese:
 
-    STSong-Light STHeiti-Regular STHeiti-Light STKaiti-Regular
-    STFangsong-Light STFangsong-Regular
+    STSong-Light STSong-Regular STHeiti-Regular STHeiti-Light
+    STKaiti-Regular STFangsong-Light STFangsong-Regular
 
 Traditional Chinese:
 
@@ -1850,7 +1850,7 @@ For the Korean fonts:
     (Hanyang,) Adobe, Solaris-hanyang, MS, Unfonts, Baekmuk
 
 For the Simplified Chinese:
-    Adobe, Fandol, Hiragino, MS, CJKUnifonts, Arphic, CJKUnifonts-ttf
+    Adobe, Fandol, Hiragino, Founder, MS, CJKUnifonts, Arphic, CJKUnifonts-ttf
 
 For the Traditional Chinese:
     Adobe, MS, CJKUnifonts, Arphic, CJKUnifonts-ttf
@@ -3367,6 +3367,7 @@ TTFname(10): STFangsong.ttf
 Name: STSong
 Class: GB
 #Provides(??): STSong-Light # fails
+#Provides(??): STSong-Regular # fails
 TTCname(10): Songti.ttc(4)
 TTCname(20): 宋体.ttc(3)
 TTFname(30): STSong.ttf
@@ -3375,6 +3376,7 @@ TTFname(40): 华文宋体.ttf
 Name: STSongti-SC-Light
 Class: GB
 #Provides(??): STSong-Light # fails
+#Provides(??): STSong-Regular # fails
 TTCname(10): Songti.ttc(3)
 TTCname(20): 宋体.ttc(2)
 #TTFname(30): STSongti-SC-Light.ttf
@@ -3569,7 +3571,86 @@ Name: STYuanti-TC-Light
 Class: CNS
 TTCname: Yuanti.ttc(5)
 
-# Beijing Founder Electronics (OS X)
+# Beijing Founder Electronics
+# note:
+#   FZ****.TTF (11 files)
+# are bundled with with WPS Office (formerly Kingsoft Office) Linux.
+#   Lantinghei.ttc
+# is bundled with OS X 10.9 Mavericks or later versions.
+
+# Beijing Founder Electronics
+
+# FZShuSong-Z01
+Name: FZSSK--GBK1-0
+Class: GB
+Provides(55): STSong-Light
+TTFname: FZSSK.TTF
+
+# FZXiaoBiaoSong-B05
+Name: FZXBSK--GBK1-0
+Class: GB
+Provides(55): STSong-Regular
+TTFname: FZXBSK.TTF
+
+# FZXiHeiI-Z08
+Name: FZXH1K--GBK1-0
+Class: GB
+Provides(55): STHeiti-Light
+TTFname: FZXH1K.TTF
+
+# FZHei-B01
+Name: FZHTK--GBK1-0
+Class: GB
+Provides(55): STHeiti-Regular
+TTFname: FZHTK.TTF
+
+# FZKai-Z03
+Name: FZKTK--GBK1-0
+Class: GB
+Provides(55): STKaiti-Regular
+TTFname: FZKTK.TTF
+
+# FZFangSong-Z02
+Name: FZFSK--GBK1-0
+Class: GB
+Provides(55): STFangsong-Light
+Provides(55): STFangsong-Regular
+TTFname: FZFSK.TTF
+
+# FZXingKai-S04
+Name: FZXKK--GBK1-0
+Class: GB
+TTFname: FZXKK.TTF
+
+# FZWeiBei-S03
+Name: FZWBK--GBK1-0
+Class: GB
+TTFname: FZWBK.TTF
+
+# FZChaoCuHei-M10
+Name: FZCCHK--GBK1-0
+Class: GB
+TTFname: FZCCHK.TTF
+
+# FZLiShu-S01
+Name: FZLSK--GBK1-0
+Class: GB
+TTFname: FZLSK.TTF
+
+# FZYaoTi-M06
+Name: FZYTK--GBK1-0
+Class: GB
+TTFname: FZYTK.TTF
+
+# FZSongS-Extended
+Name: FZSONGS--GB1-5
+Class: GB
+TTFname: FZSongS_20100603.TTF
+
+# FZSongS-Extended(SIP)
+Name: FZSONGS_SIP--GB1-5
+Class: GB
+TTFname: FZSongS(SIP)_2010603.TTF
 
 # Lantinghei SC Demibold
 Name: FZLTZHK--GBK1-0
@@ -3708,6 +3789,7 @@ TTFname(10): LiGothicMed.ttf
 Name: AdobeSongStd-Light
 Class: GB
 Provides(30): STSong-Light
+Provides(30): STSong-Regular
 OTFname(10): AdobeSongStd-Light.otf
 
 Name: AdobeHeitiStd-Regular
@@ -3749,6 +3831,7 @@ Provides(40): STSong-Light
 OTFname(10): FandolSong-Regular.otf
 
 Name: FandolSong-Bold
+Provides(40): STSong-Regular
 Class: GB
 OTFname(10): FandolSong-Bold.otf
 
@@ -3778,6 +3861,7 @@ OTFname(10): FandolFang-Regular.otf
 Name: BousungEG-Light-GB
 Class: GB
 Provides(80): STSong-Light
+Provides(80): STSong-Regular
 Provides(80): STFangsong-Light
 Provides(80): STFangsong-Regular
 TTFname: gbsn00lp.ttf
@@ -3806,6 +3890,7 @@ TTFname: bkai00mp.ttf
 Name: UMingCN
 Class: GB
 Provides(70): STSong-Light
+Provides(70): STSong-Regular
 Provides(70): STFangsong-Light
 Provides(70): STFangsong-Regular
 TTCname: uming.ttc(0)
@@ -3837,10 +3922,12 @@ Class: CNS
 Provides(90): MSung-Light
 Provides(90): MSung-Medium
 TTFname: uming.ttf
+
 # GB
 Name: ShanHeiSun-Uni-Adobe-GB1
 Class: GB
 Provides(90): STSong-Light
+Provides(90): STSong-Regular
 Provides(90): STFangsong-Light
 Provides(90): STFangsong-Regular
 TTFname: uming.ttf
@@ -3851,6 +3938,7 @@ Class: CNS
 Provides(90): MKai-Medium
 Provides(90): MHei-Medium
 TTFname: ukai.ttf
+
 # GB
 Name: ZenKai-Uni-Adobe-GB1
 Class: GB
@@ -3865,6 +3953,7 @@ TTFname: ukai.ttf
 Name: WenQuanYiMicroHei
 Class: GB
 TTCname(10): wqy-microhei.ttc(0)
+
 # CNS
 Name: WenQuanYiMicroHei-Adobe-CNS1
 Class: CNS
@@ -3874,6 +3963,7 @@ TTCname(10): wqy-microhei.ttc(0)
 Name: WenQuanYiMicroHeiMono
 Class: GB
 TTCname(10): wqy-microhei.ttc(1)
+
 # CNS
 Name: WenQuanYiMicroHeiMono-Adobe-CNS1
 Class: CNS
@@ -3884,6 +3974,7 @@ Name: WenQuanYiZenHei
 Class: GB
 TTCname(10): wqy-zenhei.ttc(0)
 TTFname(20): wqy-zenhei.ttf
+
 # CNS
 Name: WenQuanYiZenHei-Adobe-CNS1
 Class: CNS
@@ -3894,6 +3985,7 @@ TTFname(20): wqy-zenhei.ttf
 Name: WenQuanYiZenHeiMono
 Class: GB
 TTCname(10): wqy-zenhei.ttc(1)
+
 # CNS:
 Name: WenQuanYiZenHeiMono-Adobe-CNS1
 Class: CNS
@@ -3903,6 +3995,7 @@ TTCname(10): wqy-zenhei.ttc(1)
 Name: WenQuanYiZenHeiSharp
 Class: GB
 TTCname(10): wqy-zenhei.ttc(2)
+
 # CNS
 Name: WenQuanYiZenHeiSharp-Adobe-CNS1
 Class: CNS
@@ -4313,32 +4406,32 @@ OTFname: AdobeGothicStd-Light.otf
 
 Name: Batang
 Class: Korea
-Provides(50): HYSMyeongJo-Medium
 TTFname(50): Batang.ttf
 TTCname(20): batang.ttc(0)
 
 Name: BatangChe
 Class: Korea
+Provides(50): HYSMyeongJo-Medium
 TTCname(20): batang.ttc(1)
 
 Name: Dotum
 Class: Korea
-Provides(50): HYGoThic-Medium
 TTCname(20): gulim.ttc(2)
 
 Name: DotumChe
 Class: Korea
+Provides(50): HYGoThic-Medium
 TTCname(20): gulim.ttc(3)
 
 Name: Gulim
 Class: Korea
-Provides(50): HYRGoThic-Medium
-Provides(90): HYGoThic-Medium
 TTFname(50): Gulim.ttf
 TTCname(20): gulim.ttc(0)
 
 Name: GulimChe
 Class: Korea
+Provides(50): HYRGoThic-Medium
+Provides(90): HYGoThic-Medium
 TTCname(20): gulim.ttc(1)
 
 Name: Gungsuh
@@ -4373,6 +4466,7 @@ TTFname(20): simhei.ttf
 Name: SimSun
 Class: GB
 Provides(60): STSong-Light
+Provides(60): STSong-Regular
 TTFname(50): SimSun.ttf
 TTCname(20): simsun.ttc(0)
 
