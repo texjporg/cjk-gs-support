@@ -395,8 +395,22 @@ if ($opt_info) {
   $opt_listfonts = 1;
   $opt_listaliases = 1;
 }
+
+# check exclusive options; unsafe due to make_all_available()
+if ($opt_listallaliases && $opt_listaliases) {
+  print_error("Both --list-all-aliases and --list-aliases!? I'm confused!\n");
+  exit(1);
+}
 if ($opt_listallaliases && $opt_listfonts) {
   print_error("Options --list-all-aliases and --list-fonts cannot be used at the same time!\n");
+  exit(1);
+}
+if ($opt_cleanup && $opt_listfonts) {
+  print_error("Options --cleanup and --list-fonts cannot be used at the same time!\n");
+  exit(1);
+}
+if ($opt_cleanup && $opt_listaliases) {
+  print_error("Options --cleanup and --list-aliases cannot be used at the same time!\n");
   exit(1);
 }
 
@@ -2653,6 +2667,12 @@ Name: IPAPGothic
 Class: Japan
 TTFname(20): ipagp.ttf
 #TTFname(21): IPAPGothic.ttf
+
+# IPA MJ (free)
+
+Name: IPAmjMincho
+Class: Japan
+TTFname: ipamjm.ttf
 
 # Moga-Mobo from Y.Oz Vox (free)
 
