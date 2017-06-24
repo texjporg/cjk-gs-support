@@ -2549,6 +2549,28 @@ TTCname(20): YuGothB.ttc(0)
 TTFname(40): YuGothB.ttf
 #TTFname(50): YuGothic-Bold.ttf
 
+# Yu-UI-fonts (Windows only)
+
+Name: YuGothicUI-Semilight
+Class: Japan
+TTCname(20): YuGothR.ttc(1)
+
+Name: YuGothicUI-Regular
+Class: Japan
+TTCname(20): YuGothM.ttc(1)
+
+Name: YuGothicUI-Light
+Class: Japan
+TTCname(20): YuGothL.ttc(1)
+
+Name: YuGothicUI-Bold
+Class: Japan
+TTCname(20): YuGothB.ttc(1)
+
+Name: YuGothicUI-Semibold
+Class: Japan
+TTCname(20): YuGothB.ttc(2)
+
 # IPA (free)
 
 Name: IPAMincho
@@ -3573,12 +3595,10 @@ TTCname: Yuanti.ttc(5)
 
 # Beijing Founder Electronics
 # note:
-#   FZ****.TTF (11 files)
+#   FZ****.TTF (13 files)
 # are bundled with with WPS Office (formerly Kingsoft Office) Linux.
 #   Lantinghei.ttc
 # is bundled with OS X 10.9 Mavericks or later versions.
-
-# Beijing Founder Electronics
 
 # FZShuSong-Z01
 Name: FZSSK--GBK1-0
@@ -4630,6 +4650,10 @@ TTFname(50): MS PMincho.ttf
 TTFname(30): MS-PMincho.ttf
 TTCname(20): msmincho.ttc(1)
 
+Name: MS-UIGothic
+Class: Japan
+TTCname(20): msgothic.ttc(2)
+
 Name: Meiryo
 Class: Japan
 TTFname(50): Meiryo.ttf
@@ -4655,6 +4679,22 @@ TTFname(50): Meiryo Italic.ttf
 TTFname(40): MeiryoItalic.ttf
 TTFname(30): Meiryo-Italic.ttf
 TTCname(20): meiryo.ttc(1)
+
+Name: MeiryoUI
+Class: Japan
+TTCname(20): meiryo.ttc(2)
+
+Name: MeiryoUI-Bold
+Class: Japan
+TTCname(20): meiryob.ttc(2)
+
+Name: MeiryoUI-BoldItalic
+Class: Japan
+TTCname(20): meiryob.ttc(3)
+
+Name: MeiryoUI-Italic
+Class: Japan
+TTCname(20): meiryo.ttc(3)
 
 Name: HGGothicE
 Class: Japan
