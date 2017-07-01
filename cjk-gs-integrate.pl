@@ -4539,6 +4539,7 @@ Class: GB
 Provides(60): STSong-Light
 Provides(60): STSong-Regular
 TTFname(50): SimSun.ttf
+TTFname(21): simsun.ttf
 TTCname(20): simsun.ttc(0)
 
 Name: NSimSun
