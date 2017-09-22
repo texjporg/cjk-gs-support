@@ -1459,16 +1459,22 @@ sub read_font_database {
   # add a "final empty line" to easy parsing
   push @dbl, "";
   read_each_font_database(@dbl);
-}
-
-sub read_each_font_database {
-  my (@curdbl) = @_;
-
+  # with --dump-data, dump only effective database
   if ($opt_dump_data) {
     open(FOO, ">$dump_datafile") || 
       die("cannot open $dump_datafile for writing: $!");
   }
+# if ($opt_dump_data) {
+#   print FOO "$l\n";
+#   next;
+# }
+  if ($opt_dump_data) {
+    close(FOO);
+  }
+}
 
+sub read_each_font_database {
+  my (@curdbl) = @_;
   my $fontname = "";
   my $fontclass = "";
   my %fontprovides = ();
@@ -1476,11 +1482,6 @@ sub read_each_font_database {
   my $psname = "";
   my $lineno = 0;
   for my $l (@curdbl) {
-    if ($opt_dump_data) {
-      print FOO "$l\n";
-      next;
-    }
-
     $lineno++;
     next if ($l =~ m/^\s*#/);
     if ($l =~ m/^\s*$/) {
@@ -1601,10 +1602,6 @@ sub read_each_font_database {
     # we are still here??
     print_error("Cannot parse this file at line $lineno, exiting. Strange line: >>>$l<<<\n");
     exit (1);
-  }
-
-  if ($opt_dump_data) {
-    close(FOO);
   }
 }
 
