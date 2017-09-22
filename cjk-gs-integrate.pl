@@ -1487,6 +1487,9 @@ sub read_each_font_database {
       if ($fontname || $fontclass || keys(%fontfiles)) {
         if ($fontname && $fontclass && keys(%fontfiles)) {
           my $realfontname = ($psname ? $psname : $fontname);
+          if ($fontdb{$realfontname}{'origname'}) {
+            print_warning("$fontdb{$realfontname}{'origname'} is already registered in database, overwriting ...\n");
+          }
           $fontdb{$realfontname}{'origname'} = $fontname;
           $fontdb{$realfontname}{'class'} = $fontclass;
           $fontdb{$realfontname}{'files'} = { %fontfiles };
@@ -4805,7 +4808,7 @@ Name: HGPMinchoB
 Class: Japan
 TTCname(20): HGRMB.TTC(1)
 
-Name: HGPMinchoB
+Name: HGSMinchoB
 Class: Japan
 TTCname(20): HGRMB.TTC(2)
 
