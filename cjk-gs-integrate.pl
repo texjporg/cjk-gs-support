@@ -1458,6 +1458,11 @@ sub read_font_database {
   chomp(@dbl);
   # add a "final empty line" to easy parsing
   push @dbl, "";
+  read_each_font_database(@dbl);
+}
+
+sub read_each_font_database {
+  my (@curdbl) = @_;
 
   if ($opt_dump_data) {
     open(FOO, ">$dump_datafile") || 
@@ -1470,7 +1475,7 @@ sub read_font_database {
   my %fontfiles;
   my $psname = "";
   my $lineno = 0;
-  for my $l (@dbl) {
+  for my $l (@curdbl) {
     if ($opt_dump_data) {
       print FOO "$l\n";
       next;
