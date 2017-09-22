@@ -5,7 +5,8 @@
 # Copyright 2015-2017 by Norbert Preining
 # Copyright 2016-2017 by Japanese TeX Development Community
 #
-# Based on research and work by Yusuke Kuroki, Bruno Voisin, Munehiro Yamamoto
+# Written by Norbert Preining, based on research and work by
+# Yusuke Kuroki, Bruno Voisin, Hironobu Yamashita, Munehiro Yamamoto
 # and the TeX Q&A wiki page
 #
 # This file is licensed under GPL version 3 or any later version.
@@ -16,6 +17,7 @@
 #
 # TODO:
 # - how to deal with MacTeX pre-shipped configuration files?
+# - how to deal with tlgs.win32 pre-shipped configuration files?
 # - interoperability with kanji-config-updmap
 #
 # Note that symlink names should be consistent with ptex-fontmaps!
@@ -2230,17 +2232,6 @@ OTCname(30): ヒラギノ角ゴシック W3.ttc(3)
 OTCname(29): ヒラギノ角ゴシック W3.ttc(3)
 OTCname(28): HiraginoSans-W3.ttc(3)
 
-Name: HiraKakuPro-W6
-Class: Japan
-Provides(40): FutoGoB101-Bold
-Provides(40): FutoGoB101Pro-Bold
-OTFname(20): ヒラギノ角ゴ Pro W6.otf
-OTFname(19): ヒラギノ角ゴ Pro W6.otf
-OTFname(10): HiraKakuPro-W6.otf
-OTCname(30): ヒラギノ角ゴシック W6.ttc(3)
-OTCname(29): ヒラギノ角ゴシック W6.ttc(3)
-OTCname(28): HiraginoSans-W6.ttc(3)
-
 Name: HiraKakuProN-W3
 Class: Japan
 Provides(30): GothicBBB-Medium
@@ -2251,6 +2242,17 @@ OTFname(10): HiraKakuProN-W3.otf
 OTCname(30): ヒラギノ角ゴシック W3.ttc(2)
 OTCname(29): ヒラギノ角ゴシック W3.ttc(2)
 OTCname(28): HiraginoSans-W3.ttc(2)
+
+Name: HiraKakuPro-W6
+Class: Japan
+Provides(40): FutoGoB101-Bold
+Provides(40): FutoGoB101Pro-Bold
+OTFname(20): ヒラギノ角ゴ Pro W6.otf
+OTFname(19): ヒラギノ角ゴ Pro W6.otf
+OTFname(10): HiraKakuPro-W6.otf
+OTCname(30): ヒラギノ角ゴシック W6.ttc(3)
+OTCname(29): ヒラギノ角ゴシック W6.ttc(3)
+OTCname(28): HiraginoSans-W6.ttc(3)
 
 Name: HiraKakuProN-W6
 Class: Japan
