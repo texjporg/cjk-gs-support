@@ -683,7 +683,10 @@ sub do_aliases {
       }
     }
     if (!$class) {
-      print_warning("Alias candidate for $al is empty!\n") if (!%{$aliases{$al}});
+      if (!%{$aliases{$al}}) {
+        print_warning("Alias candidate for $al is empty, skipping!\n");
+        next;
+      }
       # search lowest number
       my @ks = keys(%{$aliases{$al}});
       my $first = (sort { $a <=> $b} @ks)[0];
@@ -1463,12 +1466,21 @@ sub read_font_database {
   if ($opt_dump_data) {
     open(FOO, ">$dump_datafile") || 
       die("cannot open $dump_datafile for writing: $!");
-  }
-# if ($opt_dump_data) {
-#   print FOO "$l\n";
-#   next;
-# }
-  if ($opt_dump_data) {
+    for my $k (sort keys %fontdb) {
+      print FOO "Name: $fontdb{$k}{'origname'}\n";
+      print FOO "PSName: $k\n"; # redundant for some fonts, but necessary for some and does no harm
+      print FOO "Class: $fontdb{$k}{'class'}\n";
+      for my $p (sort keys %{$fontdb{$k}{'provides'}}) {
+        print FOO "Provides($fontdb{$k}{'provides'}{$p}): $p\n";
+      }
+      for my $f (sort { $fontdb{$k}{'files'}{$a}{'priority'}
+                        <=>
+                        $fontdb{$k}{'files'}{$b}{'priority'} }
+                      keys %{$fontdb{$k}{'files'}}) {
+        print FOO "$fontdb{$k}{'files'}{$f}{'type'}name($fontdb{$k}{'files'}{$f}{'priority'}): $f\n";
+      }
+      print FOO "\n"; # empty line is a separator between entries
+    }
     close(FOO);
   }
 }
@@ -1483,13 +1495,15 @@ sub read_each_font_database {
   my $lineno = 0;
   for my $l (@curdbl) {
     $lineno++;
-    next if ($l =~ m/^\s*#/);
-    if ($l =~ m/^\s*$/) {
+    next if ($l =~ m/^\s*#/); # skip comment line
+    if ($l =~ m/^\s*$/) { # empty line is a separator between entries
       if ($fontname || $fontclass || keys(%fontfiles)) {
         if ($fontname && $fontclass && keys(%fontfiles)) {
           my $realfontname = ($psname ? $psname : $fontname);
           if ($fontdb{$realfontname}{'origname'}) {
-            print_warning("$fontdb{$realfontname}{'origname'} is already registered in database, overwriting ...\n");
+            # needed for --fontdef-add, which allows multiple external database given by user
+            print_warning("$fontdb{$realfontname}{'origname'} is already registered in database,\n");
+            print_warning("overwriting with the new one ...\n");
           }
           $fontdb{$realfontname}{'origname'} = $fontname;
           $fontdb{$realfontname}{'class'} = $fontclass;
