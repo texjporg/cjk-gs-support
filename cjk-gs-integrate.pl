@@ -608,7 +608,7 @@ sub do_nonotf_fonts {
     if ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'TTF') {
       generate_font_snippet($fontdest,
         $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
-      $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'ttfname'}, $fontdb{$k}{'subfont'});
+      $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'ttfname'}, -1);
       link_font($fontdb{$k}{'target'}, $cidfsubst, $fontdb{$k}{'ttfname'});
       link_font($fontdb{$k}{'target'}, "$opt_texmflink/$ttf_pathpart", $fontdb{$k}{'ttfname'})
         if $opt_texmflink;
@@ -795,9 +795,11 @@ sub generate_cidfmap_entry {
   # extract subfont
   my $s = "/$n << /FileType /TrueType 
   /Path pssystemparams /GenericResourceDir get 
-  (CIDFSubst/$f) concatstrings
-  /SubfontID $sf
-  /CSI [($c";
+  (CIDFSubst/$f) concatstrings\n";
+  if ($sf >= 0) { # in this script, $sf < 0 represents TTF
+    $s .= "  /SubfontID $sf\n";
+  }
+  $s .= "  /CSI [($c";
   if ($c eq "Japan") {
     $s .= "1) 6]";
   } elsif ($c eq "GB") {
@@ -1332,7 +1334,7 @@ sub check_for_files {
       if ($mf =~ m/^(.*)\((\d*)\)$/) { $sf = $2; }
       $fontdb{$k}{'target'} = $fontdb{$k}{'files'}{$mf}{'target'};
       $fontdb{$k}{'type'} = $fontdb{$k}{'files'}{$mf}{'type'};
-      $fontdb{$k}{'subfont'} = $sf if ($fontdb{$k}{'type'} eq 'TTF' || $fontdb{$k}{'type'} eq 'TTC' || $fontdb{$k}{'type'} eq 'OTC');
+      $fontdb{$k}{'subfont'} = $sf if ($fontdb{$k}{'type'} eq 'TTC' || $fontdb{$k}{'type'} eq 'OTC');
     }
     # not needed anymore
     # delete $fontdb{$k}{'files'};
@@ -1468,7 +1470,7 @@ sub read_font_database {
       die("cannot open $dump_datafile for writing: $!");
     for my $k (sort keys %fontdb) {
       print FOO "Name: $fontdb{$k}{'origname'}\n";
-      print FOO "PSName: $k\n"; # redundant for some fonts, but necessary for some and does no harm
+      print FOO "PSName: $k\n"; # redundant for some fonts but does no harm, and necessary for some
       print FOO "Class: $fontdb{$k}{'class'}\n";
       for my $p (sort keys %{$fontdb{$k}{'provides'}}) {
         print FOO "Provides($fontdb{$k}{'provides'}{$p}): $p\n";
