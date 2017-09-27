@@ -256,6 +256,7 @@ my $dump_datafile = "$prg-data.dat";
 
 my $opt_output;
 my $opt_fontdef;
+my $opt_fontdef_add;
 my @opt_aliases;
 my $opt_filelist;
 my $opt_texmflink;
@@ -281,6 +282,7 @@ my $opt_markdown = 0;
 if (! GetOptions(
         "o|output=s"       => \$opt_output,
         "f|fontdef=s"      => \$opt_fontdef,
+        "fontdef-add=s"    => \$opt_fontdef_add,
         "a|alias=s"        => \@opt_aliases,
         "filelist=s"       => \$opt_filelist,
         "link-texmf:s"     => \$opt_texmflink,
@@ -384,10 +386,6 @@ if (defined($opt_dump_data)) {
 } else {
   $opt_dump_data = 0;
 }
-if ($opt_dump_data && $opt_fontdef) {
-  print_warning("-f/--fontdef option ignored due to --dump-data\n");
-  $opt_fontdef = 0;
-}
 
 if ($opt_cleanup) {
   $opt_remove = 1;
@@ -423,10 +421,11 @@ main(@ARGV);
 #
 sub main {
   # first, read font database to obtain %fontdb
-  # if $opt_dump_data is given, exit after dumping <DATA> to $dump_datafile
   print_info("reading font database ...\n");
   read_font_database();
   if ($opt_dump_data) {
+    # with --dump-data, dump only effective database and exit
+    dump_font_database();
     if (-f $dump_datafile) {
       print_info("*** Data dumped to $dump_datafile ***\n");
       exit(0);
@@ -1452,6 +1451,8 @@ sub determine_nonotf_link_name {
 
 sub read_font_database {
   my @dbl;
+  # if --fontdef=foo is given, disregard built-in database and
+  # use "foo" as a substitute; otherwise, use built-in database
   if ($opt_fontdef) {
     open (FDB, "<$opt_fontdef") ||
       die "Cannot find $opt_fontdef: $!";
@@ -1460,30 +1461,16 @@ sub read_font_database {
   } else {
     @dbl = <DATA>;
   }
-  chomp(@dbl);
-  # add a "final empty line" to easy parsing
-  push @dbl, "";
   read_each_font_database(@dbl);
-  # with --dump-data, dump only effective database
-  if ($opt_dump_data) {
-    open(FOO, ">$dump_datafile") || 
-      die("cannot open $dump_datafile for writing: $!");
-    for my $k (sort keys %fontdb) {
-      print FOO "Name: $fontdb{$k}{'origname'}\n";
-      print FOO "PSName: $k\n"; # redundant for some fonts but does no harm, and necessary for some
-      print FOO "Class: $fontdb{$k}{'class'}\n";
-      for my $p (sort keys %{$fontdb{$k}{'provides'}}) {
-        print FOO "Provides($fontdb{$k}{'provides'}{$p}): $p\n";
-      }
-      for my $f (sort { $fontdb{$k}{'files'}{$a}{'priority'}
-                        <=>
-                        $fontdb{$k}{'files'}{$b}{'priority'} }
-                      keys %{$fontdb{$k}{'files'}}) {
-        print FOO "$fontdb{$k}{'files'}{$f}{'type'}name($fontdb{$k}{'files'}{$f}{'priority'}): $f\n";
-      }
-      print FOO "\n"; # empty line is a separator between entries
-    }
-    close(FOO);
+  # if --fontdef-add=bar is given, use "bar" as an addition
+  # to the current database; if the same Name entry appears,
+  # overwrite existing one (that is, the addition wins)
+  if ($opt_fontdef_add) {
+    open (FDB, "<$opt_fontdef_add") ||
+      die "Cannot find $opt_fontdef_add: $!";
+    @dbl = <FDB>;
+    close(FDB);
+    read_each_font_database(@dbl);
   }
 }
 
@@ -1495,6 +1482,8 @@ sub read_each_font_database {
   my %fontfiles;
   my $psname = "";
   my $lineno = 0;
+  chomp(@curdbl);
+  push @curdbl, ""; # add a "final empty line" to easy parsing
   for my $l (@curdbl) {
     $lineno++;
     next if ($l =~ m/^\s*#/); # skip comment line
@@ -1619,6 +1608,27 @@ sub read_each_font_database {
     print_error("Cannot parse this file at line $lineno, exiting. Strange line: >>>$l<<<\n");
     exit (1);
   }
+}
+
+sub dump_font_database {
+  open(FOO, ">$dump_datafile") || 
+    die("cannot open $dump_datafile for writing: $!");
+  for my $k (sort keys %fontdb) {
+    print FOO "Name: $fontdb{$k}{'origname'}\n";
+    print FOO "PSName: $k\n"; # redundant for some fonts but does no harm, and necessary for some
+    print FOO "Class: $fontdb{$k}{'class'}\n";
+    for my $p (sort keys %{$fontdb{$k}{'provides'}}) {
+      print FOO "Provides($fontdb{$k}{'provides'}{$p}): $p\n";
+    }
+    for my $f (sort { $fontdb{$k}{'files'}{$a}{'priority'}
+                      <=>
+                      $fontdb{$k}{'files'}{$b}{'priority'} }
+                    keys %{$fontdb{$k}{'files'}}) {
+      print FOO "$fontdb{$k}{'files'}{$f}{'type'}name($fontdb{$k}{'files'}{$f}{'priority'}): $f\n";
+    }
+    print FOO "\n"; # empty line is a separator between entries
+  }
+  close(FOO);
 }
 
 sub find_gs_resource {
@@ -1754,6 +1764,8 @@ sub Usage {
                       is searched and used.
 -f, --fontdef FILE    specify alternate set of font definitions, if not
                       given, the built-in set is used
+--fontdef-add FILE    specify additional set of font definitions, to
+                      overwrite subset of built-in definitions
 -a, --alias LL=RR     defines an alias, or overrides a given alias;
                       illegal if LL is provided by a real font, or
                       RR is neither available as real font or alias;
@@ -1789,9 +1801,10 @@ sub Usage {
 ";
 
   my $commandoptions = "
---dump-data [FILE]    dump the built-in set of font definitions; you can
-                      easily modify it, and tell me with -f (or --fontdef)
-                      the data file name defaults to $dump_datafile
+--dump-data [FILE]    dump the set of font definitions which is currently
+                      effective, where FILE (the dump output) defaults to
+                      $dump_datafile; you can easily modify it, and tell me
+                      with -f (or --fontdef) option
 --only-aliases        regenerate only cidfmap.aliases file, instead of all
 --list-aliases        lists the available aliases and their options, with the
                       selected option on top
