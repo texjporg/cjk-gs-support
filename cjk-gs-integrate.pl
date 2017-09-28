@@ -2247,11 +2247,14 @@ OTFname: A-OTF-ShinGoPro-Ultra.otf
 #   ヒラギノ角ゴ {Std,StdN} W8.otf
 #   ヒラギノ丸ゴ {Pro,ProN} W4.otf
 #   ヒラギノ明朝 {Pro,ProN} {W3,W6}.otf
-# are bundled with OS X 10.10.5 Yosemite or earlier versions.
+# are bundled with OS X 10.10 Yosemite or earlier versions.
 #   ヒラギノ角ゴシック {W0,...W9}.ttc
 #   ヒラギノ丸ゴ ProN W4.ttc
-#   ヒラギノ明朝 ProN {W3,W6}.ttc
 # are bundled with OS X 10.11 El Capitan or later versions.
+#   ヒラギノ明朝 ProN {W3,W6}.ttc
+# are bundled with OS X 10.11 El Capitan -- macOS 10.12.6 Sierra.
+#   ヒラギノ明朝 ProN.ttc
+# is bundled with macOS 10.13 High Sierra or later versions.
 
 Name: HiraKakuPro-W3
 Class: Japan
@@ -2262,9 +2265,6 @@ Provides(40): GothicBBBPro-Medium
 OTFname(20): ヒラギノ角ゴ Pro W3.otf
 OTFname(19): ヒラギノ角ゴ Pro W3.otf
 OTFname(10): HiraKakuPro-W3.otf
-OTCname(30): ヒラギノ角ゴシック W3.ttc(3)
-OTCname(29): ヒラギノ角ゴシック W3.ttc(3)
-OTCname(28): HiraginoSans-W3.ttc(3)
 
 Name: HiraKakuProN-W3
 Class: Japan
@@ -2273,9 +2273,6 @@ Provides(30): GothicBBBPro-Medium
 OTFname(20): ヒラギノ角ゴ ProN W3.otf
 OTFname(19): ヒラギノ角ゴ ProN W3.otf
 OTFname(10): HiraKakuProN-W3.otf
-OTCname(30): ヒラギノ角ゴシック W3.ttc(2)
-OTCname(29): ヒラギノ角ゴシック W3.ttc(2)
-OTCname(28): HiraginoSans-W3.ttc(2)
 
 Name: HiraKakuPro-W6
 Class: Japan
@@ -2284,9 +2281,6 @@ Provides(40): FutoGoB101Pro-Bold
 OTFname(20): ヒラギノ角ゴ Pro W6.otf
 OTFname(19): ヒラギノ角ゴ Pro W6.otf
 OTFname(10): HiraKakuPro-W6.otf
-OTCname(30): ヒラギノ角ゴシック W6.ttc(3)
-OTCname(29): ヒラギノ角ゴシック W6.ttc(3)
-OTCname(28): HiraginoSans-W6.ttc(3)
 
 Name: HiraKakuProN-W6
 Class: Japan
@@ -2295,9 +2289,6 @@ Provides(30): FutoGoB101Pro-Bold
 OTFname(20): ヒラギノ角ゴ ProN W6.otf
 OTFname(19): ヒラギノ角ゴ ProN W6.otf
 OTFname(10): HiraKakuProN-W6.otf
-OTCname(30): ヒラギノ角ゴシック W6.ttc(2)
-OTCname(29): ヒラギノ角ゴシック W6.ttc(2)
-OTCname(28): HiraginoSans-W6.ttc(2)
 
 Name: HiraKakuStd-W8
 Class: Japan
@@ -2306,9 +2297,6 @@ Provides(40): MidashiGoPro-MB31
 OTFname(20): ヒラギノ角ゴ Std W8.otf
 OTFname(19): ヒラギノ角ゴ Std W8.otf
 OTFname(10): HiraKakuStd-W8.otf
-OTCname(30): ヒラギノ角ゴシック W8.ttc(2)
-OTCname(29): ヒラギノ角ゴシック W8.ttc(2)
-OTCname(28): HiraginoSans-W8.ttc(2)
 
 Name: HiraKakuStdN-W8
 Class: Japan
@@ -2317,69 +2305,6 @@ Provides(30): MidashiGoPro-MB31
 OTFname(20): ヒラギノ角ゴ StdN W8.otf
 OTFname(19): ヒラギノ角ゴ StdN W8.otf
 OTFname(10): HiraKakuStdN-W8.otf
-OTCname(30): ヒラギノ角ゴシック W8.ttc(3)
-OTCname(29): ヒラギノ角ゴシック W8.ttc(3)
-OTCname(28): HiraginoSans-W8.ttc(3)
-
-Name: HiraginoSans-W0
-Class: Japan
-OTCname(30): ヒラギノ角ゴシック W0.ttc(0)
-OTCname(29): ヒラギノ角ゴシック W0.ttc(0)
-OTCname(28): HiraginoSans-W0.ttc(0)
-
-Name: HiraginoSans-W1
-Class: Japan
-OTCname(30): ヒラギノ角ゴシック W1.ttc(0)
-OTCname(29): ヒラギノ角ゴシック W1.ttc(0)
-OTCname(28): HiraginoSans-W1.ttc(0)
-
-Name: HiraginoSans-W2
-Class: Japan
-OTCname(30): ヒラギノ角ゴシック W2.ttc(0)
-OTCname(29): ヒラギノ角ゴシック W2.ttc(0)
-OTCname(28): HiraginoSans-W2.ttc(0)
-
-Name: HiraginoSans-W3
-Class: Japan
-OTCname(30): ヒラギノ角ゴシック W3.ttc(0)
-OTCname(29): ヒラギノ角ゴシック W3.ttc(0)
-OTCname(28): HiraginoSans-W3.ttc(0)
-
-Name: HiraginoSans-W4
-Class: Japan
-OTCname(30): ヒラギノ角ゴシック W4.ttc(0)
-OTCname(29): ヒラギノ角ゴシック W4.ttc(0)
-OTCname(28): HiraginoSans-W4.ttc(0)
-
-Name: HiraginoSans-W5
-Class: Japan
-OTCname(30): ヒラギノ角ゴシック W5.ttc(0)
-OTCname(29): ヒラギノ角ゴシック W5.ttc(0)
-OTCname(28): HiraginoSans-W5.ttc(0)
-
-Name: HiraginoSans-W6
-Class: Japan
-OTCname(30): ヒラギノ角ゴシック W6.ttc(0)
-OTCname(29): ヒラギノ角ゴシック W6.ttc(0)
-OTCname(28): HiraginoSans-W6.ttc(0)
-
-Name: HiraginoSans-W7
-Class: Japan
-OTCname(30): ヒラギノ角ゴシック W7.ttc(0)
-OTCname(29): ヒラギノ角ゴシック W7.ttc(0)
-OTCname(28): HiraginoSans-W7.ttc(0)
-
-Name: HiraginoSans-W8
-Class: Japan
-OTCname(30): ヒラギノ角ゴシック W8.ttc(0)
-OTCname(29): ヒラギノ角ゴシック W8.ttc(0)
-OTCname(28): HiraginoSans-W8.ttc(0)
-
-Name: HiraginoSans-W9
-Class: Japan
-OTCname(30): ヒラギノ角ゴシック W9.ttc(0)
-OTCname(29): ヒラギノ角ゴシック W9.ttc(0)
-OTCname(28): HiraginoSans-W9.ttc(0)
 
 Name: HiraMaruPro-W4
 Class: Japan
@@ -2388,9 +2313,6 @@ Provides(40): Jun101Pro-Light
 OTFname(20): ヒラギノ丸ゴ Pro W4.otf
 OTFname(19): ヒラギノ丸ゴ Pro W4.otf
 OTFname(10): HiraMaruPro-W4.otf
-OTCname(30): ヒラギノ丸ゴ ProN W4.ttc(0)
-OTCname(29): ヒラギノ丸ゴ ProN W4.ttc(0)
-OTCname(28): HiraginoSansR-W4.ttc(0)
 
 Name: HiraMaruProN-W4
 Class: Japan
@@ -2399,9 +2321,6 @@ Provides(30): Jun101Pro-Light
 OTFname(20): ヒラギノ丸ゴ ProN W4.otf
 OTFname(19): ヒラギノ丸ゴ ProN W4.otf
 OTFname(10): HiraMaruProN-W4.otf
-OTCname(30): ヒラギノ丸ゴ ProN W4.ttc(1)
-OTCname(29): ヒラギノ丸ゴ ProN W4.ttc(1)
-OTCname(28): HiraginoSansR-W4.ttc(1)
 
 Name: HiraMinPro-W3
 Class: Japan
@@ -2410,9 +2329,6 @@ Provides(40): RyuminPro-Light
 OTFname(20): ヒラギノ明朝 Pro W3.otf
 OTFname(19): ヒラギノ明朝 Pro W3.otf
 OTFname(10): HiraMinPro-W3.otf
-OTCname(30): ヒラギノ明朝 ProN W3.ttc(1)
-OTCname(29): ヒラギノ明朝 ProN W3.ttc(1)
-OTCname(28): HiraginoSerif-W3.ttc(1)
 
 Name: HiraMinPro-W6
 Class: Japan
@@ -2421,9 +2337,6 @@ Provides(40): FutoMinA101Pro-Bold
 OTFname(20): ヒラギノ明朝 Pro W6.otf
 OTFname(19): ヒラギノ明朝 Pro W6.otf
 OTFname(10): HiraMinPro-W6.otf
-OTCname(30): ヒラギノ明朝 ProN W6.ttc(1)
-OTCname(29): ヒラギノ明朝 ProN W6.ttc(1)
-OTCname(28): HiraginoSerif-W6.ttc(1)
 
 Name: HiraMinProN-W3
 Class: Japan
@@ -2432,9 +2345,6 @@ Provides(30): RyuminPro-Light
 OTFname(20): ヒラギノ明朝 ProN W3.otf
 OTFname(19): ヒラギノ明朝 ProN W3.otf
 OTFname(10): HiraMinProN-W3.otf
-OTCname(30): ヒラギノ明朝 ProN W3.ttc(0)
-OTCname(29): ヒラギノ明朝 ProN W3.ttc(0)
-OTCname(28): HiraginoSerif-W3.ttc(0)
 
 Name: HiraMinProN-W6
 Class: Japan
@@ -2443,9 +2353,6 @@ Provides(30): FutoMinA101Pro-Bold
 OTFname(20): ヒラギノ明朝 ProN W6.otf
 OTFname(19): ヒラギノ明朝 ProN W6.otf
 OTFname(10): HiraMinProN-W6.otf
-OTCname(30): ヒラギノ明朝 ProN W6.ttc(0)
-OTCname(29): ヒラギノ明朝 ProN W6.ttc(0)
-OTCname(28): HiraginoSerif-W6.ttc(0)
 
 # Following Hiragino fonts are not bundled with OS X,
 # but used in ptex-fontmaps
@@ -2467,7 +2374,10 @@ OTFname(10): HiraMinProN-W2.otf
 # Note about Mac OS X:
 #   Yu Gothic Medium.otf
 #   Yu Gothic Bold.otf
-# are bundled with OS X 10.9 Mavericks or later versions.
+# are bundled with OS X 10.9 Mavericks -- macOS 10.12.6 Sierra.
+#   YuGothic-Medium.otf
+#   YuGothic-Bold.otf
+# are bundled with macOS 10.13 High Sierra or later versions.
 #   Yu Mincho Medium.otf
 #   Yu Mincho Demibold.otf
 # are bundled with OS X 10.9 Mavericks -- 10.10.5 Yosemite.
@@ -2484,13 +2394,14 @@ OTFname(10): HiraMinProN-W2.otf
 #     index 3: YuMin_36pKn-Medium
 #     index 4: YuMin_36pKn-Demibold
 #     index 5: YuMin_36pKn-Extrabold
-# is bundled with macOS 10.12.0 Sierra or later versions.
+# is bundled with macOS 10.12 Sierra or later versions.
 
 Name: YuGo-Medium
 Class: Japan
 Provides(80): GothicBBB-Medium
 Provides(80): GothicBBBPro-Medium
 OTFname(20): Yu Gothic Medium.otf
+OTFname(19): YuGothic-Medium.otf
 OTFname(10): YuGo-Medium.otf
 
 Name: YuGo-Bold
@@ -2502,6 +2413,7 @@ Provides(80): Jun101Pro-Light
 Provides(80): MidashiGo-MB31
 Provides(80): MidashiGoPro-MB31
 OTFname(20): Yu Gothic Bold.otf
+OTFname(19): YuGothic-Bold.otf
 OTFname(10): YuGo-Bold.otf
 
 Name: YuMin-Medium
@@ -2510,7 +2422,6 @@ Provides(80): Ryumin-Light
 Provides(80): RyuminPro-Light
 OTFname(20): Yu Mincho Medium.otf
 OTFname(10): YuMin-Medium.otf
-OTCname(30): YuMincho.ttc(0)
 
 Name: YuMin-Demibold
 Class: Japan
@@ -2518,26 +2429,6 @@ Provides(80): FutoMinA101-Bold
 Provides(80): FutoMinA101Pro-Bold
 OTFname(20): Yu Mincho Demibold.otf
 OTFname(10): YuMin-Demibold.otf
-OTCname(30): YuMincho.ttc(1)
-
-# Following four entries are for macOS 10.12 Sierra
-# The index for OS X 10.11.x El Capitan is different!
-
-Name: YuMin-Extrabold
-Class: Japan
-OTCname(30): YuMincho.ttc(2)
-
-Name: YuMin_36pKn-Medium
-Class: Japan
-OTCname(30): YuMincho.ttc(3)
-
-Name: YuMin_36pKn-Demibold
-Class: Japan
-OTCname(30): YuMincho.ttc(4)
-
-Name: YuMin_36pKn-Extrabold
-Class: Japan
-OTCname(30): YuMincho.ttc(5)
 
 # Yu-fonts Windows version
 
@@ -3251,82 +3142,6 @@ OTFname: KozMinProVI-Regular.otf
 Name: KozMinProVI-Light
 Class: Japan
 OTFname: KozMinProVI-Light.otf
-
-# other Mac OS X fonts
-
-# Note about Mac OS X:
-#   Klee.ttc
-#   Tsukushi{A,B}MaruGothic.ttc
-# are bundled with OS X 10.11 El Capitan or later versions.
-#   Kyokasho.ttc
-#   ToppanBunkyuMincho-Regular.otf
-#   ToppanBunkyuGothic.ttc
-#   ToppanBunkyuMidashiMincho-ExtraBold.otf
-#   ToppanBunkyuMidashiGothic-ExtraBold.otf
-# are bundled with macOS 10.12 Sierra or later versions.
-
-Name: TsukuARdGothic-Regular
-Class: Japan
-OTCname: TsukushiAMaruGothic.ttc(0)
-
-Name: TsukuARdGothic-Bold
-Class: Japan
-OTCname: TsukushiAMaruGothic.ttc(1)
-
-Name: TsukuBRdGothic-Regular
-Class: Japan
-OTCname: TsukushiBMaruGothic.ttc(0)
-
-Name: TsukuBRdGothic-Bold
-Class: Japan
-OTCname: TsukushiBMaruGothic.ttc(1)
-
-Name: Klee-Medium
-Class: Japan
-OTCname: Klee.ttc(1)
-
-Name: Klee-Demibold
-Class: Japan
-OTCname: Klee.ttc(0)
-
-Name: YuKyo_Yoko-Medium
-Class: Japan
-OTCname: Kyokasho.ttc(0)
-
-Name: YuKyo_Yoko-Bold
-Class: Japan
-OTCname: Kyokasho.ttc(1)
-
-Name: YuKyo-Medium
-Class: Japan
-OTCname: Kyokasho.ttc(2)
-
-Name: YuKyo-Bold
-Class: Japan
-OTCname: Kyokasho.ttc(3)
-
-Name: ToppanBunkyuMincho-Regular
-PSName: ToppanBunkyuMinchoPr6N-Regular
-Class: Japan
-OTFname: ToppanBunkyuMincho-Regular.otf
-
-Name: ToppanBunkyuGothicPr6N-DB
-Class: Japan
-OTCname: ToppanBunkyuGothic.ttc(0)
-
-Name: ToppanBunkyuGothicPr6N-Regular
-Class: Japan
-OTCname: ToppanBunkyuGothic.ttc(1)
-
-Name: ToppanBunkyuMidashiMincho-ExtraBold
-PSName: ToppanBunkyuMidashiMinchoStdN-ExtraBold
-Class: Japan
-OTFname: ToppanBunkyuMidashiMincho-ExtraBold.otf
-
-Name: ToppanBunkyuMidashiGothic-ExtraBold
-PSName: ToppanBunkyuMidashiGothicStdN-ExtraBold
-Class: Japan
-OTFname: ToppanBunkyuMidashiGothic-ExtraBold.otf
 
 #
 # CHINESE FONTS
