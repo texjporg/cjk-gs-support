@@ -41,7 +41,20 @@ done
 #mv README.md README
 cd ..
 diff -urN $PROJECT-$VER-orig $PROJECT-$VER
+
+#
+# separate macOS-specific packages
+mkdir $PROJECT-macos-$VER
+# remove the non-free part in the main project
+for i in $PROJECT-$VER/*.dat ; do
+  bn=`basename $i`
+  mv $PROJECT-$VER/$bn $PROJECT-macos-$VER
+done
+# remove the rest of the stuff
+mv $PROJECT-$VER/README-macos.md $PROJECT-macos-$VER/README.md
+
 tar zcf $DIR/$PROJECT-$VER.tar.gz $PROJECT-$VER
+tar zcf $DIR/$PROJECT-macos-$VER.tar.gz $PROJECT-macos-$VER
 echo
 echo You should execute
 echo
