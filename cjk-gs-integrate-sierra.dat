@@ -1,3 +1,7 @@
+#
+# JAPANESE FONTS
+#
+
 # Hiragino
 
 Name: HiraKakuPro-W3
@@ -290,3 +294,35 @@ Name: ToppanBunkyuMidashiGothic-ExtraBold
 PSName: ToppanBunkyuMidashiGothicStdN-ExtraBold
 Class: Japan
 OTFname: ToppanBunkyuMidashiGothic-ExtraBold.otf
+
+#
+# CHINESE FONTS
+#
+
+# Hiragino chinese
+
+Name: HiraginoSansGB-W3
+Class: GB
+Provides(50): STHeiti-Light
+OTFname(20): Hiragino Sans GB W3.otf
+OTFname(10): HiraginoSansGB-W3.otf
+OTCname(30): Hiragino Sans GB W3.ttc(0)
+OTCname(28): HiraginoSansGB-W3.ttc(0)
+
+Name: HiraginoSansGB-W6
+Class: GB
+Provides(50): STHeiti-Regular
+OTFname(20): Hiragino Sans GB W6.otf
+OTFname(10): HiraginoSansGB-W6.otf
+OTCname(30): Hiragino Sans GB W6.ttc(0)
+OTCname(28): HiraginoSansGB-W6.ttc(0)
+
+Name: HiraginoSansCNS-W3
+Class: CNS
+OTCname(30): Hiragino Sans CNS.ttc(0)
+OTCname(28): HiraginoSansCNS.ttc(0)
+
+Name: HiraginoSansCNS-W6
+Class: CNS
+OTCname(30): Hiragino Sans CNS.ttc(1)
+OTCname(28): HiraginoSansCNS.ttc(1)

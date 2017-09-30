@@ -3166,33 +3166,30 @@ OTFname: KozMinProVI-Light.otf
 # CHINESE FONTS
 #
 
-# Hiragino chinese (OS X)
+# Hiragino chinese
+
+# Note about Mac OS X:
+#   Hiragino Sans GB {W3,W6}.otf
+# are bundled with OS X 10.10.5 Yosemite or earlier versions.
+#   Hiragino Sans GB {W3,W6}.ttc
+# are bundled with OS X 10.11 El Capitan -- macOS 10.12.6 Sierra.
+#   Hiragino Sans CNS.ttc
+# is bundled with macOS 10.12 Sierra -- macOS 10.12.6 Sierra.
+#   Hiragino Sans GB.ttc
+#   Hiragino_Sans_CNS.ttc
+# is bundled with macOS 10.13 High Sierra or later versions.
 
 Name: HiraginoSansGB-W3
 Class: GB
 Provides(50): STHeiti-Light
 OTFname(20): Hiragino Sans GB W3.otf
 OTFname(10): HiraginoSansGB-W3.otf
-OTCname(30): Hiragino Sans GB W3.ttc(0)
-OTCname(28): HiraginoSansGB-W3.ttc(0)
 
 Name: HiraginoSansGB-W6
 Class: GB
 Provides(50): STHeiti-Regular
 OTFname(20): Hiragino Sans GB W6.otf
 OTFname(10): HiraginoSansGB-W6.otf
-OTCname(30): Hiragino Sans GB W6.ttc(0)
-OTCname(28): HiraginoSansGB-W6.ttc(0)
-
-Name: HiraginoSansCNS-W3
-Class: CNS
-OTCname(30): Hiragino Sans CNS.ttc(0)
-OTCname(28): HiraginoSansCNS.ttc(0)
-
-Name: HiraginoSansCNS-W6
-Class: CNS
-OTCname(30): Hiragino Sans CNS.ttc(1)
-OTCname(28): HiraginoSansCNS.ttc(1)
 
 # DynaComware (OS X)
 

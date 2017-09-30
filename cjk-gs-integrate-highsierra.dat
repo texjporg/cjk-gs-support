@@ -1,3 +1,7 @@
+#
+# JAPANESE FONTS
+#
+
 # Hiragino
 
 Name: HiraKakuPro-W3
@@ -295,7 +299,7 @@ OTFname: ToppanBunkyuMidashiGothicStdN-ExtraBold.otf
 # CHINESE FONTS
 #
 
-# Hiragino chinese (OS X)
+# Hiragino chinese
 
 Name: HiraginoSansGB-W3
 Class: GB
