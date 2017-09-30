@@ -9,7 +9,10 @@ Here we provide additional database for macOS-specific font files.
 Usage
 -----
 
-First, download the database file (`*.dat`) which is suitable for your OS version.
+First, download the database file (`*.dat`) which is suitable for
+your OS version.
+You don't need to install the database file, but you can place it
+under `$TEXMF/fonts/misc/cjk-gs-integrate` if you like.
 
 If you are using macOS 10.13 High Sierra, execute
 
