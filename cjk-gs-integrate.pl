@@ -321,7 +321,7 @@ if ($opt_help || $opt_markdown) {
   exit 0;
 }
 
-if ($opt_debug) {
+if ($opt_debug >= 2) {
   require Data::Dumper;
   $Data::Dumper::Indent = 1;
 }
@@ -1313,13 +1313,13 @@ sub check_for_files {
   }
 
   # show the %fontdb before file check
-  if ($opt_debug > 0) {
-    print_debug("dumping font database before file check:\n");
-    print_debug(Data::Dumper::Dumper(\%fontdb));
+  if ($opt_debug >= 2) {
+    print_ddebug("dumping font database before file check:\n");
+    print_ddebug(Data::Dumper::Dumper(\%fontdb));
   }
-  if ($opt_debug > 1) {
-    print_ddebug("dumping basename to filename list:\n");
-    print_ddebug(Data::Dumper::Dumper(\%bntofn));
+  if ($opt_debug >= 3) {
+    print_dddebug("dumping basename to filename list:\n");
+    print_dddebug(Data::Dumper::Dumper(\%bntofn));
   }
 
   # update the %fontdb with the found files
@@ -1359,9 +1359,9 @@ sub check_for_files {
     # not needed anymore
     # delete $fontdb{$k}{'files'};
   }
-  if ($opt_debug > 0) {
-    print_debug("dumping font database:\n");
-    print_debug(Data::Dumper::Dumper(\%fontdb));
+  if ($opt_debug >= 2) {
+    print_ddebug("dumping font database:\n");
+    print_ddebug(Data::Dumper::Dumper(\%fontdb));
   }
 }
 
@@ -1415,9 +1415,9 @@ sub compute_aliases {
       $user_aliases{$ll} = $rr;
     }
   }
-  if ($opt_debug > 0) {
-    print_debug("dumping aliases:\n");
-    print_debug(Data::Dumper::Dumper(\%aliases));
+  if ($opt_debug >= 2) {
+    print_ddebug("dumping aliases:\n");
+    print_ddebug(Data::Dumper::Dumper(\%aliases));
   }
 }
 
@@ -1523,8 +1523,8 @@ sub read_each_font_database {
           $fontdb{$realfontname}{'class'} = $fontclass;
           $fontdb{$realfontname}{'files'} = { %fontfiles };
           $fontdb{$realfontname}{'provides'} = { %fontprovides };
-          if ($opt_debug > 1) {
-            print_ddebug("Dumping fontfiles for $realfontname: " . Data::Dumper::Dumper(\%fontfiles));
+          if ($opt_debug >= 3) {
+            print_dddebug("Dumping fontfiles for $realfontname: " . Data::Dumper::Dumper(\%fontfiles));
           }
           # reset to start
           $fontname = $fontclass = $psname = "";
@@ -1554,8 +1554,8 @@ sub read_each_font_database {
       if (win32()) {
         $encoded_fn = encode_utftocp($fn);
       }
-      print_ddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
-      print_ddebug("type: otf\n");
+      print_dddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
+      print_dddebug("type: otf\n");
       $fontfiles{$fn}{'type'} = 'OTF';
       next;
     }
@@ -1567,8 +1567,8 @@ sub read_each_font_database {
       if (win32()) {
         $encoded_fn = encode_utftocp($fn);
       }
-      print_ddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
-      print_ddebug("type: otc\n");
+      print_dddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
+      print_dddebug("type: otc\n");
       $fontfiles{$fn}{'type'} = 'OTC';
       next;
     }
@@ -1580,8 +1580,8 @@ sub read_each_font_database {
       if (win32()) {
         $encoded_fn = encode_utftocp($fn);
       }
-      print_ddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
-      print_ddebug("type: ttf\n");
+      print_dddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
+      print_dddebug("type: ttf\n");
       $fontfiles{$fn}{'type'} = 'TTF';
       next;
     }
@@ -1593,8 +1593,8 @@ sub read_each_font_database {
       if (win32()) {
         $encoded_fn = encode_utftocp($fn);
       }
-      print_ddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
-      print_ddebug("type: ttc\n");
+      print_dddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
+      print_dddebug("type: ttc\n");
       $fontfiles{$fn}{'type'} = 'TTC';
       next;
     }
@@ -1607,18 +1607,18 @@ sub read_each_font_database {
       if (win32()) {
         $encoded_fn = encode_utftocp($fn);
       }
-      print_ddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
+      print_dddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
       if ($fn =~ m/\.otf$/i) {
-        print_ddebug("type: otf\n");
+        print_dddebug("type: otf\n");
         $fontfiles{$fn}{'type'} = 'OTF';
       } elsif ($fn =~ m/\.otc(\(\d+\))?$/i) {
-        print_ddebug("type: otc\n");
+        print_dddebug("type: otc\n");
         $fontfiles{$fn}{'type'} = 'OTC';
       } elsif ($fn =~ m/\.ttf$/i) {
-        print_ddebug("type: ttf\n");
+        print_dddebug("type: ttf\n");
         $fontfiles{$fn}{'type'} = 'TTF';
       } elsif ($fn =~ m/\.ttc(\(\d+\))?$/i) {
-        print_ddebug("type: ttc\n");
+        print_dddebug("type: ttc\n");
         $fontfiles{$fn}{'type'} = 'TTC';
       } else {
         print_warning("cannot determine font type of $fn at line $lineno, skipping!\n");
@@ -2061,6 +2061,9 @@ sub print_debug {
 }
 sub print_ddebug {
   print STDERR "$prg [DEBUG]: ", @_ if ($opt_debug >= 2);
+}
+sub print_dddebug {
+  print STDERR "$prg [DEBUG]: ", @_ if ($opt_debug >= 3);
 }
 
 
