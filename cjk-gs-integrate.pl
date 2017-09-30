@@ -1515,9 +1515,9 @@ sub read_each_font_database {
         if ($fontname && $fontclass && keys(%fontfiles)) {
           my $realfontname = ($psname ? $psname : $fontname);
           if ($fontdb{$realfontname}{'origname'}) {
-            # needed for --fontdef-add, which allows multiple external database given by user
-            print_warning("$fontdb{$realfontname}{'origname'} is already registered in database,\n");
-            print_warning("overwriting with the new one ...\n");
+            # needed for --fontdef-add, which allows overwriting with external database given by user
+            print_debug("$fontdb{$realfontname}{'origname'} is already registered in database,\n");
+            print_debug("overwriting with the new one ...\n");
           }
           $fontdb{$realfontname}{'origname'} = $fontname;
           $fontdb{$realfontname}{'class'} = $fontclass;
