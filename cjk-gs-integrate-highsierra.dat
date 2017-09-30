@@ -1,3 +1,5 @@
+# Hiragino
+
 Name: HiraKakuPro-W3
 Class: Japan
 Provides(40): GothicBBB-Medium
@@ -157,17 +159,6 @@ OTCname(30): ヒラギノ明朝 ProN.ttc(1)
 OTCname(29): ヒラギノ明朝 ProN.ttc(1)
 OTCname(28): HiraginoSerif.ttc(1)
 
-Name: HiraMinPro-W6
-Class: Japan
-Provides(40): FutoMinA101-Bold
-Provides(40): FutoMinA101Pro-Bold
-OTFname(20): ヒラギノ明朝 Pro W6.otf
-OTFname(19): ヒラギノ明朝 Pro W6.otf
-OTFname(10): HiraMinPro-W6.otf
-OTCname(30): ヒラギノ明朝 ProN.ttc(3)
-OTCname(29): ヒラギノ明朝 ProN.ttc(3)
-OTCname(28): HiraginoSerif.ttc(3)
-
 Name: HiraMinProN-W3
 Class: Japan
 Provides(30): Ryumin-Light
@@ -179,6 +170,17 @@ OTCname(30): ヒラギノ明朝 ProN.ttc(0)
 OTCname(29): ヒラギノ明朝 ProN.ttc(0)
 OTCname(28): HiraginoSerif.ttc(0)
 
+Name: HiraMinPro-W6
+Class: Japan
+Provides(40): FutoMinA101-Bold
+Provides(40): FutoMinA101Pro-Bold
+OTFname(20): ヒラギノ明朝 Pro W6.otf
+OTFname(19): ヒラギノ明朝 Pro W6.otf
+OTFname(10): HiraMinPro-W6.otf
+OTCname(30): ヒラギノ明朝 ProN.ttc(3)
+OTCname(29): ヒラギノ明朝 ProN.ttc(3)
+OTCname(28): HiraginoSerif.ttc(3)
+
 Name: HiraMinProN-W6
 Class: Japan
 Provides(30): FutoMinA101-Bold
@@ -189,6 +191,8 @@ OTFname(10): HiraMinProN-W6.otf
 OTCname(30): ヒラギノ明朝 ProN.ttc(2)
 OTCname(29): ヒラギノ明朝 ProN.ttc(2)
 OTCname(28): HiraginoSerif.ttc(2)
+
+# Yu-fonts MacOS version
 
 Name: YuMin-Medium
 Class: Japan
@@ -221,6 +225,8 @@ OTCname(30): YuMincho.ttc(4)
 Name: YuMin_36pKn-Extrabold
 Class: Japan
 OTCname(30): YuMincho.ttc(5)
+
+# other Mac OS X fonts
 
 Name: TsukuARdGothic-Regular
 Class: Japan
@@ -261,25 +267,6 @@ OTCname: Kyokasho.ttc(2)
 Name: YuKyo-Bold
 Class: Japan
 OTCname: Kyokasho.ttc(3)
-
-# other Mac OS X fonts
-
-# Note about Mac OS X:
-#   Klee.ttc
-#   Tsukushi{A,B}MaruGothic.ttc
-# are bundled with OS X 10.11 El Capitan or later versions.
-#   Kyokasho.ttc
-# is bundled with macOS 10.12 Sierra or later versions.
-#   ToppanBunkyuMincho-Regular.otf
-#   ToppanBunkyuGothic.ttc
-#   ToppanBunkyuMidashiMincho-ExtraBold.otf
-#   ToppanBunkyuMidashiGothic-ExtraBold.otf
-# are bundled with macOS 10.12 Sierra.
-#   ToppanBunkyuMinchoPr6N-Regular.otf
-#   ToppanBunkyuGothicPr6N.ttc
-#   ToppanBunkyuMidashiMinchoStdN-ExtraBold.otf
-#   ToppanBunkyuMidashiGothicStdN-ExtraBold.otf
-# are bundled with macOS 10.13 High Sierra or later versions.
 
 Name: ToppanBunkyuMinchoPr6N-Regular
 PSName: ToppanBunkyuMinchoPr6N-Regular

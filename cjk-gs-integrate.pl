@@ -2240,14 +2240,14 @@ Class: Japan
 Provides(20): ShinGo-Ultra
 OTFname: A-OTF-ShinGoPro-Ultra.otf
 
-# Hiragino (OS X)
+# Hiragino
 
 # Note about Mac OS X:
 #   ヒラギノ角ゴ {Pro,ProN} {W3,W6}.otf
 #   ヒラギノ角ゴ {Std,StdN} W8.otf
 #   ヒラギノ丸ゴ {Pro,ProN} W4.otf
 #   ヒラギノ明朝 {Pro,ProN} {W3,W6}.otf
-# are bundled with OS X 10.10 Yosemite or earlier versions.
+# are bundled with OS X 10.10.5 Yosemite or earlier versions.
 #   ヒラギノ角ゴシック {W0,...W9}.ttc
 #   ヒラギノ丸ゴ ProN W4.ttc
 # are bundled with OS X 10.11 El Capitan or later versions.
@@ -2330,14 +2330,6 @@ OTFname(20): ヒラギノ明朝 Pro W3.otf
 OTFname(19): ヒラギノ明朝 Pro W3.otf
 OTFname(10): HiraMinPro-W3.otf
 
-Name: HiraMinPro-W6
-Class: Japan
-Provides(40): FutoMinA101-Bold
-Provides(40): FutoMinA101Pro-Bold
-OTFname(20): ヒラギノ明朝 Pro W6.otf
-OTFname(19): ヒラギノ明朝 Pro W6.otf
-OTFname(10): HiraMinPro-W6.otf
-
 Name: HiraMinProN-W3
 Class: Japan
 Provides(30): Ryumin-Light
@@ -2345,6 +2337,14 @@ Provides(30): RyuminPro-Light
 OTFname(20): ヒラギノ明朝 ProN W3.otf
 OTFname(19): ヒラギノ明朝 ProN W3.otf
 OTFname(10): HiraMinProN-W3.otf
+
+Name: HiraMinPro-W6
+Class: Japan
+Provides(40): FutoMinA101-Bold
+Provides(40): FutoMinA101Pro-Bold
+OTFname(20): ヒラギノ明朝 Pro W6.otf
+OTFname(19): ヒラギノ明朝 Pro W6.otf
+OTFname(10): HiraMinPro-W6.otf
 
 Name: HiraMinProN-W6
 Class: Japan
@@ -2542,6 +2542,25 @@ TTCname(20): YuGothB.ttc(1)
 Name: YuGothicUI-Semibold
 Class: Japan
 TTCname(20): YuGothB.ttc(2)
+
+# other Mac OS X fonts
+
+# Note about Mac OS X:
+#   Klee.ttc
+#   Tsukushi{A,B}MaruGothic.ttc
+# are bundled with OS X 10.11 El Capitan or later versions.
+#   Kyokasho.ttc
+# is bundled with macOS 10.12 Sierra or later versions.
+#   ToppanBunkyuMincho-Regular.otf
+#   ToppanBunkyuGothic.ttc
+#   ToppanBunkyuMidashiMincho-ExtraBold.otf
+#   ToppanBunkyuMidashiGothic-ExtraBold.otf
+# are bundled with macOS 10.12 Sierra.
+#   ToppanBunkyuMinchoPr6N-Regular.otf
+#   ToppanBunkyuGothicPr6N.ttc
+#   ToppanBunkyuMidashiMinchoStdN-ExtraBold.otf
+#   ToppanBunkyuMidashiGothicStdN-ExtraBold.otf
+# are bundled with macOS 10.13 High Sierra or later versions.
 
 # IPA (free)
 
