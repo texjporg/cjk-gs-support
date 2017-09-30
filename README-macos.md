@@ -26,5 +26,8 @@ For macOS 10.12 Sierra, use `cjk-gs-integrate-sierra.dat`.
 Authors, Contributors, and Copyright
 ------------------------------------
 
+Maintained by Japanese TeX Development Community. For development, see
+  https://github.com/texjporg/cjk-gs-support
+
 The script is licensed under GNU General Public License Version 3 or later.
 The contained font data is not copyrightable.

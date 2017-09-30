@@ -208,8 +208,11 @@ Authors, Contributors, and Copyright
 ------------------------------------
 
 The script and its documentation was written by Norbert Preining, based
-on research and work by Yusuke Kuroki, Bruno Voisin, Hironobu Yamashita,
-Munehiro Yamamoto and the TeX Q&A wiki page.
+on research and work by Yusuke Kuroki, Yusuke Terada, Bruno Voisin,
+Hironobu Yamashita, Munehiro Yamamoto and the TeX Q&A wiki page.
+
+Maintained by Japanese TeX Development Community. For development, see
+  https://github.com/texjporg/cjk-gs-support
 
 The script is licensed under GNU General Public License Version 3 or later.
 The contained font data is not copyrightable.
