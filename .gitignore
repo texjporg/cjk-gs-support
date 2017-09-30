@@ -11,3 +11,6 @@
 *~
 *.bak
 *.sav
+
+# cjk-gs-integrate specific (often generated during test)
+cjk-gs-integrate-data.dat
