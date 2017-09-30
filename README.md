@@ -22,7 +22,8 @@ Usage
   -f, --fontdef FILE    specify alternate set of font definitions, if not
                         given, the built-in set is used
   --fontdef-add FILE    specify additional set of font definitions, to
-                        overwrite subset of built-in definitions
+                        overwrite subset of built-in definitions;
+                        can be given multiple times
   -a, --alias LL=RR     defines an alias, or overrides a given alias;
                         illegal if LL is provided by a real font, or
                         RR is neither available as real font or alias;

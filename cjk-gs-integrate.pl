@@ -256,7 +256,7 @@ my $dump_datafile = "$prg-data.dat";
 
 my $opt_output;
 my $opt_fontdef;
-my $opt_fontdef_add;
+my @opt_fontdef_add;
 my @opt_aliases;
 my $opt_filelist;
 my $opt_texmflink;
@@ -282,7 +282,7 @@ my $opt_markdown = 0;
 if (! GetOptions(
         "o|output=s"       => \$opt_output,
         "f|fontdef=s"      => \$opt_fontdef,
-        "fontdef-add=s"    => \$opt_fontdef_add,
+        "fontdef-add=s"    => \@opt_fontdef_add,
         "a|alias=s"        => \@opt_aliases,
         "filelist=s"       => \$opt_filelist,
         "link-texmf:s"     => \$opt_texmflink,
@@ -336,7 +336,7 @@ if (macosx()) {
   my $macos_ver_minor = $macos_ver;
   $macos_ver_minor =~ s/^(\d+)\.(\d+).*/$2/;
   if ($macos_ver_major==10 && $macos_ver_minor>=11) {
-    if (!$opt_fontdef && !$opt_fontdef_add) { # if built-in only
+    if (!$opt_fontdef && !@opt_fontdef_add) { # if built-in only
       print_warning("Our built-in database does not support recent\n");
       print_warning("versions of Mac OS (10.11 El Capitan or later)!\n");
       print_warning("If you want to use Hiragino fonts bundled with\n");
@@ -1487,10 +1487,10 @@ sub read_font_database {
   # if --fontdef-add=bar is given, use "bar" as an addition
   # to the current database; if the same Name entry appears,
   # overwrite existing one (that is, the addition wins)
-  if ($opt_fontdef_add) {
-    my $foo = kpse_miscfont($opt_fontdef_add);
+  for (@opt_fontdef_add) {
+    my $foo = kpse_miscfont($_);
     open (FDB, "<$foo") ||
-      die "Cannot find $opt_fontdef_add: $!";
+      die "Cannot find $_: $!";
     @dbl = <FDB>;
     close(FDB);
     read_each_font_database(@dbl);
@@ -1794,7 +1794,8 @@ sub Usage {
 -f, --fontdef FILE    specify alternate set of font definitions, if not
                       given, the built-in set is used
 --fontdef-add FILE    specify additional set of font definitions, to
-                      overwrite subset of built-in definitions
+                      overwrite subset of built-in definitions;
+                      can be given multiple times
 -a, --alias LL=RR     defines an alias, or overrides a given alias;
                       illegal if LL is provided by a real font, or
                       RR is neither available as real font or alias;
