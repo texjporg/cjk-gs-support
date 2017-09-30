@@ -336,7 +336,7 @@ if (macosx()) {
   my $macos_ver_minor = $macos_ver;
   $macos_ver_minor =~ s/^(\d+)\.(\d+).*/$2/;
   if ($macos_ver_major==10 && $macos_ver_minor>=11) {
-    if (!$opt_fontdef_add) {
+    if (!$opt_fontdef && !$opt_fontdef_add) { # if built-in only
       print_warning("Our built-in database does not support recent\n");
       print_warning("versions of Mac OS (10.11 El Capitan or later)!\n");
       print_warning("If you want to use Hiragino fonts bundled with\n");
@@ -1475,7 +1475,8 @@ sub read_font_database {
   # if --fontdef=foo is given, disregard built-in database and
   # use "foo" as a substitute; otherwise, use built-in database
   if ($opt_fontdef) {
-    open (FDB, "<$opt_fontdef") ||
+    my $foo = kpse_miscfont($opt_fontdef);
+    open (FDB, "<$foo") ||
       die "Cannot find $opt_fontdef: $!";
     @dbl = <FDB>;
     close(FDB);
@@ -1487,7 +1488,8 @@ sub read_font_database {
   # to the current database; if the same Name entry appears,
   # overwrite existing one (that is, the addition wins)
   if ($opt_fontdef_add) {
-    open (FDB, "<$opt_fontdef_add") ||
+    my $foo = kpse_miscfont($opt_fontdef_add);
+    open (FDB, "<$foo") ||
       die "Cannot find $opt_fontdef_add: $!";
     @dbl = <FDB>;
     close(FDB);
@@ -1755,6 +1757,12 @@ sub find_gs_resource {
     }
   }
   return $foundres;
+}
+
+sub kpse_miscfont {
+  my ($file) = @_;
+  chomp( my $foo = `kpsewhich -format=miscfont $file`);
+  return $foo;
 }
 
 sub encode_utftocp {
