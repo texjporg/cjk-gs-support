@@ -21,6 +21,8 @@ Usage
                         is searched and used.
   -f, --fontdef FILE    specify alternate set of font definitions, if not
                         given, the built-in set is used
+  --fontdef-add FILE    specify additional set of font definitions, to
+                        overwrite subset of built-in definitions
   -a, --alias LL=RR     defines an alias, or overrides a given alias;
                         illegal if LL is provided by a real font, or
                         RR is neither available as real font or alias;
@@ -60,9 +62,10 @@ Usage
 #### Command like options ####
 
 `````
-  --dump-data [FILE]    dump the built-in set of font definitions; you can
-                        easily modify it, and tell me with -f (or --fontdef)
-                        the data file name defaults to cjk-gs-integrate-data.dat
+  --dump-data [FILE]    dump the set of font definitions which is currently
+                        effective, where FILE (the dump output) defaults to
+                        cjk-gs-integrate-data.dat; you can easily modify it,
+                        and tell me with -f (or --fontdef) option
   --only-aliases        regenerate only cidfmap.aliases file, instead of all
   --list-aliases        lists the available aliases and their options, with the
                         selected option on top

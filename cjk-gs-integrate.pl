@@ -326,6 +326,27 @@ if ($opt_debug) {
   $Data::Dumper::Indent = 1;
 }
 
+if (macosx()) {
+  # due to frequent incompatible changes in font file names by Apple,
+  # our built-in database doesn't support OS X 10.11 El Capitan or
+  # later versions
+  my $macos_ver = `sw_vers -productVersion`;
+  my $macos_ver_major = $macos_ver;
+  $macos_ver_major =~ s/^(\d+)\.(\d+).*/$1/;
+  my $macos_ver_minor = $macos_ver;
+  $macos_ver_minor =~ s/^(\d+)\.(\d+).*/$2/;
+  if ($macos_ver_major==10 && $macos_ver_minor>=11) {
+    if (!$opt_fontdef_add) {
+      print_warning("Our built-in database does not support recent\n");
+      print_warning("versions of Mac OS (10.11 El Capitan or later)!\n");
+      print_warning("If you want to use Hiragino fonts bundled with\n");
+      print_warning("your OS, obtain external database file and\n");
+      print_warning("specify it with --fontdef-add option!\n");
+      print_warning("I'll continue with my built-in database ...\n");
+    }
+  }
+}
+
 if (defined($opt_texmflink)) {
   my $foo;
   if ($opt_texmflink eq '') {
@@ -1803,8 +1824,8 @@ sub Usage {
   my $commandoptions = "
 --dump-data [FILE]    dump the set of font definitions which is currently
                       effective, where FILE (the dump output) defaults to
-                      $dump_datafile; you can easily modify it, and tell me
-                      with -f (or --fontdef) option
+                      $dump_datafile; you can easily modify it,
+                      and tell me with -f (or --fontdef) option
 --only-aliases        regenerate only cidfmap.aliases file, instead of all
 --list-aliases        lists the available aliases and their options, with the
                       selected option on top
