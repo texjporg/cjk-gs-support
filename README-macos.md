@@ -30,7 +30,7 @@ Then execute the script in the usual way (see main documentation) and add
 the option `--fontdef-add`. For macOS 10.13 High Sierra this would be:
 
 `````
-[shell] cjk-gs-integrate[.pl] --fontdef-add=cjk-gs-integrate-highsierra.dat
+cjk-gs-integrate[.pl] --fontdef-add=cjk-gs-integrate-highsierra.dat
 `````
 
 For OS X 10.11 El Capitan, use `cjk-gs-integrate-elcapitan.dat`.
