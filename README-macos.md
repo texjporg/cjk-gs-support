@@ -3,21 +3,34 @@ External Database for cjk-gs-integrate
 
 Due to frequent incompatible changes in font file names by Apple,
 the built-in database in cjk-gs-integrate doesn't support
-OS X 10.11 El Capitan or later versions.
-Here we provide additional database for macOS-specific font files.
+OS X 10.11 El Capitan or later versions. Support for these
+releases are provided in additional databases included in the
+current package.
 
 Usage
 -----
 
-First, download the database file (`*.dat`) which is suitable for
-your OS version.
-You don't need to install the database file, but you can place it
-under `$TEXMF/fonts/misc/cjk-gs-integrate` if you like.
+Either install `cjk-gs-integrate-macos` from 
+[TLContrib](https://contrib.texlive.info) or download the 
+required database files directly from the 
+[github account](https://github.com/texjporg/cjk-gs-support).
 
-If you are using macOS 10.13 High Sierra, execute
+We provide the following additional databases:
+
+- for El Capitan (10.11): [cjk-gs-integrate-elcapitan.dat](https://raw.githubusercontent.com/texjporg/cjk-gs-support/master/cjk-gs-integrate-elcapitan.dat)
+- for Sierra (10.12): [cjk-gs-integrate-sierra.dat](https://raw.githubusercontent.com/texjporg/cjk-gs-support/master/cjk-gs-integrate-sierra.dat)
+- for High Sierra (10.13): [cjk-gs-integrate-highsierra.dat](https://raw.githubusercontent.com/texjporg/cjk-gs-support/master/cjk-gs-integrate-highsierra.dat)
+
+Download the database file (`*.dat`) which is suitable for
+your OS version. Either place it in the current working directory
+or into the directory `$TEXMF/fonts/misc/cjk-gs-integrate` where
+`$TEXMF` is one of the TEXMF trees/
+
+Then execute the script in the usual way (see main documentation) and add
+the option `--fontdef-add`. For macOS 10.13 High Sierra this would be:
 
 `````
-[perl] cjk-gs-integrate[.pl] --fontdef-add=cjk-gs-integrate-highsierra.dat
+[shell] cjk-gs-integrate[.pl] --fontdef-add=cjk-gs-integrate-highsierra.dat
 `````
 
 For OS X 10.11 El Capitan, use `cjk-gs-integrate-elcapitan.dat`.
