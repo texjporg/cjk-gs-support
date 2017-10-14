@@ -1638,7 +1638,7 @@ sub dump_font_database {
     die("cannot open $dump_datafile for writing: $!");
   for my $k (sort keys %fontdb) {
     print FOO "Name: $fontdb{$k}{'origname'}\n";
-    print FOO "PSName: $k\n"; # redundant for some fonts but does no harm, and necessary for some
+    print FOO "PSName: $k\n" if ($fontdb{$k}{'origname'} ne $k);
     print FOO "Class: $fontdb{$k}{'class'}\n";
     for my $p (sort keys %{$fontdb{$k}{'provides'}}) {
       print FOO "Provides($fontdb{$k}{'provides'}{$p}): $p\n";
