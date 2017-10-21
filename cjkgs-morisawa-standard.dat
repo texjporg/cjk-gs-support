@@ -1,0 +1,747 @@
+# Morisawa standard sets
+
+# Some of the {Pr6N,Pro} variants are used in morisawa (ptex-fontmaps)
+# or in moriprop (S. Saito).
+
+# Note:
+# A-OTF-Jun101Pr6N-Light appeared in otf-(up-)morisawa-pr6n.map
+# which is older than jfontmaps 20140301.0
+# however, such a Pr6N variant never existed, so removed
+# https://www.tug.org/pipermail/tex-live/2014-February/034855.html
+
+Name: A-OTF-RyuminPr6N-Light
+PSName: RyuminPr6N-Light
+Class: Japan
+Provides(10): Ryumin-Light
+Provides(10): RyuminPro-Light
+Provides(10): HiraMinProN-W3
+Provides(10): HiraMinPro-W3
+OTFname: A-OTF-RyuminPr6N-Light.otf
+
+Name: A-OTF-RyuminPr6N-Regular
+PSName: RyuminPr6N-Regular
+Class: Japan
+Provides(10): Ryumin-Regular
+OTFname: A-OTF-RyuminPr6N-Regular.otf
+
+Name: A-OTF-RyuminPr6N-Medium
+PSName: RyuminPr6N-Medium
+Class: Japan
+Provides(10): Ryumin-Medium
+OTFname: A-OTF-RyuminPr6N-Medium.otf
+
+Name: A-OTF-RyuminPr6N-Bold
+PSName: RyuminPr6N-Bold
+Class: Japan
+Provides(10): Ryumin-Bold
+OTFname: A-OTF-RyuminPr6N-Bold.otf
+
+Name: A-OTF-RyuminPr6N-ExBold
+PSName: RyuminPr6N-ExBold
+Class: Japan
+Provides(10): Ryumin-ExBold
+OTFname: A-OTF-RyuminPr6N-ExBold.otf
+
+Name: A-OTF-RyuminPr6N-Heavy
+PSName: RyuminPr6N-Heavy
+Class: Japan
+Provides(10): Ryumin-Heavy
+OTFname: A-OTF-RyuminPr6N-Heavy.otf
+
+Name: A-OTF-RyuminPr6N-ExHeavy
+PSName: RyuminPr6N-ExHeavy
+Class: Japan
+Provides(10): Ryumin-ExHeavy
+OTFname: A-OTF-RyuminPr6N-ExHeavy.otf
+
+Name: A-OTF-RyuminPr6N-Ultra
+PSName: RyuminPr6N-Ultra
+Class: Japan
+Provides(10): Ryumin-Ultra
+OTFname: A-OTF-RyuminPr6N-Ultra.otf
+
+Name: A-OTF-RyuminPr6-Light
+PSName: RyuminPr6-Light
+Class: Japan
+Provides(15): Ryumin-Light
+Provides(15): HiraMinPro-W3
+OTFname: A-OTF-RyuminPr6-Light.otf
+
+Name: A-OTF-RyuminPr6-Regular
+PSName: RyuminPr6-Regular
+Class: Japan
+Provides(15): Ryumin-Regular
+OTFname: A-OTF-RyuminPr6-Regular.otf
+
+Name: A-OTF-RyuminPr6-Medium
+PSName: RyuminPr6-Medium
+Class: Japan
+Provides(15): Ryumin-Medium
+OTFname: A-OTF-RyuminPr6-Medium.otf
+
+Name: A-OTF-RyuminPr6-Bold
+PSName: RyuminPr6-Bold
+Class: Japan
+Provides(15): Ryumin-Bold
+OTFname: A-OTF-RyuminPr6-Bold.otf
+
+Name: A-OTF-RyuminPr6-ExBold
+PSName: RyuminPr6-ExBold
+Class: Japan
+Provides(15): Ryumin-ExBold
+OTFname: A-OTF-RyuminPr6-ExBold.otf
+
+Name: A-OTF-RyuminPr6-Heavy
+PSName: RyuminPr6-Heavy
+Class: Japan
+Provides(15): Ryumin-Heavy
+OTFname: A-OTF-RyuminPr6-Heavy.otf
+
+Name: A-OTF-RyuminPr6-ExHeavy
+PSName: RyuminPr6-ExHeavy
+Class: Japan
+Provides(15): Ryumin-ExHeavy
+OTFname: A-OTF-RyuminPr6-ExHeavy.otf
+
+Name: A-OTF-RyuminPr6-Ultra
+PSName: RyuminPr6-Ultra
+Class: Japan
+Provides(15): Ryumin-Ultra
+OTFname: A-OTF-RyuminPr6-Ultra.otf
+
+Name: A-OTF-RyuminPr5-Light
+PSName: RyuminPr5-Light
+Class: Japan
+Provides(18): Ryumin-Light
+Provides(18): HiraMinPro-W3
+OTFname: A-OTF-RyuminPr5-Light.otf
+
+Name: A-OTF-RyuminPr5-Regular
+PSName: RyuminPr5-Regular
+Class: Japan
+Provides(18): Ryumin-Regular
+OTFname: A-OTF-RyuminPr5-Regular.otf
+
+Name: A-OTF-RyuminPr5-Medium
+PSName: RyuminPr5-Medium
+Class: Japan
+Provides(18): Ryumin-Medium
+OTFname: A-OTF-RyuminPr5-Medium.otf
+
+Name: A-OTF-RyuminPr5-Bold
+PSName: RyuminPr5-Bold
+Class: Japan
+Provides(18): Ryumin-Bold
+OTFname: A-OTF-RyuminPr5-Bold.otf
+
+Name: A-OTF-RyuminPr5-ExBold
+PSName: RyuminPr5-ExBold
+Class: Japan
+Provides(18): Ryumin-ExBold
+OTFname: A-OTF-RyuminPr5-ExBold.otf
+
+Name: A-OTF-RyuminPr5-Heavy
+PSName: RyuminPr5-Heavy
+Class: Japan
+Provides(18): Ryumin-Heavy
+OTFname: A-OTF-RyuminPr5-Heavy.otf
+
+Name: A-OTF-RyuminPr5-ExHeavy
+PSName: RyuminPr5-ExHeavy
+Class: Japan
+Provides(18): Ryumin-ExHeavy
+OTFname: A-OTF-RyuminPr5-ExHeavy.otf
+
+Name: A-OTF-RyuminPr5-Ultra
+PSName: RyuminPr5-Ultra
+Class: Japan
+Provides(18): Ryumin-Ultra
+OTFname: A-OTF-RyuminPr5-Ultra.otf
+
+Name: A-OTF-RyuminPro-Light
+PSName: RyuminPro-Light
+Class: Japan
+Provides(20): Ryumin-Light
+Provides(20): HiraMinPro-W3
+OTFname: A-OTF-RyuminPro-Light.otf
+
+Name: A-OTF-RyuminPro-Regular
+PSName: RyuminPro-Regular
+Class: Japan
+Provides(20): Ryumin-Regular
+OTFname: A-OTF-RyuminPro-Regular.otf
+
+Name: A-OTF-RyuminPro-Medium
+PSName: RyuminPro-Medium
+Class: Japan
+Provides(20): Ryumin-Medium
+OTFname: A-OTF-RyuminPro-Medium.otf
+
+Name: A-OTF-RyuminPro-Bold
+PSName: RyuminPro-Bold
+Class: Japan
+Provides(20): Ryumin-Bold
+OTFname: A-OTF-RyuminPro-Bold.otf
+
+Name: A-OTF-RyuminPro-ExBold
+PSName: RyuminPro-ExBold
+Class: Japan
+Provides(20): Ryumin-ExBold
+OTFname: A-OTF-RyuminPro-ExBold.otf
+
+Name: A-OTF-RyuminPro-Heavy
+PSName: RyuminPro-Heavy
+Class: Japan
+Provides(20): Ryumin-Heavy
+OTFname: A-OTF-RyuminPro-Heavy.otf
+
+Name: A-OTF-RyuminPro-ExHeavy
+PSName: RyuminPro-ExHeavy
+Class: Japan
+Provides(20): Ryumin-ExHeavy
+OTFname: A-OTF-RyuminPro-ExHeavy.otf
+
+Name: A-OTF-RyuminPro-Ultra
+PSName: RyuminPro-Ultra
+Class: Japan
+Provides(20): Ryumin-Ultra
+OTFname: A-OTF-RyuminPro-Ultra.otf
+
+Name: A-OTF-FutoMinA101Pr6N-Bold
+PSName: FutoMinA101Pr6N-Bold
+Class: Japan
+Provides(10): FutoMinA101-Bold
+Provides(10): FutoMinA101Pro-Bold
+Provides(10): HiraMinProN-W6
+Provides(10): HiraMinPro-W6
+OTFname: A-OTF-FutoMinA101Pr6N-Bold.otf
+
+Name: A-OTF-FutoMinA101Pr6-Bold
+PSName: FutoMinA101Pr6-Bold
+Class: Japan
+Provides(15): FutoMinA101-Bold
+Provides(15): HiraMinPro-W6
+OTFname: A-OTF-FutoMinA101Pr6-Bold.otf
+
+Name: A-OTF-FutoMinA101Pr5-Bold
+PSName: FutoMinA101Pr5-Bold
+Class: Japan
+Provides(18): FutoMinA101-Bold
+Provides(18): HiraMinPro-W6
+OTFname: A-OTF-FutoMinA101Pr5-Bold.otf
+
+Name: A-OTF-FutoMinA101Pro-Bold
+PSName: FutoMinA101Pro-Bold
+Class: Japan
+Provides(20): FutoMinA101-Bold
+Provides(20): HiraMinPro-W6
+OTFname: A-OTF-FutoMinA101Pro-Bold.otf
+
+Name: A-OTF-GothicBBBPr6N-Medium
+PSName: GothicBBBPr6N-Medium
+Class: Japan
+Provides(10): GothicBBB-Medium
+Provides(10): GothicBBBPro-Medium
+Provides(10): HiraKakuProN-W3
+Provides(10): HiraKakuPro-W3
+OTFname: A-OTF-GothicBBBPr6N-Medium.otf
+
+Name: A-OTF-GothicBBBPr6-Medium
+PSName: GothicBBBPr6-Medium
+Class: Japan
+Provides(15): GothicBBB-Medium
+Provides(15): HiraKakuPro-W3
+OTFname: A-OTF-GothicBBBPr6-Medium.otf
+
+Name: A-OTF-GothicBBBPr5-Medium
+PSName: GothicBBBPr5-Medium
+Class: Japan
+Provides(18): GothicBBB-Medium
+Provides(18): HiraKakuPro-W3
+OTFname: A-OTF-GothicBBBPr5-Medium.otf
+
+Name: A-OTF-GothicBBBPro-Medium
+PSName: GothicBBBPro-Medium
+Class: Japan
+Provides(20): GothicBBB-Medium
+Provides(20): HiraKakuPro-W3
+OTFname: A-OTF-GothicBBBPro-Medium.otf
+
+Name: A-OTF-FutoGoB101Pr6N-Bold
+PSName: FutoGoB101Pr6N-Bold
+Class: Japan
+Provides(10): FutoGoB101-Bold
+Provides(10): FutoGoB101Pro-Bold
+Provides(10): HiraKakuProN-W6
+Provides(10): HiraKakuPro-W6
+OTFname: A-OTF-FutoGoB101Pr6N-Bold.otf
+
+Name: A-OTF-FutoGoB101Pr6-Bold
+PSName: FutoGoB101Pr6-Bold
+Class: Japan
+Provides(15): FutoGoB101-Bold
+Provides(15): HiraKakuPro-W6
+OTFname: A-OTF-FutoGoB101Pr6-Bold.otf
+
+Name: A-OTF-FutoGoB101Pr5-Bold
+PSName: FutoGoB101Pr5-Bold
+Class: Japan
+Provides(18): FutoGoB101-Bold
+Provides(18): HiraKakuPro-W6
+OTFname: A-OTF-FutoGoB101Pr5-Bold.otf
+
+Name: A-OTF-FutoGoB101Pro-Bold
+PSName: FutoGoB101Pro-Bold
+Class: Japan
+Provides(20): FutoGoB101-Bold
+Provides(20): HiraKakuPro-W6
+OTFname: A-OTF-FutoGoB101Pro-Bold.otf
+
+Name: A-OTF-MidashiGoPr6N-MB31
+PSName: MidashiGoPr6N-MB31
+Class: Japan
+Provides(10): MidashiGo-MB31
+Provides(10): MidashiGoPro-MB31
+Provides(10): HiraKakuStdN-W8
+Provides(10): HiraKakuStd-W8
+OTFname: A-OTF-MidashiGoPr6N-MB31.otf
+
+Name: A-OTF-MidashiGoPr6-MB31
+PSName: MidashiGoPr6-MB31
+Class: Japan
+Provides(15): MidashiGo-MB31
+Provides(15): HiraKakuStd-W8
+OTFname: A-OTF-MidashiGoPr6-MB31.otf
+
+Name: A-OTF-MidashiGoPr5-MB31
+PSName: MidashiGoPr5-MB31
+Class: Japan
+Provides(18): MidashiGo-MB31
+Provides(18): HiraKakuStd-W8
+OTFname: A-OTF-MidashiGoPr5-MB31.otf
+
+Name: A-OTF-MidashiGoPro-MB31
+PSName: MidashiGoPro-MB31
+Class: Japan
+Provides(20): MidashiGo-MB31
+Provides(20): HiraKakuStd-W8
+OTFname: A-OTF-MidashiGoPro-MB31.otf
+
+Name: A-OTF-Jun101Pro-Light
+PSName: Jun101Pro-Light
+Class: Japan
+Provides(20): Jun101-Light
+Provides(20): HiraMaruPro-W4
+OTFname: A-OTF-Jun101Pro-Light.otf
+
+Name: A-OTF-Jun201Pro-Regular
+PSName: Jun201Pro-Regular
+Class: Japan
+Provides(20): Jun201-Regular
+OTFname: A-OTF-Jun201Pro-Regular.otf
+
+Name: A-OTF-Jun34Pro-Medium
+PSName: Jun34Pro-Medium
+Class: Japan
+Provides(20): Jun34-Medium
+OTFname: A-OTF-Jun34Pro-Medium.otf
+
+Name: A-OTF-Jun501Pro-Bold
+PSName: Jun501Pro-Bold
+Class: Japan
+Provides(20): Jun501-Bold
+OTFname: A-OTF-Jun501Pro-Bold.otf
+
+Name: A-OTF-ShinGoPr6N-ExLight
+PSName: ShinGoPr6N-ExLight
+Class: Japan
+Provides(10): ShinGo-ExLight
+OTFname: A-OTF-ShinGoPr6N-ExLight.otf
+
+Name: A-OTF-ShinGoPr6N-Light
+PSName: ShinGoPr6N-Light
+Class: Japan
+Provides(10): ShinGo-Light
+OTFname: A-OTF-ShinGoPr6N-Light.otf
+
+Name: A-OTF-ShinGoPr6N-Regular
+PSName: ShinGoPr6N-Regular
+Class: Japan
+Provides(10): ShinGo-Regular
+OTFname: A-OTF-ShinGoPr6N-Regular.otf
+
+Name: A-OTF-ShinGoPr6N-Medium
+PSName: ShinGoPr6N-Medium
+Class: Japan
+Provides(10): ShinGo-Medium
+OTFname: A-OTF-ShinGoPr6N-Medium.otf
+
+Name: A-OTF-ShinGoPr6N-DeBold
+PSName: ShinGoPr6N-DeBold
+Class: Japan
+Provides(10): ShinGo-DeBold
+OTFname: A-OTF-ShinGoPr6N-DeBold.otf
+
+Name: A-OTF-ShinGoPr6N-Bold
+PSName: ShinGoPr6N-Bold
+Class: Japan
+Provides(10): ShinGo-Bold
+OTFname: A-OTF-ShinGoPr6N-Bold.otf
+
+Name: A-OTF-ShinGoPr6N-Heavy
+PSName: ShinGoPr6N-Heavy
+Class: Japan
+Provides(10): ShinGo-Heavy
+OTFname: A-OTF-ShinGoPr6N-Heavy.otf
+
+Name: A-OTF-ShinGoPr6N-Ultra
+PSName: ShinGoPr6N-Ultra
+Class: Japan
+Provides(10): ShinGo-Ultra
+OTFname: A-OTF-ShinGoPr6N-Ultra.otf
+
+Name: A-OTF-ShinGoPr6-ExLight
+PSName: ShinGoPr6-ExLight
+Class: Japan
+Provides(15): ShinGo-ExLight
+OTFname: A-OTF-ShinGoPr6-ExLight.otf
+
+Name: A-OTF-ShinGoPr6-Light
+PSName: ShinGoPr6-Light
+Class: Japan
+Provides(15): ShinGo-Light
+OTFname: A-OTF-ShinGoPr6-Light.otf
+
+Name: A-OTF-ShinGoPr6-Regular
+PSName: ShinGoPr6-Regular
+Class: Japan
+Provides(15): ShinGo-Regular
+OTFname: A-OTF-ShinGoPr6-Regular.otf
+
+Name: A-OTF-ShinGoPr6-Medium
+PSName: ShinGoPr6-Medium
+Class: Japan
+Provides(15): ShinGo-Medium
+OTFname: A-OTF-ShinGoPr6-Medium.otf
+
+Name: A-OTF-ShinGoPr6-DeBold
+PSName: ShinGoPr6-DeBold
+Class: Japan
+Provides(15): ShinGo-DeBold
+OTFname: A-OTF-ShinGoPr6-DeBold.otf
+
+Name: A-OTF-ShinGoPr6-Bold
+PSName: ShinGoPr6-Bold
+Class: Japan
+Provides(15): ShinGo-Bold
+OTFname: A-OTF-ShinGoPr6-Bold.otf
+
+Name: A-OTF-ShinGoPr6-Heavy
+PSName: ShinGoPr6-Heavy
+Class: Japan
+Provides(15): ShinGo-Heavy
+OTFname: A-OTF-ShinGoPr6-Heavy.otf
+
+Name: A-OTF-ShinGoPr6-Ultra
+PSName: ShinGoPr6-Ultra
+Class: Japan
+Provides(15): ShinGo-Ultra
+OTFname: A-OTF-ShinGoPr6-Ultra.otf
+
+Name: A-OTF-ShinGoPr5-ExLight
+PSName: ShinGoPr5-ExLight
+Class: Japan
+Provides(18): ShinGo-ExLight
+OTFname: A-OTF-ShinGoPr5-ExLight.otf
+
+Name: A-OTF-ShinGoPr5-Light
+PSName: ShinGoPr5-Light
+Class: Japan
+Provides(18): ShinGo-Light
+OTFname: A-OTF-ShinGoPr5-Light.otf
+
+Name: A-OTF-ShinGoPr5-Regular
+PSName: ShinGoPr5-Regular
+Class: Japan
+Provides(18): ShinGo-Regular
+OTFname: A-OTF-ShinGoPr5-Regular.otf
+
+Name: A-OTF-ShinGoPr5-Medium
+PSName: ShinGoPr5-Medium
+Class: Japan
+Provides(18): ShinGo-Medium
+OTFname: A-OTF-ShinGoPr5-Medium.otf
+
+Name: A-OTF-ShinGoPr5-DeBold
+PSName: ShinGoPr5-DeBold
+Class: Japan
+Provides(18): ShinGo-DeBold
+OTFname: A-OTF-ShinGoPr5-DeBold.otf
+
+Name: A-OTF-ShinGoPr5-Bold
+PSName: ShinGoPr5-Bold
+Class: Japan
+Provides(18): ShinGo-Bold
+OTFname: A-OTF-ShinGoPr5-Bold.otf
+
+Name: A-OTF-ShinGoPr5-Heavy
+PSName: ShinGoPr5-Heavy
+Class: Japan
+Provides(18): ShinGo-Heavy
+OTFname: A-OTF-ShinGoPr5-Heavy.otf
+
+Name: A-OTF-ShinGoPr5-Ultra
+PSName: ShinGoPr5-Ultra
+Class: Japan
+Provides(18): ShinGo-Ultra
+OTFname: A-OTF-ShinGoPr5-Ultra.otf
+
+Name: A-OTF-ShinGoPro-ExLight
+PSName: ShinGoPro-ExLight
+Class: Japan
+Provides(20): ShinGo-ExLight
+OTFname: A-OTF-ShinGoPro-ExLight.otf
+
+Name: A-OTF-ShinGoPro-Light
+PSName: ShinGoPro-Light
+Class: Japan
+Provides(20): ShinGo-Light
+OTFname: A-OTF-ShinGoPro-Light.otf
+
+Name: A-OTF-ShinGoPro-Regular
+PSName: ShinGoPro-Regular
+Class: Japan
+Provides(20): ShinGo-Regular
+OTFname: A-OTF-ShinGoPro-Regular.otf
+
+Name: A-OTF-ShinGoPro-Medium
+PSName: ShinGoPro-Medium
+Class: Japan
+Provides(20): ShinGo-Medium
+OTFname: A-OTF-ShinGoPro-Medium.otf
+
+Name: A-OTF-ShinGoPro-DeBold
+PSName: ShinGoPro-DeBold
+Class: Japan
+Provides(20): ShinGo-DeBold
+OTFname: A-OTF-ShinGoPro-DeBold.otf
+
+Name: A-OTF-ShinGoPro-Bold
+PSName: ShinGoPro-Bold
+Class: Japan
+Provides(20): ShinGo-Bold
+OTFname: A-OTF-ShinGoPro-Bold.otf
+
+Name: A-OTF-ShinGoPro-Heavy
+PSName: ShinGoPro-Heavy
+Class: Japan
+Provides(20): ShinGo-Heavy
+OTFname: A-OTF-ShinGoPro-Heavy.otf
+
+Name: A-OTF-ShinGoPro-Ultra
+PSName: ShinGoPro-Ultra
+Class: Japan
+Provides(20): ShinGo-Ultra
+OTFname: A-OTF-ShinGoPro-Ultra.otf
+
+Name: A-OTF-ShinMGoPr6N-Light
+PSName: ShinMGoPr6N-Light
+Class: Japan
+Provides(10): Jun101-Light
+Provides(10): Jun101Pro-Light
+Provides(10): HiraMaruProN-W4
+Provides(10): HiraMaruPro-W4
+Provides(10): ShinMGo-Light
+OTFname: A-OTF-ShinMGoPr6N-Light.otf
+
+Name: A-OTF-ShinMGoPr6N-Regular
+PSName: ShinMGoPr6N-Regular
+Class: Japan
+Provides(10): ShinMGo-Regular
+OTFname: A-OTF-ShinMGoPr6N-Regular.otf
+
+Name: A-OTF-ShinMGoPr6N-Medium
+PSName: ShinMGoPr6N-Medium
+Class: Japan
+Provides(10): ShinMGo-Medium
+OTFname: A-OTF-ShinMGoPr6N-Medium.otf
+
+Name: A-OTF-ShinMGoPr6N-DeBold
+PSName: ShinMGoPr6N-DeBold
+Class: Japan
+Provides(10): ShinMGo-DeBold
+OTFname: A-OTF-ShinMGoPr6N-DeBold.otf
+
+Name: A-OTF-ShinMGoPr6N-Bold
+PSName: ShinMGoPr6N-Bold
+Class: Japan
+Provides(10): ShinMGo-Bold
+OTFname: A-OTF-ShinMGoPr6N-Bold.otf
+
+Name: A-OTF-ShinMGoPr6N-Heavy
+PSName: ShinMGoPr6N-Heavy
+Class: Japan
+Provides(10): ShinMGo-Heavy
+OTFname: A-OTF-ShinMGoPr6N-Heavy.otf
+
+Name: A-OTF-ShinMGoPr6N-Ultra
+PSName: ShinMGoPr6N-Ultra
+Class: Japan
+Provides(10): ShinMGo-Ultra
+OTFname: A-OTF-ShinMGoPr6N-Ultra.otf
+
+Name: A-OTF-ShinMGoPr6-Light
+PSName: ShinMGoPr6-Light
+Class: Japan
+Provides(15): Jun101-Light
+Provides(15): HiraMaruPro-W4
+Provides(15): ShinMGo-Light
+OTFname: A-OTF-ShinMGoPr6-Light.otf
+
+Name: A-OTF-ShinMGoPr6-Regular
+PSName: ShinMGoPr6-Regular
+Class: Japan
+Provides(15): ShinMGo-Regular
+OTFname: A-OTF-ShinMGoPr6-Regular.otf
+
+Name: A-OTF-ShinMGoPr6-Medium
+PSName: ShinMGoPr6-Medium
+Class: Japan
+Provides(15): ShinMGo-Medium
+OTFname: A-OTF-ShinMGoPr6-Medium.otf
+
+Name: A-OTF-ShinMGoPr6-DeBold
+PSName: ShinMGoPr6-DeBold
+Class: Japan
+Provides(15): ShinMGo-DeBold
+OTFname: A-OTF-ShinMGoPr6-DeBold.otf
+
+Name: A-OTF-ShinMGoPr6-Bold
+PSName: ShinMGoPr6-Bold
+Class: Japan
+Provides(15): ShinMGo-Bold
+OTFname: A-OTF-ShinMGoPr6-Bold.otf
+
+Name: A-OTF-ShinMGoPr6-Heavy
+PSName: ShinMGoPr6-Heavy
+Class: Japan
+Provides(15): ShinMGo-Heavy
+OTFname: A-OTF-ShinMGoPr6-Heavy.otf
+
+Name: A-OTF-ShinMGoPr6-Ultra
+PSName: ShinMGoPr6-Ultra
+Class: Japan
+Provides(15): ShinMGo-Ultra
+OTFname: A-OTF-ShinMGoPr6-Ultra.otf
+
+Name: A-OTF-ShinMGoPr5-Light
+PSName: ShinMGoPr5-Light
+Class: Japan
+Provides(18): Jun101-Light
+Provides(18): HiraMaruPro-W4
+Provides(18): ShinMGo-Light
+OTFname: A-OTF-ShinMGoPr5-Light.otf
+
+Name: A-OTF-ShinMGoPr5-Regular
+PSName: ShinMGoPr5-Regular
+Class: Japan
+Provides(18): ShinMGo-Regular
+OTFname: A-OTF-ShinMGoPr5-Regular.otf
+
+Name: A-OTF-ShinMGoPr5-Medium
+PSName: ShinMGoPr5-Medium
+Class: Japan
+Provides(18): ShinMGo-Medium
+OTFname: A-OTF-ShinMGoPr5-Medium.otf
+
+Name: A-OTF-ShinMGoPr5-DeBold
+PSName: ShinMGoPr5-DeBold
+Class: Japan
+Provides(18): ShinMGo-DeBold
+OTFname: A-OTF-ShinMGoPr5-DeBold.otf
+
+Name: A-OTF-ShinMGoPr5-Bold
+PSName: ShinMGoPr5-Bold
+Class: Japan
+Provides(18): ShinMGo-Bold
+OTFname: A-OTF-ShinMGoPr5-Bold.otf
+
+Name: A-OTF-ShinMGoPr5-Heavy
+PSName: ShinMGoPr5-Heavy
+Class: Japan
+Provides(18): ShinMGo-Heavy
+OTFname: A-OTF-ShinMGoPr5-Heavy.otf
+
+Name: A-OTF-ShinMGoPr5-Ultra
+PSName: ShinMGoPr5-Ultra
+Class: Japan
+Provides(18): ShinMGo-Ultra
+OTFname: A-OTF-ShinMGoPr5-Ultra.otf
+
+Name: A-OTF-ShinMGoPro-Light
+PSName: ShinMGoPro-Light
+Class: Japan
+Provides(20): ShinMGo-Light
+OTFname: A-OTF-ShinMGoPro-Light.otf
+
+Name: A-OTF-ShinMGoPro-Regular
+PSName: ShinMGoPro-Regular
+Class: Japan
+Provides(20): ShinMGo-Regular
+OTFname: A-OTF-ShinMGoPro-Regular.otf
+
+Name: A-OTF-ShinMGoPro-Medium
+PSName: ShinMGoPro-Medium
+Class: Japan
+Provides(20): ShinMGo-Medium
+OTFname: A-OTF-ShinMGoPro-Medium.otf
+
+Name: A-OTF-ShinMGoPro-DeBold
+PSName: ShinMGoPro-DeBold
+Class: Japan
+Provides(20): ShinMGo-DeBold
+OTFname: A-OTF-ShinMGoPro-DeBold.otf
+
+Name: A-OTF-ShinMGoPro-Bold
+PSName: ShinMGoPro-Bold
+Class: Japan
+Provides(20): ShinMGo-Bold
+OTFname: A-OTF-ShinMGoPro-Bold.otf
+
+Name: A-OTF-ShinMGoPro-Heavy
+PSName: ShinMGoPro-Heavy
+Class: Japan
+Provides(20): ShinMGo-Heavy
+OTFname: A-OTF-ShinMGoPro-Heavy.otf
+
+Name: A-OTF-ShinMGoPro-Ultra
+PSName: ShinMGoPro-Ultra
+Class: Japan
+Provides(20): ShinMGo-Ultra
+OTFname: A-OTF-ShinMGoPro-Ultra.otf
+
+Name: A-OTF-MidashiMinPr6N-MA31
+PSName: MidashiMinPr6N-MA31
+Class: Japan
+Provides(10): MidashiMin-MA31
+Provides(10): MidashiMinPro-MA31
+OTFname: A-OTF-MidashiMinPr6N-MA31.otf
+
+Name: A-OTF-MidashiMinPr6-MA31
+PSName: MidashiMinPr6-MA31
+Class: Japan
+Provides(15): MidashiMin-MA31
+OTFname: A-OTF-MidashiMinPr6-MA31.otf
+
+Name: A-OTF-MidashiMinPr5-MA31
+PSName: MidashiMinPr5-MA31
+Class: Japan
+Provides(18): MidashiMin-MA31
+OTFname: A-OTF-MidashiMinPr5-MA31.otf
+
+Name: A-OTF-MidashiMinPro-MA31
+PSName: MidashiMinPro-MA31
+Class: Japan
+Provides(20): MidashiMin-MA31
+OTFname: A-OTF-MidashiMinPro-MA31.otf
+
