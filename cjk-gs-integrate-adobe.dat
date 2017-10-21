@@ -1,0 +1,139 @@
+# Ryo PlusN (Kana + Kozuka Std) and Ryo Std (Kana only)
+
+# Note about Adobe Creative Suite:
+#   RyoTextStd:     CS1, CS2, CS3
+#   RyoTextPlusN:   CS4, CS5, CS5.5
+#   RyoDispStd:     CS1, CS2, CS3, CS4
+#   RyoDispPlusN:   CS5, CS5.5
+#   RyoGothicStd:   CS3
+#   RyoGothicPlusN: CS4, CS5, CS5.5
+# are bundled in DVD installer/data.
+
+Name: RyoTextPlusN-ExtraLight
+Class: Japan
+OTFname: RyoTextPlusN-ExtraLight.otf
+
+Name: RyoTextPlusN-Light
+Class: Japan
+OTFname: RyoTextPlusN-Light.otf
+
+Name: RyoTextPlusN-Regular
+Class: Japan
+OTFname: RyoTextPlusN-Regular.otf
+
+Name: RyoTextPlusN-Medium
+Class: Japan
+OTFname: RyoTextPlusN-Medium.otf
+
+Name: RyoDispPlusN-Medium
+Class: Japan
+OTFname: RyoDispPlusN-Medium.otf
+
+Name: RyoDispPlusN-SemiBold
+Class: Japan
+OTFname: RyoDispPlusN-SemiBold.otf
+
+Name: RyoDispPlusN-Bold
+Class: Japan
+OTFname: RyoDispPlusN-Bold.otf
+
+Name: RyoDispPlusN-ExtraBold
+Class: Japan
+OTFname: RyoDispPlusN-ExtraBold.otf
+
+Name: RyoDispPlusN-Heavy
+Class: Japan
+OTFname: RyoDispPlusN-Heavy
+
+Name: RyoTextStd-ExtraLight
+Class: Japan
+OTFname: RyoTextStd-ExtraLight.otf
+
+Name: RyoTextStd-Light
+Class: Japan
+OTFname: RyoTextStd-Light.otf
+
+Name: RyoTextStd-Regular
+Class: Japan
+OTFname: RyoTextStd-Regular.otf
+
+Name: RyoTextStd-Medium
+Class: Japan
+OTFname: RyoTextStd-Medium.otf
+
+Name: RyoDispStd-Medium
+Class: Japan
+OTFname: RyoDispStd-Medium.otf
+
+Name: RyoDispStd-SemiBold
+Class: Japan
+OTFname: RyoDispStd-SemiBold.otf
+
+Name: RyoDispStd-Bold
+Class: Japan
+OTFname: RyoDispStd-Bold.otf
+
+Name: RyoDispStd-ExtraBold
+Class: Japan
+OTFname: RyoDispStd-ExtraBold.otf
+
+Name: RyoDispStd-Heavy
+Class: Japan
+OTFname: RyoDispStd-Heavy.otf
+
+Name: RyoGothicPlusN-ExtraLight
+Class: Japan
+OTFname: RyoGothicPlusN-ExtraLight.otf
+
+Name: RyoGothicPlusN-Light
+Class: Japan
+OTFname: RyoGothicPlusN-Light.otf
+
+Name: RyoGothicPlusN-Regular
+Class: Japan
+OTFname: RyoGothicPlusN-Regular.otf
+
+Name: RyoGothicPlusN-Medium
+Class: Japan
+OTFname: RyoGothicPlusN-Medium.otf
+
+Name: RyoGothicPlusN-Bold
+Class: Japan
+OTFname: RyoGothicPlusN-Bold.otf
+
+Name: RyoGothicPlusN-Heavy
+Class: Japan
+OTFname: RyoGothicPlusN-Heavy.otf
+
+Name: RyoGothicPlusN-UltraHeavy
+Class: Japan
+OTFname: RyoGothicPlusN-UltraHeavy.otf
+
+Name: RyoGothicStd-ExtraLight
+Class: Japan
+OTFname: RyoGothicStd-ExtraLight.otf
+
+Name: RyoGothicStd-Light
+Class: Japan
+OTFname: RyoGothicStd-Light.otf
+
+Name: RyoGothicStd-Regular
+Class: Japan
+OTFname: RyoGothicStd-Regular.otf
+
+Name: RyoGothicStd-Medium
+Class: Japan
+OTFname: RyoGothicStd-Medium.otf
+
+Name: RyoGothicStd-Bold
+Class: Japan
+OTFname: RyoGothicStd-Bold.otf
+
+Name: RyoGothicStd-Heavy
+Class: Japan
+OTFname: RyoGothicStd-Heavy.otf
+
+Name: RyoGothicStd-UltraHeavy
+Class: Japan
+OTFname: RyoGothicStd-UltraHeavy.otf
+
