@@ -2161,24 +2161,10 @@ Provides(20): MidashiGo-MB31
 Provides(20): HiraKakuStd-W8
 OTFname: A-OTF-MidashiGoPro-MB31.otf
 
-# A-OTF-Jun101Pr6N-Light has been replaced by A-OTF-ShinMGoPr6N-Light
-# in otf-(up-)morisawa-pr6n.map since jfontmaps 20140301.0
-# now unnecessary, but reserved for backward compatibility
-Name: A-OTF-Jun101Pr6N-Light
-PSName: Jun101Pr6N-Light
-Class: Japan
-Provides(11): Jun101-Light
-Provides(11): Jun101Pro-Light
-Provides(11): HiraMaruProN-W4
-Provides(11): HiraMaruPro-W4
-OTFname: A-OTF-Jun101Pr6N-Light.otf
-
-Name: A-OTF-Jun101Pro-Light
-PSName: Jun101Pro-Light
-Class: Japan
-Provides(20): Jun101-Light
-Provides(20): HiraMaruPro-W4
-OTFname: A-OTF-Jun101Pro-Light.otf
+# A-OTF-Jun101Pr6N-Light appeared in otf-(up-)morisawa-pr6n.map
+# which is older than jfontmaps 20140301.0
+# however, such a Pr6N variant never existed, so removed
+# https://www.tug.org/pipermail/tex-live/2014-February/034855.html
 
 Name: A-OTF-ShinMGoPr6N-Light
 PSName: ShinMGoPr6N-Light
@@ -2188,6 +2174,13 @@ Provides(10): Jun101Pro-Light
 Provides(10): HiraMaruProN-W4
 Provides(10): HiraMaruPro-W4
 OTFname: A-OTF-ShinMGoPr6N-Light.otf
+
+Name: A-OTF-Jun101Pro-Light
+PSName: Jun101Pro-Light
+Class: Japan
+Provides(20): Jun101-Light
+Provides(20): HiraMaruPro-W4
+OTFname: A-OTF-Jun101Pro-Light.otf
 
 # Morisawa others (for moriprop);
 # A-OTF-Jun101Pro-Light.otf and A-OTF-RyuminPro-Light.otf already added
