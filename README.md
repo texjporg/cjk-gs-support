@@ -178,14 +178,14 @@ In addition, we also include provide entries for the OTF Morisawa names:
     RyuminPro-Light GothicBBBPro-Medium FutoMinA101Pro-Bold
     FutoGoB101Pro-Bold Jun101Pro-Light
 
-The order is determined by the Provides setting in the font database,
-and for the Japanese fonts it is currently:
-    Morisawa Pr6N, Morisawa, Hiragino ProN, Hiragino,
-    Kozuka Pr6N, Kozuka ProVI, Kozuka, Yu OSX, Yu Win,
-    MS, Moga-Mobo-ex, Moga-Mobo, IPAex, IPA, Ume
-
+The order is determined by the `Provides` setting in the font database.
 That is, the first font found in this order will be used to provide the
 alias if necessary.
+
+For the Japanese fonts:
+    Morisawa Pr6N, Morisawa, Hiragino ProN, Hiragino,
+    Kozuka Pr6N, Kozuka ProVI, Kozuka Pro, Kozuka Std,
+    Yu OS X, Yu Win, MS, Moga-Mobo-ex, Moga-Mobo, IPAex, IPA, Ume
 
 For the Korean fonts:
     (Hanyang,) Adobe, Solaris-hanyang, MS, Unfonts, Baekmuk
