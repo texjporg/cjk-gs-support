@@ -501,7 +501,7 @@ sub main {
   }
   if (! -d $opt_output) {
     $dry_run || mkdir($opt_output) || 
-      die ("Cannot create directory $opt_output: $!");
+      die("Cannot create directory $opt_output: $!");
   }
   if ($opt_cleanup) {
     print_info("going to clean up $opt_output\n");
@@ -657,7 +657,7 @@ sub do_nonotf_fonts {
         die("Cannot create directory $opt_output/Init: $!");
     }
     open(FOO, ">$opt_output/$cidfmap_local_pathpart") || 
-      die "Cannot open $opt_output/$cidfmap_local_pathpart: $!";
+      die("Cannot open $opt_output/$cidfmap_local_pathpart: $!");
     print FOO $outp;
     close(FOO);
   }
@@ -740,7 +740,7 @@ sub do_aliases {
         die("Cannot create directory $opt_output/Init: $!");
     }
     open(FOO, ">$opt_output/$cidfmap_aliases_pathpart") || 
-      die "Cannot open $opt_output/$cidfmap_aliases_pathpart: $!";
+      die("Cannot open $opt_output/$cidfmap_aliases_pathpart: $!");
     print FOO $outp;
     close(FOO);
   }
@@ -758,7 +758,7 @@ sub update_master_cidfmap {
     ($opt_remove ? "removing" : "adding"), ($opt_remove ? "from" : "to")));
   if (-r $cidfmap_master) {
     open(FOO, "<", $cidfmap_master) ||
-      die ("Cannot open $cidfmap_master for reading: $!");
+      die("Cannot open $cidfmap_master for reading: $!");
     my $found = 0;
     my $newmaster = "";
     # in add mode: just search for the entry and set $found
@@ -781,7 +781,7 @@ sub update_master_cidfmap {
       if ($found) {
         return if $dry_run;
         open(FOO, ">", $cidfmap_master) ||
-          die ("Cannot clean up $cidfmap_master: $!");
+          die("Cannot clean up $cidfmap_master: $!");
         print FOO $newmaster;
         close FOO;
       }
@@ -791,7 +791,7 @@ sub update_master_cidfmap {
       } else {
         return if $dry_run;
         open(FOO, ">", $cidfmap_master) ||
-          die ("Cannot open $cidfmap_master for appending: $!");
+          die("Cannot open $cidfmap_master for appending: $!");
         print FOO $newmaster;
         print FOO "($add) .runlibfile\n";
         close(FOO);
@@ -801,7 +801,7 @@ sub update_master_cidfmap {
     return if $dry_run;
     return if $opt_remove;
     open(FOO, ">", $cidfmap_master) ||
-      die ("Cannot open $cidfmap_master for writing: $!");
+      die("Cannot open $cidfmap_master for writing: $!");
     print FOO "($add) .runlibfile\n";
     close(FOO);
   }
@@ -1199,7 +1199,7 @@ sub make_all_available {
 sub check_for_files {
   my @foundfiles;
   if ($opt_filelist) {
-    open(FOO, "<", $opt_filelist) || die "Cannot open $opt_filelist: $!";
+    open(FOO, "<", $opt_filelist) || die("Cannot open $opt_filelist: $!");
     @foundfiles = <FOO>;
     close(FOO) || warn "Cannot close $opt_filelist: $!";
   } else {
@@ -1476,8 +1476,8 @@ sub read_font_database {
   # use "foo" as a substitute; otherwise, use built-in database
   if ($opt_fontdef) {
     my $foo = kpse_miscfont($opt_fontdef);
-    open (FDB, "<$foo") ||
-      die "Cannot find $opt_fontdef: $!";
+    open(FDB, "<$foo") ||
+      die("Cannot find $opt_fontdef: $!");
     @dbl = <FDB>;
     close(FDB);
   } else {
@@ -1489,8 +1489,8 @@ sub read_font_database {
   # overwrite existing one (that is, the addition wins)
   for (@opt_fontdef_add) {
     my $foo = kpse_miscfont($_);
-    open (FDB, "<$foo") ||
-      die "Cannot find $_: $!";
+    open(FDB, "<$foo") ||
+      die("Cannot find $_: $!");
     @dbl = <FDB>;
     close(FDB);
     read_each_font_database(@dbl);
@@ -1545,7 +1545,7 @@ sub read_each_font_database {
     if ($l =~ m/^INCLUDE\s*(.*)$/) {
       my @dbl;
       my $foo = kpse_miscfont($1);
-      if (!open (FDB, "<$foo")) {
+      if (!open(FDB, "<$foo")) {
         print_warning("Cannot find $1, skipping!\n");
         next;
       }
