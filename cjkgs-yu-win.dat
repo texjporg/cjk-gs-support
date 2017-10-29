@@ -1,0 +1,113 @@
+# Yu-fonts Windows/MSOffice version
+
+# Note about Windows:
+#   yugothi{b,c,l}.ttf
+#   yumin.ttf, yumin{db,l}.ttf
+# are bundled with Windows 8.1.
+#   YuGoth{B,L,M,R}.ttc
+#   yumin.ttf, yumin{db,l}.ttf
+# are bundled with Windows 10.
+#   YUGOTH{B,L,M,R}.TTC
+#   YUMIN.TTF, YUMIN{DB,L}.TTF
+# are bundled with Yu Font Pack for MSOffice 2010/2013.
+#   YuGothic.ttf
+#   YuGothic-Bold.ttf
+# are bundled with VS2013 or later versions.
+#   YuGoth{B,L,M,R}.ttf
+#   yumin.ttf, yumin{db,l}.ttf
+# are bundled with Office for Mac 2016.
+
+# In the following database, Yu Font Pack entries do not appear
+# as separate lines, but they are implied by Windows 10 entries
+# since win32 is case-insensitive.
+# Currently we don't add VS2013 YuGothic.ttf (YuGothic) and
+# YuGothic-Bold.ttf (YuGothic-Bold) on purpose, because these files
+# are smaller than Windows 8.1 yugothic.ttf and yugothib.ttf
+
+Name: YuMincho-Regular
+Class: Japan
+Provides(90): Ryumin-Light
+Provides(90): RyuminPro-Light
+Provides(90): HiraMinProN-W3
+Provides(90): HiraMinPro-W3
+TTFname(20): yumin.ttf
+#TTFname(50): YuMincho-Regular.ttf # never existed
+
+Name: YuMincho-Light
+Class: Japan
+TTFname(20): yuminl.ttf
+#TTFname(50): YuMincho-Light.ttf # never existed
+
+Name: YuMincho-DemiBold
+Class: Japan
+Provides(90): FutoMinA101-Bold
+Provides(90): FutoMinA101Pro-Bold
+Provides(90): HiraMinProN-W6
+Provides(90): HiraMinPro-W6
+TTFname(20): yumindb.ttf
+#TTFname(50): YuMincho-DemiBold.ttf # never existed
+
+Name: YuGothic-Regular
+Class: Japan
+Provides(90): GothicBBB-Medium
+Provides(90): GothicBBBPro-Medium
+Provides(90): HiraKakuProN-W3
+Provides(90): HiraKakuPro-W3
+TTFname(25): yugothic.ttf
+TTCname(20): YuGothR.ttc(0)
+TTFname(40): YuGothR.ttf
+#TTFname(50): YuGothic-Regular.ttf # never existed
+
+Name: YuGothic-Medium
+Class: Japan
+TTCname(20): YuGothM.ttc(0)
+TTFname(40): YuGothM.ttf
+
+Name: YuGothic-Light
+Class: Japan
+TTFname(25): yugothil.ttf
+TTCname(20): YuGothL.ttc(0)
+TTFname(40): YuGothL.ttf
+#TTFname(50): YuGothic-Light.ttf # never existed
+
+Name: YuGothic-Bold
+Class: Japan
+Provides(90): FutoGoB101-Bold
+Provides(90): FutoGoB101Pro-Bold
+Provides(90): HiraKakuProN-W6
+Provides(90): HiraKakuPro-W6
+Provides(90): Jun101-Light
+Provides(90): Jun101Pro-Light
+Provides(90): HiraMaruProN-W4
+Provides(90): HiraMaruPro-W4
+Provides(90): MidashiGo-MB31
+Provides(90): MidashiGoPro-MB31
+Provides(90): HiraKakuStdN-W8
+Provides(90): HiraKakuStd-W8
+TTFname(25): yugothib.ttf
+TTCname(20): YuGothB.ttc(0)
+TTFname(40): YuGothB.ttf
+#TTFname(50): YuGothic-Bold.ttf
+
+# Yu-UI-fonts (Windows only)
+
+Name: YuGothicUI-Semilight
+Class: Japan
+TTCname(20): YuGothR.ttc(1)
+
+Name: YuGothicUI-Regular
+Class: Japan
+TTCname(20): YuGothM.ttc(1)
+
+Name: YuGothicUI-Light
+Class: Japan
+TTCname(20): YuGothL.ttc(1)
+
+Name: YuGothicUI-Bold
+Class: Japan
+TTCname(20): YuGothB.ttc(1)
+
+Name: YuGothicUI-Semibold
+Class: Japan
+TTCname(20): YuGothB.ttc(2)
+

@@ -1,0 +1,61 @@
+# Yu-fonts MacOS version
+
+# Note about Mac OS X:
+#   Yu Gothic Medium.otf
+#   Yu Gothic Bold.otf
+# are bundled with OS X 10.9 Mavericks -- macOS 10.12.6 Sierra.
+#   YuGothic-Medium.otf
+#   YuGothic-Bold.otf
+# are bundled with macOS 10.13 High Sierra or later versions.
+#   Yu Mincho Medium.otf
+#   Yu Mincho Demibold.otf
+# are bundled with OS X 10.9 Mavericks -- 10.10.5 Yosemite.
+#   YuMincho.ttc
+#     index 0: YuMin-Medium
+#     index 1: YuMin-Demibold
+#     index 2: YuMin_36pKn-Medium
+#     index 3: YuMin_36pKn-Demibold
+# is bundled with OS X 10.11 -- 10.11.6 El Capitan.
+#   YuMincho.ttc
+#     index 0: YuMin-Medium
+#     index 1: YuMin-Demibold
+#     index 2: YuMin-Extrabold
+#     index 3: YuMin_36pKn-Medium
+#     index 4: YuMin_36pKn-Demibold
+#     index 5: YuMin_36pKn-Extrabold
+# is bundled with macOS 10.12 Sierra or later versions.
+
+Name: YuGo-Medium
+Class: Japan
+Provides(80): GothicBBB-Medium
+Provides(80): GothicBBBPro-Medium
+OTFname(20): Yu Gothic Medium.otf
+OTFname(19): YuGothic-Medium.otf
+OTFname(10): YuGo-Medium.otf
+
+Name: YuGo-Bold
+Class: Japan
+Provides(80): FutoGoB101-Bold
+Provides(80): FutoGoB101Pro-Bold
+Provides(80): Jun101-Light
+Provides(80): Jun101Pro-Light
+Provides(80): MidashiGo-MB31
+Provides(80): MidashiGoPro-MB31
+OTFname(20): Yu Gothic Bold.otf
+OTFname(19): YuGothic-Bold.otf
+OTFname(10): YuGo-Bold.otf
+
+Name: YuMin-Medium
+Class: Japan
+Provides(80): Ryumin-Light
+Provides(80): RyuminPro-Light
+OTFname(20): Yu Mincho Medium.otf
+OTFname(10): YuMin-Medium.otf
+
+Name: YuMin-Demibold
+Class: Japan
+Provides(80): FutoMinA101-Bold
+Provides(80): FutoMinA101Pro-Bold
+OTFname(20): Yu Mincho Demibold.otf
+OTFname(10): YuMin-Demibold.otf
+
