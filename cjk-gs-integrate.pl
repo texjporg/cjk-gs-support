@@ -1542,9 +1542,22 @@ sub read_each_font_database {
       }
       next;
     }
+    if ($l =~ m/^INCLUDE\s*(.*)$/) {
+      my @dbl;
+      my $foo = kpse_miscfont($1);
+      if (!open (FDB, "<$foo")) {
+        print_warning("Cannot find $1, skipping!\n");
+        next;
+      }
+      @dbl = <FDB>;
+      close(FDB);
+      read_each_font_database(@dbl);
+      next;
+    }
     if ($l =~ m/^Name:\s*(.*)$/) { $fontname = $1; next; }
     if ($l =~ m/^PSName:\s*(.*)$/) { $psname = $1; next; }
     if ($l =~ m/^Class:\s*(.*)$/) { $fontclass = $1 ; next ; }
+    if ($l =~ m/^Provides\((\d+)\):\s*(.*)$/) { $fontprovides{$2} = $1; next; }
     # new code: distinguish 4 types (otf, otc, ttf, ttc)
     if ($l =~ m/^OTFname(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
@@ -1626,7 +1639,6 @@ sub read_each_font_database {
       }
       next;
     }
-    if ($l =~ m/^Provides\((\d+)\):\s*(.*)$/) { $fontprovides{$2} = $1; next; }
     # we are still here??
     print_error("Cannot parse this file at line $lineno, exiting. Strange line: >>>$l<<<\n");
     exit (1);
@@ -2080,10 +2092,11 @@ __DATA__
 #
 
 # Morisawa -- Provides level 10(Pr6N), 15(Pr6), 18(Pr5), 20(Pro)
-# (see morisawa-standard.dat and morisawa-extra.dat)
+INCLUDE cjkgs-morisawa-standard.dat
+INCLUDE cjkgs-morisawa-extra.dat
 
 # Hiragino -- Provides level 30(ProN), 40(Pro)
-# (see hiragino.dat)
+INCLUDE cjkgs-hiragino.dat
 
 # Yu-fonts MacOS version
 
@@ -2681,14 +2694,15 @@ Class: Japan
 TTFname: OsakaMono.ttf
 
 # Kozuka (Adobe) -- Provides level 50(Pr6N), 55(ProVI), 60(Pro), 65(Std)
-# (see kozuka.dat)
+INCLUDE cjkgs-kozuka.dat
+INCLUDE cjkgs-ryokana.dat
 
 #
 # CHINESE FONTS
 #
 
 # Hiragino -- Provides level 50
-# (see hiragino.dat)
+# (already included in JAPANESE section)
 
 # DynaComware (OS X)
 
