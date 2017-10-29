@@ -17,9 +17,9 @@ required database files directly from the
 
 We provide the following additional databases:
 
-- for El Capitan (10.11): [cjk-gs-integrate-elcapitan.dat](https://raw.githubusercontent.com/texjporg/cjk-gs-support/master/cjk-gs-integrate-elcapitan.dat)
-- for Sierra (10.12): [cjk-gs-integrate-sierra.dat](https://raw.githubusercontent.com/texjporg/cjk-gs-support/master/cjk-gs-integrate-sierra.dat)
-- for High Sierra (10.13): [cjk-gs-integrate-highsierra.dat](https://raw.githubusercontent.com/texjporg/cjk-gs-support/master/cjk-gs-integrate-highsierra.dat)
+- for El Capitan (10.11): [cjkgs-macos-elcapitan.dat](https://raw.githubusercontent.com/texjporg/cjk-gs-support/master/cjkgs-macos-elcapitan.dat)
+- for Sierra (10.12): [cjkgs-macos-sierra.dat](https://raw.githubusercontent.com/texjporg/cjk-gs-support/master/cjkgs-macos-sierra.dat)
+- for High Sierra (10.13): [cjkgs-macos-highsierra.dat](https://raw.githubusercontent.com/texjporg/cjk-gs-support/master/cjkgs-macos-highsierra.dat)
 
 Download the database file (`*.dat`) which is suitable for
 your OS version. Either place it in the current working directory
@@ -30,11 +30,11 @@ Then execute the script in the usual way (see main documentation) and add
 the option `--fontdef-add`. For macOS 10.13 High Sierra this would be:
 
 `````
-cjk-gs-integrate[.pl] --fontdef-add=cjk-gs-integrate-highsierra.dat
+cjk-gs-integrate[.pl] --fontdef-add=cjkgs-macos-highsierra.dat
 `````
 
-For OS X 10.11 El Capitan, use `cjk-gs-integrate-elcapitan.dat`.
-For macOS 10.12 Sierra, use `cjk-gs-integrate-sierra.dat`.
+For OS X 10.11 El Capitan, use `cjkgs-macos-elcapitan.dat`.
+For macOS 10.12 Sierra, use `cjkgs-macos-sierra.dat`.
 
 Authors, Contributors, and Copyright
 ------------------------------------
