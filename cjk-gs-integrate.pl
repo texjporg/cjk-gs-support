@@ -2098,6 +2098,10 @@ INCLUDE cjkgs-morisawa-extra.dat
 # Hiragino -- Provides level 30(ProN), 40(Pro)
 INCLUDE cjkgs-hiragino.dat
 
+# Kozuka (Adobe) -- Provides level 50(Pr6N), 55(ProVI), 60(Pro), 65(Std)
+INCLUDE cjkgs-kozuka.dat
+INCLUDE cjkgs-ryokana.dat
+
 # Yu-fonts MacOS version -- Provides level 80
 INCLUDE cjkgs-yu-osx.dat
 
@@ -2524,10 +2528,6 @@ TTFname: Osaka.ttf
 Name: Osaka-Mono
 Class: Japan
 TTFname: OsakaMono.ttf
-
-# Kozuka (Adobe) -- Provides level 50(Pr6N), 55(ProVI), 60(Pro), 65(Std)
-INCLUDE cjkgs-kozuka.dat
-INCLUDE cjkgs-ryokana.dat
 
 #
 # CHINESE FONTS
