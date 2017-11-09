@@ -14,9 +14,75 @@
 #   楷体.ttc
 # are bundled with OS X 10.8 -- 10.8.5 Mountain Lion.
 #   Songti.ttc
+#     index 0: STSongti-SC-Black
+#     index 1: STSongti-SC-Bold
+#     index 2: STSongti-TC-Bold
+#     index 3: STSongti-SC-Light
+#     index 4: STSong
+#     index 5: STSongti-TC-Light
+#     index 6: STSongti-SC-Regular
+#     index 7: STSongti-TC-Regular
+# is bundled with OS X 10.9 or later versions.
 #   Kaiti.ttc
-# are bundled with OS X 10.9 -- 10.9.5 Mavericks.
+#     index 0: STKaiti-SC-Black
+#     index 1: STKaiti-SC-Bold
+#     index 2: STKaiTi-TC-Bold
+#     index 3: STKaiti-SC-Regular
+#     index 4: STKaiti
+#     index 5: STKaiTi-TC-Regular
+# is bundled with OS X 10.9 -- 10.11.6 El Capitan.
+#   Kaiti.ttc
+#     index 0: STKaitiSC-Regular
+#     index 1: STKaiti
+#     index 2: STKaitiTC-Regular
+#     index 3: STKaitiSC-Bold
+#     index 4: STKaitiTC-Bold
+#     index 5: STKaitiSC-Black
+#     index 6: STKaitiTC-Black
+# is bundled with macOS 10.12 Sierra or later versions.
+#   Baoli.ttc
+#     index 0: STBaoli-SC-Regular
+#   Libian.ttc
+#     index 0: STLibian-SC-Regular
+#   Xingkai.ttc
+#     index 0: STXingkai-SC-Bold
+#     index 1: STXingkai-SC-Light
+# are bundled with OS X 10.9 Mavericks -- 10.11.6 El Capitan.
+#   Baoli.ttc
+#     index 0: STBaoliSC-Regular
+#     index 1: STBaoliTC-Regular
+#   Libian.ttc
+#     index 0: STLibianSC-Regular
+#     index 1: STLibianTC-Regular
+#   Xingkai.ttc
+#     index 0: STXingkaiSC-Bold
+#     index 1: STXingkaiTC-Bold
+#     index 2: STXingkaiSC-Light
+#     index 3: STXingkaiTC-Light
+# are bundled with macOS 10.12 Sierra or later versions.
+#   Yuanti.ttc
+#     index 0: STYuanti-SC-Bold
+#     index 1: STYuanti-SC-Light
+#     index 2: STYuanti-SC-Regular
+# are bundled with OS X 10.9 Mavericks -- 10.10.5 Yosemite.
+#   Yuanti.ttc
+#     index 0: STYuanti-SC-Bold
+#     index 1: STYuanti-TC-Bold
+#     index 2: STYuanti-SC-Light
+#     index 3: STYuanti-TC-Light
+#     index 4: STYuanti-SC-Regular
+#     index 5: STYuanti-TC-Regular
+# are bundled with OS X 10.11 -- 10.11.6 El Capitan.
+#   Yuanti.ttc
+#     index 0: STYuanti-SC-Regular
+#     index 1: STYuanti-TC-Regular
+#     index 2: STYuanti-SC-Bold
+#     index 3: STYuanti-TC-Bold
+#     index 4: STYuanti-SC-Light
+#     index 5: STYuanti-TC-Light
+# are bundled with macOS 10.12 Sierra or later versions.
 
+# [TODO] Not sure about macOS 10.13, should check
 # [TODO] Check for OS X 10.10 Yosemite or later versions
 # [TODO] Separate macOS-specific database
 
