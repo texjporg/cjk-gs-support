@@ -2599,53 +2599,7 @@ Name: PingFangSC-Ultralight
 Class: GB
 OTCname: PingFang.ttc(17)
 
-# Changzhou SinoType (OS X)
-
-Name: STXihei
-Class: GB
-#Provides(??): STHeiti-Light # fails
-TTFname(20): 华文细黑.ttf
-TTFname(10): STXihei.ttf
-
-Name: STHeiti
-Class: GB
-#Provides(??): STHeiti-Regular # fails
-TTFname(20): 华文黑体.ttf
-TTFname(10): STHeiti.ttf
-
-Name: STHeitiSC-Light
-Class: GB
-#Provides(??): STHeiti-Light # fails
-TTCname(10): STHeiti-Light.ttc(1)
-TTCname(20): STHeiti Light.ttc(1)
-#TTFname(30): STHeitiSC-Light.ttf
-
-Name: STHeitiSC-Medium
-Class: GB
-#Provides(??): STHeiti-Regular # fails
-TTCname(10): STHeiti-Medium.ttc(1)
-TTCname(20): STHeiti Medium.ttc(1)
-#TTFname(30): STHeitiSC-Medium.ttf
-
-Name: STHeitiTC-Light
-Class: CNS
-TTCname(10): STHeiti-Light.ttc(0)
-TTCname(20): STHeiti Light.ttc(0)
-#TTFname(30): STHeitiTC-Light.ttf
-
-Name: STHeitiTC-Medium
-Class: CNS
-#Provides(??): MHei-Medium # fails
-TTCname(10): STHeiti-Medium.ttc(0)
-TTCname(20): STHeiti Medium.ttc(0)
-#TTFname(30): STHeitiTC-Medium.ttf
-
-Name: STFangsong
-Class: GB
-#Provides(??): STFangsong-Light # fails
-#Provides(??): STFangsong-Regular # fails
-TTFname(20): 华文仿宋.ttf
-TTFname(10): STFangsong.ttf
+# Changzhou SinoType -- Provides level ??
 
 # TTC entry for Mountain Lion (10.8) or later
 # TTF entry for Lion (10.7) or earlier
@@ -2800,6 +2754,52 @@ Name: STKaitiTC-Black
 Class: CNS
 TTCname(10): Kaiti.ttc(6)
 
+Name: STXihei
+Class: GB
+#Provides(??): STHeiti-Light # fails
+TTFname(20): 华文细黑.ttf
+TTFname(10): STXihei.ttf
+
+Name: STHeiti
+Class: GB
+#Provides(??): STHeiti-Regular # fails
+TTFname(20): 华文黑体.ttf
+TTFname(10): STHeiti.ttf
+
+Name: STHeitiSC-Light
+Class: GB
+#Provides(??): STHeiti-Light # fails
+TTCname(10): STHeiti-Light.ttc(1)
+TTCname(20): STHeiti Light.ttc(1)
+#TTFname(30): STHeitiSC-Light.ttf
+
+Name: STHeitiSC-Medium
+Class: GB
+#Provides(??): STHeiti-Regular # fails
+TTCname(10): STHeiti-Medium.ttc(1)
+TTCname(20): STHeiti Medium.ttc(1)
+#TTFname(30): STHeitiSC-Medium.ttf
+
+Name: STHeitiTC-Light
+Class: CNS
+TTCname(10): STHeiti-Light.ttc(0)
+TTCname(20): STHeiti Light.ttc(0)
+#TTFname(30): STHeitiTC-Light.ttf
+
+Name: STHeitiTC-Medium
+Class: CNS
+#Provides(??): MHei-Medium # fails
+TTCname(10): STHeiti-Medium.ttc(0)
+TTCname(20): STHeiti Medium.ttc(0)
+#TTFname(30): STHeitiTC-Medium.ttf
+
+Name: STFangsong
+Class: GB
+#Provides(??): STFangsong-Light # fails
+#Provides(??): STFangsong-Regular # fails
+TTFname(20): 华文仿宋.ttf
+TTFname(10): STFangsong.ttf
+
 Name: STBaoliSC-Regular
 Class: GB
 TTCname: Baoli.ttc(0)
@@ -2855,6 +2855,26 @@ TTCname: Yuanti.ttc(4)
 Name: STYuanti-TC-Light
 Class: CNS
 TTCname: Yuanti.ttc(5)
+
+Name: STZhongsong
+Class: GB
+TTFname: STZHONGS.ttf
+
+Name: STXinwei
+Class: GB
+TTFname: STXINWEI.ttf
+
+Name: STXingkai
+Class: GB
+TTFname: STXINGKA.ttf
+
+Name: STLiti
+Class: GB
+TTFname: STLITI.ttf
+
+Name: STHupo
+Class: GB
+TTFname: STHUPO.ttf
 
 # Beijing Founder Electronics
 # note:
@@ -3797,26 +3817,6 @@ TTFname: Dengb.ttf
 Name: DengXian-Light
 Class: GB
 TTFname: Dengl.ttf
-
-Name: STZhongsong
-Class: GB
-TTFname: STZHONGS.ttf
-
-Name: STXinwei
-Class: GB
-TTFname: STXINWEI.ttf
-
-Name: STXingkai
-Class: GB
-TTFname: STXINGKA.ttf
-
-Name: STLiti
-Class: GB
-TTFname: STLITI.ttf
-
-Name: STHupo
-Class: GB
-TTFname: STHUPO.ttf
 
 # traditional chinese
 
