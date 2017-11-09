@@ -2110,7 +2110,7 @@ INCLUDE cjkgs-yu-win.dat
 
 # other Mac OS X fonts
 
-# Note about Mac OS X:
+# Note about Mac (Mac OS X 10.6 -- macOS 10.13)
 #   Klee.ttc
 #   Tsukushi{A,B}MaruGothic.ttc
 # are bundled with OS X 10.11 El Capitan or later versions.
@@ -2120,7 +2120,7 @@ INCLUDE cjkgs-yu-win.dat
 #   ToppanBunkyuGothic.ttc
 #   ToppanBunkyuMidashiMincho-ExtraBold.otf
 #   ToppanBunkyuMidashiGothic-ExtraBold.otf
-# are bundled with macOS 10.12 Sierra.
+# are bundled with macOS 10.12 -- 10.12.6 Sierra.
 #   ToppanBunkyuMinchoPr6N-Regular.otf
 #   ToppanBunkyuGothicPr6N.ttc
 #   ToppanBunkyuMidashiMinchoStdN-ExtraBold.otf
