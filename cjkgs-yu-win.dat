@@ -13,6 +13,8 @@
 #   YuGothic.ttf
 #   YuGothic-Bold.ttf
 # are bundled with VS2013 or later versions.
+
+# Note about MSOffice:
 #   YuGoth{B,L,M,R}.ttf
 #   yumin.ttf, yumin{db,l}.ttf
 # are bundled with Office for Mac 2016.
