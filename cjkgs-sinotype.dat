@@ -1,12 +1,17 @@
 # Changzhou SinoType
 
 # Note about Mac (Mac OS X 10.6 -- macOS 10.13)
-#   华文细黑.ttf
-#   华文黑体.ttf
-#   华文仿宋.ttf
 #   STHeiti Light.ttc
 #   STHeiti Medium.ttc
 # are bundled with all versions.
+#   华文细黑.ttf
+#   华文黑体.ttf
+#   华文仿宋.ttf
+# are bundled with macOS 10.12.6 Sierra or earlier versions.
+#   STXIHEI.ttf
+#   STHEITI.ttf
+#   STFANGSO.ttf
+# are bundled with macOS 10.13 High Sierra or later versions.
 #   华文宋体.ttf
 #   华文楷体.ttf
 # are bundled with Mac OS X 10.7.5 Lion or earlier versions.
@@ -82,7 +87,6 @@
 #     index 5: STYuanti-TC-Light
 # are bundled with macOS 10.12 Sierra or later versions.
 
-# [TODO] Not sure about macOS 10.13, should check
 # [TODO] Check for OS X 10.10 Yosemite or later versions
 # [TODO] Separate macOS-specific database
 
@@ -243,12 +247,14 @@ Class: GB
 #Provides(??): STHeiti-Light # fails
 TTFname(10): STXihei.ttf
 TTFname(11): STXIHEI.TTF
+TTFname(19): STXIHEI.ttf
 TTFname(20): 华文细黑.ttf
 
 Name: STHeiti
 Class: GB
 #Provides(??): STHeiti-Regular # fails
 TTFname(10): STHeiti.ttf
+TTFname(19): STHEITI.ttf
 TTFname(20): 华文黑体.ttf
 
 Name: STHeitiSC-Light
@@ -257,16 +263,16 @@ Class: GB
 TTCname(30): STHeiti-Light.ttc(1)
 TTCname(40): STHeiti Light.ttc(1)
 
+Name: STHeitiTC-Light
+Class: CNS
+TTCname(30): STHeiti-Light.ttc(0)
+TTCname(40): STHeiti Light.ttc(0)
+
 Name: STHeitiSC-Medium
 Class: GB
 #Provides(??): STHeiti-Regular # fails
 TTCname(30): STHeiti-Medium.ttc(1)
 TTCname(40): STHeiti Medium.ttc(1)
-
-Name: STHeitiTC-Light
-Class: CNS
-TTCname(30): STHeiti-Light.ttc(0)
-TTCname(40): STHeiti Light.ttc(0)
 
 Name: STHeitiTC-Medium
 Class: CNS
@@ -280,6 +286,7 @@ Class: GB
 #Provides(??): STFangsong-Regular # fails
 TTFname(10): STFangsong.ttf
 TTFname(11): STFANGSO.TTF
+TTFname(19): STFANGSO.ttf
 TTFname(20): 华文仿宋.ttf
 
 Name: STBaoliSC-Regular
