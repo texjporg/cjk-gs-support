@@ -1,0 +1,69 @@
+#
+# CHINESE FONTS
+#
+
+# Changzhou SinoType
+
+Name: STSong
+Class: GB
+#Provides(??): STSong-Light # fails
+#Provides(??): STSong-Regular # fails
+TTFname(10): STSong.ttf
+TTFname(11): STSONG.TTF
+TTFname(20): 华文宋体.ttf
+TTCname(39): Songti-mountainlion.ttc(3)
+TTCname(40): 宋体.ttc(3)
+
+Name: STKaiti
+Class: GB
+#Provides(??): STKaiti-Regular # fails
+TTFname(10): STKaiti.ttf
+TTFname(11): STKAITI.TTF
+TTFname(20): 华文楷体.ttf
+TTCname(39): Kaiti-mountainlion.ttc(3)
+TTCname(40): 楷体.ttc(3)
+
+Name: STKaiti-Adobe-CNS1
+Class: CNS
+#Provides(??): MKai-Medium # fails
+TTFname(10): STKaiti.ttf
+TTFname(11): STKAITI.TTF
+TTFname(20): 华文楷体.ttf
+TTCname(39): Kaiti-mountainlion.ttc(3)
+TTCname(40): 楷体.ttc(3)
+
+Name: STSongti-SC-Black
+Class: GB
+TTCname(39): Songti-mountainlion.ttc(0)
+TTCname(40): 宋体.ttc(0)
+
+Name: STSongti-SC-Bold
+Class: GB
+TTCname(39): Songti-mountainlion.ttc(1)
+TTCname(40): 宋体.ttc(1)
+
+Name: STSongti-SC-Light
+Class: GB
+TTCname(39): Songti-mountainlion.ttc(2)
+TTCname(40): 宋体.ttc(2)
+
+Name: STSongti-SC-Regular
+Class: GB
+TTCname(39): Songti-mountainlion.ttc(4)
+TTCname(40): 宋体.ttc(4)
+
+Name: STKaiti-SC-Black
+Class: GB
+TTCname(39): Kaiti-mountainlion.ttc(0)
+TTCname(40): 楷体.ttc(0)
+
+Name: STKaiti-SC-Bold
+Class: GB
+TTCname(39): Kaiti-mountainlion.ttc(1)
+TTCname(40): 楷体.ttc(1)
+
+Name: STKaiti-SC-Regular
+Class: GB
+TTCname(39): Kaiti-mountainlion.ttc(2)
+TTCname(40): 楷体.ttc(2)
+

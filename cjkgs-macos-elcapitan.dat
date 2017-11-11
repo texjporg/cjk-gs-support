@@ -269,3 +269,119 @@ OTFname(20): Hiragino Sans GB W6.otf
 OTFname(10): HiraginoSansGB-W6.otf
 OTCname(30): Hiragino Sans GB W6.ttc(0)
 OTCname(28): HiraginoSansGB-W6.ttc(0)
+
+# Changzhou SinoType
+
+Name: STSong
+Class: GB
+#Provides(??): STSong-Light # fails
+#Provides(??): STSong-Regular # fails
+TTFname(10): STSong.ttf
+TTFname(11): STSONG.TTF
+TTFname(20): 华文宋体.ttf
+TTCname(30): Songti.ttc(4)
+
+Name: STKaiti
+Class: GB
+#Provides(??): STKaiti-Regular # fails
+TTFname(10): STKaiti.ttf
+TTFname(11): STKAITI.TTF
+TTFname(20): 华文楷体.ttf
+TTCname(30): Kaiti.ttc(4)
+
+Name: STKaiti-Adobe-CNS1
+Class: CNS
+#Provides(??): MKai-Medium # fails
+TTFname(10): STKaiti.ttf
+TTFname(11): STKAITI.TTF
+TTFname(20): 华文楷体.ttf
+TTCname(30): Kaiti.ttc(4)
+
+Name: STSongti-SC-Black
+Class: GB
+TTCname(30): Songti.ttc(0)
+
+Name: STSongti-SC-Bold
+Class: GB
+TTCname(30): Songti.ttc(1)
+
+Name: STSongti-TC-Bold
+Class: CNS
+TTCname(30): Songti.ttc(2)
+
+Name: STSongti-SC-Light
+Class: GB
+TTCname(30): Songti.ttc(3)
+
+Name: STSongti-TC-Light
+Class: CNS
+TTCname(30): Songti.ttc(5)
+
+Name: STSongti-SC-Regular
+Class: GB
+TTCname(30): Songti.ttc(6)
+
+Name: STSongti-TC-Regular
+Class: CNS
+TTCname(30): Songti.ttc(7)
+
+Name: STKaiti-SC-Black
+Class: GB
+TTCname(30): Kaiti.ttc(0)
+
+Name: STKaiti-SC-Bold
+Class: GB
+TTCname(30): Kaiti.ttc(1)
+
+Name: STKaiTi-TC-Bold
+Class: CNS
+TTCname(30): Kaiti.ttc(2)
+
+Name: STKaiti-SC-Regular
+Class: GB
+TTCname(30): Kaiti.ttc(3)
+
+Name: STKaiTi-TC-Regular
+Class: CNS
+TTCname(30): Kaiti.ttc(5)
+
+Name: STBaoli-SC-Regular
+Class: GB
+TTCname(30): Baoli.ttc(0)
+
+Name: STLibian-SC-Regular
+Class: GB
+TTCname(30): Libian.ttc(0)
+
+Name: STXingkai-SC-Bold
+Class: GB
+TTCname(30): Xingkai.ttc(0)
+
+Name: STXingkai-SC-Light
+Class: GB
+TTCname(30): Xingkai.ttc(1)
+
+Name: STYuanti-SC-Bold
+Class: GB
+TTCname(30): Yuanti.ttc(0)
+
+Name: STYuanti-TC-Bold
+Class: CNS
+TTCname(30): Yuanti.ttc(1)
+
+Name: STYuanti-SC-Light
+Class: GB
+TTCname(30): Yuanti.ttc(2)
+
+Name: STYuanti-TC-Light
+Class: CNS
+TTCname(30): Yuanti.ttc(3)
+
+Name: STYuanti-SC-Regular
+Class: GB
+TTCname(30): Yuanti.ttc(4)
+
+Name: STYuanti-TC-Regular
+Class: CNS
+TTCname(30): Yuanti.ttc(5)
+

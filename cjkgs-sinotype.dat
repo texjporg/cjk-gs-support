@@ -87,9 +87,6 @@
 #     index 5: STYuanti-TC-Light
 # are bundled with macOS 10.12 Sierra or later versions.
 
-# [TODO] Check for OS X 10.10 Yosemite or later versions
-# [TODO] Separate macOS-specific database
-
 # Note about MSOffice:
 #   STZHONGS.ttf
 #   STXINWEI.ttf
@@ -98,8 +95,6 @@
 #   STHUPO.ttf
 # are bundled with Office for Mac 2016.
 
-# TTC entry for Mountain Lion (10.8) or later
-# TTF entry for Lion (10.7) or earlier
 Name: STSong
 Class: GB
 #Provides(??): STSong-Light # fails
@@ -107,140 +102,20 @@ Class: GB
 TTFname(10): STSong.ttf
 TTFname(11): STSONG.TTF
 TTFname(20): 华文宋体.ttf
-TTCname(30): Songti.ttc(4)
-TTCname(40): 宋体.ttc(3)
 
-Name: STSongti-SC-Light
-Class: GB
-#Provides(??): STSong-Light # fails
-#Provides(??): STSong-Regular # fails
-TTCname(30): Songti.ttc(3)
-TTCname(40): 宋体.ttc(2)
-
-Name: STSongti-SC-Regular
-Class: GB
-TTCname(30): Songti.ttc(6)
-TTCname(40): 宋体.ttc(4)
-
-Name: STSongti-SC-Bold
-Class: GB
-TTCname(30): Songti.ttc(1)
-TTCname(40): 宋体.ttc(1)
-
-Name: STSongti-SC-Black
-Class: GB
-TTCname(30): Songti.ttc(0)
-TTCname(40): 宋体.ttc(0)
-
-Name: STSongti-TC-Light
-Class: CNS
-#Provides(??): MSung-Light # fails
-TTCname(30): Songti.ttc(5)
-
-Name: STSongti-TC-Regular
-Class: CNS
-#Provides(??): MSung-Medium # fails
-TTCname(30): Songti.ttc(7)
-
-Name: STSongti-TC-Bold
-Class: CNS
-TTCname(30): Songti.ttc(2)
-
-# Note about Mac OS X:
-#   Kaiti.ttc
-# contained 6 fonts before OS X 10.11.6 El Capitan.
-# After macOS 10.12 Sierra, it contains 7 fonts and
-# the order of ttc index has completely changed.
-
-# TTF entry for Lion (10.7) or earlier
-# TTC entry for Mountain Lion (10.8) or later
 Name: STKaiti
 Class: GB
 #Provides(??): STKaiti-Regular # fails
 TTFname(10): STKaiti.ttf
 TTFname(11): STKAITI.TTF
 TTFname(20): 华文楷体.ttf
-## for Sierra (10.12) or later
-TTCname(30): Kaiti.ttc(1)
-## for El Capitan (10.11.6) or earlier
-#TTCname(30): Kaiti.ttc(4)
-TTCname(40): 楷体.ttc(3)
 
-# TTF entry for Lion (10.7) or earlier
-# TTC entry for Mountain Lion (10.8) or later
 Name: STKaiti-Adobe-CNS1
 Class: CNS
 #Provides(??): MKai-Medium # fails
 TTFname(10): STKaiti.ttf
 TTFname(11): STKAITI.TTF
 TTFname(20): 华文楷体.ttf
-## for Sierra (10.12) or later
-TTCname(30): Kaiti.ttc(1)
-## for El Capitan (10.11.6) or earlier
-#TTCname(30): Kaiti.ttc(4)
-TTCname(40): 楷体.ttc(3)
-
-# for El Capitan (10.11.6) or earlier
-Name: STKaiti-SC-Regular
-Class: GB
-#Provides(??): STKaiti-Regular # fails
-TTCname(30): Kaiti.ttc(3)
-TTCname(40): 楷体.ttc(2)
-
-# for Sierra (10.12) or later
-Name: STKaitiSC-Regular
-Class: GB
-#Provides(??): STKaiti-Regular # fails
-TTCname(30): Kaiti.ttc(0)
-
-# for El Capitan (10.11.6) or earlier
-Name: STKaiti-SC-Bold
-Class: GB
-TTCname(30): Kaiti.ttc(1)
-TTCname(40): 楷体.ttc(1)
-
-# for Sierra (10.12) or later
-Name: STKaitiSC-Bold
-Class: GB
-TTCname(30): Kaiti.ttc(3)
-
-# for El Capitan (10.11.6) or earlier
-Name: STKaiti-SC-Black
-Class: GB
-TTCname(30): Kaiti.ttc(0)
-TTCname(40): 楷体.ttc(0)
-
-# for Sierra (10.12) or later
-Name: STKaitiSC-Black
-Class: GB
-TTCname(30): Kaiti.ttc(5)
-
-# for El Capitan (10.11.6) or earlier
-Name: STKaiTi-TC-Regular
-Class: CNS
-#Provides(??): MKai-Medium # fails
-TTCname(30): Kaiti.ttc(5)
-
-# for Sierra (10.12) or later
-Name: STKaitiTC-Regular
-Class: CNS
-#Provides(??): MKai-Medium # fails
-TTCname(30): Kaiti.ttc(2)
-
-# for El Capitan (10.11.6) or earlier
-Name: STKaiTi-TC-Bold
-Class: CNS
-TTCname(30): Kaiti.ttc(2)
-
-# for Sierra (10.12) or later
-Name: STKaitiTC-Bold
-Class: CNS
-TTCname(30): Kaiti.ttc(4)
-
-# for Sierra (10.12) or later (New!)
-Name: STKaitiTC-Black
-Class: CNS
-TTCname(30): Kaiti.ttc(6)
 
 Name: STXihei
 Class: GB
@@ -257,29 +132,6 @@ TTFname(10): STHeiti.ttf
 TTFname(19): STHEITI.ttf
 TTFname(20): 华文黑体.ttf
 
-Name: STHeitiSC-Light
-Class: GB
-#Provides(??): STHeiti-Light # fails
-TTCname(30): STHeiti-Light.ttc(1)
-TTCname(40): STHeiti Light.ttc(1)
-
-Name: STHeitiTC-Light
-Class: CNS
-TTCname(30): STHeiti-Light.ttc(0)
-TTCname(40): STHeiti Light.ttc(0)
-
-Name: STHeitiSC-Medium
-Class: GB
-#Provides(??): STHeiti-Regular # fails
-TTCname(30): STHeiti-Medium.ttc(1)
-TTCname(40): STHeiti Medium.ttc(1)
-
-Name: STHeitiTC-Medium
-Class: CNS
-#Provides(??): MHei-Medium # fails
-TTCname(30): STHeiti-Medium.ttc(0)
-TTCname(40): STHeiti Medium.ttc(0)
-
 Name: STFangsong
 Class: GB
 #Provides(??): STFangsong-Light # fails
@@ -288,62 +140,6 @@ TTFname(10): STFangsong.ttf
 TTFname(11): STFANGSO.TTF
 TTFname(19): STFANGSO.ttf
 TTFname(20): 华文仿宋.ttf
-
-Name: STBaoliSC-Regular
-Class: GB
-TTCname: Baoli.ttc(0)
-
-Name: STBaoliTC-Regular
-Class: CNS
-TTCname: Baoli.ttc(1)
-
-Name: STLibianSC-Regular
-Class: GB
-TTCname: Libian.ttc(0)
-
-Name: STLibianTC-Regular
-Class: CNS
-TTCname: Libian.ttc(1)
-
-Name: STXingkaiSC-Bold
-Class: GB
-TTCname: Xingkai.ttc(0)
-
-Name: STXingkaiTC-Bold
-Class: CNS
-TTCname: Xingkai.ttc(1)
-
-Name: STXingkaiSC-Light
-Class: GB
-TTCname: Xingkai.ttc(2)
-
-Name: STXingkaiTC-Light
-Class: CNS
-TTCname: Xingkai.ttc(3)
-
-Name: STYuanti-SC-Regular
-Class: GB
-TTCname: Yuanti.ttc(0)
-
-Name: STYuanti-TC-Regular
-Class: CNS
-TTCname: Yuanti.ttc(1)
-
-Name: STYuanti-SC-Bold
-Class: GB
-TTCname: Yuanti.ttc(2)
-
-Name: STYuanti-TC-Bold
-Class: CNS
-TTCname: Yuanti.ttc(3)
-
-Name: STYuanti-SC-Light
-Class: GB
-TTCname: Yuanti.ttc(4)
-
-Name: STYuanti-TC-Light
-Class: CNS
-TTCname: Yuanti.ttc(5)
 
 Name: STZhongsong
 Class: GB
@@ -373,4 +169,24 @@ TTFname(12): STHUPO.ttf
 Name: STCaiyun
 Class: GB
 TTFname(11): STCAIYUN.TTF
+
+Name: STHeitiSC-Light
+Class: GB
+TTCname(30): STHeiti-Light.ttc(1)
+TTCname(40): STHeiti Light.ttc(1)
+
+Name: STHeitiTC-Light
+Class: CNS
+TTCname(30): STHeiti-Light.ttc(0)
+TTCname(40): STHeiti Light.ttc(0)
+
+Name: STHeitiSC-Medium
+Class: GB
+TTCname(30): STHeiti-Medium.ttc(1)
+TTCname(40): STHeiti Medium.ttc(1)
+
+Name: STHeitiTC-Medium
+Class: CNS
+TTCname(30): STHeiti-Medium.ttc(0)
+TTCname(40): STHeiti Medium.ttc(0)
 
