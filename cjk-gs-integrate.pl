@@ -1510,6 +1510,7 @@ sub read_each_font_database {
   for my $l (@curdbl) {
     $lineno++;
     next if ($l =~ m/^\s*#/); # skip comment line
+    $l =~ s/\s*#.*$//; # skip comment after '#'
     if ($l =~ m/^\s*$/) { # empty line is a separator between entries
       if ($fontname || $fontclass || keys(%fontfiles)) {
         if ($fontname && $fontclass && keys(%fontfiles)) {
