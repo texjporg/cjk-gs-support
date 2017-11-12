@@ -2536,68 +2536,8 @@ TTFname: OsakaMono.ttf
 # Hiragino -- Provides level 50
 # (already included in JAPANESE section)
 
-# DynaComware (OS X)
-
-Name: LiHeiPro
-Class: CNS
-#Provides(??): MHei-Medium # fails
-TTFname(20): 儷黑 Pro.ttf
-TTFname(10): LiHeiPro.ttf
-
-Name: LiSongPro
-Class: CNS
-#Provides(??): MSung-Medium # fails
-#Provides(??): MSung-Light # fails
-TTFname(20): 儷宋 Pro.ttf
-TTFname(10): LiSongPro.ttf
-
-Name: PingFangTC-Regular
-Class: CNS
-OTCname: PingFang.ttc(1)
-
-Name: PingFangSC-Regular
-Class: GB
-OTCname: PingFang.ttc(2)
-
-Name: PingFangTC-Medium
-Class: CNS
-OTCname: PingFang.ttc(4)
-
-Name: PingFangSC-Medium
-Class: GB
-OTCname: PingFang.ttc(5)
-
-Name: PingFangTC-Semibold
-Class: CNS
-OTCname: PingFang.ttc(7)
-
-Name: PingFangSC-Semibold
-Class: GB
-OTCname: PingFang.ttc(8)
-
-Name: PingFangTC-Light
-Class: CNS
-OTCname: PingFang.ttc(10)
-
-Name: PingFangSC-Light
-Class: GB
-OTCname: PingFang.ttc(11)
-
-Name: PingFangTC-Thin
-Class: CNS
-OTCname: PingFang.ttc(13)
-
-Name: PingFangSC-Thin
-Class: GB
-OTCname: PingFang.ttc(14)
-
-Name: PingFangTC-Ultralight
-Class: CNS
-OTCname: PingFang.ttc(16)
-
-Name: PingFangSC-Ultralight
-Class: GB
-OTCname: PingFang.ttc(17)
+# DynaComware -- Provides level ??
+INCLUDE cjkgs-dynacomware.dat
 
 # Changzhou SinoType -- Provides level ??
 INCLUDE cjkgs-sinotype.dat

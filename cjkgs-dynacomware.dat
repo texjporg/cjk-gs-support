@@ -1,0 +1,99 @@
+# DynaComware
+
+# Note about Mac (Mac OS X 10.6 -- macOS 10.13)
+#   儷黑 Pro.ttf
+#   儷宋 Pro.ttf
+# are bundled with macOS 10.12.6 Sierra or earlier versions.
+#   LiHeiPro.ttf
+#   LiSongPro.ttf
+# are bundled with macOS 10.13 High Sierra or later versions.
+#   PingFang.ttc
+#     index  0--17: PingFang*
+#     index 18--35: .PingFang* (hidden fonts)
+# is bundled with OS X 10.11 El Capitan or later versions.
+
+Name: LiHeiPro
+Class: CNS
+#Provides(??): MHei-Medium # fails
+TTFname(20): 儷黑 Pro.ttf
+TTFname(10): LiHeiPro.ttf
+
+Name: LiSongPro
+Class: CNS
+#Provides(??): MSung-Medium # fails
+#Provides(??): MSung-Light # fails
+TTFname(20): 儷宋 Pro.ttf
+TTFname(10): LiSongPro.ttf
+
+Name: PingFangHK-Regular
+Class: CNS # HK
+OTCname: PingFang.ttc(0)
+
+Name: PingFangTC-Regular
+Class: CNS
+OTCname: PingFang.ttc(1)
+
+Name: PingFangSC-Regular
+Class: GB
+OTCname: PingFang.ttc(2)
+
+Name: PingFangHK-Medium
+Class: CNS # HK
+OTCname: PingFang.ttc(3)
+
+Name: PingFangTC-Medium
+Class: CNS
+OTCname: PingFang.ttc(4)
+
+Name: PingFangSC-Medium
+Class: GB
+OTCname: PingFang.ttc(5)
+
+Name: PingFangHK-Semibold
+Class: CNS # HK
+OTCname: PingFang.ttc(6)
+
+Name: PingFangTC-Semibold
+Class: CNS
+OTCname: PingFang.ttc(7)
+
+Name: PingFangSC-Semibold
+Class: GB
+OTCname: PingFang.ttc(8)
+
+Name: PingFangHK-Light
+Class: CNS # HK
+OTCname: PingFang.ttc(9)
+
+Name: PingFangTC-Light
+Class: CNS
+OTCname: PingFang.ttc(10)
+
+Name: PingFangSC-Light
+Class: GB
+OTCname: PingFang.ttc(11)
+
+Name: PingFangHK-Thin
+Class: CNS # HK
+OTCname: PingFang.ttc(12)
+
+Name: PingFangTC-Thin
+Class: CNS
+OTCname: PingFang.ttc(13)
+
+Name: PingFangSC-Thin
+Class: GB
+OTCname: PingFang.ttc(14)
+
+Name: PingFangHK-Ultralight
+Class: CNS # HK
+OTCname: PingFang.ttc(15)
+
+Name: PingFangTC-Ultralight
+Class: CNS
+OTCname: PingFang.ttc(16)
+
+Name: PingFangSC-Ultralight
+Class: GB
+OTCname: PingFang.ttc(17)
+
