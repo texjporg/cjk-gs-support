@@ -30,6 +30,8 @@ Name: HiraMinProN-W6
 Class: Japan
 Provides(30): FutoMinA101-Bold
 Provides(30): FutoMinA101Pro-Bold
+Provides(30): MidashiMin-MA31
+Provides(30): MidashiMinPro-MA31
 OTFname(20): ヒラギノ明朝 ProN W6.otf
 OTFname(19): ヒラギノ明朝 ProN W6.otf
 OTFname(10): HiraMinProN-W6.otf
@@ -78,6 +80,8 @@ Name: HiraMinPro-W6
 Class: Japan
 Provides(40): FutoMinA101-Bold
 Provides(40): FutoMinA101Pro-Bold
+Provides(40): MidashiMin-MA31
+Provides(40): MidashiMinPro-MA31
 OTFname(20): ヒラギノ明朝 Pro W6.otf
 OTFname(19): ヒラギノ明朝 Pro W6.otf
 OTFname(10): HiraMinPro-W6.otf
@@ -140,7 +144,7 @@ OTFname(10): HiraMinPro-W2.otf
 # is bundled with macOS 10.12 Sierra -- macOS 10.12.6 Sierra.
 #   Hiragino Sans GB.ttc
 #   Hiragino_Sans_CNS.ttc
-# is bundled with macOS 10.13 High Sierra or later versions.
+# are bundled with macOS 10.13 High Sierra or later versions.
 
 Name: HiraginoSansGB-W3
 Class: GB

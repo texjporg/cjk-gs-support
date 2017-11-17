@@ -2144,6 +2144,8 @@ Provides(130): FutoMinA101-Bold
 Provides(130): FutoMinA101Pro-Bold
 Provides(130): HiraMinProN-W6
 Provides(130): HiraMinPro-W6
+Provides(130): MidashiMin-MA31
+Provides(130): MidashiMinPro-MA31
 TTFname(20): ipam.ttf
 #TTFname(21): IPAMincho.ttf
 
@@ -2157,14 +2159,14 @@ Provides(130): FutoGoB101-Bold
 Provides(130): FutoGoB101Pro-Bold
 Provides(130): HiraKakuProN-W6
 Provides(130): HiraKakuPro-W6
-Provides(130): Jun101-Light
-Provides(130): Jun101Pro-Light
-Provides(130): HiraMaruProN-W4
-Provides(130): HiraMaruPro-W4
 Provides(130): MidashiGo-MB31
 Provides(130): MidashiGoPro-MB31
 Provides(130): HiraKakuStdN-W8
 Provides(130): HiraKakuStd-W8
+Provides(130): Jun101-Light
+Provides(130): Jun101Pro-Light
+Provides(130): HiraMaruProN-W4
+Provides(130): HiraMaruPro-W4
 TTFname(20): ipag.ttf
 #TTFname(21): IPAGothic.ttf
 
@@ -2178,6 +2180,8 @@ Provides(120): FutoMinA101-Bold
 Provides(120): FutoMinA101Pro-Bold
 Provides(120): HiraMinProN-W6
 Provides(120): HiraMinPro-W6
+Provides(120): MidashiMin-MA31
+Provides(120): MidashiMinPro-MA31
 TTFname(20): ipaexm.ttf
 #TTFname(21): IPAexMincho.ttf
 
@@ -2191,14 +2195,14 @@ Provides(120): FutoGoB101-Bold
 Provides(120): FutoGoB101Pro-Bold
 Provides(120): HiraKakuProN-W6
 Provides(120): HiraKakuPro-W6
-Provides(120): Jun101-Light
-Provides(120): Jun101Pro-Light
-Provides(120): HiraMaruProN-W4
-Provides(120): HiraMaruPro-W4
 Provides(120): MidashiGo-MB31
 Provides(120): MidashiGoPro-MB31
 Provides(120): HiraKakuStdN-W8
 Provides(120): HiraKakuStd-W8
+Provides(120): Jun101-Light
+Provides(120): Jun101Pro-Light
+Provides(120): HiraMaruProN-W4
+Provides(120): HiraMaruPro-W4
 TTFname(20): ipaexg.ttf
 #TTFname(21): IPAexGothic.ttf
 
@@ -2260,6 +2264,8 @@ Provides(110): FutoMinA101-Bold
 Provides(110): FutoMinA101Pro-Bold
 Provides(110): HiraMinProN-W6
 Provides(110): HiraMinPro-W6
+Provides(110): MidashiMin-MA31
+Provides(110): MidashiMinPro-MA31
 TTCname: mogamb.ttc(0)
 
 Name: MogaExMincho-Bold
@@ -2268,6 +2274,8 @@ Provides(100): FutoMinA101-Bold
 Provides(100): FutoMinA101Pro-Bold
 Provides(100): HiraMinProN-W6
 Provides(100): HiraMinPro-W6
+Provides(100): MidashiMin-MA31
+Provides(100): MidashiMinPro-MA31
 TTCname: mogamb.ttc(1)
 
 Name: Moga90Mincho-Bold
@@ -2430,6 +2438,8 @@ Provides(140): FutoMinA101-Bold
 Provides(140): FutoMinA101Pro-Bold
 Provides(140): HiraMinProN-W6
 Provides(140): HiraMinPro-W6
+Provides(140): MidashiMin-MA31
+Provides(140): MidashiMinPro-MA31
 TTFname(10): ume-tmo3.ttf
 #TTFname(11): ume-tms3.ttf
 
@@ -2443,14 +2453,14 @@ Provides(140): FutoGoB101-Bold
 Provides(140): FutoGoB101Pro-Bold
 Provides(140): HiraKakuProN-W6
 Provides(140): HiraKakuPro-W6
-Provides(140): Jun101-Light
-Provides(140): Jun101Pro-Light
-Provides(140): HiraMaruProN-W4
-Provides(140): HiraMaruPro-W4
 Provides(140): MidashiGo-MB31
 Provides(140): MidashiGoPro-MB31
 Provides(140): HiraKakuStdN-W8
 Provides(140): HiraKakuStd-W8
+Provides(140): Jun101-Light
+Provides(140): Jun101Pro-Light
+Provides(140): HiraMaruProN-W4
+Provides(140): HiraMaruPro-W4
 TTFname(10): ume-tgo4.ttf
 
 Name: Ume-Gothic-O5
@@ -3537,6 +3547,22 @@ TTFname(10): MSMHei-Bold.ttf
 
 # japanese
 
+Name: MS-Mincho
+Class: Japan
+Provides(95): Ryumin-Light
+Provides(95): RyuminPro-Light
+Provides(95): HiraMinProN-W3
+Provides(95): HiraMinPro-W3
+Provides(95): FutoMinA101-Bold
+Provides(95): FutoMinA101Pro-Bold
+Provides(95): HiraMinProN-W6
+Provides(95): HiraMinPro-W6
+Provides(95): MidashiMin-MA31
+Provides(95): MidashiMinPro-MA31
+TTFname(50): MS Mincho.ttf
+TTFname(30): MS-Mincho.ttf
+TTCname(20): msmincho.ttc(0)
+
 Name: MS-Gothic
 Class: Japan
 Provides(95): GothicBBB-Medium
@@ -3559,31 +3585,17 @@ TTFname(50): MS Gothic.ttf
 TTFname(30): MS-Gothic.ttf
 TTCname(20): msgothic.ttc(0)
 
-Name: MS-Mincho
+Name: MS-PMincho
 Class: Japan
-Provides(95): Ryumin-Light
-Provides(95): RyuminPro-Light
-Provides(95): HiraMinProN-W3
-Provides(95): HiraMinPro-W3
-Provides(95): FutoMinA101-Bold
-Provides(95): FutoMinA101Pro-Bold
-Provides(95): HiraMinProN-W6
-Provides(95): HiraMinPro-W6
-TTFname(50): MS Mincho.ttf
-TTFname(30): MS-Mincho.ttf
-TTCname(20): msmincho.ttc(0)
+TTFname(50): MS PMincho.ttf
+TTFname(30): MS-PMincho.ttf
+TTCname(20): msmincho.ttc(1)
 
 Name: MS-PGothic
 Class: Japan
 TTFname(50): MS PGothic.ttf
 TTFname(30): MS-PGothic.ttf
 TTCname(20): msgothic.ttc(1)
-
-Name: MS-PMincho
-Class: Japan
-TTFname(50): MS PMincho.ttf
-TTFname(30): MS-PMincho.ttf
-TTCname(20): msmincho.ttc(1)
 
 Name: MS-UIGothic
 Class: Japan

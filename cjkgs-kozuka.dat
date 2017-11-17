@@ -1,6 +1,144 @@
 # Kozuka (Adobe)
 
+### JAPANESE ###
+
 # Some of the {Pr6N,ProVI,Pro} variants are used in ptex-fontmaps.
+
+Name: KozMinPr6N-ExtraLight
+Class: Japan
+OTFname: KozMinPr6N-ExtraLight.otf
+
+Name: KozMinPr6N-Light
+Class: Japan
+OTFname: KozMinPr6N-Light.otf
+
+Name: KozMinPr6N-Regular
+Class: Japan
+Provides(50): Ryumin-Light
+Provides(50): RyuminPro-Light
+Provides(50): HiraMinProN-W3
+Provides(50): HiraMinPro-W3
+OTFname: KozMinPr6N-Regular.otf
+
+Name: KozMinPr6N-Medium
+Class: Japan
+OTFname: KozMinPr6N-Medium.otf
+
+Name: KozMinPr6N-Bold
+Class: Japan
+Provides(50): FutoMinA101-Bold
+Provides(50): FutoMinA101Pro-Bold
+Provides(50): HiraMinProN-W6
+Provides(50): HiraMinPro-W6
+OTFname: KozMinPr6N-Bold.otf
+
+Name: KozMinPr6N-Heavy
+Class: Japan
+Provides(50): MidashiMin-MA31
+Provides(50): MidashiMinPro-MA31
+OTFname: KozMinPr6N-Heavy.otf
+
+Name: KozMinProVI-ExtraLight
+Class: Japan
+OTFname: KozMinProVI-ExtraLight.otf
+
+Name: KozMinProVI-Light
+Class: Japan
+OTFname: KozMinProVI-Light.otf
+
+Name: KozMinProVI-Regular
+Class: Japan
+Provides(55): Ryumin-Light
+Provides(55): RyuminPro-Light
+Provides(55): HiraMinProN-W3
+Provides(55): HiraMinPro-W3
+OTFname: KozMinProVI-Regular.otf
+
+Name: KozMinProVI-Medium
+Class: Japan
+OTFname: KozMinProVI-Medium.otf
+
+Name: KozMinProVI-Bold
+Class: Japan
+Provides(55): FutoMinA101-Bold
+Provides(55): FutoMinA101Pro-Bold
+Provides(55): HiraMinProN-W6
+Provides(55): HiraMinPro-W6
+OTFname: KozMinProVI-Bold.otf
+
+Name: KozMinProVI-Heavy
+Class: Japan
+Provides(55): MidashiMin-MA31
+Provides(55): MidashiMinPro-MA31
+OTFname: KozMinProVI-Heavy.otf
+
+Name: KozMinPro-ExtraLight
+Class: Japan
+OTFname: KozMinPro-ExtraLight.otf
+
+Name: KozMinPro-Light
+Class: Japan
+OTFname: KozMinPro-Light.otf
+
+Name: KozMinPro-Regular
+Class: Japan
+Provides(60): Ryumin-Light
+Provides(60): RyuminPro-Light
+Provides(60): HiraMinProN-W3
+Provides(60): HiraMinPro-W3
+OTFname: KozMinPro-Regular.otf
+
+Name: KozMinPro-Medium
+Class: Japan
+OTFname: KozMinPro-Medium.otf
+
+Name: KozMinPro-Bold
+Class: Japan
+Provides(60): FutoMinA101-Bold
+Provides(60): FutoMinA101Pro-Bold
+Provides(60): HiraMinProN-W6
+Provides(60): HiraMinPro-W6
+OTFname: KozMinPro-Bold.otf
+
+Name: KozMinPro-Heavy
+Class: Japan
+Provides(60): MidashiMin-MA31
+Provides(60): MidashiMinPro-MA31
+OTFname: KozMinPro-Heavy.otf
+
+Name: KozMinStd-ExtraLight
+Class: Japan
+OTFname: KozMinStd-ExtraLight.otf
+
+Name: KozMinStd-Light
+Class: Japan
+OTFname: KozMinStd-Light.otf
+
+Name: KozMinStd-Regular
+Class: Japan
+Provides(65): Ryumin-Light
+Provides(65): RyuminPro-Light
+Provides(65): HiraMinProN-W3
+Provides(65): HiraMinPro-W3
+OTFname: KozMinStd-Regular.otf
+
+Name: KozMinStd-Medium
+Class: Japan
+OTFname: KozMinStd-Medium.otf
+
+Name: KozMinStd-Bold
+Class: Japan
+Provides(65): FutoMinA101-Bold
+Provides(65): FutoMinA101Pro-Bold
+Provides(65): HiraMinProN-W6
+Provides(65): HiraMinPro-W6
+OTFname: KozMinStd-Bold.otf
+
+Name: KozMinStd-Heavy
+Class: Japan
+Provides(65): MidashiMin-MA31
+Provides(65): MidashiMinPro-MA31
+OTFname: KozMinStd-Heavy.otf
 
 Name: KozGoPr6N-ExtraLight
 Class: Japan
@@ -161,132 +299,4 @@ Provides(65): Jun101Pro-Light
 Provides(65): HiraMaruProN-W4
 Provides(65): HiraMaruPro-W4
 OTFname: KozGoStd-Heavy.otf
-
-Name: KozMinPr6N-ExtraLight
-Class: Japan
-OTFname: KozMinPr6N-ExtraLight.otf
-
-Name: KozMinPr6N-Light
-Class: Japan
-OTFname: KozMinPr6N-Light.otf
-
-Name: KozMinPr6N-Regular
-Class: Japan
-Provides(50): Ryumin-Light
-Provides(50): RyuminPro-Light
-Provides(50): HiraMinProN-W3
-Provides(50): HiraMinPro-W3
-OTFname: KozMinPr6N-Regular.otf
-
-Name: KozMinPr6N-Medium
-Class: Japan
-OTFname: KozMinPr6N-Medium.otf
-
-Name: KozMinPr6N-Bold
-Class: Japan
-Provides(50): FutoMinA101-Bold
-Provides(50): FutoMinA101Pro-Bold
-Provides(50): HiraMinProN-W6
-Provides(50): HiraMinPro-W6
-OTFname: KozMinPr6N-Bold.otf
-
-Name: KozMinPr6N-Heavy
-Class: Japan
-OTFname: KozMinPr6N-Heavy.otf
-
-Name: KozMinProVI-ExtraLight
-Class: Japan
-OTFname: KozMinProVI-ExtraLight.otf
-
-Name: KozMinProVI-Light
-Class: Japan
-OTFname: KozMinProVI-Light.otf
-
-Name: KozMinProVI-Regular
-Class: Japan
-Provides(55): Ryumin-Light
-Provides(55): RyuminPro-Light
-Provides(55): HiraMinProN-W3
-Provides(55): HiraMinPro-W3
-OTFname: KozMinProVI-Regular.otf
-
-Name: KozMinProVI-Medium
-Class: Japan
-OTFname: KozMinProVI-Medium.otf
-
-Name: KozMinProVI-Bold
-Class: Japan
-Provides(55): FutoMinA101-Bold
-Provides(55): FutoMinA101Pro-Bold
-Provides(55): HiraMinProN-W6
-Provides(55): HiraMinPro-W6
-OTFname: KozMinProVI-Bold.otf
-
-Name: KozMinProVI-Heavy
-Class: Japan
-OTFname: KozMinProVI-Heavy.otf
-
-Name: KozMinPro-ExtraLight
-Class: Japan
-OTFname: KozMinPro-ExtraLight.otf
-
-Name: KozMinPro-Light
-Class: Japan
-OTFname: KozMinPro-Light.otf
-
-Name: KozMinPro-Regular
-Class: Japan
-Provides(60): Ryumin-Light
-Provides(60): RyuminPro-Light
-Provides(60): HiraMinProN-W3
-Provides(60): HiraMinPro-W3
-OTFname: KozMinPro-Regular.otf
-
-Name: KozMinPro-Medium
-Class: Japan
-OTFname: KozMinPro-Medium.otf
-
-Name: KozMinPro-Bold
-Class: Japan
-Provides(60): FutoMinA101-Bold
-Provides(60): FutoMinA101Pro-Bold
-Provides(60): HiraMinProN-W6
-Provides(60): HiraMinPro-W6
-OTFname: KozMinPro-Bold.otf
-
-Name: KozMinPro-Heavy
-Class: Japan
-OTFname: KozMinPro-Heavy.otf
-
-Name: KozMinStd-ExtraLight
-Class: Japan
-OTFname: KozMinStd-ExtraLight.otf
-
-Name: KozMinStd-Light
-Class: Japan
-OTFname: KozMinStd-Light.otf
-
-Name: KozMinStd-Regular
-Class: Japan
-Provides(65): Ryumin-Light
-Provides(65): RyuminPro-Light
-Provides(65): HiraMinProN-W3
-Provides(65): HiraMinPro-W3
-OTFname: KozMinStd-Regular.otf
-
-Name: KozMinStd-Medium
-Class: Japan
-OTFname: KozMinStd-Medium.otf
-
-Name: KozMinStd-Bold
-Class: Japan
-Provides(65): FutoMinA101-Bold
-Provides(65): FutoMinA101Pro-Bold
-Provides(65): HiraMinProN-W6
-Provides(65): HiraMinPro-W6
-OTFname: KozMinStd-Bold.otf
-
-Name: KozMinStd-Heavy
-Class: Japan
-OTFname: KozMinStd-Heavy.otf
 

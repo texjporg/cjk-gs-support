@@ -1,5 +1,7 @@
 # Changzhou SinoType
 
+### SIMPLIFIED/TRADITIONAL CHINESE ###
+
 # Note about Mac (Mac OS X 10.6 -- macOS 10.13)
 #   STHeiti Light.ttc
 #   STHeiti Medium.ttc
@@ -69,7 +71,7 @@
 #     index 0: STYuanti-SC-Bold
 #     index 1: STYuanti-SC-Light
 #     index 2: STYuanti-SC-Regular
-# are bundled with OS X 10.9 Mavericks -- 10.10.5 Yosemite.
+# is bundled with OS X 10.9 Mavericks -- 10.10.5 Yosemite.
 #   Yuanti.ttc
 #     index 0: STYuanti-SC-Bold
 #     index 1: STYuanti-TC-Bold
@@ -77,7 +79,7 @@
 #     index 3: STYuanti-TC-Light
 #     index 4: STYuanti-SC-Regular
 #     index 5: STYuanti-TC-Regular
-# are bundled with OS X 10.11 -- 10.11.6 El Capitan.
+# is bundled with OS X 10.11 -- 10.11.6 El Capitan.
 #   Yuanti.ttc
 #     index 0: STYuanti-SC-Regular
 #     index 1: STYuanti-TC-Regular
@@ -85,7 +87,7 @@
 #     index 3: STYuanti-TC-Bold
 #     index 4: STYuanti-SC-Light
 #     index 5: STYuanti-TC-Light
-# are bundled with macOS 10.12 Sierra or later versions.
+# is bundled with macOS 10.12 Sierra or later versions.
 
 # Note about MSOffice:
 #   STZHONGS.ttf

@@ -1,5 +1,7 @@
 # Yu-fonts Windows/MSOffice version
 
+### JAPANESE ###
+
 # Note about Windows:
 #   yugothi{b,c,l}.ttf
 #   yumin.ttf, yumin{db,l}.ttf
@@ -46,6 +48,8 @@ Provides(90): FutoMinA101-Bold
 Provides(90): FutoMinA101Pro-Bold
 Provides(90): HiraMinProN-W6
 Provides(90): HiraMinPro-W6
+Provides(90): MidashiMin-MA31
+Provides(90): MidashiMinPro-MA31
 TTFname(20): yumindb.ttf
 #TTFname(50): YuMincho-DemiBold.ttf # never existed
 
@@ -78,14 +82,14 @@ Provides(90): FutoGoB101-Bold
 Provides(90): FutoGoB101Pro-Bold
 Provides(90): HiraKakuProN-W6
 Provides(90): HiraKakuPro-W6
-Provides(90): Jun101-Light
-Provides(90): Jun101Pro-Light
-Provides(90): HiraMaruProN-W4
-Provides(90): HiraMaruPro-W4
 Provides(90): MidashiGo-MB31
 Provides(90): MidashiGoPro-MB31
 Provides(90): HiraKakuStdN-W8
 Provides(90): HiraKakuStd-W8
+Provides(90): Jun101-Light
+Provides(90): Jun101Pro-Light
+Provides(90): HiraMaruProN-W4
+Provides(90): HiraMaruPro-W4
 TTFname(25): yugothib.ttf
 TTCname(20): YuGothB.ttc(0)
 TTFname(40): YuGothB.ttf

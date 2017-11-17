@@ -1,6 +1,4 @@
-#
-# JAPANESE FONTS
-#
+### JAPANESE ###
 
 # Hiragino
 
@@ -19,6 +17,8 @@ Name: HiraMinProN-W6
 Class: Japan
 Provides(30): FutoMinA101-Bold
 Provides(30): FutoMinA101Pro-Bold
+Provides(30): MidashiMin-MA31
+Provides(30): MidashiMinPro-MA31
 OTFname(20): ヒラギノ明朝 ProN W6.otf
 OTFname(19): ヒラギノ明朝 ProN W6.otf
 OTFname(10): HiraMinProN-W6.otf
@@ -85,6 +85,8 @@ Name: HiraMinPro-W6
 Class: Japan
 Provides(40): FutoMinA101-Bold
 Provides(40): FutoMinA101Pro-Bold
+Provides(40): MidashiMin-MA31
+Provides(40): MidashiMinPro-MA31
 OTFname(20): ヒラギノ明朝 Pro W6.otf
 OTFname(19): ヒラギノ明朝 Pro W6.otf
 OTFname(10): HiraMinPro-W6.otf
@@ -202,6 +204,8 @@ Name: YuMin-Medium
 Class: Japan
 Provides(80): Ryumin-Light
 Provides(80): RyuminPro-Light
+Provides(80): HiraMinProN-W3
+Provides(80): HiraMinPro-W3
 OTFname(20): Yu Mincho Medium.otf
 OTFname(10): YuMin-Medium.otf
 OTCname(30): YuMincho.ttc(0)
@@ -210,6 +214,10 @@ Name: YuMin-Demibold
 Class: Japan
 Provides(80): FutoMinA101-Bold
 Provides(80): FutoMinA101Pro-Bold
+Provides(80): HiraMinProN-W6
+Provides(80): HiraMinPro-W6
+Provides(80): MidashiMin-MA31
+Provides(80): MidashiMinPro-MA31
 OTFname(20): Yu Mincho Demibold.otf
 OTFname(10): YuMin-Demibold.otf
 OTCname(30): YuMincho.ttc(1)
@@ -295,9 +303,7 @@ PSName: ToppanBunkyuMidashiGothicStdN-ExtraBold
 Class: Japan
 OTFname: ToppanBunkyuMidashiGothic-ExtraBold.otf
 
-#
-# CHINESE FONTS
-#
+### SIMPLIFIED/TRADITIONAL CHINESE ###
 
 # Hiragino chinese
 

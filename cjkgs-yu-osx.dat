@@ -1,5 +1,7 @@
 # Yu-fonts MacOS version
 
+### JAPANESE ###
+
 # Note about Mac (Mac OS X 10.6 -- macOS 10.13)
 #   Yu Gothic Medium.otf
 #   Yu Gothic Bold.otf
@@ -25,10 +27,32 @@
 #     index 5: YuMin_36pKn-Extrabold
 # is bundled with macOS 10.12 Sierra or later versions.
 
+Name: YuMin-Medium
+Class: Japan
+Provides(80): Ryumin-Light
+Provides(80): RyuminPro-Light
+Provides(80): HiraMinProN-W3
+Provides(80): HiraMinPro-W3
+OTFname(20): Yu Mincho Medium.otf
+OTFname(10): YuMin-Medium.otf
+
+Name: YuMin-Demibold
+Class: Japan
+Provides(80): FutoMinA101-Bold
+Provides(80): FutoMinA101Pro-Bold
+Provides(80): HiraMinProN-W6
+Provides(80): HiraMinPro-W6
+Provides(80): MidashiMin-MA31
+Provides(80): MidashiMinPro-MA31
+OTFname(20): Yu Mincho Demibold.otf
+OTFname(10): YuMin-Demibold.otf
+
 Name: YuGo-Medium
 Class: Japan
 Provides(80): GothicBBB-Medium
 Provides(80): GothicBBBPro-Medium
+Provides(80): HiraKakuProN-W3
+Provides(80): HiraKakuPro-W3
 OTFname(20): Yu Gothic Medium.otf
 OTFname(19): YuGothic-Medium.otf
 OTFname(10): YuGo-Medium.otf
@@ -37,25 +61,17 @@ Name: YuGo-Bold
 Class: Japan
 Provides(80): FutoGoB101-Bold
 Provides(80): FutoGoB101Pro-Bold
-Provides(80): Jun101-Light
-Provides(80): Jun101Pro-Light
+Provides(80): HiraKakuProN-W6
+Provides(80): HiraKakuPro-W6
 Provides(80): MidashiGo-MB31
 Provides(80): MidashiGoPro-MB31
+Provides(80): HiraKakuStdN-W8
+Provides(80): HiraKakuStd-W8
+Provides(80): Jun101-Light
+Provides(80): Jun101Pro-Light
+Provides(80): HiraMaruProN-W4
+Provides(80): HiraMaruPro-W4
 OTFname(20): Yu Gothic Bold.otf
 OTFname(19): YuGothic-Bold.otf
 OTFname(10): YuGo-Bold.otf
-
-Name: YuMin-Medium
-Class: Japan
-Provides(80): Ryumin-Light
-Provides(80): RyuminPro-Light
-OTFname(20): Yu Mincho Medium.otf
-OTFname(10): YuMin-Medium.otf
-
-Name: YuMin-Demibold
-Class: Japan
-Provides(80): FutoMinA101-Bold
-Provides(80): FutoMinA101Pro-Bold
-OTFname(20): Yu Mincho Demibold.otf
-OTFname(10): YuMin-Demibold.otf
 
