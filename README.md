@@ -159,7 +159,8 @@ are added:
 
 Japanese:
 
-    Ryumin-Light GothicBBB-Medium FutoMinA101-Bold FutoGoB101-Bold Jun101-Light
+    Ryumin-Light GothicBBB-Medium FutoMinA101-Bold FutoGoB101-Bold
+    MidashiMin-MA31 MidashiGo-MB31 Jun101-Light
 
 Korean:
 
@@ -175,8 +176,10 @@ Traditional Chinese:
     MSung-Light MSung-Medium MHei-Medium MKai-Medium
 
 In addition, we also include provide entries for the OTF Morisawa names:
-    RyuminPro-Light GothicBBBPro-Medium FutoMinA101Pro-Bold
-    FutoGoB101Pro-Bold Jun101Pro-Light
+
+    RyuminPro-Light GothicBBBPro-Medium
+    FutoMinA101Pro-Bold FutoGoB101Pro-Bold
+    MidashiMinPro-MA31 MidashiGoPro-MB31 Jun101Pro-Light
 
 The order is determined by the `Provides` setting in the font database.
 That is, the first font found in this order will be used to provide the
@@ -185,7 +188,8 @@ alias if necessary.
 For the Japanese fonts:
     Morisawa Pr6N, Morisawa, Hiragino ProN, Hiragino,
     Kozuka Pr6N, Kozuka ProVI, Kozuka Pro, Kozuka Std,
-    Yu OS X, Yu Win, MS, Moga-Mobo-ex, Moga-Mobo, IPAex, IPA, Ume
+    Yu OS X, Yu Win, MS,
+    Moga-Mobo-ex, Moga-Mobo, IPAex, IPA, Ume
 
 For the Korean fonts:
     (Hanyang,) Adobe, Solaris-hanyang, MS, Unfonts, Baekmuk
