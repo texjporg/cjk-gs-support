@@ -671,20 +671,16 @@ sub do_nonotf_fonts {
 
 sub do_aliases {
   my $fontdest = "$opt_output/Font";
+  my $ciddest  = "$opt_output/CIDFont"; # required for Heisei* check only
   my $cidfsubst = "$opt_output/CIDFSubst";
   my $outp = '';
   #
   # alias handling
-  # we use two levels of aliases, one is for the default names that
-  # are not actual fonts:
-  # Ryumin-Light, GothicBBB-Medium, FutoMinA101-Bold, FutoGoB101-Bold,
-  # Jun101-Light which are the original Morisawa names.
-  #
-  # the second level of aliases is for Morisawa OTF font names:
-  # RyuminPro-Light, GothicBBBPro-Medium,
-  # FutoMinA101Pro-Bold, FutoGoB101Pro-Bold
-  # Jun101Pro-Light
-  #
+  # we use two levels of aliases
+  #  * one is for the default generic names (these are not actual fonts)
+  #      Ryumin-Light, GothicBBB-Medium, ... etc.
+  #  * the second level of aliases is for Morisawa OTF font names
+  #      RyuminPro-Light, GothicBBBPro-Medium, ... etc.
   # the order of fonts selected is
   # defined in the Provides(Priority): Name in the font definiton
   #
@@ -733,6 +729,11 @@ sub do_aliases {
       print STDERR "unknown class $class for $al\n";
     }
   }
+  # special case for native CID fonts in ancient days
+  # if not readable, add aliases for substitution
+  push @jal, "/HeiseiMin-W3 /Ryumin-Light ;" if (! -r "$ciddest/HeiseiMin-W3");
+  push @jal, "/HeiseiKakuGo-W5 /GothicBBB-Medium ;" if (! -r "$ciddest/HeiseiKakuGo-W5");
+  #
   $outp .= "\n% Japanese fonts\n" . join("\n", @jal) . "\n" if @jal;
   $outp .= "\n% Korean fonts\n" . join("\n", @kal) . "\n" if @kal;
   $outp .= "\n% Traditional Chinese fonts\n" . join("\n", @tal) . "\n" if @tal;
