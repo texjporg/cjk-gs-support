@@ -15,9 +15,14 @@
 # For development see
 #  https://github.com/texjporg/cjk-gs-support
 #
+# LIMITATIONS:
+# - Running the script (with default mode = actual setup/removing operations)
+#   always overwrites "cidfmap.local" and "cidfmap.aliases" without asking,
+#   whose file names might be common enough. If you choose to run the script,
+#   leave these files untouched. (Do NOT edit these files by yourself!)
+#   (This note also applies to MacTeX pre-shipped configuration files.)
+#
 # TODO:
-# - how to deal with MacTeX pre-shipped configuration files?
-# - how to deal with tlgs.win32 pre-shipped configuration files?
 # - interoperability with kanji-config-updmap
 #
 # Note that symlink names should be consistent with ptex-fontmaps!
@@ -500,7 +505,7 @@ sub main {
     }
   }
   if (! -d $opt_output) {
-    $dry_run || mkdir($opt_output) || 
+    $dry_run || mkdir($opt_output) ||
       die("Cannot create directory $opt_output: $!");
   }
   if ($opt_cleanup) {
@@ -656,7 +661,7 @@ sub do_nonotf_fonts {
       mkdir("$opt_output/Init") ||
         die("Cannot create directory $opt_output/Init: $!");
     }
-    open(FOO, ">$opt_output/$cidfmap_local_pathpart") || 
+    open(FOO, ">$opt_output/$cidfmap_local_pathpart") ||
       die("Cannot open $opt_output/$cidfmap_local_pathpart: $!");
     print FOO $outp;
     close(FOO);
@@ -672,7 +677,7 @@ sub do_aliases {
   # alias handling
   # we use two levels of aliases, one is for the default names that
   # are not actual fonts:
-  # Ryumin-Light, GothicBBB-Medium, FutoMinA101-Bold, FutoGoB101-Bold, 
+  # Ryumin-Light, GothicBBB-Medium, FutoMinA101-Bold, FutoGoB101-Bold,
   # Jun101-Light which are the original Morisawa names.
   #
   # the second level of aliases is for Morisawa OTF font names:
@@ -739,7 +744,7 @@ sub do_aliases {
       mkdir("$opt_output/Init") ||
         die("Cannot create directory $opt_output/Init: $!");
     }
-    open(FOO, ">$opt_output/$cidfmap_aliases_pathpart") || 
+    open(FOO, ">$opt_output/$cidfmap_aliases_pathpart") ||
       die("Cannot open $opt_output/$cidfmap_aliases_pathpart: $!");
     print FOO $outp;
     close(FOO);
@@ -752,33 +757,60 @@ sub do_aliases {
 }
 
 sub update_master_cidfmap {
+  # what we have to do is:
+  #   in add mode:
+  #     * add an entry for the given argument
+  #     * for tlgs.win32 pre-shipped cidfmap, prepend '%' to override
+  #       the default of "(cidfmap.TeXLive) .runlibfile",
+  #   in remove mode:
+  #     * remove an entry for the given argument
+  #     * for tlgs.win32 pre-shipped cidfmap, remove '%' to restore the default
   my $add = shift;
   my $cidfmap_master = "$opt_output/$cidfmap_pathpart";
-  print_info(sprintf("%s $add %s cidfmap file ...\n", 
+  print_info(sprintf("%s $add %s cidfmap file ...\n",
     ($opt_remove ? "removing" : "adding"), ($opt_remove ? "from" : "to")));
   if (-r $cidfmap_master) {
     open(FOO, "<", $cidfmap_master) ||
       die("Cannot open $cidfmap_master for reading: $!");
     my $found = 0;
+    my $found_tl = 0;
     my $newmaster = "";
     # in add mode: just search for the entry and set $found
     # in remove mode: collect all lines that do not match
+    # also, we handle "cidfmap.TeXLive" now
     while(<FOO>) {
       if (m/^\s*\(\Q$add\E\)\s\s*\.runlibfile\s*$/) {
         $found = 1;
+      } elsif (m/^\s*\(cidfmap\.TeXLive\)\s\s*\.runlibfile\s*$/) {
+        # if found, it should be disabled in add mode in a way in which it can
+        # be detected in the (future) remove mode
+        next if ($found_tl); # skip it as duplicate (though unlikely to happen)
+        $found_tl = 1;
+        $newmaster .= "\%" if (!$opt_remove); # in add mode, disable it
+        $newmaster .= $_; # pass it as-is
+      } elsif (m/^\s*\%\%*\s*\(cidfmap\.TeXLive\)\s\s*\.runlibfile\s*$/) {
+        # if found, it should be the one disabled by myself in the previous run;
+        # restore it in remove mode
+        next if ($found_tl); # skip it as duplicate (though unlikely to happen)
+        $found_tl = 1;
+        if ($opt_remove) {
+          ($newmaster .= $_) =~ s/\%//g; # in remove mode, enable it
+        } else {
+          $newmaster .= $_; # pass it as-is
+        }
       } else {
         $newmaster .= $_;
       }
     }
     close(FOO);
-    # if the master cidfmap has a new line at end of file,
+    # if the original master cidfmap has a new line at end of file,
     # then $newmaster should end with "\n".
     # otherwise we add a new line, since there is a possibility of %EOF comment
     # without trailing new line (e.g. TL before r44039)
-    $newmaster =~ s/\n$//g;
-    $newmaster =~ s/$/\n/g;
+    $newmaster =~ s/\n$//;
+    $newmaster =~ s/$/\n/;
     if ($opt_remove) {
-      if ($found) {
+      if ($found || $found_tl) {
         return if $dry_run;
         open(FOO, ">", $cidfmap_master) ||
           die("Cannot clean up $cidfmap_master: $!");
@@ -786,7 +818,7 @@ sub update_master_cidfmap {
         close FOO;
       }
     } else {
-      if ($found) {
+      if ($found && !$found_tl) {
         print_info("$add already loaded in $cidfmap_master, no changes\n");
       } else {
         return if $dry_run;
@@ -848,7 +880,7 @@ sub generate_font_snippet {
       unlink "$fd/$n-$enc" if (-f "$fd/$n-$enc");
       next;
     }
-    open(FOO, ">$fd/$n-$enc") || 
+    open(FOO, ">$fd/$n-$enc") ||
       die("cannot open $fd/$n-$enc for writing: $!");
     print FOO "%!PS-Adobe-3.0 Resource-Font
 %%DocumentNeededResources: $enc (CMap)
@@ -876,7 +908,7 @@ sub add_akotfps_data {
 
 #
 # link_font operation
-# $opt_force is *not* treated first to warn only 
+# $opt_force is *not* treated first to warn only
 # at really critical cases
 # case 1:
 #   exists, is link, link targets agree
@@ -902,7 +934,7 @@ sub add_akotfps_data {
 #   not exists
 #     $opt_force is ignored
 #     do nothing or add according to $opt_remove
-#     
+#
 sub link_font {
   my ($f, $cd, $n) = @_;
   return if $dry_run;
@@ -1056,7 +1088,7 @@ sub maybe_unlink {
 # write batch file (windows only)
 sub write_winbatch {
   return if $dry_run;
-  open(FOO, ">$winbatch") || 
+  open(FOO, ">$winbatch") ||
     die("cannot open $winbatch for writing: $!");
   # $winbatch_content may contain multibyte characters, and they
   # should be encoded in cp932 in batch file
@@ -1073,7 +1105,7 @@ sub write_akotfps_datafile {
   return if $dry_run;
   make_dir("$opt_akotfps/$akotfps_pathpart",
          "cannot create $akotfps_datafilename in it!");
-  open(FOO, ">$opt_akotfps/$akotfps_pathpart/$akotfps_datafilename") || 
+  open(FOO, ">$opt_akotfps/$akotfps_pathpart/$akotfps_datafilename") ||
     die("cannot open $opt_akotfps/$akotfps_pathpart/$akotfps_datafilename for writing: $!");
   print FOO "% psnames-for-otf
 %
@@ -1207,7 +1239,7 @@ sub check_for_files {
     my @fn;
     for my $k (keys %fontdb) {
       for my $f (keys %{$fontdb{$k}{'files'}}) {
-        # check for subfont extension 
+        # check for subfont extension
         if ($f =~ m/^(.*)\(\d*\)$/) {
           push @fn, $1;
         } else {
@@ -1326,7 +1358,7 @@ sub check_for_files {
   for my $k (keys %fontdb) {
     $fontdb{$k}{'available'} = 0;
     for my $f (keys %{$fontdb{$k}{'files'}}) {
-      # check for subfont extension 
+      # check for subfont extension
       my $realfile = $f;
       $realfile =~ s/^(.*)\(\d*\)$/$1/;
       if ($bntofn{$realfile}) {
@@ -1647,7 +1679,7 @@ sub read_each_font_database {
 }
 
 sub dump_font_database {
-  open(FOO, ">$dump_datafile") || 
+  open(FOO, ">$dump_datafile") ||
     die("cannot open $dump_datafile for writing: $!");
   for my $k (sort keys %fontdb) {
     print FOO "Name: $fontdb{$k}{'origname'}\n";
@@ -1888,7 +1920,7 @@ The `<Resource>` dir is either given by `-o`/`--output`, or otherwise searched
 from an installed Ghostscript (binary name is assumed to be 'gs' on unix,
 'gswin32c' on win32).
 
-Aliases are added to 
+Aliases are added to
 
     <Resource>/Init/cidfmap.aliases
       -- if you are using tlgs win32, tlpkg/tlgs/lib/cidfmap.aliases instead
@@ -2051,7 +2083,7 @@ The contained font data is not copyrightable.
 
 sub print_for_out {
   my ($what, $indent) = @_;
-  for (split /\n/, $what) { 
+  for (split /\n/, $what) {
     next if m/`````/;
     s/\s*####\s*//g;
     if ($_ eq '') {
@@ -2071,7 +2103,7 @@ sub print_verbose {
   print STDOUT "$prg: ", @_;
 }
 sub print_warning {
-  print STDERR "$prg [WARNING]: ", @_ if (!$opt_quiet) 
+  print STDERR "$prg [WARNING]: ", @_ if (!$opt_quiet)
 }
 sub print_error {
   print STDERR "$prg [ERROR]: ", @_;
