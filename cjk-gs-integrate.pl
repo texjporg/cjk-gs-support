@@ -782,7 +782,7 @@ sub update_master_cidfmap {
       if (m/^\s*\(\Q$add\E\)\s\s*\.runlibfile\s*$/) {
         $found = 1;
       } elsif (m/^\s*\(cidfmap\.TeXLive\)\s\s*\.runlibfile\s*$/) {
-        # if found, it should be disabled in add mode in a way in which it can
+        # if found, it has to be disabled in add mode in a way in which it can
         # be detected in the (future) remove mode
         next if ($found_tl); # skip it as duplicate (though unlikely to happen)
         $found_tl = 1;
@@ -793,11 +793,8 @@ sub update_master_cidfmap {
         # restore it in remove mode
         next if ($found_tl); # skip it as duplicate (though unlikely to happen)
         $found_tl = 1;
-        if ($opt_remove) {
-          ($newmaster .= $_) =~ s/\%//g; # in remove mode, enable it
-        } else {
-          $newmaster .= $_; # pass it as-is
-        }
+        $_ =~ s/\%//g if ($opt_remove); # in remove mode, enable it
+        $newmaster .= $_; # pass it
       } else {
         $newmaster .= $_;
       }
