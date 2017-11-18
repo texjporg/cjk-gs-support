@@ -1,0 +1,256 @@
+# Microsoft Windows, Windows/Mac Office fonts
+
+### JAPANESE ###
+
+# Note about Windows:
+#   MSMINCHO.TTC
+#   MSGOTHIC.TTC
+# are bundled with Windows XP.
+#   msmincho.ttc
+#   msgothic.ttc
+# are bundled with Windows Vista or later versions.
+#   meiryo.ttc
+#   meiryob.ttc
+# are bundled with Windows Vista or later versions,
+# and "Japanese ClearType fonts for Windows XP".
+
+# Note about MSOffice:
+#   MS Mincho.ttf
+#   MS Gothic.ttf
+#   Meiryo.ttf
+#   Meiryo Bold.ttf
+#   Meiryo Bold Italic.ttf
+#   Meiryo Italic.ttf
+# are bundled with Office for Mac 2011.
+#   msmincho.ttc
+#   msgothic.ttc
+#   Meiryo.ttf
+#   MeiryoBold.ttf
+#   MeiryoBoldItalic.ttf
+#   MeiryoItalic.ttf
+# are bundled with Office for Mac 2016.
+
+# [TODO] Check about HG* fonts, and move Chinese/Korean fonts
+
+Name: MS-Mincho
+Class: Japan
+Provides(95): Ryumin-Light
+Provides(95): RyuminPro-Light
+Provides(95): HiraMinProN-W3
+Provides(95): HiraMinPro-W3
+Provides(95): FutoMinA101-Bold
+Provides(95): FutoMinA101Pro-Bold
+Provides(95): HiraMinProN-W6
+Provides(95): HiraMinPro-W6
+Provides(95): MidashiMin-MA31
+Provides(95): MidashiMinPro-MA31
+TTFname(50): MS Mincho.ttf
+TTFname(30): MS-Mincho.ttf
+TTCname(20): msmincho.ttc(0)
+
+Name: MS-Gothic
+Class: Japan
+Provides(95): GothicBBB-Medium
+Provides(95): GothicBBBPro-Medium
+Provides(95): HiraKakuProN-W3
+Provides(95): HiraKakuPro-W3
+Provides(95): FutoGoB101-Bold
+Provides(95): FutoGoB101Pro-Bold
+Provides(95): HiraKakuProN-W6
+Provides(95): HiraKakuPro-W6
+Provides(95): MidashiGo-MB31
+Provides(95): MidashiGoPro-MB31
+Provides(95): HiraKakuStdN-W8
+Provides(95): HiraKakuStd-W8
+Provides(95): Jun101-Light
+Provides(95): Jun101Pro-Light
+Provides(95): HiraMaruProN-W4
+Provides(95): HiraMaruPro-W4
+TTFname(50): MS Gothic.ttf
+TTFname(30): MS-Gothic.ttf
+TTCname(20): msgothic.ttc(0)
+
+Name: MS-PMincho
+Class: Japan
+TTFname(50): MS PMincho.ttf
+TTFname(30): MS-PMincho.ttf
+TTCname(20): msmincho.ttc(1)
+
+Name: MS-PGothic
+Class: Japan
+TTFname(50): MS PGothic.ttf
+TTFname(30): MS-PGothic.ttf
+TTCname(20): msgothic.ttc(1)
+
+Name: MS-UIGothic
+Class: Japan
+TTCname(20): msgothic.ttc(2)
+
+Name: Meiryo
+Class: Japan
+TTFname(50): Meiryo.ttf
+TTCname(20): meiryo.ttc(0)
+
+Name: Meiryo-Bold
+Class: Japan
+TTFname(50): Meiryo Bold.ttf
+TTFname(40): MeiryoBold.ttf
+TTFname(30): Meiryo-Bold.ttf
+TTCname(20): meiryob.ttc(0)
+
+Name: Meiryo-BoldItalic
+Class: Japan
+TTFname(50): Meiryo Bold Italic.ttf
+TTFname(40): MeiryoBoldItalic.ttf
+TTFname(30): Meiryo-BoldItalic.ttf
+TTCname(20): meiryob.ttc(1)
+
+Name: Meiryo-Italic
+Class: Japan
+TTFname(50): Meiryo Italic.ttf
+TTFname(40): MeiryoItalic.ttf
+TTFname(30): Meiryo-Italic.ttf
+TTCname(20): meiryo.ttc(1)
+
+Name: MeiryoUI
+Class: Japan
+TTCname(20): meiryo.ttc(2)
+
+Name: MeiryoUI-Bold
+Class: Japan
+TTCname(20): meiryob.ttc(2)
+
+Name: MeiryoUI-BoldItalic
+Class: Japan
+TTCname(20): meiryob.ttc(3)
+
+Name: MeiryoUI-Italic
+Class: Japan
+TTCname(20): meiryo.ttc(3)
+
+Name: HGGothicE
+Class: Japan
+TTCname(50): HGRGE.ttc(0)
+TTCname(20): HGRGE.TTC(0)
+
+Name: HGPGothicE
+Class: Japan
+TTCname(50): HGRGE.ttc(1)
+TTCname(20): HGRGE.TTC(1)
+
+Name: HGSGothicE
+Class: Japan
+TTCname(50): HGRGE.ttc(2)
+TTCname(20): HGRGE.TTC(2)
+
+Name: HGGothicM
+Class: Japan
+TTCname(20): HGRGM.TTC(0)
+
+Name: HGPGothicM
+Class: Japan
+TTCname(20): HGRGM.TTC(1)
+
+Name: HGSGothicM
+Class: Japan
+TTCname(20): HGRGM.TTC(2)
+
+Name: HGMinchoE
+Class: Japan
+TTCname(50): HGRME.ttc(0)
+TTCname(20): HGRME.TTC(0)
+
+Name: HGPMinchoE
+Class: Japan
+TTCname(50): HGRME.ttc(1)
+TTCname(20): HGRME.TTC(2)
+
+Name: HGSMinchoE
+Class: Japan
+TTCname(50): HGRME.ttc(2)
+TTCname(20): HGRME.TTC(2)
+
+Name: HGMinchoB
+Class: Japan
+TTCname(20): HGRMB.TTC(0)
+
+Name: HGPMinchoB
+Class: Japan
+TTCname(20): HGRMB.TTC(1)
+
+Name: HGSMinchoB
+Class: Japan
+TTCname(20): HGRMB.TTC(2)
+
+Name: HGSoeiKakugothicUB
+Class: Japan
+TTCname(50): HGRSGU.ttc(0)
+TTCname(20): HGRSGU.TTC(0)
+
+Name: HGPSoeiKakugothicUB
+Class: Japan
+TTCname(50): HGRSGU.ttc(1)
+TTCname(20): HGRSGU.TTC(1)
+
+Name: HGSSoeiKakugothicUB
+Class: Japan
+TTCname(50): HGRSGU.ttc(2)
+TTCname(20): HGRSGU.TTC(2)
+
+Name: HGSoeiKakupoptai
+Class: Japan
+TTCname(20): HGRPP1.TTC(0)
+
+Name: HGPSoeiKakupoptai
+Class: Japan
+TTCname(20): HGRPP1.TTC(1)
+
+Name: HGSSoeiKakupoptai
+Class: Japan
+TTCname(20): HGRPP1.TTC(2)
+
+Name: HGSoeiPresenceEB
+Class: Japan
+TTCname(20): HGRPRE.TTC(0)
+
+Name: HGPSoeiPresenceEB
+Class: Japan
+TTCname(20): HGRPRE.TTC(1)
+
+Name: HGSSoeiPresenceEB
+Class: Japan
+TTCname(20): HGRPRE.TTC(2)
+
+Name: HGKyokashotai
+Class: Japan
+TTCname(20): HGRKK.TTC(0)
+
+Name: HGPKyokashotai
+Class: Japan
+TTCname(20): HGRKK.TTC(1)
+
+Name: HGSKyokashotai
+Class: Japan
+TTCname(20): HGRKK.TTC(2)
+
+Name: HGGyoshotai
+Class: Japan
+TTCname(20): HGRGY.TTC(0)
+
+Name: HGPGyoshotai
+Class: Japan
+TTCname(20): HGRGY.TTC(1)
+
+Name: HGSGyoshotai
+Class: Japan
+TTCname(20): HGRGY.TTC(2)
+
+Name: HGMaruGothicMPRO
+Class: Japan
+TTFname(40): HGRSMP.ttf
+TTFname(20): HGRSMP.TTF
+
+Name: HGSeikaishotaiPRO
+Class: Japan
+TTFname(20): HGRSKP.TTF
+
