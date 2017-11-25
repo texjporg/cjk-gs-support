@@ -2133,7 +2133,7 @@ INCLUDE cjkgs-morisawa-extra.dat
 # Hiragino -- Provides level 30(ProN), 40(Pro)
 INCLUDE cjkgs-hiragino.dat
 
-# Kozuka (Adobe) -- Provides level 50(Pr6N), 55(ProVI), 60(Pro), 65(Std)
+# Kozuka -- Provides level 50(Pr6N), 55(ProVI), 60(Pro), 65(Std)
 INCLUDE cjkgs-kozuka.dat
 INCLUDE cjkgs-ryokana.dat
 
@@ -2146,12 +2146,12 @@ INCLUDE cjkgs-yu-win.dat
 # MS -- Provides level 95
 INCLUDE cjkgs-microsoft.dat
 
+# Fontworks
+INCLUDE cjkgs-fontworks.dat
+
 # other Mac OS X fonts
 
 # Note about Mac (Mac OS X 10.6 -- macOS 10.13)
-#   Klee.ttc
-#   Tsukushi{A,B}MaruGothic.ttc
-# are bundled with OS X 10.11 El Capitan or later versions.
 #   Kyokasho.ttc
 # is bundled with macOS 10.12 Sierra or later versions.
 #   ToppanBunkyuMincho-Regular.otf

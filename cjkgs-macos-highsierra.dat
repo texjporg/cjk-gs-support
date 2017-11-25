@@ -238,7 +238,15 @@ Name: YuMin_36pKn-Extrabold
 Class: Japan
 OTCname(30): YuMincho.ttc(5)
 
-# other Mac OS X fonts
+# Fontworks MacOS version
+
+Name: Klee-Medium
+Class: Japan
+OTCname: Klee.ttc(1)
+
+Name: Klee-Demibold
+Class: Japan
+OTCname: Klee.ttc(0)
 
 Name: TsukuARdGothic-Regular
 Class: Japan
@@ -256,13 +264,7 @@ Name: TsukuBRdGothic-Bold
 Class: Japan
 OTCname: TsukushiBMaruGothic.ttc(1)
 
-Name: Klee-Medium
-Class: Japan
-OTCname: Klee.ttc(1)
-
-Name: Klee-Demibold
-Class: Japan
-OTCname: Klee.ttc(0)
+# other Mac OS X fonts
 
 Name: YuKyo_Yoko-Medium
 Class: Japan

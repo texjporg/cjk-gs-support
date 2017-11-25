@@ -1,0 +1,67 @@
+# Fontworks (including Fontworks MacOS version)
+
+# Note about Mac (Mac OS X 10.6 -- macOS 10.13)
+#   Klee.ttc
+#   Tsukushi{A,B}MaruGothic.ttc
+# are bundled with OS X 10.11 El Capitan or later versions.
+
+Name: FOT-KleePro-M
+PSName: KleePro-M
+Class: Japan
+OTFname: FOT-KleePro-M.otf
+
+Name: FOT-KleePro-DB
+PSName: KleePro-DB
+Class: Japan
+OTFname: FOT-KleePro-DB.otf
+
+Name: FOT-TsukuARdGothicStd-L
+PSName: TsukuARdGothicStd-L
+Class: Japan
+OTFname: FOT-TsukuARdGothicStd-L.otf
+
+Name: FOT-TsukuARdGothicStd-R
+PSName: TsukuARdGothicStd-R
+Class: Japan
+OTFname: FOT-TsukuARdGothicStd-R.otf
+
+Name: FOT-TsukuARdGothicStd-M
+PSName: TsukuARdGothicStd-M
+Class: Japan
+OTFname: FOT-TsukuARdGothicStd-M.otf
+
+Name: FOT-TsukuARdGothicStd-D
+PSName: TsukuARdGothicStd-D
+Class: Japan
+OTFname: FOT-TsukuARdGothicStd-D.otf
+
+Name: FOT-TsukuARdGothicStd-E
+PSName: TsukuARdGothicStd-E
+Class: Japan
+OTFname: FOT-TsukuARdGothicStd-E.otf
+
+Name: FOT-TsukuBRdGothicStd-L
+PSName: TsukuBRdGothicStd-L
+Class: Japan
+OTFname: FOT-TsukuBRdGothicStd-L.otf
+
+Name: FOT-TsukuBRdGothicStd-R
+PSName: TsukuBRdGothicStd-R
+Class: Japan
+OTFname: FOT-TsukuBRdGothicStd-R.otf
+
+Name: FOT-TsukuBRdGothicStd-M
+PSName: TsukuBRdGothicStd-M
+Class: Japan
+OTFname: FOT-TsukuBRdGothicStd-M.otf
+
+Name: FOT-TsukuBRdGothicStd-D
+PSName: TsukuBRdGothicStd-D
+Class: Japan
+OTFname: FOT-TsukuBRdGothicStd-D.otf
+
+Name: FOT-TsukuBRdGothicStd-E
+PSName: TsukuBRdGothicStd-E
+Class: Japan
+OTFname: FOT-TsukuBRdGothicStd-E.otf
+
