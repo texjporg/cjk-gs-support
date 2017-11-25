@@ -636,50 +636,6 @@ Class: Japan
 Provides(15): ShinMGo-Ultra
 OTFname: A-OTF-ShinMGoPr6-Ultra.otf
 
-Name: A-OTF-ShinMGoPr5-Light
-PSName: ShinMGoPr5-Light
-Class: Japan
-Provides(18): Jun101-Light
-Provides(18): HiraMaruPro-W4
-Provides(18): ShinMGo-Light
-OTFname: A-OTF-ShinMGoPr5-Light.otf
-
-Name: A-OTF-ShinMGoPr5-Regular
-PSName: ShinMGoPr5-Regular
-Class: Japan
-Provides(18): ShinMGo-Regular
-OTFname: A-OTF-ShinMGoPr5-Regular.otf
-
-Name: A-OTF-ShinMGoPr5-Medium
-PSName: ShinMGoPr5-Medium
-Class: Japan
-Provides(18): ShinMGo-Medium
-OTFname: A-OTF-ShinMGoPr5-Medium.otf
-
-Name: A-OTF-ShinMGoPr5-DeBold
-PSName: ShinMGoPr5-DeBold
-Class: Japan
-Provides(18): ShinMGo-DeBold
-OTFname: A-OTF-ShinMGoPr5-DeBold.otf
-
-Name: A-OTF-ShinMGoPr5-Bold
-PSName: ShinMGoPr5-Bold
-Class: Japan
-Provides(18): ShinMGo-Bold
-OTFname: A-OTF-ShinMGoPr5-Bold.otf
-
-Name: A-OTF-ShinMGoPr5-Heavy
-PSName: ShinMGoPr5-Heavy
-Class: Japan
-Provides(18): ShinMGo-Heavy
-OTFname: A-OTF-ShinMGoPr5-Heavy.otf
-
-Name: A-OTF-ShinMGoPr5-Ultra
-PSName: ShinMGoPr5-Ultra
-Class: Japan
-Provides(18): ShinMGo-Ultra
-OTFname: A-OTF-ShinMGoPr5-Ultra.otf
-
 Name: A-OTF-ShinMGoPro-Light
 PSName: ShinMGoPro-Light
 Class: Japan
