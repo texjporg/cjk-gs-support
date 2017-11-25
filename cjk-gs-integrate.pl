@@ -2149,21 +2149,8 @@ INCLUDE cjkgs-microsoft.dat
 # Fontworks
 INCLUDE cjkgs-fontworks.dat
 
-# other Mac OS X fonts
-
-# Note about Mac (Mac OS X 10.6 -- macOS 10.13)
-#   Kyokasho.ttc
-# is bundled with macOS 10.12 Sierra or later versions.
-#   ToppanBunkyuMincho-Regular.otf
-#   ToppanBunkyuGothic.ttc
-#   ToppanBunkyuMidashiMincho-ExtraBold.otf
-#   ToppanBunkyuMidashiGothic-ExtraBold.otf
-# are bundled with macOS 10.12 -- 10.12.6 Sierra.
-#   ToppanBunkyuMinchoPr6N-Regular.otf
-#   ToppanBunkyuGothicPr6N.ttc
-#   ToppanBunkyuMidashiMinchoStdN-ExtraBold.otf
-#   ToppanBunkyuMidashiGothicStdN-ExtraBold.otf
-# are bundled with macOS 10.13 High Sierra or later versions.
+# Toppan
+INCLUDE cjkgs-toppan.dat
 
 # IPA (free)
 

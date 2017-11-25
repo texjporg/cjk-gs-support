@@ -238,6 +238,22 @@ Name: YuMin_36pKn-Extrabold
 Class: Japan
 OTCname(30): YuMincho.ttc(5)
 
+Name: YuKyo_Yoko-Medium
+Class: Japan
+OTCname: Kyokasho.ttc(0)
+
+Name: YuKyo_Yoko-Bold
+Class: Japan
+OTCname: Kyokasho.ttc(1)
+
+Name: YuKyo-Medium
+Class: Japan
+OTCname: Kyokasho.ttc(2)
+
+Name: YuKyo-Bold
+Class: Japan
+OTCname: Kyokasho.ttc(3)
+
 # Fontworks MacOS version
 
 Name: Klee-Medium
@@ -264,23 +280,7 @@ Name: TsukuBRdGothic-Bold
 Class: Japan
 OTCname: TsukushiBMaruGothic.ttc(1)
 
-# other Mac OS X fonts
-
-Name: YuKyo_Yoko-Medium
-Class: Japan
-OTCname: Kyokasho.ttc(0)
-
-Name: YuKyo_Yoko-Bold
-Class: Japan
-OTCname: Kyokasho.ttc(1)
-
-Name: YuKyo-Medium
-Class: Japan
-OTCname: Kyokasho.ttc(2)
-
-Name: YuKyo-Bold
-Class: Japan
-OTCname: Kyokasho.ttc(3)
+# Toppan MacOS version
 
 Name: ToppanBunkyuMinchoPr6N-Regular
 PSName: ToppanBunkyuMinchoPr6N-Regular

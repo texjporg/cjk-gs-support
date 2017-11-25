@@ -1,0 +1,67 @@
+# Toppan (including Fontworks MacOS version)
+
+# Note about Mac (Mac OS X 10.6 -- macOS 10.13)
+#   ToppanBunkyuMincho-Regular.otf
+#   ToppanBunkyuGothic.ttc
+#   ToppanBunkyuMidashiMincho-ExtraBold.otf
+#   ToppanBunkyuMidashiGothic-ExtraBold.otf
+# are bundled with macOS 10.12 -- 10.12.6 Sierra.
+#   ToppanBunkyuMinchoPr6N-Regular.otf
+#   ToppanBunkyuGothicPr6N.ttc
+#   ToppanBunkyuMidashiMinchoStdN-ExtraBold.otf
+#   ToppanBunkyuMidashiGothicStdN-ExtraBold.otf
+# are bundled with macOS 10.13 High Sierra or later versions.
+
+# based on Morisawa Passport
+# ("P" stands for pair kerning)
+
+Name: AP-OTF-BunkyuMinPr6N-R
+PSName: PBunkyuMinPr6N-R
+Class: Japan
+OTFname: AP-OTF-BunkyuMinPr6N-R.otf
+
+Name: AP-OTF-BunkyuMinPr6-R
+PSName: PBunkyuMinPr6-R
+Class: Japan
+OTFname: AP-OTF-BunkyuMinPr6-R.otf
+
+Name: AP-OTF-BunkyuMdMinStdN-EB
+PSName: PBunkyuMdMinStdN-EB
+Class: Japan
+OTFname: AP-OTF-BunkyuMdMinStdN-EB.otf
+
+Name: AP-OTF-BunkyuMdMinStd-EB
+PSName: PBunkyuMdMinStd-EB
+Class: Japan
+OTFname: AP-OTF-BunkyuMdMinStd-EB.otf
+
+Name: AP-OTF-BunkyuGoPr6N-DB
+PSName: PBunkyuGoPr6N-DB
+Class: Japan
+OTFname: AP-OTF-BunkyuGoPr6N-DB.otf
+
+Name: AP-OTF-BunkyuGoPr6N-R
+PSName: PBunkyuGoPr6N-R
+Class: Japan
+OTFname: AP-OTF-BunkyuGoPr6N-R.otf
+
+Name: AP-OTF-BunkyuGoPr6-DB
+PSName: PBunkyuGoPr6-DB
+Class: Japan
+OTFname: AP-OTF-BunkyuGoPr6-DB.otf
+
+Name: AP-OTF-BunkyuGoPr6-R
+PSName: PBunkyuGoPr6-R
+Class: Japan
+OTFname: AP-OTF-BunkyuGoPr6-R.otf
+
+Name: AP-OTF-BunkyuMdGoStdN-EB
+PSName: PBunkyuMdGoStdN-EB
+Class: Japan
+OTFname: AP-OTF-BunkyuMdGoStdN-EB.otf
+
+Name: AP-OTF-BunkyuMdGoStd-EB
+PSName: PBunkyuMdGoStd-EB
+Class: Japan
+OTFname: AP-OTF-BunkyuMdGoStd-EB.otf
+
