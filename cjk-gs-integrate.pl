@@ -3492,6 +3492,16 @@ Provides(60): STFangsong-Regular
 TTFname(40): Fangsong.ttf
 TTFname(20): simfang.ttf
 
+Name: LiSu
+Class: GB
+TTCname(20): SIMLI.TTF
+TTCname(19): simli.ttf
+
+Name: YouYuan
+Class: GB
+TTCname(20): SIMYOU.TTF
+TTCname(19): simyou.ttf
+
 Name: MicrosoftYaHei
 Class: GB
 TTFname(20): msyh.ttf
