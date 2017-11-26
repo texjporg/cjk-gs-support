@@ -53,6 +53,16 @@ if (win32()) {
   print_warning("Sorry, we have only partial support for Windows!\n");
 }
 
+# The followings are installed by ptex-fontmaps (texjporg):
+#   * 2004-H
+#   * 2004-V
+# The followings are created by Adobe but not considered official
+# (see https://forums.adobe.com/thread/537415)
+#   * GB-RKSJ-H
+#   * GBT-RKSJ-H
+#   * KSC-RKSJ-H
+# All others are provided in the latest Adobe CMap Resources:
+#   https://github.com/adobe-type-tools/cmap-resources
 my %encode_list = (
   Japan => [ qw/
     2004-H
@@ -124,7 +134,8 @@ my %encode_list = (
     UniJISX02132004-UTF32-H
     UniJISX02132004-UTF32-V
     V
-    WP-Symbol/ ],
+    WP-Symbol
+    / ],
   GB => [ qw/
     Adobe-GB1-0
     Adobe-GB1-1
@@ -161,7 +172,8 @@ my %encode_list = (
     UniGB-UTF32-H
     UniGB-UTF32-V
     UniGB-UTF8-H
-    UniGB-UTF8-V/ ],
+    UniGB-UTF8-V
+    / ],
   CNS => [ qw/
     Adobe-CNS1-0
     Adobe-CNS1-1
@@ -170,6 +182,7 @@ my %encode_list = (
     Adobe-CNS1-4
     Adobe-CNS1-5
     Adobe-CNS1-6
+    Adobe-CNS1-7
     B5-H
     B5-V
     B5pc-H
@@ -207,7 +220,8 @@ my %encode_list = (
     UniCNS-UTF32-H
     UniCNS-UTF32-V
     UniCNS-UTF8-H
-    UniCNS-UTF8-V/ ],
+    UniCNS-UTF8-V
+    / ],
   Korea => [ qw/
     Adobe-Korea1-0
     Adobe-Korea1-1
@@ -234,7 +248,8 @@ my %encode_list = (
     UniKS-UTF32-H
     UniKS-UTF32-V
     UniKS-UTF8-H
-    UniKS-UTF8-V/ ] );
+    UniKS-UTF8-V
+    / ] );
 
 #
 # location where links to fonts in texmf are created, relative to TEXMF
