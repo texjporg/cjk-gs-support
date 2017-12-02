@@ -2592,6 +2592,9 @@ TTFname: OsakaMono.ttf
 # CHINESE FONTS
 #
 
+# Adobe -- Provides level 30
+INCLUDE cjkgs-adobe.dat
+
 # Hiragino -- Provides level 50
 # (already included in JAPANESE section)
 
@@ -2810,47 +2813,6 @@ Class: CNS
 TTFname(20): Apple LiGothic Medium.ttf
 TTFname(10): LiGothicMed.ttf
 
-# Adobe chinese fonts
-
-# simplified chinese
-
-Name: AdobeSongStd-Light
-Class: GB
-Provides(30): STSong-Light
-Provides(30): STSong-Regular
-OTFname(10): AdobeSongStd-Light.otf
-
-Name: AdobeHeitiStd-Regular
-Class: GB
-Provides(30): STHeiti-Regular
-Provides(30): STHeiti-Light
-OTFname(20): AdobeHeitiStd-Regular.otf
-
-Name: AdobeKaitiStd-Regular
-Class: GB
-Provides(30): STKaiti-Regular
-OTFname(20): AdobeKaitiStd-Regular.otf
-
-Name: AdobeFangsongStd-Regular
-Class: GB
-Provides(30): STFangsong-Light
-Provides(30): STFangsong-Regular
-OTFname(20): AdobeFangsongStd-Regular.otf
-
-# traditional chinese
-
-Name: AdobeMingStd-Light
-Class: CNS
-Provides(30): MSung-Light
-Provides(30): MSung-Medium
-OTFname(20): AdobeMingStd-Light.otf
-
-Name: AdobeFanHeitiStd-Bold
-Class: CNS
-Provides(30): MHei-Medium
-Provides(30): MKai-Medium
-OTFname(20): AdobeFanHeitiStd-Bold.otf
-
 # Fandol (free)
 
 Name: FandolSong-Regular
@@ -3055,7 +3017,11 @@ TTFname: cwfs.ttf
 # KOREAN FONTS
 #
 
+# Adobe -- Provides level 30
+# (already included in CHINESE section)
+
 # Solaris -- Provides level 40
+INCLUDE cjkgs-solaris.dat
 
 # Baekmuk (free)
 # This is a special case, because "batang.ttf" in baekmuk and
@@ -3381,23 +3347,6 @@ TTFname: Gungseouche.ttf
 Name: JCHEadA
 Class: Korea
 TTFname: HeadlineA.ttf
-
-# Adobe korean fonts
-
-Name: AdobeMyungjoStd-Medium
-Class: Korea
-Provides(30): HYSMyeongJo-Medium
-OTFname: AdobeMyungjoStd-Medium.otf
-
-Name: AdobeGothicStd-Bold
-Class: Korea
-Provides(30): HYGoThic-Medium
-Provides(80): HYRGoThic-Medium
-OTFname: AdobeGothicStd-Bold.otf
-
-Name: AdobeGothicStd-Light
-Class: Korea
-OTFname: AdobeGothicStd-Light.otf
 
 #
 # Microsoft Windows, Windows/Mac Office fonts
