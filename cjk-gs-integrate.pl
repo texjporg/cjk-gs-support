@@ -2029,7 +2029,7 @@ For the Japanese fonts:
     Moga-Mobo-ex, Moga-Mobo, IPAex, IPA, Ume
 
 For the Korean fonts:
-    (Hanyang,) Adobe, Solaris-hanyang, MS, Unfonts, Baekmuk
+    (Hanyang,) Adobe, Solaris, MS, Unfonts, Baekmuk
 
 For the Simplified Chinese:
     Adobe, Fandol, Hiragino, Founder, MS, CJKUnifonts, Arphic, CJKUnifonts-ttf
@@ -3055,34 +3055,7 @@ TTFname: cwfs.ttf
 # KOREAN FONTS
 #
 
-# Solaris-hanyang (Solaris 10, 11)
-
-Name: Myeongjo
-Class: Korea
-Provides(40): HYSMyeongJo-Medium
-TTFname: h2mjsm.ttf
-
-Name: Gothic
-Class: Korea
-Provides(40): HYGoThic-Medium
-TTFname: h2gtrm.ttf
-
-Name: RoundedGothic
-Class: Korea
-Provides(40): HYRGoThic-Medium
-TTFname: h2drrm.ttf
-
-Name: Haeseo
-Class: Korea
-TTFname: h2hsrm.ttf
-
-Name: SunDotum
-Class: Korea
-TTFname: sundotump.ttf
-
-Name: SunDotumChe
-Class: Korea
-TTFname: sundotumf.ttf
+# Solaris -- Provides level 40
 
 # Baekmuk (free)
 # This is a special case, because "batang.ttf" in baekmuk and
