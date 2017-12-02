@@ -1267,11 +1267,20 @@ sub check_for_files {
       push @extradirs, "c:/windows/fonts//";
     } else {
       # other dirs to check, for normal unix?
-      for my $d (qw!/Library/Fonts /System/Library/Fonts /System/Library/Assets /Network/Library/Fonts /usr/share/fonts!) {
+      for my $d (qw!/Library/Fonts /System/Library/Fonts /System/Library/Assets
+                    /Network/Library/Fonts /usr/share/fonts!) {
         push @extradirs, "$d//" if (-d $d); # recursive search
       }
-      # macosx specific; the path contains white space, so hack required
-      for my $d (qw!/Applications/Microsoft__Word.app /Applications/Microsoft__Excel.app /Applications/Microsoft__PowerPoint.app!) {
+      # the path contains white space, so hack required
+      for my $d (qw!/Library/Application__Support/Apple/Fonts!) {
+        my $sd = $d;
+        $sd =~ s/__/ /;
+        push @extradirs, "$sd//" if (-d "$sd"); # recursive search
+      }
+      # office for mac 2016
+      for my $d (qw!/Applications/Microsoft__Word.app
+                    /Applications/Microsoft__Excel.app
+                    /Applications/Microsoft__PowerPoint.app!) {
         my $sd = $d;
         $sd =~ s/__/ /;
         push @extradirs, "$sd/Contents/Resources/Fonts/" if (-d "$sd/Contents/Resources/Fonts");
