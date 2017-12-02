@@ -1,0 +1,112 @@
+# Beijing Founder Electronics
+
+### SIMPLIFIED CHINESE ###
+
+# Note:
+#   FZ****.TTF (13 files)
+# are bundled with with WPS Office (formerly Kingsoft Office) Linux.
+#   Lantinghei.ttc
+# is bundled with OS X 10.9 Mavericks or later versions.
+
+# FZShuSong-Z01
+Name: FZSSK--GBK1-0
+Class: GB
+Provides(55): STSong-Light
+TTFname: FZSSK.TTF
+
+# FZXiaoBiaoSong-B05
+Name: FZXBSK--GBK1-0
+Class: GB
+Provides(55): STSong-Regular
+TTFname: FZXBSK.TTF
+
+# FZXiHeiI-Z08
+Name: FZXH1K--GBK1-0
+Class: GB
+Provides(55): STHeiti-Light
+TTFname: FZXH1K.TTF
+
+# FZHei-B01
+Name: FZHTK--GBK1-0
+Class: GB
+Provides(55): STHeiti-Regular
+TTFname: FZHTK.TTF
+
+# FZKai-Z03
+Name: FZKTK--GBK1-0
+Class: GB
+Provides(55): STKaiti-Regular
+TTFname: FZKTK.TTF
+
+# FZFangSong-Z02
+Name: FZFSK--GBK1-0
+Class: GB
+Provides(55): STFangsong-Light
+Provides(55): STFangsong-Regular
+TTFname: FZFSK.TTF
+
+# FZXingKai-S04
+Name: FZXKK--GBK1-0
+Class: GB
+TTFname: FZXKK.TTF
+
+# FZWeiBei-S03
+Name: FZWBK--GBK1-0
+Class: GB
+TTFname: FZWBK.TTF
+
+# FZChaoCuHei-M10
+Name: FZCCHK--GBK1-0
+Class: GB
+TTFname: FZCCHK.TTF
+
+# FZLiShu-S01
+Name: FZLSK--GBK1-0
+Class: GB
+TTFname: FZLSK.TTF
+
+# FZYaoTi-M06
+Name: FZYTK--GBK1-0
+Class: GB
+TTFname: FZYTK.TTF
+
+# FZSongS-Extended
+Name: FZSONGS--GB1-5
+Class: GB
+TTFname: FZSongS_20100603.TTF
+
+# FZSongS-Extended(SIP)
+Name: FZSONGS_SIP--GB1-5
+Class: GB
+TTFname: FZSongS(SIP)_2010603.TTF
+
+# Lantinghei SC Demibold
+Name: FZLTZHK--GBK1-0
+Class: GB
+TTCname: Lantinghei.ttc(0)
+
+# Lantinghei SC Extralight
+Name: FZLTXHK--GBK1-0
+Class: GB
+TTCname: Lantinghei.ttc(1)
+
+# Lantinghei SC Heavy
+Name: FZLTTHK--GBK1-0
+Class: GB
+TTCname: Lantinghei.ttc(2)
+
+# Lantinghei TC Demibold
+Name: FZLTZHB--B51-0
+Class: CNS
+TTCname: Lantinghei.ttc(3)
+
+# Lantinghei TC Extralight
+Name: FZLTXHB--B51-0
+Class: CNS
+TTCname: Lantinghei.ttc(4)
+
+# Lantinghei TC Heavy
+Name: FZLTTHB--B51-0
+Class: CNS
+TTCname: Lantinghei.ttc(5)
+
