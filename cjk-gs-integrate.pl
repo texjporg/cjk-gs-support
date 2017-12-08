@@ -3429,6 +3429,11 @@ Name: MicrosoftMHei-Bold
 Class: CNS
 TTFname(10): MSMHei-Bold.ttf
 
+# Remove-only database
+# that is, entries which contain at least one 'RMVname' line
+# note that this line should come at the _end_ of all INCLUDE files
+INCLUDE cjkgs-macos-removeonly.dat
+
 
 ### Local Variables:
 ### perl-indent-level: 2
