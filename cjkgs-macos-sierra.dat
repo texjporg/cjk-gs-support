@@ -285,25 +285,25 @@ OTCname: TsukushiBMaruGothic.ttc(1)
 Name: ToppanBunkyuMincho-Regular
 PSName: ToppanBunkyuMinchoPr6N-Regular
 Class: Japan
-OTFname: ToppanBunkyuMincho-Regular.otf
+OTFname(20): ToppanBunkyuMincho-Regular.otf
 
 Name: ToppanBunkyuGothicPr6N-DB
 Class: Japan
-OTCname: ToppanBunkyuGothic.ttc(0)
+OTCname(20): ToppanBunkyuGothic.ttc(0)
 
 Name: ToppanBunkyuGothicPr6N-Regular
 Class: Japan
-OTCname: ToppanBunkyuGothic.ttc(1)
+OTCname(20): ToppanBunkyuGothic.ttc(1)
 
 Name: ToppanBunkyuMidashiMincho-ExtraBold
 PSName: ToppanBunkyuMidashiMinchoStdN-ExtraBold
 Class: Japan
-OTFname: ToppanBunkyuMidashiMincho-ExtraBold.otf
+OTFname(20): ToppanBunkyuMidashiMincho-ExtraBold.otf
 
 Name: ToppanBunkyuMidashiGothic-ExtraBold
 PSName: ToppanBunkyuMidashiGothicStdN-ExtraBold
 Class: Japan
-OTFname: ToppanBunkyuMidashiGothic-ExtraBold.otf
+OTFname(20): ToppanBunkyuMidashiGothic-ExtraBold.otf
 
 ### SIMPLIFIED/TRADITIONAL CHINESE ###
 

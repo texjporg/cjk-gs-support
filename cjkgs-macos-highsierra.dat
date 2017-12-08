@@ -9,9 +9,9 @@ Provides(30): RyuminPro-Light
 OTFname(20): ヒラギノ明朝 ProN W3.otf
 OTFname(19): ヒラギノ明朝 ProN W3.otf
 OTFname(10): HiraMinProN-W3.otf
-OTCname(30): ヒラギノ明朝 ProN.ttc(0)
-OTCname(29): ヒラギノ明朝 ProN.ttc(0)
-OTCname(28): HiraginoSerif.ttc(0)
+OTCname(40): ヒラギノ明朝 ProN.ttc(0)
+OTCname(39): ヒラギノ明朝 ProN.ttc(0)
+OTCname(38): HiraginoSerif.ttc(0)
 
 Name: HiraMinProN-W6
 Class: Japan
@@ -22,9 +22,9 @@ Provides(30): MidashiMinPro-MA31
 OTFname(20): ヒラギノ明朝 ProN W6.otf
 OTFname(19): ヒラギノ明朝 ProN W6.otf
 OTFname(10): HiraMinProN-W6.otf
-OTCname(30): ヒラギノ明朝 ProN.ttc(2)
-OTCname(29): ヒラギノ明朝 ProN.ttc(2)
-OTCname(28): HiraginoSerif.ttc(2)
+OTCname(40): ヒラギノ明朝 ProN.ttc(2)
+OTCname(39): ヒラギノ明朝 ProN.ttc(2)
+OTCname(38): HiraginoSerif.ttc(2)
 
 Name: HiraKakuProN-W3
 Class: Japan
@@ -77,9 +77,9 @@ Provides(40): RyuminPro-Light
 OTFname(20): ヒラギノ明朝 Pro W3.otf
 OTFname(19): ヒラギノ明朝 Pro W3.otf
 OTFname(10): HiraMinPro-W3.otf
-OTCname(30): ヒラギノ明朝 ProN.ttc(1)
-OTCname(29): ヒラギノ明朝 ProN.ttc(1)
-OTCname(28): HiraginoSerif.ttc(1)
+OTCname(40): ヒラギノ明朝 ProN.ttc(1)
+OTCname(39): ヒラギノ明朝 ProN.ttc(1)
+OTCname(38): HiraginoSerif.ttc(1)
 
 Name: HiraMinPro-W6
 Class: Japan
@@ -90,9 +90,9 @@ Provides(40): MidashiMinPro-MA31
 OTFname(20): ヒラギノ明朝 Pro W6.otf
 OTFname(19): ヒラギノ明朝 Pro W6.otf
 OTFname(10): HiraMinPro-W6.otf
-OTCname(30): ヒラギノ明朝 ProN.ttc(3)
-OTCname(29): ヒラギノ明朝 ProN.ttc(3)
-OTCname(28): HiraginoSerif.ttc(3)
+OTCname(40): ヒラギノ明朝 ProN.ttc(3)
+OTCname(39): ヒラギノ明朝 ProN.ttc(3)
+OTCname(38): HiraginoSerif.ttc(3)
 
 Name: HiraKakuPro-W3
 Class: Japan
@@ -283,27 +283,29 @@ OTCname: TsukushiBMaruGothic.ttc(1)
 # Toppan MacOS version
 
 Name: ToppanBunkyuMinchoPr6N-Regular
-PSName: ToppanBunkyuMinchoPr6N-Regular
 Class: Japan
-OTFname: ToppanBunkyuMinchoPr6N-Regular.otf
+OTFname(20): ToppanBunkyuMincho-Regular.otf # take over from Sierra
+OTFname(10): ToppanBunkyuMinchoPr6N-Regular.otf
 
 Name: ToppanBunkyuGothicPr6N-DB
 Class: Japan
-OTCname: ToppanBunkyuGothicPr6N.ttc(0)
+OTCname(20): ToppanBunkyuGothic.ttc(0) # take over from Sierra
+OTCname(10): ToppanBunkyuGothicPr6N.ttc(0)
 
 Name: ToppanBunkyuGothicPr6N-Regular
 Class: Japan
-OTCname: ToppanBunkyuGothicPr6N.ttc(1)
+OTCname(20): ToppanBunkyuGothic.ttc(1) # take over from Sierra
+OTCname(10): ToppanBunkyuGothicPr6N.ttc(1)
 
 Name: ToppanBunkyuMidashiMinchoStdN-ExtraBold
-PSName: ToppanBunkyuMidashiMinchoStdN-ExtraBold
 Class: Japan
-OTFname: ToppanBunkyuMidashiMinchoStdN-ExtraBold.otf
+OTFname(20): ToppanBunkyuMidashiMincho-ExtraBold.otf # take over from Sierra
+OTFname(10): ToppanBunkyuMidashiMinchoStdN-ExtraBold.otf
 
 Name: ToppanBunkyuMidashiGothicStdN-ExtraBold
-PSName: ToppanBunkyuMidashiGothicStdN-ExtraBold
 Class: Japan
-OTFname: ToppanBunkyuMidashiGothicStdN-ExtraBold.otf
+OTFname(20): ToppanBunkyuMidashiGothic-ExtraBold.otf # take over from Sierra
+OTFname(10): ToppanBunkyuMidashiGothicStdN-ExtraBold.otf
 
 ### SIMPLIFIED/TRADITIONAL CHINESE ###
 
@@ -327,12 +329,12 @@ OTCname(28): HiraginoSansGB.ttc(2)
 
 Name: HiraginoSansCNS-W3
 Class: CNS
-OTCname(30): Hiragino_Sans_CNS.ttc(0)
+OTCname(29): Hiragino_Sans_CNS.ttc(0)
 OTCname(28): HiraginoSansCNS.ttc(0)
 
 Name: HiraginoSansCNS-W6
 Class: CNS
-OTCname(30): Hiragino_Sans_CNS.ttc(1)
+OTCname(29): Hiragino_Sans_CNS.ttc(1)
 OTCname(28): HiraginoSansCNS.ttc(1)
 
 # Changzhou SinoType
