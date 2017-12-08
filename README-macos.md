@@ -3,7 +3,7 @@ External Database for cjk-gs-integrate
 
 Due to frequent incompatible changes in font file names by Apple,
 the built-in database in cjk-gs-integrate doesn't support
-OS X 10.11 El Capitan or later versions. Support for these
+OS X 10.8 Mountain Lion or later versions. Support for these
 releases are provided in additional databases included in the
 current package.
 
@@ -17,9 +17,16 @@ required database files directly from the
 
 We provide the following additional databases:
 
-- for El Capitan (10.11): [cjkgs-macos-elcapitan.dat](https://raw.githubusercontent.com/texjporg/cjk-gs-support/master/cjkgs-macos-elcapitan.dat)
-- for Sierra (10.12): [cjkgs-macos-sierra.dat](https://raw.githubusercontent.com/texjporg/cjk-gs-support/master/cjkgs-macos-sierra.dat)
-- for High Sierra (10.13): [cjkgs-macos-highsierra.dat](https://raw.githubusercontent.com/texjporg/cjk-gs-support/master/cjkgs-macos-highsierra.dat)
+- for Mountain Lion (10.8):
+  [cjkgs-macos-mountainlion.dat](https://raw.githubusercontent.com/texjporg/cjk-gs-support/master/cjkgs-macos-mountainlion.dat)
+- for Mavericks (10.9) and Yosemite (10.10):
+  [cjkgs-macos-mavericks.dat](https://raw.githubusercontent.com/texjporg/cjk-gs-support/master/cjkgs-macos-mavericks.dat)
+- for El Capitan (10.11):
+  [cjkgs-macos-elcapitan.dat](https://raw.githubusercontent.com/texjporg/cjk-gs-support/master/cjkgs-macos-elcapitan.dat)
+- for Sierra (10.12):
+  [cjkgs-macos-sierra.dat](https://raw.githubusercontent.com/texjporg/cjk-gs-support/master/cjkgs-macos-sierra.dat)
+- for High Sierra (10.13):
+  [cjkgs-macos-highsierra.dat](https://raw.githubusercontent.com/texjporg/cjk-gs-support/master/cjkgs-macos-highsierra.dat)
 
 Download the database file (`*.dat`) which is suitable for
 your OS version. Either place it in the current working directory
@@ -33,8 +40,8 @@ the option `--fontdef-add`. For macOS 10.13 High Sierra this would be:
 cjk-gs-integrate[.pl] --fontdef-add=cjkgs-macos-highsierra.dat
 `````
 
-For OS X 10.11 El Capitan, use `cjkgs-macos-elcapitan.dat`.
 For macOS 10.12 Sierra, use `cjkgs-macos-sierra.dat`.
+For OS X 10.11 El Capitan, use `cjkgs-macos-elcapitan.dat`.
 
 Authors, Contributors, and Copyright
 ------------------------------------
