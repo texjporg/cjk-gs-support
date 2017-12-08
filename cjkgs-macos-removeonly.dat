@@ -342,16 +342,20 @@ Class: GB
 Provides(50): STHeiti-Light
 OTFname(20): Hiragino Sans GB W3.otf
 OTFname(10): HiraginoSansGB-W3.otf
-RMVname(30): Hiragino Sans GB.ttc(0)
-RMVname(28): HiraginoSansGB.ttc(0)
+RMVname(30): Hiragino Sans GB W3.ttc(0)
+RMVname(28): HiraginoSansGB-W3.ttc(0)
+RMVname(40): Hiragino Sans GB.ttc(0)
+RMVname(38): HiraginoSansGB.ttc(0)
 
 Name: HiraginoSansGB-W6
 Class: GB
 Provides(50): STHeiti-Regular
 OTFname(20): Hiragino Sans GB W6.otf
 OTFname(10): HiraginoSansGB-W6.otf
-RMVname(30): Hiragino Sans GB.ttc(2)
-RMVname(28): HiraginoSansGB.ttc(2)
+RMVname(30): Hiragino Sans GB W6.ttc(0)
+RMVname(28): HiraginoSansGB-W6.ttc(0)
+RMVname(40): Hiragino Sans GB.ttc(2)
+RMVname(38): HiraginoSansGB.ttc(2)
 
 Name: HiraginoSansCNS-W3
 Class: CNS
