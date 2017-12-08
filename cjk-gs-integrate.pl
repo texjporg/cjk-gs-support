@@ -1694,6 +1694,20 @@ sub read_each_font_database {
       }
       next;
     }
+    # only for removing
+    if ($l =~ m/^RMVname(\((\d+)\))?:\s*(.*)$/) {
+      my $fn = $3;
+      $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
+      # cp932 for win32 console
+      my $encoded_fn;
+      if (win32()) {
+        $encoded_fn = encode_utftocp($fn);
+      }
+      print_dddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
+      print_dddebug("type: remomve\n");
+      $fontfiles{$fn}{'type'} = 'RMV';
+      next;
+    }
     # we are still here??
     print_error("Cannot parse this file at line $lineno, exiting. Strange line: >>>$l<<<\n");
     exit (1);
