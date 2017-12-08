@@ -102,7 +102,7 @@ The `<Resource>` dir is either given by `-o`/`--output`, or otherwise searched
 from an installed Ghostscript (binary name is assumed to be 'gs' on unix,
 'gswin32c' on win32).
 
-Aliases are added to 
+Aliases are added to
 
     <Resource>/Init/cidfmap.aliases
       -- if you are using tlgs win32, tlpkg/tlgs/lib/cidfmap.aliases instead
@@ -192,7 +192,7 @@ For the Japanese fonts:
     Moga-Mobo-ex, Moga-Mobo, IPAex, IPA, Ume
 
 For the Korean fonts:
-    (Hanyang,) Adobe, Solaris-hanyang, MS, Unfonts, Baekmuk
+    (Hanyang,) Adobe, Solaris, MS, Unfonts, Baekmuk
 
 For the Simplified Chinese:
     Adobe, Fandol, Hiragino, Founder, MS, CJKUnifonts, Arphic, CJKUnifonts-ttf
