@@ -46,9 +46,11 @@ diff -urN $PROJECT-$VER-orig $PROJECT-$VER
 # separate macOS-specific packages
 mkdir $PROJECT-macos-$VER
 # remove the non-free part in the main project
-for i in $PROJECT-$VER/*.dat ; do
+for i in $PROJECT-$VER/cjkgs-macos-*.dat ; do
   bn=`basename $i`
-  mv $PROJECT-$VER/$bn $PROJECT-macos-$VER
+  if test $bn != "cjkgs-macos-removeonly.dat"; then
+    mv $PROJECT-$VER/$bn $PROJECT-macos-$VER
+  fi
 done
 # remove the rest of the stuff
 mv $PROJECT-$VER/README-macos.md $PROJECT-macos-$VER/README.md
