@@ -1,0 +1,200 @@
+# Moga-Mobo from Y.Oz Vox (free)
+
+### JAPANESE ###
+
+Name: MogaMincho-Regular
+Class: Japan
+Provides(110): Ryumin-Light
+Provides(110): RyuminPro-Light
+Provides(110): HiraMinProN-W3
+Provides(110): HiraMinPro-W3
+TTCname: mogam.ttc(0)
+
+Name: MogaExMincho-Regular
+Class: Japan
+Provides(100): Ryumin-Light
+Provides(100): RyuminPro-Light
+Provides(100): HiraMinProN-W3
+Provides(100): HiraMinPro-W3
+TTCname: mogam.ttc(1)
+
+Name: MogaExMincho-Italic
+Class: Japan
+TTCname: mogam.ttc(2)
+
+Name: Moga90Mincho-Regular
+Class: Japan
+TTCname: mogam.ttc(3)
+
+Name: MogaEx90Mincho-Regular
+Class: Japan
+TTCname: mogam.ttc(4)
+
+Name: MogaEx90Mincho-Italic
+Class: Japan
+TTCname: mogam.ttc(5)
+
+Name: MogaMincho-Bold
+Class: Japan
+Provides(110): FutoMinA101-Bold
+Provides(110): FutoMinA101Pro-Bold
+Provides(110): HiraMinProN-W6
+Provides(110): HiraMinPro-W6
+Provides(110): MidashiMin-MA31
+Provides(110): MidashiMinPro-MA31
+TTCname: mogamb.ttc(0)
+
+Name: MogaExMincho-Bold
+Class: Japan
+Provides(100): FutoMinA101-Bold
+Provides(100): FutoMinA101Pro-Bold
+Provides(100): HiraMinProN-W6
+Provides(100): HiraMinPro-W6
+Provides(100): MidashiMin-MA31
+Provides(100): MidashiMinPro-MA31
+TTCname: mogamb.ttc(1)
+
+Name: Moga90Mincho-Bold
+Class: Japan
+TTCname: mogamb.ttc(2)
+
+Name: MogaEx90Mincho-Bold
+Class: Japan
+TTCname: mogamb.ttc(3)
+
+Name: MogaHMincho-Regular
+Class: Japan
+TTCname: mogahm.ttc(0)
+
+Name: MogaExHMincho-Regular
+Class: Japan
+TTCname: mogahm.ttc(1)
+
+Name: MogaExHMincho-Italic
+Class: Japan
+TTCname: mogahm.ttc(2)
+
+Name: Moga90HMincho-Regular
+Class: Japan
+TTCname: mogahm.ttc(3)
+
+Name: MogaEx90HMincho-Regular
+Class: Japan
+TTCname: mogahm.ttc(4)
+
+Name: MogaEx90HMincho-Italic
+Class: Japan
+TTCname: mogahm.ttc(5)
+
+Name: MogaHMincho-Bold
+Class: Japan
+TTCname: mogahmb.ttc(0)
+
+Name: MogaExHMincho-Bold
+Class: Japan
+TTCname: mogahmb.ttc(1)
+
+Name: Moga90HMincho-Bold
+Class: Japan
+TTCname: mogahmb.ttc(2)
+
+Name: MogaEx90HMincho-Bold
+Class: Japan
+TTCname: mogahmb.ttc(3)
+
+Name: MogaGothic-Regular
+Class: Japan
+Provides(110): GothicBBB-Medium
+Provides(110): GothicBBBPro-Medium
+Provides(110): HiraKakuProN-W3
+Provides(110): HiraKakuPro-W3
+TTCname: mogag.ttc(0)
+
+Name: MogaExGothic-Regular
+Class: Japan
+Provides(100): GothicBBB-Medium
+Provides(100): GothicBBBPro-Medium
+Provides(100): HiraKakuProN-W3
+Provides(100): HiraKakuPro-W3
+TTCname: mogag.ttc(1)
+
+Name: Moga90Gothic-Regular
+Class: Japan
+TTCname: mogag.ttc(2)
+
+Name: MogaEx90Gothic-Regular
+Class: Japan
+TTCname: mogag.ttc(3)
+
+Name: MogaGothic-Bold
+Class: Japan
+Provides(110): FutoGoB101-Bold
+Provides(110): FutoGoB101Pro-Bold
+Provides(110): HiraKakuProN-W6
+Provides(110): HiraKakuPro-W6
+Provides(110): MidashiGo-MB31
+Provides(110): MidashiGoPro-MB31
+Provides(110): HiraKakuStdN-W8
+Provides(110): HiraKakuStd-W8
+TTCname: mogagb.ttc(0)
+
+Name: MogaExGothic-Bold
+Class: Japan
+Provides(100): FutoGoB101-Bold
+Provides(100): FutoGoB101Pro-Bold
+Provides(100): HiraKakuProN-W6
+Provides(100): HiraKakuPro-W6
+Provides(100): MidashiGo-MB31
+Provides(100): MidashiGoPro-MB31
+Provides(100): HiraKakuStdN-W8
+Provides(100): HiraKakuStd-W8
+TTCname: mogagb.ttc(1)
+
+Name: Moga90Gothic-Bold
+Class: Japan
+TTCname: mogagb.ttc(2)
+
+Name: MogaEx90Gothic-Bold
+Class: Japan
+TTCname: mogagb.ttc(3)
+
+Name: MoboGothic-Regular
+Class: Japan
+Provides(110): Jun101-Light
+Provides(110): Jun101Pro-Light
+Provides(110): HiraMaruProN-W4
+Provides(110): HiraMaruPro-W4
+TTCname: mobog.ttc(0)
+
+Name: MoboExGothic-Regular
+Class: Japan
+Provides(100): Jun101-Light
+Provides(100): Jun101Pro-Light
+Provides(100): HiraMaruProN-W4
+Provides(100): HiraMaruPro-W4
+TTCname: mobog.ttc(1)
+
+Name: Mobo90Gothic-Regular
+Class: Japan
+TTCname: mobog.ttc(2)
+
+Name: MoboEx90Gothic-Regular
+Class: Japan
+TTCname: mobog.ttc(3)
+
+Name: MoboGothic-Bold
+Class: Japan
+TTCname: mobogb.ttc(0)
+
+Name: MoboExGothic-Bold
+Class: Japan
+TTCname: mobogb.ttc(1)
+
+Name: Mobo90Gothic-Bold
+Class: Japan
+TTCname: mobogb.ttc(2)
+
+Name: MoboEx90Gothic-Bold
+Class: Japan
+TTCname: mobogb.ttc(3)
+
