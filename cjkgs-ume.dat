@@ -1,0 +1,106 @@
+# Ume-font (free)
+
+### JAPANESE ###
+
+# Note:
+# in the current release (2016-09-03 umefont_660.7z),
+# ume-tms.ttf and ume-pms.ttf ("studybook" family) share the same PSName
+# as ume-tmo.ttf and ume-pmo.ttf; we don't add these database
+# intentionally -- HY (2017/01/17)
+
+Name: Ume-Mincho
+Class: Japan
+Provides(140): Ryumin-Light
+Provides(140): RyuminPro-Light
+Provides(140): HiraMinProN-W3
+Provides(140): HiraMinPro-W3
+Provides(140): FutoMinA101-Bold
+Provides(140): FutoMinA101Pro-Bold
+Provides(140): HiraMinProN-W6
+Provides(140): HiraMinPro-W6
+Provides(140): MidashiMin-MA31
+Provides(140): MidashiMinPro-MA31
+TTFname(10): ume-tmo3.ttf
+#TTFname(11): ume-tms3.ttf
+
+Name: Ume-Gothic
+Class: Japan
+Provides(140): GothicBBB-Medium
+Provides(140): GothicBBBPro-Medium
+Provides(140): HiraKakuProN-W3
+Provides(140): HiraKakuPro-W3
+Provides(140): FutoGoB101-Bold
+Provides(140): FutoGoB101Pro-Bold
+Provides(140): HiraKakuProN-W6
+Provides(140): HiraKakuPro-W6
+Provides(140): MidashiGo-MB31
+Provides(140): MidashiGoPro-MB31
+Provides(140): HiraKakuStdN-W8
+Provides(140): HiraKakuStd-W8
+Provides(140): Jun101-Light
+Provides(140): Jun101Pro-Light
+Provides(140): HiraMaruProN-W4
+Provides(140): HiraMaruPro-W4
+TTFname(10): ume-tgo4.ttf
+
+Name: Ume-Gothic-O5
+Class: Japan
+TTFname(10): ume-tgo5.ttf
+
+Name: Ume-Gothic-C4
+Class: Japan
+TTFname(10): ume-tgc4.ttf
+
+Name: Ume-Gothic-C5
+Class: Japan
+TTFname(10): ume-tgc5.ttf
+
+Name: Ume-Gothic-S4
+Class: Japan
+TTFname(10): ume-tgs4.ttf
+
+Name: Ume-Gothic-S5
+Class: Japan
+TTFname(10): ume-tgs5.ttf
+
+Name: Ume-P-Mincho
+Class: Japan
+TTFname(10): ume-pmo3.ttf
+#TTFname(11): ume-pms3.ttf
+
+Name: Ume-P-Gothic
+Class: Japan
+TTFname(10): ume-pgo4.ttf
+
+Name: Ume-P-Gothic-O5
+Class: Japan
+TTFname(10): ume-pgo5.ttf
+
+Name: Ume-P-Gothic-C4
+Class: Japan
+TTFname(10): ume-pgc4.ttf
+
+Name: Ume-P-Gothic-C5
+Class: Japan
+TTFname(10): ume-pgc5.ttf
+
+Name: Ume-P-Gothic-S4
+Class: Japan
+TTFname(10): ume-pgs4.ttf
+
+Name: Ume-P-Gothic-S5
+Class: Japan
+TTFname(10): ume-pgs5.ttf
+
+Name: Ume-UI-Gothic
+Class: Japan
+TTFname(10): ume-ugo4.ttf
+
+Name: Ume-UI-Gothic-O5
+Class: Japan
+TTFname(10): ume-ugo5.ttf
+
+Name: Ume-Hy-Gothic
+Class: Japan
+TTFname(10): ume-hgo4.ttf
+
