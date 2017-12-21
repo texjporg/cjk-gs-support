@@ -1597,6 +1597,20 @@ sub read_each_font_database {
       }
       next;
     }
+    if ($l =~ m/^!INCLUDE\s*(.*)$/) { # for remove-only database
+      next if (!$opt_cleanup);
+      my @dbl;
+      my $foo = kpse_miscfont($1);
+      if (!open(FDB, "<$foo")) {
+        print_warning("Cannot find $1, skipping!\n");
+        next;
+      }
+      @dbl = <FDB>;
+      close(FDB);
+      print_debug("Reading database file $1...\n");
+      read_each_font_database(@dbl);
+      next;
+    }
     if ($l =~ m/^INCLUDE\s*(.*)$/) {
       my @dbl;
       my $foo = kpse_miscfont($1);
@@ -1606,6 +1620,7 @@ sub read_each_font_database {
       }
       @dbl = <FDB>;
       close(FDB);
+      print_debug("Reading database file $1...\n");
       read_each_font_database(@dbl);
       next;
     }
@@ -1704,7 +1719,7 @@ sub read_each_font_database {
         $encoded_fn = encode_utftocp($fn);
       }
       print_dddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
-      print_dddebug("type: remomve\n");
+      print_dddebug("type: remove\n");
       $fontfiles{$fn}{'type'} = 'RMV';
       next;
     }
@@ -3135,10 +3150,10 @@ Name: MicrosoftMHei-Bold
 Class: CNS
 TTFname(10): MSMHei-Bold.ttf
 
-# Remove-only database
+# Remove-only database (should begin with !INCLUDE)
 # that is, entries which contain at least one 'RMVname' line
 # note that this line should come at the _end_ of all INCLUDE files
-INCLUDE cjkgs-macos-removeonly.dat
+!INCLUDE cjkgs-macos-removeonly.dat
 
 
 ### Local Variables:
