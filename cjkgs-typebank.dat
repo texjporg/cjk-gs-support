@@ -1,0 +1,33 @@
+# TypeBank
+
+### JAPANESE ###
+
+# Note about Windows:
+#   UDDigiKyokashoN-R.ttc
+#   UDDigiKyokashoN-B.ttc
+# are bundled with Windows 10 (Fall Creators Update).
+
+Name: UDDigiKyokashoN-R
+Class: Japan
+TTCname: UDDigiKyokashoN-R.ttc(0)
+
+Name: UDDigiKyokashoNP-R
+Class: Japan
+TTCname: UDDigiKyokashoN-R.ttc(1)
+
+Name: UDDigiKyokashoNK-R
+Class: Japan
+TTCname: UDDigiKyokashoN-R.ttc(2)
+
+Name: UDDigiKyokashoN-B
+Class: Japan
+TTCname: UDDigiKyokashoN-B.ttc(0)
+
+Name: UDDigiKyokashoNP-B
+Class: Japan
+TTCname: UDDigiKyokashoN-B.ttc(1)
+
+Name: UDDigiKyokashoNK-B
+Class: Japan
+TTCname: UDDigiKyokashoN-B.ttc(2)
+

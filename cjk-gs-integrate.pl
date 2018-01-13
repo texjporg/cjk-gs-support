@@ -2199,6 +2199,9 @@ INCLUDE cjkgs-yu-win.dat
 # MS -- Provides level 95
 INCLUDE cjkgs-microsoft.dat
 
+# TypeBank
+INCLUDE cjkgs-typebank.dat
+
 # Fontworks
 INCLUDE cjkgs-fontworks.dat
 
