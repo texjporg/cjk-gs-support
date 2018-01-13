@@ -54,7 +54,7 @@ if (macosx()) {
 
 my @newarg;
 push @newarg, "--fontdef-add=cjkgs-macos-$addname.dat" if ($addname);
-push @newarg, @ARGV if ($addname);
+push @newarg, @ARGV;
 if (-f "cjk-gs-integrate.pl") {
   system("perl cjk-gs-integrate.pl @newarg");
 } else {
