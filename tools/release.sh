@@ -52,6 +52,7 @@ for i in $PROJECT-$VER/cjkgs-macos-*.dat ; do
     mv $PROJECT-$VER/$bn $PROJECT-macos-$VER
   fi
 done
+mv $PROJECT-$VER/cjk-gs-integrate-macos.pl $PROJECT-macos-$VER
 # remove the rest of the stuff
 mv $PROJECT-$VER/README-macos.md $PROJECT-macos-$VER/README.md
 

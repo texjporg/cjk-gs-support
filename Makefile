@@ -10,9 +10,9 @@ README.md: cjk-gs-integrate.pl
 
 install: README.md
 	mkdir -p ${TEXMF}/doc/fonts/$(PROJECT)
-	cp README.md ${TEXMF}/doc/fonts/$(PROJECT)/
+	cp *.md ${TEXMF}/doc/fonts/$(PROJECT)/
 	mkdir -p ${TEXMF}/scripts/$(PROJECT)
-	cp cjk-gs-integrate.pl ${TEXMF}/scripts/$(PROJECT)/
+	cp *.pl ${TEXMF}/scripts/$(PROJECT)/
 	mkdir -p ${TEXMF}/fonts/misc/$(PROJECT)
 	cp *.dat ${TEXMF}/fonts/misc/$(PROJECT)/
 
