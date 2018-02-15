@@ -1362,8 +1362,8 @@ sub check_for_files {
     }
     my $bn = basename($f);
     # kpsewhich -all might return multiple files with the same basename;
-    # choose the first one among them
-    $bntofn{$bn} = $realf if (!$bntofn{$bn});
+    # collect all of them
+    $bntofn{$bn}{$realf} = 1;
   }
 
   # show the %fontdb before file check
@@ -1383,9 +1383,36 @@ sub check_for_files {
       # check for subfont extension
       my $realfile = $f;
       $realfile =~ s/^(.*)\(\d*\)$/$1/;
-      if ($bntofn{$realfile}) {
+      # check for casefolding
+      # we might catch different names (batang/Batang) and identify them wrongly on
+      #  * case-insensitive file systems (like HFS on MacOS)
+      #  * kpathsea 6.3.0 or later, with casefolding fallback search (TL2018)
+      # check the actual psname using otfinfo utility, only when we "know"
+      # both uppercase/lowercase font files are possible and they are different
+      my $actualpsname;
+      my $bname;
+      for my $b (keys %{$bntofn{$realfile}}) {
+        if ($fontdb{$k}{'casefold'}) {
+          print_debug("We need to test whether\n");
+          print_debug("  $b\n");
+          print_debug("is the correct one. Invoking otfinfo ...\n");
+          chomp( $actualpsname = `otfinfo -p "$b"`);
+          if ($actualpsname ne $k) {
+            print_warning("PSName returned by otfinfo ($actualpsname) is\n");
+            print_warning("different from our database ($k), discarding!\n");
+          } else {
+            print_debug("... test passed.\n");
+            $bname = $b;
+            last;
+          }
+        } else {
+          $bname = $b;
+          last;
+        }
+      }
+      if ($bname) {
         # we found a representative, make it available
-        $fontdb{$k}{'files'}{$f}{'target'} = $bntofn{$realfile};
+        $fontdb{$k}{'files'}{$f}{'target'} = $bname;
         $fontdb{$k}{'available'} = 1;
       } else {
         # delete the entry for convenience
@@ -1556,6 +1583,7 @@ sub read_each_font_database {
   my $fontname = "";
   my $fontclass = "";
   my %fontprovides = ();
+  my $fontcasefold = "";
   my %fontfiles;
   my $psname = "";
   my $lineno = 0;
@@ -1576,6 +1604,7 @@ sub read_each_font_database {
           }
           $fontdb{$realfontname}{'origname'} = $fontname;
           $fontdb{$realfontname}{'class'} = $fontclass;
+          $fontdb{$realfontname}{'casefold'} = $fontcasefold;
           $fontdb{$realfontname}{'files'} = { %fontfiles };
           $fontdb{$realfontname}{'provides'} = { %fontprovides };
           if ($opt_debug >= 3) {
@@ -1628,6 +1657,7 @@ sub read_each_font_database {
     if ($l =~ m/^PSName:\s*(.*)$/) { $psname = $1; next; }
     if ($l =~ m/^Class:\s*(.*)$/) { $fontclass = $1 ; next ; }
     if ($l =~ m/^Provides\((\d+)\):\s*(.*)$/) { $fontprovides{$2} = $1; next; }
+    if ($l =~ m/^Casefold:\s*(.*)$/) { $fontcasefold = $1 ; next ; }
     # new code: distinguish 4 types (otf, otc, ttf, ttc)
     if ($l =~ m/^OTFname(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
@@ -1739,6 +1769,7 @@ sub dump_font_database {
     for my $p (sort keys %{$fontdb{$k}{'provides'}}) {
       print FOO "Provides($fontdb{$k}{'provides'}{$p}): $p\n";
     }
+    print FOO "Casefold: $fontdb{$k}{'casefold'}\n" if ($fontdb{$k}{'casefold'});
     for my $f (sort { $fontdb{$k}{'files'}{$a}{'priority'}
                       <=>
                       $fontdb{$k}{'files'}{$b}{'priority'} }
