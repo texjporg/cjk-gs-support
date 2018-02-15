@@ -1413,6 +1413,14 @@ sub check_for_files {
           print_debug("  $b\n");
           print_debug("is the correct one. Invoking otfinfo ...\n");
           chomp( $actualpsname = `otfinfo -p "$b"`);
+          if ($?) {
+            # something is wrong with the font file, or otfinfo does not support it;
+            # still there is a chance that Ghostscript supports, so don't discard it
+            print_debug("... command exited with $?!\n");
+            print_debug("OK, I'll take this, but it may not work properly.\n");
+            $bname = $b;
+            last;
+          }
           if ($actualpsname ne $k) {
             print_debug("... PSName returned by otfinfo ($actualpsname) is\n");
             print_debug("different from our database ($k), discarding!\n");
