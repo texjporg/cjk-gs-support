@@ -2,12 +2,16 @@
 #
 # cjk-gs-integrate - setup Ghostscript for CID/TTF CJK fonts
 #
-# Copyright 2015-2017 by Norbert Preining
-# Copyright 2016-2017 by Japanese TeX Development Community
+# Copyright 2015-2018 by Norbert Preining
+# Copyright 2016-2018 by Japanese TeX Development Community
 #
-# Written by Norbert Preining, based on research and work by
-# Yusuke Kuroki, Bruno Voisin, Hironobu Yamashita, Munehiro Yamamoto
-# and the TeX Q&A wiki page
+# This work is based on research and work by (in alphabetical order)
+#   Yusuke Kuroki
+#   Yusuke Terada
+#   Bruno Voisin
+#   Munehiro Yamamoto
+#   Hironobu Yamashita
+# and the Japanese TeX Q&A wiki page
 #
 # This file is licensed under GPL version 3 or any later version.
 # For copyright statements see end of file.
@@ -344,6 +348,17 @@ if ($opt_help || $opt_markdown) {
 if ($opt_debug >= 2) {
   require Data::Dumper;
   $Data::Dumper::Indent = 1;
+}
+
+my $otfinfo_available;
+chomp( my $otfinfo_help = `otfinfo --help 2>$nul` );
+if ($?) {
+  print_warning("The program 'otfinfo' not found in PATH.\n");
+  print_warning("Sorry, we can't be safe enough to distinguish\n");
+  print_warning("uppercase / lowercase file names.\n");
+  $otfinfo_available = 0;
+} else {
+  $otfinfo_available = 1;
 }
 
 if (macosx()) {
@@ -1392,14 +1407,15 @@ sub check_for_files {
       my $actualpsname;
       my $bname;
       for my $b (keys %{$bntofn{$realfile}}) {
-        if ($fontdb{$k}{'casefold'}) {
+        if ($fontdb{$k}{'casefold'} && $otfinfo_available &&
+            ($fontdb{$k}{'files'}{$f}{'type'} eq 'OTF' || $fontdb{$k}{'files'}{$f}{'type'} eq 'TTF')) {
           print_debug("We need to test whether\n");
           print_debug("  $b\n");
           print_debug("is the correct one. Invoking otfinfo ...\n");
           chomp( $actualpsname = `otfinfo -p "$b"`);
           if ($actualpsname ne $k) {
-            print_warning("PSName returned by otfinfo ($actualpsname) is\n");
-            print_warning("different from our database ($k), discarding!\n");
+            print_debug("... PSName returned by otfinfo ($actualpsname) is\n");
+            print_debug("different from our database ($k), discarding!\n");
           } else {
             print_debug("... test passed.\n");
             $bname = $b;
