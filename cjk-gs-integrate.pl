@@ -1628,12 +1628,14 @@ sub read_each_font_database {
           }
           # reset to start
           $fontname = $fontclass = $psname = "";
+          $fontcasefold = "";
           %fontfiles = ();
           %fontprovides = ();
         } else {
           print_warning("incomplete entry above line $lineno for $fontname/$fontclass, skipping!\n");
           # reset to start
           $fontname = $fontclass = $psname = "";
+          $fontcasefold = "";
           %fontfiles = ();
           %fontprovides = ();
         }
@@ -2711,6 +2713,7 @@ INCLUDE cjkgs-solaris.dat
 Name: Baekmuk-Batang
 Class: Korea
 Provides(70): HYSMyeongJo-Medium
+Casefold: true
 TTFname(20): batang.ttf
 TTFname(10): Baekmuk-Batang.ttf
 
@@ -2723,6 +2726,7 @@ TTFname(10): Baekmuk-Dotum.ttf
 Name: Baekmuk-Gulim
 Class: Korea
 Provides(70): HYRGoThic-Medium
+Casefold: true
 TTFname(20): gulim.ttf
 TTFname(10): Baekmuk-Gulim.ttf
 
@@ -3035,6 +3039,7 @@ TTFname: HeadlineA.ttf
 
 Name: Batang
 Class: Korea
+Casefold: true
 TTFname(50): Batang.ttf
 TTCname(20): batang.ttc(0)
 
@@ -3054,6 +3059,7 @@ TTCname(20): gulim.ttc(3)
 
 Name: Gulim
 Class: Korea
+Casefold: true
 TTFname(50): Gulim.ttf
 TTCname(20): gulim.ttc(0)
 
