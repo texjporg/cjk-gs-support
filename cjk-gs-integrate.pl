@@ -342,7 +342,7 @@ my %user_aliases;
 
 if ($opt_help || $opt_markdown) {
   Usage();
-  exit 0;
+  exit(0);
 }
 
 if ($opt_debug >= 2) {
@@ -351,7 +351,7 @@ if ($opt_debug >= 2) {
 }
 
 my $otfinfo_available;
-chomp( my $otfinfo_help = `otfinfo --help 2>$nul` );
+chomp(my $otfinfo_help = `otfinfo --help 2>$nul`);
 if ($?) {
   print_warning("The program 'otfinfo' not found in PATH.\n");
   print_warning("Sorry, we can't be safe enough to distinguish\n");
@@ -387,7 +387,7 @@ if (defined($opt_texmflink)) {
   if ($opt_texmflink eq '') {
     # option was passed but didn't receive a value
     #  -> use TEXMFLOCAL
-    chomp( $foo = `kpsewhich -var-value=TEXMFLOCAL`);
+    chomp($foo = `kpsewhich -var-value=TEXMFLOCAL`);
   } else {
     # option was passed with an argument
     #  -> use it
@@ -402,7 +402,7 @@ if (defined($opt_akotfps)) {
     if (defined($opt_texmflink)) {
       $foo = $opt_texmflink;
     } else {
-      chomp( $foo = `kpsewhich -var-value=TEXMFLOCAL`);
+      chomp($foo = `kpsewhich -var-value=TEXMFLOCAL`);
     }
   } else {
     $foo = $opt_akotfps;
@@ -1028,7 +1028,7 @@ sub make_dir {
   if (-r $d) {
     if (! -d $d) {
       print_error("$d is not a directory, $w\n");
-      exit 1;
+      exit(1);
     }
   } else {
     $dry_run || make_path($d);
@@ -1412,7 +1412,7 @@ sub check_for_files {
           print_debug("We need to test whether\n");
           print_debug("  $b\n");
           print_debug("is the correct one. Invoking otfinfo ...\n");
-          chomp( $actualpsname = `otfinfo -p "$b"`);
+          chomp($actualpsname = `otfinfo -p "$b"`);
           if ($?) {
             # something is wrong with the font file, or otfinfo does not support it;
             # still there is a chance that Ghostscript supports, so don't discard it
@@ -1780,8 +1780,9 @@ sub read_each_font_database {
       next;
     }
     # we are still here??
-    print_error("Cannot parse this file at line $lineno, exiting. Strange line: >>>$l<<<\n");
-    exit (1);
+    print_error("Cannot parse this file at line $lineno, exiting.
+                 Strange line: >>>$l<<<\n");
+    exit(1);
   }
 }
 
@@ -1811,7 +1812,7 @@ sub find_gs_resource {
   my $foundres = '';
   if (win32()) {
     # determine tlgs or native gs
-    chomp( my $foo = `kpsewhich -var-value=SELFAUTOPARENT`);
+    chomp(my $foo = `kpsewhich -var-value=SELFAUTOPARENT`);
     if ( -d "$foo/tlpkg/tlgs" ) {
       # should be texlive with tlgs
       print_debug("Assuming tlgs win32 ...\n");
@@ -1831,7 +1832,7 @@ sub find_gs_resource {
     } else {
       # we assume gswin32c is in the path
       # TODO: what should we do for gswin64c?
-      chomp( $foundres = `where gswin32c 2>$nul` ); # assume 'where' is available
+      chomp($foundres = `where gswin32c 2>$nul`); # assume 'where' is available
       if ($?) {
         print_error("Cannot run where gswin32c ...\n");
       } else {
@@ -1850,7 +1851,7 @@ sub find_gs_resource {
         }
       }
       if (!$foundres) {
-        chomp( my $gsver = `gswin32c --version 2>$nul` );
+        chomp(my $gsver = `gswin32c --version 2>$nul`);
         if ($?) {
           print_error("Cannot run gswin32c --version ...\n");
         } else {
@@ -1868,7 +1869,7 @@ sub find_gs_resource {
     }
   } else {
     # we assume that gs is in the path
-    chomp( my $gsver = `gs --version 2>$nul` );
+    chomp(my $gsver = `gs --version 2>$nul`);
     if ($?) {
       print_error("Cannot run gs --version ...\n");
     } else {
@@ -1876,7 +1877,7 @@ sub find_gs_resource {
       # when /path/to/bin/gs is found, then there should be
       # /path/to/share/ghostscript/$(gs --version)/Resource
       print_debug("Finding gs resource by assuming relative path ...\n");
-      chomp( $foundres = `which gs` );
+      chomp($foundres = `which gs`);
       $foundres =~ s!/bin/gs$!/share/ghostscript/$gsver/Resource!;
       if ( ! -d $foundres ) {
         $foundres = '';
@@ -1886,7 +1887,7 @@ sub find_gs_resource {
       }
     }
     if (!$foundres) {
-      chomp( my @ret = `gs --help 2>$nul` );
+      chomp(my @ret = `gs --help 2>$nul`);
       if ($?) {
         print_error("Cannot run gs --help ...\n");
       } else {
@@ -1914,7 +1915,11 @@ sub find_gs_resource {
 
 sub kpse_miscfont {
   my ($file) = @_;
-  chomp( my $foo = `kpsewhich -format=miscfont $file`);
+  chomp(my $foo = `kpsewhich -format=miscfont $file`);
+  # for GitHub repository diretory structure
+  if ($foo eq "") {
+    $foo = "database/$file" if (-f "database/$file");
+  }
   return $foo;
 }
 
@@ -2186,7 +2191,7 @@ The contained font data is not copyrightable.
     print_for_out($authors, "  ");
     print "\n";
   }
-  exit 0;
+  exit(0);
 }
 
 sub print_for_out {
