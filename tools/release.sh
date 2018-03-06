@@ -26,11 +26,12 @@ fi
 echo
 git commit -m "Release $VER" --allow-empty
 git archive --format=tar --prefix=$PROJECT-$VER/ HEAD | (cd $TEMP && tar xf -)
-# exclude unnecessary files for CTAN
-rm -f $PROJECT-$VER/.gitignore
-rm -rf $PROJECT-$VER/tools
 git --no-pager log --date=short --format='%ad  %aN  <%ae>%n%n%x09* %s%d [%h]%n' > $TEMP/$PROJECT-$VER/ChangeLog
 cd $TEMP
+# exclude unnecessary files for CTAN
+rm -f $PROJECT-$VER/.gitignore
+rm -rf $PROJECT-$VER/tools $PROJECT-$VER/tests
+# version number
 rm -rf $PROJECT-$VER-orig
 cp -r $PROJECT-$VER $PROJECT-$VER-orig
 cd $PROJECT-$VER
@@ -38,9 +39,6 @@ for i in cjk-gs-integrate.pl ; do
   perl -pi.bak -e "s/\\\$VER\\\$/$VER/g" $i
   rm -f ${i}.bak
 done
-# rename README.md to README for CTAN
-# not necessary anymore, README.md is acceptable
-#mv README.md README
 cd ..
 diff -urN $PROJECT-$VER-orig $PROJECT-$VER
 
@@ -75,3 +73,5 @@ echo "  DIRECTORY:    fonts/utilities/$PROJECT"
 echo "  LICENSE:      free/GPLv3"
 echo "  FILE:         $DIR/$PROJECT-$VER.tar.gz"
 
+# clean up
+rm -rf $PROJECT-$VER-orig $PROJECT-$VER $PROJECT-macos-$VER
