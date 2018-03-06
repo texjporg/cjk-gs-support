@@ -26,12 +26,14 @@ fi
 echo
 git commit -m "Release $VER" --allow-empty
 git archive --format=tar --prefix=$PROJECT-$VER/ HEAD | (cd $TEMP && tar xf -)
+# exclude unnecessary files for CTAN
+rm -f $PROJECT-$VER/.gitignore
+rm -rf $PROJECT-$VER/tools
 git --no-pager log --date=short --format='%ad  %aN  <%ae>%n%n%x09* %s%d [%h]%n' > $TEMP/$PROJECT-$VER/ChangeLog
 cd $TEMP
 rm -rf $PROJECT-$VER-orig
 cp -r $PROJECT-$VER $PROJECT-$VER-orig
 cd $PROJECT-$VER
-rm -f .gitignore
 for i in cjk-gs-integrate.pl ; do
   perl -pi.bak -e "s/\\\$VER\\\$/$VER/g" $i
   rm -f ${i}.bak
