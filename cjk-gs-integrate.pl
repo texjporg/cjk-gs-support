@@ -1406,7 +1406,7 @@ sub check_for_files {
       # both uppercase/lowercase font files are possible and they are different
       my $actualpsname;
       my $bname;
-      for my $b (keys %{$bntofn{$realfile}}) {
+      for my $b (sort keys %{$bntofn{$realfile}}) {
         if ($fontdb{$k}{'casefold'} && $otfinfo_available &&
             ($fontdb{$k}{'files'}{$f}{'type'} eq 'OTF' || $fontdb{$k}{'files'}{$f}{'type'} eq 'TTF')) {
           print_debug("We need to test whether\n");
