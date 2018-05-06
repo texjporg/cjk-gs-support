@@ -1,0 +1,88 @@
+# Apple
+
+### TRADITIONAL CHINESE ###
+
+Name: LiSungLight
+Class: CNS
+TTFname(20): Apple LiSung Light.ttf
+TTFname(10): LiSungLight.ttf
+
+Name: LiGothicMed
+Class: CNS
+TTFname(20): Apple LiGothic Medium.ttf
+TTFname(10): LiGothicMed.ttf
+
+### KOREAN ###
+
+Name: AppleMyungjo
+Class: Korea
+#Provides(??): HYSMyeongJo-Medium # fails
+TTFname: AppleMyungjo.ttf
+
+Name: AppleGothic
+Class: Korea
+#Provides(??): HYGoThic-Medium # fails
+#Provides(??): HYRGoThic-Medium # fails
+TTFname: AppleGothic.ttf
+
+Name: AppleSDGothicNeo-Regular
+Class: Korea
+OTFname(10): AppleSDGothicNeo-Regular.otf
+OTCname(20): AppleSDGothicNeo.ttc(0)
+
+Name: AppleSDGothicNeo-Medium
+Class: Korea
+OTFname(10): AppleSDGothicNeo-Medium.otf
+OTCname(20): AppleSDGothicNeo.ttc(2)
+
+Name: AppleSDGothicNeo-SemiBold
+Class: Korea
+OTFname(10): AppleSDGothicNeo-SemiBold.otf
+OTCname(20): AppleSDGothicNeo.ttc(4)
+
+Name: AppleSDGothicNeo-Bold
+Class: Korea
+OTFname(10): AppleSDGothicNeo-Bold.otf
+OTCname(20): AppleSDGothicNeo.ttc(6)
+
+Name: AppleSDGothicNeo-Light
+Class: Korea
+OTFname(10): AppleSDGothicNeo-Light.otf
+OTCname(20): AppleSDGothicNeo.ttc(8)
+
+Name: AppleSDGothicNeo-Thin
+Class: Korea
+OTFname(10): AppleSDGothicNeo-Thin.otf
+OTCname(20): AppleSDGothicNeo.ttc(10)
+
+Name: AppleSDGothicNeo-UltraLight
+Class: Korea
+OTFname(10): AppleSDGothicNeo-UltraLight.otf
+OTCname(20): AppleSDGothicNeo.ttc(12)
+
+Name: AppleSDGothicNeo-ExtraBold
+Class: Korea
+OTFname(10): AppleSDGothicNeo-ExtraBold.otf
+OTCname(20): AppleSDGothicNeo.ttc(14)
+
+Name: AppleSDGothicNeo-Heavy
+Class: Korea
+OTFname(10): AppleSDGothicNeo-Heavy.otf
+OTCname(20): AppleSDGothicNeo.ttc(16)
+
+Name: JCsmPC
+Class: Korea
+TTFname: PCmyoungjo.ttf
+
+Name: JCfg
+Class: Korea
+TTFname: Pilgiche.ttf
+
+Name: JCkg
+Class: Korea
+TTFname: Gungseouche.ttf
+
+Name: JCHEadA
+Class: Korea
+TTFname: HeadlineA.ttf
+
