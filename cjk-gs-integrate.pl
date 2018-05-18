@@ -2407,6 +2407,9 @@ INCLUDE cjkgs-dynacomware.dat
 # Changzhou SinoType -- Provides level ??
 INCLUDE cjkgs-sinotype.dat
 
+# Apple
+INCLUDE cjkgs-apple.dat
+
 # Arphic Font Design Team (OS X)
 
 Name: WeibeiSC-Bold
