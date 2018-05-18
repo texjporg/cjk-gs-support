@@ -2,17 +2,48 @@
 
 ### TRADITIONAL CHINESE ###
 
+# Note about Mac (Mac OS X 10.6 -- macOS 10.13)
+#   Apple LiSung Light.ttf
+#   Apple LiGothic Medium.ttf
+# are bundled with OS X 10.12.6 Sierra or earlier versions.
+#   AppleLiSung-Light.ttf
+#   AppleLiGothic-Medium.ttf
+# are bundled with macOS 10.13 High Sierra or later versions.
+
 Name: LiSungLight
 Class: CNS
 TTFname(20): Apple LiSung Light.ttf
+TTFname(19): AppleLiSung-Light.ttf
 TTFname(10): LiSungLight.ttf
 
 Name: LiGothicMed
 Class: CNS
 TTFname(20): Apple LiGothic Medium.ttf
+TTFname(19): AppleLiGothic-Medium.ttf
 TTFname(10): LiGothicMed.ttf
 
 ### KOREAN ###
+
+# Note about Mac (Mac OS X 10.6 -- macOS 10.13)
+#   AppleMyungjo.ttf
+#   AppleGothic.ttf
+#   PCmyoungjo.ttf
+#   Pilgiche.ttf
+#   Gungseouche.ttf
+#   HeadlineA.ttf
+# are bundled with all versions.
+#   AppleSDGothicNeo-Regular.otf
+#   AppleSDGothicNeo-Medium.otf
+#   AppleSDGothicNeo-SemiBold.otf
+#   AppleSDGothicNeo-Bold.otf
+#   AppleSDGothicNeo-Light.otf
+#   AppleSDGothicNeo-Thin.otf
+#   AppleSDGothicNeo-UltraLight.otf
+#   AppleSDGothicNeo-ExtraBold.otf
+#   AppleSDGothicNeo-Heavy.otf
+# are bundled with OS X 10.10.5 Yosemite or earlier versions.
+#   AppleSDGothicNeo.ttc
+# is bundled with OS X 10.11 El Capitan or later versions.
 
 Name: AppleMyungjo
 Class: Korea
