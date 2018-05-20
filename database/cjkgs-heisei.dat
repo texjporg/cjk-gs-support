@@ -4,41 +4,51 @@
 
 Name: HeiseiMinStd-W3
 Class: Japan
-OTFname: Heisei Mincho Std W3.otf
+OTFname(20): Heisei Mincho Std W3.otf # ?
+OTFname(10): HeiseiMinStd-W3.otf
 
 Name: HeiseiMinStd-W5
 Class: Japan
-OTFname: Heisei Mincho Std W5.otf
+OTFname(20): Heisei Mincho Std W5.otf # ?
+OTFname(10): HeiseiMinStd-W5.otf
 
 Name: HeiseiMinStd-W7
 Class: Japan
-OTFname: Heisei Mincho Std W7.otf
+OTFname(20): Heisei Mincho Std W7.otf # ?
+OTFname(10): HeiseiMinStd-W7.otf
 
 Name: HeiseiMinStd-W9
 Class: Japan
-OTFname: Heisei Mincho Std W9.otf
+OTFname(20): Heisei Mincho Std W9.otf # ?
+OTFname(10): HeiseiMinStd-W9.otf
 
 Name: HeiseiKakuGoStd-W3
 Class: Japan
-OTFname: Heisei Kaku Gothic Std W3.otf
+OTFname(20): Heisei Kaku Gothic Std W3.otf # ?
+OTFname(10): HeiseiKakuGoStd-W3.otf
 
 Name: HeiseiKakuGoStd-W5
 Class: Japan
-OTFname: Heisei Kaku Gothic Std W5.otf
+OTFname(20): Heisei Kaku Gothic Std W5.otf # ?
+OTFname(10): HeiseiKakuGoStd-W5.otf
 
 Name: HeiseiKakuGoStd-W7
 Class: Japan
-OTFname: Heisei Kaku Gothic Std W7.otf
+OTFname(20): Heisei Kaku Gothic Std W7.otf # ?
+OTFname(10): HeiseiKakuGoStd-W7.otf
 
 Name: HeiseiKakuGoStd-W9
 Class: Japan
-OTFname: Heisei Kaku Gothic Std W9.otf
+OTFname(20): Heisei Kaku Gothic Std W9.otf # ?
+OTFname(10): HeiseiKakuGoStd-W9.otf
 
 Name: HeiseiMaruGoStd-W4
 Class: Japan
-OTFname: Heisei Maru Gothic Std W4.otf
+OTFname(20): Heisei Maru Gothic Std W4.otf # ?
+OTFname(10): HeiseiMaruGoStd-W4.otf
 
 Name: HeiseiMaruGoStd-W8
 Class: Japan
-OTFname: Heisei Maru Gothic Std W8.otf
+OTFname(20): Heisei Maru Gothic Std W8.otf # ?
+OTFname(10): HeiseiMaruGoStd-W8.otf
 
