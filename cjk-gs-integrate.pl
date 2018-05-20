@@ -2270,6 +2270,9 @@ INCLUDE cjkgs-fontworks.dat
 # Toppan
 INCLUDE cjkgs-toppan.dat
 
+# Heisei
+INCLUDE cjkgs-heisei.dat
+
 # Moga-Mobo from Y.Oz Vox (free) -- Provides level 100(Ex), 110(none)
 INCLUDE cjkgs-mogamobo.dat
 
