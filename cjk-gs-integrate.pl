@@ -560,6 +560,10 @@ sub main {
   print_info(($opt_remove ? "removing" : "generating") . " snippets and cidfmap.aliases for font aliases ...\n");
   do_aliases();
   write_akotfps_datafile() if $opt_akotfps;
+  if ($opt_texmflink && !$dry_run) {
+    print_info("running mktexlsr ...\n");
+    system("mktexlsr");
+  }
   print_info("finished\n");
   if ($opt_winbatch) {
     if (-f $winbatch) {
