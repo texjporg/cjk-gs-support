@@ -2243,7 +2243,7 @@ __DATA__
 
 # Morisawa -- Provides level 10(Pr6N), 15(Pr6), 18(Pr5), 20(Pro)
 INCLUDE cjkgs-morisawa.dat
-INCLUDE cjkgs-morisawa-extra.dat
+#INCLUDE cjkgs-morisawa-extra.dat
 
 # Hiragino -- Provides level 30(ProN), 40(Pro)
 INCLUDE cjkgs-hiragino.dat
