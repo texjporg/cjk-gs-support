@@ -524,7 +524,7 @@ sub main {
   }
 
   # do actual setup/removing operations
-  if (! $opt_output) {
+  if (!$opt_output) {
     print_info("searching for Ghostscript resource\n");
     my $gsres = find_gs_resource();
     if (!$gsres) {
@@ -555,11 +555,11 @@ sub main {
       print_info(($opt_remove ? "removing" : "generating") . " links, snippets and cidfmap.local for non-CID fonts ...\n");
       do_nonotf_fonts();
     }
-    write_winbatch() if ($opt_winbatch);
+    write_winbatch() if $opt_winbatch;
   }
   print_info(($opt_remove ? "removing" : "generating") . " snippets and cidfmap.aliases for font aliases ...\n");
   do_aliases();
-  write_akotfps_datafile() if ($opt_akotfps);
+  write_akotfps_datafile() if $opt_akotfps;
   print_info("finished\n");
   if ($opt_winbatch) {
     if (-f $winbatch) {
@@ -783,7 +783,7 @@ sub do_aliases {
   update_master_cidfmap('cidfmap.aliases');
   # if we are in cleanup mode, also remove cidfmap.aliases itself
   if (-f "$opt_output/$cidfmap_aliases_pathpart") {
-    unlink "$opt_output/$cidfmap_aliases_pathpart" if ($opt_cleanup);
+    unlink "$opt_output/$cidfmap_aliases_pathpart" if $opt_cleanup;
   }
 }
 
@@ -815,16 +815,16 @@ sub update_master_cidfmap {
       } elsif (m/^\s*\(cidfmap\.TeXLive\)\s\s*\.runlibfile\s*$/) {
         # if found, it has to be disabled in add mode in a way in which it can
         # be detected in the (future) remove mode
-        next if ($found_tl); # skip it as duplicate (though unlikely to happen)
+        next if $found_tl; # skip it as duplicate (though unlikely to happen)
         $found_tl = 1;
         $newmaster .= "\%" if (!$opt_remove); # in add mode, disable it
         $newmaster .= $_; # pass it as-is
       } elsif (m/^\s*\%\%*\s*\(cidfmap\.TeXLive\)\s\s*\.runlibfile\s*$/) {
         # if found, it should be the one disabled by myself in the previous run;
         # restore it in remove mode
-        next if ($found_tl); # skip it as duplicate (though unlikely to happen)
+        next if $found_tl; # skip it as duplicate (though unlikely to happen)
         $found_tl = 1;
-        $_ =~ s/\%//g if ($opt_remove); # in remove mode, enable it
+        $_ =~ s/\%//g if $opt_remove; # in remove mode, enable it
         $newmaster .= $_; # pass it
       } else {
         $newmaster .= $_;
@@ -929,7 +929,7 @@ pop
 sub add_akotfps_data {
   my ($fn) = @_;
   return if $dry_run;
-  if (! $opt_remove) {
+  if (!$opt_remove) {
     $akotfps_datacontent .= "$fn\n";
   }
 }
@@ -1018,7 +1018,7 @@ sub link_font {
   # if we are still here and $do_unlink is set, remove it
   maybe_unlink($target) if $do_unlink;
   # recreate link if we are not in the remove case
-  if (! $opt_remove) {
+  if (!$opt_remove) {
     maybe_symlink($f, $target) || die("Cannot link font $f to $target: $!");
   }
 }
@@ -1061,14 +1061,14 @@ sub maybe_symlink {
     if ($opt_winbatch) {
       # re-encoding of $winbatch_content is done by write_winbatch()
       $winbatch_content .= "if not exist \"$targetname\" mklink ";
-      $winbatch_content .= "/h " if ($opt_hardlink);
+      $winbatch_content .= "/h " if $opt_hardlink;
       $winbatch_content .= "\"$targetname\" \"$realname\"\n";
     } else {
       # should be encoded in cp932 for win32 console
       $realname = encode_utftocp($realname);
       $targetname = encode_utftocp($targetname);
       my $cmdl = "cmd.exe /c if not exist \"$targetname\" mklink ";
-      $cmdl .= "/h " if ($opt_hardlink);
+      $cmdl .= "/h " if $opt_hardlink;
       $cmdl .= "\"$targetname\" \"$realname\"";
       my @ret = `$cmdl`;
       # sometimes hard link creation may fail due to "Access denied"
@@ -1323,8 +1323,8 @@ sub check_for_files {
         # comment out -- HY (2016/09/27)
         # my $newotf = join($sep, @extradirs) . $sep;
         # my $newttf = $newotf;
-        # $newotf .= $ENV{'OPENTYPEFONTS'} if ($ENV{'OPENTYPEFONTS'});
-        # $newttf .= $ENV{'TTFONTS'} if ($ENV{'TTFONTS'});
+        # $newotf .= $ENV{'OPENTYPEFONTS'} if $ENV{'OPENTYPEFONTS'};
+        # $newttf .= $ENV{'TTFONTS'} if $ENV{'TTFONTS'};
         # $ENV{'OPENTYPEFONTS'} = $newotf;
         # $ENV{'TTFONTS'} = $newttf;
         # new code for uppercase/lowercase workaround -- HY (2016/09/27)
