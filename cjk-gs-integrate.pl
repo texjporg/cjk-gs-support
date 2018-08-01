@@ -97,6 +97,7 @@ my %encode_list = (
     Adobe-Japan1-4
     Adobe-Japan1-5
     Adobe-Japan1-6
+    Adobe-Japan1-7
     EUC-H
     EUC-V
     Ext-H
