@@ -297,6 +297,7 @@ my $opt_listallaliases = 0;
 my $opt_listfonts = 0;
 my $opt_info = 0;
 my $opt_machine = 0;
+my $opt_strictpsname = 0;
 my $dry_run = 0;
 my $opt_quiet = 0;
 my $opt_debug = 0;
@@ -323,6 +324,7 @@ if (! GetOptions(
         "list-fonts"       => \$opt_listfonts,
         "info"             => \$opt_info,
         "machine-readable" => \$opt_machine,
+        "strict-psname"    => \$opt_strictpsname, # hidden option for debugging
         "n|dry-run"        => \$dry_run,
         "q|quiet"          => \$opt_quiet,
         "d|debug+"         => \$opt_debug,
@@ -353,9 +355,17 @@ if ($opt_debug >= 2) {
 my $otfinfo_available;
 chomp(my $otfinfo_help = `otfinfo --help 2>$nul`);
 if ($?) {
-  print_warning("The program 'otfinfo' not found in PATH.\n");
-  print_warning("Sorry, we can't be safe enough to distinguish\n");
-  print_warning("uppercase / lowercase file names.\n");
+  # to tell the truth, we want to show below as a warning
+  # but BasicTeX (scheme-small) does not have 'otfinfo' (lcdf-typetools);
+  # show info only for debugging
+  print_debug("The program 'otfinfo' not found in PATH.\n");
+  print_debug("Sorry, we can't be safe enough to distinguish\n");
+  print_debug("uppercase / lowercase file names.\n");
+  # but the below should be an error!
+  if ($opt_strictpsname) {
+    print_error("'otfinfo' not found, cannot proceed!\n");
+    exit(1);
+  }
   $otfinfo_available = 0;
 } else {
   $otfinfo_available = 1;
@@ -1411,6 +1421,7 @@ sub check_for_files {
       my $actualpsname;
       my $bname;
       for my $b (sort keys %{$bntofn{$realfile}}) {
+        $fontdb{$k}{'casefold'} = "debug" if $opt_strictpsname;
         if ($fontdb{$k}{'casefold'} && $otfinfo_available &&
             ($fontdb{$k}{'files'}{$f}{'type'} eq 'OTF' || $fontdb{$k}{'files'}{$f}{'type'} eq 'TTF')) {
           print_debug("We need to test whether\n");
@@ -1422,12 +1433,14 @@ sub check_for_files {
             # still there is a chance that Ghostscript supports, so don't discard it
             print_debug("... command exited with $?!\n");
             print_debug("OK, I'll take this, but it may not work properly.\n");
+            print_warning("otfinfo check failed for $b\n") if $opt_strictpsname;
             $bname = $b;
             last;
           }
           if ($actualpsname ne $k) {
             print_debug("... PSName returned by otfinfo ($actualpsname) is\n");
             print_debug("different from our database ($k), discarding!\n");
+            print_warning("otfinfo check failed for $b\n") if $opt_strictpsname;
           } else {
             print_debug("... test passed.\n");
             $bname = $b;
