@@ -1,0 +1,32 @@
+# BIZ UD (Morisawa)
+
+### JAPANESE ###
+
+# Note:
+#   BIZ-UD*.ttc (3 files)
+# are available from https://bizplus.morisawa.co.jp for Win/Mac.
+
+Name: BIZ-UDGothic-B
+Class: Japan
+TTCname: BIZ-UDGothic-B.ttc(0)
+
+Name: BIZ-UDPGothic-B
+Class: Japan
+TTCname: BIZ-UDGothic-B.ttc(1)
+
+Name: BIZ-UDGothic-R
+Class: Japan
+TTCname: BIZ-UDGothic-R.ttc(0)
+
+Name: BIZ-UDPGothic-R
+Class: Japan
+TTCname: BIZ-UDGothic-R.ttc(1)
+
+Name: BIZ-UDMincho-M
+Class: Japan
+TTCname: BIZ-UDMincho-M.ttc(0)
+
+Name: BIZ-UDPMincho-M
+Class: Japan
+TTCname: BIZ-UDMincho-M.ttc(1)
+

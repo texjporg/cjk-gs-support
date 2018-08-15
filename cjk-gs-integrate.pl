@@ -2279,6 +2279,9 @@ INCLUDE cjkgs-yu-win.dat
 # MS -- Provides level 95
 INCLUDE cjkgs-microsoft.dat
 
+# BIZ UD
+INCLUDE cjkgs-bizud.dat
+
 # TypeBank
 INCLUDE cjkgs-typebank.dat
 
