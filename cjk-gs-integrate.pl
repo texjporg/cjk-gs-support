@@ -1603,6 +1603,7 @@ sub read_font_database {
       die("Cannot find $opt_fontdef: $!");
     @dbl = <FDB>;
     close(FDB);
+    print_debug("New database file: $opt_fontdef...\n");
   } else {
     @dbl = <DATA>;
   }
@@ -1616,6 +1617,7 @@ sub read_font_database {
       die("Cannot find $_: $!");
     @dbl = <FDB>;
     close(FDB);
+    print_debug("Additional database file: $_...\n");
     read_each_font_database(@dbl);
   }
 }
