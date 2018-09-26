@@ -1,0 +1,30 @@
+# Monotype Imaging, Monotype Hong Kong
+
+### SIMPLIFIED/TRADITIONAL CHINESE ###
+
+# Note about Mac (Mac OS X 10.6 -- macOS 10.13)
+#   YuppySC-Regular.otf
+#   YuppyTC-Regular.otf
+# are bundled with OS X 10.9 Mavericks or later versions.
+#   LingWaiSC-Medium.otf
+#   LingWaiTC-Medium.otf
+# are bundled with macOS 10.12 Sierra or later versions.
+
+Name: YuppySC-Regular
+Class: GB
+OTFname: YuppySC-Regular.otf
+
+Name: YuppyTC-Regular
+Class: CNS
+OTFname: YuppyTC-Regular.otf
+
+Name: LingWaiSC-Medium
+PSName: MLingWaiMedium-SC
+Class: GB
+OTFname: LingWaiSC-Medium.otf
+
+Name: LingWaiTC-Medium
+PSName: MLingWaiMedium-TC
+Class: CNS
+OTFname: LingWaiTC-Medium.otf
+

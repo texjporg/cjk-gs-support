@@ -2448,28 +2448,6 @@ PSName: Weibei-TC-Bold
 Class: CNS
 OTFname: WeibeiTC-Bold.otf
 
-# Monotype Imaging (OS X)
-
-Name: YuppySC-Regular
-Class: GB
-OTFname: YuppySC-Regular.otf
-
-Name: YuppyTC-Regular
-Class: CNS
-OTFname: YuppyTC-Regular.otf
-
-# Monotype Hong Kong (OS X)
-
-Name: LingWaiSC-Medium
-PSName: MLingWaiMedium-SC
-Class: GB
-OTFname: LingWaiSC-Medium.otf
-
-Name: LingWaiTC-Medium
-PSName: MLingWaiMedium-TC
-Class: CNS
-OTFname: LingWaiTC-Medium.otf
-
 # Shanghai Ikarus Ltd./URW Software & Type GmbH
 
 Name: SIL-Hei-Med-Jian
