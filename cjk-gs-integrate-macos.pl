@@ -48,6 +48,8 @@ if (macosx()) {
       $addname = "sierra";
     } elsif ($macos_ver_minor==13) {
       $addname = "highsierra";
+    } elsif ($macos_ver_minor==14) {
+      $addname = "highsierra"; # mojave
     }
   }
 }
