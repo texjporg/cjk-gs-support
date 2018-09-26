@@ -2261,24 +2261,24 @@ __DATA__
 # JAPANESE FONTS
 #
 
-# Morisawa -- Provides level 10(Pr6N), 15(Pr6), 18(Pr5), 20(Pro)
+# Morisawa -- Provides J10(Pr6N), J15(Pr6), J18(Pr5), J20(Pro)
 INCLUDE cjkgs-morisawa.dat
 #INCLUDE cjkgs-morisawa-extra.dat
 
-# Hiragino -- Provides level 30(ProN), 40(Pro)
+# Hiragino -- Provides J30(ProN), J40(Pro)
 INCLUDE cjkgs-hiragino.dat
 
-# Kozuka -- Provides level 50(Pr6N), 55(ProVI), 60(Pro), 65(Std)
+# Kozuka -- Provides J50(Pr6N), J55(ProVI), J60(Pro), J65(Std)
 INCLUDE cjkgs-kozuka.dat
 INCLUDE cjkgs-ryokana.dat
 
-# Yu-fonts MacOS version -- Provides level 80
+# Yu-fonts MacOS version -- Provides J80
 INCLUDE cjkgs-yu-osx.dat
 
-# Yu-fonts Windows/MSOffice version -- Provides level 90
+# Yu-fonts Windows/MSOffice version -- Provides J90
 INCLUDE cjkgs-yu-win.dat
 
-# MS -- Provides level 95
+# MS -- Provides J95
 INCLUDE cjkgs-microsoft.dat
 
 # BIZ UD
@@ -2296,13 +2296,13 @@ INCLUDE cjkgs-toppan.dat
 # Heisei
 INCLUDE cjkgs-heisei.dat
 
-# Moga-Mobo from Y.Oz Vox (free) -- Provides level 100(Ex), 110(none)
+# Moga-Mobo from Y.Oz Vox (free) -- Provides J100(Ex), J110(none)
 INCLUDE cjkgs-mogamobo.dat
 
-# Ume-font (free) -- Provides level 140
+# Ume-font (free) -- Provides J140
 INCLUDE cjkgs-ume.dat
 
-# IPA (free) -- Provides level 120(Ex), 130(none)
+# IPA (free) -- Provides J120(Ex), J130(none)
 
 Name: IPAMincho
 Class: Japan
@@ -2418,19 +2418,19 @@ TTFname: OsakaMono.ttf
 # CHINESE FONTS
 #
 
-# Adobe -- Provides level 30
+# Adobe -- Provides S30, T30
 INCLUDE cjkgs-adobe.dat
 
-# Hiragino -- Provides level 50
+# Hiragino -- Provides S50
 # (already included in JAPANESE section)
 
-# Beijing Founder Electronics -- Provides level 55
+# Beijing Founder Electronics -- Provides S55
 INCLUDE cjkgs-founder.dat
 
-# Changzhou SinoType -- Provides level ??
+# Changzhou SinoType -- Provides S??
 INCLUDE cjkgs-sinotype.dat
 
-# DynaComware -- Provides level ??
+# DynaComware -- Provides T??
 INCLUDE cjkgs-dynacomware.dat
 
 # Monotype
@@ -2449,7 +2449,7 @@ Name: SIL-Kai-Reg-Jian
 Class: GB
 TTFname: Kai.ttf
 
-# Fandol (free) -- Provides level 40
+# Fandol (free) -- Provides S40
 
 Name: FandolSong-Regular
 Class: GB
@@ -2482,34 +2482,8 @@ Provides(40): STFangsong-Light
 Provides(40): STFangsong-Regular
 OTFname(10): FandolFang-Regular.otf
 
-# Arphic (free)
-
-Name: BousungEG-Light-GB
-Class: GB
-Provides(80): STSong-Light
-Provides(80): STSong-Regular
-Provides(80): STFangsong-Light
-Provides(80): STFangsong-Regular
-TTFname: gbsn00lp.ttf
-
-Name: GBZenKai-Medium
-Class: GB
-Provides(80): STKaiti-Regular
-Provides(80): STHeiti-Regular
-Provides(80): STHeiti-Light
-TTFname: gkai00mp.ttf
-
-Name: ShanHeiSun-Light
-Class: CNS
-Provides(80): MSung-Light
-Provides(80): MSung-Medium
-TTFname: bsmi00lp.ttf
-
-Name: ZenKai-Medium
-Class: CNS
-Provides(80): MKai-Medium
-Provides(80): MHei-Medium
-TTFname: bkai00mp.ttf
+# Arphic (free) -- Provides S80, T80
+INCLUDE cjkgs-arphic.dat
 
 # CJK-Unifonts new ttc edition (free)
 
@@ -2653,10 +2627,10 @@ TTFname: cwfs.ttf
 # KOREAN FONTS
 #
 
-# Adobe -- Provides level 30
+# Adobe -- Provides K30/80
 # (already included in CHINESE section)
 
-# Solaris -- Provides level 40
+# Solaris -- Provides K40
 INCLUDE cjkgs-solaris.dat
 
 # Baekmuk (free)

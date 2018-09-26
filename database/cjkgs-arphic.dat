@@ -2,6 +2,13 @@
 
 ### SIMPLIFIED/TRADITIONAL CHINESE ###
 
+# Note about TeX Live:
+#   gbsn00lp.ttf
+#   gkai00mp.ttf
+#   bsmi00lp.ttf
+#   bkai00mp.ttf
+# are available as "arphic" package for free.
+
 # Note about Mac (Mac OS X 10.6 -- macOS 10.13)
 #   WeibeiSC-Bold.otf (PSName: Weibei-SC-Bold)
 #   WeibeiTC-Bold.otf (PSName: Weibei-TC-Bold)
@@ -9,4 +16,31 @@
 #   WeibeiSC-Bold.otf (PSName: WeibeiSC-Bold)
 #   WeibeiTC-Bold.otf (PSName: WeibeiTC-Bold)
 # are bundled with macOS 10.13 High Sierra or later versions.
+
+Name: BousungEG-Light-GB
+Class: GB
+Provides(80): STSong-Light
+Provides(80): STSong-Regular
+Provides(80): STFangsong-Light
+Provides(80): STFangsong-Regular
+TTFname: gbsn00lp.ttf
+
+Name: GBZenKai-Medium
+Class: GB
+Provides(80): STKaiti-Regular
+Provides(80): STHeiti-Regular
+Provides(80): STHeiti-Light
+TTFname: gkai00mp.ttf
+
+Name: ShanHeiSun-Light
+Class: CNS
+Provides(80): MSung-Light
+Provides(80): MSung-Medium
+TTFname: bsmi00lp.ttf
+
+Name: ZenKai-Medium
+Class: CNS
+Provides(80): MKai-Medium
+Provides(80): MHei-Medium
+TTFname: bkai00mp.ttf
 
