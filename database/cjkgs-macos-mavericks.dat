@@ -103,3 +103,15 @@ Name: STYuanti-SC-Regular
 Class: GB
 TTCname(30): Yuanti.ttc(2)
 
+# Arphic Technology
+
+Name: WeibeiSC-Bold
+PSName: Weibei-SC-Bold
+Class: GB
+OTFname: WeibeiSC-Bold.otf
+
+Name: WeibeiTC-Bold
+PSName: Weibei-TC-Bold
+Class: CNS
+OTFname: WeibeiTC-Bold.otf
+

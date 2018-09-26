@@ -472,3 +472,13 @@ Name: STYuanti-TC-Light
 Class: CNS
 TTCname(30): Yuanti.ttc(5)
 
+# Arphic Technology
+
+Name: WeibeiSC-Bold
+Class: GB
+OTFname: WeibeiSC-Bold.otf
+
+Name: WeibeiTC-Bold
+Class: CNS
+OTFname: WeibeiTC-Bold.otf
+

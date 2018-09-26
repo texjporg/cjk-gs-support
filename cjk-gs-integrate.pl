@@ -2427,26 +2427,17 @@ INCLUDE cjkgs-adobe.dat
 # Beijing Founder Electronics -- Provides level 55
 INCLUDE cjkgs-founder.dat
 
-# DynaComware -- Provides level ??
-INCLUDE cjkgs-dynacomware.dat
-
 # Changzhou SinoType -- Provides level ??
 INCLUDE cjkgs-sinotype.dat
 
+# DynaComware -- Provides level ??
+INCLUDE cjkgs-dynacomware.dat
+
+# Monotype
+INCLUDE cjkgs-monotype.dat
+
 # Apple
 INCLUDE cjkgs-apple.dat
-
-# Arphic Font Design Team (OS X)
-
-Name: WeibeiSC-Bold
-PSName: Weibei-SC-Bold
-Class: GB
-OTFname: WeibeiSC-Bold.otf
-
-Name: WeibeiTC-Bold
-PSName: Weibei-TC-Bold
-Class: CNS
-OTFname: WeibeiTC-Bold.otf
 
 # Shanghai Ikarus Ltd./URW Software & Type GmbH
 
@@ -2458,7 +2449,7 @@ Name: SIL-Kai-Reg-Jian
 Class: GB
 TTFname: Kai.ttf
 
-# Fandol (free)
+# Fandol (free) -- Provides level 40
 
 Name: FandolSong-Regular
 Class: GB
