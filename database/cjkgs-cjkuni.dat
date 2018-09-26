@@ -1,0 +1,66 @@
+# CJK-Unifonts new ttc edition (free)
+
+### SIMPLIFIED/TRADITIONAL CHINESE ###
+
+Name: UMingCN
+Class: GB
+Provides(70): STSong-Light
+Provides(70): STSong-Regular
+Provides(70): STFangsong-Light
+Provides(70): STFangsong-Regular
+TTCname: uming.ttc(0)
+
+Name: UMingTW
+Class: CNS
+Provides(70): MSung-Light
+Provides(70): MSung-Medium
+TTCname: uming.ttc(2)
+
+Name: UKaiCN
+Class: GB
+Provides(70): STKaiti-Regular
+Provides(70): STHeiti-Regular
+Provides(70): STHeiti-Light
+TTCname: ukai.ttc(0)
+
+Name: UKaiTW
+Class: CNS
+Provides(70): MKai-Medium
+Provides(70): MHei-Medium
+TTCname: ukai.ttc(2)
+
+# CJK-Unifonts old ttf edition (free)
+
+### SIMPLIFIED/TRADITIONAL CHINESE ###
+
+# CNS
+Name: ShanHeiSun-Uni
+Class: CNS
+Provides(90): MSung-Light
+Provides(90): MSung-Medium
+TTFname: uming.ttf
+
+# GB
+Name: ShanHeiSun-Uni-Adobe-GB1
+Class: GB
+Provides(90): STSong-Light
+Provides(90): STSong-Regular
+Provides(90): STFangsong-Light
+Provides(90): STFangsong-Regular
+TTFname: uming.ttf
+
+# CNS
+Name: ZenKai-Uni
+Class: CNS
+Provides(90): MKai-Medium
+Provides(90): MHei-Medium
+TTFname: ukai.ttf
+
+# GB
+Name: ZenKai-Uni-Adobe-GB1
+Class: GB
+Provides(90): STKaiti-Regular
+Provides(90): STHeiti-Regular
+Provides(90): STHeiti-Light
+TTFname: ukai.ttf
+
