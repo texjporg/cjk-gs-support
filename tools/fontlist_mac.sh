@@ -20,6 +20,7 @@ for d in \
   "/Library/Fonts" \
   "/System/Library/Assets/com_apple_MobileAsset_Font3" \
   "/System/Library/Assets/com_apple_MobileAsset_Font4" \
+  "/System/Library/Assets/com_apple_MobileAsset_Font5" \
   "/Library/Application Support/Apple/Fonts" \
   "/Applications/Microsoft Word.app/Contents/Resources/Fonts" \
   "/Applications/Microsoft Word.app/Contents/Resources/DFonts" \
