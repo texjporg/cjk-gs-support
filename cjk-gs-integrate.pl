@@ -2450,37 +2450,7 @@ Class: GB
 TTFname: Kai.ttf
 
 # Fandol (free) -- Provides S40
-
-Name: FandolSong-Regular
-Class: GB
-Provides(40): STSong-Light
-OTFname(10): FandolSong-Regular.otf
-
-Name: FandolSong-Bold
-Provides(40): STSong-Regular
-Class: GB
-OTFname(10): FandolSong-Bold.otf
-
-Name: FandolKai-Regular
-Class: GB
-Provides(40): STKaiti-Regular
-OTFname(10): FandolKai-Regular.otf
-
-Name: FandolHei-Regular
-Class: GB
-Provides(40): STHeiti-Regular
-Provides(40): STHeiti-Light
-OTFname(10): FandolHei-Regular.otf
-
-Name: FandolHei-Bold
-Class: GB
-OTFname(10): FandolHei-Bold.otf
-
-Name: FandolFang-Regular
-Class: GB
-Provides(40): STFangsong-Light
-Provides(40): STFangsong-Regular
-OTFname(10): FandolFang-Regular.otf
+INCLUDE cjkgs-fandol.dat
 
 # Arphic (free) -- Provides S80, T80
 INCLUDE cjkgs-arphic.dat
