@@ -2470,50 +2470,6 @@ PSName: MLingWaiMedium-TC
 Class: CNS
 OTFname: LingWaiTC-Medium.otf
 
-# DynaComware Taiwan (OS X)
-
-Name: WawaSC-Regular
-PSName: DFWaWaSC-W5
-Class: GB
-OTFname: WawaSC-Regular.otf
-
-Name: WawaTC-Regular
-PSName: DFWaWaTC-W5
-Class: CNS
-OTFname: WawaTC-Regular.otf
-
-Name: HannotateSC-W5
-Class: GB
-OTCname: Hannotate.ttc(0)
-
-Name: HannotateTC-W5
-Class: CNS
-OTCname: Hannotate.ttc(1)
-
-Name: HannotateSC-W7
-Class: GB
-OTCname: Hannotate.ttc(2)
-
-Name: HannotateTC-W7
-Class: CNS
-OTCname: Hannotate.ttc(3)
-
-Name: HanziPenSC-W3
-Class: GB
-OTCname: Hanzipen.ttc(0)
-
-Name: HanziPenTC-W3
-Class: CNS
-OTCname: Hanzipen.ttc(1)
-
-Name: HanziPenSC-W5
-Class: GB
-OTCname: Hanzipen.ttc(2)
-
-Name: HanziPenTC-W5
-Class: CNS
-OTCname: Hanzipen.ttc(3)
-
 # Shanghai Ikarus Ltd./URW Software & Type GmbH
 
 Name: SIL-Hei-Med-Jian
