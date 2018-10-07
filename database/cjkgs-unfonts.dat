@@ -1,0 +1,112 @@
+# Unfonts (free)
+
+### KOREAN ###
+
+# Note about TeX Live:
+#   Un*.ttf (23 files, excluding UnBom.ttf for license issue)
+# are available as "unfonts-{core,extra}" package for free.
+
+# Unfonts-core (free)
+
+Name: UnBatang
+Class: Korea
+Provides(60): HYSMyeongJo-Medium
+TTFname: UnBatang.ttf
+
+Name: UnBatang-Bold
+Class: Korea
+TTFname: UnBatangBold.ttf
+
+Name: UnDotum
+Class: Korea
+Provides(60): HYGoThic-Medium
+TTFname: UnDotum.ttf
+
+Name: UnDotum-Bold
+Class: Korea
+TTFname: UnDotumBold.ttf
+
+Name: UnDinaru
+Class: Korea
+Provides(60): HYRGoThic-Medium
+TTFname: UnDinaru.ttf
+
+Name: UnDinaru-Bold
+Class: Korea
+TTFname: UnDinaruBold.ttf
+
+Name: UnDinaru-Light
+Class: Korea
+TTFname: UnDinaruLight.ttf
+
+Name: UnGraphic
+Class: Korea
+TTFname: UnGraphic.ttf
+
+Name: UnGraphic-Bold
+Class: Korea
+TTFname: UnGraphicBold.ttf
+
+Name: UnGungseo
+Class: Korea
+TTFname: UnGungseo.ttf
+
+Name: UnPilgi
+Class: Korea
+TTFname: UnPilgi.ttf
+
+Name: UnPilgi-Bold
+Class: Korea
+TTFname: UnPilgiBold.ttf
+
+# Unfonts-extra (free)
+
+#Name: UnBom
+#Class: Korea
+#TTFname: UnBom.ttf
+
+Name: UnPen
+Class: Korea
+TTFname: UnPen.ttf
+
+Name: UnPenheulim
+Class: Korea
+TTFname: UnPenheulim.ttf
+
+Name: UnPilgia
+Class: Korea
+TTFname: UnPilgia.ttf
+
+Name: UnShinmun
+Class: Korea
+TTFname: UnShinmun.ttf
+
+Name: UnVada
+Class: Korea
+TTFname: UnVada.ttf
+
+Name: UnYetgul
+Class: Korea
+TTFname: UnYetgul.ttf
+
+Name: UnTaza
+Class: Korea
+TTFname: UnTaza.ttf
+
+# UnJamo... family has proportional metrics
+Name: UnJamoBatang
+Class: Korea
+TTFname: UnJamoBatang.ttf
+
+Name: UnJamoDotum
+Class: Korea
+TTFname: UnJamoDotum.ttf
+
+Name: UnJamoNovel
+Class: Korea
+TTFname: UnJamoNovel.ttf
+
+Name: UnJamoSora
+Class: Korea
+TTFname: UnJamoSora.ttf
+

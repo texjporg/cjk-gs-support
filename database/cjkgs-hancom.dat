@@ -1,0 +1,26 @@
+# Hancom HCR (free)
+
+# Note:
+#   HAN*.ttf (4 files)
+# are available from Hancom Office website for free.
+
+### KOREAN ###
+
+# note that all fonts have narrow metrics
+
+Name: HCRBatang
+Class: Korea
+TTFname: HANBatang.ttf
+
+Name: HCRBatang-Bold
+Class: Korea
+TTFname: HANBatangB.ttf
+
+Name: HCRDotum
+Class: Korea
+TTFname: HANDotum.ttf
+
+Name: HCRDotum-Bold
+Class: Korea
+TTFname: HANDotumB.ttf
+

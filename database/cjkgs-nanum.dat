@@ -1,0 +1,78 @@
+# Nanum (free) (including Nanum MacOS version)
+
+# Note about Mac (Mac OS X 10.6 -- macOS 10.13)
+#   Nanum*.ttc (3 files)
+# are bundled with ???.
+
+### KOREAN ###
+
+# note that all fonts have narrow metrics
+
+Name: NanumMyeongjo
+Class: Korea
+TTFname(10): NanumMyeongjo.ttf
+TTCname(20): NanumMyeongjo.ttc(0)
+
+Name: NanumMyeongjoBold
+Class: Korea
+TTFname(10): NanumMyeongjoBold.ttf
+TTCname(20): NanumMyeongjo.ttc(1)
+
+Name: NanumMyeongjoExtraBold
+Class: Korea
+TTFname(10): NanumMyeongjoExtraBold.ttf
+TTCname(20): NanumMyeongjo.ttc(2)
+
+Name: NanumGothic
+Class: Korea
+TTFname(10): NanumGothic.ttf
+TTCname(20): NanumGothic.ttc(0)
+
+Name: NanumGothicBold
+Class: Korea
+TTFname(10): NanumGothicBold.ttf
+TTCname(20): NanumGothic.ttc(1)
+
+Name: NanumGothicExtraBold
+Class: Korea
+TTFname(10): NanumGothicExtraBold.ttf
+TTCname(20): NanumGothic.ttc(2)
+
+Name: NanumGothicLight
+Class: Korea
+TTFname(10): NanumGothicLight.ttf
+
+Name: NanumBarunGothic
+Class: Korea
+TTFname(10): NanumBarunGothic.ttf
+
+Name: NanumBarunGothicBold
+Class: Korea
+TTFname(10): NanumBarunGothicBold.ttf
+
+Name: NanumBarunGothicLight
+Class: Korea
+TTFname(10): NanumBarunGothicLight.ttf
+
+Name: NanumBarunGothicUltraLight
+Class: Korea
+TTFname(10): NanumBarunGothicUltraLight.ttf
+
+Name: NanumBarunpen
+Class: Korea
+TTFname(10): NanumBarunpenR.ttf
+
+Name: NanumBarunpen-Bold
+Class: Korea
+TTFname(10): NanumBarunpenB.ttf
+
+Name: NanumBrush
+Class: Korea
+TTFname(10): NanumBrush.ttf
+TTCname(20): NanumScript.ttc(0)
+
+Name: NanumPen
+Class: Korea
+TTFname(10): NanumPen.ttf
+TTCname(20): NanumScript.ttc(1)
+

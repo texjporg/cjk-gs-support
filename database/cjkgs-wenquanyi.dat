@@ -1,0 +1,56 @@
+# WenQuanYi (free)
+
+### SIMPLIFIED/TRADITIONAL CHINESE ###
+
+# GB
+Name: WenQuanYiMicroHei
+Class: GB
+TTCname(10): wqy-microhei.ttc(0)
+
+# CNS
+Name: WenQuanYiMicroHei-Adobe-CNS1
+Class: CNS
+TTCname(10): wqy-microhei.ttc(0)
+
+# GB
+Name: WenQuanYiMicroHeiMono
+Class: GB
+TTCname(10): wqy-microhei.ttc(1)
+
+# CNS
+Name: WenQuanYiMicroHeiMono-Adobe-CNS1
+Class: CNS
+TTCname(10): wqy-microhei.ttc(1)
+
+# GB
+Name: WenQuanYiZenHei
+Class: GB
+TTCname(10): wqy-zenhei.ttc(0)
+TTFname(20): wqy-zenhei.ttf
+
+# CNS
+Name: WenQuanYiZenHei-Adobe-CNS1
+Class: CNS
+TTCname(10): wqy-zenhei.ttc(0)
+TTFname(20): wqy-zenhei.ttf
+
+# GB
+Name: WenQuanYiZenHeiMono
+Class: GB
+TTCname(10): wqy-zenhei.ttc(1)
+
+# CNS:
+Name: WenQuanYiZenHeiMono-Adobe-CNS1
+Class: CNS
+TTCname(10): wqy-zenhei.ttc(1)
+
+# GB
+Name: WenQuanYiZenHeiSharp
+Class: GB
+TTCname(10): wqy-zenhei.ttc(2)
+
+# CNS
+Name: WenQuanYiZenHeiSharp-Adobe-CNS1
+Class: CNS
+TTCname(10): wqy-zenhei.ttc(2)
+

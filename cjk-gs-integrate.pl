@@ -2299,110 +2299,14 @@ INCLUDE cjkgs-heisei.dat
 # Moga-Mobo from Y.Oz Vox (free) -- Provides J100(Ex), J110(none)
 INCLUDE cjkgs-mogamobo.dat
 
+# IPA (free) -- Provides J120(Ex), J130(none)
+INCLUDE cjkgs-ipa.dat
+
 # Ume-font (free) -- Provides J140
 INCLUDE cjkgs-ume.dat
 
-# IPA (free) -- Provides J120(Ex), J130(none)
-
-Name: IPAMincho
-Class: Japan
-Provides(130): Ryumin-Light
-Provides(130): RyuminPro-Light
-Provides(130): HiraMinProN-W3
-Provides(130): HiraMinPro-W3
-Provides(130): FutoMinA101-Bold
-Provides(130): FutoMinA101Pro-Bold
-Provides(130): HiraMinProN-W6
-Provides(130): HiraMinPro-W6
-Provides(130): MidashiMin-MA31
-Provides(130): MidashiMinPro-MA31
-TTFname(20): ipam.ttf
-#TTFname(21): IPAMincho.ttf
-
-Name: IPAGothic
-Class: Japan
-Provides(130): GothicBBB-Medium
-Provides(130): GothicBBBPro-Medium
-Provides(130): HiraKakuProN-W3
-Provides(130): HiraKakuPro-W3
-Provides(130): FutoGoB101-Bold
-Provides(130): FutoGoB101Pro-Bold
-Provides(130): HiraKakuProN-W6
-Provides(130): HiraKakuPro-W6
-Provides(130): MidashiGo-MB31
-Provides(130): MidashiGoPro-MB31
-Provides(130): HiraKakuStdN-W8
-Provides(130): HiraKakuStd-W8
-Provides(130): Jun101-Light
-Provides(130): Jun101Pro-Light
-Provides(130): HiraMaruProN-W4
-Provides(130): HiraMaruPro-W4
-TTFname(20): ipag.ttf
-#TTFname(21): IPAGothic.ttf
-
-Name: IPAexMincho
-Class: Japan
-Provides(120): Ryumin-Light
-Provides(120): RyuminPro-Light
-Provides(120): HiraMinProN-W3
-Provides(120): HiraMinPro-W3
-Provides(120): FutoMinA101-Bold
-Provides(120): FutoMinA101Pro-Bold
-Provides(120): HiraMinProN-W6
-Provides(120): HiraMinPro-W6
-Provides(120): MidashiMin-MA31
-Provides(120): MidashiMinPro-MA31
-TTFname(20): ipaexm.ttf
-#TTFname(21): IPAexMincho.ttf
-
-Name: IPAexGothic
-Class: Japan
-Provides(120): GothicBBB-Medium
-Provides(120): GothicBBBPro-Medium
-Provides(120): HiraKakuProN-W3
-Provides(120): HiraKakuPro-W3
-Provides(120): FutoGoB101-Bold
-Provides(120): FutoGoB101Pro-Bold
-Provides(120): HiraKakuProN-W6
-Provides(120): HiraKakuPro-W6
-Provides(120): MidashiGo-MB31
-Provides(120): MidashiGoPro-MB31
-Provides(120): HiraKakuStdN-W8
-Provides(120): HiraKakuStd-W8
-Provides(120): Jun101-Light
-Provides(120): Jun101Pro-Light
-Provides(120): HiraMaruProN-W4
-Provides(120): HiraMaruPro-W4
-TTFname(20): ipaexg.ttf
-#TTFname(21): IPAexGothic.ttf
-
-# IPA proportional (free)
-
-Name: IPAPMincho
-Class: Japan
-TTFname(20): ipamp.ttf
-#TTFname(21): IPAPMincho.ttf
-
-Name: IPAPGothic
-Class: Japan
-TTFname(20): ipagp.ttf
-#TTFname(21): IPAPGothic.ttf
-
-# IPA MJ (free)
-
-Name: IPAmjMincho
-Class: Japan
-TTFname: ipamjm.ttf
-
 # Sazanami (free)
-
-Name: Sazanami-Mincho-Regular
-Class: Japan
-TTFname: sazanami-mincho.ttf
-
-Name: Sazanami-Gothic-Regular
-Class: Japan
-TTFname: sazanami-gothic.ttf
+INCLUDE cjkgs-sazanami.dat
 
 # Osaka (Apple)
 
@@ -2460,58 +2364,7 @@ INCLUDE cjkgs-arphic.dat
 INCLUDE cjkgs-cjkuni.dat
 
 # WenQuanYi (free)
-
-# GB
-Name: WenQuanYiMicroHei
-Class: GB
-TTCname(10): wqy-microhei.ttc(0)
-
-# CNS
-Name: WenQuanYiMicroHei-Adobe-CNS1
-Class: CNS
-TTCname(10): wqy-microhei.ttc(0)
-
-# GB
-Name: WenQuanYiMicroHeiMono
-Class: GB
-TTCname(10): wqy-microhei.ttc(1)
-
-# CNS
-Name: WenQuanYiMicroHeiMono-Adobe-CNS1
-Class: CNS
-TTCname(10): wqy-microhei.ttc(1)
-
-# GB
-Name: WenQuanYiZenHei
-Class: GB
-TTCname(10): wqy-zenhei.ttc(0)
-TTFname(20): wqy-zenhei.ttf
-
-# CNS
-Name: WenQuanYiZenHei-Adobe-CNS1
-Class: CNS
-TTCname(10): wqy-zenhei.ttc(0)
-TTFname(20): wqy-zenhei.ttf
-
-# GB
-Name: WenQuanYiZenHeiMono
-Class: GB
-TTCname(10): wqy-zenhei.ttc(1)
-
-# CNS:
-Name: WenQuanYiZenHeiMono-Adobe-CNS1
-Class: CNS
-TTCname(10): wqy-zenhei.ttc(1)
-
-# GB
-Name: WenQuanYiZenHeiSharp
-Class: GB
-TTCname(10): wqy-zenhei.ttc(2)
-
-# CNS
-Name: WenQuanYiZenHeiSharp-Adobe-CNS1
-Class: CNS
-TTCname(10): wqy-zenhei.ttc(2)
+INCLUDE cjkgs-wenquanyi.dat
 
 # cwTeX (free)
 
@@ -2576,180 +2429,11 @@ Class: Korea
 TTFname(20): hline.ttf
 TTFname(10): Baekmuk-Headline.ttf
 
-# Unfonts-core (free)
+# Unfonts (free) -- Provides K60
+INCLUDE cjkgs-unfonts.dat
 
-Name: UnBatang
-Class: Korea
-Provides(60): HYSMyeongJo-Medium
-TTFname: UnBatang.ttf
-
-Name: UnBatang-Bold
-Class: Korea
-TTFname: UnBatangBold.ttf
-
-Name: UnDotum
-Class: Korea
-Provides(60): HYGoThic-Medium
-TTFname: UnDotum.ttf
-
-Name: UnDotum-Bold
-Class: Korea
-TTFname: UnDotumBold.ttf
-
-Name: UnDinaru
-Class: Korea
-Provides(60): HYRGoThic-Medium
-TTFname: UnDinaru.ttf
-
-Name: UnDinaru-Bold
-Class: Korea
-TTFname: UnDinaruBold.ttf
-
-Name: UnDinaru-Light
-Class: Korea
-TTFname: UnDinaruLight.ttf
-
-Name: UnGraphic
-Class: Korea
-TTFname: UnGraphic.ttf
-
-Name: UnGraphic-Bold
-Class: Korea
-TTFname: UnGraphicBold.ttf
-
-Name: UnGungseo
-Class: Korea
-TTFname: UnGungseo.ttf
-
-Name: UnPilgi
-Class: Korea
-TTFname: UnPilgi.ttf
-
-Name: UnPilgi-Bold
-Class: Korea
-TTFname: UnPilgiBold.ttf
-
-# Unfonts-extra (free)
-
-Name: UnBom
-Class: Korea
-TTFname: UnBom.ttf
-
-Name: UnPen
-Class: Korea
-TTFname: UnPen.ttf
-
-Name: UnPenheulim
-Class: Korea
-TTFname: UnPenheulim.ttf
-
-Name: UnPilgia
-Class: Korea
-TTFname: UnPilgia.ttf
-
-Name: UnShinmun
-Class: Korea
-TTFname: UnShinmun.ttf
-
-Name: UnVada
-Class: Korea
-TTFname: UnVada.ttf
-
-Name: UnYetgul
-Class: Korea
-TTFname: UnYetgul.ttf
-
-Name: UnTaza
-Class: Korea
-TTFname: UnTaza.ttf
-
-# UnJamo... family has proportional metrics
-Name: UnJamoBatang
-Class: Korea
-TTFname: UnJamoBatang.ttf
-
-Name: UnJamoDotum
-Class: Korea
-TTFname: UnJamoDotum.ttf
-
-Name: UnJamoNovel
-Class: Korea
-TTFname: UnJamoNovel.ttf
-
-Name: UnJamoSora
-Class: Korea
-TTFname: UnJamoSora.ttf
-
-# Nanum (free - TTF files) and Nanum OS X (free - TTC files)
-# note that all fonts have narrow metrics
-
-Name: NanumMyeongjo
-Class: Korea
-TTFname(10): NanumMyeongjo.ttf
-TTCname(20): NanumMyeongjo.ttc(0)
-
-Name: NanumMyeongjoBold
-Class: Korea
-TTFname(10): NanumMyeongjoBold.ttf
-TTCname(20): NanumMyeongjo.ttc(1)
-
-Name: NanumMyeongjoExtraBold
-Class: Korea
-TTFname(10): NanumMyeongjoExtraBold.ttf
-TTCname(20): NanumMyeongjo.ttc(2)
-
-Name: NanumGothic
-Class: Korea
-TTFname(10): NanumGothic.ttf
-TTCname(20): NanumGothic.ttc(0)
-
-Name: NanumGothicBold
-Class: Korea
-TTFname(10): NanumGothicBold.ttf
-TTCname(20): NanumGothic.ttc(1)
-
-Name: NanumGothicExtraBold
-Class: Korea
-TTFname(10): NanumGothicExtraBold.ttf
-TTCname(20): NanumGothic.ttc(2)
-
-Name: NanumGothicLight
-Class: Korea
-TTFname(10): NanumGothicLight.ttf
-
-Name: NanumBarunGothic
-Class: Korea
-TTFname(10): NanumBarunGothic.ttf
-
-Name: NanumBarunGothicBold
-Class: Korea
-TTFname(10): NanumBarunGothicBold.ttf
-
-Name: NanumBarunGothicLight
-Class: Korea
-TTFname(10): NanumBarunGothicLight.ttf
-
-Name: NanumBarunGothicUltraLight
-Class: Korea
-TTFname(10): NanumBarunGothicUltraLight.ttf
-
-Name: NanumBarunpen
-Class: Korea
-TTFname(10): NanumBarunpenR.ttf
-
-Name: NanumBarunpen-Bold
-Class: Korea
-TTFname(10): NanumBarunpenB.ttf
-
-Name: NanumBrush
-Class: Korea
-TTFname(10): NanumBrush.ttf
-TTCname(20): NanumScript.ttc(0)
-
-Name: NanumPen
-Class: Korea
-TTFname(10): NanumPen.ttf
-TTCname(20): NanumScript.ttc(1)
+# Nanum (free)
+INCLUDE cjkgs-nanum.dat
 
 # Design font by Ho-Seok Ee, aka. "ALee's font" (free)
 
@@ -2780,23 +2464,8 @@ Class: Korea
 TTFname: BM-HANNA.ttf
 
 # Hancom HCR (free)
-# note that all fonts have narrow metrics
+INCLUDE cjkgs-hancom.dat
 
-Name: HCRBatang
-Class: Korea
-TTFname: HANBatang.ttf
-
-Name: HCRBatang-Bold
-Class: Korea
-TTFname: HANBatangB.ttf
-
-Name: HCRDotum
-Class: Korea
-TTFname: HANDotum.ttf
-
-Name: HCRDotum-Bold
-Class: Korea
-TTFname: HANDotumB.ttf
 
 #
 # Microsoft Windows, Windows/Mac Office fonts

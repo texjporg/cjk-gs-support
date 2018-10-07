@@ -1,0 +1,103 @@
+# IPA (free)
+
+### JAPANESE ###
+
+# Note about TeX Live:
+#   ipam.ttf
+#   ipag.ttf
+#   ipaexm.ttf
+#   ipaexg.ttf
+#   ipapm.ttf
+#   ipapg.ttf
+# are available as "ipaex" package for free.
+
+Name: IPAMincho
+Class: Japan
+Provides(130): Ryumin-Light
+Provides(130): RyuminPro-Light
+Provides(130): HiraMinProN-W3
+Provides(130): HiraMinPro-W3
+Provides(130): FutoMinA101-Bold
+Provides(130): FutoMinA101Pro-Bold
+Provides(130): HiraMinProN-W6
+Provides(130): HiraMinPro-W6
+Provides(130): MidashiMin-MA31
+Provides(130): MidashiMinPro-MA31
+TTFname(20): ipam.ttf
+#TTFname(21): IPAMincho.ttf
+
+Name: IPAGothic
+Class: Japan
+Provides(130): GothicBBB-Medium
+Provides(130): GothicBBBPro-Medium
+Provides(130): HiraKakuProN-W3
+Provides(130): HiraKakuPro-W3
+Provides(130): FutoGoB101-Bold
+Provides(130): FutoGoB101Pro-Bold
+Provides(130): HiraKakuProN-W6
+Provides(130): HiraKakuPro-W6
+Provides(130): MidashiGo-MB31
+Provides(130): MidashiGoPro-MB31
+Provides(130): HiraKakuStdN-W8
+Provides(130): HiraKakuStd-W8
+Provides(130): Jun101-Light
+Provides(130): Jun101Pro-Light
+Provides(130): HiraMaruProN-W4
+Provides(130): HiraMaruPro-W4
+TTFname(20): ipag.ttf
+#TTFname(21): IPAGothic.ttf
+
+Name: IPAexMincho
+Class: Japan
+Provides(120): Ryumin-Light
+Provides(120): RyuminPro-Light
+Provides(120): HiraMinProN-W3
+Provides(120): HiraMinPro-W3
+Provides(120): FutoMinA101-Bold
+Provides(120): FutoMinA101Pro-Bold
+Provides(120): HiraMinProN-W6
+Provides(120): HiraMinPro-W6
+Provides(120): MidashiMin-MA31
+Provides(120): MidashiMinPro-MA31
+TTFname(20): ipaexm.ttf
+#TTFname(21): IPAexMincho.ttf
+
+Name: IPAexGothic
+Class: Japan
+Provides(120): GothicBBB-Medium
+Provides(120): GothicBBBPro-Medium
+Provides(120): HiraKakuProN-W3
+Provides(120): HiraKakuPro-W3
+Provides(120): FutoGoB101-Bold
+Provides(120): FutoGoB101Pro-Bold
+Provides(120): HiraKakuProN-W6
+Provides(120): HiraKakuPro-W6
+Provides(120): MidashiGo-MB31
+Provides(120): MidashiGoPro-MB31
+Provides(120): HiraKakuStdN-W8
+Provides(120): HiraKakuStd-W8
+Provides(120): Jun101-Light
+Provides(120): Jun101Pro-Light
+Provides(120): HiraMaruProN-W4
+Provides(120): HiraMaruPro-W4
+TTFname(20): ipaexg.ttf
+#TTFname(21): IPAexGothic.ttf
+
+# IPA proportional (free)
+
+Name: IPAPMincho
+Class: Japan
+TTFname(20): ipamp.ttf
+#TTFname(21): IPAPMincho.ttf
+
+Name: IPAPGothic
+Class: Japan
+TTFname(20): ipagp.ttf
+#TTFname(21): IPAPGothic.ttf
+
+# IPA MJ (free)
+
+Name: IPAmjMincho
+Class: Japan
+TTFname: ipamjm.ttf
+
