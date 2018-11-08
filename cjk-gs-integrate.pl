@@ -2257,6 +2257,14 @@ __DATA__
 # CJK FONT DEFINITIONS
 #
 
+# Noto
+INCLUDE cjkgs-notoserif.dat
+INCLUDE cjkgs-notosans.dat
+
+# SourceHan
+INCLUDE cjkgs-sourcehanserif.dat
+INCLUDE cjkgs-sourcehansans.dat
+
 #
 # JAPANESE FONTS
 #

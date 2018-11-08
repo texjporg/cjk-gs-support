@@ -1,0 +1,142 @@
+# SourceHanSerif
+
+Name: SourceHanSerif-ExtraLight
+Class: Japan
+OTFname: SourceHanSerif-ExtraLight.otf
+OTCname: SourceHanSerif-ExtraLight.ttc(0)
+
+Name: SourceHanSerif-Light
+Class: Japan
+OTFname: SourceHanSerif-Light.otf
+OTCname: SourceHanSerif-Light.ttc(0)
+
+Name: SourceHanSerif-Regular
+Class: Japan
+OTFname: SourceHanSerif-Regular.otf
+OTCname: SourceHanSerif-Regular.ttc(0)
+
+Name: SourceHanSerif-Medium
+Class: Japan
+OTFname: SourceHanSerif-Medium.otf
+OTCname: SourceHanSerif-Medium.ttc(0)
+
+Name: SourceHanSerif-SemiBold
+Class: Japan
+OTFname: SourceHanSerif-SemiBold.otf
+OTCname: SourceHanSerif-SemiBold.ttc(0)
+
+Name: SourceHanSerif-Bold
+Class: Japan
+OTFname: SourceHanSerif-Bold.otf
+OTCname: SourceHanSerif-Bold.ttc(0)
+
+Name: SourceHanSerif-Heavy
+Class: Japan
+OTFname: SourceHanSerif-Heavy.otf
+OTCname: SourceHanSerif-Heavy.ttc(0)
+
+Name: SourceHanSerifK-ExtraLight
+Class: Korea
+OTFname: SourceHanSerifK-ExtraLight.otf
+OTCname: SourceHanSerif-ExtraLight.ttc(1)
+
+Name: SourceHanSerifK-Light
+Class: Korea
+OTFname: SourceHanSerifK-Light.otf
+OTCname: SourceHanSerif-Light.ttc(1)
+
+Name: SourceHanSerifK-Regular
+Class: Korea
+OTFname: SourceHanSerifK-Regular.otf
+OTCname: SourceHanSerif-Regular.ttc(1)
+
+Name: SourceHanSerifK-Medium
+Class: Korea
+OTFname: SourceHanSerifK-Medium.otf
+OTCname: SourceHanSerif-Medium.ttc(1)
+
+Name: SourceHanSerifK-SemiBold
+Class: Korea
+OTFname: SourceHanSerifK-SemiBold.otf
+OTCname: SourceHanSerif-SemiBold.ttc(1)
+
+Name: SourceHanSerifK-Bold
+Class: Korea
+OTFname: SourceHanSerifK-Bold.otf
+OTCname: SourceHanSerif-Bold.ttc(1)
+
+Name: SourceHanSerifK-Heavy
+Class: Korea
+OTFname: SourceHanSerifK-Heavy.otf
+OTCname: SourceHanSerif-Heavy.ttc(1)
+
+Name: SourceHanSerifSC-ExtraLight
+Class: GB
+OTFname: SourceHanSerifSC-ExtraLight.otf
+OTCname: SourceHanSerif-ExtraLight.ttc(2)
+
+Name: SourceHanSerifSC-Light
+Class: GB
+OTFname: SourceHanSerifSC-Light.otf
+OTCname: SourceHanSerif-Light.ttc(2)
+
+Name: SourceHanSerifSC-Regular
+Class: GB
+OTFname: SourceHanSerifSC-Regular.otf
+OTCname: SourceHanSerif-Regular.ttc(2)
+
+Name: SourceHanSerifSC-Medium
+Class: GB
+OTFname: SourceHanSerifSC-Medium.otf
+OTCname: SourceHanSerif-Medium.ttc(2)
+
+Name: SourceHanSerifSC-SemiBold
+Class: GB
+OTFname: SourceHanSerifSC-SemiBold.otf
+OTCname: SourceHanSerif-SemiBold.ttc(2)
+
+Name: SourceHanSerifSC-Bold
+Class: GB
+OTFname: SourceHanSerifSC-Bold.otf
+OTCname: SourceHanSerif-Bold.ttc(2)
+
+Name: SourceHanSerifSC-Heavy
+Class: GB
+OTFname: SourceHanSerifSC-Heavy.otf
+OTCname: SourceHanSerif-Heavy.ttc(2)
+
+Name: SourceHanSerifTC-ExtraLight
+Class: CNS
+OTFname: SourceHanSerifTC-ExtraLight.otf
+OTCname: SourceHanSerif-ExtraLight.ttc(3)
+
+Name: SourceHanSerifTC-Light
+Class: CNS
+OTFname: SourceHanSerifTC-Light.otf
+OTCname: SourceHanSerif-Light.ttc(3)
+
+Name: SourceHanSerifTC-Regular
+Class: CNS
+OTFname: SourceHanSerifTC-Regular.otf
+OTCname: SourceHanSerif-Regular.ttc(3)
+
+Name: SourceHanSerifTC-Medium
+Class: CNS
+OTFname: SourceHanSerifTC-Medium.otf
+OTCname: SourceHanSerif-Medium.ttc(3)
+
+Name: SourceHanSerifTC-SemiBold
+Class: CNS
+OTFname: SourceHanSerifTC-SemiBold.otf
+OTCname: SourceHanSerif-SemiBold.ttc(3)
+
+Name: SourceHanSerifTC-Bold
+Class: CNS
+OTFname: SourceHanSerifTC-Bold.otf
+OTCname: SourceHanSerif-Bold.ttc(3)
+
+Name: SourceHanSerifTC-Heavy
+Class: CNS
+OTFname: SourceHanSerifTC-Heavy.otf
+OTCname: SourceHanSerif-Heavy.ttc(3)
+

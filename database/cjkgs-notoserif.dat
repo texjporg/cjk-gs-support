@@ -1,0 +1,141 @@
+# NotoSerif
+
+Name: NotoSerifCJKjp-ExtraLight
+Class: Japan
+OTFname: NotoSerifCJKjp-ExtraLight.otf
+OTCname: NotoSerifCJK-ExtraLight.ttc(0)
+
+Name: NotoSerifCJKjp-Light
+Class: Japan
+OTFname: NotoSerifCJKjp-Light.otf
+OTCname: NotoSerifCJK-Light.ttc(0)
+
+Name: NotoSerifCJKjp-Regular
+Class: Japan
+OTFname: NotoSerifCJKjp-Regular.otf
+OTCname: NotoSerifCJK-Regular.ttc(0)
+
+Name: NotoSerifCJKjp-Medium
+Class: Japan
+OTFname: NotoSerifCJKjp-Medium.otf
+OTCname: NotoSerifCJK-Medium.ttc(0)
+
+Name: NotoSerifCJKjp-SemiBold
+Class: Japan
+OTFname: NotoSerifCJKjp-SemiBold.otf
+OTCname: NotoSerifCJK-SemiBold.ttc(0)
+
+Name: NotoSerifCJKjp-Bold
+Class: Japan
+OTFname: NotoSerifCJKjp-Bold.otf
+OTCname: NotoSerifCJK-Bold.ttc(0)
+
+Name: NotoSerifCJKjp-Black
+Class: Japan
+OTFname: NotoSerifCJKjp-Black.otf
+OTCname: NotoSerifCJK-Black.ttc(0)
+
+Name: NotoSerifCJKkr-ExtraLight
+Class: Korea
+OTFname: NotoSerifCJKkr-ExtraLight.otf
+OTCname: NotoSerifCJK-ExtraLight.ttc(1)
+
+Name: NotoSerifCJKkr-Light
+Class: Korea
+OTFname: NotoSerifCJKkr-Light.otf
+OTCname: NotoSerifCJK-Light.ttc(1)
+
+Name: NotoSerifCJKkr-Regular
+Class: Korea
+OTFname: NotoSerifCJKkr-Regular.otf
+OTCname: NotoSerifCJK-Regular.ttc(1)
+
+Name: NotoSerifCJKkr-Medium
+Class: Korea
+OTFname: NotoSerifCJKkr-Medium.otf
+OTCname: NotoSerifCJK-Medium.ttc(1)
+
+Name: NotoSerifCJKkr-SemiBold
+Class: Korea
+OTFname: NotoSerifCJKkr-SemiBold.otf
+OTCname: NotoSerifCJK-SemiBold.ttc(1)
+
+Name: NotoSerifCJKkr-Bold
+Class: Korea
+OTFname: NotoSerifCJKkr-Bold.otf
+OTCname: NotoSerifCJK-Bold.ttc(1)
+
+Name: NotoSerifCJKkr-Black
+Class: Korea
+OTFname: NotoSerifCJKkr-Black.otf
+OTCname: NotoSerifCJK-Black.ttc(1)
+
+Name: NotoSerifCJKsc-ExtraLight
+Class: GB
+OTFname: NotoSerifCJKsc-ExtraLight.otf
+OTCname: NotoSerifCJK-ExtraLight.ttc(2)
+
+Name: NotoSerifCJKsc-Light
+Class: GB
+OTFname: NotoSerifCJKsc-Light.otf
+OTCname: NotoSerifCJK-Light.ttc(2)
+
+Name: NotoSerifCJKsc-Regular
+Class: GB
+OTFname: NotoSerifCJKsc-Regular.otf
+OTCname: NotoSerifCJK-Regular.ttc(2)
+
+Name: NotoSerifCJKsc-Medium
+Class: GB
+OTFname: NotoSerifCJKsc-Medium.otf
+OTCname: NotoSerifCJK-Medium.ttc(2)
+
+Name: NotoSerifCJKsc-SemiBold
+Class: GB
+OTFname: NotoSerifCJKsc-SemiBold.otf
+OTCname: NotoSerifCJK-SemiBold.ttc(2)
+
+Name: NotoSerifCJKsc-Bold
+Class: GB
+OTFname: NotoSerifCJKsc-Bold.otf
+OTCname: NotoSerifCJK-Bold.ttc(2)
+
+Name: NotoSerifCJKsc-Black
+Class: GB
+OTFname: NotoSerifCJKsc-Black.otf
+OTCname: NotoSerifCJK-Black.ttc(2)
+
+Name: NotoSerifCJKtc-ExtraLight
+Class: CNS
+OTFname: NotoSerifCJKtc-ExtraLight.otf
+OTCname: NotoSerifCJK-ExtraLight.ttc(3)
+
+Name: NotoSerifCJKtc-Light
+Class: CNS
+OTFname: NotoSerifCJKtc-Light.otf
+OTCname: NotoSerifCJK-Light.ttc(3)
+
+Name: NotoSerifCJKtc-Regular
+Class: CNS
+OTFname: NotoSerifCJKtc-Regular.otf
+OTCname: NotoSerifCJK-Regular.ttc(3)
+
+Name: NotoSerifCJKtc-Medium
+Class: CNS
+OTFname: NotoSerifCJKtc-Medium.otf
+OTCname: NotoSerifCJK-Medium.ttc(3)
+
+Name: NotoSerifCJKtc-SemiBold
+Class: CNS
+OTFname: NotoSerifCJKtc-SemiBold.otf
+OTCname: NotoSerifCJK-SemiBold.ttc(3)
+
+Name: NotoSerifCJKtc-Bold
+Class: CNS
+OTFname: NotoSerifCJKtc-Bold.otf
+OTCname: NotoSerifCJK-Bold.ttc(3)
+
+Name: NotoSerifCJKtc-Black
+Class: CNS
+OTFname: NotoSerifCJKtc-Black.otf
+OTCname: NotoSerifCJK-Black.ttc(3)

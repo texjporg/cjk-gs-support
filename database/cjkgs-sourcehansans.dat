@@ -1,0 +1,182 @@
+# SourceHanSans
+
+Name: SourceHanSans-ExtraLight
+Class: Japan
+OTFname: SourceHanSans-ExtraLight.otf
+OTCname: SourceHanSans-ExtraLight.ttc(0)
+
+Name: SourceHanSans-Light
+Class: Japan
+OTFname: SourceHanSans-Light.otf
+OTCname: SourceHanSans-Light.ttc(0)
+
+Name: SourceHanSans-Normal
+Class: Japan
+OTFname: SourceHanSans-Normal.otf
+OTCname: SourceHanSans-Normal.ttc(0)
+
+Name: SourceHanSans-Regular
+Class: Japan
+OTFname: SourceHanSans-Regular.otf
+OTCname: SourceHanSans-Regular.ttc(0)
+
+Name: SourceHanSans-Medium
+Class: Japan
+OTFname: SourceHanSans-Medium.otf
+OTCname: SourceHanSans-Medium.ttc(0)
+
+Name: SourceHanSans-Bold
+Class: Japan
+OTFname: SourceHanSans-Bold.otf
+OTCname: SourceHanSans-Bold.ttc(0)
+
+Name: SourceHanSans-Heavy
+Class: Japan
+OTFname: SourceHanSans-Heavy.otf
+OTCname: SourceHanSans-Heavy.ttc(0)
+
+Name: SourceHanSansK-ExtraLight
+Class: Korea
+OTFname: SourceHanSansK-ExtraLight.otf
+OTCname: SourceHanSans-ExtraLight.ttc(1)
+
+Name: SourceHanSansK-Light
+Class: Korea
+OTFname: SourceHanSansK-Light.otf
+OTCname: SourceHanSans-Light.ttc(1)
+
+Name: SourceHanSansK-Normal
+Class: Korea
+OTFname: SourceHanSansK-Normal.otf
+OTCname: SourceHanSans-Normal.ttc(1)
+
+Name: SourceHanSansK-Regular
+Class: Korea
+OTFname: SourceHanSansK-Regular.otf
+OTCname: SourceHanSans-Regular.ttc(1)
+
+Name: SourceHanSansK-Medium
+Class: Korea
+OTFname: SourceHanSansK-Medium.otf
+OTCname: SourceHanSans-Medium.ttc(1)
+
+Name: SourceHanSansK-Bold
+Class: Korea
+OTFname: SourceHanSansK-Bold.otf
+OTCname: SourceHanSans-Bold.ttc(1)
+
+Name: SourceHanSansK-Heavy
+Class: Korea
+OTFname: SourceHanSansK-Heavy.otf
+OTCname: SourceHanSans-Heavy.ttc(1)
+
+Name: SourceHanSansSC-ExtraLight
+Class: GB
+OTFname: SourceHanSansSC-ExtraLight.otf
+OTCname: SourceHanSans-ExtraLight.ttc(2)
+
+Name: SourceHanSansSC-Light
+Class: GB
+OTFname: SourceHanSansSC-Light.otf
+OTCname: SourceHanSans-Light.ttc(2)
+
+Name: SourceHanSansSC-Normal
+Class: GB
+OTFname: SourceHanSansSC-Normal.otf
+OTCname: SourceHanSans-Normal.ttc(2)
+
+Name: SourceHanSansSC-Regular
+Class: GB
+OTFname: SourceHanSansSC-Regular.otf
+OTCname: SourceHanSans-Regular.ttc(2)
+
+Name: SourceHanSansSC-Medium
+Class: GB
+OTFname: SourceHanSansSC-Medium.otf
+OTCname: SourceHanSans-Medium.ttc(2)
+
+Name: SourceHanSansSC-Bold
+Class: GB
+OTFname: SourceHanSansSC-Bold.otf
+OTCname: SourceHanSans-Bold.ttc(2)
+
+Name: SourceHanSansSC-Heavy
+Class: GB
+OTFname: SourceHanSansSC-Heavy.otf
+OTCname: SourceHanSans-Heavy.ttc(2)
+
+Name: SourceHanSansTC-ExtraLight
+Class: CNS
+OTFname: SourceHanSansTC-ExtraLight.otf
+OTCname: SourceHanSans-ExtraLight.ttc(3)
+
+Name: SourceHanSansTC-Light
+Class: CNS
+OTFname: SourceHanSansTC-Light.otf
+OTCname: SourceHanSans-Light.ttc(3)
+
+Name: SourceHanSansTC-Normal
+Class: CNS
+OTFname: SourceHanSansTC-Normal.otf
+OTCname: SourceHanSans-Normal.ttc(3)
+
+Name: SourceHanSansTC-Regular
+Class: CNS
+OTFname: SourceHanSansTC-Regular.otf
+OTCname: SourceHanSans-Regular.ttc(3)
+
+Name: SourceHanSansTC-Medium
+Class: CNS
+OTFname: SourceHanSansTC-Medium.otf
+OTCname: SourceHanSans-Medium.ttc(3)
+
+Name: SourceHanSansTC-Bold
+Class: CNS
+OTFname: SourceHanSansTC-Bold.otf
+OTCname: SourceHanSans-Bold.ttc(3)
+
+Name: SourceHanSansTC-Heavy
+Class: CNS
+OTFname: SourceHanSansTC-Heavy.otf
+OTCname: SourceHanSans-Heavy.ttc(3)
+
+Name: SourceHanSansHW-Regular
+Class: Japan
+OTFname: SourceHanSansHW-Regular.otf
+OTCname: SourceHanSans-Regular.ttc(4)
+
+Name: SourceHanSansHW-Bold
+Class: Japan
+OTFname: SourceHanSansHW-Bold.otf
+OTCname: SourceHanSans-Bold.ttc(4)
+
+Name: SourceHanSansHWK-Regular
+Class: Korea
+OTFname: SourceHanSansHWK-Regular.otf
+OTCname: SourceHanSans-Regular.ttc(5)
+
+Name: SourceHanSansHWK-Bold
+Class: Korea
+OTFname: SourceHanSansHWK-Bold.otf
+OTCname: SourceHanSans-Bold.ttc(5)
+
+Name: SourceHanSansHWSC-Regular
+Class: GB
+OTFname: SourceHanSansHWSC-Regular.otf
+OTCname: SourceHanSans-Regular.ttc(6)
+
+Name: SourceHanSansHWSC-Bold
+Class: GB
+OTFname: SourceHanSansHWSC-Bold.otf
+OTCname: SourceHanSans-Bold.ttc(6)
+
+Name: SourceHanSansHWTC-Regular
+Class: CNS
+OTFname: SourceHanSansHWTC-Regular.otf
+OTCname: SourceHanSans-Regular.ttc(7)
+
+Name: SourceHanSansHWTC-Bold
+Class: CNS
+OTFname: SourceHanSansHWTC-Bold.otf
+OTCname: SourceHanSans-Bold.ttc(7)
+
