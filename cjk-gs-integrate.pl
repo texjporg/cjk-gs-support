@@ -1369,6 +1369,7 @@ sub check_for_files {
   # map basenames to filenames
   my %bntofn;
   for my $f (@foundfiles) {
+    $f =~ s/[\r\n]+\z//; # perl's chomp() on git-bash cannot strip CR of CRLF ??
     my $realf = abs_path($f);
     if (!$realf) {
       print_warning("dead link or strange file found: $f - ignored!\n");
