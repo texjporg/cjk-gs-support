@@ -4,7 +4,35 @@
 
 # Note:
 #   BIZ-UD*.ttc (3 files)
-# are available from https://bizplus.morisawa.co.jp for Win/Mac.
+# are bundled with Windows 10 (October 2018 Update).
+# Also available from https://bizplus.morisawa.co.jp for Win/Mac.
+
+Name: BIZ-UDGothic-Bold
+Class: Japan
+TTCname: BIZ-UDGothicB.ttc(0)
+
+Name: BIZ-UDPGothic-Bold
+Class: Japan
+TTCname: BIZ-UDGothicB.ttc(1)
+
+Name: BIZ-UDGothic
+Class: Japan
+TTCname: BIZ-UDGothicR.ttc(0)
+
+Name: BIZ-UDPGothic
+Class: Japan
+TTCname: BIZ-UDGothicR.ttc(1)
+
+Name: BIZ-UDMincho-Medium
+Class: Japan
+TTCname: BIZ-UDMinchoM.ttc(0)
+
+Name: BIZ-UDPMincho-Medium
+Class: Japan
+TTCname: BIZ-UDMinchoM.ttc(1)
+
+# Version 2018-10-23 or earlier (before official October 2018 Update)
+# had different filename and PSName
 
 Name: BIZ-UDGothic-B
 Class: Japan
