@@ -1445,6 +1445,7 @@ sub check_for_files {
             $bname = $b;
             last;
           }
+          $actualpsname =~ s/[\r\n]+\z//; # perl's chomp() on git-bash cannot strip CR of CRLF ??
           if ($actualpsname ne $k) {
             print_debug("... PSName returned by otfinfo ($actualpsname) is\n");
             print_debug("different from our database ($k), discarding!\n");
