@@ -57,6 +57,14 @@ if (win32()) {
   print_warning("Sorry, we have only partial support for Windows!\n");
 }
 
+#
+# check for the existence of kpsewhich, otherwise we cannot do anything
+if (system("kpsewhich --version >/dev/null 2>&1 </dev/null" ) != 0) {
+  print_error("We need `kpsewhich' being installed! Exiting.\n");
+  exit(1);
+}
+
+
 # The followings are installed by ptex-fontmaps (texjporg):
 #   * 2004-H
 #   * 2004-V
