@@ -5,6 +5,9 @@ This script searches a list of directories for CJK fonts, and makes
 them available to an installed Ghostscript. In the simplest case with
 sufficient privileges, a run without arguments should effect in a
 complete setup of Ghostscript.
+Search is done using the kpathsea library, in particular `kpsewhich`
+program. To run this script, you will need some TeX distribution in
+your system.
 
 Usage
 -----
