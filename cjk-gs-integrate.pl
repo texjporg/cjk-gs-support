@@ -682,15 +682,15 @@ sub do_nonotf_fonts {
     if $opt_texmflink;
   for my $k (sort keys %fontdb) {
     if ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'TTF') {
-      generate_font_snippet($fontdest,
-        $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
+    # generate_font_snippet($fontdest,
+    #   $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
       $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'ttfname'}, -1);
       link_font($fontdb{$k}{'target'}, $cidfsubst, $fontdb{$k}{'ttfname'});
       link_font($fontdb{$k}{'target'}, "$opt_texmflink/$ttf_pathpart", $fontdb{$k}{'ttfname'})
         if $opt_texmflink;
     } elsif ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'TTC') {
-      generate_font_snippet($fontdest,
-        $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
+    # generate_font_snippet($fontdest,
+    #   $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
       $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'ttcname'}, $fontdb{$k}{'subfont'});
       link_font($fontdb{$k}{'target'}, $cidfsubst, $fontdb{$k}{'ttcname'});
       link_font($fontdb{$k}{'target'}, "$opt_texmflink/$ttf_pathpart", $fontdb{$k}{'ttcname'})
