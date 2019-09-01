@@ -359,23 +359,22 @@ if ($opt_debug >= 2) {
   $Data::Dumper::Indent = 1;
 }
 
-my $otfinfo_available;
-chomp(my $otfinfo_help = `otfinfo --help 2>$nul`);
+my $zrlistttc = "/path/to/zrlistttc.lua"; # should be full-path
+my $zrlistttc_available;
+chomp(my $zrlistttc_help = `texlua $zrlistttc 2>$nul`);
 if ($?) {
-  # to tell the truth, we want to show below as a warning
-  # but BasicTeX (scheme-small) does not have 'otfinfo' (lcdf-typetools);
   # show info only for debugging
-  print_debug("The program 'otfinfo' not found in PATH.\n");
+  print_debug("The script 'zrlistttc.lua' not found.\n");
   print_debug("Sorry, we can't be safe enough to distinguish\n");
   print_debug("uppercase / lowercase file names.\n");
   # but the below should be an error!
   if ($opt_strictpsname) {
-    print_error("'otfinfo' not found, cannot proceed!\n");
+    print_error("'zrlistttc' not found, cannot proceed!\n");
     exit(1);
   }
-  $otfinfo_available = 0;
+  $zrlistttc_available = 0;
 } else {
-  $otfinfo_available = 1;
+  $zrlistttc_available = 1;
 }
 
 if (macosx()) {
@@ -1420,36 +1419,41 @@ sub check_for_files {
       # check for subfont extension
       my $realfile = $f;
       $realfile =~ s/^(.*)\(\d*\)$/$1/;
+      my $index = 0;
+      if ($fontdb{$k}{'files'}{$f}{'type'} eq 'OTC' || $fontdb{$k}{'files'}{$f}{'type'} eq 'TTC') {
+        if ($f =~ m/^(.*)\((\d*)\)$/) {
+          $index = $2;
+        }
+      }
       # check for casefolding
       # we might catch different names (batang/Batang) and identify them wrongly on
       #  * case-insensitive file systems (like HFS on MacOS)
       #  * kpathsea 6.3.0 or later, with casefolding fallback search (TL2018)
-      # check the actual psname using otfinfo utility, only when we "know"
+      # check the actual psname using zrlistttc.lua, only when we "know"
       # both uppercase/lowercase font files are possible and they are different
       my $actualpsname;
       my $bname;
       for my $b (sort keys %{$bntofn{$realfile}}) {
         $fontdb{$k}{'casefold'} = "debug" if $opt_strictpsname;
-        if ($fontdb{$k}{'casefold'} && $otfinfo_available &&
-            ($fontdb{$k}{'files'}{$f}{'type'} eq 'OTF' || $fontdb{$k}{'files'}{$f}{'type'} eq 'TTF')) {
+        if ($fontdb{$k}{'casefold'} && $zrlistttc_available) {
           print_debug("We need to test whether\n");
           print_debug("  $b\n");
-          print_debug("is the correct one. Invoking otfinfo ...\n");
-          chomp($actualpsname = `otfinfo -p "$b"`);
+          print_debug("is the correct one. Invoking zrlistttc ...\n");
+          chomp($actualpsname = `texlua $zrlistttc -i $index "$b"`);
           if ($?) {
-            # something is wrong with the font file, or otfinfo does not support it;
+            # something is wrong with the font file, or zrlistttc does not support it;
             # still there is a chance that Ghostscript supports, so don't discard it
             print_debug("... command exited with $?!\n");
             print_debug("OK, I'll take this, but it may not work properly.\n");
-            print_warning("otfinfo check failed for $b\n") if $opt_strictpsname;
+            print_warning("zrlistttc check failed for $b\n") if $opt_strictpsname;
             $bname = $b;
             last;
           }
           $actualpsname =~ s/[\r\n]+\z//; # perl's chomp() on git-bash cannot strip CR of CRLF ??
           if ($actualpsname ne $k) {
-            print_debug("... PSName returned by otfinfo ($actualpsname) is\n");
+            print_debug("... PSName returned by zrlistttc ($actualpsname) is\n");
             print_debug("different from our database ($k), discarding!\n");
-            print_warning("otfinfo check failed for $b\n") if $opt_strictpsname;
+            print_warning("zrlistttc check failed for $b\n") if $opt_strictpsname;
           } else {
             print_debug("... test passed.\n");
             $bname = $b;
