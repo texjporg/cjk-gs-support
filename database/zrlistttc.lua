@@ -1,5 +1,7 @@
 -- zrlistttc.lua
--- ref. zrdecompttc.lua
+-- Copyright (c) 2019 Takayuki YATO
+-- Modified by Hironobu YAMASHITA
+-- This software is distributed under the MIT License.
 prog_name = 'zrlistttc'
 version = '0.4'
 mod_date = '2019/08/31'
