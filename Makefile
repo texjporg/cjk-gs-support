@@ -15,6 +15,7 @@ install: README.md
 	cp *.pl ${TEXMF}/scripts/$(PROJECT)/
 	mkdir -p ${TEXMF}/fonts/misc/$(PROJECT)
 	cp database/*.dat ${TEXMF}/fonts/misc/$(PROJECT)/
+	cp database/zrlistttc.lua ${TEXMF}/fonts/misc/$(PROJECT)/
 
 release: README.md
 	sh tools/release.sh
