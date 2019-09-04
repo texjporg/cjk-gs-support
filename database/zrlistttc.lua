@@ -1,9 +1,11 @@
--- zrdecompttc.lua
+-- zrlistttc.lua
+-- ref. zrdecompttc.lua
 prog_name = 'zrlistttc'
-version = '0.2'
+version = '0.4'
 mod_date = '2019/08/31'
 ----------------------------------------
 verbose = false
+ttc_index = nil
 content = { 6 }
 langid = nil
 ttc_file = nil
@@ -132,7 +134,8 @@ do
     return string.char(unpack(d))
   end
   local file_type = {
-    [0x74746366] = 'ttc'; [0x10000] = 'ttf'; [0x4F54544F] = 'otf'
+    [0x74746366] = 'ttc'; [0x10000] = 'ttf'; [0x4F54544F] = 'otf';
+    [0x74727565] = 'ttf'
   }
   function otf_offset(reader)
     local cd = reader:cdata(0, 12)
@@ -252,6 +255,7 @@ do
 This is %s v%s <%s> by 'ZR'
 Usage: %s[.lua] [-v] [-c <spec>] <ttc_file>
   -v    be verbose
+  -i    show only one font with a specified index
   -c    content specification; comma-separated list of items,
         where an item is either 'id', 'type', or an name-ID
 ]]):format(prog_name, version, mod_date, prog_name))
@@ -276,6 +280,11 @@ Usage: %s[.lua] [-v] [-c <spec>] <ttc_file>
     end
     return t
   end
+  local function ttc_index_spec(str)
+    local p = str:match('^(%d+)$')
+    sure(p, "invalid ttc_index spec", str)
+    return tonumber(p)
+  end
   function read_option()
     if #arg == 0 then show_usage() end
     local idx = 1
@@ -286,6 +295,9 @@ Usage: %s[.lua] [-v] [-c <spec>] <ttc_file>
         show_usage()
       elseif opt == '-v' then
         verbose = true
+      elseif opt == '-i' then
+        idx = idx + 1; sure(arg[idx], "ttc_index spec is missing")
+        ttc_index = ttc_index_spec(arg[idx])
       elseif opt == '-c' then
         idx = idx + 1; sure(arg[idx], "content spec is missing")
         content = stt(content_spec(arg[idx]))
@@ -303,8 +315,15 @@ Usage: %s[.lua] [-v] [-c <spec>] <ttc_file>
     read_option()
     local reader = make_reader(ttc_file)
     local tofs = otf_offset(reader)
-    for i = 1, #tofs do
-      otf_list(reader, i - 1, tofs[i])
+    if ttc_index then
+      if ttc_index < 0 or ttc_index > #tofs - 1 then
+        abort("non-existing ttc_index", ttc_index)
+      end
+        otf_list(reader, ttc_index, tofs[ttc_index + 1])
+    else
+      for i = 1, #tofs do
+        otf_list(reader, i - 1, tofs[i])
+      end
     end
     reader:close()
   end
