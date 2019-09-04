@@ -359,19 +359,18 @@ if ($opt_debug >= 2) {
   $Data::Dumper::Indent = 1;
 }
 
-my $zrlistttc = "/path/to/zrlistttc.lua"; # should be full-path
+my $zrlistttc = kpse_miscfont("zrlistttc.lua");
 my $zrlistttc_available;
 chomp(my $zrlistttc_help = `texlua $zrlistttc 2>$nul`);
 if ($?) {
+  if ($opt_strictpsname) {
+    print_error("The script 'zrlistttc.lua' not found, cannot proceed!\n");
+    exit(1);
+  }
   # show info only for debugging
   print_debug("The script 'zrlistttc.lua' not found.\n");
   print_debug("Sorry, we can't be safe enough to distinguish\n");
   print_debug("uppercase / lowercase file names.\n");
-  # but the below should be an error!
-  if ($opt_strictpsname) {
-    print_error("'zrlistttc' not found, cannot proceed!\n");
-    exit(1);
-  }
   $zrlistttc_available = 0;
 } else {
   $zrlistttc_available = 1;
