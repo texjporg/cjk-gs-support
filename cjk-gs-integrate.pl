@@ -680,26 +680,18 @@ sub do_nonotf_fonts {
     if $opt_texmflink;
   for my $k (sort keys %fontdb) {
     if ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'TTF') {
-    # generate_font_snippet($fontdest,
-    #   $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
       $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'ttfname'}, -1);
       link_font($fontdb{$k}{'target'}, $cidfsubst, $fontdb{$k}{'ttfname'});
       link_font($fontdb{$k}{'target'}, "$opt_texmflink/$ttf_pathpart", $fontdb{$k}{'ttfname'})
         if $opt_texmflink;
     } elsif ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'TTC') {
-    # generate_font_snippet($fontdest,
-    #   $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
       $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'ttcname'}, $fontdb{$k}{'subfont'});
       link_font($fontdb{$k}{'target'}, $cidfsubst, $fontdb{$k}{'ttcname'});
       link_font($fontdb{$k}{'target'}, "$opt_texmflink/$ttf_pathpart", $fontdb{$k}{'ttcname'})
         if $opt_texmflink;
     } elsif ($fontdb{$k}{'available'} && $fontdb{$k}{'type'} eq 'OTC') {
-      # currently Ghostscript does not have OTC support; not creating gs resource
+      # currently Ghostscript does not have OTC support; we don't know what to do
       print_debug("gs does not support OTC, not creating gs resource for $k\n");
-    # generate_font_snippet($fontdest,
-    #   $k, $fontdb{$k}{'class'}, $fontdb{$k}{'target'});
-    # $outp .= generate_cidfmap_entry($k, $fontdb{$k}{'class'}, $fontdb{$k}{'otcname'}, $fontdb{$k}{'subfont'});
-    # link_font($fontdb{$k}{'target'}, $cidfsubst, $fontdb{$k}{'otcname'});
       link_font($fontdb{$k}{'target'}, "$opt_texmflink/$otf_pathpart", $fontdb{$k}{'otcname'})
         if $opt_texmflink;
     }
@@ -1419,7 +1411,7 @@ sub check_for_files {
       my $realfile = $f;
       $realfile =~ s/^(.*)\(\d*\)$/$1/;
       my $index = 0;
-      if ($fontdb{$k}{'files'}{$f}{'type'} eq 'OTC' || $fontdb{$k}{'files'}{$f}{'type'} eq 'TTC') {
+      if ($fontdb{$k}{'files'}{$f}{'type'} eq 'TTC' || $fontdb{$k}{'files'}{$f}{'type'} eq 'OTC') {
         if ($f =~ m/^(.*)\((\d*)\)$/) {
           $index = $2;
         }
