@@ -42,7 +42,7 @@ Class: Japan
 TTFname(20): yuminl.ttf
 #TTFname(50): YuMincho-Light.ttf # never existed
 
-Name: YuMincho-DemiBold
+Name: YuMincho-Demibold
 Class: Japan
 Provides(90): FutoMinA101-Bold
 Provides(90): FutoMinA101Pro-Bold
@@ -51,7 +51,7 @@ Provides(90): HiraMinPro-W6
 Provides(90): MidashiMin-MA31
 Provides(90): MidashiMinPro-MA31
 TTFname(20): yumindb.ttf
-#TTFname(50): YuMincho-DemiBold.ttf # never existed
+#TTFname(50): YuMincho-Demibold.ttf # never existed
 
 Name: YuGothic-Regular
 Class: Japan

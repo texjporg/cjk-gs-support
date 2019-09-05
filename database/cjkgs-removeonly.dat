@@ -1,0 +1,7 @@
+# Bugs in previous cjkgs-yu-win.dat:
+# Wrong PSName (NG: YuMincho-DemiBold -> OK: YuMincho-Demibold)
+
+Name: YuMincho-DemiBold
+Class: Japan
+TTFname(20): yumindb.ttf
+

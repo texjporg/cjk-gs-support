@@ -2659,6 +2659,7 @@ TTFname(10): MSMHei-Bold.ttf
 # Remove-only database (should begin with !INCLUDE)
 # that is, entries which contain at least one 'RMVname' line
 # note that this line should come at the _end_ of all INCLUDE files
+!INCLUDE cjkgs-removeonly.dat
 !INCLUDE cjkgs-macos-removeonly.dat
 
 
