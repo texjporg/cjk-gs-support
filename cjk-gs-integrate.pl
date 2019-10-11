@@ -1293,7 +1293,8 @@ sub check_for_files {
       push @extradirs, "c:/windows/fonts//";
     } else {
       # other dirs to check, for normal unix?
-      for my $d (qw!/Library/Fonts /System/Library/Fonts /System/Library/Assets
+      for my $d (qw!/Library/Fonts /System/Library/Fonts
+                    /System/Library/Assets /System/Library/AssetsV2
                     /Network/Library/Fonts /usr/share/fonts!) {
         push @extradirs, "$d//" if (-d $d); # recursive search
       }
