@@ -2324,6 +2324,9 @@ INCLUDE cjkgs-ume.dat
 # Sazanami (free)
 INCLUDE cjkgs-sazanami.dat
 
+# Harano Aji Fonts (free)
+INCLUDE cjkgs-haranoaji.dat
+
 # Osaka (Apple)
 
 Name: Osaka
