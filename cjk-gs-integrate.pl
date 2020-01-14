@@ -1417,17 +1417,20 @@ sub check_for_files {
           $index = $2;
         }
       }
-      # check for casefolding
-      # we might catch different names (batang/Batang) and identify them wrongly on
-      #  * case-insensitive file systems (like HFS on MacOS)
-      #  * kpathsea 6.3.0 or later, with casefolding fallback search (TL2018)
-      # check the actual psname using zrlistttc.lua, only when we "know"
-      # both uppercase/lowercase font files are possible and they are different
+      # double check for casefolding or incompatible OTC/TTC index
+      #   [1] casefolding issue
+      #     we might catch different names (batang/Batang) and identify them wrongly on
+      #        * case-insensitive file systems (like HFS on MacOS)
+      #        * kpathsea 6.3.0 or later, with casefolding fallback search (TL2018)
+      #     check the actual psname using zrlistttc.lua, only when we "know"
+      #     both uppercase/lowercase font files are possible and they are different
+      #   [2] incompatible index
+      #     the index in msgothic.ttc changed at some time between Win7 and Win10.
       my $actualpsname;
       my $bname;
       for my $b (sort keys %{$bntofn{$realfile}}) {
-        $fontdb{$k}{'casefold'} = "debug" if $opt_strictpsname;
-        if ($fontdb{$k}{'casefold'} && $zrlistttc_available) {
+        $fontdb{$k}{'doublecheck'} = "debug" if $opt_strictpsname;
+        if ($fontdb{$k}{'doublecheck'} && $zrlistttc_available) {
           print_debug("We need to test whether\n");
           print_debug("  $b\n");
           print_debug("is the correct one. Invoking zrlistttc ...\n");
@@ -1631,7 +1634,7 @@ sub read_each_font_database {
   my $fontname = "";
   my $fontclass = "";
   my %fontprovides = ();
-  my $fontcasefold = "";
+  my $fontdoublecheck = "";
   my %fontfiles;
   my $psname = "";
   my $lineno = 0;
@@ -1652,7 +1655,7 @@ sub read_each_font_database {
           }
           $fontdb{$realfontname}{'origname'} = $fontname;
           $fontdb{$realfontname}{'class'} = $fontclass;
-          $fontdb{$realfontname}{'casefold'} = $fontcasefold;
+          $fontdb{$realfontname}{'doublecheck'} = $fontdoublecheck;
           $fontdb{$realfontname}{'files'} = { %fontfiles };
           $fontdb{$realfontname}{'provides'} = { %fontprovides };
           if ($opt_debug >= 3) {
@@ -1660,14 +1663,14 @@ sub read_each_font_database {
           }
           # reset to start
           $fontname = $fontclass = $psname = "";
-          $fontcasefold = "";
+          $fontdoublecheck = "";
           %fontfiles = ();
           %fontprovides = ();
         } else {
           print_warning("incomplete entry above line $lineno for $fontname/$fontclass, skipping!\n");
           # reset to start
           $fontname = $fontclass = $psname = "";
-          $fontcasefold = "";
+          $fontdoublecheck = "";
           %fontfiles = ();
           %fontprovides = ();
         }
@@ -1707,7 +1710,8 @@ sub read_each_font_database {
     if ($l =~ m/^PSName:\s*(.*)$/) { $psname = $1; next; }
     if ($l =~ m/^Class:\s*(.*)$/) { $fontclass = $1 ; next ; }
     if ($l =~ m/^Provides\((\d+)\):\s*(.*)$/) { $fontprovides{$2} = $1; next; }
-    if ($l =~ m/^Casefold:\s*(.*)$/) { $fontcasefold = $1 ; next ; }
+    if ($l =~ m/^Doublecheck:\s*(.*)$/) { $fontdoublecheck = $1 ; next ; }
+    if ($l =~ m/^Casefold:\s*(.*)$/) { $fontdoublecheck = $1 ; next ; } # no longer used
     # new code: distinguish 4 types (otf, otc, ttf, ttc)
     if ($l =~ m/^OTFname(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
@@ -1820,7 +1824,7 @@ sub dump_font_database {
     for my $p (sort keys %{$fontdb{$k}{'provides'}}) {
       print FOO "Provides($fontdb{$k}{'provides'}{$p}): $p\n";
     }
-    print FOO "Casefold: $fontdb{$k}{'casefold'}\n" if ($fontdb{$k}{'casefold'});
+    print FOO "Doublecheck: $fontdb{$k}{'doublecheck'}\n" if ($fontdb{$k}{'doublecheck'});
     for my $f (sort { $fontdb{$k}{'files'}{$a}{'priority'}
                       <=>
                       $fontdb{$k}{'files'}{$b}{'priority'} }
@@ -2426,7 +2430,7 @@ INCLUDE cjkgs-solaris.dat
 Name: Baekmuk-Batang
 Class: Korea
 Provides(70): HYSMyeongJo-Medium
-Casefold: true
+Doublecheck: true
 TTFname(20): batang.ttf
 TTFname(10): Baekmuk-Batang.ttf
 
@@ -2439,7 +2443,7 @@ TTFname(10): Baekmuk-Dotum.ttf
 Name: Baekmuk-Gulim
 Class: Korea
 Provides(70): HYRGoThic-Medium
-Casefold: true
+Doublecheck: true
 TTFname(20): gulim.ttf
 TTFname(10): Baekmuk-Gulim.ttf
 
@@ -2494,7 +2498,7 @@ INCLUDE cjkgs-hancom.dat
 
 Name: Batang
 Class: Korea
-Casefold: true
+Doublecheck: true
 TTFname(50): Batang.ttf
 TTCname(20): batang.ttc(0)
 
@@ -2514,7 +2518,7 @@ TTCname(20): gulim.ttc(3)
 
 Name: Gulim
 Class: Korea
-Casefold: true
+Doublecheck: true
 TTFname(50): Gulim.ttf
 TTCname(20): gulim.ttc(0)
 

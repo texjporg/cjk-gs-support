@@ -30,6 +30,8 @@
 #   MeiryoItalic.ttf
 # are bundled with Office for Mac 2016.
 
+# [TODO] I don't know when the TTC index of msgothic.ttc changed!
+
 # [TODO] Check about HG* fonts, and move Chinese/Korean fonts
 
 Name: MS-Mincho
@@ -78,13 +80,17 @@ TTCname(20): msmincho.ttc(1)
 
 Name: MS-PGothic
 Class: Japan
+Doublecheck: true
 TTFname(50): MS PGothic.ttf
 TTFname(30): MS-PGothic.ttf
-TTCname(20): msgothic.ttc(1)
+TTCname(20): msgothic.ttc(1) # old
+TTCname(20): msgothic.ttc(2) # new
 
 Name: MS-UIGothic
 Class: Japan
-TTCname(20): msgothic.ttc(2)
+Doublecheck: true
+TTCname(20): msgothic.ttc(2) # old
+TTCname(20): msgothic.ttc(1) # new
 
 Name: Meiryo
 Class: Japan
