@@ -84,13 +84,13 @@ Doublecheck: true
 TTFname(50): MS PGothic.ttf
 TTFname(30): MS-PGothic.ttf
 TTCname(20): msgothic.ttc(1) # old
-TTCname(20): msgothic.ttc(2) # new
+TTCname(19): msgothic.ttc(2) # new
 
 Name: MS-UIGothic
 Class: Japan
 Doublecheck: true
 TTCname(20): msgothic.ttc(2) # old
-TTCname(20): msgothic.ttc(1) # new
+TTCname(19): msgothic.ttc(1) # new
 
 Name: Meiryo
 Class: Japan

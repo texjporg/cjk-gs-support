@@ -1432,8 +1432,8 @@ sub check_for_files {
         $fontdb{$k}{'doublecheck'} = "debug" if $opt_strictpsname;
         if ($fontdb{$k}{'doublecheck'} && $zrlistttc_available) {
           print_debug("We need to test whether\n");
-          print_debug("  $b\n");
-          print_debug("is the correct one. Invoking zrlistttc ...\n");
+          print_debug("  $b:$index\n");
+          print_debug("is the correct one ($k). Invoking zrlistttc ...\n");
           chomp($actualpsname = `texlua $zrlistttc -i $index "$b"`);
           if ($?) {
             # something is wrong with the font file, or zrlistttc does not support it;
