@@ -1,142 +1,142 @@
 # SourceHanSerif
 
 Name: SourceHanSerif-ExtraLight
-Class: Japan
+Class: AI0
 OTFname(10): SourceHanSerif-ExtraLight.otf
 OTCname(20): SourceHanSerif-ExtraLight.ttc(0)
 
 Name: SourceHanSerif-Light
-Class: Japan
+Class: AI0
 OTFname(10): SourceHanSerif-Light.otf
 OTCname(20): SourceHanSerif-Light.ttc(0)
 
 Name: SourceHanSerif-Regular
-Class: Japan
+Class: AI0
 OTFname(10): SourceHanSerif-Regular.otf
 OTCname(20): SourceHanSerif-Regular.ttc(0)
 
 Name: SourceHanSerif-Medium
-Class: Japan
+Class: AI0
 OTFname(10): SourceHanSerif-Medium.otf
 OTCname(20): SourceHanSerif-Medium.ttc(0)
 
 Name: SourceHanSerif-SemiBold
-Class: Japan
+Class: AI0
 OTFname(10): SourceHanSerif-SemiBold.otf
 OTCname(20): SourceHanSerif-SemiBold.ttc(0)
 
 Name: SourceHanSerif-Bold
-Class: Japan
+Class: AI0
 OTFname(10): SourceHanSerif-Bold.otf
 OTCname(20): SourceHanSerif-Bold.ttc(0)
 
 Name: SourceHanSerif-Heavy
-Class: Japan
+Class: AI0
 OTFname(10): SourceHanSerif-Heavy.otf
 OTCname(20): SourceHanSerif-Heavy.ttc(0)
 
 Name: SourceHanSerifK-ExtraLight
-Class: Korea
+Class: AI0
 OTFname(10): SourceHanSerifK-ExtraLight.otf
 OTCname(20): SourceHanSerif-ExtraLight.ttc(1)
 
 Name: SourceHanSerifK-Light
-Class: Korea
+Class: AI0
 OTFname(10): SourceHanSerifK-Light.otf
 OTCname(20): SourceHanSerif-Light.ttc(1)
 
 Name: SourceHanSerifK-Regular
-Class: Korea
+Class: AI0
 OTFname(10): SourceHanSerifK-Regular.otf
 OTCname(20): SourceHanSerif-Regular.ttc(1)
 
 Name: SourceHanSerifK-Medium
-Class: Korea
+Class: AI0
 OTFname(10): SourceHanSerifK-Medium.otf
 OTCname(20): SourceHanSerif-Medium.ttc(1)
 
 Name: SourceHanSerifK-SemiBold
-Class: Korea
+Class: AI0
 OTFname(10): SourceHanSerifK-SemiBold.otf
 OTCname(20): SourceHanSerif-SemiBold.ttc(1)
 
 Name: SourceHanSerifK-Bold
-Class: Korea
+Class: AI0
 OTFname(10): SourceHanSerifK-Bold.otf
 OTCname(20): SourceHanSerif-Bold.ttc(1)
 
 Name: SourceHanSerifK-Heavy
-Class: Korea
+Class: AI0
 OTFname(10): SourceHanSerifK-Heavy.otf
 OTCname(20): SourceHanSerif-Heavy.ttc(1)
 
 Name: SourceHanSerifSC-ExtraLight
-Class: GB
+Class: AI0
 OTFname(10): SourceHanSerifSC-ExtraLight.otf
 OTCname(20): SourceHanSerif-ExtraLight.ttc(2)
 
 Name: SourceHanSerifSC-Light
-Class: GB
+Class: AI0
 OTFname(10): SourceHanSerifSC-Light.otf
 OTCname(20): SourceHanSerif-Light.ttc(2)
 
 Name: SourceHanSerifSC-Regular
-Class: GB
+Class: AI0
 OTFname(10): SourceHanSerifSC-Regular.otf
 OTCname(20): SourceHanSerif-Regular.ttc(2)
 
 Name: SourceHanSerifSC-Medium
-Class: GB
+Class: AI0
 OTFname(10): SourceHanSerifSC-Medium.otf
 OTCname(20): SourceHanSerif-Medium.ttc(2)
 
 Name: SourceHanSerifSC-SemiBold
-Class: GB
+Class: AI0
 OTFname(10): SourceHanSerifSC-SemiBold.otf
 OTCname(20): SourceHanSerif-SemiBold.ttc(2)
 
 Name: SourceHanSerifSC-Bold
-Class: GB
+Class: AI0
 OTFname(10): SourceHanSerifSC-Bold.otf
 OTCname(20): SourceHanSerif-Bold.ttc(2)
 
 Name: SourceHanSerifSC-Heavy
-Class: GB
+Class: AI0
 OTFname(10): SourceHanSerifSC-Heavy.otf
 OTCname(20): SourceHanSerif-Heavy.ttc(2)
 
 Name: SourceHanSerifTC-ExtraLight
-Class: CNS
+Class: AI0
 OTFname(10): SourceHanSerifTC-ExtraLight.otf
 OTCname(20): SourceHanSerif-ExtraLight.ttc(3)
 
 Name: SourceHanSerifTC-Light
-Class: CNS
+Class: AI0
 OTFname(10): SourceHanSerifTC-Light.otf
 OTCname(20): SourceHanSerif-Light.ttc(3)
 
 Name: SourceHanSerifTC-Regular
-Class: CNS
+Class: AI0
 OTFname(10): SourceHanSerifTC-Regular.otf
 OTCname(20): SourceHanSerif-Regular.ttc(3)
 
 Name: SourceHanSerifTC-Medium
-Class: CNS
+Class: AI0
 OTFname(10): SourceHanSerifTC-Medium.otf
 OTCname(20): SourceHanSerif-Medium.ttc(3)
 
 Name: SourceHanSerifTC-SemiBold
-Class: CNS
+Class: AI0
 OTFname(10): SourceHanSerifTC-SemiBold.otf
 OTCname(20): SourceHanSerif-SemiBold.ttc(3)
 
 Name: SourceHanSerifTC-Bold
-Class: CNS
+Class: AI0
 OTFname(10): SourceHanSerifTC-Bold.otf
 OTCname(20): SourceHanSerif-Bold.ttc(3)
 
 Name: SourceHanSerifTC-Heavy
-Class: CNS
+Class: AI0
 OTFname(10): SourceHanSerifTC-Heavy.otf
 OTCname(20): SourceHanSerif-Heavy.ttc(3)
 

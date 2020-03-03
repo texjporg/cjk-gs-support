@@ -1,182 +1,182 @@
 # SourceHanSans
 
 Name: SourceHanSans-ExtraLight
-Class: Japan
+Class: AI0
 OTFname(10): SourceHanSans-ExtraLight.otf
 OTCname(20): SourceHanSans-ExtraLight.ttc(0)
 
 Name: SourceHanSans-Light
-Class: Japan
+Class: AI0
 OTFname(10): SourceHanSans-Light.otf
 OTCname(20): SourceHanSans-Light.ttc(0)
 
 Name: SourceHanSans-Normal
-Class: Japan
+Class: AI0
 OTFname(10): SourceHanSans-Normal.otf
 OTCname(20): SourceHanSans-Normal.ttc(0)
 
 Name: SourceHanSans-Regular
-Class: Japan
+Class: AI0
 OTFname(10): SourceHanSans-Regular.otf
 OTCname(20): SourceHanSans-Regular.ttc(0)
 
 Name: SourceHanSans-Medium
-Class: Japan
+Class: AI0
 OTFname(10): SourceHanSans-Medium.otf
 OTCname(20): SourceHanSans-Medium.ttc(0)
 
 Name: SourceHanSans-Bold
-Class: Japan
+Class: AI0
 OTFname(10): SourceHanSans-Bold.otf
 OTCname(20): SourceHanSans-Bold.ttc(0)
 
 Name: SourceHanSans-Heavy
-Class: Japan
+Class: AI0
 OTFname(10): SourceHanSans-Heavy.otf
 OTCname(20): SourceHanSans-Heavy.ttc(0)
 
 Name: SourceHanSansK-ExtraLight
-Class: Korea
+Class: AI0
 OTFname(10): SourceHanSansK-ExtraLight.otf
 OTCname(20): SourceHanSans-ExtraLight.ttc(1)
 
 Name: SourceHanSansK-Light
-Class: Korea
+Class: AI0
 OTFname(10): SourceHanSansK-Light.otf
 OTCname(20): SourceHanSans-Light.ttc(1)
 
 Name: SourceHanSansK-Normal
-Class: Korea
+Class: AI0
 OTFname(10): SourceHanSansK-Normal.otf
 OTCname(20): SourceHanSans-Normal.ttc(1)
 
 Name: SourceHanSansK-Regular
-Class: Korea
+Class: AI0
 OTFname(10): SourceHanSansK-Regular.otf
 OTCname(20): SourceHanSans-Regular.ttc(1)
 
 Name: SourceHanSansK-Medium
-Class: Korea
+Class: AI0
 OTFname(10): SourceHanSansK-Medium.otf
 OTCname(20): SourceHanSans-Medium.ttc(1)
 
 Name: SourceHanSansK-Bold
-Class: Korea
+Class: AI0
 OTFname(10): SourceHanSansK-Bold.otf
 OTCname(20): SourceHanSans-Bold.ttc(1)
 
 Name: SourceHanSansK-Heavy
-Class: Korea
+Class: AI0
 OTFname(10): SourceHanSansK-Heavy.otf
 OTCname(20): SourceHanSans-Heavy.ttc(1)
 
 Name: SourceHanSansSC-ExtraLight
-Class: GB
+Class: AI0
 OTFname(10): SourceHanSansSC-ExtraLight.otf
 OTCname(20): SourceHanSans-ExtraLight.ttc(2)
 
 Name: SourceHanSansSC-Light
-Class: GB
+Class: AI0
 OTFname(10): SourceHanSansSC-Light.otf
 OTCname(20): SourceHanSans-Light.ttc(2)
 
 Name: SourceHanSansSC-Normal
-Class: GB
+Class: AI0
 OTFname(10): SourceHanSansSC-Normal.otf
 OTCname(20): SourceHanSans-Normal.ttc(2)
 
 Name: SourceHanSansSC-Regular
-Class: GB
+Class: AI0
 OTFname(10): SourceHanSansSC-Regular.otf
 OTCname(20): SourceHanSans-Regular.ttc(2)
 
 Name: SourceHanSansSC-Medium
-Class: GB
+Class: AI0
 OTFname(10): SourceHanSansSC-Medium.otf
 OTCname(20): SourceHanSans-Medium.ttc(2)
 
 Name: SourceHanSansSC-Bold
-Class: GB
+Class: AI0
 OTFname(10): SourceHanSansSC-Bold.otf
 OTCname(20): SourceHanSans-Bold.ttc(2)
 
 Name: SourceHanSansSC-Heavy
-Class: GB
+Class: AI0
 OTFname(10): SourceHanSansSC-Heavy.otf
 OTCname(20): SourceHanSans-Heavy.ttc(2)
 
 Name: SourceHanSansTC-ExtraLight
-Class: CNS
+Class: AI0
 OTFname(10): SourceHanSansTC-ExtraLight.otf
 OTCname(20): SourceHanSans-ExtraLight.ttc(3)
 
 Name: SourceHanSansTC-Light
-Class: CNS
+Class: AI0
 OTFname(10): SourceHanSansTC-Light.otf
 OTCname(20): SourceHanSans-Light.ttc(3)
 
 Name: SourceHanSansTC-Normal
-Class: CNS
+Class: AI0
 OTFname(10): SourceHanSansTC-Normal.otf
 OTCname(20): SourceHanSans-Normal.ttc(3)
 
 Name: SourceHanSansTC-Regular
-Class: CNS
+Class: AI0
 OTFname(10): SourceHanSansTC-Regular.otf
 OTCname(20): SourceHanSans-Regular.ttc(3)
 
 Name: SourceHanSansTC-Medium
-Class: CNS
+Class: AI0
 OTFname(10): SourceHanSansTC-Medium.otf
 OTCname(20): SourceHanSans-Medium.ttc(3)
 
 Name: SourceHanSansTC-Bold
-Class: CNS
+Class: AI0
 OTFname(10): SourceHanSansTC-Bold.otf
 OTCname(20): SourceHanSans-Bold.ttc(3)
 
 Name: SourceHanSansTC-Heavy
-Class: CNS
+Class: AI0
 OTFname(10): SourceHanSansTC-Heavy.otf
 OTCname(20): SourceHanSans-Heavy.ttc(3)
 
 Name: SourceHanSansHW-Regular
-Class: Japan
+Class: AI0
 OTFname(10): SourceHanSansHW-Regular.otf
 OTCname(20): SourceHanSans-Regular.ttc(4)
 
 Name: SourceHanSansHW-Bold
-Class: Japan
+Class: AI0
 OTFname(10): SourceHanSansHW-Bold.otf
 OTCname(20): SourceHanSans-Bold.ttc(4)
 
 Name: SourceHanSansHWK-Regular
-Class: Korea
+Class: AI0
 OTFname(10): SourceHanSansHWK-Regular.otf
 OTCname(20): SourceHanSans-Regular.ttc(5)
 
 Name: SourceHanSansHWK-Bold
-Class: Korea
+Class: AI0
 OTFname(10): SourceHanSansHWK-Bold.otf
 OTCname(20): SourceHanSans-Bold.ttc(5)
 
 Name: SourceHanSansHWSC-Regular
-Class: GB
+Class: AI0
 OTFname(10): SourceHanSansHWSC-Regular.otf
 OTCname(20): SourceHanSans-Regular.ttc(6)
 
 Name: SourceHanSansHWSC-Bold
-Class: GB
+Class: AI0
 OTFname(10): SourceHanSansHWSC-Bold.otf
 OTCname(20): SourceHanSans-Bold.ttc(6)
 
 Name: SourceHanSansHWTC-Regular
-Class: CNS
+Class: AI0
 OTFname(10): SourceHanSansHWTC-Regular.otf
 OTCname(20): SourceHanSans-Regular.ttc(7)
 
 Name: SourceHanSansHWTC-Bold
-Class: CNS
+Class: AI0
 OTFname(10): SourceHanSansHWTC-Bold.otf
 OTCname(20): SourceHanSans-Bold.ttc(7)
 
