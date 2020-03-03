@@ -8,10 +8,16 @@ OTFname: HaranoAjiMincho-ExtraLight.otf
 
 Name: HaranoAjiMincho-Light
 Class: Japan
+Provides(70): Ryumin-Light
+Provides(70): RyuminPro-Light
+Provides(70): HiraMinProN-W3
+Provides(70): HiraMinPro-W3
 OTFname: HaranoAjiMincho-Light.otf
 
 Name: HaranoAjiMincho-Regular
 Class: Japan
+Provides(70): FutoMinA101-Bold
+Provides(70): FutoMinA101Pro-Bold
 OTFname: HaranoAjiMincho-Regular.otf
 
 Name: HaranoAjiMincho-Medium
@@ -20,10 +26,18 @@ OTFname: HaranoAjiMincho-Medium.otf
 
 Name: HaranoAjiMincho-SemiBold
 Class: Japan
+Provides(70): MidashiMin-MA31
+Provides(70): MidashiMinPro-MA31
+Provides(70): HiraMinProN-W6
+Provides(70): HiraMinPro-W6
 OTFname: HaranoAjiMincho-SemiBold.otf
 
 Name: HaranoAjiMincho-Bold
 Class: Japan
+Provides(71): MidashiMin-MA31
+Provides(71): MidashiMinPro-MA31
+Provides(71): HiraMinProN-W6
+Provides(71): HiraMinPro-W6
 OTFname: HaranoAjiMincho-Bold.otf
 
 Name: HaranoAjiMincho-Heavy
@@ -40,21 +54,39 @@ OTFname: HaranoAjiGothic-Light.otf
 
 Name: HaranoAjiGothic-Normal
 Class: Japan
+Provides(70): HiraKakuProN-W3
+Provides(70): HiraKakuPro-W3
 OTFname: HaranoAjiGothic-Normal.otf
 
 Name: HaranoAjiGothic-Regular
 Class: Japan
+Provides(70): GothicBBB-Medium
+Provides(70): GothicBBBPro-Medium
+Provides(71): HiraKakuProN-W3
+Provides(71): HiraKakuPro-W3
 OTFname: HaranoAjiGothic-Regular.otf
 
 Name: HaranoAjiGothic-Medium
 Class: Japan
+Provides(70): FutoGoB101-Bold
+Provides(70): FutoGoB101Pro-Bold
+Provides(70): HiraKakuProN-W6
+Provides(70): HiraKakuPro-W6
 OTFname: HaranoAjiGothic-Medium.otf
 
 Name: HaranoAjiGothic-Bold
 Class: Japan
+Provides(70): MidashiGo-MB31
+Provides(70): MidashiGoPro-MB31
+Provides(70): HiraKakuStdN-W8
+Provides(70): HiraKakuStd-W8
 OTFname: HaranoAjiGothic-Bold.otf
 
 Name: HaranoAjiGothic-Heavy
 Class: Japan
+Provides(70): Jun101-Light
+Provides(70): Jun101Pro-Light
+Provides(70): HiraMaruProN-W4
+Provides(70): HiraMaruPro-W4
 OTFname: HaranoAjiGothic-Heavy.otf
 

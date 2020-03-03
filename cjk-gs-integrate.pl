@@ -2148,6 +2148,7 @@ alias if necessary.
 For the Japanese fonts:
     Morisawa Pr6N, Morisawa, Hiragino ProN, Hiragino,
     Kozuka Pr6N, Kozuka ProVI, Kozuka Pro, Kozuka Std,
+    HaranoAji,
     Yu OS X, Yu Win, MS,
     Moga-Mobo-ex, Moga-Mobo, IPAex, IPA, Ume
 
