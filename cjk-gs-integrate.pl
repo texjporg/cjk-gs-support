@@ -934,6 +934,21 @@ pop
 %%EOF
 ";
     close(FOO);
+
+    if (! -d "$fd/../CMap") {
+      print_debug("Creating directory $fd/../CMap ...\n");
+      make_dir("$fd/../CMap", "cannot create CMap directory");
+    }
+    if (! -f "$fd/../CMap/$enc") {
+      print_debug("CMap $enc is not found in gs resource diretory\n");
+      chomp(my $dest = `kpsewhich -format=cmap $enc`);
+      if ($dest) {
+        print_debug("Symlinking CMap $dest ...\n");
+        link_font($dest, "$fd/../CMap", $enc);
+      } else {
+        print_debug("CMap $enc is not found by kpsewhich\n");
+      }
+    }
   }
 }
 
