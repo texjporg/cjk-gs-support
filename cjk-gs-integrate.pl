@@ -917,6 +917,15 @@ sub generate_font_snippet {
   for my $enc (@{$encode_list{$c}}) {
     if ($opt_remove) {
       unlink "$fd/$n-$enc" if (-f "$fd/$n-$enc");
+      if(-l "$fd/../CMap/$enc") {
+        my $linkt = readlink("$fd/../CMap/$enc");
+        if($linkt) {
+          chomp(my $dest = `kpsewhich -format=cmap $enc`);
+          if($dest eq $linkt) {
+            unlink("$fd/../CMap/$enc");
+          }
+        }
+      }
       next;
     }
     open(FOO, ">$fd/$n-$enc") ||
