@@ -574,6 +574,7 @@ sub main {
   }
   print_info(($opt_remove ? "removing" : "generating") . " snippets and cidfmap.aliases for font aliases ...\n");
   do_aliases();
+  do_cmaps();
   write_akotfps_datafile() if $opt_akotfps;
   if ($opt_texmflink && !$dry_run) {
     print_info("running mktexlsr ...\n");
@@ -798,6 +799,53 @@ sub do_aliases {
   }
 }
 
+sub do_cmaps {
+  # add symlinking CMaps
+  # for which we generate snippets but gs does not provide
+  my $cmapdest = "$opt_output/CMap";
+  return if $dry_run;
+  if ($opt_remove) {
+    # we remove only if both of the following conditions are met:
+    #   (1) it is a link
+    #   (2) the link target is the same as kpsewhich result
+    # otherwise it's unsafe to remove, as it may have been added
+    # by others or distributed by gs itself
+    for my $class (%encode_list) {
+      for my $enc (@{$encode_list{$class}}) {
+        if (-l "$cmapdest/$enc") {
+          my $linkt = readlink("$cmapdest/$enc");
+          if ($linkt) {
+            chomp(my $dest = `kpsewhich -format=cmap $enc`);
+            if ($linkt eq $dest) {
+              unlink("$cmapdest/$enc");
+            }
+          }
+        }
+      }
+    }
+    return;
+  }
+  # add mode
+  if (! -d "$cmapdest") {
+    print_debug("Creating directory $cmapdest ...\n");
+    make_dir("$cmapdest", "cannot create CMap directory");
+  }
+  for my $class (%encode_list) {
+    for my $enc (@{$encode_list{$class}}) {
+      if (! -f "$cmapdest/$enc") {
+        print_debug("CMap $enc is not found in gs resource directory\n");
+        chomp(my $dest = `kpsewhich -format=cmap $enc`);
+        if ($dest) {
+          print_debug("Symlinking CMap $dest ...\n");
+          link_font($dest, "$cmapdest", $enc);
+        } else {
+          print_debug("CMap $enc is not found by kpsewhich\n");
+        }
+      }
+    }
+  }
+}
+
 sub update_master_cidfmap {
   # what we have to do is:
   #   in add mode:
@@ -917,15 +965,6 @@ sub generate_font_snippet {
   for my $enc (@{$encode_list{$c}}) {
     if ($opt_remove) {
       unlink "$fd/$n-$enc" if (-f "$fd/$n-$enc");
-      if(-l "$fd/../CMap/$enc") {
-        my $linkt = readlink("$fd/../CMap/$enc");
-        if($linkt) {
-          chomp(my $dest = `kpsewhich -format=cmap $enc`);
-          if($dest eq $linkt) {
-            unlink("$fd/../CMap/$enc");
-          }
-        }
-      }
       next;
     }
     open(FOO, ">$fd/$n-$enc") ||
@@ -943,21 +982,6 @@ pop
 %%EOF
 ";
     close(FOO);
-
-    if (! -d "$fd/../CMap") {
-      print_debug("Creating directory $fd/../CMap ...\n");
-      make_dir("$fd/../CMap", "cannot create CMap directory");
-    }
-    if (! -f "$fd/../CMap/$enc") {
-      print_debug("CMap $enc is not found in gs resource diretory\n");
-      chomp(my $dest = `kpsewhich -format=cmap $enc`);
-      if ($dest) {
-        print_debug("Symlinking CMap $dest ...\n");
-        link_font($dest, "$fd/../CMap", $enc);
-      } else {
-        print_debug("CMap $enc is not found by kpsewhich\n");
-      }
-    }
   }
 }
 
