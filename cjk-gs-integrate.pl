@@ -728,7 +728,7 @@ sub do_aliases {
   #
   $outp .= "\n\n% Aliases\n";
   #
-  my (@jal, @kal, @tal, @sal);
+  my (@jal, @kal, @tal, @sal, @ai0al);
   #
   for my $al (sort keys %aliases) {
     my $target;
@@ -767,6 +767,8 @@ sub do_aliases {
       push @sal, "/$al /$target ;";
     } elsif ($class eq 'CNS') {
       push @tal, "/$al /$target ;";
+    } elsif ($class eq 'AI0') {
+      push @ai0al, "/$al /$target ;";
     } else {
       print STDERR "unknown class $class for $al\n";
     }
@@ -780,6 +782,7 @@ sub do_aliases {
   $outp .= "\n% Korean fonts\n" . join("\n", @kal) . "\n" if @kal;
   $outp .= "\n% Traditional Chinese fonts\n" . join("\n", @tal) . "\n" if @tal;
   $outp .= "\n% Simplified Chinese fonts\n" . join("\n", @sal) . "\n" if @sal;
+  $outp .= "\n% Adobe-Identity-0 fonts\n" . join("\n", @ai0al) . "\n" if @ai0al;
   #
   return if $dry_run;
   if ($outp && !$opt_remove) {
@@ -1256,7 +1259,7 @@ sub info_found_fonts {
 # dump aliases
 sub info_list_aliases {
   print "List of ", ($opt_listallaliases ? "all" : "available"), " aliases and their options (in decreasing priority):\n" unless $opt_machine;
-  my (@jal, @kal, @tal, @sal);
+  my (@jal, @kal, @tal, @sal, @ai0al);
   for my $al (sort keys %aliases) {
     my $cl;
     my @ks = sort { $a <=> $b} keys(%{$aliases{$al}});
@@ -1288,6 +1291,8 @@ sub info_list_aliases {
       push @sal, $foo;
     } elsif ($cl eq 'CNS') {
       push @tal, $foo;
+    } elsif ($cl eq 'AI0') {
+      push @ai0al, $foo;
     } else {
       print STDERR "unknown class $cl for $al\n";
     }
@@ -1297,11 +1302,13 @@ sub info_list_aliases {
     print @kal if @kal;
     print @sal if @sal;
     print @tal if @tal;
+    print @ai0al if @ai0al;
   } else {
     print "Aliases for Japanese fonts:\n", @jal, "\n" if @jal;
     print "Aliases for Korean fonts:\n", @kal, "\n" if @kal;
     print "Aliases for Simplified Chinese fonts:\n", @sal, "\n" if @sal;
     print "Aliases for Traditional Chinese fonts:\n", @tal, "\n" if @tal;
+    print "Aliases for Adobe-Identity-0 fonts:\n", @ai0al, "\n" if @ai0al;
   }
 }
 
