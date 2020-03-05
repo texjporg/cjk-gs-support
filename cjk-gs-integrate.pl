@@ -2377,7 +2377,7 @@ INCLUDE cjkgs-ume.dat
 # Sazanami (free)
 INCLUDE cjkgs-sazanami.dat
 
-# Harano Aji Fonts (free)
+# Harano Aji Fonts (free) -- Provides J70, J71
 INCLUDE cjkgs-haranoaji.dat
 
 # Osaka (Apple)
