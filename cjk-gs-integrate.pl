@@ -950,6 +950,9 @@ sub generate_cidfmap_entry {
     $s .= "1) 5]";
   } elsif ($c eq "Korea") {
     $s .= "1) 2]";
+  } elsif ($c eq "AI0") {
+    print_warning("cannot use class AI0 for non-OTF $n, skipping.\n");
+    return '';
   } else {
     print_warning("unknown class $c for $n, skipping.\n");
     return '';
