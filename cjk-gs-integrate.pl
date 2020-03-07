@@ -833,6 +833,10 @@ sub do_cmaps {
     make_dir("$cmapdest", "cannot create CMap directory");
   }
   for my $class (%encode_list) {
+    if ($class =~ m/^AI0-(.*)$/) {
+      # skip AI0 font-specific CMap when the real font is unavailable
+      next if (!$fontdb{$1}{'available'});
+    }
     for my $enc (@{$encode_list{$class}}) {
       if (! -f "$cmapdest/$enc") {
         print_debug("CMap $enc is not found in gs resource directory\n");
