@@ -1507,7 +1507,7 @@ sub check_for_files {
         if ($opt_strictpsname && !$fontdb{$k}{'doublecheck'}) {
           $fontdb{$k}{'doublecheck'} = "debug"; # stub
         }
-        if ($fontdb{$k}{'doublecheck'} && $zrlistttc_available) {
+        if ($fontdb{$k}{'doublecheck'} && $fontdb{$k}{'doublecheck'} ne "false" && $zrlistttc_available) {
           print_debug("We need to test whether\n");
           print_debug("  $b:$index\n");
           print_debug("is the correct one ($k). Invoking zrlistttc ...\n");

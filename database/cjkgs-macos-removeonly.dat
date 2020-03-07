@@ -395,6 +395,7 @@ RMVname(40): 楷体.ttc(3)
 Name: STKaiti-Adobe-CNS1
 Class: CNS
 #Provides(??): MKai-Medium # fails
+Doublecheck: false
 TTFname(10): STKaiti.ttf
 TTFname(11): STKAITI.TTF
 TTFname(20): 华文楷体.ttf
