@@ -1737,7 +1737,7 @@ sub read_each_font_database {
           if ($fontclass eq "AI0") {
             $encode_list{"AI0-$realfontname"} = [ @fontcmaps ];
           } elsif (@fontcmaps) {
-            print_warning("CMap entry for class $realfontname (Class: $fontclass) ignored!\n");
+            print_warning("CMap entry for $realfontname (Class: $fontclass) ignored!\n");
           }
           if ($opt_debug >= 3) {
             print_dddebug("Dumping fontfiles for $realfontname: " . Data::Dumper::Dumper(\%fontfiles));
