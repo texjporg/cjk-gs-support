@@ -1504,7 +1504,9 @@ sub check_for_files {
       my $actualpsname;
       my $bname;
       for my $b (sort keys %{$bntofn{$realfile}}) {
-        $fontdb{$k}{'doublecheck'} = "debug" if $opt_strictpsname;
+        if ($opt_strictpsname && !$fontdb{$k}{'doublecheck'}) {
+          $fontdb{$k}{'doublecheck'} = "debug"; # stub
+        }
         if ($fontdb{$k}{'doublecheck'} && $zrlistttc_available) {
           print_debug("We need to test whether\n");
           print_debug("  $b:$index\n");
@@ -1523,7 +1525,9 @@ sub check_for_files {
           if ($actualpsname ne $k) {
             print_debug("... PSName returned by zrlistttc ($actualpsname) is\n");
             print_debug("different from our database ($k), discarding!\n");
-            print_warning("zrlistttc check failed for $b\n") if $opt_strictpsname;
+            if ($opt_strictpsname && $fontdb{$k}{'doublecheck'} eq "debug") {
+              print_warning("zrlistttc check failed for $b: please report to the author!\n");
+            }
           } else {
             print_debug("... test passed.\n");
             $bname = $b;
