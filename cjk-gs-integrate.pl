@@ -818,8 +818,7 @@ sub do_cmaps {
         if (-l "$cmapdest/$enc") {
           my $linkt = readlink("$cmapdest/$enc");
           if ($linkt) {
-            chomp(my $dest = `kpsewhich -format=cmap $enc`);
-            if ($linkt eq $dest) {
+            if ($linkt eq search_cmap($enc)) {
               unlink("$cmapdest/$enc");
             }
           }
@@ -837,7 +836,7 @@ sub do_cmaps {
     for my $enc (@{$encode_list{$class}}) {
       if (! -f "$cmapdest/$enc") {
         print_debug("CMap $enc is not found in gs resource directory\n");
-        chomp(my $dest = `kpsewhich -format=cmap $enc`);
+        my $dest = search_cmap($enc);
         if ($dest) {
           print_debug("Symlinking CMap $dest ...\n");
           link_font($dest, "$cmapdest", $enc);
@@ -847,6 +846,17 @@ sub do_cmaps {
       }
     }
   }
+}
+
+my %cmap_cache;
+
+sub search_cmap {
+  my ($cmap) = @_;
+  # search CMap with kpsewhich and cache
+  if (! exists $cmap_cache{$cmap}) {
+    chomp($cmap_cache{$cmap} = `kpsewhich -format=cmap $cmap`);
+  }
+  return $cmap_cache{$cmap};
 }
 
 sub update_master_cidfmap {
