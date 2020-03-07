@@ -31,6 +31,12 @@
 # are bundled with Office for Mac 2016.
 
 # [TODO] I don't know when the TTC index of msgothic.ttc changed!
+# Office for Mac 2016 (Ver.15.32.0, 2017-03)：
+#   msgothic.ttc Version 5.10i : old (P -> UI)
+# Office for Mac 2016 (at least Ver.16.16.14, 2019-09)：
+#   msgothic.ttc Version 5.30  : new (UI -> P)
+# Windows 8.1 (at least 2014-12)
+#   msgothic.ttc Version 5.10  : new (UI -> P)
 
 # [TODO] Check about HG* fonts, and move Chinese/Korean fonts
 

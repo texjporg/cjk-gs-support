@@ -2634,8 +2634,18 @@ Name: GungsuhChe
 Class: Korea
 TTCname(20): batang.ttc(3)
 
+# for Windows 10
+# and Office for Mac 2016 (at least Ver.16.11.0, 2018-03)
+Name: MalgunGothic
+Class: Korea
+Doublecheck: true
+TTFname: malgun.ttf
+
+# for Windows 7
+# and Office for Mac 2016 (Ver.15.32.0, 2017-03)
 Name: MalgunGothicRegular
 Class: Korea
+Doublecheck: true
 TTFname: malgun.ttf
 
 Name: MalgunGothicBold
