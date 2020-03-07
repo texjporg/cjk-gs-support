@@ -1526,6 +1526,9 @@ sub check_for_files {
             print_debug("... PSName returned by zrlistttc ($actualpsname) is\n");
             print_debug("different from our database ($k), discarding!\n");
             if ($opt_strictpsname && $fontdb{$k}{'doublecheck'} eq "debug") {
+              # in our database, we've set $fontdb{$k}{'doublecheck'} to "true" intentionally
+              # when we *know* doublecheck is actually required;
+              # if the stub "debug" detects a difference, our database should contain a bug!
               print_warning("zrlistttc check failed for $b: please report to the author!\n");
             }
           } else {
