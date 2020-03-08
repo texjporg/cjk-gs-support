@@ -859,6 +859,7 @@ sub search_cmap {
   # search CMap with kpsewhich and cache
   if (! exists $cmap_cache{$cmap}) {
     chomp($cmap_cache{$cmap} = `kpsewhich -format=cmap $cmap`);
+    $cmap_cache{$cmap} =~ s/[\r\n]+\z//; # perl's chomp() on git-bash cannot strip CR of CRLF ??
   }
   return $cmap_cache{$cmap};
 }
