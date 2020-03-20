@@ -37,6 +37,8 @@ use File::Basename;
 use File::Path qw(make_path);
 use Cwd 'abs_path';
 use strict;
+use utf8;
+use Encode;
 
 (my $prg = basename($0)) =~ s/\.pl$//;
 my $version = '$VER$';
@@ -51,8 +53,6 @@ if (win32()) {
   # routines. make sure all of these should be restricted to win32 mode!
   # TODO: what to do with $opt_fontdef, @opt_aliases and $opt_filelist,
   #       with regard to encodings?
-  use utf8;
-  use Encode;
   # some perl functions (symlink, -l test) does not work
   print_warning("Sorry, we have only partial support for Windows!\n");
 }
