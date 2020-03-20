@@ -31,12 +31,13 @@
 #
 # Note that symlink names should be consistent with ptex-fontmaps!
 
-$^W = 1;
 use Getopt::Long qw(:config no_autoabbrev ignore_case_always);
 use File::Basename;
 use File::Path qw(make_path);
 use Cwd 'abs_path';
 use strict;
+use warnings;
+no warnings qw(once);
 use utf8;
 use Encode;
 
