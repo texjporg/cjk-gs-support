@@ -40,6 +40,11 @@ use warnings;
 no warnings qw(once);
 use utf8;
 use Encode;
+use Encode::Locale;
+
+binmode (STDIN, ':encoding(console_in)');
+binmode (STDOUT, ':encoding(console_out)');
+binmode (STDERR, ':encoding(console_out)');
 
 (my $prg = basename($0)) =~ s/\.pl$//;
 my $version = '$VER$';
