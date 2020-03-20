@@ -42,11 +42,13 @@ use utf8;
 use Encode;
 use Encode::Locale;
 
+Encode::Locale::decode_argv;
+
 binmode (STDIN, ':encoding(console_in)');
 binmode (STDOUT, ':encoding(console_out)');
 binmode (STDERR, ':encoding(console_out)');
 
-(my $prg = basename($0)) =~ s/\.pl$//;
+(my $prg = basename(decode('locale', $0))) =~ s/\.pl$//;
 my $version = '$VER$';
 
 if (win32()) {
