@@ -1155,12 +1155,10 @@ sub maybe_symlink {
       $winbatch_content .= "/h " if $opt_hardlink;
       $winbatch_content .= "\"$targetname\" \"$realname\"\n";
     } else {
-      # should be encoded in cp932 for win32 console
-      $realname = encode_utftocp($realname);
-      $targetname = encode_utftocp($targetname);
       my $cmdl = "cmd.exe /c if not exist \"$targetname\" mklink ";
       $cmdl .= "/h " if $opt_hardlink;
       $cmdl .= "\"$targetname\" \"$realname\"";
+      $cmdl = encode('locale', $cmdl);
       my @ret = `$cmdl`;
       # sometimes hard link creation may fail due to "Access denied"
       # (especially when $realname is located in c:/windows/fonts).
@@ -1194,9 +1192,8 @@ sub maybe_unlink {
       # re-encoding of $winbatch_content is done by write_winbatch()
       $winbatch_content .= "if exist \"$targetname\" del \"$targetname\"\n";
     } else {
-      # should be encoded in cp932 for win32 console
-      $targetname = encode_utftocp($targetname);
       my $cmdl = "cmd.exe /c if exist \"$targetname\" del \"$targetname\"";
+      $cmdl = encode('locale', $cmdl);
       my @ret = `$cmdl`;
     }
   } else {
@@ -1207,11 +1204,8 @@ sub maybe_unlink {
 # write batch file (windows only)
 sub write_winbatch {
   return if $dry_run;
-  open(FOO, ">$winbatch") ||
+  open(FOO, ">:encoding(locale)", $winbatch) ||
     die("cannot open $winbatch for writing: $!");
-  # $winbatch_content may contain multibyte characters, and they
-  # should be encoded in cp932 in batch file
-  $winbatch_content = encode_utftocp($winbatch_content);
   print FOO "\@echo off\n",
             "$winbatch_content",
             "\@echo symlink ", ($opt_remove ? "removed\n" : "generated\n"),
@@ -1249,10 +1243,6 @@ sub info_found_fonts {
       print "Type:  $fontdb{$k}{'type'}\n";
       print "Class: $fontdb{$k}{'class'}\n";
       my $fn = $fontdb{$k}{'target'};
-      # cp932 for win32 console
-      if (win32()) {
-        $fn = encode_utftocp($fn);
-      }
       if ($fontdb{$k}{'type'} eq 'TTC' || $fontdb{$k}{'type'} eq 'OTC') {
         $fn .= "($fontdb{$k}{'subfont'})";
       }
@@ -1294,10 +1284,6 @@ sub info_list_aliases {
     for my $p (@ks) {
       my $t = $aliases{$al}{$p};
       my $fn = ($opt_listallaliases ? "-" : $fontdb{$t}{'target'} );
-      # cp932 for win32 console
-      if (win32()) {
-        $fn = encode_utftocp($fn);
-      }
       # should always be the same ;-)
       $cl = $fontdb{$t}{'class'};
       if (!$opt_listallaliases && ($fontdb{$t}{'type'} eq 'TTC' || $fontdb{$t}{'type'} eq 'OTC')) {
@@ -1435,16 +1421,13 @@ sub check_for_files {
       $cmdl .= " \"$f\" ";
     }
     # shoot up kpsewhich
-    # this call (derived from the database) contains multibyte characters,
-    # and they should be encoded in cp932 for win32 console
-    if (win32()) {
-      $cmdl = encode_utftocp($cmdl);
-    }
     print_ddebug("checking for $cmdl\n");
+    $cmdl = encode('locale', $cmdl);
     @foundfiles = `$cmdl`;
+    # We assume that the output of kpsewhich is
+    # the same as perl's locale (or active code page).
+    @foundfiles = map { decode('locale', $_) } @foundfiles;
   }
-  # at this point, on windows, @foundfiles is encoded in cp932
-  # which is suitable for the next few lines
   chomp(@foundfiles);
   print_ddebug("Found files @foundfiles\n");
   # map basenames to filenames
@@ -1466,11 +1449,6 @@ sub check_for_files {
       my $temp_realfdir = "$realf";
       $temp_realfdir =~ s!^(.*)/(.*)$!$1!;
       next if ($temp_realfdir =~ $otf_pathpart || $temp_realfdir =~ $ttf_pathpart);
-    }
-    # decode now on windows! (cp932 -> internal utf-8)
-    if (win32()) {
-      $f = encode_cptoutf($f);
-      $realf = encode_cptoutf($realf);
     }
     my $bn = basename($f);
     # kpsewhich -all might return multiple files with the same basename;
@@ -1816,12 +1794,7 @@ sub read_each_font_database {
     if ($l =~ m/^OTFname(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
-      # cp932 for win32 console
-      my $encoded_fn;
-      if (win32()) {
-        $encoded_fn = encode_utftocp($fn);
-      }
-      print_dddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
+      print_dddebug("filename: ${fn}\n");
       print_dddebug("type: otf\n");
       $fontfiles{$fn}{'type'} = 'OTF';
       next;
@@ -1829,12 +1802,7 @@ sub read_each_font_database {
     if ($l =~ m/^OTCname(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
-      # cp932 for win32 console
-      my $encoded_fn;
-      if (win32()) {
-        $encoded_fn = encode_utftocp($fn);
-      }
-      print_dddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
+      print_dddebug("filename: ${fn}\n");
       print_dddebug("type: otc\n");
       $fontfiles{$fn}{'type'} = 'OTC';
       next;
@@ -1842,12 +1810,7 @@ sub read_each_font_database {
     if ($l =~ m/^TTFname(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
-      # cp932 for win32 console
-      my $encoded_fn;
-      if (win32()) {
-        $encoded_fn = encode_utftocp($fn);
-      }
-      print_dddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
+      print_dddebug("filename: ${fn}\n");
       print_dddebug("type: ttf\n");
       $fontfiles{$fn}{'type'} = 'TTF';
       next;
@@ -1855,12 +1818,7 @@ sub read_each_font_database {
     if ($l =~ m/^TTCname(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
-      # cp932 for win32 console
-      my $encoded_fn;
-      if (win32()) {
-        $encoded_fn = encode_utftocp($fn);
-      }
-      print_dddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
+      print_dddebug("filename: ${fn}\n");
       print_dddebug("type: ttc\n");
       $fontfiles{$fn}{'type'} = 'TTC';
       next;
@@ -1869,12 +1827,7 @@ sub read_each_font_database {
     if ($l =~ m/^Filename(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
-      # cp932 for win32 console
-      my $encoded_fn;
-      if (win32()) {
-        $encoded_fn = encode_utftocp($fn);
-      }
-      print_dddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
+      print_dddebug("filename: ${fn}\n");
       if ($fn =~ m/\.otf$/i) {
         print_dddebug("type: otf\n");
         $fontfiles{$fn}{'type'} = 'OTF';
@@ -1897,12 +1850,7 @@ sub read_each_font_database {
     if ($l =~ m/^RMVname(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
-      # cp932 for win32 console
-      my $encoded_fn;
-      if (win32()) {
-        $encoded_fn = encode_utftocp($fn);
-      }
-      print_dddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
+      print_dddebug("filename: ${fn}\n");
       print_dddebug("type: remove\n");
       $fontfiles{$fn}{'type'} = 'RMV';
       next;
@@ -1966,15 +1914,17 @@ sub find_gs_resource {
     } else {
       # we assume gswin32c is in the path
       # TODO: what should we do for gswin64c?
-      chomp($foundres = `where gswin32c 2>$nul`); # assume 'where' is available
+      $foundres = `where gswin32c 2>$nul`; # assume 'where' is available
       if ($?) {
         print_error("Cannot run where gswin32c ...\n");
       } else {
+        # We assume that the output of 'where' is
+        # the same as perl's locale (or active code page).
+        chomp($foundres = decode('locale', $foundres));
         # trial 1: assume the relative path
         # when C:\path\to\bin\gswin32c.exe is found, then there should be
         # C:\path\to\Resource (note that 'where' returns backslash-ed path)
         print_debug("Finding gs resource by assuming relative path ...\n");
-        $foundres = encode_cptoutf($foundres); # 99.99% unnecessary
         $foundres =~ s!\\!/!g;
         $foundres =~ s!/bin/gswin32c\.exe$!/Resource!;
         if ( ! -d $foundres ) {
@@ -2055,20 +2005,6 @@ sub kpse_miscfont {
   if ($foo eq "") {
     chomp($foo = `kpsewhich -format=miscfont $file`);
   }
-  return $foo;
-}
-
-sub encode_utftocp {
-  my ($foo) = @_;
-  $foo = Encode::decode('utf-8', $foo);
-  $foo = Encode::encode('cp932', $foo);
-  return $foo;
-}
-
-sub encode_cptoutf {
-  my ($foo) = @_;
-  $foo = Encode::decode('cp932', $foo);
-  $foo = Encode::encode('utf-8', $foo);
   return $foo;
 }
 
