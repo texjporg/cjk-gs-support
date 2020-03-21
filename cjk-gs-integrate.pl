@@ -1863,7 +1863,7 @@ sub read_each_font_database {
 }
 
 sub dump_font_database {
-  open(FOO, ">$dump_datafile") ||
+  open(FOO, ">:encoding(UTF-8)", $dump_datafile) ||
     die("cannot open $dump_datafile for writing: $!");
   for my $k (sort keys %fontdb) {
     print FOO "Name: $fontdb{$k}{'origname'}\n";
