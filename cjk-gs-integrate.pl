@@ -724,8 +724,9 @@ sub do_nonotf_fonts {
       mkdir(encode('locale_fs', "$opt_output/Init")) ||
         die("Cannot create directory $opt_output/Init: $!");
     }
-    open(FOO, ">", encode('locale_fs',
-                          "$opt_output/$cidfmap_local_pathpart")) ||
+    # It seems that tlgs can handle UTF-8 TTF filename in cidfmap.local.
+    open(FOO, ">:encoding(UTF-8)",
+         encode('locale_fs', "$opt_output/$cidfmap_local_pathpart")) ||
       die("Cannot open $opt_output/$cidfmap_local_pathpart: $!");
     print FOO $outp;
     close(FOO);
@@ -814,7 +815,7 @@ sub do_aliases {
       mkdir(encode('locale_fs', "$opt_output/Init")) ||
         die("Cannot create directory $opt_output/Init: $!");
     }
-    open(FOO, ">",
+    open(FOO, ">:encoding(UTF-8)",
          encode('locale_fs', "$opt_output/$cidfmap_aliases_pathpart")) ||
       die("Cannot open $opt_output/$cidfmap_aliases_pathpart: $!");
     print FOO $outp;
@@ -912,7 +913,7 @@ sub update_master_cidfmap {
   print_info(sprintf("%s $add %s cidfmap file ...\n",
     ($opt_remove ? "removing" : "adding"), ($opt_remove ? "from" : "to")));
   if (-r encode('locale_fs', $cidfmap_master)) {
-    open(FOO, "<", encode('locale_fs', $cidfmap_master)) ||
+    open(FOO, "<:encoding(UTF-8)", encode('locale_fs', $cidfmap_master)) ||
       die("Cannot open $cidfmap_master for reading: $!");
     my $found = 0;
     my $found_tl = 0;
@@ -951,7 +952,7 @@ sub update_master_cidfmap {
     if ($opt_remove) {
       if ($found || $found_tl) {
         return if $dry_run;
-        open(FOO, ">", encode('locale_fs', $cidfmap_master)) ||
+        open(FOO, ">:encoding(UTF-8)", encode('locale_fs', $cidfmap_master)) ||
           die("Cannot clean up $cidfmap_master: $!");
         print FOO $newmaster;
         close FOO;
@@ -961,7 +962,7 @@ sub update_master_cidfmap {
         print_info("$add already loaded in $cidfmap_master, no changes\n");
       } else {
         return if $dry_run;
-        open(FOO, ">", encode('locale_fs', $cidfmap_master)) ||
+        open(FOO, ">:encoding(UTF-8)", encode('locale_fs', $cidfmap_master)) ||
           die("Cannot open $cidfmap_master for appending: $!");
         print FOO $newmaster;
         print FOO "($add) .runlibfile\n";
@@ -971,7 +972,7 @@ sub update_master_cidfmap {
   } else {
     return if $dry_run;
     return if $opt_remove;
-    open(FOO, ">", encode('locale_fs', $cidfmap_master)) ||
+    open(FOO, ">:encoding(UTF-8)", encode('locale_fs', $cidfmap_master)) ||
       die("Cannot open $cidfmap_master for writing: $!");
     print FOO "($add) .runlibfile\n";
     close(FOO);
@@ -1026,7 +1027,7 @@ sub generate_font_snippet {
           if (-f encode('locale_fs', "$fd/$n-$enc"));
       next;
     }
-    open(FOO, ">", encode('locale_fs', "$fd/$n-$enc")) ||
+    open(FOO, ">:encoding(UTF-8)", encode('locale_fs', "$fd/$n-$enc")) ||
       die("cannot open $fd/$n-$enc for writing: $!");
     print FOO "%!PS-Adobe-3.0 Resource-Font
 %%DocumentNeededResources: $enc (CMap)
@@ -1245,7 +1246,7 @@ sub write_akotfps_datafile {
   return if $dry_run;
   make_dir("$opt_akotfps/$akotfps_pathpart",
          "cannot create $akotfps_datafilename in it!");
-  open(FOO, ">",
+  open(FOO, ">:encoding(UTF-8)",
        encode('locale_fs',
               "$opt_akotfps/$akotfps_pathpart/$akotfps_datafilename")) ||
     die("cannot open $opt_akotfps/$akotfps_pathpart/$akotfps_datafilename for writing: $!");
