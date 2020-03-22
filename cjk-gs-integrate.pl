@@ -369,7 +369,9 @@ if ($opt_debug >= 2) {
 
 my $zrlistttc = kpse_miscfont("zrlistttc.lua");
 my $zrlistttc_available;
-chomp(my $zrlistttc_help = `texlua $zrlistttc 2>$nul`);
+my $cmdl = "texlua $zrlistttc 2>$nul";
+$cmdl = encode('locale', $cmdl);
+chomp(my $zrlistttc_help = `$cmdl`);
 if ($?) {
   if ($opt_strictpsname) {
     print_error("The script 'zrlistttc.lua' not found, cannot proceed!\n");
@@ -884,7 +886,9 @@ sub search_cmap {
   my ($cmap) = @_;
   # search CMap with kpsewhich and cache
   if (! exists $cmap_cache{$cmap}) {
-    $cmap_cache{$cmap} = `kpsewhich -format=cmap $cmap`;
+    my $cmdl = "kpsewhich -format=cmap $cmap";
+    $cmdl = encode('locale', $cmdl);
+    $cmap_cache{$cmap} = `$cmdl`;
     # We assume that the output of kpsewhich is
     # the same as perl's locale (or active code page).
     $cmap_cache{$cmap} = decode('locale', $cmap_cache{$cmap});
@@ -1529,7 +1533,9 @@ sub check_for_files {
           print_debug("We need to test whether\n");
           print_debug("  $b:$index\n");
           print_debug("is the correct one ($k). Invoking zrlistttc ...\n");
-          chomp($actualpsname = `texlua $zrlistttc -i $index "$b"`);
+          my $cmdl = "texlua $zrlistttc -i $index \"$b\"";
+          $cmdl = encode('locale', $cmdl);
+          chomp($actualpsname = `$cmdl`);
           if ($?) {
             # something is wrong with the font file, or zrlistttc does not support it;
             # still there is a chance that Ghostscript supports, so don't discard it
@@ -1539,6 +1545,9 @@ sub check_for_files {
             $bname = $b;
             last;
           }
+          # We assume that the output of texlua is
+          # the same as perl's locale (or active code page).
+          $actualpsname = decode('locale', $actualpsname);
           $actualpsname =~ s/[\r\n]+\z//; # perl's chomp() on git-bash cannot strip CR of CRLF ??
           if ($actualpsname ne $k) {
             print_debug("... PSName returned by zrlistttc ($actualpsname) is\n");
@@ -1996,7 +2005,11 @@ sub find_gs_resource {
       # when /path/to/bin/gs is found, then there should be
       # /path/to/share/ghostscript/$(gs --version)/Resource
       print_debug("Finding gs resource by assuming relative path ...\n");
-      chomp($foundres = `which gs`);
+      $foundres = `which gs`;
+      # We assume that the output of 'which' is
+      # the same as perl's locale (or active code page).
+      $foundres = decode('locale', $foundres);
+      chomp($foundres);
       $foundres =~ s!/bin/gs$!/share/ghostscript/$gsver/Resource!;
       if ( ! -d encode('locale_fs', $foundres) ) {
         $foundres = '';
@@ -2006,10 +2019,14 @@ sub find_gs_resource {
       }
     }
     if (!$foundres) {
-      chomp(my @ret = `gs --help 2>$nul`);
+      my @ret = `gs --help 2>$nul`;
       if ($?) {
         print_error("Cannot run gs --help ...\n");
       } else {
+        # We assume that the output of gs is
+        # the same as perl's locale (or active code page).
+        @ret = map { decode('locale', $_) } @ret;
+        chomp(@ret);
         # trial 2: parse gs help message
         print_debug("Finding gs resource by parsing help message ...\n");
         $foundres = '';
@@ -2038,7 +2055,9 @@ sub kpse_miscfont {
   # first, prioritize GitHub repository diretory structure
   $foo = "database/$file" if (-f encode('locale_fs', "database/$file"));
   if ($foo eq "") {
-    $foo = `kpsewhich -format=miscfont $file`;
+    my $cmdl = "kpsewhich -format=miscfont $file";
+    $cmdl = encode('locale', $cmdl);
+    $foo = `$cmdl`;
     # We assume that the output of kpsewhich is
     # the same as perl's locale (or active code page).
     $foo = decode('locale', $foo);
