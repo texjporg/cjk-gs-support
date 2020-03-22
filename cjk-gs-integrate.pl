@@ -1434,7 +1434,7 @@ sub check_for_files {
   my %bntofn;
   for my $f (@foundfiles) {
     $f =~ s/[\r\n]+\z//; # perl's chomp() on git-bash cannot strip CR of CRLF ??
-    my $realf = abs_path($f);
+    my $realf = decode('locale_fs', abs_path(encode('locale_fs', $f)));
     if (!$realf) {
       print_warning("dead link or strange file found: $f - ignored!\n");
       next;
