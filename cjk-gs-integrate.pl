@@ -410,7 +410,11 @@ if (defined($opt_texmflink)) {
   if ($opt_texmflink eq '') {
     # option was passed but didn't receive a value
     #  -> use TEXMFLOCAL
-    chomp($foo = `kpsewhich -var-value=TEXMFLOCAL`);
+    $foo = `kpsewhich -var-value=TEXMFLOCAL`;
+    # We assume that the output of kpsewhich is
+    # the same as perl's locale (or active code page).
+    decode('locale', $foo);
+    chomp($foo);
   } else {
     # option was passed with an argument
     #  -> use it
@@ -425,7 +429,11 @@ if (defined($opt_akotfps)) {
     if (defined($opt_texmflink)) {
       $foo = $opt_texmflink;
     } else {
-      chomp($foo = `kpsewhich -var-value=TEXMFLOCAL`);
+      $foo = `kpsewhich -var-value=TEXMFLOCAL`;
+      # We assume that the output of kpsewhich is
+      # the same as perl's locale (or active code page).
+      decode('locale', $foo);
+      chomp($foo);
     }
   } else {
     $foo = $opt_akotfps;
@@ -876,7 +884,11 @@ sub search_cmap {
   my ($cmap) = @_;
   # search CMap with kpsewhich and cache
   if (! exists $cmap_cache{$cmap}) {
-    chomp($cmap_cache{$cmap} = `kpsewhich -format=cmap $cmap`);
+    $cmap_cache{$cmap} = `kpsewhich -format=cmap $cmap`;
+    # We assume that the output of kpsewhich is
+    # the same as perl's locale (or active code page).
+    $cmap_cache{$cmap} = decode('locale', $cmap_cache{$cmap});
+    chomp($cmap_cache{$cmap});
     $cmap_cache{$cmap} =~ s/[\r\n]+\z//; # perl's chomp() on git-bash cannot strip CR of CRLF ??
   }
   return $cmap_cache{$cmap};
@@ -1913,7 +1925,11 @@ sub find_gs_resource {
   my $foundres = '';
   if (win32()) {
     # determine tlgs or native gs
-    chomp(my $foo = `kpsewhich -var-value=SELFAUTOPARENT`);
+    my $foo = `kpsewhich -var-value=SELFAUTOPARENT`;
+    # We assume that the output of kpsewhich is
+    # the same as perl's locale (or active code page).
+    decode('locale', $foo);
+    chomp($foo);
     if ( -d encode('locale_fs', "$foo/tlpkg/tlgs") ) {
       # should be texlive with tlgs
       print_debug("Assuming tlgs win32 ...\n");
@@ -2022,7 +2038,11 @@ sub kpse_miscfont {
   # first, prioritize GitHub repository diretory structure
   $foo = "database/$file" if (-f encode('locale_fs', "database/$file"));
   if ($foo eq "") {
-    chomp($foo = `kpsewhich -format=miscfont $file`);
+    $foo = `kpsewhich -format=miscfont $file`;
+    # We assume that the output of kpsewhich is
+    # the same as perl's locale (or active code page).
+    $foo = decode('locale', $foo);
+    chomp($foo);
   }
   return $foo;
 }
