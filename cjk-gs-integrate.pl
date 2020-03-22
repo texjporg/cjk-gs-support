@@ -439,7 +439,8 @@ if (defined($opt_winbatch)) {
   }
   if (win32()) {
     $opt_winbatch = 1;
-    unlink $winbatch if (-f $winbatch);
+    unlink encode('locale_fs', $winbatch)
+        if (-f encode('locale_fs', $winbatch));
   } else {
     print_warning("ignoring --winbatch option due to non-Windows\n");
     $opt_winbatch = 0;
@@ -461,7 +462,8 @@ if (defined($opt_dump_data)) {
     $dump_datafile = $opt_dump_data;
   }
   $opt_dump_data = 1;
-  unlink $dump_datafile if (-f $dump_datafile);
+  unlink encode('locale_fs', $dump_datafile)
+      if (-f encode('locale_fs', $dump_datafile));
 } else {
   $opt_dump_data = 0;
 }
@@ -505,7 +507,7 @@ sub main {
   if ($opt_dump_data) {
     # with --dump-data, dump only effective database and exit
     dump_font_database();
-    if (-f $dump_datafile) {
+    if (-f encode('locale_fs', $dump_datafile)) {
       print_info("*** Data dumped to $dump_datafile ***\n");
       exit(0);
     } else {
@@ -557,8 +559,8 @@ sub main {
       $opt_output = $gsres;
     }
   }
-  if (! -d $opt_output) {
-    $dry_run || mkdir($opt_output) ||
+  if (! -d encode('locale_fs', $opt_output)) {
+    $dry_run || mkdir(encode('locale_fs', $opt_output)) ||
       die("Cannot create directory $opt_output: $!");
   }
   if ($opt_cleanup) {
@@ -590,7 +592,7 @@ sub main {
   }
   print_info("finished\n");
   if ($opt_winbatch) {
-    if (-f $winbatch) {
+    if (-f encode('locale_fs', $winbatch)) {
       print_info("*** Batch file $winbatch created ***\n");
       print_info("*** to complete, run it as administrator privilege.***\n");
     } else {
@@ -621,7 +623,8 @@ sub do_all_fonts {
     # due to previous bugs
     for my $class (%encode_list) {
       for my $enc (@{$encode_list{$class}}) {
-        unlink "$fontdest/$k-$enc" if (-f "$fontdest/$k-$enc");
+        unlink encode('locale_fs', "$fontdest/$k-$enc")
+            if (-f encode('locale_fs', "$fontdest/$k-$enc"));
       }
     }
     #
@@ -654,8 +657,8 @@ sub do_all_fonts {
   }
   update_master_cidfmap('cidfmap.local');
   # we are in cleanup mode, also remove cidfmap.local itself
-  if (-f "$opt_output/$cidfmap_local_pathpart") {
-    unlink "$opt_output/$cidfmap_local_pathpart";
+  if (-f encode('locale_fs', "$opt_output/$cidfmap_local_pathpart")) {
+    unlink encode('locale_fs', "$opt_output/$cidfmap_local_pathpart");
   }
 }
 
@@ -707,11 +710,12 @@ sub do_nonotf_fonts {
   }
   return if $dry_run;
   if ($outp) {
-    if (! -d "$opt_output/Init") {
-      mkdir("$opt_output/Init") ||
+    if (! -d encode('locale_fs', "$opt_output/Init")) {
+      mkdir(encode('locale_fs', "$opt_output/Init")) ||
         die("Cannot create directory $opt_output/Init: $!");
     }
-    open(FOO, ">$opt_output/$cidfmap_local_pathpart") ||
+    open(FOO, ">", encode('locale_fs',
+                          "$opt_output/$cidfmap_local_pathpart")) ||
       die("Cannot open $opt_output/$cidfmap_local_pathpart: $!");
     print FOO $outp;
     close(FOO);
@@ -783,8 +787,10 @@ sub do_aliases {
   }
   # special case for native CID fonts in ancient days
   # if not readable, add aliases for substitution
-  push @jal, "/HeiseiMin-W3 /Ryumin-Light ;" if (! -r "$ciddest/HeiseiMin-W3");
-  push @jal, "/HeiseiKakuGo-W5 /GothicBBB-Medium ;" if (! -r "$ciddest/HeiseiKakuGo-W5");
+  push @jal, "/HeiseiMin-W3 /Ryumin-Light ;"
+      if (! -r encode('locale_fs', "$ciddest/HeiseiMin-W3"));
+  push @jal, "/HeiseiKakuGo-W5 /GothicBBB-Medium ;"
+      if (! -r encode('locale_fs', "$ciddest/HeiseiKakuGo-W5"));
   #
   $outp .= "\n% Japanese fonts\n" . join("\n", @jal) . "\n" if @jal;
   $outp .= "\n% Korean fonts\n" . join("\n", @kal) . "\n" if @kal;
@@ -794,19 +800,21 @@ sub do_aliases {
   #
   return if $dry_run;
   if ($outp && !$opt_remove) {
-    if (! -d "$opt_output/Init") {
-      mkdir("$opt_output/Init") ||
+    if (! -d encode('locale_fs', "$opt_output/Init")) {
+      mkdir(encode('locale_fs', "$opt_output/Init")) ||
         die("Cannot create directory $opt_output/Init: $!");
     }
-    open(FOO, ">$opt_output/$cidfmap_aliases_pathpart") ||
+    open(FOO, ">",
+         encode('locale_fs', "$opt_output/$cidfmap_aliases_pathpart")) ||
       die("Cannot open $opt_output/$cidfmap_aliases_pathpart: $!");
     print FOO $outp;
     close(FOO);
   }
   update_master_cidfmap('cidfmap.aliases');
   # if we are in cleanup mode, also remove cidfmap.aliases itself
-  if (-f "$opt_output/$cidfmap_aliases_pathpart") {
-    unlink "$opt_output/$cidfmap_aliases_pathpart" if $opt_cleanup;
+  if (-f encode('locale_fs', "$opt_output/$cidfmap_aliases_pathpart")) {
+    unlink encode('locale_fs', "$opt_output/$cidfmap_aliases_pathpart")
+        if $opt_cleanup;
   }
 }
 
@@ -823,11 +831,13 @@ sub do_cmaps {
     # by others or distributed by gs itself
     for my $class (%encode_list) {
       for my $enc (@{$encode_list{$class}}) {
-        if (-l "$cmapdest/$enc") {
-          my $linkt = readlink("$cmapdest/$enc");
+        if (-l encode('locale_fs', "$cmapdest/$enc")) {
+          my $linkt = decode('locale_fs',
+                             readlink(encode('locale_fs',
+                                             "$cmapdest/$enc")));
           if ($linkt) {
             if ($linkt eq search_cmap($enc)) {
-              unlink("$cmapdest/$enc");
+              unlink(encode('locale_fs', "$cmapdest/$enc"));
             }
           }
         }
@@ -836,7 +846,7 @@ sub do_cmaps {
     return;
   }
   # add mode
-  if (! -d "$cmapdest") {
+  if (! -d encode('locale_fs', "$cmapdest")) {
     print_debug("Creating directory $cmapdest ...\n");
     make_dir("$cmapdest", "cannot create CMap directory");
   }
@@ -846,7 +856,7 @@ sub do_cmaps {
       next if (!$fontdb{$1}{'available'});
     }
     for my $enc (@{$encode_list{$class}}) {
-      if (! -f "$cmapdest/$enc") {
+      if (! -f encode('locale_fs', "$cmapdest/$enc")) {
         print_debug("CMap $enc is not found in gs resource directory\n");
         my $dest = search_cmap($enc);
         if ($dest) {
@@ -885,8 +895,8 @@ sub update_master_cidfmap {
   my $cidfmap_master = "$opt_output/$cidfmap_pathpart";
   print_info(sprintf("%s $add %s cidfmap file ...\n",
     ($opt_remove ? "removing" : "adding"), ($opt_remove ? "from" : "to")));
-  if (-r $cidfmap_master) {
-    open(FOO, "<", $cidfmap_master) ||
+  if (-r encode('locale_fs', $cidfmap_master)) {
+    open(FOO, "<", encode('locale_fs', $cidfmap_master)) ||
       die("Cannot open $cidfmap_master for reading: $!");
     my $found = 0;
     my $found_tl = 0;
@@ -925,7 +935,7 @@ sub update_master_cidfmap {
     if ($opt_remove) {
       if ($found || $found_tl) {
         return if $dry_run;
-        open(FOO, ">", $cidfmap_master) ||
+        open(FOO, ">", encode('locale_fs', $cidfmap_master)) ||
           die("Cannot clean up $cidfmap_master: $!");
         print FOO $newmaster;
         close FOO;
@@ -935,7 +945,7 @@ sub update_master_cidfmap {
         print_info("$add already loaded in $cidfmap_master, no changes\n");
       } else {
         return if $dry_run;
-        open(FOO, ">", $cidfmap_master) ||
+        open(FOO, ">", encode('locale_fs', $cidfmap_master)) ||
           die("Cannot open $cidfmap_master for appending: $!");
         print FOO $newmaster;
         print FOO "($add) .runlibfile\n";
@@ -945,7 +955,7 @@ sub update_master_cidfmap {
   } else {
     return if $dry_run;
     return if $opt_remove;
-    open(FOO, ">", $cidfmap_master) ||
+    open(FOO, ">", encode('locale_fs', $cidfmap_master)) ||
       die("Cannot open $cidfmap_master for writing: $!");
     print FOO "($add) .runlibfile\n";
     close(FOO);
@@ -996,10 +1006,11 @@ sub generate_font_snippet {
   }
   for my $enc (@{$encode_list{$c}}) {
     if ($opt_remove) {
-      unlink "$fd/$n-$enc" if (-f "$fd/$n-$enc");
+      unlink encode('locale_fs', "$fd/$n-$enc")
+          if (-f encode('locale_fs', "$fd/$n-$enc"));
       next;
     }
-    open(FOO, ">$fd/$n-$enc") ||
+    open(FOO, ">", encode('locale_fs', "$fd/$n-$enc")) ||
       die("cannot open $fd/$n-$enc for writing: $!");
     print FOO "%!PS-Adobe-3.0 Resource-Font
 %%DocumentNeededResources: $enc (CMap)
@@ -1062,16 +1073,16 @@ sub link_font {
   }
   my $target = "$cd/$n";
   my $do_unlink = 0;
-  if (-l $target) {
+  if (-l encode('locale_fs', $target)) {
     if ($opt_cleanup) {
       $do_unlink = 1;
     } else {
-      my $linkt = readlink($target);
+      my $linkt = decode('locale_fs', readlink(encode('locale_fs', $target)));
       if ($linkt) {
         if ($linkt eq $f) {
           # case 1: exists, link, targets agree
           $do_unlink = 1;
-        } elsif (-r $linkt) {
+        } elsif (-r encode('locale_fs', $linkt)) {
           # case 3: exists, link, targets different
           if ($opt_force) {
             print_info("Removing link $target due to --force!\n");
@@ -1090,9 +1101,9 @@ sub link_font {
         exit(1);
       }
     }
-  } elsif (-r $target) {
+  } elsif (-r encode('locale_fs', $target)) {
     # case 4: exists, but not link (NTFS hardlink on win32 falls into this)
-    if (-s $target) {
+    if (-s encode('locale_fs', $target)) {
       if ($opt_force) {
         print_info("Removing $target due to --force!\n");
         $do_unlink = 1;
@@ -1116,13 +1127,13 @@ sub link_font {
 
 sub make_dir {
   my ($d, $w) = @_;
-  if (-r $d) {
-    if (! -d $d) {
+  if (-r encode('locale_fs', $d)) {
+    if (! -d encode('locale_fs', $d)) {
       print_error("$d is not a directory, $w\n");
       exit(1);
     }
   } else {
-    $dry_run || make_path($d);
+    $dry_run || make_path(encode('locale', $d));
   }
 }
 
@@ -1197,14 +1208,14 @@ sub maybe_unlink {
       my @ret = `$cmdl`;
     }
   } else {
-    unlink ($targetname);
+    unlink (encode('locale_fs', $targetname));
   }
 }
 
 # write batch file (windows only)
 sub write_winbatch {
   return if $dry_run;
-  open(FOO, ">:encoding(locale)", $winbatch) ||
+  open(FOO, ">:encoding(locale)", encode('locale_fs', $winbatch)) ||
     die("cannot open $winbatch for writing: $!");
   print FOO "\@echo off\n",
             "$winbatch_content",
@@ -1218,7 +1229,9 @@ sub write_akotfps_datafile {
   return if $dry_run;
   make_dir("$opt_akotfps/$akotfps_pathpart",
          "cannot create $akotfps_datafilename in it!");
-  open(FOO, ">$opt_akotfps/$akotfps_pathpart/$akotfps_datafilename") ||
+  open(FOO, ">",
+       encode('locale_fs',
+              "$opt_akotfps/$akotfps_pathpart/$akotfps_datafilename")) ||
     die("cannot open $opt_akotfps/$akotfps_pathpart/$akotfps_datafilename for writing: $!");
   print FOO "% psnames-for-otf
 %
@@ -1340,7 +1353,8 @@ sub make_all_available {
 sub check_for_files {
   my @foundfiles;
   if ($opt_filelist) {
-    open(FOO, "<", $opt_filelist) || die("Cannot open $opt_filelist: $!");
+    open(FOO, "<", encode('locale_fs', $opt_filelist)) ||
+         die("Cannot open $opt_filelist: $!");
     @foundfiles = <FOO>;
     close(FOO) || warn "Cannot close $opt_filelist: $!";
   } else {
@@ -1366,13 +1380,15 @@ sub check_for_files {
       for my $d (qw!/Library/Fonts /System/Library/Fonts
                     /System/Library/Assets /System/Library/AssetsV2
                     /Network/Library/Fonts /usr/share/fonts!) {
-        push @extradirs, "$d//" if (-d $d); # recursive search
+        push @extradirs, "$d//"
+            if (-d encode('locale_fs', $d)); # recursive search
       }
       # the path contains white space, so hack required
       for my $d (qw!/Library/Application__Support/Apple/Fonts!) {
         my $sd = $d;
         $sd =~ s/__/ /;
-        push @extradirs, "$sd//" if (-d "$sd"); # recursive search
+        push @extradirs, "$sd//"
+            if (-d encode('locale_fs', "$sd")); # recursive search
       }
       # office for mac 2016
       for my $d (qw!/Applications/Microsoft__Word.app
@@ -1380,11 +1396,14 @@ sub check_for_files {
                     /Applications/Microsoft__PowerPoint.app!) {
         my $sd = $d;
         $sd =~ s/__/ /;
-        push @extradirs, "$sd/Contents/Resources/Fonts/" if (-d "$sd/Contents/Resources/Fonts");
-        push @extradirs, "$sd/Contents/Resources/DFonts/" if (-d "$sd/Contents/Resources/DFonts");
+        push @extradirs, "$sd/Contents/Resources/Fonts/"
+            if (-d encode('locale_fs', "$sd/Contents/Resources/Fonts"));
+        push @extradirs, "$sd/Contents/Resources/DFonts/"
+            if (-d encode('locale_fs', "$sd/Contents/Resources/DFonts"));
       }
       my $home = $ENV{'HOME'};
-      push @extradirs, "$home/Library/Fonts//" if (-d "$home/Library/Fonts");
+      push @extradirs, "$home/Library/Fonts//"
+          if (-d encode('locale_fs', "$home/Library/Fonts"));
     }
     #
     if (@extradirs) {
@@ -1675,7 +1694,7 @@ sub read_font_database {
   # use "foo" as a substitute; otherwise, use built-in database
   if ($opt_fontdef) {
     my $foo = kpse_miscfont($opt_fontdef);
-    open(FDB, "<:encoding(UTF-8)", $foo) ||
+    open(FDB, "<:encoding(UTF-8)", encode('locale_fs', $foo)) ||
       die("Cannot find $opt_fontdef: $!");
     @dbl = <FDB>;
     close(FDB);
@@ -1689,7 +1708,7 @@ sub read_font_database {
   # overwrite existing one (that is, the addition wins)
   for (@opt_fontdef_add) {
     my $foo = kpse_miscfont($_);
-    open(FDB, "<:encoding(UTF-8)", $foo) ||
+    open(FDB, "<:encoding(UTF-8)", encode('locale_fs', $foo)) ||
       die("Cannot find $_: $!");
     @dbl = <FDB>;
     close(FDB);
@@ -1760,7 +1779,7 @@ sub read_each_font_database {
       next if (!$opt_cleanup);
       my @dbl;
       my $foo = kpse_miscfont($1);
-      if (!open(FDB, "<:encoding(UTF-8)", $foo)) {
+      if (!open(FDB, "<:encoding(UTF-8)", encode('locale_fs', $foo))) {
         print_warning("Cannot find $1, skipping!\n");
         next;
       }
@@ -1773,7 +1792,7 @@ sub read_each_font_database {
     if ($l =~ m/^INCLUDE\s*(.*)$/) {
       my @dbl;
       my $foo = kpse_miscfont($1);
-      if (!open(FDB, "<:encoding(UTF-8)", $foo)) {
+      if (!open(FDB, "<:encoding(UTF-8)", encode('locale_fs', $foo))) {
         print_warning("Cannot find $1, skipping!\n");
         next;
       }
@@ -1863,7 +1882,7 @@ sub read_each_font_database {
 }
 
 sub dump_font_database {
-  open(FOO, ">:encoding(UTF-8)", $dump_datafile) ||
+  open(FOO, ">:encoding(UTF-8)", encode('locale_fs', $dump_datafile)) ||
     die("cannot open $dump_datafile for writing: $!");
   for my $k (sort keys %fontdb) {
     print FOO "Name: $fontdb{$k}{'origname'}\n";
@@ -1895,14 +1914,14 @@ sub find_gs_resource {
   if (win32()) {
     # determine tlgs or native gs
     chomp(my $foo = `kpsewhich -var-value=SELFAUTOPARENT`);
-    if ( -d "$foo/tlpkg/tlgs" ) {
+    if ( -d encode('locale_fs', "$foo/tlpkg/tlgs") ) {
       # should be texlive with tlgs
       print_debug("Assuming tlgs win32 ...\n");
       $foundres = "$foo/tlpkg/tlgs/Resource";
       # for TL2016, tlgs binary has built-in Resource,
       # so we cannot set up CJK fonts correctly.
       # the following test forces to exit in such case
-      if ( ! -d $foundres ) {
+      if ( ! -d encode('locale_fs', $foundres) ) {
         print_error("No Resource directory available for tlgs,\n");
         print_error("we cannot support such gs, sorry.\n");
         $foundres = '';
@@ -1927,7 +1946,7 @@ sub find_gs_resource {
         print_debug("Finding gs resource by assuming relative path ...\n");
         $foundres =~ s!\\!/!g;
         $foundres =~ s!/bin/gswin32c\.exe$!/Resource!;
-        if ( ! -d $foundres ) {
+        if ( ! -d encode('locale_fs', $foundres) ) {
           $foundres = '';
         }
         if (!$foundres) {
@@ -1942,7 +1961,7 @@ sub find_gs_resource {
           # trial 2: assume the fixed path, c:/gs/gs$gsver/Resource
           print_debug("Finding gs resource by assuming fixed path ...\n");
           $foundres = "c:/gs/gs$gsver/Resource";
-          if ( ! -d $foundres ) {
+          if ( ! -d encode('locale_fs', $foundres) ) {
             $foundres = '';
           }
           if (!$foundres) {
@@ -1963,7 +1982,7 @@ sub find_gs_resource {
       print_debug("Finding gs resource by assuming relative path ...\n");
       chomp($foundres = `which gs`);
       $foundres =~ s!/bin/gs$!/share/ghostscript/$gsver/Resource!;
-      if ( ! -d $foundres ) {
+      if ( ! -d encode('locale_fs', $foundres) ) {
         $foundres = '';
       }
       if (!$foundres) {
@@ -2001,7 +2020,7 @@ sub kpse_miscfont {
   my ($file) = @_;
   my $foo = '';
   # first, prioritize GitHub repository diretory structure
-  $foo = "database/$file" if (-f "database/$file");
+  $foo = "database/$file" if (-f encode('locale_fs', "database/$file"));
   if ($foo eq "") {
     chomp($foo = `kpsewhich -format=miscfont $file`);
   }
