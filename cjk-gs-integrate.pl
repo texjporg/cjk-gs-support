@@ -52,15 +52,6 @@ binmode (STDERR, ':encoding(console_out)');
 my $version = '$VER$';
 
 if (win32()) {
-  # conversion between internal (utf-8) and console (cp932):
-  # multibyte characters should be encoded in cp932 at least during
-  #   * kpathsea file search
-  #   * abs_path existence test
-  #   * input/output on console
-  #   * batch file output
-  # routines. make sure all of these should be restricted to win32 mode!
-  # TODO: what to do with $opt_fontdef, @opt_aliases and $opt_filelist,
-  #       with regard to encodings?
   # some perl functions (symlink, -l test) does not work
   print_warning("Sorry, we have only partial support for Windows!\n");
 }
