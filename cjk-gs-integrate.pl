@@ -39,13 +39,16 @@ use strict;
 use warnings;
 use utf8;
 use Encode;
-use Encode::Locale;
+use Encode::Alias;
 
-Encode::Locale::decode_argv;
+my $debug_msg_before_init;
+init_encode_locale ();
 
 binmode (STDIN, ':encoding(console_in)');
 binmode (STDOUT, ':encoding(console_out)');
 binmode (STDERR, ':encoding(console_out)');
+
+@ARGV = map{ decode('locale', $_) }@ARGV;
 
 (my $prg = basename(decode('locale', $0))) =~ s/\.pl$//;
 my $version = '$VER$';
@@ -331,6 +334,10 @@ if (! GetOptions(
         "markdown"         => \$opt_markdown,
         "v|version"        => sub { print &version(); exit(0); }, ) ) {
   die "Try \"$0 --help\" for more information.\n";
+}
+
+if ($debug_msg_before_init) {
+  print_debug ($debug_msg_before_init);
 }
 
 sub win32 { return ($^O=~/^MSWin(32|64)$/i); }
@@ -2056,6 +2063,27 @@ sub kpse_miscfont {
     chomp($foo);
   }
   return $foo;
+}
+
+sub init_encode_locale {
+  eval {
+    require Encode::Locale;
+    Encode::Locale->import();
+
+    $debug_msg_before_init .= "Encode::Locale is loaded.\n";
+  };
+  if ($@) {
+    if (win32) {
+      die ("For Windows, Encode::Locale is required.\n");
+    }
+
+    $debug_msg_before_init .=
+        "Encode::Locale is not found. Assuming all encodings are UTF-8.\n";
+    Encode::Alias::define_alias('locale' => 'UTF-8');
+    Encode::Alias::define_alias('locale_fs' => 'UTF-8');
+    Encode::Alias::define_alias('console_in' => 'UTF-8');
+    Encode::Alias::define_alias('console_out' => 'UTF-8');
+  }
 }
 
 sub version {
