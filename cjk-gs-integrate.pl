@@ -37,7 +37,6 @@ use File::Path qw(make_path);
 use Cwd 'abs_path';
 use strict;
 use warnings;
-no warnings qw(once);
 use utf8;
 use Encode;
 use Encode::Locale;
@@ -355,6 +354,7 @@ if (system("kpsewhich --version >$nul 2>&1 <$nul" ) != 0) {
 
 if ($opt_debug >= 2) {
   require Data::Dumper;
+  no warnings qw(once);
   $Data::Dumper::Indent = 1;
 }
 
