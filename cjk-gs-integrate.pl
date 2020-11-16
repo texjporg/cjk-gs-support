@@ -31,28 +31,29 @@
 #
 # Note that symlink names should be consistent with ptex-fontmaps!
 
-$^W = 1;
 use Getopt::Long qw(:config no_autoabbrev ignore_case_always);
 use File::Basename;
 use File::Path qw(make_path);
 use Cwd 'abs_path';
 use strict;
+use warnings;
+use utf8;
+use Encode;
+use Encode::Alias;
 
-(my $prg = basename($0)) =~ s/\.pl$//;
+my $debug_msg_before_init;
+init_encode_locale ();
+
+binmode (STDIN, ':encoding(console_in)');
+binmode (STDOUT, ':encoding(console_out)');
+binmode (STDERR, ':encoding(console_out)');
+
+@ARGV = map{ decode('locale', $_) }@ARGV;
+
+(my $prg = basename(decode('locale', $0))) =~ s/\.pl$//;
 my $version = '$VER$';
 
 if (win32()) {
-  # conversion between internal (utf-8) and console (cp932):
-  # multibyte characters should be encoded in cp932 at least during
-  #   * kpathsea file search
-  #   * abs_path existence test
-  #   * input/output on console
-  #   * batch file output
-  # routines. make sure all of these should be restricted to win32 mode!
-  # TODO: what to do with $opt_fontdef, @opt_aliases and $opt_filelist,
-  #       with regard to encodings?
-  use utf8;
-  use Encode;
   # some perl functions (symlink, -l test) does not work
   print_warning("Sorry, we have only partial support for Windows!\n");
 }
@@ -335,6 +336,10 @@ if (! GetOptions(
   die "Try \"$0 --help\" for more information.\n";
 }
 
+if ($debug_msg_before_init) {
+  print_debug ($debug_msg_before_init);
+}
+
 sub win32 { return ($^O=~/^MSWin(32|64)$/i); }
 sub macosx { return ($^O=~/^darwin$/i); }
 my $nul = (win32() ? 'nul' : '/dev/null') ;
@@ -356,12 +361,15 @@ if (system("kpsewhich --version >$nul 2>&1 <$nul" ) != 0) {
 
 if ($opt_debug >= 2) {
   require Data::Dumper;
+  no warnings qw(once);
   $Data::Dumper::Indent = 1;
 }
 
 my $zrlistttc = kpse_miscfont("zrlistttc.lua");
 my $zrlistttc_available;
-chomp(my $zrlistttc_help = `texlua $zrlistttc 2>$nul`);
+my $cmdl = "texlua $zrlistttc 2>$nul";
+$cmdl = encode('locale', $cmdl);
+chomp(my $zrlistttc_help = `$cmdl`);
 if ($?) {
   if ($opt_strictpsname) {
     print_error("The script 'zrlistttc.lua' not found, cannot proceed!\n");
@@ -402,7 +410,11 @@ if (defined($opt_texmflink)) {
   if ($opt_texmflink eq '') {
     # option was passed but didn't receive a value
     #  -> use TEXMFLOCAL
-    chomp($foo = `kpsewhich -var-value=TEXMFLOCAL`);
+    $foo = `kpsewhich -var-value=TEXMFLOCAL`;
+    # We assume that the output of kpsewhich is
+    # the same as perl's locale (or active code page).
+    decode('locale', $foo);
+    chomp($foo);
   } else {
     # option was passed with an argument
     #  -> use it
@@ -417,7 +429,11 @@ if (defined($opt_akotfps)) {
     if (defined($opt_texmflink)) {
       $foo = $opt_texmflink;
     } else {
-      chomp($foo = `kpsewhich -var-value=TEXMFLOCAL`);
+      $foo = `kpsewhich -var-value=TEXMFLOCAL`;
+      # We assume that the output of kpsewhich is
+      # the same as perl's locale (or active code page).
+      decode('locale', $foo);
+      chomp($foo);
     }
   } else {
     $foo = $opt_akotfps;
@@ -431,7 +447,8 @@ if (defined($opt_winbatch)) {
   }
   if (win32()) {
     $opt_winbatch = 1;
-    unlink $winbatch if (-f $winbatch);
+    unlink encode('locale_fs', $winbatch)
+        if (-f encode('locale_fs', $winbatch));
   } else {
     print_warning("ignoring --winbatch option due to non-Windows\n");
     $opt_winbatch = 0;
@@ -453,7 +470,8 @@ if (defined($opt_dump_data)) {
     $dump_datafile = $opt_dump_data;
   }
   $opt_dump_data = 1;
-  unlink $dump_datafile if (-f $dump_datafile);
+  unlink encode('locale_fs', $dump_datafile)
+      if (-f encode('locale_fs', $dump_datafile));
 } else {
   $opt_dump_data = 0;
 }
@@ -497,7 +515,7 @@ sub main {
   if ($opt_dump_data) {
     # with --dump-data, dump only effective database and exit
     dump_font_database();
-    if (-f $dump_datafile) {
+    if (-f encode('locale_fs', $dump_datafile)) {
       print_info("*** Data dumped to $dump_datafile ***\n");
       exit(0);
     } else {
@@ -549,8 +567,8 @@ sub main {
       $opt_output = $gsres;
     }
   }
-  if (! -d $opt_output) {
-    $dry_run || mkdir($opt_output) ||
+  if (! -d encode('locale_fs', $opt_output)) {
+    $dry_run || mkdir(encode('locale_fs', $opt_output)) ||
       die("Cannot create directory $opt_output: $!");
   }
   if ($opt_cleanup) {
@@ -582,7 +600,7 @@ sub main {
   }
   print_info("finished\n");
   if ($opt_winbatch) {
-    if (-f $winbatch) {
+    if (-f encode('locale_fs', $winbatch)) {
       print_info("*** Batch file $winbatch created ***\n");
       print_info("*** to complete, run it as administrator privilege.***\n");
     } else {
@@ -613,7 +631,8 @@ sub do_all_fonts {
     # due to previous bugs
     for my $class (%encode_list) {
       for my $enc (@{$encode_list{$class}}) {
-        unlink "$fontdest/$k-$enc" if (-f "$fontdest/$k-$enc");
+        unlink encode('locale_fs', "$fontdest/$k-$enc")
+            if (-f encode('locale_fs', "$fontdest/$k-$enc"));
       }
     }
     #
@@ -646,8 +665,8 @@ sub do_all_fonts {
   }
   update_master_cidfmap('cidfmap.local');
   # we are in cleanup mode, also remove cidfmap.local itself
-  if (-f "$opt_output/$cidfmap_local_pathpart") {
-    unlink "$opt_output/$cidfmap_local_pathpart";
+  if (-f encode('locale_fs', "$opt_output/$cidfmap_local_pathpart")) {
+    unlink encode('locale_fs', "$opt_output/$cidfmap_local_pathpart");
   }
 }
 
@@ -699,11 +718,13 @@ sub do_nonotf_fonts {
   }
   return if $dry_run;
   if ($outp) {
-    if (! -d "$opt_output/Init") {
-      mkdir("$opt_output/Init") ||
+    if (! -d encode('locale_fs', "$opt_output/Init")) {
+      mkdir(encode('locale_fs', "$opt_output/Init")) ||
         die("Cannot create directory $opt_output/Init: $!");
     }
-    open(FOO, ">$opt_output/$cidfmap_local_pathpart") ||
+    # It seems that tlgs can handle UTF-8 TTF filename in cidfmap.local.
+    open(FOO, ">:encoding(UTF-8)",
+         encode('locale_fs', "$opt_output/$cidfmap_local_pathpart")) ||
       die("Cannot open $opt_output/$cidfmap_local_pathpart: $!");
     print FOO $outp;
     close(FOO);
@@ -775,8 +796,10 @@ sub do_aliases {
   }
   # special case for native CID fonts in ancient days
   # if not readable, add aliases for substitution
-  push @jal, "/HeiseiMin-W3 /Ryumin-Light ;" if (! -r "$ciddest/HeiseiMin-W3");
-  push @jal, "/HeiseiKakuGo-W5 /GothicBBB-Medium ;" if (! -r "$ciddest/HeiseiKakuGo-W5");
+  push @jal, "/HeiseiMin-W3 /Ryumin-Light ;"
+      if (! -r encode('locale_fs', "$ciddest/HeiseiMin-W3"));
+  push @jal, "/HeiseiKakuGo-W5 /GothicBBB-Medium ;"
+      if (! -r encode('locale_fs', "$ciddest/HeiseiKakuGo-W5"));
   #
   $outp .= "\n% Japanese fonts\n" . join("\n", @jal) . "\n" if @jal;
   $outp .= "\n% Korean fonts\n" . join("\n", @kal) . "\n" if @kal;
@@ -786,19 +809,21 @@ sub do_aliases {
   #
   return if $dry_run;
   if ($outp && !$opt_remove) {
-    if (! -d "$opt_output/Init") {
-      mkdir("$opt_output/Init") ||
+    if (! -d encode('locale_fs', "$opt_output/Init")) {
+      mkdir(encode('locale_fs', "$opt_output/Init")) ||
         die("Cannot create directory $opt_output/Init: $!");
     }
-    open(FOO, ">$opt_output/$cidfmap_aliases_pathpart") ||
+    open(FOO, ">:encoding(UTF-8)",
+         encode('locale_fs', "$opt_output/$cidfmap_aliases_pathpart")) ||
       die("Cannot open $opt_output/$cidfmap_aliases_pathpart: $!");
     print FOO $outp;
     close(FOO);
   }
   update_master_cidfmap('cidfmap.aliases');
   # if we are in cleanup mode, also remove cidfmap.aliases itself
-  if (-f "$opt_output/$cidfmap_aliases_pathpart") {
-    unlink "$opt_output/$cidfmap_aliases_pathpart" if $opt_cleanup;
+  if (-f encode('locale_fs', "$opt_output/$cidfmap_aliases_pathpart")) {
+    unlink encode('locale_fs', "$opt_output/$cidfmap_aliases_pathpart")
+        if $opt_cleanup;
   }
 }
 
@@ -815,11 +840,13 @@ sub do_cmaps {
     # by others or distributed by gs itself
     for my $class (%encode_list) {
       for my $enc (@{$encode_list{$class}}) {
-        if (-l "$cmapdest/$enc") {
-          my $linkt = readlink("$cmapdest/$enc");
+        if (-l encode('locale_fs', "$cmapdest/$enc")) {
+          my $linkt = decode('locale_fs',
+                             readlink(encode('locale_fs',
+                                             "$cmapdest/$enc")));
           if ($linkt) {
             if ($linkt eq search_cmap($enc)) {
-              unlink("$cmapdest/$enc");
+              unlink(encode('locale_fs', "$cmapdest/$enc"));
             }
           }
         }
@@ -828,7 +855,7 @@ sub do_cmaps {
     return;
   }
   # add mode
-  if (! -d "$cmapdest") {
+  if (! -d encode('locale_fs', "$cmapdest")) {
     print_debug("Creating directory $cmapdest ...\n");
     make_dir("$cmapdest", "cannot create CMap directory");
   }
@@ -838,7 +865,7 @@ sub do_cmaps {
       next if (!$fontdb{$1}{'available'});
     }
     for my $enc (@{$encode_list{$class}}) {
-      if (! -f "$cmapdest/$enc") {
+      if (! -f encode('locale_fs', "$cmapdest/$enc")) {
         print_debug("CMap $enc is not found in gs resource directory\n");
         my $dest = search_cmap($enc);
         if ($dest) {
@@ -858,7 +885,13 @@ sub search_cmap {
   my ($cmap) = @_;
   # search CMap with kpsewhich and cache
   if (! exists $cmap_cache{$cmap}) {
-    chomp($cmap_cache{$cmap} = `kpsewhich -format=cmap $cmap`);
+    my $cmdl = "kpsewhich -format=cmap $cmap";
+    $cmdl = encode('locale', $cmdl);
+    $cmap_cache{$cmap} = `$cmdl`;
+    # We assume that the output of kpsewhich is
+    # the same as perl's locale (or active code page).
+    $cmap_cache{$cmap} = decode('locale', $cmap_cache{$cmap});
+    chomp($cmap_cache{$cmap});
     $cmap_cache{$cmap} =~ s/[\r\n]+\z//; # perl's chomp() on git-bash cannot strip CR of CRLF ??
   }
   return $cmap_cache{$cmap};
@@ -877,8 +910,8 @@ sub update_master_cidfmap {
   my $cidfmap_master = "$opt_output/$cidfmap_pathpart";
   print_info(sprintf("%s $add %s cidfmap file ...\n",
     ($opt_remove ? "removing" : "adding"), ($opt_remove ? "from" : "to")));
-  if (-r $cidfmap_master) {
-    open(FOO, "<", $cidfmap_master) ||
+  if (-r encode('locale_fs', $cidfmap_master)) {
+    open(FOO, "<:encoding(UTF-8)", encode('locale_fs', $cidfmap_master)) ||
       die("Cannot open $cidfmap_master for reading: $!");
     my $found = 0;
     my $found_tl = 0;
@@ -917,7 +950,7 @@ sub update_master_cidfmap {
     if ($opt_remove) {
       if ($found || $found_tl) {
         return if $dry_run;
-        open(FOO, ">", $cidfmap_master) ||
+        open(FOO, ">:encoding(UTF-8)", encode('locale_fs', $cidfmap_master)) ||
           die("Cannot clean up $cidfmap_master: $!");
         print FOO $newmaster;
         close FOO;
@@ -927,7 +960,7 @@ sub update_master_cidfmap {
         print_info("$add already loaded in $cidfmap_master, no changes\n");
       } else {
         return if $dry_run;
-        open(FOO, ">", $cidfmap_master) ||
+        open(FOO, ">:encoding(UTF-8)", encode('locale_fs', $cidfmap_master)) ||
           die("Cannot open $cidfmap_master for appending: $!");
         print FOO $newmaster;
         print FOO "($add) .runlibfile\n";
@@ -937,7 +970,7 @@ sub update_master_cidfmap {
   } else {
     return if $dry_run;
     return if $opt_remove;
-    open(FOO, ">", $cidfmap_master) ||
+    open(FOO, ">:encoding(UTF-8)", encode('locale_fs', $cidfmap_master)) ||
       die("Cannot open $cidfmap_master for writing: $!");
     print FOO "($add) .runlibfile\n";
     close(FOO);
@@ -988,10 +1021,11 @@ sub generate_font_snippet {
   }
   for my $enc (@{$encode_list{$c}}) {
     if ($opt_remove) {
-      unlink "$fd/$n-$enc" if (-f "$fd/$n-$enc");
+      unlink encode('locale_fs', "$fd/$n-$enc")
+          if (-f encode('locale_fs', "$fd/$n-$enc"));
       next;
     }
-    open(FOO, ">$fd/$n-$enc") ||
+    open(FOO, ">:encoding(UTF-8)", encode('locale_fs', "$fd/$n-$enc")) ||
       die("cannot open $fd/$n-$enc for writing: $!");
     print FOO "%!PS-Adobe-3.0 Resource-Font
 %%DocumentNeededResources: $enc (CMap)
@@ -1054,16 +1088,16 @@ sub link_font {
   }
   my $target = "$cd/$n";
   my $do_unlink = 0;
-  if (-l $target) {
+  if (-l encode('locale_fs', $target)) {
     if ($opt_cleanup) {
       $do_unlink = 1;
     } else {
-      my $linkt = readlink($target);
+      my $linkt = decode('locale_fs', readlink(encode('locale_fs', $target)));
       if ($linkt) {
         if ($linkt eq $f) {
           # case 1: exists, link, targets agree
           $do_unlink = 1;
-        } elsif (-r $linkt) {
+        } elsif (-r encode('locale_fs', $linkt)) {
           # case 3: exists, link, targets different
           if ($opt_force) {
             print_info("Removing link $target due to --force!\n");
@@ -1082,9 +1116,9 @@ sub link_font {
         exit(1);
       }
     }
-  } elsif (-r $target) {
+  } elsif (-r encode('locale_fs', $target)) {
     # case 4: exists, but not link (NTFS hardlink on win32 falls into this)
-    if (-s $target) {
+    if (-s encode('locale_fs', $target)) {
       if ($opt_force) {
         print_info("Removing $target due to --force!\n");
         $do_unlink = 1;
@@ -1108,13 +1142,13 @@ sub link_font {
 
 sub make_dir {
   my ($d, $w) = @_;
-  if (-r $d) {
-    if (! -d $d) {
+  if (-r encode('locale_fs', $d)) {
+    if (! -d encode('locale_fs', $d)) {
       print_error("$d is not a directory, $w\n");
       exit(1);
     }
   } else {
-    $dry_run || make_path($d);
+    $dry_run || make_path(encode('locale', $d));
   }
 }
 
@@ -1147,12 +1181,10 @@ sub maybe_symlink {
       $winbatch_content .= "/h " if $opt_hardlink;
       $winbatch_content .= "\"$targetname\" \"$realname\"\n";
     } else {
-      # should be encoded in cp932 for win32 console
-      $realname = encode_utftocp($realname);
-      $targetname = encode_utftocp($targetname);
       my $cmdl = "cmd.exe /c if not exist \"$targetname\" mklink ";
       $cmdl .= "/h " if $opt_hardlink;
       $cmdl .= "\"$targetname\" \"$realname\"";
+      $cmdl = encode('locale', $cmdl);
       my @ret = `$cmdl`;
       # sometimes hard link creation may fail due to "Access denied"
       # (especially when $realname is located in c:/windows/fonts).
@@ -1186,24 +1218,20 @@ sub maybe_unlink {
       # re-encoding of $winbatch_content is done by write_winbatch()
       $winbatch_content .= "if exist \"$targetname\" del \"$targetname\"\n";
     } else {
-      # should be encoded in cp932 for win32 console
-      $targetname = encode_utftocp($targetname);
       my $cmdl = "cmd.exe /c if exist \"$targetname\" del \"$targetname\"";
+      $cmdl = encode('locale', $cmdl);
       my @ret = `$cmdl`;
     }
   } else {
-    unlink ($targetname);
+    unlink (encode('locale_fs', $targetname));
   }
 }
 
 # write batch file (windows only)
 sub write_winbatch {
   return if $dry_run;
-  open(FOO, ">$winbatch") ||
+  open(FOO, ">:encoding(locale)", encode('locale_fs', $winbatch)) ||
     die("cannot open $winbatch for writing: $!");
-  # $winbatch_content may contain multibyte characters, and they
-  # should be encoded in cp932 in batch file
-  $winbatch_content = encode_utftocp($winbatch_content);
   print FOO "\@echo off\n",
             "$winbatch_content",
             "\@echo symlink ", ($opt_remove ? "removed\n" : "generated\n"),
@@ -1216,7 +1244,9 @@ sub write_akotfps_datafile {
   return if $dry_run;
   make_dir("$opt_akotfps/$akotfps_pathpart",
          "cannot create $akotfps_datafilename in it!");
-  open(FOO, ">$opt_akotfps/$akotfps_pathpart/$akotfps_datafilename") ||
+  open(FOO, ">:encoding(UTF-8)",
+       encode('locale_fs',
+              "$opt_akotfps/$akotfps_pathpart/$akotfps_datafilename")) ||
     die("cannot open $opt_akotfps/$akotfps_pathpart/$akotfps_datafilename for writing: $!");
   print FOO "% psnames-for-otf
 %
@@ -1241,10 +1271,6 @@ sub info_found_fonts {
       print "Type:  $fontdb{$k}{'type'}\n";
       print "Class: $fontdb{$k}{'class'}\n";
       my $fn = $fontdb{$k}{'target'};
-      # cp932 for win32 console
-      if (win32()) {
-        $fn = encode_utftocp($fn);
-      }
       if ($fontdb{$k}{'type'} eq 'TTC' || $fontdb{$k}{'type'} eq 'OTC') {
         $fn .= "($fontdb{$k}{'subfont'})";
       }
@@ -1286,10 +1312,6 @@ sub info_list_aliases {
     for my $p (@ks) {
       my $t = $aliases{$al}{$p};
       my $fn = ($opt_listallaliases ? "-" : $fontdb{$t}{'target'} );
-      # cp932 for win32 console
-      if (win32()) {
-        $fn = encode_utftocp($fn);
-      }
       # should always be the same ;-)
       $cl = $fontdb{$t}{'class'};
       if (!$opt_listallaliases && ($fontdb{$t}{'type'} eq 'TTC' || $fontdb{$t}{'type'} eq 'OTC')) {
@@ -1346,7 +1368,8 @@ sub make_all_available {
 sub check_for_files {
   my @foundfiles;
   if ($opt_filelist) {
-    open(FOO, "<", $opt_filelist) || die("Cannot open $opt_filelist: $!");
+    open(FOO, "<", encode('locale_fs', $opt_filelist)) ||
+         die("Cannot open $opt_filelist: $!");
     @foundfiles = <FOO>;
     close(FOO) || warn "Cannot close $opt_filelist: $!";
   } else {
@@ -1372,13 +1395,15 @@ sub check_for_files {
       for my $d (qw!/Library/Fonts /System/Library/Fonts
                     /System/Library/Assets /System/Library/AssetsV2
                     /Network/Library/Fonts /usr/share/fonts!) {
-        push @extradirs, "$d//" if (-d $d); # recursive search
+        push @extradirs, "$d//"
+            if (-d encode('locale_fs', $d)); # recursive search
       }
       # the path contains white space, so hack required
       for my $d (qw!/Library/Application__Support/Apple/Fonts!) {
         my $sd = $d;
         $sd =~ s/__/ /;
-        push @extradirs, "$sd//" if (-d "$sd"); # recursive search
+        push @extradirs, "$sd//"
+            if (-d encode('locale_fs', "$sd")); # recursive search
       }
       # office for mac 2016
       for my $d (qw!/Applications/Microsoft__Word.app
@@ -1386,11 +1411,14 @@ sub check_for_files {
                     /Applications/Microsoft__PowerPoint.app!) {
         my $sd = $d;
         $sd =~ s/__/ /;
-        push @extradirs, "$sd/Contents/Resources/Fonts/" if (-d "$sd/Contents/Resources/Fonts");
-        push @extradirs, "$sd/Contents/Resources/DFonts/" if (-d "$sd/Contents/Resources/DFonts");
+        push @extradirs, "$sd/Contents/Resources/Fonts/"
+            if (-d encode('locale_fs', "$sd/Contents/Resources/Fonts"));
+        push @extradirs, "$sd/Contents/Resources/DFonts/"
+            if (-d encode('locale_fs', "$sd/Contents/Resources/DFonts"));
       }
       my $home = $ENV{'HOME'};
-      push @extradirs, "$home/Library/Fonts//" if (-d "$home/Library/Fonts");
+      push @extradirs, "$home/Library/Fonts//"
+          if (-d encode('locale_fs', "$home/Library/Fonts"));
     }
     #
     if (@extradirs) {
@@ -1427,23 +1455,20 @@ sub check_for_files {
       $cmdl .= " \"$f\" ";
     }
     # shoot up kpsewhich
-    # this call (derived from the database) contains multibyte characters,
-    # and they should be encoded in cp932 for win32 console
-    if (win32()) {
-      $cmdl = encode_utftocp($cmdl);
-    }
     print_ddebug("checking for $cmdl\n");
+    $cmdl = encode('locale', $cmdl);
     @foundfiles = `$cmdl`;
+    # We assume that the output of kpsewhich is
+    # the same as perl's locale (or active code page).
+    @foundfiles = map { decode('locale', $_) } @foundfiles;
   }
-  # at this point, on windows, @foundfiles is encoded in cp932
-  # which is suitable for the next few lines
   chomp(@foundfiles);
   print_ddebug("Found files @foundfiles\n");
   # map basenames to filenames
   my %bntofn;
   for my $f (@foundfiles) {
     $f =~ s/[\r\n]+\z//; # perl's chomp() on git-bash cannot strip CR of CRLF ??
-    my $realf = abs_path($f);
+    my $realf = decode('locale_fs', abs_path(encode('locale_fs', $f)));
     if (!$realf) {
       print_warning("dead link or strange file found: $f - ignored!\n");
       next;
@@ -1458,11 +1483,6 @@ sub check_for_files {
       my $temp_realfdir = "$realf";
       $temp_realfdir =~ s!^(.*)/(.*)$!$1!;
       next if ($temp_realfdir =~ $otf_pathpart || $temp_realfdir =~ $ttf_pathpart);
-    }
-    # decode now on windows! (cp932 -> internal utf-8)
-    if (win32()) {
-      $f = encode_cptoutf($f);
-      $realf = encode_cptoutf($realf);
     }
     my $bn = basename($f);
     # kpsewhich -all might return multiple files with the same basename;
@@ -1512,7 +1532,9 @@ sub check_for_files {
           print_debug("We need to test whether\n");
           print_debug("  $b:$index\n");
           print_debug("is the correct one ($k). Invoking zrlistttc ...\n");
-          chomp($actualpsname = `texlua $zrlistttc -i $index "$b"`);
+          my $cmdl = "texlua $zrlistttc -i $index \"$b\"";
+          $cmdl = encode('locale', $cmdl);
+          chomp($actualpsname = `$cmdl`);
           if ($?) {
             # something is wrong with the font file, or zrlistttc does not support it;
             # still there is a chance that Ghostscript supports, so don't discard it
@@ -1522,6 +1544,9 @@ sub check_for_files {
             $bname = $b;
             last;
           }
+          # We assume that the output of texlua is
+          # the same as perl's locale (or active code page).
+          $actualpsname = decode('locale', $actualpsname);
           $actualpsname =~ s/[\r\n]+\z//; # perl's chomp() on git-bash cannot strip CR of CRLF ??
           if ($actualpsname ne $k) {
             print_debug("... PSName returned by zrlistttc ($actualpsname) is\n");
@@ -1689,7 +1714,7 @@ sub read_font_database {
   # use "foo" as a substitute; otherwise, use built-in database
   if ($opt_fontdef) {
     my $foo = kpse_miscfont($opt_fontdef);
-    open(FDB, "<$foo") ||
+    open(FDB, "<:encoding(UTF-8)", encode('locale_fs', $foo)) ||
       die("Cannot find $opt_fontdef: $!");
     @dbl = <FDB>;
     close(FDB);
@@ -1703,7 +1728,7 @@ sub read_font_database {
   # overwrite existing one (that is, the addition wins)
   for (@opt_fontdef_add) {
     my $foo = kpse_miscfont($_);
-    open(FDB, "<$foo") ||
+    open(FDB, "<:encoding(UTF-8)", encode('locale_fs', $foo)) ||
       die("Cannot find $_: $!");
     @dbl = <FDB>;
     close(FDB);
@@ -1774,7 +1799,7 @@ sub read_each_font_database {
       next if (!$opt_cleanup);
       my @dbl;
       my $foo = kpse_miscfont($1);
-      if (!open(FDB, "<$foo")) {
+      if (!open(FDB, "<:encoding(UTF-8)", encode('locale_fs', $foo))) {
         print_warning("Cannot find $1, skipping!\n");
         next;
       }
@@ -1787,7 +1812,7 @@ sub read_each_font_database {
     if ($l =~ m/^INCLUDE\s*(.*)$/) {
       my @dbl;
       my $foo = kpse_miscfont($1);
-      if (!open(FDB, "<$foo")) {
+      if (!open(FDB, "<:encoding(UTF-8)", encode('locale_fs', $foo))) {
         print_warning("Cannot find $1, skipping!\n");
         next;
       }
@@ -1808,12 +1833,7 @@ sub read_each_font_database {
     if ($l =~ m/^OTFname(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
-      # cp932 for win32 console
-      my $encoded_fn;
-      if (win32()) {
-        $encoded_fn = encode_utftocp($fn);
-      }
-      print_dddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
+      print_dddebug("filename: ${fn}\n");
       print_dddebug("type: otf\n");
       $fontfiles{$fn}{'type'} = 'OTF';
       next;
@@ -1821,12 +1841,7 @@ sub read_each_font_database {
     if ($l =~ m/^OTCname(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
-      # cp932 for win32 console
-      my $encoded_fn;
-      if (win32()) {
-        $encoded_fn = encode_utftocp($fn);
-      }
-      print_dddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
+      print_dddebug("filename: ${fn}\n");
       print_dddebug("type: otc\n");
       $fontfiles{$fn}{'type'} = 'OTC';
       next;
@@ -1834,12 +1849,7 @@ sub read_each_font_database {
     if ($l =~ m/^TTFname(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
-      # cp932 for win32 console
-      my $encoded_fn;
-      if (win32()) {
-        $encoded_fn = encode_utftocp($fn);
-      }
-      print_dddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
+      print_dddebug("filename: ${fn}\n");
       print_dddebug("type: ttf\n");
       $fontfiles{$fn}{'type'} = 'TTF';
       next;
@@ -1847,12 +1857,7 @@ sub read_each_font_database {
     if ($l =~ m/^TTCname(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
-      # cp932 for win32 console
-      my $encoded_fn;
-      if (win32()) {
-        $encoded_fn = encode_utftocp($fn);
-      }
-      print_dddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
+      print_dddebug("filename: ${fn}\n");
       print_dddebug("type: ttc\n");
       $fontfiles{$fn}{'type'} = 'TTC';
       next;
@@ -1861,12 +1866,7 @@ sub read_each_font_database {
     if ($l =~ m/^Filename(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
-      # cp932 for win32 console
-      my $encoded_fn;
-      if (win32()) {
-        $encoded_fn = encode_utftocp($fn);
-      }
-      print_dddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
+      print_dddebug("filename: ${fn}\n");
       if ($fn =~ m/\.otf$/i) {
         print_dddebug("type: otf\n");
         $fontfiles{$fn}{'type'} = 'OTF';
@@ -1889,12 +1889,7 @@ sub read_each_font_database {
     if ($l =~ m/^RMVname(\((\d+)\))?:\s*(.*)$/) {
       my $fn = $3;
       $fontfiles{$fn}{'priority'} = ($2 ? $2 : 10);
-      # cp932 for win32 console
-      my $encoded_fn;
-      if (win32()) {
-        $encoded_fn = encode_utftocp($fn);
-      }
-      print_dddebug("filename: ", ($encoded_fn ? "$encoded_fn" : "$fn"), "\n");
+      print_dddebug("filename: ${fn}\n");
       print_dddebug("type: remove\n");
       $fontfiles{$fn}{'type'} = 'RMV';
       next;
@@ -1907,7 +1902,7 @@ sub read_each_font_database {
 }
 
 sub dump_font_database {
-  open(FOO, ">$dump_datafile") ||
+  open(FOO, ">:encoding(UTF-8)", encode('locale_fs', $dump_datafile)) ||
     die("cannot open $dump_datafile for writing: $!");
   for my $k (sort keys %fontdb) {
     print FOO "Name: $fontdb{$k}{'origname'}\n";
@@ -1938,15 +1933,19 @@ sub find_gs_resource {
   my $foundres = '';
   if (win32()) {
     # determine tlgs or native gs
-    chomp(my $foo = `kpsewhich -var-value=SELFAUTOPARENT`);
-    if ( -d "$foo/tlpkg/tlgs" ) {
+    my $foo = `kpsewhich -var-value=SELFAUTOPARENT`;
+    # We assume that the output of kpsewhich is
+    # the same as perl's locale (or active code page).
+    decode('locale', $foo);
+    chomp($foo);
+    if ( -d encode('locale_fs', "$foo/tlpkg/tlgs") ) {
       # should be texlive with tlgs
       print_debug("Assuming tlgs win32 ...\n");
       $foundres = "$foo/tlpkg/tlgs/Resource";
       # for TL2016, tlgs binary has built-in Resource,
       # so we cannot set up CJK fonts correctly.
       # the following test forces to exit in such case
-      if ( ! -d $foundres ) {
+      if ( ! -d encode('locale_fs', $foundres) ) {
         print_error("No Resource directory available for tlgs,\n");
         print_error("we cannot support such gs, sorry.\n");
         $foundres = '';
@@ -1958,18 +1957,20 @@ sub find_gs_resource {
     } else {
       # we assume gswin32c is in the path
       # TODO: what should we do for gswin64c?
-      chomp($foundres = `where gswin32c 2>$nul`); # assume 'where' is available
+      $foundres = `where gswin32c 2>$nul`; # assume 'where' is available
       if ($?) {
         print_error("Cannot run where gswin32c ...\n");
       } else {
+        # We assume that the output of 'where' is
+        # the same as perl's locale (or active code page).
+        chomp($foundres = decode('locale', $foundres));
         # trial 1: assume the relative path
         # when C:\path\to\bin\gswin32c.exe is found, then there should be
         # C:\path\to\Resource (note that 'where' returns backslash-ed path)
         print_debug("Finding gs resource by assuming relative path ...\n");
-        $foundres = encode_cptoutf($foundres); # 99.99% unnecessary
         $foundres =~ s!\\!/!g;
         $foundres =~ s!/bin/gswin32c\.exe$!/Resource!;
-        if ( ! -d $foundres ) {
+        if ( ! -d encode('locale_fs', $foundres) ) {
           $foundres = '';
         }
         if (!$foundres) {
@@ -1984,7 +1985,7 @@ sub find_gs_resource {
           # trial 2: assume the fixed path, c:/gs/gs$gsver/Resource
           print_debug("Finding gs resource by assuming fixed path ...\n");
           $foundres = "c:/gs/gs$gsver/Resource";
-          if ( ! -d $foundres ) {
+          if ( ! -d encode('locale_fs', $foundres) ) {
             $foundres = '';
           }
           if (!$foundres) {
@@ -2003,9 +2004,13 @@ sub find_gs_resource {
       # when /path/to/bin/gs is found, then there should be
       # /path/to/share/ghostscript/$(gs --version)/Resource
       print_debug("Finding gs resource by assuming relative path ...\n");
-      chomp($foundres = `which gs`);
+      $foundres = `which gs`;
+      # We assume that the output of 'which' is
+      # the same as perl's locale (or active code page).
+      $foundres = decode('locale', $foundres);
+      chomp($foundres);
       $foundres =~ s!/bin/gs$!/share/ghostscript/$gsver/Resource!;
-      if ( ! -d $foundres ) {
+      if ( ! -d encode('locale_fs', $foundres) ) {
         $foundres = '';
       }
       if (!$foundres) {
@@ -2013,10 +2018,14 @@ sub find_gs_resource {
       }
     }
     if (!$foundres) {
-      chomp(my @ret = `gs --help 2>$nul`);
+      my @ret = `gs --help 2>$nul`;
       if ($?) {
         print_error("Cannot run gs --help ...\n");
       } else {
+        # We assume that the output of gs is
+        # the same as perl's locale (or active code page).
+        @ret = map { decode('locale', $_) } @ret;
+        chomp(@ret);
         # trial 2: parse gs help message
         print_debug("Finding gs resource by parsing help message ...\n");
         $foundres = '';
@@ -2043,25 +2052,38 @@ sub kpse_miscfont {
   my ($file) = @_;
   my $foo = '';
   # first, prioritize GitHub repository diretory structure
-  $foo = "database/$file" if (-f "database/$file");
+  $foo = "database/$file" if (-f encode('locale_fs', "database/$file"));
   if ($foo eq "") {
-    chomp($foo = `kpsewhich -format=miscfont $file`);
+    my $cmdl = "kpsewhich -format=miscfont $file";
+    $cmdl = encode('locale', $cmdl);
+    $foo = `$cmdl`;
+    # We assume that the output of kpsewhich is
+    # the same as perl's locale (or active code page).
+    $foo = decode('locale', $foo);
+    chomp($foo);
   }
   return $foo;
 }
 
-sub encode_utftocp {
-  my ($foo) = @_;
-  $foo = Encode::decode('utf-8', $foo);
-  $foo = Encode::encode('cp932', $foo);
-  return $foo;
-}
+sub init_encode_locale {
+  eval {
+    require Encode::Locale;
+    Encode::Locale->import();
 
-sub encode_cptoutf {
-  my ($foo) = @_;
-  $foo = Encode::decode('cp932', $foo);
-  $foo = Encode::encode('utf-8', $foo);
-  return $foo;
+    $debug_msg_before_init .= "Encode::Locale is loaded.\n";
+  };
+  if ($@) {
+    if (win32) {
+      die ("For Windows, Encode::Locale is required.\n");
+    }
+
+    $debug_msg_before_init .=
+        "Encode::Locale is not found. Assuming all encodings are UTF-8.\n";
+    Encode::Alias::define_alias('locale' => 'UTF-8');
+    Encode::Alias::define_alias('locale_fs' => 'UTF-8');
+    Encode::Alias::define_alias('console_in' => 'UTF-8');
+    Encode::Alias::define_alias('console_out' => 'UTF-8');
+  }
 }
 
 sub version {
