@@ -385,7 +385,7 @@ if (macosx()) {
   $macos_ver_major =~ s/^(\d+)\.(\d+).*/$1/;
   my $macos_ver_minor = $macos_ver;
   $macos_ver_minor =~ s/^(\d+)\.(\d+).*/$2/;
-  if ($macos_ver_major==10 && $macos_ver_minor>=8) {
+  if ($macos_ver_major>=11 || ($macos_ver_major==10 && $macos_ver_minor>=8)) {
     if (!$opt_cleanup && !$opt_fontdef && !@opt_fontdef_add) { # if built-in only
       print_warning("Our built-in database does not support recent\n");
       print_warning("versions of Mac OS (10.8 Mountain Lion or later)!\n");
