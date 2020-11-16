@@ -48,15 +48,13 @@ if (macosx()) {
       $addname = "elcapitan";
     } elsif ($macos_ver_minor==12) {
       $addname = "sierra";
-    } elsif ($macos_ver_minor==13) {
-      $addname = "highsierra";
-    } elsif ($macos_ver_minor==14) {
-      $addname = "highsierra"; # mojave
-    } elsif ($macos_ver_minor==15) {
-      $addname = "highsierra"; # catalina -- at least nothing is wrong
-    } elsif ($macos_ver_minor>=16) {
-      print STDERR "Warning: macOS 10.$macos_ver_minor is untested.\n";
-      $addname = "highsierra"; # (the most recent one)
+    } elsif ($macos_ver_minor>=13) {
+      $addname = "highsierra"; # macOS 10.x was ended with x=15 (catalina)
+    } 
+  } elsif ($macos_ver_major==11) {
+    if ($macos_ver_minor==0) {
+      print STDERR "Warning: macOS 11.$macos_ver_minor is untested.\n";
+      $addname = "highsierra"; # big sur -- new major version
     }
   }
 }
