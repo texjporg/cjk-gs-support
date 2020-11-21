@@ -445,12 +445,7 @@ if (defined($opt_winbatch)) {
   print_warning("ignoring --winbatch option due to being obsolete\n");
 }
 if ($opt_hardlink) {
-  if (win32()) {
-    $opt_hardlink = 1;
-  } else {
-    print_warning("ignoring --hardlink option due to non-Windows\n");
-    $opt_hardlink = 0;
-  }
+  print_warning("ignoring --hardlink option due to being obsolete\n");
 }
 
 if (defined($opt_dump_data)) {
@@ -2182,10 +2177,6 @@ sub Usage {
 -h, --help            this help
 ";
 
-  my $winonlyoptions = "
---hardlink            create hardlinks instead of symlinks
-";
-
   my $commandoptions = "
 --dump-data [FILE]    dump the set of font definitions which is currently
                       effective, where FILE (the dump output) defaults to
@@ -2358,8 +2349,6 @@ The contained font data is not copyrightable.
     print "\n$shortdesc\nUsage\n-----\n\n`````\n$usage\n`````\n\n";
     print "#### Options ####\n\n`````";
     print_for_out($options, "  ");
-    print "`````\n\n#### Windows only options ####\n\n`````";
-    print_for_out($winonlyoptions, "  ");
     print "`````\n\n#### Command like options ####\n\n`````";
     print_for_out($commandoptions, "  ");
     print "`````\n\nOperation\n---------\n$operation\n";
@@ -2375,10 +2364,6 @@ The contained font data is not copyrightable.
     print "\nUsage: $usage\n\n$headline\n$shortdesc";
     print "\nOptions:\n";
     print_for_out($options, "  ");
-    if (win32()) {
-      print "\nWindows only options:\n";
-      print_for_out($winonlyoptions, "  ");
-    }
     print "\nCommand like options:\n";
     print_for_out($commandoptions, "  ");
     print "\nOperation:\n";
