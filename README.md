@@ -54,15 +54,6 @@ Usage
   -h, --help            this help
 `````
 
-#### Windows only options ####
-
-`````
-  --hardlink            create hardlinks instead of symlinks
-  --winbatch [FILE]     prepare a batch file for link generation, instead of
-                        generating links right away
-                        the batch file name defaults to makefontlinks.bat
-`````
-
 #### Command like options ####
 
 `````
@@ -216,8 +207,9 @@ Authors, Contributors, and Copyright
 ------------------------------------
 
 The script and its documentation was written by Norbert Preining, based
-on research and work by Yusuke Kuroki, Yusuke Terada, Bruno Voisin,
-Hironobu Yamashita, Munehiro Yamamoto and the TeX Q&A wiki page.
+on research and work by Masamichi Hosoda, Yusuke Kuroki, Yusuke Terada,
+Bruno Voisin, Hironobu Yamashita, Munehiro Yamamoto and the TeX Q&A wiki
+page.
 
 Maintained by Japanese TeX Development Community. For development, see
   https://github.com/texjporg/cjk-gs-support
