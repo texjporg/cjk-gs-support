@@ -60,6 +60,8 @@ if (win32()) {
 
   require Win32::API;
   Win32::API->import ();
+  require File::Compare;
+  File::Compare->import ();
 }
 
 # The followings are installed by ptex-fontmaps (texjporg):
@@ -1095,6 +1097,18 @@ sub link_font {
       if ($opt_force) {
         print_info("Removing $target due to --force!\n");
         $do_unlink = 1;
+      } elsif (win32()) {
+        my $result = compare (encode ('locale_fs', $f),
+                              encode ('locale_fs', $target));
+        if ($result == -1) {
+          print_error("file compare failed: ${f}, ${target}\n");
+          exit(1);
+        } elsif ($result) {
+          print_error("$target already existing and different content, exiting!\n");
+          exit(1);
+        }
+        print_debug("$target already existing but same content, skipping!\n");
+        return;
       } else {
         print_error("$target already existing, exiting!\n");
         exit(1);
