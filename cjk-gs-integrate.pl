@@ -277,10 +277,6 @@ my $akotfps_pathpart = "dvips/ps2otfps";
 my $akotfps_datafilename = "psnames-for-otf";
 my $akotfps_datacontent = '';
 
-# if windows, we might create batch file for links
-my $winbatch = "makefontlinks.bat";
-my $winbatch_content = '';
-
 # dump output for data file (for easy editing for users)
 my $dump_datafile = "$prg-data.dat";
 
@@ -446,19 +442,7 @@ if (defined($opt_akotfps)) {
 }
 
 if (defined($opt_winbatch)) {
-  if ($opt_winbatch ne '') {
-    $winbatch = $opt_winbatch;
-  }
-  if (win32()) {
-    $opt_winbatch = 1;
-    unlink encode('locale_fs', $winbatch)
-        if (-f encode('locale_fs', $winbatch));
-  } else {
-    print_warning("ignoring --winbatch option due to non-Windows\n");
-    $opt_winbatch = 0;
-  }
-} else {
-  $opt_winbatch = 0;
+  print_warning("ignoring --winbatch option due to being obsolete\n");
 }
 if ($opt_hardlink) {
   if (win32()) {
@@ -592,7 +576,6 @@ sub main {
       print_info(($opt_remove ? "removing" : "generating") . " links, snippets and cidfmap.local for non-CID fonts ...\n");
       do_nonotf_fonts();
     }
-    write_winbatch() if $opt_winbatch;
   }
   print_info(($opt_remove ? "removing" : "generating") . " snippets and cidfmap.aliases for font aliases ...\n");
   do_aliases();
@@ -603,15 +586,6 @@ sub main {
     system("mktexlsr");
   }
   print_info("finished\n");
-  if ($opt_winbatch) {
-    if (-f encode('locale_fs', $winbatch)) {
-      print_info("*** Batch file $winbatch created ***\n");
-      print_info("*** to complete, run it as administrator privilege.***\n");
-    } else {
-      print_error("Failed to create $winbatch!\n");
-      exit(1);
-    }
-  }
 }
 
 sub do_all_fonts {
@@ -1190,24 +1164,9 @@ sub maybe_symlink {
   }
 }
 
-# unlink function actually works also on windows, however,
-# leave it to batch file for consistency. otherwise
-# option $opt_force may not work as expected
 sub maybe_unlink {
   my ($targetname) = @_;
-  if (win32()) {
-    $targetname =~ s!/!\\!g;
-    if ($opt_winbatch) {
-      # re-encoding of $winbatch_content is done by write_winbatch()
-      $winbatch_content .= "if exist \"$targetname\" del \"$targetname\"\n";
-    } else {
-      my $cmdl = "cmd.exe /c if exist \"$targetname\" del \"$targetname\"";
-      $cmdl = encode('locale', $cmdl);
-      my @ret = `$cmdl`;
-    }
-  } else {
-    unlink (encode('locale_fs', $targetname));
-  }
+  unlink (encode('locale_fs', $targetname));
 }
 
 # For Windows: Create symbolic link
@@ -1330,18 +1289,6 @@ sub load_copyfilew {
         ) or die ('Failed: Win32::API::More->new CopyFileW');
 
     return $copyfilew;
-}
-
-# write batch file (windows only)
-sub write_winbatch {
-  return if $dry_run;
-  open(FOO, ">:encoding(locale)", encode('locale_fs', $winbatch)) ||
-    die("cannot open $winbatch for writing: $!");
-  print FOO "\@echo off\n",
-            "$winbatch_content",
-            "\@echo symlink ", ($opt_remove ? "removed\n" : "generated\n"),
-            "\@pause 1\n";
-  close(FOO);
 }
 
 # write to psnames-for-otfps
@@ -2237,9 +2184,6 @@ sub Usage {
 
   my $winonlyoptions = "
 --hardlink            create hardlinks instead of symlinks
---winbatch [FILE]     prepare a batch file for link generation, instead of
-                      generating links right away
-                      the batch file name defaults to $winbatch
 ";
 
   my $commandoptions = "
