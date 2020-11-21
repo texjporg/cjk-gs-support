@@ -38,6 +38,7 @@ use Cwd 'abs_path';
 use strict;
 use warnings;
 use utf8;
+use feature 'state';
 use Encode;
 use Encode::Alias;
 
@@ -56,6 +57,9 @@ my $version = '$VER$';
 if (win32()) {
   # some perl functions (symlink, -l test) does not work
   print_warning("Sorry, we have only partial support for Windows!\n");
+
+  require Win32::API;
+  Win32::API->import ();
 }
 
 # The followings are installed by ptex-fontmaps (texjporg):
@@ -1152,56 +1156,35 @@ sub make_dir {
   }
 }
 
-# perl symlink function does not work on windows, so leave it to
-# cmd.exe mklink function (or write to batch file).
-# if target already exists, do not try to override it. otherwise
-# "mklink error: Cannot create a file when that file already exists"
-# is thrown many times
+# perl symlink function does not work on windows, so we use Win32 API.
 sub maybe_symlink {
   my ($realname, $targetname) = @_;
   if (win32()) {
-    # hardlink vs. symlink -- HY 2017/04/26
-    #   * readablitiy: hardlink is easier, but it seems that current gs can read
-    #                  symlink properly, so it doesn't matter
-    #   * permission:  hardlink creation does not require administrator privilege,
-    #                  but is likely to fail for c:/windows/fonts/* system files
-    #                  due to "Access denied"
-    #                  symlink creation requires administrator privilege, but
-    #                  it can link to all files in c:/windows/fonts/
-    #   * versatility: symlink can point to a file on a different/remote volume
-    # for these reasons, we try to create symlink by default.
-    # if --hardlink option is given, we create hardlink instead.
-    # also, if --winbatch option is given, we prepare batch file for link generation,
-    # instead of creating links right away.
-    $realname =~ s!/!\\!g;
-    $targetname =~ s!/!\\!g;
-    if ($opt_winbatch) {
-      # re-encoding of $winbatch_content is done by write_winbatch()
-      $winbatch_content .= "if not exist \"$targetname\" mklink ";
-      $winbatch_content .= "/h " if $opt_hardlink;
-      $winbatch_content .= "\"$targetname\" \"$realname\"\n";
-    } else {
-      my $cmdl = "cmd.exe /c if not exist \"$targetname\" mklink ";
-      $cmdl .= "/h " if $opt_hardlink;
-      $cmdl .= "\"$targetname\" \"$realname\"";
-      $cmdl = encode('locale', $cmdl);
-      my @ret = `$cmdl`;
-      # sometimes hard link creation may fail due to "Access denied"
-      # (especially when $realname is located in c:/windows/fonts).
-      # TODO: what should we do to ensure resources, which might be
-      #       different from $realname? -- HY (2017/03/21)
-      # -- one possibility:
-      # if (@ret) {
-      #   @ret ="done";
-      # } else {
-      #   print_info("Hard link creation for $realname failed. I will copy this file instead.\n");
-      #   $cmdl = "cmd.exe /c if not exist \"$targetname\" copy \"$realname\" \"$targetname\"";
-      #   @ret = `$cmdl`;
-      # }
-      # -- however, both tlgs (TeX Live) and standalone gswin32/64 (built
-      #    by Akira Kakuto) can search in c:/windows/fonts by default.
-      #    Thus, copying such files is waste of memory
+    # Try symbolic link, hard link, copy by Win32 API
+
+    # On Windows, the creation of a symbolic link requires a privilege.
+    # Therefore, if the creation of the symbolic link fails,
+    # create a hard link.
+    # However, the creation of the hard link requires the write permission
+    # to the original existing file.
+    # Thus, if the hard link also fails, copy the file.
+
+    if (win32_symlink ($realname, $targetname)) {
+      print_debug ("Symbolic link succeeded: ${targetname}\n");
+      return 1;
     }
+
+    if (win32_hardlink ($realname, $targetname)) {
+      print_debug ("Hard link succeeded: ${targetname}\n");
+      return 1;
+    }
+
+    if (win32_copy ($realname, $targetname)) {
+      print_debug ("Copy succeeded: ${targetname}\n");
+      return 1;
+    }
+
+    print_warning ("Link/copy failed: ${targetname}\n");
   } else {
     symlink ($realname, $targetname);
   }
@@ -1225,6 +1208,128 @@ sub maybe_unlink {
   } else {
     unlink (encode('locale_fs', $targetname));
   }
+}
+
+# For Windows: Create symbolic link
+sub win32_symlink {
+    my ($existingfilename, $newfilename) = @_;
+
+    # We use CreateSymbolicLinkW API directly for creating symbolic link
+    # because perl's symlink function may not work in Windows.
+    state $createsymboliclinkw = load_createsymboliclinkw ();
+
+    $existingfilename =~ s|/|\\|g;
+    $newfilename =~ s|/|\\|g;
+
+    my $r = $createsymboliclinkw->Call (
+        encode ('UTF-16LE', $newfilename),
+        encode ('UTF-16LE', $existingfilename),
+        0
+        );
+    if (ord($r) != 0) {
+        return 1;
+    }
+    my $msg = decode ('locale',
+                      Win32::FormatMessage (Win32::GetLastError ()));
+    $msg =~ s/[\r\n]+\z//;
+    print_debug ("CreateSymbolicLinkW failed: ${msg}\n");
+
+    return 0;
+}
+
+# For Windows: Create hard link
+sub win32_hardlink {
+    my ($existingfilename, $newfilename) = @_;
+
+    # We use CreateHardLinkW API directly for creating hard link
+    # because -W API is not affected by the perl's active code page.
+    state $createhardlinkw = load_createhardlinkw ();
+
+    $existingfilename =~ s|/|\\|g;
+    $newfilename =~ s|/|\\|g;
+
+    my $r = $createhardlinkw->Call (
+        encode ('UTF-16LE', $newfilename),
+        encode ('UTF-16LE', $existingfilename),
+        0
+        );
+    if ($r) {
+        return 1;
+    }
+    my $msg = decode ('locale',
+                      Win32::FormatMessage (Win32::GetLastError ()));
+    $msg =~ s/[\r\n]+\z//;
+    print_debug ("CreateHardLinkW failed: ${msg}\n");
+
+    return 0;
+}
+
+# For Windows: Copy file
+sub win32_copy {
+    my ($existingfilename, $newfilename) = @_;
+
+    # We use CopyFileW API directly for copying file
+    # because -W API is not affected by the perl's active code page.
+    state $copyfilew = load_copyfilew ();
+
+    $existingfilename =~ s|/|\\|g;
+    $newfilename =~ s|/|\\|g;
+
+    my $r = $copyfilew->Call (
+        encode ('UTF-16LE', $existingfilename),
+        encode ('UTF-16LE', $newfilename),
+        1
+        );
+    if ($r) {
+        return 1;
+    }
+    my $msg = decode ('locale',
+                      Win32::FormatMessage (Win32::GetLastError ()));
+    $msg =~ s/[\r\n]+\z//;
+    print_debug ("CopyFileW failed: ${msg}\n");
+
+    return 0;
+}
+
+# For Windows: Load CreateSymbolicLinkW API
+sub load_createsymboliclinkw {
+    my $createsymboliclinkw = Win32::API::More->new (
+        'kernel32.dll',
+        'BOOLEAN CreateSymbolicLinkW(
+           LPCWSTR lpSymlinkFileName,
+           LPCWSTR lpTargetFileName,
+           DWORD   dwFlags
+         )'
+        ) or die ('Failed: Win32::API::More->new CreateSymbolicLinkW');
+
+    return $createsymboliclinkw;
+}
+# For Windows: Load CreateHardLinkW API
+sub load_createhardlinkw {
+    my $createhardlinkw = Win32::API::More->new (
+        'kernel32.dll',
+        'BOOL CreateHardLinkW(
+           LPCWSTR  lpFileName,
+           LPCWSTR  lpExistingFileName,
+           UINT_PTR lpSecurityAttributes
+          )'
+        ) or die ('Failed: Win32::API::More->new CreateHardLinkW');
+
+    return $createhardlinkw;
+}
+
+# For Windows: Load CopyFileW API
+sub load_copyfilew {
+    my $copyfilew = Win32::API::More->new (
+        'kernel32.dll',
+        'BOOL CopyFileW(
+           LPCWSTR lpExistingFileName,
+           LPCWSTR lpNewFileName,
+           BOOL    bFailIfExists
+         )'
+        ) or die ('Failed: Win32::API::More->new CopyFileW');
+
+    return $copyfilew;
 }
 
 # write batch file (windows only)
