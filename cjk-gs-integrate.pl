@@ -6,6 +6,7 @@
 # Copyright 2016-2020 by Japanese TeX Development Community
 #
 # This work is based on research and work by (in alphabetical order)
+#   Masamichi Hosoda
 #   Yusuke Kuroki
 #   Yusuke Terada
 #   Bruno Voisin
@@ -2346,8 +2347,9 @@ requirements of `LL` and `RR` must be fulfilled:
 
   my $authors = "
 The script and its documentation was written by Norbert Preining, based
-on research and work by Yusuke Kuroki, Yusuke Terada, Bruno Voisin,
-Hironobu Yamashita, Munehiro Yamamoto and the TeX Q&A wiki page.
+on research and work by Masamichi Hosoda, Yusuke Kuroki, Yusuke Terada,
+Bruno Voisin, Hironobu Yamashita, Munehiro Yamamoto and the TeX Q&A wiki
+page.
 
 Maintained by Japanese TeX Development Community. For development, see
   https://github.com/texjporg/cjk-gs-support
