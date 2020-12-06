@@ -50,7 +50,7 @@ if (macosx()) {
       $addname = "sierra";
     } elsif ($macos_ver_minor>=13) {
       $addname = "highsierra"; # macOS 10.x was ended with x=15 (catalina)
-    } 
+    }
   } elsif ($macos_ver_major==11) {
     if ($macos_ver_minor==0) {
       print STDERR "Warning: macOS 11.$macos_ver_minor is untested.\n";
@@ -65,7 +65,7 @@ push @newarg, @ARGV;
 if (-f "cjk-gs-integrate.pl") {
   system("perl cjk-gs-integrate.pl @newarg");
 } else {
-  system("cjk-gs-integrate @newarg");  
+  system("cjk-gs-integrate @newarg");
 }
 
 
