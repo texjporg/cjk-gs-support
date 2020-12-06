@@ -25,7 +25,7 @@ We provide the following additional databases:
   [cjkgs-macos-elcapitan.dat](https://raw.githubusercontent.com/texjporg/cjk-gs-support/master/cjkgs-macos-elcapitan.dat)
 - for Sierra (10.12):
   [cjkgs-macos-sierra.dat](https://raw.githubusercontent.com/texjporg/cjk-gs-support/master/cjkgs-macos-sierra.dat)
-- for High Sierra (10.13):
+- for High Sierra (10.13) or later:
   [cjkgs-macos-highsierra.dat](https://raw.githubusercontent.com/texjporg/cjk-gs-support/master/cjkgs-macos-highsierra.dat)
 
 Download the database file (`*.dat`) which is suitable for
