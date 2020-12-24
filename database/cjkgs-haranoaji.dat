@@ -102,6 +102,8 @@ OTFname: HaranoAjiMinchoCN-Light.otf
 
 Name: HaranoAjiMinchoCN-Regular
 Class: GB
+Provides(45): STSong-Light
+Provides(45): STSong-Regular
 OTFname: HaranoAjiMinchoCN-Regular.otf
 
 Name: HaranoAjiMinchoCN-Medium
@@ -138,6 +140,9 @@ OTFname: HaranoAjiGothicCN-Regular.otf
 
 Name: HaranoAjiGothicCN-Medium
 Class: GB
+Provides(45): STHeiti-Light
+Provides(45): STHeiti-Regular
+Provides(45): STKaiti-Regular
 OTFname: HaranoAjiGothicCN-Medium.otf
 
 Name: HaranoAjiGothicCN-Bold
@@ -160,10 +165,14 @@ OTFname: HaranoAjiMinchoTW-Light.otf
 
 Name: HaranoAjiMinchoTW-Regular
 Class: CNS
+Provides(45): MSung-Light
+Provides(45): MSung-Medium
 OTFname: HaranoAjiMinchoTW-Regular.otf
 
 Name: HaranoAjiMinchoTW-Medium
 Class: CNS
+Provides(45): MHei-Medium
+Provides(45): MKai-Medium
 OTFname: HaranoAjiMinchoTW-Medium.otf
 
 Name: HaranoAjiMinchoTW-SemiBold
@@ -218,6 +227,7 @@ OTFname: HaranoAjiMinchoK1-Light.otf
 
 Name: HaranoAjiMinchoK1-Regular
 Class: Korea
+Provides(45): HYSMyeongJo-Medium
 OTFname: HaranoAjiMinchoK1-Regular.otf
 
 Name: HaranoAjiMinchoK1-Medium
@@ -254,6 +264,8 @@ OTFname: HaranoAjiGothicK1-Regular.otf
 
 Name: HaranoAjiGothicK1-Medium
 Class: Korea
+Provides(45): HYGoThic-Medium
+Provides(45): HYRGoThic-Medium
 OTFname: HaranoAjiGothicK1-Medium.otf
 
 Name: HaranoAjiGothicK1-Bold

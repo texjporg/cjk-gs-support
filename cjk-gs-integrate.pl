@@ -2323,18 +2323,19 @@ alias if necessary.
 For the Japanese fonts:
     Morisawa Pr6N, Morisawa, Hiragino ProN, Hiragino,
     Kozuka Pr6N, Kozuka ProVI, Kozuka Pro, Kozuka Std,
-    HaranoAji,
-    Yu OS X, Yu Win, MS,
+    HaranoAji, Yu OS X, Yu Win, MS,
     Moga-Mobo-ex, Moga-Mobo, IPAex, IPA, Ume
 
 For the Korean fonts:
     (Hanyang,) Adobe, Solaris, MS, Unfonts, Baekmuk
 
 For the Simplified Chinese:
-    Adobe, Fandol, Hiragino, Founder, MS, CJKUnifonts, Arphic, CJKUnifonts-ttf
+    Adobe, Fandol, HaranoAji, Hiragino, Founder, MS,
+    CJKUnifonts, Arphic, CJKUnifonts-ttf
 
 For the Traditional Chinese:
-    Adobe, MS, CJKUnifonts, Arphic, CJKUnifonts-ttf
+    Adobe, HaranoAji, MS,
+    CJKUnifonts, Arphic, CJKUnifonts-ttf
 
 #### Overriding aliases ####
 
@@ -2519,6 +2520,9 @@ TTFname: OsakaMono.ttf
 # Adobe -- Provides S30, T30
 INCLUDE cjkgs-adobe.dat
 
+# HaranoAji -- Provides S45, T45
+# (already included in JAPANESE section)
+
 # Hiragino -- Provides S50
 # (already included in JAPANESE section)
 
@@ -2533,9 +2537,6 @@ INCLUDE cjkgs-dynacomware.dat
 
 # Monotype
 INCLUDE cjkgs-monotype.dat
-
-# Apple
-INCLUDE cjkgs-apple.dat
 
 # Shanghai Ikarus Ltd./URW Software & Type GmbH
 
@@ -2592,6 +2593,9 @@ TTFname: cwfs.ttf
 # Solaris -- Provides K40
 INCLUDE cjkgs-solaris.dat
 
+# HaranoAji -- Provides K45
+# (already included in JAPANESE section)
+
 # Baekmuk (free)
 # This is a special case, because "batang.ttf" in baekmuk and
 # "Batang.ttf" in Microsoft Mac Office font share the same filename;
@@ -2628,6 +2632,9 @@ INCLUDE cjkgs-unfonts.dat
 
 # Nanum (free)
 INCLUDE cjkgs-nanum.dat
+
+# Apple
+INCLUDE cjkgs-apple.dat
 
 # Design font by Ho-Seok Ee, aka. "ALee's font" (free)
 

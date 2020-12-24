@@ -182,18 +182,19 @@ alias if necessary.
 For the Japanese fonts:
     Morisawa Pr6N, Morisawa, Hiragino ProN, Hiragino,
     Kozuka Pr6N, Kozuka ProVI, Kozuka Pro, Kozuka Std,
-    HaranoAji,
-    Yu OS X, Yu Win, MS,
+    HaranoAji, Yu OS X, Yu Win, MS,
     Moga-Mobo-ex, Moga-Mobo, IPAex, IPA, Ume
 
 For the Korean fonts:
     (Hanyang,) Adobe, Solaris, MS, Unfonts, Baekmuk
 
 For the Simplified Chinese:
-    Adobe, Fandol, Hiragino, Founder, MS, CJKUnifonts, Arphic, CJKUnifonts-ttf
+    Adobe, Fandol, HaranoAji, Hiragino, Founder, MS,
+    CJKUnifonts, Arphic, CJKUnifonts-ttf
 
 For the Traditional Chinese:
-    Adobe, MS, CJKUnifonts, Arphic, CJKUnifonts-ttf
+    Adobe, HaranoAji, MS,
+    CJKUnifonts, Arphic, CJKUnifonts-ttf
 
 #### Overriding aliases ####
 
