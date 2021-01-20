@@ -2,10 +2,55 @@
 
 ### JAPANESE ###
 
+# Note (as of 2021-01-15):
+#   DotGothic16-Regular.ttf
+#   KleeOne-Regular.ttf
+#   KleeOne-SemiBold.ttf
+#   RampartOne-Regular.ttf
+#   ReggaeOne-Regular.ttf
+#   RocknRollOne-Regular.ttf
+#   Stick-Regular.ttf
+#   TrainOne-Regular.ttf
+# are prepared for Google Fonts for free (SIL Open Font License).
+#   * https://github.com/fontworks-fonts
+#   * https://fontworks.co.jp/news/2021/01/15/9531/
+
 # Note about Mac (Mac OS X 10.6 -- macOS 10.13)
 #   Klee.ttc
 #   Tsukushi{A,B}MaruGothic.ttc
 # are bundled with OS X 10.11 El Capitan or later versions.
+
+Name: DotGothic16-Regular
+Class: Japan
+TTFname: DotGothic16-Regular.ttf
+
+Name: KleeOne-Regular
+Class: Japan
+TTFname: KleeOne-Regular.ttf
+
+Name: KleeOne-SemiBold
+Class: Japan
+TTFname: KleeOne-SemiBold.ttf
+
+Name: RampartOne-Regular
+Class: Japan
+TTFname: RampartOne-Regular.ttf
+
+Name: ReggaeOne-Regular
+Class: Japan
+TTFname: ReggaeOne-Regular.ttf
+
+Name: RocknRollOne-Regular
+Class: Japan
+TTFname: RocknRollOne-Regular.ttf
+
+Name: Stick-Regular
+Class: Japan
+TTFname: Stick-Regular.ttf
+
+Name: TrainOne-Regular
+Class: Japan
+TTFname: TrainOne-Regular.ttf
 
 Name: FOT-KleePro-M
 PSName: KleePro-M
