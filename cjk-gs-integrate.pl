@@ -2,8 +2,8 @@
 #
 # cjk-gs-integrate - setup Ghostscript for CID/TTF CJK fonts
 #
-# Copyright 2015-2020 by Norbert Preining
-# Copyright 2016-2020 by Japanese TeX Development Community
+# Copyright 2015-2021 by Norbert Preining
+# Copyright 2016-2021 by Japanese TeX Development Community
 #
 # This work is based on research and work by (in alphabetical order)
 #   Masamichi Hosoda

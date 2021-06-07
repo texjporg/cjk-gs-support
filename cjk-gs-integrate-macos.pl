@@ -2,7 +2,7 @@
 #
 # cjk-gs-integrate-macos - wrapper for cjk-gs-integrate on macOS
 #
-# Copyright 2017-2020 by Japanese TeX Development Community
+# Copyright 2017-2021 by Japanese TeX Development Community
 #
 # This file is licensed under GPL version 3 or any later version.
 # For copyright statements see end of file.
