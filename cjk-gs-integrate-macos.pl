@@ -51,9 +51,9 @@ if (macosx()) {
     } elsif ($macos_ver_minor>=13) {
       $addname = "highsierra"; # macOS 10.x was ended with x=15 (catalina)
     }
-  } elsif ($macos_ver_major==11) {
+  } elsif ($macos_ver_major>=11) {
     if ($macos_ver_minor>=0) {
-      print STDERR "Warning: macOS 11.$macos_ver_minor is untested.\n";
+      print STDERR "Warning: macOS $macos_ver_major.$macos_ver_minor is untested.\n";
       $addname = "highsierra"; # big sur -- new major version
     }
   }
