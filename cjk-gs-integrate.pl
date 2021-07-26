@@ -262,6 +262,23 @@ my %encode_list = (
     UniKS-UTF32-V
     UniKS-UTF8-H
     UniKS-UTF8-V
+    / ],
+  KR => [ qw/
+    Adobe-KR-0
+    Adobe-KR-1
+    Adobe-KR-2
+    Adobe-KR-3
+    Adobe-KR-4
+    Adobe-KR-5
+    Adobe-KR-6
+    Adobe-KR-7
+    Adobe-KR-8
+    Adobe-KR-9
+    Identity-H
+    Identity-V
+    UniAKR-UTF16-H
+    UniAKR-UTF32-H
+    UniAKR-UTF8-H
     / ] );
 
 #
@@ -725,7 +742,7 @@ sub do_aliases {
   #
   $outp .= "\n\n% Aliases\n";
   #
-  my (@jal, @kal, @tal, @sal, @ai0al);
+  my (@jal, @kal, @kral, @tal, @sal, @ai0al);
   #
   for my $al (sort keys %aliases) {
     my $target;
@@ -760,6 +777,8 @@ sub do_aliases {
       push @jal, "/$al /$target ;";
     } elsif ($class eq 'Korea') {
       push @kal, "/$al /$target ;";
+    } elsif ($class eq 'KR') {
+      push @kral, "/$al /$target ;";
     } elsif ($class eq 'GB') {
       push @sal, "/$al /$target ;";
     } elsif ($class eq 'CNS') {
@@ -778,7 +797,8 @@ sub do_aliases {
       if (! -r encode('locale_fs', "$ciddest/HeiseiKakuGo-W5"));
   #
   $outp .= "\n% Japanese fonts\n" . join("\n", @jal) . "\n" if @jal;
-  $outp .= "\n% Korean fonts\n" . join("\n", @kal) . "\n" if @kal;
+  $outp .= "\n% Korean (AK1) fonts\n" . join("\n", @kal) . "\n" if @kal;
+  $outp .= "\n% Korean (AKR) fonts\n" . join("\n", @kral) . "\n" if @kral;
   $outp .= "\n% Traditional Chinese fonts\n" . join("\n", @tal) . "\n" if @tal;
   $outp .= "\n% Simplified Chinese fonts\n" . join("\n", @sal) . "\n" if @sal;
   $outp .= "\n% Adobe-Identity-0 fonts\n" . join("\n", @ai0al) . "\n" if @ai0al;
@@ -974,6 +994,8 @@ sub generate_cidfmap_entry {
     $s .= "1) 5]";
   } elsif ($c eq "Korea") {
     $s .= "1) 2]";
+  } elsif ($c eq "KR") {
+    $s .= ") 9]";
   } elsif ($c eq "AI0") {
     print_warning("cannot use class AI0 for non-OTF $n, skipping.\n");
     return '';
@@ -1365,7 +1387,7 @@ sub info_found_fonts {
 # dump aliases
 sub info_list_aliases {
   print "List of ", ($opt_listallaliases ? "all" : "available"), " aliases and their options (in decreasing priority):\n" unless $opt_machine;
-  my (@jal, @kal, @tal, @sal, @ai0al);
+  my (@jal, @kal, @kral, @tal, @sal, @ai0al);
   for my $al (sort keys %aliases) {
     my $cl;
     my @ks = sort { $a <=> $b} keys(%{$aliases{$al}});
@@ -1389,6 +1411,8 @@ sub info_list_aliases {
       push @jal, $foo;
     } elsif ($cl eq 'Korea') {
       push @kal, $foo;
+    } elsif ($cl eq 'KR') {
+      push @kral, $foo;
     } elsif ($cl eq 'GB') {
       push @sal, $foo;
     } elsif ($cl eq 'CNS') {
@@ -1402,12 +1426,14 @@ sub info_list_aliases {
   if ($opt_machine) {
     print @jal if @jal;
     print @kal if @kal;
+    print @kral if @kral;
     print @sal if @sal;
     print @tal if @tal;
     print @ai0al if @ai0al;
   } else {
     print "Aliases for Japanese fonts:\n", @jal, "\n" if @jal;
-    print "Aliases for Korean fonts:\n", @kal, "\n" if @kal;
+    print "Aliases for Korean (AK1) fonts:\n", @kal, "\n" if @kal;
+    print "Aliases for Korean (AKR) fonts:\n", @kral, "\n" if @kral;
     print "Aliases for Simplified Chinese fonts:\n", @sal, "\n" if @sal;
     print "Aliases for Traditional Chinese fonts:\n", @tal, "\n" if @tal;
     print "Aliases for Adobe-Identity-0 fonts:\n", @ai0al, "\n" if @ai0al;
