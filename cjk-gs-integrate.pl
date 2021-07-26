@@ -2613,7 +2613,7 @@ Class: CNS
 TTFname: cwfs.ttf
 
 #
-# KOREAN FONTS
+# KOREAN (AK1) FONTS
 #
 
 # Adobe -- Provides K30/80
@@ -2695,6 +2695,13 @@ TTFname: BM-HANNA.ttf
 
 # Hancom HCR (free)
 INCLUDE cjkgs-hancom.dat
+
+#
+# KOREAN (AKR) FONTS
+#
+
+# HaranoAji
+# (already included in JAPANESE section)
 
 
 #

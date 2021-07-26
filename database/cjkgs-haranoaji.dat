@@ -215,7 +215,7 @@ Name: HaranoAjiGothicTW-Heavy
 Class: CNS
 OTFname: HaranoAjiGothicTW-Heavy.otf
 
-### KOREAN ###
+### KOREAN (AK1) ###
 
 Name: HaranoAjiMinchoK1-ExtraLight
 Class: Korea
@@ -275,3 +275,61 @@ OTFname: HaranoAjiGothicK1-Bold.otf
 Name: HaranoAjiGothicK1-Heavy
 Class: Korea
 OTFname: HaranoAjiGothicK1-Heavy.otf
+
+### KOREAN (AKR) ###
+
+Name: HaranoAjiMinchoKR-ExtraLight
+Class: KR
+OTFname: HaranoAjiMinchoKR-ExtraLight.otf
+
+Name: HaranoAjiMinchoKR-Light
+Class: KR
+OTFname: HaranoAjiMinchoKR-Light.otf
+
+Name: HaranoAjiMinchoKR-Regular
+Class: KR
+OTFname: HaranoAjiMinchoKR-Regular.otf
+
+Name: HaranoAjiMinchoKR-Medium
+Class: KR
+OTFname: HaranoAjiMinchoKR-Medium.otf
+
+Name: HaranoAjiMinchoKR-SemiBold
+Class: KR
+OTFname: HaranoAjiMinchoKR-SemiBold.otf
+
+Name: HaranoAjiMinchoKR-Bold
+Class: KR
+OTFname: HaranoAjiMinchoKR-Bold.otf
+
+Name: HaranoAjiMinchoKR-Heavy
+Class: KR
+OTFname: HaranoAjiMinchoKR-Heavy.otf
+
+Name: HaranoAjiGothicKR-ExtraLight
+Class: KR
+OTFname: HaranoAjiGothicKR-ExtraLight.otf
+
+Name: HaranoAjiGothicKR-Light
+Class: KR
+OTFname: HaranoAjiGothicKR-Light.otf
+
+Name: HaranoAjiGothicKR-Normal
+Class: KR
+OTFname: HaranoAjiGothicKR-Normal.otf
+
+Name: HaranoAjiGothicKR-Regular
+Class: KR
+OTFname: HaranoAjiGothicKR-Regular.otf
+
+Name: HaranoAjiGothicKR-Medium
+Class: KR
+OTFname: HaranoAjiGothicKR-Medium.otf
+
+Name: HaranoAjiGothicKR-Bold
+Class: KR
+OTFname: HaranoAjiGothicKR-Bold.otf
+
+Name: HaranoAjiGothicKR-Heavy
+Class: KR
+OTFname: HaranoAjiGothicKR-Heavy.otf
