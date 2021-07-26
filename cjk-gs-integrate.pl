@@ -2503,6 +2503,9 @@ INCLUDE cjkgs-sazanami.dat
 # Harano Aji Fonts (free) -- Provides J70, J71
 INCLUDE cjkgs-haranoaji.dat
 
+# IBM Plex (free)
+INCLUDE cjkgs-ibm-plex.dat
+
 # Osaka (Apple)
 
 Name: Osaka
