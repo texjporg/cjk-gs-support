@@ -2703,6 +2703,9 @@ INCLUDE cjkgs-hancom.dat
 # HaranoAji
 # (already included in JAPANESE section)
 
+# IBM Plex
+# (already included in JAPANESE section)
+
 
 #
 # Microsoft Windows, Windows/Mac Office fonts

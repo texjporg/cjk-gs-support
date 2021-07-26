@@ -33,3 +33,37 @@ OTFname: IBMPlexSansJP-SemiBold.otf
 Name: IBMPlexSansJP-Bold
 Class: Japan
 OTFname: IBMPlexSansJP-Bold.otf
+
+### KOREAN (AKR) ###
+
+Name: IBMPlexSansKR-Thin
+Class: KR
+OTFname: IBMPlexSansKR-Thin.otf
+
+Name: IBMPlexSansKR-ExtraLight
+Class: KR
+OTFname: IBMPlexSansKR-ExtraLight.otf
+
+Name: IBMPlexSansKR-Light
+Class: KR
+OTFname: IBMPlexSansKR-Light.otf
+
+Name: IBMPlexSansKR-Regular
+Class: KR
+OTFname: IBMPlexSansKR-Regular.otf
+
+Name: IBMPlexSansKR-Text
+Class: KR
+OTFname: IBMPlexSansKR-Text.otf
+
+Name: IBMPlexSansKR-Medium
+Class: KR
+OTFname: IBMPlexSansKR-Medium.otf
+
+Name: IBMPlexSansKR-SemiBold
+Class: KR
+OTFname: IBMPlexSansKR-SemiBold.otf
+
+Name: IBMPlexSansKR-Bold
+Class: KR
+OTFname: IBMPlexSansKR-Bold.otf
