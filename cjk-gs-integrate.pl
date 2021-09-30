@@ -2021,7 +2021,7 @@ sub find_gs_resource {
   my $foundres = '';
   if (win32()) {
     # determine tlgs or native gs
-    my $foo = `kpsewhich -var-value=SELFAUTOPARENT`;
+    my $foo = `kpsewhich -var-value=TEXMFROOT`;
     # We assume that the output of kpsewhich is
     # the same as perl's locale (or active code page).
     decode('locale', $foo);
