@@ -980,7 +980,7 @@ sub generate_cidfmap_entry {
   # as determined by minimal priority number
   # extract subfont
   my $s = "/$n << /FileType /TrueType 
-  /Path pssystemparams /GenericResourceDir get 
+  /Path currentsystemparams /GenericResourceDir get 
   (CIDFSubst/$f) concatstrings\n";
   if ($sf >= 0) { # in this script, $sf < 0 represents TTF
     $s .= "  /SubfontID $sf\n";
