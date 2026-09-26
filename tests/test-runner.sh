@@ -4,13 +4,13 @@
 do_gb() {
 # simplified chinese uses STSong-Light
 platex "\def\dviware{dvipdfmx}\input adobe-GB1-012.tex" && \
-    dvipdfmx -o adobe-GB1-012.dvipdfmx.pdf adobe-GB1-012.dvi
+    dvipdfmx -f noEmbed-kanjix.map -o adobe-GB1-012.dvipdfmx.pdf adobe-GB1-012.dvi
 platex "\def\dviware{dvips}\input adobe-GB1-012.tex" && \
-    dvips adobe-GB1-012.dvi
+    dvips -u noEmbed-psfonts.map adobe-GB1-012.dvi
 platex "\def\dviware{dvipdfmx}\input adobe-GB1-345.tex" && \
-    dvipdfmx -o adobe-GB1-345.dvipdfmx.pdf adobe-GB1-345.dvi
+    dvipdfmx -f noEmbed-kanjix.map -o adobe-GB1-345.dvipdfmx.pdf adobe-GB1-345.dvi
 platex "\def\dviware{dvips}\input adobe-GB1-345.tex" && \
-    dvips adobe-GB1-345.dvi
+    dvips -u noEmbed-psfonts.map adobe-GB1-345.dvi
 
 for i in `perl ../cjk-gs-integrate.pl --list-aliases --machine-readable -q | grep ^STSong-Light: | awk -F: '{print$3}'`; do
 	perl ../cjk-gs-integrate.pl --only-aliases --alias STSong-Light=$i
@@ -33,9 +33,9 @@ done
 do_cns() {
 # traditional chinese uses MSung-Light
 platex "\def\dviware{dvipdfmx}\input adobe-CNS1.tex" && \
-    dvipdfmx -o adobe-CNS1.dvipdfmx.pdf adobe-CNS1.dvi
+    dvipdfmx -f noEmbed-kanjix.map -o adobe-CNS1.dvipdfmx.pdf adobe-CNS1.dvi
 platex "\def\dviware{dvips}\input adobe-CNS1.tex" && \
-    dvips adobe-CNS1.dvi
+    dvips -u noEmbed-psfonts.map adobe-CNS1.dvi
 for i in `perl ../cjk-gs-integrate.pl --list-aliases --machine-readable -q | grep ^MSung-Light: | awk -F: '{print$3}'`; do
 	perl ../cjk-gs-integrate.pl --only-aliases --alias MSung-Light=$i
 	echo ps2pdf adobe-CNS1.ps -o "adobe-CNS1-$i.pdf"
@@ -50,9 +50,9 @@ done
 do_korea() {
 # korean uses HYSMyeongJo-Medium
 platex "\def\dviware{dvipdfmx}\input adobe-Korea1.tex" && \
-    dvipdfmx -o adobe-Korea1.dvipdfmx.pdf adobe-Korea1.dvi
+    dvipdfmx -f noEmbed-kanjix.map -o adobe-Korea1.dvipdfmx.pdf adobe-Korea1.dvi
 platex "\def\dviware{dvips}\input adobe-Korea1.tex" && \
-    dvips adobe-Korea1.dvi
+    dvips -u noEmbed-psfonts.map adobe-Korea1.dvi
 for i in `perl ../cjk-gs-integrate.pl --list-aliases --machine-readable -q | grep ^HYSMyeongJo-Medium: | awk -F: '{print$3}'`; do
 	perl ../cjk-gs-integrate.pl --only-aliases --alias HYSMyeongJo-Medium=$i
 	echo ps2pdf adobe-Korea1.ps -o "adobe-Korea1-$i.pdf"
@@ -67,9 +67,9 @@ done
 do_japan() {
 # japanese uses Ryumin-Light
 platex "\def\dviware{dvipdfmx}\input adobe-Japan1.tex" && \
-    dvipdfmx -o adobe-Japan1.dvipdfmx.pdf adobe-Japan1.dvi
+    dvipdfmx -f noEmbed-kanjix.map -o adobe-Japan1.dvipdfmx.pdf adobe-Japan1.dvi
 platex "\def\dviware{dvips}\input adobe-Japan1.tex" && \
-    dvips adobe-Japan1.dvi
+    dvips -u noEmbed-psfonts.map adobe-Japan1.dvi
 for i in `perl ../cjk-gs-integrate.pl --list-aliases --machine-readable -q | grep ^Ryumin-Light: | awk -F: '{print$3}'`; do
 	perl ../cjk-gs-integrate.pl --only-aliases --alias Ryumin-Light=$i
 	echo ps2pdf adobe-Japan1.ps -o "adobe-Japan1-$i.pdf"
