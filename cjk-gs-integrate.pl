@@ -2038,10 +2038,33 @@ sub find_gs_resource {
         print_error("we cannot support such gs, sorry.\n");
         $foundres = '';
       }
-      # change output location
-      $cidfmap_pathpart = "../lib/cidfmap";
-      $cidfmap_local_pathpart = "../lib/cidfmap.local";
-      $cidfmap_aliases_pathpart = "../lib/cidfmap.aliases";
+      # [see: https://github.com/texjporg/cjk-gs-support/issues/25 (comments on 2026-09-26)]
+      # It appears that tlgs has changed the default location of cidfmap:
+      #   * As of TL2022 r65457 (gs-9.56.1): lib/cidfmap, lib/cidfmap.TeXLive
+      #                                       (cidfmap is simply a wrapper for cidfmap.TeXLive)
+      #   * As of TL2023 r66672 (gs-10.01.0): Resource/Init/cidfmap
+      #                                       (same content as the previous cidfmap.TeXLive)
+      # GS loads cidfmap regardless of whether it is located in lib/ or Resource/Init/,
+      # and the cidfmap in lib/ takes precedence over the one in Resource/Init/.
+      # Therefore, we (cjk-gs-integrate) always write under lib/ instead of Resource/Init
+      # to override the default cidfmap(.TeXLive) without overwriting itself.
+      #   * For TL2022 or earlier, edit existing lib/cidfmap both in "generate" and "remove" modes.
+      #   * For TL2023 or later, create a new lib/cidfmap in "generate" mode.
+      #     In "remove" mode, we must ensure that an empty lib/cidfmap (created by us) is not left behind,
+      #     so that GS can fall back to the Resource/Init/cidfmap (originally shipped with TL).
+      #     (It could be possible that we edit existing Resource/Init/cidfmap, but currently untouched).
+      #chomp(my $gsver = `rungs --version 2>$nul`);
+      #if ($?) {
+      #  print_error("Cannot run rungs --version ...\n");
+      #} else {
+      #  print_debug("Found tlgs $gsver.\n");
+      #  $gsver =~ s!^(\d+)\..*$!$1!;
+      #  if ($gsver < 10) {
+          $cidfmap_pathpart = "../lib/cidfmap";
+          $cidfmap_local_pathpart = "../lib/cidfmap.local";
+          $cidfmap_aliases_pathpart = "../lib/cidfmap.aliases";
+      #  }
+      #}
     } else {
       # we assume gswin32c is in the path
       # TODO: what should we do for gswin64c?
