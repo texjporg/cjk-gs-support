@@ -897,11 +897,14 @@ sub update_master_cidfmap {
   # what we have to do is:
   #   in add mode:
   #     * add an entry for the given argument
-  #     * for tlgs.win32 pre-shipped cidfmap, prepend '%' to override
-  #       the default of "(cidfmap.TeXLive) .runlibfile",
+  #     * for TL2022 or earlier in which tlgs.win32 pre-shipped lib/cidfmap,
+  #       prepend '%' to override the default of "(cidfmap.TeXLive) .runlibfile"
+  #     * for TL2023 or later, create a new lib/cidfmap to override the default of Resource/Init/cidfmap
   #   in remove mode:
   #     * remove an entry for the given argument
-  #     * for tlgs.win32 pre-shipped cidfmap, remove '%' to restore the default
+  #     * for TL2022 or earlier in which tlgs.win32 pre-shipped lib/cidfmap,
+  #       remove '%' to restore the default of "(cidfmap.TeXLive) .runlibfile"
+  #     * for TL2023 or later, remove empty lib/cidfmap to restore the default of Resource/Init/cidfmap
   my $add = shift;
   my $cidfmap_master = "$opt_output/$cidfmap_pathpart";
   print_info(sprintf("%s $add %s cidfmap file ...\n",
@@ -950,6 +953,10 @@ sub update_master_cidfmap {
           die("Cannot clean up $cidfmap_master: $!");
         print FOO $newmaster;
         close FOO;
+      }
+      # if $newmaster is empty, remove file itself in cleanup mode
+      if ($newmaster =~ /^\s*$/) {
+        unlink encode('locale_fs', $cidfmap_master) if $opt_cleanup;
       }
     } else {
       if ($found && !$found_tl) {
