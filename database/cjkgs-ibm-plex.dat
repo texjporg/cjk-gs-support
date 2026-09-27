@@ -1,5 +1,14 @@
 # IBM Plex (free)
 
+# Note:
+#   IBMPlexSansJP-*.otf (8 files) since 2021-07-24
+#   IBMPlexSansKR-*.otf (8 files) since 2020-06-09
+#   IBMPlexSansSC-*.otf (8 files) since 2024-12-03
+#   IBMPlexSansTC-*.otf (8 files) since 2024-08-31
+# are available for free (SIL Open Font License).
+#   * https://github.com/IBM/plex/releases/
+#   * https://www.ibm.com/plex/
+
 ### JAPANESE ###
 
 Name: IBMPlexSansJP-Thin
@@ -7,6 +16,7 @@ Class: Japan
 OTFname: IBMPlexSansJP-Thin.otf
 
 Name: IBMPlexSansJP-ExtraLight
+PSName: IBMPlexSansJP-ExtLt
 Class: Japan
 OTFname: IBMPlexSansJP-ExtraLight.otf
 
@@ -15,6 +25,7 @@ Class: Japan
 OTFname: IBMPlexSansJP-Light.otf
 
 Name: IBMPlexSansJP-Regular
+PSName: IBMPlexSansJP
 Class: Japan
 OTFname: IBMPlexSansJP-Regular.otf
 
@@ -23,10 +34,12 @@ Class: Japan
 OTFname: IBMPlexSansJP-Text.otf
 
 Name: IBMPlexSansJP-Medium
+PSName: IBMPlexSansJP-Medm
 Class: Japan
 OTFname: IBMPlexSansJP-Medium.otf
 
 Name: IBMPlexSansJP-SemiBold
+PSName: IBMPlexSansJP-SmBld
 Class: Japan
 OTFname: IBMPlexSansJP-SemiBold.otf
 
@@ -41,6 +54,7 @@ Class: KR
 OTFname: IBMPlexSansKR-Thin.otf
 
 Name: IBMPlexSansKR-ExtraLight
+PSName: IBMPlexSansKR-ExtLt
 Class: KR
 OTFname: IBMPlexSansKR-ExtraLight.otf
 
@@ -49,6 +63,7 @@ Class: KR
 OTFname: IBMPlexSansKR-Light.otf
 
 Name: IBMPlexSansKR-Regular
+PSName: IBMPlexSansKR
 Class: KR
 OTFname: IBMPlexSansKR-Regular.otf
 
@@ -57,13 +72,92 @@ Class: KR
 OTFname: IBMPlexSansKR-Text.otf
 
 Name: IBMPlexSansKR-Medium
+PSName: IBMPlexSansKR-Medm
 Class: KR
 OTFname: IBMPlexSansKR-Medium.otf
 
 Name: IBMPlexSansKR-SemiBold
+PSName: IBMPlexSansKR-SmBld
 Class: KR
 OTFname: IBMPlexSansKR-SemiBold.otf
 
 Name: IBMPlexSansKR-Bold
 Class: KR
 OTFname: IBMPlexSansKR-Bold.otf
+
+### SIMPLIFIED CHINESE ###
+
+Name: IBMPlexSansSC-Thin
+Class: GB
+OTFname: IBMPlexSansSC-Thin.otf
+
+Name: IBMPlexSansSC-ExtraLight
+PSName: IBMPlexSansSC-ExtLt
+Class: GB
+OTFname: IBMPlexSansSC-ExtraLight.otf
+
+Name: IBMPlexSansSC-Light
+Class: GB
+OTFname: IBMPlexSansSC-Light.otf
+
+Name: IBMPlexSansSC-Regular
+PSName: IBMPlexSansSC
+Class: GB
+OTFname: IBMPlexSansSC-Regular.otf
+
+Name: IBMPlexSansSC-Text
+Class: GB
+OTFname: IBMPlexSansSC-Text.otf
+
+Name: IBMPlexSansSC-Medium
+PSName: IBMPlexSansSC-Medm
+Class: GB
+OTFname: IBMPlexSansSC-Medium.otf
+
+Name: IBMPlexSansSC-SemiBold
+PSName: IBMPlexSansSC-SmBld
+Class: GB
+OTFname: IBMPlexSansSC-SemiBold.otf
+
+Name: IBMPlexSansSC-Bold
+Class: GB
+OTFname: IBMPlexSansSC-Bold.otf
+
+### TRADITIONAL CHINESE ###
+
+Name: IBMPlexSansTC-Thin
+Class: CNS
+OTFname: IBMPlexSansTC-Thin.otf
+
+Name: IBMPlexSansTC-ExtraLight
+PSName: IBMPlexSansTC-ExtLt
+Class: CNS
+OTFname: IBMPlexSansTC-ExtraLight.otf
+
+Name: IBMPlexSansTC-Light
+Class: CNS
+OTFname: IBMPlexSansTC-Light.otf
+
+Name: IBMPlexSansTC-Regular
+PSName: IBMPlexSansTC
+Class: CNS
+OTFname: IBMPlexSansTC-Regular.otf
+
+Name: IBMPlexSansTC-Text
+Class: CNS
+OTFname: IBMPlexSansTC-Text.otf
+
+Name: IBMPlexSansTC-Medium
+PSName: IBMPlexSansTC-Medm
+Class: CNS
+OTFname: IBMPlexSansTC-Medium.otf
+
+Name: IBMPlexSansTC-SemiBold
+PSName: IBMPlexSansTC-SmBld
+Class: CNS
+OTFname: IBMPlexSansTC-SemiBold.otf
+
+Name: IBMPlexSansTC-Bold
+Class: CNS
+OTFname: IBMPlexSansTC-Bold.otf
+
