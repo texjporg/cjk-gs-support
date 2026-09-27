@@ -1,0 +1,26 @@
+# cwTeX
+
+### TRADITIONAL CHINESE ###
+
+# [TODO] Note should be added
+
+Name: cwTeXMing
+Class: CNS
+TTFname: cwming.ttf
+
+Name: cwTeXHeiBold
+Class: CNS
+TTFname: cwheib.ttf
+
+Name: cwTeXKai
+Class: CNS
+TTFname: cwkai.ttf
+
+Name: cwTeXYen
+Class: CNS
+TTFname: cwyen.ttf
+
+Name: cwTeXFangSong
+Class: CNS
+TTFname: cwfs.ttf
+

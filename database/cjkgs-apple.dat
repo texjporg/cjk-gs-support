@@ -1,6 +1,6 @@
 # Apple
 
-### JAPANESE ###
+### JAPANESE (Osaka family) ###
 
 # Note about Mac (Mac OS X 10.6 -- macOS 10.13)
 #   Osaka.ttf
@@ -14,6 +14,21 @@ TTFname: Osaka.ttf
 Name: Osaka-Mono
 Class: Japan
 TTFname: OsakaMono.ttf
+
+### SIMPLIFIED CHINESE (Shanghai Ikarus Ltd./URW Software & Type GmbH) ###
+
+# Note about Mac (Mac OS X 10.6 -- macOS 10.13)
+#   Hei.ttf
+#   Kai.ttf
+# are bundled with all versions.
+
+Name: SIL-Hei-Med-Jian
+Class: GB
+TTFname: Hei.ttf
+
+Name: SIL-Kai-Reg-Jian
+Class: GB
+TTFname: Kai.ttf
 
 ### TRADITIONAL CHINESE ###
 

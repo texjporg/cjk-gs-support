@@ -2587,16 +2587,6 @@ INCLUDE cjkgs-dynacomware.dat
 # Monotype
 INCLUDE cjkgs-monotype.dat
 
-# Shanghai Ikarus Ltd./URW Software & Type GmbH
-
-Name: SIL-Hei-Med-Jian
-Class: GB
-TTFname: Hei.ttf
-
-Name: SIL-Kai-Reg-Jian
-Class: GB
-TTFname: Kai.ttf
-
 # Fandol (free) -- Provides S40
 INCLUDE cjkgs-fandol.dat
 
@@ -2611,26 +2601,7 @@ INCLUDE cjkgs-cjkuni.dat
 INCLUDE cjkgs-wenquanyi.dat
 
 # cwTeX (free)
-
-Name: cwTeXMing
-Class: CNS
-TTFname: cwming.ttf
-
-Name: cwTeXHeiBold
-Class: CNS
-TTFname: cwheib.ttf
-
-Name: cwTeXKai
-Class: CNS
-TTFname: cwkai.ttf
-
-Name: cwTeXYen
-Class: CNS
-TTFname: cwyen.ttf
-
-Name: cwTeXFangSong
-Class: CNS
-TTFname: cwfs.ttf
+INCLUDE cjkgs-cwtex.dat
 
 #
 # KOREAN (AK1) FONTS
