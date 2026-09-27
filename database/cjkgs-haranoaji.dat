@@ -2,6 +2,24 @@
 
 ### JAPANESE ###
 
+# Note about TeX Live:
+#   + HaranoAjiMincho-Light
+#   + HaranoAjiMincho-Regular
+#   + HaranoAjiMincho-Bold
+#   + HaranoAjiGothic-Regular
+#   + HaranoAjiGothic-Medium
+#   + HaranoAjiGothic-Bold
+#   + HaranoAjiGothic-Heavy
+# are available as "haranoaji" package for free.
+#   + HaranoAjiMincho-ExtraLight
+#   + HaranoAjiMincho-Medium
+#   + HaranoAjiMincho-SemiBold
+#   + HaranoAjiMincho-Heavy
+#   + HaranoAjiGothic-ExtraLight
+#   + HaranoAjiGothic-Light
+#   + HaranoAjiGothic-Normal
+# are available as "haranoaji-extra" package for free.
+
 Name: HaranoAjiMincho-ExtraLight
 Class: Japan
 OTFname: HaranoAjiMincho-ExtraLight.otf
@@ -92,6 +110,8 @@ OTFname: HaranoAjiGothic-Heavy.otf
 
 ### SIMPLIFIED CHINESE ###
 
+# Upstream: https://github.com/trueroad/HaranoAjiFontsCN
+
 Name: HaranoAjiMinchoCN-ExtraLight
 Class: GB
 OTFname: HaranoAjiMinchoCN-ExtraLight.otf
@@ -155,6 +175,8 @@ OTFname: HaranoAjiGothicCN-Heavy.otf
 
 ### TRADITIONAL CHINESE ###
 
+# Upstream: https://github.com/trueroad/HaranoAjiFontsTW
+
 Name: HaranoAjiMinchoTW-ExtraLight
 Class: CNS
 OTFname: HaranoAjiMinchoTW-ExtraLight.otf
@@ -217,6 +239,8 @@ OTFname: HaranoAjiGothicTW-Heavy.otf
 
 ### KOREAN (AK1) ###
 
+# Upstream: https://github.com/trueroad/HaranoAjiFontsK1
+
 Name: HaranoAjiMinchoK1-ExtraLight
 Class: Korea
 OTFname: HaranoAjiMinchoK1-ExtraLight.otf
@@ -278,6 +302,8 @@ OTFname: HaranoAjiGothicK1-Heavy.otf
 
 ### KOREAN (AKR) ###
 
+# Upstream: https://github.com/trueroad/HaranoAjiFontsKR
+
 Name: HaranoAjiMinchoKR-ExtraLight
 Class: KR
 OTFname: HaranoAjiMinchoKR-ExtraLight.otf
@@ -333,3 +359,4 @@ OTFname: HaranoAjiGothicKR-Bold.otf
 Name: HaranoAjiGothicKR-Heavy
 Class: KR
 OTFname: HaranoAjiGothicKR-Heavy.otf
+

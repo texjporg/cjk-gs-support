@@ -3,6 +3,8 @@
 # Note about Mac (Mac OS X 10.6 -- macOS 10.13)
 #   Nanum*.ttc (3 files)
 # are bundled with ???.
+#   Nanum*.ttf
+# Debian package "fonts-nanum" and "fonts-nanum-extra" (not all files are supported now)
 
 ### KOREAN ###
 

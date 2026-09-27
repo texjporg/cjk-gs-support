@@ -1,8 +1,9 @@
 # cwTeX (free)
+# Original upstream: http://cle.linux.org.tw/fonts/cwttf/ (dead link)
+# See also: https://homepage.ntu.edu.tw/~ntut019/cwtex/cwtex.html
+# Debian package "fonts-cwtex"
 
 ### TRADITIONAL CHINESE ###
-
-# https://homepage.ntu.edu.tw/~ntut019/cwtex/cwtex.html
 
 Name: cwTeXMing
 Class: CNS

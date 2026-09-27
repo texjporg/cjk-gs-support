@@ -3,6 +3,8 @@
 ### KOREAN ###
 
 # Design font by Ho-Seok Ee, aka. "ALee's font" (free)
+# Original upstream: unknown
+# Debian package "fonts-alee"
 
 Name: Bandal
 Class: Korea
@@ -25,7 +27,10 @@ Class: Korea
 TTFname: Guseul.ttf
 
 # Woowa Brothers (free)
+# Upstream: https://www.woowahan.com/en/fonts
+# Debian package "fonts-woowa-bm"
 
+# new files are unsupported; the following is a single filename that was used a long time ago.
 Name: BMHANNA
 Class: Korea
 TTFname: BM-HANNA.ttf
