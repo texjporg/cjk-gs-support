@@ -2628,36 +2628,11 @@ INCLUDE cjkgs-nanum.dat
 # Apple
 INCLUDE cjkgs-apple.dat
 
-# Design font by Ho-Seok Ee, aka. "ALee's font" (free)
-
-Name: Bandal
-Class: Korea
-TTFname: Bandal.ttf
-
-Name: Bangwool
-Class: Korea
-TTFname: Bangwool.ttf
-
-Name: Eunjin
-Class: Korea
-TTFname: Eunjin.ttf
-
-Name: EunjinNakseo
-Class: Korea
-TTFname: EunjinNakseo.ttf
-
-Name: Guseul
-Class: Korea
-TTFname: Guseul.ttf
-
-# Woowa Brothers (free)
-
-Name: BMHANNA
-Class: Korea
-TTFname: BM-HANNA.ttf
-
 # Hancom HCR (free)
 INCLUDE cjkgs-hancom.dat
+
+# Miscellaneous uncategorized (free)
+INCLUDE cjkgs-miscfree.dat
 
 #
 # KOREAN (AKR) FONTS
