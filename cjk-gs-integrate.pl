@@ -2383,7 +2383,7 @@ For the Japanese fonts:
     Moga-Mobo-ex, Moga-Mobo, IPAex, IPA, Ume
 
 For the Korean fonts:
-    (Hanyang,) Adobe, Solaris, MS, Unfonts, Baekmuk
+    (Hanyang,) Adobe, Solaris, HaranoAji, MS, Unfonts, Baekmuk
 
 For the Simplified Chinese:
     Adobe, Fandol, HaranoAji, Hiragino, Founder, MS,
