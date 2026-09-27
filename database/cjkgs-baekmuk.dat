@@ -1,0 +1,38 @@
+# Baekmuk (free)
+
+### KOREAN ###
+
+# Note about TeX Live:
+#   batang.ttf, dotum.ttf, gulim.ttf, hline.ttf (4 files)
+# are available as "baekmuk" package for free.
+
+# This is a special case, because "batang.ttf" in baekmuk and
+# "Batang.ttf" in Microsoft Mac Office font share the same filename;
+# symlink name should be "Baekmuk-Batang.ttf"
+# similar for "Gulim.ttf" -- HY (2016/09/29)
+
+Name: Baekmuk-Batang
+Class: Korea
+Provides(70): HYSMyeongJo-Medium
+Doublecheck: true
+TTFname(20): batang.ttf
+TTFname(10): Baekmuk-Batang.ttf
+
+Name: Baekmuk-Dotum
+Class: Korea
+Provides(70): HYGoThic-Medium
+TTFname(20): dotum.ttf
+TTFname(10): Baekmuk-Dotum.ttf
+
+Name: Baekmuk-Gulim
+Class: Korea
+Provides(70): HYRGoThic-Medium
+Doublecheck: true
+TTFname(20): gulim.ttf
+TTFname(10): Baekmuk-Gulim.ttf
+
+Name: Baekmuk-Headline
+Class: Korea
+TTFname(20): hline.ttf
+TTFname(10): Baekmuk-Headline.ttf
+

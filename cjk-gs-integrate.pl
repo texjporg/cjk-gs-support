@@ -2562,16 +2562,6 @@ INCLUDE cjkgs-haranoaji.dat
 # IBM Plex (free)
 INCLUDE cjkgs-ibm-plex.dat
 
-# Osaka (Apple)
-
-Name: Osaka
-Class: Japan
-TTFname: Osaka.ttf
-
-Name: Osaka-Mono
-Class: Japan
-TTFname: OsakaMono.ttf
-
 #
 # CHINESE FONTS
 #
@@ -2655,36 +2645,8 @@ INCLUDE cjkgs-solaris.dat
 # HaranoAji -- Provides K45
 # (already included in JAPANESE section)
 
-# Baekmuk (free)
-# This is a special case, because "batang.ttf" in baekmuk and
-# "Batang.ttf" in Microsoft Mac Office font share the same filename;
-# symlink name should be "Baekmuk-Batang.ttf"
-# similar for "Gulim.ttf" -- HY (2016/09/29)
-
-Name: Baekmuk-Batang
-Class: Korea
-Provides(70): HYSMyeongJo-Medium
-Doublecheck: true
-TTFname(20): batang.ttf
-TTFname(10): Baekmuk-Batang.ttf
-
-Name: Baekmuk-Dotum
-Class: Korea
-Provides(70): HYGoThic-Medium
-TTFname(20): dotum.ttf
-TTFname(10): Baekmuk-Dotum.ttf
-
-Name: Baekmuk-Gulim
-Class: Korea
-Provides(70): HYRGoThic-Medium
-Doublecheck: true
-TTFname(20): gulim.ttf
-TTFname(10): Baekmuk-Gulim.ttf
-
-Name: Baekmuk-Headline
-Class: Korea
-TTFname(20): hline.ttf
-TTFname(10): Baekmuk-Headline.ttf
+# Baekmuk (free) -- Provides K70
+INCLUDE cjkgs-baekmuk.dat
 
 # Unfonts (free) -- Provides K60
 INCLUDE cjkgs-unfonts.dat

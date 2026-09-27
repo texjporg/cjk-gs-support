@@ -1,5 +1,20 @@
 # Apple
 
+### JAPANESE ###
+
+# Note about Mac (Mac OS X 10.6 -- macOS 10.13)
+#   Osaka.ttf
+#   OsakaMono.ttf
+# are bundled with all versions.
+
+Name: Osaka
+Class: Japan
+TTFname: Osaka.ttf
+
+Name: Osaka-Mono
+Class: Japan
+TTFname: OsakaMono.ttf
+
 ### TRADITIONAL CHINESE ###
 
 # Note about Mac (Mac OS X 10.6 -- macOS 10.13)
